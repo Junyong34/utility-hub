@@ -2,7 +2,12 @@
 
 ## Project Overview
 
-**utility-hub** is a Next.js application providing a collection of reusable utilities, TypeScript types, and configuration templates. Built with React 19, TypeScript, and Tailwind CSS.
+**utility-hub** is a Next.js application providing a collection of reusable utilities, interactive tools, and a blog platform. Built with React 19, TypeScript, Tailwind CSS, and shadcn/ui.
+
+### Core Features
+- **Blog System**: SSG-powered markdown blog with frontmatter support
+- **Lotto Number Generator**: Interactive number generator with CSR/SSR hybrid approach
+- **UI Component Library**: Built on shadcn/ui and Radix UI for accessibility
 
 ## General Instructions
 
@@ -19,7 +24,15 @@
 pnpm dev          # Start development server
 pnpm build        # Build for production
 pnpm start        # Start production server
-pnpm lint         # Run ESLint
+```
+
+### Code Quality
+```bash
+pnpm lint              # Run ESLint (basic check)
+pnpm lint:check        # Full lint check (warnings as errors)
+pnpm lint:fix          # Auto-fix lint issues
+pnpm lint:staged       # Lint only staged files
+pnpm type-check        # TypeScript type checking
 ```
 
 ### Requirements
@@ -30,12 +43,17 @@ pnpm lint         # Run ESLint
 
 ```
 utility-hub/
-├── app/              # Next.js app directory (App Router)
-├── components/       # React components (shadcn/ui)
-├── lib/             # Utility functions and helpers
-├── public/          # Static assets
-└── docs/            # Project documentation
+├── app/                    # Next.js App Router (pages & routing)
+├── components/             # React components (ui/, blog/, lotto/)
+├── hooks/                  # Custom React hooks
+├── lib/                    # Business logic & utilities
+├── content/                # Static content (markdown posts)
+├── public/                 # Static assets
+├── rules/                  # Project guidelines (detailed)
+└── docs/                   # Project documentation
 ```
+
+**📖 상세 구조 정보**: [`rules/directory-structure.md`](./rules/directory-structure.md)
 
 ## Code Style & Conventions
 
@@ -47,12 +65,8 @@ utility-hub/
 ### React/Next.js
 - Use React 19 features (Server Components by default)
 - Follow Next.js App Router conventions
-- Use shadcn/ui components for UI consistency
-
-### Styling
 - Use Tailwind CSS v4 with `@tailwindcss/postcss`
-- Use `clsx` and `tailwind-merge` for conditional classes
-- Follow component-based styling patterns
+- **📖 컴포넌트 작성 가이드**: [`rules/component-guidelines.md`](./rules/component-guidelines.md)
 
 ### Naming Conventions
 - Components: PascalCase (e.g., `Button.tsx`)
@@ -60,27 +74,8 @@ utility-hub/
 - Constants: UPPER_SNAKE_CASE
 - Files: kebab-case for directories, PascalCase/camelCase for source files
 
-## Git Workflow
 
-### Branching
-- Main branch: `main`
-- Feature branches: `feature/description`
-- Bug fixes: `fix/description`
-
-### Commits
-- Use conventional commits format
-- Examples:
-  - `feat: add user authentication`
-  - `fix: resolve button click issue`
-  - `docs: update README`
-  - `chore: update dependencies`
-
-### Pull Requests
-- Create PRs against `main` branch
-- Ensure all tests pass before merging
-- Squash commits when merging
-
-## Development Boundaries
+## Development Guidelines
 
 ### Security
 - Never commit sensitive data (API keys, tokens, credentials)
@@ -88,41 +83,20 @@ utility-hub/
 - Validate all user inputs
 
 ### Performance
-- Optimize bundle size (use dynamic imports when needed)
-- Follow React/Next.js performance best practices
+- Optimize bundle size (dynamic imports when needed)
+- Follow React/Next.js best practices
 - Use proper caching strategies
 
-### Testing
-- Write tests for critical functionality
-- Verify builds pass before committing
-- Run `pnpm build` to check for type errors
+### Before Committing
+1. **타입 검사**: `pnpm type-check` (TypeScript 타입 에러 확인)
+2. **린트 검사**: `pnpm lint:check` (코드 스타일 및 규칙 검사)
+3. **자동 수정**: `pnpm lint:fix` (자동 수정 가능한 문제 해결)
+4. **빌드 테스트**: `pnpm build` (프로덕션 빌드 확인)
+5. **변경사항 확인**: 모든 변경사항이 예상대로 동작하는지 검증
 
-## Available Skills
+**Tip**: `lint-staged`를 설치하면 staged 파일만 자동 검사 가능
+```bash
+pnpm add -D lint-staged
+pnpm lint:staged  # git add한 파일만 검사
+```
 
-### Core Development Skills
-- **brainstorming**: Use before any creative work - creating features, building components, adding functionality
-- **test-driven-development**: Use when implementing features or bugfixes
-- **systematic-debugging**: Use when encountering bugs or unexpected behavior
-- **verification-before-completion**: Use before claiming work is complete
-
-### Code Quality Skills
-- **vercel-react-best-practices**: React/Next.js performance optimization guidelines
-- **vercel-composition-patterns**: React composition patterns that scale
-- **web-design-guidelines**: UI code review for accessibility and best practices
-- **requesting-code-review**: Use before merging to verify work meets requirements
-- **receiving-code-review**: Use when receiving code review feedback
-
-### Workflow Skills
-- **writing-plans**: Use for multi-step tasks before touching code
-- **executing-plans**: Use to execute implementation plans with review checkpoints
-- **subagent-driven-development**: Use for executing implementation plans with independent tasks
-- **dispatching-parallel-agents**: Use for 2+ independent tasks without dependencies
-- **using-git-worktrees**: Use for isolated feature work
-
-### Skill Management
-- **find-skills**: Discover and install agent skills
-- **writing-skills**: Create or edit skills
-- **skill-creator**: Guide for creating effective skills
-- **skill-installer**: Install Codex skills from repositories
-
-For complete skill documentation and usage instructions, see skill file paths in the original configuration.
