@@ -10,6 +10,7 @@ utility-hub/
 ├── components/             # React 컴포넌트
 ├── hooks/                  # 커스텀 React 훅
 ├── lib/                    # 유틸리티 함수 및 비즈니스 로직
+├── types/                  # TypeScript 타입 정의
 ├── content/                # 정적 콘텐츠 (마크다운 등)
 ├── public/                 # 정적 파일 (이미지, 아이콘 등)
 ├── rules/                  # 프로젝트 규칙 및 가이드 문서
@@ -28,7 +29,11 @@ Next.js 13+ App Router 규칙을 따르는 페이지 및 라우팅 디렉토리�
 app/
 ├── layout.tsx              # 루트 레이아웃 (전역 UI)
 ├── page.tsx                # 홈페이지 (/)
+├── not-found.tsx           # 404 페이지
 ├── globals.css             # 전역 스타일
+├── favicon.ico             # 파비콘
+├── robots.ts               # robots.txt 생성
+├── sitemap.ts              # sitemap.xml 생성
 ├── blog/
 │   ├── page.tsx            # 블로그 목록 (/blog)
 │   └── [slug]/
@@ -36,7 +41,9 @@ app/
 ├── tools/
 │   └── lotto/
 │       └── page.tsx        # 로또 생성기 (/tools/lotto)
-└── api/                    # API Routes
+├── rss.xml/
+│   └── route.ts            # RSS 피드 생성
+└── api/                    # API Routes (필요시 추가)
     └── [endpoint]/
         └── route.ts
 ```
@@ -84,7 +91,15 @@ components/
 │   ├── button.tsx
 │   ├── card.tsx
 │   ├── input.tsx
+│   ├── badge.tsx
+│   ├── separator.tsx
+│   ├── dropdown-menu.tsx
+│   ├── select.tsx
 │   └── ...
+├── seo/                    # SEO 관련 컴포넌트
+│   ├── JsonLd.tsx
+│   ├── Breadcrumb.tsx
+│   └── index.ts
 ├── blog/                   # 블로그 관련 컴포넌트
 │   ├── PostCard.tsx
 │   ├── PostList.tsx
@@ -160,6 +175,13 @@ export function useLotto() {
 ```
 lib/
 ├── utils.ts               # 공통 유틸리티 함수
+├── seo/                   # SEO 관련 유틸리티
+│   ├── index.ts
+│   ├── metadata.ts        # 메타데이터 생성
+│   ├── structured-data.ts # 구조화된 데이터
+│   ├── sitemap.ts         # 사이트맵 생성
+│   ├── robots.ts          # robots.txt 생성
+│   └── canonical.ts       # 캐노니컬 URL 관리
 ├── blog/
 │   ├── posts.ts           # 블로그 데이터 로직
 │   └── markdown.ts        # 마크다운 파싱
@@ -186,6 +208,38 @@ lib/
 - 특정 기능의 비즈니스 로직
 - 서버/클라이언트 양쪽에서 사용 가능
 - 예: 블로그 포스트 파싱, 로또 번호 생성
+
+---
+
+## 📁 `types/` - TypeScript 타입 정의
+
+전역적으로 사용되는 TypeScript 타입과 인터페이스를 관리합니다.
+
+### 구조
+
+```
+types/
+├── seo.ts                 # SEO 관련 타입 정의
+└── [feature].ts           # 기능별 타입 정의
+```
+
+### 규칙
+
+1. **파일명**: camelCase (예: `seo.ts`)
+2. **타입명**: PascalCase (예: `SeoMetadata`)
+3. **인터페이스 우선**: `type` 보다 `interface` 선호
+4. **export**: 모든 타입은 export 해야 함
+
+### 예시
+
+```typescript
+export interface SeoMetadata {
+  title: string;
+  description: string;
+  keywords?: string[];
+  openGraph?: OpenGraphData;
+}
+```
 
 ---
 
@@ -357,6 +411,7 @@ import type { Post } from '@/lib/blog/posts';
 | `components/` | React 컴포넌트 | `.tsx` |
 | `hooks/` | 커스텀 훅 | `.ts` |
 | `lib/` | 비즈니스 로직 | `.ts` |
+| `types/` | 타입 정의 | `.ts` |
 | `content/` | 정적 콘텐츠 | `.md`, `.json` |
 | `public/` | 정적 파일 | 이미지, 아이콘 등 |
 | `rules/` | 규칙 문서 | `.md` |

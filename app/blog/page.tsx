@@ -3,14 +3,27 @@ import Link from 'next/link';
 import { getAllPosts } from '@/lib/blog/posts';
 import { PostList } from '@/components/blog/PostList';
 import { Button } from '@/components/ui/button';
+import { generateMetadata as createMetadata } from '@/lib/seo';
+import { Breadcrumb } from '@/components/seo';
 
 /**
  * 블로그 메인 페이지 메타데이터
+ * - 키워드, OG, Twitter Card 최적화
  */
-export const metadata: Metadata = {
-  title: 'Blog | Utility Hub',
-  description: 'Next.js, TypeScript, React에 관한 블로그 포스트 모음',
-};
+export const metadata: Metadata = createMetadata({
+  title: '블로그',
+  description:
+    'Next.js, TypeScript, React, 웹 개발에 관한 유용한 팁과 정보를 공유합니다. 실무에 도움이 되는 개발 블로그 포스트 모음.',
+  canonical: 'https://utility-hub.com/blog',
+  keywords: [
+    'Next.js 블로그',
+    'React 튜토리얼',
+    'TypeScript 가이드',
+    '웹 개발',
+    '프론트엔드',
+    '개발 팁',
+  ],
+});
 
 /**
  * 블로그 목록 페이지 (SSG)
@@ -24,6 +37,9 @@ export default function BlogPage() {
       {/* 헤더 */}
       <header className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          {/* Breadcrumb */}
+          <Breadcrumb items={[{ name: '블로그' }]} className="mb-4" />
+
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Blog</h1>

@@ -112,3 +112,23 @@ export function getAllTags(): string[] {
 
   return Array.from(tagsSet).sort();
 }
+
+/**
+ * 이전/다음 포스트를 가져옵니다
+ */
+export function getAdjacentPosts(currentSlug: string): {
+  prevPost: Omit<Post, 'content'> | null;
+  nextPost: Omit<Post, 'content'> | null;
+} {
+  const allPosts = getAllPosts();
+  const currentIndex = allPosts.findIndex((post) => post.slug === currentSlug);
+
+  if (currentIndex === -1) {
+    return { prevPost: null, nextPost: null };
+  }
+
+  return {
+    prevPost: currentIndex > 0 ? allPosts[currentIndex - 1] : null,
+    nextPost: currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
+  };
+}
