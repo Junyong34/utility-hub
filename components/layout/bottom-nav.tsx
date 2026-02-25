@@ -8,6 +8,23 @@ import { FloatingShareButton } from "@/components/ui/floating-share-button"
 export function BottomNav() {
   const [activeItem, setActiveItem] = React.useState("/")
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Zento",
+          text: "복잡한 정보를 단순하게 - Zento",
+          url: window.location.href,
+        })
+      } catch (error) {
+        console.log("Share failed:", error)
+      }
+    } else {
+      // Fallback: 클립보드에 복사
+      navigator.clipboard.writeText(window.location.href)
+      alert("링크가 복사되었습니다!")
+    }
+  }
   return (
     <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4">
       {/* 메인 네비게이션 바 (긴 캡슐) */}
