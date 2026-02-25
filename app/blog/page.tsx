@@ -72,7 +72,7 @@ export default function BlogPage() {
       <footer className="mt-16 border-t bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-gray-600 text-sm">
-            © 2024 Utility Hub. All rights reserved.
+            © 2024 유용한 정보 허브. All rights reserved.
           </p>
         </div>
       </footer>

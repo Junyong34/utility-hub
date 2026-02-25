@@ -5,14 +5,14 @@ import type { SEOMetadata, OpenGraphImage } from '@/types/seo';
  * 사이트 기본 설정
  */
 export const SITE_CONFIG = {
-  name: 'Utility Hub',
-  title: 'Utility Hub - 유용한 팁과 도구 모음',
+  name: '유용한 정보 허브',
+  title: '유용한 정보 허브 - 생활과 개발 팁 모음',
   description:
     '일상과 개발에 유용한 팁, 도구, 정보를 제공하는 웹사이트입니다',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://utility-hub.com',
-  ogImage: '/og-image.png',
+  ogImage: '/og-images.png',
   locale: 'ko_KR',
-  author: 'Utility Hub Team',
+  author: '정보 허브 팀',
   social: {
     github: 'https://github.com/yourusername',
     // twitter: 'https://twitter.com/yourusername',

@@ -8,7 +8,7 @@ import { LottoGenerator } from '@/components/lotto/LottoGenerator';
  * 로또 페이지 메타데이터
  */
 export const metadata: Metadata = {
-  title: '로또 번호 생성기 | Utility Hub',
+  title: '로또 번호 생성기 | 유용한 정보 허브',
   description: '행운의 로또 번호를 자동으로 생성해보세요. 1~45 사이의 랜덤 번호 6개를 생성합니다.',
 };
 
@@ -99,7 +99,7 @@ export default function LottoPage() {
       <footer className="mt-16 border-t bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-gray-600 text-sm">
-            © 2024 Utility Hub. All rights reserved.
+            © 2024 유용한 정보 허브. All rights reserved.
           </p>
         </div>
       </footer>

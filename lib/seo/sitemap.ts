@@ -100,7 +100,7 @@ ${entries
 export function generateImageSitemapXml(): string {
   const posts = getAllPosts();
   const postsWithImages = posts.filter((post) => {
-    // 향후 포스트에 featured image 필드 추가 시 사용
+    // 향후 포스트에 featured images 필드 추가 시 사용
     return false; // 현재는 이미지 없음
   });
 

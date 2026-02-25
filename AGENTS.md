@@ -44,7 +44,7 @@ pnpm type-check        # TypeScript type checking
 ```
 utility-hub/
 ├── app/                    # Next.js App Router (pages & routing)
-├── components/             # React components (ui/, blog/, lotto/)
+├── components/             # React components (ui/, blog/, lotto/, home/, layout/)
 ├── hooks/                  # Custom React hooks
 ├── lib/                    # Business logic & utilities
 ├── content/                # Static content (markdown posts)
@@ -54,6 +54,7 @@ utility-hub/
 ```
 
 **📖 상세 구조 정보**: [`rules/directory-structure.md`](./rules/directory-structure.md)
+**📝 변경사항 이력**: [`rules/changelog.md`](./rules/changelog.md)
 
 ## Code Style & Conventions
 

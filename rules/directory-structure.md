@@ -126,10 +126,12 @@ components/
 - 프로젝트 전반에서 재사용
 - Radix UI 기반으로 접근성 보장
 
-#### 기능별 디렉토리 (`blog/`, `lotto/`, 등)
+#### 기능별 디렉토리 (`blog/`, `lotto/`, `home/`, `layout/` 등)
 - 특정 기능에 종속된 컴포넌트
 - 도메인 로직 포함 가능
-- 해당 기능 페이지에서만 사용
+- `home/`: 홈페이지 전용 섹션 컴포넌트
+- `layout/`: 전역 레이아웃 컴포넌트 (헤더, 네비게이션 등)
+- 해당 기능 페이지에서 주로 사용
 
 ---
 
@@ -312,7 +314,8 @@ public/
 rules/
 ├── directory-structure.md      # 디렉토리 구조 가이드 (본 문서)
 ├── component-guidelines.md     # 컴포넌트 작성 가이드
-├── rendering-strategies.md     # 렌더링 전략 가이드
+├── changelog.md                # 변경사항 가이드
+├── rendering-strategies.md     # 렌더링 전략 가이드 (향후 추가)
 └── [rule-name].md              # 기타 규칙 문서
 ```
 
@@ -321,6 +324,7 @@ rules/
 - AGENTS.md 파일을 경량화
 - 카테고리별 상세 가이드 제공
 - 토큰 사용량 최적화
+- 변경사항 이력 및 개발 규칙 문서화
 
 ---
 

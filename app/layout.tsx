@@ -4,6 +4,8 @@ import "./globals.css";
 import { generateMetadata as createMetadata, SITE_CONFIG } from "@/lib/seo";
 import { createWebSiteSchema, createOrganizationSchema } from "@/lib/seo";
 import { JsonLdMultiple } from "@/components/seo";
+import { Header } from "@/components/layout/header";
+import { BottomNav } from "@/components/layout/bottom-nav";
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans", display: 'swap' });
 
@@ -75,7 +77,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Header />
+        <main className="md:pt-20 pb-24 md:pb-0">
+          {children}
+        </main>
+        <BottomNav />
       </body>
     </html>
   );
