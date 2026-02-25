@@ -31,17 +31,10 @@ jobs:
       - name: Type check
         run: pnpm type-check
 
-      - name: Build
-        run: pnpm build
-
       - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v3.0
-        with:
-          publish-dir: './.next'
-          production-deploy: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          enable-pull-request-comment: false
+        run: |
+          pnpm add -g netlify-cli
+          netlify deploy --prod --build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 10
