@@ -34,13 +34,13 @@ jobs:
       - name: Type check
         run: pnpm type-check
 
-      - name: Build Next.js application
+      - name: Build Next.js application (verification)
         run: pnpm build
 
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
         with:
-          args: deploy --prod --dir=.next
+          args: deploy --prod --build
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
