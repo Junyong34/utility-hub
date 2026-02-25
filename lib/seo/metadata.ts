@@ -10,7 +10,7 @@ export const SITE_CONFIG = {
   description:
     '복잡한 정보를 단순하게 정리해주는 공간. 일상과 개발에 유용한 팁, 도구, 정보를 제공합니다.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.zento.kr',
-  ogImage: '/og-images.png',
+  ogImage: '/og-images/main-og-image.png',
   locale: 'ko_KR',
   author: 'Zento',
   social: {
