@@ -2,30 +2,11 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { Share2Icon } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { NAV_ITEMS } from "./nav-config"
+import { FloatingShareButton } from "@/components/ui/floating-share-button"
 
 export function BottomNav() {
   const [activeItem, setActiveItem] = React.useState("/")
-
-  const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "Zento",
-          text: "복잡한 정보를 단순하게 - Zento",
-          url: window.location.href,
-        })
-      } catch (error) {
-        console.log("Share failed:", error)
-      }
-    } else {
-      // Fallback: 클립보드에 복사
-      navigator.clipboard.writeText(window.location.href)
-      alert("링크가 복사되었습니다!")
-    }
-  }
 
   return (
     <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4">
@@ -64,16 +45,8 @@ export function BottomNav() {
         })}
       </div>
 
-      {/* 공유하기 버튼 (분리된 원형 버튼) */}
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={handleShare}
-        className="rounded-full h-14 w-14 bg-background/95 hover:bg-background backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/40 shadow-sm shrink-0"
-      >
-        <Share2Icon className="h-5 w-5 text-foreground" />
-        <span className="sr-only">Share</span>
-      </Button>
+      {/* 공유하기 버튼 (분리된 원형 버튼) - FloatingShareButton 사용 */}
+      <FloatingShareButton className="static" />
     </nav>
   )
 }
