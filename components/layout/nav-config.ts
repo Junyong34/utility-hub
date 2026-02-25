@@ -1,4 +1,4 @@
-import { HomeIcon, BookOpenIcon, WrenchIcon, UtensilsCrossedIcon, LucideIcon } from "lucide-react"
+import { BookOpenIcon, WrenchIcon, SparklesIcon, LucideIcon } from "lucide-react"
 
 export interface NavItem {
   name: string
@@ -11,8 +11,7 @@ export interface NavItem {
  * Header와 BottomNav에서 동일하게 사용
  */
 export const NAV_ITEMS: NavItem[] = [
-  { name: "Home", href: "/", icon: HomeIcon },
   { name: "Blog", href: "/blog", icon: BookOpenIcon },
   { name: "Tools", href: "/tools", icon: WrenchIcon },
-  { name: "Meal Kit", href: "/mealkit", icon: UtensilsCrossedIcon },
+  { name: "AI", href: "/ai", icon: SparklesIcon },
 ]

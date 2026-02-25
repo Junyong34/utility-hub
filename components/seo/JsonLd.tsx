@@ -28,7 +28,7 @@ export function JsonLdMultiple({ data }: { data: any[] }) {
   return (
     <>
       {data.map((item, index) => (
-        <JsonLd key={index} data={item} />
+        <JsonLd key={`${item['@type']}-${index}`} data={item} />
       ))}
     </>
   );

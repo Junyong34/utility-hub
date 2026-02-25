@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { generateMetadata as createMetadata, SITE_CONFIG } from "@/lib/seo";
 import { createWebSiteSchema, createOrganizationSchema } from "@/lib/seo";
@@ -117,6 +118,12 @@ export default function RootLayout({
         <div className="hidden md:block">
           <FloatingShareButton />
         </div>
+        <Script
+          id="adsense-script"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3902027059531716"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
       </body>
     </html>
   );
