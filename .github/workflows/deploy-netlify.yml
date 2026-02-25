@@ -34,7 +34,7 @@ jobs:
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
-          publish-dir: './out'
+          publish-dir: '.next'
           production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           enable-pull-request-comment: false
