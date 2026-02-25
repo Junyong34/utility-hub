@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { generateMetadata as createMetadata, SITE_CONFIG } from "@/lib/seo";
 import { createWebSiteSchema, createOrganizationSchema } from "@/lib/seo";
@@ -92,13 +93,6 @@ export default function RootLayout({
         {/* 구조화 데이터 (JSON-LD) */}
         <JsonLdMultiple data={structuredData} />
 
-        {/* Google AdSense */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3902027059531716"
-          crossOrigin="anonymous"
-        />
-
         {/*     <!-- Google tag (gtag.js) --> */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-KG82C2B3TH"></script>
         <script
@@ -124,6 +118,12 @@ export default function RootLayout({
         <div className="hidden md:block">
           <FloatingShareButton />
         </div>
+        <Script
+          id="adsense-script"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3902027059531716"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
       </body>
     </html>
   );
