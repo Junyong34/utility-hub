@@ -6,6 +6,7 @@ import { createWebSiteSchema, createOrganizationSchema } from "@/lib/seo";
 import { JsonLdMultiple } from "@/components/seo";
 import { Header } from "@/components/layout/header";
 import { BottomNav } from "@/components/layout/bottom-nav";
+import { FloatingShareButton } from "@/components/ui/floating-share-button";
 
 const roboto = Roboto({ subsets: ["latin"], variable: "--font-sans", display: 'swap' });
 
@@ -91,8 +92,18 @@ export default function RootLayout({
         {/* 구조화 데이터 (JSON-LD) */}
         <JsonLdMultiple data={structuredData} />
 
-        {/* Google Analytics (필요시 추가) */}
-        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> */}
+        {/*     <!-- Google tag (gtag.js) --> */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KG82C2B3TH"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-KG82C2B3TH');
+            `,
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -102,6 +113,10 @@ export default function RootLayout({
           {children}
         </main>
         <BottomNav />
+        {/* PC width에서만 공유하기 버튼 표시 (모바일은 BottomNav에 포함) */}
+        <div className="hidden md:block">
+          <FloatingShareButton />
+        </div>
       </body>
     </html>
   );
