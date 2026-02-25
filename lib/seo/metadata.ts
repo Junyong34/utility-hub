@@ -5,14 +5,14 @@ import type { SEOMetadata, OpenGraphImage } from '@/types/seo';
  * 사이트 기본 설정
  */
 export const SITE_CONFIG = {
-  name: '유용한 정보 허브',
-  title: '유용한 정보 허브 - 생활과 개발 팁 모음',
+  name: 'Zento',
+  title: 'Zento - 복잡한 정보를 단순하게',
   description:
-    '일상과 개발에 유용한 팁, 도구, 정보를 제공하는 웹사이트입니다',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://utility-hub.com',
-  ogImage: '/og-images.png',
+    '복잡한 정보를 단순하게 정리해주는 공간. 일상과 개발에 유용한 팁, 도구, 정보를 제공합니다.',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.zento.kr',
+  ogImage: '/og-images/main-og-image.png',
   locale: 'ko_KR',
-  author: '정보 허브 팀',
+  author: 'Zento',
   social: {
     github: 'https://github.com/yourusername',
     // twitter: 'https://twitter.com/yourusername',

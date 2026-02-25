@@ -68,6 +68,26 @@ export default function RootLayout({
   return (
     <html lang="ko" className={roboto.variable}>
       <head>
+        {/* Favicon */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/asset/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/asset/favicon-16x16.png" />
+
+        {/* Apple Touch Icon */}
+        <link rel="apple-touch-icon" sizes="152x152" href="/asset/apple-icon-152x152.png" />
+        <link rel="apple-touch-icon" href="/asset/apple-icon.png" />
+
+        {/* Android Icon */}
+        <link rel="icon" type="image/png" sizes="192x192" href="/asset/android-icon-48x48.png" />
+
+        {/* Web App Manifest */}
+        <link rel="manifest" href="/asset/manifest.json" />
+
+        {/* MS Tile */}
+        <meta name="msapplication-TileColor" content="#ffffff" />
+        <meta name="msapplication-TileImage" content="/asset/ms-icon-70x70.png" />
+        <meta name="msapplication-config" content="/asset/browserconfig.xml" />
+
         {/* 구조화 데이터 (JSON-LD) */}
         <JsonLdMultiple data={structuredData} />
 
