@@ -92,6 +92,13 @@ export default function RootLayout({
         {/* 구조화 데이터 (JSON-LD) */}
         <JsonLdMultiple data={structuredData} />
 
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3902027059531716"
+          crossOrigin="anonymous"
+        />
+
         {/*     <!-- Google tag (gtag.js) --> */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-KG82C2B3TH"></script>
         <script

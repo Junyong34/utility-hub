@@ -59,16 +59,7 @@ export function Header() {
             <span className="sr-only">Toggle theme</span>
           </Button>
 
-          {/* 포인트 */}
-          <div className="hidden sm:flex items-center space-x-1 rounded-full bg-muted px-3 py-1.5">
-            <SparklesIcon className="h-4 w-4 text-yellow-500" />
-            <span className="text-sm font-medium">33 tS</span>
-          </div>
 
-          {/* Premium 버튼 */}
-          <Button className="hidden sm:inline-flex">
-            Premium
-          </Button>
 
           {/* 모바일 메뉴 */}
           <DropdownMenu>
