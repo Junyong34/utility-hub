@@ -1,11 +1,11 @@
 # 디렉토리 구조 가이드
 
-이 문서는 utility-hub 프로젝트의 디렉토리 구조와 각 디렉토리의 역할을 설명합니다.
+이 문서는 Zento 프로젝트의 디렉토리 구조와 각 디렉토리의 역할을 설명합니다.
 
 ## 전체 구조 개요
 
 ```
-utility-hub/
+zento/ (utility-hub)
 ├── app/                    # Next.js App Router (페이지 및 라우팅)
 ├── components/             # React 컴포넌트
 ├── hooks/                  # 커스텀 React 훅
@@ -349,7 +349,7 @@ docs/
 새로운 기능(예: `calculator`)을 추가할 때 다음 구조를 따르세요:
 
 ```
-utility-hub/
+zento/
 ├── app/
 │   └── tools/
 │       └── calculator/

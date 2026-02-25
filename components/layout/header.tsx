@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { NAV_ITEMS } from "./nav-config"
+import { Logo } from "./logo"
 
 export function Header() {
   const [theme, setTheme] = React.useState<"light" | "dark">("light")
@@ -24,11 +25,8 @@ export function Header() {
     <header className="hidden md:block fixed top-4 left-0 right-0 z-50 w-full px-4">
       <div className="mx-auto max-w-4xl flex h-14 items-center justify-between px-6 rounded-full border border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
         {/* 로고 */}
-        <Link href="/" className="flex items-center space-x-2">
-          <SparklesIcon className="h-5 w-5 text-primary" />
-          <span className="font-bold text-base">
-            <span className="text-primary">정보</span> <span className="hidden sm:inline">허브</span>
-          </span>
+        <Link href="/">
+          <Logo size={32} />
         </Link>
 
         {/* 데스크톱 네비게이션 */}

@@ -13,8 +13,8 @@ export function BottomNav() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "유용한 정보 허브",
-          text: "일상과 개발에 유용한 팁과 정보 모음",
+          title: "Zento",
+          text: "복잡한 정보를 단순하게 - Zento",
           url: window.location.href,
         })
       } catch (error) {
@@ -40,14 +40,25 @@ export function BottomNav() {
               key={item.name}
               href={item.href}
               onClick={() => setActiveItem(item.href)}
-              className={`flex flex-col items-center justify-center gap-0.5 px-4 py-2 rounded-full transition-all ${
+              className={`relative flex flex-col items-center justify-center gap-0.5 px-6 py-2 rounded-full transition-all duration-300 ${
                 isActive
-                  ? "bg-primary text-primary-foreground shadow-md"
+                  ? "text-primary shadow-md"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <Icon className="h-5 w-5" />
-              <span className="text-[10px] font-medium leading-tight">{item.name}</span>
+              {/* 배경 애니메이션 */}
+              {isActive && (
+                <span
+                  className="absolute inset-0 bg-primary/10 rounded-full animate-scale-in"
+                  style={{
+                    animation: 'scaleIn 0.3s ease-out forwards'
+                  }}
+                />
+              )}
+
+              {/* 아이콘 및 텍스트 (relative로 배경 위에 표시) */}
+              <Icon className={`h-5 w-5 relative z-10 transition-colors duration-300 ${isActive ? 'stroke-primary stroke-[2.5]' : ''}`} />
+              <span className="text-[10px] font-medium leading-tight relative z-10">{item.name}</span>
             </Link>
           )
         })}

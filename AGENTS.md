@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**utility-hub** is a Next.js application providing a collection of reusable utilities, interactive tools, and a blog platform. Built with React 19, TypeScript, Tailwind CSS, and shadcn/ui.
+**Zento** (www.zento.kr) is a Next.js application providing a collection of reusable utilities, interactive tools, and a blog platform. The name comes from "Zen + Info" representing a space that simplifies complex information. Built with React 19, TypeScript, Tailwind CSS, and shadcn/ui.
 
 ### Core Features
 - **Blog System**: SSG-powered markdown blog with frontmatter support

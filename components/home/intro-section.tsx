@@ -4,7 +4,8 @@ import * as React from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowRightIcon, PlayIcon, SparklesIcon } from "lucide-react"
+import { ArrowRightIcon, PlayIcon } from "lucide-react"
+import { Logo } from "@/components/layout/logo"
 
 const techBadges = [
   { name: "Claude Code", color: "bg-orange-500/10 text-orange-500 border-orange-500/20" },
@@ -28,11 +29,8 @@ export function IntroSection() {
 
       {/* 상단 로고/제목 (메인 페이지 전용) */}
       <div className="max-w-screen-2xl mx-auto px-4 pt-6">
-        <Link href="/" className="flex items-center justify-center space-x-2">
-          <SparklesIcon className="h-6 w-6 text-primary" />
-          <span className="font-bold text-xl">
-            <span className="text-primary">유용한</span> 정보 허브
-          </span>
+        <Link href="/" className="flex items-center justify-center">
+          <Logo size={48} className="text-xl" />
         </Link>
       </div>
 
@@ -54,9 +52,9 @@ export function IntroSection() {
           {/* 메인 타이틀 */}
           <div className="space-y-4 max-w-4xl">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-              <span className="text-primary">유용한 정보 허브</span>
+              <span className="text-primary">Zento</span>
               <br />
-              <span className="text-foreground">생활을 더 편리하게</span>
+              <span className="text-foreground">복잡한 정보를 단순하게</span>
             </h1>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               일상과 개발에 유용한 팁과 정보를 한곳에.
