@@ -28,7 +28,7 @@ export function BottomNav() {
   return (
     <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4">
       {/* 메인 네비게이션 바 (긴 캡슐) */}
-      <div className="flex items-center gap-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/40 rounded-full px-2 py-2 shadow-sm">
+      <div className="flex items-center gap-0 bg-card/60 dark:bg-white/10 backdrop-blur-xl border border-border/40 dark:border-white/20 rounded-full px-2 py-2 shadow-lg dark:shadow-2xl">
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon!
           const isActive = activeItem === item.href

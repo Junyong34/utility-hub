@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { MenuIcon, MoonIcon, SunIcon, SparklesIcon } from "lucide-react"
+import { MenuIcon, MoonIcon, SunIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -13,7 +13,7 @@ import {
 import { NAV_ITEMS } from "./nav-config"
 import { Logo } from "./logo"
 
-export function Header() {
+export function DesktopNav() {
   const [theme, setTheme] = React.useState<"light" | "dark">("light")
 
   const toggleTheme = () => {
@@ -23,7 +23,7 @@ export function Header() {
 
   return (
     <header className="hidden md:block fixed top-4 left-0 right-0 z-50 w-full px-4">
-      <div className="mx-auto max-w-4xl flex h-14 items-center justify-between px-6 rounded-full border border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
+      <div className="mx-auto max-w-4xl flex h-14 items-center justify-between px-6 rounded-full border border-border/40 dark:border-white/20 bg-card/60 dark:bg-white/10 backdrop-blur-xl shadow-lg dark:shadow-2xl">
         {/* 로고 */}
         <Link href="/">
           <Logo size={32} />

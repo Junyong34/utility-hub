@@ -18,6 +18,7 @@ export function Logo({ size = 32, className = "", showText = true }: LogoProps) 
 
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
+      {/* 라이트모드 로고 */}
       <Image
         src="/asset/logo.png"
         alt="Zento Logo"
@@ -25,9 +26,20 @@ export function Logo({ size = 32, className = "", showText = true }: LogoProps) 
         height={size}
         style={{ width: size, height: size }}
         priority
+        className="dark:hidden"
+      />
+      {/* 다크모드 로고 */}
+      <Image
+        src="/asset/logo-dark.png"
+        alt="Zento Logo"
+        width={size}
+        height={size}
+        style={{ width: size, height: size }}
+        priority
+        className="hidden dark:block"
       />
       {showText && (
-        <span className={`font-bold ${getTextSize()}`}>
+        <span className={`font-bold ${getTextSize()} text-foreground/60`}>
           Zento
         </span>
       )}

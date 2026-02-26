@@ -51,7 +51,7 @@
 /*---break---*/
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(0.994 0 89.876);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -161,15 +161,43 @@
   }
 
   .prose :where(ul):not(:where([class~="not-prose"] *)) {
-    @apply list-disc list-inside my-5 space-y-2;
+    @apply list-disc my-5 space-y-2;
+    padding-left: 1.5rem;
   }
 
   .prose :where(ol):not(:where([class~="not-prose"] *)) {
-    @apply list-decimal list-inside my-5 space-y-2;
+    @apply list-decimal my-5 space-y-2;
+    padding-left: 1.5rem;
   }
 
   .prose :where(li):not(:where([class~="not-prose"] *)) {
-    @apply ml-4;
+    @apply leading-7;
+    padding-left: 0.5rem;
+  }
+
+  /* li 내부의 p 태그 인라인 스타일 (줄바꿈 방지) */
+  .prose :where(li > p):not(:where([class~="not-prose"] *)) {
+    @apply inline;
+    margin: 0;
+  }
+
+  /* 중첩 리스트 간격 조정 */
+  .prose :where(ul ul, ul ol, ol ul, ol ol):not(:where([class~="not-prose"] *)) {
+    @apply my-2;
+  }
+
+  /* 리스트 마커와 텍스트가 같은 줄에 표시되도록 */
+  .prose :where(li > *:first-child):not(:where([class~="not-prose"] *)) {
+    @apply mt-0;
+  }
+
+  .prose :where(li > *:last-child):not(:where([class~="not-prose"] *)) {
+    @apply mb-0;
+  }
+
+  /* li 내부에 여러 p 태그가 있을 경우 간격 조정 */
+  .prose :where(li > p + p):not(:where([class~="not-prose"] *)) {
+    @apply block mt-2;
   }
 
   .prose :where(a):not(:where([class~="not-prose"] *)) {
@@ -189,7 +217,7 @@
   }
 
   .prose :where(pre):not(:where([class~="not-prose"] *)) {
-    @apply bg-slate-900 text-slate-100 p-4 rounded-lg overflow-x-auto my-6;
+    @apply p-4 overflow-x-auto my-6;
   }
 
   .prose :where(pre code):not(:where([class~="not-prose"] *)) {
@@ -223,86 +251,116 @@
 
 /*---break---*/
 
-/* Code Syntax Highlighting (highlight.js theme) */
+/* rehype-pretty-code 스타일 */
 @layer components {
-  .hljs {
-    @apply block overflow-x-auto p-4;
+  /* CSS Variables 모드: Shiki 변수를 실제 CSS 속성으로 매핑 */
+  /* 라이트 모드 */
+  html:not(.dark) [data-rehype-pretty-code-figure] pre {
+    color: var(--shiki-light);
+    background-color: var(--shiki-light-bg);
   }
 
-  .hljs-comment,
-  .hljs-quote {
-    @apply text-slate-500 italic;
+  html:not(.dark) [data-rehype-pretty-code-figure] span {
+    color: var(--shiki-light);
+    font-style: var(--shiki-light-font-style);
+    font-weight: var(--shiki-light-font-weight);
+    text-decoration: var(--shiki-light-text-decoration);
   }
 
-  .hljs-keyword,
-  .hljs-selector-tag,
-  .hljs-subst {
-    @apply text-pink-400 font-semibold;
+  /* 다크 모드 */
+  html.dark [data-rehype-pretty-code-figure] pre {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
   }
 
-  .hljs-number,
-  .hljs-literal,
-  .hljs-variable,
-  .hljs-template-variable,
-  .hljs-tag .hljs-attr {
-    @apply text-orange-400;
+  html.dark [data-rehype-pretty-code-figure] span {
+    color: var(--shiki-dark);
+    font-style: var(--shiki-dark-font-style);
+    font-weight: var(--shiki-dark-font-weight);
+    text-decoration: var(--shiki-dark-text-decoration);
   }
 
-  .hljs-string,
-  .hljs-doctag {
-    @apply text-green-400;
+  /* 코드 블록 기본 스타일 */
+  pre {
+    @apply overflow-x-auto border border-border p-4 my-6;
   }
 
-  .hljs-title,
-  .hljs-section,
-  .hljs-selector-id {
-    @apply text-blue-400 font-semibold;
+  pre > code {
+    @apply grid;
   }
 
-  .hljs-type,
-  .hljs-class .hljs-title {
-    @apply text-yellow-400;
+  /* 인라인 코드 스타일 (prose에서 이미 정의되어 있지만 확실히 하기 위해) */
+  :not(pre) > code {
+    @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
   }
 
-  .hljs-tag,
-  .hljs-name,
-  .hljs-attribute {
-    @apply text-blue-300;
+  /* 코드 라인 스타일 */
+  code[data-line-numbers] {
+    counter-reset: line;
   }
 
-  .hljs-regexp,
-  .hljs-link {
-    @apply text-cyan-400;
+  code[data-line-numbers] > [data-line]::before {
+    counter-increment: line;
+    content: counter(line);
+    @apply inline-block w-4 mr-4 text-right;
   }
 
-  .hljs-symbol,
-  .hljs-bullet {
-    @apply text-purple-400;
-  }
-
-  .hljs-built_in,
-  .hljs-builtin-name {
-    @apply text-cyan-300;
-  }
-
-  .hljs-meta {
+  /* 라이트 모드 라인 번호 */
+  :root:not(.dark) code[data-line-numbers] > [data-line]::before {
     @apply text-slate-400;
   }
 
-  .hljs-deletion {
-    @apply bg-red-900/30;
+  /* 다크 모드 라인 번호 */
+  .dark code[data-line-numbers] > [data-line]::before {
+    @apply text-slate-600;
   }
 
-  .hljs-addition {
-    @apply bg-green-900/30;
+  /* 하이라이트된 라인 - 라이트 모드 */
+  :root:not(.dark) code [data-highlighted-line] {
+    @apply bg-blue-100 border-l-2 border-l-blue-500;
   }
 
-  .hljs-emphasis {
-    @apply italic;
+  /* 하이라이트된 라인 - 다크 모드 */
+  .dark code [data-highlighted-line] {
+    @apply bg-slate-700/50 border-l-2 border-l-blue-400;
   }
 
-  .hljs-strong {
-    @apply font-bold;
+  /* 코드 블록 타이틀 */
+  [data-rehype-pretty-code-title] {
+    @apply px-4 py-2 text-sm font-mono;
+    margin-bottom: 0;
+    background-color: #161b22; /* GitHub Dark 타이틀 배경 */
+    color: #c9d1d9;
+    border: 1px solid;
+    border-color: oklch(1 0 0 / 10%);
+    border-bottom: none;
+  }
+
+  /* 라이트 모드 타이틀 */
+  :root:not(.dark) [data-rehype-pretty-code-title] {
+    background-color: #eaeef2;
+    color: #24292f;
+    border-color: oklch(0.922 0 0);
+  }
+
+  /* 타이틀이 있을 때 pre의 상단 border 제거 */
+  [data-rehype-pretty-code-title] + pre {
+    @apply mt-0;
+    border-top: none;
+  }
+
+  /* 코드 블록 래퍼 */
+  figure[data-rehype-pretty-code-figure] {
+    @apply my-6;
+  }
+
+  /* 타이틀이 있는 figure는 margin 조정 */
+  figure[data-rehype-pretty-code-figure]:has([data-rehype-pretty-code-title]) {
+    @apply my-6;
+  }
+
+  figure[data-rehype-pretty-code-figure]:has([data-rehype-pretty-code-title]) pre {
+    @apply my-0;
   }
 }
 

@@ -173,6 +173,12 @@ const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
 - **로또 생성기** (`/tools/lotto`): SSR + CSR
   - 서버에서 초기 통계 렌더링
   - 클라이언트에서 번호 생성 인터랙션
+  
+
+- ㅋㅋㅋㅋㅋ
+  - ㅋㅋㅋㅋ
+    - ㅋㅋㅋㅋㅋ
+      - ㅋㅋㅋ
 
 ## 결론
 

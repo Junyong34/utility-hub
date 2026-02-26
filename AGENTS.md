@@ -6,8 +6,13 @@
 
 ### Core Features
 - **Blog System**: SSG-powered markdown blog with frontmatter support
+  - 목차(TOC) 기능: H2/H3 헤딩 자동 추출 및 활성 섹션 추적
+  - 반응형 레이아웃: 데스크탑(sticky 사이드바), 모바일(바텀시트)
+  - 마크다운 처리: unified + rehype-pretty-code
 - **Lotto Number Generator**: Interactive number generator with CSR/SSR hybrid approach
 - **UI Component Library**: Built on shadcn/ui and Radix UI for accessibility
+  - 재사용 가능한 BottomSheet 컴포넌트
+  - 일관된 플로팅 버튼 스타일
 
 ## General Instructions
 
@@ -68,6 +73,7 @@ utility-hub/
 - Follow Next.js App Router conventions
 - Use Tailwind CSS v4 with `@tailwindcss/postcss`
 - **📖 컴포넌트 작성 가이드**: [`rules/component-guidelines.md`](./rules/component-guidelines.md)
+- **📐 블로그 레이아웃 규칙**: [`rules/component-guidelines.md#블로그-레이아웃-가이드라인`](./rules/component-guidelines.md#블로그-레이아웃-가이드라인)
 
 ### Naming Conventions
 - Components: PascalCase (e.g., `Button.tsx`)
