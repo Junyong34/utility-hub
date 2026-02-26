@@ -131,6 +131,7 @@ export function generateBlogPostMetadata(post: {
   author: string;
   tags: string[];
   slug: string;
+  ogImage?: string;
   updatedAt?: string;
 }): Metadata {
   const url = `${SITE_CONFIG.url}/blog/${post.slug}`;
@@ -143,6 +144,7 @@ export function generateBlogPostMetadata(post: {
     title: post.title,
     description: post.excerpt,
     canonical: url,
+    ogImage: post.ogImage,
     ogType: 'article',
     publishedTime,
     modifiedTime,
