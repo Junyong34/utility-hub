@@ -7,6 +7,7 @@ interface Post {
   author: string;
   excerpt: string;
   tags: string[];
+  ogImage?: string;
 }
 
 interface PostListProps {

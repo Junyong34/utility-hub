@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { processMarkdown } from '@/lib/blog/markdown-processor';
@@ -8,6 +9,7 @@ interface PostContentProps {
   author: string;
   tags: string[];
   content: string;
+  ogImage?: string;
 }
 
 /**
@@ -15,7 +17,7 @@ interface PostContentProps {
  * 개별 포스트의 전체 내용을 표시합니다
  * unified + rehype-pretty-code를 사용하여 마크다운을 렌더링합니다
  */
-export async function PostContent({ title, date, author, tags, content }: PostContentProps) {
+export async function PostContent({ title, date, author, tags, content, ogImage }: PostContentProps) {
   // 날짜 포맷팅
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -28,8 +30,23 @@ export async function PostContent({ title, date, author, tags, content }: PostCo
 
   return (
     <article className="w-full">
+      {/* OG 이미지 */}
+      {ogImage && (
+        <div className="relative w-full aspect-[2/1] mb-10 overflow-hidden rounded-lg">
+          <Image
+            src={ogImage}
+            alt={title}
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+          />
+        </div>
+      )}
+
       {/* 헤더 */}
       <header className="mb-10">
+
         <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{title}</h1>
 
         {/* 메타 정보 */}

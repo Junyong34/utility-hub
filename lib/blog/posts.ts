@@ -10,6 +10,7 @@ export interface PostMetadata {
   author: string;
   excerpt: string;
   tags: string[];
+  ogImage?: string;
 }
 
 export interface Post extends PostMetadata {
@@ -42,6 +43,7 @@ export function getAllPosts(): Omit<Post, 'content'>[] {
         author: data.author,
         excerpt: data.excerpt,
         tags: data.tags || [],
+        ogImage: data.ogImage,
       };
     });
 
@@ -67,6 +69,7 @@ export function getPostBySlug(slug: string): Post | null {
       author: data.author,
       excerpt: data.excerpt,
       tags: data.tags || [],
+      ogImage: data.ogImage,
       content,
     };
   } catch (error) {

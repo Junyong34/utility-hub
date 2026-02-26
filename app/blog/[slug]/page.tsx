@@ -39,6 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     author: post.author,
     tags: post.tags,
     slug: post.slug,
+    ogImage: post.ogImage,
   });
 }
 
@@ -105,6 +106,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   author={post.author}
                   tags={post.tags}
                   content={post.content}
+                  ogImage={post.ogImage}
                 />
               </article>
 
