@@ -24,7 +24,33 @@
 ## 네비게이션 컴포넌트 규칙
 - 네비게이션 메뉴 설정은 `nav-config.ts`로 분리하여 중복 방지
 - 데스크톱과 모바일 네비게이션을 별도 컴포넌트로 관리
-- 반응형 디자인: 데스크톱(Header), 모바일(BottomNav)로 분리
+- 반응형 디자인: 데스크톱(DesktopNav), 모바일(BottomNav)로 분리
+
+## 블로그 컴포넌트 규칙
+
+### TagFilter 컴포넌트
+- **위치**: `components/blog/TagFilter.tsx`
+- **역할**: 태그별 블로그 포스트 필터링
+- **특징**:
+  - Badge 컴포넌트 기반
+  - 클라이언트 컴포넌트 (`'use client'`)
+  - 선택된 태그 상태 관리
+  - 전체 보기 옵션 제공
+
+### OG 이미지 지원
+- **Frontmatter 필드**: `ogImage: "/og-images/post/post-1.webp"`
+- **메타데이터**: `lib/seo/metadata.ts`의 `generateBlogPostMetadata()` 함수에서 처리
+- **이미지 저장**: `public/og-images/post/` 디렉토리
+
+## SEO 컴포넌트 규칙
+
+### AdSenseScript 컴포넌트
+- **위치**: `components/seo/AdSenseScript.tsx`
+- **역할**: Google AdSense 스크립트 로딩
+- **특징**:
+  - 클라이언트 컴포넌트
+  - 환경 변수로 AdSense ID 관리
+  - 비동기 스크립트 로딩
 
 ---
 
