@@ -13,6 +13,9 @@
 - **UI Component Library**: Built on shadcn/ui and Radix UI for accessibility
   - 재사용 가능한 BottomSheet 컴포넌트
   - 일관된 플로팅 버튼 스타일
+- **URL State Management**: nuqs library for shareable URL-based state
+  - Type-safe query parameter management
+  - Seamless link sharing with preserved state
 
 ## General Instructions
 
@@ -38,6 +41,8 @@ pnpm lint:check        # Full lint check (warnings as errors)
 pnpm lint:fix          # Auto-fix lint issues
 pnpm lint:staged       # Lint only staged files
 pnpm type-check        # TypeScript type checking
+pnpm format            # Format code with Prettier
+pnpm format:check      # Check code formatting
 ```
 
 ### Requirements
@@ -95,15 +100,30 @@ utility-hub/
 - Use proper caching strategies
 
 ### Before Committing
-1. **타입 검사**: `pnpm type-check` (TypeScript 타입 에러 확인)
-2. **린트 검사**: `pnpm lint:check` (코드 스타일 및 규칙 검사)
-3. **자동 수정**: `pnpm lint:fix` (자동 수정 가능한 문제 해결)
-4. **빌드 테스트**: `pnpm build` (프로덕션 빌드 확인)
-5. **변경사항 확인**: 모든 변경사항이 예상대로 동작하는지 검증
+1. **포맷 검사**: `pnpm format:check` (Prettier 포맷팅 검사)
+2. **타입 검사**: `pnpm type-check` (TypeScript 타입 에러 확인)
+3. **린트 검사**: `pnpm lint:check` (코드 스타일 및 규칙 검사)
+4. **자동 수정**: `pnpm lint:fix` (자동 수정 가능한 문제 해결)
+5. **빌드 테스트**: `pnpm build` (프로덕션 빌드 확인)
+6. **변경사항 확인**: 모든 변경사항이 예상대로 동작하는지 검증
 
 **Tip**: `lint-staged`를 설치하면 staged 파일만 자동 검사 가능
 ```bash
 pnpm add -D lint-staged
 pnpm lint:staged  # git add한 파일만 검사
 ```
+
+## Development Environment
+
+### Code Formatting (Prettier)
+- **Version**: 3.8.1
+- **Config**: `.prettierrc` (no semicolons, single quotes, 2-space tabs)
+- **Ignore**: `.prettierignore` (node_modules, .next, build artifacts)
+- **📖 상세 설정**: [`rules/development-setup.md`](./rules/development-setup.md)
+
+### URL State Management (nuqs)
+- **Version**: 2.8.8
+- **Setup**: `NuqsAdapter` wrapped in `app/layout.tsx`
+- **Purpose**: Share application state via URLs (filters, search, pagination)
+- **📖 사용 가이드**: [`rules/development-setup.md#nuqs-사용-가이드`](./rules/development-setup.md#nuqs-사용-가이드)
 

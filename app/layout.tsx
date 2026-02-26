@@ -8,6 +8,7 @@ import { JsonLdMultiple } from '@/components/seo'
 import { DesktopNav } from '@/components/layout/desktop-nav'
 import { BottomNav } from '@/components/layout/bottom-nav'
 import { FloatingShareButton } from '@/components/ui/floating-share-button'
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -138,19 +139,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <DesktopNav />
-        <main className="md:pt-20 pb-24 md:pb-0">{children}</main>
-        <BottomNav />
-        {/* PC width에서만 공유하기 버튼 표시 (모바일은 BottomNav에 포함) */}
-        <div className="hidden md:block">
-          <FloatingShareButton />
-        </div>
-        <Script
-          id="adsense-script"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3902027059531716"
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
+        <NuqsAdapter>
+          <DesktopNav />
+          <main className="md:pt-20 pb-24 md:pb-0">{children}</main>
+          <BottomNav />
+          {/* PC width에서만 공유하기 버튼 표시 (모바일은 BottomNav에 포함) */}
+          <div className="hidden md:block">
+            <FloatingShareButton />
+          </div>
+          <Script
+            id="adsense-script"
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3902027059531716"
+            strategy="afterInteractive"
+            crossOrigin="anonymous"
+          />
+        </NuqsAdapter>
       </body>
     </html>
   )
