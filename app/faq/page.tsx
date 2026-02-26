@@ -1,16 +1,16 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Card } from '@/components/ui/card'
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { Card } from '@/components/ui/card';
 import {
   generateMetadata as createMetadata,
   createPageStructuredData,
   createFAQSchema,
-} from '@/lib/seo'
-import { Breadcrumb, JsonLdMultiple } from '@/components/seo'
+} from '@/lib/seo';
+import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 
 interface FaqItem {
-  question: string
-  answer: string
+  question: string;
+  answer: string;
 }
 
 const FAQ_ITEMS: FaqItem[] = [
@@ -54,7 +54,7 @@ const FAQ_ITEMS: FaqItem[] = [
     answer:
       '네. Zento는 반응형 UI를 적용해 모바일과 데스크톱에서 모두 사용할 수 있도록 구성되어 있습니다.',
   },
-]
+];
 
 export const metadata: Metadata = createMetadata({
   title: '자주 묻는 질문',
@@ -62,7 +62,7 @@ export const metadata: Metadata = createMetadata({
     'Zento 이용 전 자주 묻는 질문을 확인하세요. 서비스 소개, 콘텐츠, 도구 사용 방법을 한눈에 볼 수 있습니다.',
   canonical: 'https://www.zento.kr/faq',
   keywords: ['FAQ', '자주 묻는 질문', 'Zento', '도구 사용 방법'],
-})
+});
 
 export default function FaqPage() {
   const { webPage, breadcrumb } = createPageStructuredData({
@@ -71,8 +71,8 @@ export default function FaqPage() {
     description:
       'Zento 이용 전 자주 묻는 질문을 확인하세요. 서비스 소개와 도구 사용 방법을 제공합니다.',
     breadcrumbs: [{ name: '홈', url: '/' }, { name: 'FAQ' }],
-  })
-  const faqSchema = createFAQSchema(FAQ_ITEMS)
+  });
+  const faqSchema = createFAQSchema(FAQ_ITEMS);
 
   return (
     <>
@@ -91,7 +91,7 @@ export default function FaqPage() {
         </header>
 
         <main className="mx-auto grid max-w-5xl gap-4 px-4 py-10 sm:px-6 lg:px-8">
-          {FAQ_ITEMS.map((item) => (
+          {FAQ_ITEMS.map(item => (
             <Card key={item.question} className="p-6">
               <h2 className="text-lg font-semibold">{item.question}</h2>
               <p className="mt-3 leading-relaxed text-muted-foreground">
@@ -117,5 +117,5 @@ export default function FaqPage() {
         </main>
       </div>
     </>
-  )
+  );
 }

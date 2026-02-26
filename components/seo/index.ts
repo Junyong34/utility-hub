@@ -4,3 +4,4 @@
 
 export * from './JsonLd';
 export * from './Breadcrumb';
+export * from './AdSenseScript';
