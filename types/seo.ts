@@ -34,6 +34,22 @@ export interface WebSiteSchema extends JsonLdBase {
 }
 
 /**
+ * WebPage 스키마
+ */
+export interface WebPageSchema extends JsonLdBase {
+  '@type': 'WebPage';
+  name: string;
+  url: string;
+  description?: string;
+  inLanguage?: string;
+  isPartOf?: {
+    '@type': 'WebSite';
+    name: string;
+    url: string;
+  };
+}
+
+/**
  * Article/BlogPosting 스키마
  */
 export interface ArticleSchema extends JsonLdBase {

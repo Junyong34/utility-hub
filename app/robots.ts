@@ -28,10 +28,20 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Googlebot-Image',
         allow: '/',
       },
-      // AI 크롤러 차단 (선택사항)
       {
-        userAgent: ['GPTBot', 'CCBot', 'anthropic-ai'],
-        disallow: ['/'],
+        userAgent: 'Bingbot',
+        allow: '/',
+      },
+      // GEO 대상 AI 크롤러 허용
+      {
+        userAgent: [
+          'GPTBot',
+          'ChatGPT-User',
+          'PerplexityBot',
+          'ClaudeBot',
+          'anthropic-ai',
+        ],
+        allow: '/',
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

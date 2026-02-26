@@ -20,9 +20,27 @@ export function getStaticPages(): SitemapEntry[] {
       priority: 0.9,
     },
     {
+      url: `${SITE_CONFIG.url}/tools`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${SITE_CONFIG.url}/tools/lotto`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_CONFIG.url}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_CONFIG.url}/faq`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
       priority: 0.7,
     },
   ];
@@ -99,7 +117,7 @@ ${entries
  */
 export function generateImageSitemapXml(): string {
   const posts = getAllPosts();
-  const postsWithImages = posts.filter((post) => {
+  const postsWithImages = posts.filter(() => {
     // 향후 포스트에 featured images 필드 추가 시 사용
     return false; // 현재는 이미지 없음
   });

@@ -1,4 +1,10 @@
-import { BookOpenIcon, WrenchIcon, SparklesIcon, LucideIcon } from "lucide-react"
+import {
+  BookOpenIcon,
+  WrenchIcon,
+  CircleHelpIcon,
+  InfoIcon,
+  LucideIcon,
+} from "lucide-react"
 
 export interface NavItem {
   name: string
@@ -13,5 +19,6 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { name: "Blog", href: "/blog", icon: BookOpenIcon },
   { name: "Tools", href: "/tools", icon: WrenchIcon },
-  { name: "AI", href: "/ai", icon: SparklesIcon },
+  { name: "About", href: "/about", icon: InfoIcon },
+  { name: "FAQ", href: "/faq", icon: CircleHelpIcon },
 ]
