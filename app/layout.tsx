@@ -1,10 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Roboto } from 'next/font/google'
-import Script from 'next/script'
 import './globals.css'
 import { generateMetadata as createMetadata, SITE_CONFIG } from '@/lib/seo'
 import { createWebSiteSchema, createOrganizationSchema } from '@/lib/seo'
-import { JsonLdMultiple } from '@/components/seo'
+import { AdSenseScript, JsonLdMultiple } from '@/components/seo'
 import { DesktopNav } from '@/components/layout/desktop-nav'
 import { BottomNav } from '@/components/layout/bottom-nav'
 import { FloatingShareButton } from '@/components/ui/floating-share-button'
@@ -140,6 +139,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NuqsAdapter>
+          <AdSenseScript />
           <DesktopNav />
           <main className="md:pt-20 pb-24 md:pb-0">{children}</main>
           <BottomNav />
@@ -147,12 +147,6 @@ export default function RootLayout({
           <div className="hidden md:block">
             <FloatingShareButton />
           </div>
-          <Script
-            id="adsense-script"
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3902027059531716"
-            strategy="afterInteractive"
-            crossOrigin="anonymous"
-          />
         </NuqsAdapter>
       </body>
     </html>

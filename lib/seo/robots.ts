@@ -29,14 +29,17 @@ export const ROBOT_RULES: RobotRule[] = [
     allow: '/',
   },
 
-  // 특정 봇 차단 (스크래핑, 악성 봇 등)
+  // GEO 대상 AI 봇 허용
   {
     userAgent: [
-      'GPTBot', // OpenAI 크롤러
-      'CCBot', // Common Crawl
-      'anthropic-ai', // Anthropic AI
+      'Bingbot',
+      'GPTBot',
+      'ChatGPT-User',
+      'PerplexityBot',
+      'ClaudeBot',
+      'anthropic-ai',
     ],
-    disallow: '/',
+    allow: '/',
   },
 ];
 

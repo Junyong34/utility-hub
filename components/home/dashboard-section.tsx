@@ -8,17 +8,17 @@ import { Button } from "@/components/ui/button"
 import {
   BookOpenIcon,
   WrenchIcon,
-  UtensilsCrossedIcon,
+  InfoIcon,
+  CircleHelpIcon,
   FlameIcon,
   ArrowRightIcon,
   DicesIcon,
-  CalculatorIcon,
-  TrendingUpIcon,
-  CoinsIcon,
-  StarIcon,
+  FileTextIcon,
+  CalendarIcon,
+  BarChart3Icon,
 } from "lucide-react"
 
-// Hero Cards - 3개 주요 서비스
+// Hero Cards - 주요 페이지
 const heroServices = [
   {
     icon: BookOpenIcon,
@@ -39,13 +39,22 @@ const heroServices = [
     hoverColor: "hover:border-green-500/50",
   },
   {
-    icon: UtensilsCrossedIcon,
-    title: "Meal Kit Reviews",
-    description: "실제 구매 후기와 맛있는 레시피",
-    href: "/mealkit",
+    icon: InfoIcon,
+    title: "About",
+    description: "Zento 소개와 운영 원칙",
+    href: "/about",
     color: "text-orange-500",
     bgColor: "bg-orange-500/10",
     hoverColor: "hover:border-orange-500/50",
+  },
+  {
+    icon: CircleHelpIcon,
+    title: "FAQ",
+    description: "자주 묻는 질문과 빠른 답변",
+    href: "/faq",
+    color: "text-purple-500",
+    bgColor: "bg-purple-500/10",
+    hoverColor: "hover:border-purple-500/50",
   },
 ]
 
@@ -54,70 +63,67 @@ const hotTopics = [
   {
     badge: "NEW",
     badgeColor: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-    title: "2024년 대출 금리 비교 가이드",
-    href: "/blog/loan-guide-2024",
-  },
-  {
-    badge: "HOT",
-    badgeColor: "bg-red-500/10 text-red-500 border-red-500/20",
-    title: "이번주 밀키트 베스트 3",
-    href: "/mealkit/weekly-best",
+    title: "SSG, SSR, CSR: 올바른 렌더링 전략 선택하기",
+    href: "/blog/third-post",
   },
   {
     badge: "POPULAR",
+    badgeColor: "bg-green-500/10 text-green-500 border-green-500/20",
+    title: "Radix UI로 구축하는 접근성 높은 컴포넌트",
+    href: "/blog/second-post",
+  },
+  {
+    badge: "GUIDE",
     badgeColor: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-    title: "로또 당첨 확률 분석",
-    href: "/blog/lotto-analysis",
+    title: "Next.js와 TypeScript로 시작하는 현대적인 웹 개발",
+    href: "/blog/first-post",
   },
 ]
 
-// Quick Access Tools
+// Quick Access
 const quickTools = [
   { icon: DicesIcon, name: "로또", href: "/tools/lotto", color: "text-purple-500" },
-  { icon: CalculatorIcon, name: "대출", href: "/tools/loan", color: "text-blue-500" },
-  { icon: TrendingUpIcon, name: "이자", href: "/tools/interest", color: "text-green-500" },
-  { icon: CoinsIcon, name: "환율", href: "/tools/exchange", color: "text-yellow-500" },
+  { icon: FileTextIcon, name: "블로그", href: "/blog", color: "text-blue-500" },
+  { icon: InfoIcon, name: "About", href: "/about", color: "text-orange-500" },
+  { icon: CircleHelpIcon, name: "FAQ", href: "/faq", color: "text-green-500" },
 ]
 
-// Recent Meal Kit Reviews (더미 데이터)
-const recentMealKits = [
+// Recent Posts
+const recentPosts = [
   {
     id: 1,
-    name: "마라샹궈 밀키트",
-    rating: 4.5,
-    image: "🌶️",
-    href: "/mealkit/1",
+    title: "SSG, SSR, CSR: 올바른 렌더링 전략 선택하기",
+    date: "2024-02-01",
+    href: "/blog/third-post",
   },
   {
     id: 2,
-    name: "소고기 미역국",
-    rating: 5.0,
-    image: "🥘",
-    href: "/mealkit/2",
+    title: "Radix UI로 구축하는 접근성 높은 컴포넌트",
+    date: "2024-01-22",
+    href: "/blog/second-post",
   },
   {
     id: 3,
-    name: "치킨까스",
-    rating: 4.0,
-    image: "🍗",
-    href: "/mealkit/3",
+    title: "Next.js와 TypeScript로 시작하는 현대적인 웹 개발",
+    date: "2024-01-15",
+    href: "/blog/first-post",
   },
 ]
 
 // Stats Overview
 const statsData = [
-  { value: "42", label: "Blog Posts", color: "text-blue-500" },
-  { value: "15", label: "Tools", color: "text-green-500" },
-  { value: "28", label: "Meal Kit Reviews", color: "text-orange-500" },
-  { value: "156", label: "Users", color: "text-purple-500" },
+  { value: "3", label: "Blog Posts", color: "text-blue-500" },
+  { value: "1", label: "Tools", color: "text-green-500" },
+  { value: "2", label: "Core Pages", color: "text-orange-500" },
+  { value: "100%", label: "Valid Links", color: "text-purple-500" },
 ]
 
 export function DashboardSection() {
   return (
     <section className="w-full py-8 sm:py-12">
       <div className="max-w-screen-2xl mx-auto px-4 space-y-12">
-        {/* Hero Cards - 3개 주요 서비스 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Hero Cards - 주요 서비스 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {heroServices.map((service) => {
             const Icon = service.icon
             return (
@@ -176,11 +182,11 @@ export function DashboardSection() {
           </div>
         </div>
 
-        {/* Quick Access Tools */}
+        {/* Quick Access */}
         <div>
           <div className="flex items-center gap-2 mb-6">
             <WrenchIcon className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold">자주 찾는 도구</h2>
+            <h2 className="text-2xl font-bold">빠른 이동</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {quickTools.map((tool) => {
@@ -201,31 +207,28 @@ export function DashboardSection() {
           </div>
         </div>
 
-        {/* Recent Meal Kit Reviews */}
+        {/* Recent Posts */}
         <div>
           <div className="flex items-center gap-2 mb-6">
-            <UtensilsCrossedIcon className="h-6 w-6 text-orange-500" />
-            <h2 className="text-2xl font-bold">최근 밀키트 리뷰</h2>
+            <CalendarIcon className="h-6 w-6 text-orange-500" />
+            <h2 className="text-2xl font-bold">최신 글</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {recentMealKits.map((mealkit) => (
-              <Link key={mealkit.id} href={mealkit.href}>
+            {recentPosts.map((post) => (
+              <Link key={post.id} href={post.href}>
                 <Card className="border-border/50 hover:border-primary/50 transition-all hover:shadow-lg group">
-                  <CardContent className="p-6 space-y-4">
-                    {/* 이미지 플레이스홀더 (이모지) */}
-                    <div className="aspect-square bg-muted rounded-lg flex items-center justify-center text-6xl group-hover:scale-105 transition-transform">
-                      {mealkit.image}
-                    </div>
-                    {/* 제품명 */}
+                  <CardContent className="p-6 space-y-3">
                     <div className="space-y-2">
-                      <h3 className="font-semibold text-base group-hover:text-primary transition-colors">
-                        {mealkit.name}
+                      <h3 className="font-semibold text-base leading-relaxed group-hover:text-primary transition-colors line-clamp-2">
+                        {post.title}
                       </h3>
-                      {/* 별점 */}
-                      <div className="flex items-center gap-1">
-                        <StarIcon className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-                        <span className="text-sm font-medium">{mealkit.rating}/5</span>
+                      <div className="text-sm text-muted-foreground">
+                        {post.date}
                       </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-primary">
+                      <span>읽어보기</span>
+                      <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </CardContent>
                 </Card>
@@ -237,7 +240,7 @@ export function DashboardSection() {
         {/* Stats Overview */}
         <div>
           <div className="flex items-center gap-2 mb-6">
-            <TrendingUpIcon className="h-6 w-6 text-primary" />
+            <BarChart3Icon className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">한눈에 보기</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

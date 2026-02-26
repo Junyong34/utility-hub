@@ -1,6 +1,7 @@
 import type {
   OrganizationSchema,
   WebSiteSchema,
+  WebPageSchema,
   ArticleSchema,
   BreadcrumbListSchema,
   BreadcrumbItem,
@@ -20,7 +21,7 @@ export function createOrganizationSchema(): OrganizationSchema {
     '@type': 'Organization',
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/logo.png`,
+    logo: `${SITE_CONFIG.url}/asset/logo.png`,
     description: SITE_CONFIG.description,
     sameAs: Object.values(SITE_CONFIG.social).filter(Boolean),
   };
@@ -37,6 +38,31 @@ export function createWebSiteSchema(): WebSiteSchema {
     url: SITE_CONFIG.url,
     description: SITE_CONFIG.description,
     publisher: createOrganizationSchema(),
+  };
+}
+
+/**
+ * WebPage 구조화 데이터 생성
+ */
+export function createWebPageSchema(page: {
+  name: string;
+  path: string;
+  description?: string;
+}): WebPageSchema {
+  const url = `${SITE_CONFIG.url}${page.path}`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.name,
+    url,
+    description: page.description,
+    inLanguage: 'ko-KR',
+    isPartOf: {
+      '@type': 'WebSite',
+      name: SITE_CONFIG.name,
+      url: SITE_CONFIG.url,
+    },
   };
 }
 
@@ -140,6 +166,26 @@ export function createFAQSchema(
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity,
+  };
+}
+
+/**
+ * 일반 페이지용 통합 구조화 데이터 생성
+ * (WebPage + Breadcrumb)
+ */
+export function createPageStructuredData(page: {
+  name: string;
+  path: string;
+  description?: string;
+  breadcrumbs: Array<{ name: string; url?: string }>;
+}) {
+  return {
+    webPage: createWebPageSchema({
+      name: page.name,
+      path: page.path,
+      description: page.description,
+    }),
+    breadcrumb: createBreadcrumbSchema(page.breadcrumbs),
   };
 }
 
