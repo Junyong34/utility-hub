@@ -2,10 +2,12 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
+import rehypeRaw from 'rehype-raw';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeReact from 'rehype-react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { CopyButton } from '@/components/blog/CopyButton';
+import type { ReactNode } from 'react';
 
 /**
  * 마크다운을 React 컴포넌트로 변환하는 프로세서
@@ -20,17 +22,19 @@ export interface TocItem {
 }
 
 // 텍스트를 ID로 변환하는 헬퍼 함수
-function generateId(text: string): string {
+function generateId(text: ReactNode): string {
   return String(text).toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-가-힣]/g, '');
 }
 
 // 코드 블록 커스텀 컴포넌트
-function Pre({ children, ...props }: any) {
+function Pre({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) {
   // children에서 텍스트 추출
-  const extractText = (node: any): string => {
+  const extractText = (node: unknown): string => {
     if (typeof node === 'string') return node;
     if (Array.isArray(node)) return node.map(extractText).join('');
-    if (node?.props?.children) return extractText(node.props.children);
+    if (node && typeof node === 'object' && 'props' in node && node.props && typeof node.props === 'object' && 'children' in node.props) {
+      return extractText(node.props.children);
+    }
     return '';
   };
 
@@ -45,7 +49,7 @@ function Pre({ children, ...props }: any) {
 }
 
 // 링크 컴포넌트
-function Link({ href, children, ...props }: any) {
+function Link({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
   return (
     <a
       href={href}
@@ -59,7 +63,7 @@ function Link({ href, children, ...props }: any) {
 }
 
 // 헤딩 컴포넌트들
-function H1({ children, ...props }: any) {
+function H1({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h1
       className="scroll-mt-20"
@@ -71,7 +75,7 @@ function H1({ children, ...props }: any) {
   );
 }
 
-function H2({ children, ...props }: any) {
+function H2({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
       className="scroll-mt-20"
@@ -83,7 +87,7 @@ function H2({ children, ...props }: any) {
   );
 }
 
-function H3({ children, ...props }: any) {
+function H3({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
       className="scroll-mt-20"
@@ -125,7 +129,7 @@ export async function processMarkdown(markdown: string) {
   const file = await unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypePrettyCode, {
       theme: {
         dark: 'github-dark',
@@ -133,6 +137,7 @@ export async function processMarkdown(markdown: string) {
       },
       defaultColor: false, // CSS Variables 모드 활성화 (--shiki-light, --shiki-dark 생성)
     })
+    .use(rehypeRaw)
     .use(rehypeReact, {
       Fragment,
       jsx,
