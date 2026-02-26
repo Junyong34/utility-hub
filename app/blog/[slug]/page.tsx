@@ -3,10 +3,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getAllPostSlugs, getPostBySlug, getAdjacentPosts } from '@/lib/blog/posts';
 import { PostContent } from '@/components/blog/PostContent';
+import { BlogPostHeader } from '@/components/blog/BlogPostHeader';
 import { Button } from '@/components/ui/button';
 import { generateBlogPostMetadata } from '@/lib/seo';
 import { createBlogPostStructuredData } from '@/lib/seo';
-import { JsonLdMultiple, BlogBreadcrumb } from '@/components/seo';
+import { JsonLdMultiple } from '@/components/seo';
 import { ChevronLeft, ChevronRight, List } from 'lucide-react';
 
 interface PageProps {
@@ -85,21 +86,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <div className="min-h-screen bg-background">
         {/* 헤더 */}
-        <header className="bg-card border-b">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-            {/* Breadcrumb 네비게이션 */}
-            <BlogBreadcrumb postTitle={post.title} />
-
-            <Link href="/blog">
-              <Button variant="ghost" className="mt-4">
-                ← 목록으로
-              </Button>
-            </Link>
-          </div>
-        </header>
+        <BlogPostHeader postTitle={post.title} />
 
         {/* 메인 콘텐츠 */}
-        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <article className="bg-card rounded-lg shadow-sm p-8 md:p-12">
             <PostContent
               title={post.title}
