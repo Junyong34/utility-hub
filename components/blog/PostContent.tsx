@@ -1,7 +1,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { processMarkdown, extractTableOfContents } from '@/lib/blog/markdown-processor';
-import { TableOfContents } from '@/components/blog/TableOfContents';
+import { processMarkdown } from '@/lib/blog/markdown-processor';
 
 interface PostContentProps {
   title: string;
@@ -27,46 +26,37 @@ export async function PostContent({ title, date, author, tags, content }: PostCo
   // 마크다운 처리
   const processedContent = await processMarkdown(content);
 
-  // 목차 추출
-  const tocItems = extractTableOfContents(content);
-
   return (
-    <div className="flex gap-8">
-      {/* 메인 콘텐츠 */}
-      <article className="flex-1 min-w-0">
-        {/* 헤더 */}
-        <header className="mb-10">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{title}</h1>
+    <article className="w-full">
+      {/* 헤더 */}
+      <header className="mb-10">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{title}</h1>
 
-          {/* 메타 정보 */}
-          <div className="flex items-center gap-3 text-muted-foreground mb-6">
-            <time dateTime={date} className="text-sm">
-              {formattedDate}
-            </time>
-            <span>•</span>
-            <span className="text-sm">{author}</span>
+        {/* 메타 정보 */}
+        <div className="flex items-center gap-3 text-muted-foreground mb-6">
+          <time dateTime={date} className="text-sm">
+            {formattedDate}
+          </time>
+          <span>•</span>
+          <span className="text-sm">{author}</span>
+        </div>
+
+        {/* 태그 */}
+        {tags && tags.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {tags.map((tag) => (
+              <Badge key={tag} variant="secondary" className="text-xs">
+                {tag}
+              </Badge>
+            ))}
           </div>
+        )}
 
-          {/* 태그 */}
-          {tags && tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-6">
-              {tags.map((tag) => (
-                <Badge key={tag} variant="secondary" className="text-xs">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          )}
+        <Separator className="mt-6" />
+      </header>
 
-          <Separator className="mt-6" />
-        </header>
-
-        {/* 마크다운 콘텐츠 */}
-        <div className="prose prose-lg max-w-none">{processedContent}</div>
-      </article>
-
-      {/* 목차 (우측 사이드바 - 데스크탑 전용, 모바일은 플로팅) */}
-      <TableOfContents items={tocItems} />
-    </div>
+      {/* 마크다운 콘텐츠 */}
+      <div className="prose prose-lg max-w-none">{processedContent}</div>
+    </article>
   );
 }

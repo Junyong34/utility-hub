@@ -161,15 +161,43 @@
   }
 
   .prose :where(ul):not(:where([class~="not-prose"] *)) {
-    @apply list-disc list-inside my-5 space-y-2;
+    @apply list-disc my-5 space-y-2;
+    padding-left: 1.5rem;
   }
 
   .prose :where(ol):not(:where([class~="not-prose"] *)) {
-    @apply list-decimal list-inside my-5 space-y-2;
+    @apply list-decimal my-5 space-y-2;
+    padding-left: 1.5rem;
   }
 
   .prose :where(li):not(:where([class~="not-prose"] *)) {
-    @apply ml-4;
+    @apply leading-7;
+    padding-left: 0.5rem;
+  }
+
+  /* li 내부의 p 태그 인라인 스타일 (줄바꿈 방지) */
+  .prose :where(li > p):not(:where([class~="not-prose"] *)) {
+    @apply inline;
+    margin: 0;
+  }
+
+  /* 중첩 리스트 간격 조정 */
+  .prose :where(ul ul, ul ol, ol ul, ol ol):not(:where([class~="not-prose"] *)) {
+    @apply my-2;
+  }
+
+  /* 리스트 마커와 텍스트가 같은 줄에 표시되도록 */
+  .prose :where(li > *:first-child):not(:where([class~="not-prose"] *)) {
+    @apply mt-0;
+  }
+
+  .prose :where(li > *:last-child):not(:where([class~="not-prose"] *)) {
+    @apply mb-0;
+  }
+
+  /* li 내부에 여러 p 태그가 있을 경우 간격 조정 */
+  .prose :where(li > p + p):not(:where([class~="not-prose"] *)) {
+    @apply block mt-2;
   }
 
   .prose :where(a):not(:where([class~="not-prose"] *)) {

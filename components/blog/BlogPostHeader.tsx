@@ -14,7 +14,7 @@ interface BlogPostHeaderProps {
 export function BlogPostHeader({ postTitle }: BlogPostHeaderProps) {
   return (
     <header className="bg-card border-b">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         {/* Breadcrumb 네비게이션 */}
         <BlogBreadcrumb postTitle={postTitle} />
 
