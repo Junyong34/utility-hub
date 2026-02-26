@@ -25,21 +25,21 @@ export function PostCard({ slug, title, date, author, excerpt, tags }: PostCardP
 
   return (
     <Link href={`/blog/${slug}`} className="block group">
-      <Card className="p-6 h-full transition-all hover:shadow-lg hover:border-blue-500">
+      <Card className="p-6 h-full transition-all hover:shadow-lg hover:border-primary">
         {/* 제목 */}
-        <h2 className="text-2xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
+        <h2 className="text-2xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
           {title}
         </h2>
 
         {/* 메타 정보 */}
-        <div className="flex items-center gap-3 text-sm text-gray-600 mb-3">
+        <div className="flex items-center gap-3 text-sm text-muted-foreground mb-3">
           <time dateTime={date}>{formattedDate}</time>
           <span>•</span>
           <span>{author}</span>
         </div>
 
         {/* 요약 */}
-        <p className="text-gray-700 mb-4 line-clamp-3">{excerpt}</p>
+        <p className="text-foreground mb-4 line-clamp-3">{excerpt}</p>
 
         {/* 태그 */}
         {tags.length > 0 && (

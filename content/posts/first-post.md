@@ -23,7 +23,7 @@ Next.js는 React 기반의 프레임워크로, 다음과 같은 강력한 기능
 
 TypeScript는 JavaScript에 타입 시스템을 추가한 언어입니다:
 
-```typescript
+```typescript title="example.ts"
 interface User {
   id: number;
   name: string;

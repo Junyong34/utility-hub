@@ -33,17 +33,17 @@ export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* 헤더 */}
-      <header className="bg-white border-b">
+      <header className="bg-card border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Breadcrumb */}
           <Breadcrumb items={[{ name: '블로그' }]} className="mb-4" />
 
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Blog</h1>
-              <p className="mt-1 text-gray-600">
+              <h1 className="text-3xl font-bold text-foreground">Blog</h1>
+              <p className="mt-1 text-muted-foreground">
                 웹 개발에 관한 인사이트와 팁을 공유합니다
               </p>
             </div>
@@ -58,8 +58,8 @@ export default function BlogPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* 포스트 개수 */}
         <div className="mb-6">
-          <p className="text-gray-600">
-            총 <span className="font-semibold text-gray-900">{posts.length}</span>개의
+          <p className="text-muted-foreground">
+            총 <span className="font-semibold text-foreground">{posts.length}</span>개의
             포스트
           </p>
         </div>
@@ -69,9 +69,9 @@ export default function BlogPage() {
       </main>
 
       {/* 푸터 */}
-      <footer className="mt-16 border-t bg-white">
+      <footer className="mt-16 border-t bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <p className="text-center text-gray-600 text-sm">
+          <p className="text-center text-muted-foreground text-sm">
             © 2024 유용한 정보 허브. All rights reserved.
           </p>
         </div>
