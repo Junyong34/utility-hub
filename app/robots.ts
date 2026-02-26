@@ -32,6 +32,10 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: 'Bingbot',
         allow: '/',
       },
+      {
+        userAgent: 'Yeti',
+        allow: '/',
+      },
       // GEO 대상 AI 크롤러 허용
       {
         userAgent: [

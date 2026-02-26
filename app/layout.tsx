@@ -116,6 +116,12 @@ export default function RootLayout({
         />
         <meta name="msapplication-config" content="/asset/browserconfig.xml" />
 
+        {/* Naver Site Verification */}
+        <meta
+          name="naver-site-verification"
+          content="02fee2c3f11fc3e1adf2520de92918a360a75556"
+        />
+
         {/* 구조화 데이터 (JSON-LD) */}
         <JsonLdMultiple data={structuredData} />
 
