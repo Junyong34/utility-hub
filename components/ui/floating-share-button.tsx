@@ -202,7 +202,7 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
               variant="ghost"
               size="default"
               onClick={handleNativeShare}
-              className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/40 shadow-sm hover:bg-muted min-w-[140px] justify-start"
+              className="bg-card/60 dark:bg-white/10 backdrop-blur-xl border border-border/40 dark:border-white/20 shadow-lg dark:shadow-2xl hover:bg-muted min-w-[140px] justify-start"
             >
               <Share2 className="h-5 w-5" aria-hidden="true" />
               공유하기
@@ -215,7 +215,7 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
             variant="ghost"
             size="default"
             onClick={handleCopy}
-            className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/40 shadow-sm hover:bg-muted min-w-[140px] justify-start"
+            className="bg-card/60 dark:bg-white/10 backdrop-blur-xl border border-border/40 dark:border-white/20 shadow-lg dark:shadow-2xl hover:bg-muted min-w-[140px] justify-start"
           >
             {feedback === "링크를 복사했습니다." ? (
               <Check className="h-5 w-5" aria-hidden="true" />
@@ -236,7 +236,7 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
         aria-expanded={isOpen}
         aria-label={isOpen ? "공유 메뉴 닫기" : "공유 메뉴 열기"}
         onClick={() => setIsOpen((prev) => !prev)}
-        className="rounded-full h-14 w-14 bg-background/95 hover:bg-background backdrop-blur supports-[backdrop-filter]:bg-background/60 border border-border/40 shadow-sm shrink-0"
+        className="rounded-full h-14 w-14 bg-card/60 dark:bg-white/10 hover:bg-muted backdrop-blur-xl border border-border/40 dark:border-white/20 shadow-lg dark:shadow-2xl shrink-0"
       >
         <Share2 className="h-5 w-5 text-foreground" aria-hidden="true" />
         <span className="sr-only">공유</span>

@@ -5,7 +5,7 @@ import "./globals.css";
 import { generateMetadata as createMetadata, SITE_CONFIG } from "@/lib/seo";
 import { createWebSiteSchema, createOrganizationSchema } from "@/lib/seo";
 import { JsonLdMultiple } from "@/components/seo";
-import { Header } from "@/components/layout/header";
+import { DesktopNav } from "@/components/layout/desktop-nav";
 import { BottomNav } from "@/components/layout/bottom-nav";
 import { FloatingShareButton } from "@/components/ui/floating-share-button";
 
@@ -109,7 +109,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
+        <DesktopNav />
         <main className="md:pt-20 pb-24 md:pb-0">
           {children}
         </main>
