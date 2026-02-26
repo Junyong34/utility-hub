@@ -6,13 +6,7 @@ import { Logo } from "@/components/layout/logo"
 
 export function IntroSection() {
   return (
-    <section className="relative w-full overflow-hidden">
-      {/* 배경 그라데이션 */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
-      </div>
-
+    <section className="w-full">
       {/* 상단 로고/제목 (메인 페이지 전용) */}
       <div className="max-w-screen-2xl mx-auto px-4 pt-6">
         <Link href="/" className="flex items-center justify-center">
