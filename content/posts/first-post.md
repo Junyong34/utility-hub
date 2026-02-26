@@ -22,7 +22,10 @@ Next.js는 React 기반의 프레임워크로, 다음과 같은 강력한 기능
 
 ## TypeScript의 필요성
 
+<img src="/images/이미지-1.webp" alt="샘플 이미지" style="width: 100%; max-width: 600px;" />
+
 TypeScript는 JavaScript에 타입 시스템을 추가한 언어입니다:
+
 
 ```typescript title="example.ts"
 interface User {
@@ -47,7 +50,7 @@ function greetUser(user: User): string {
 
 Next.js 13부터 도입된 App Router는 React Server Components를 기반으로 합니다:
 
-```tsx
+```tsx  title="example.ts"
 // app/page.tsx
 export default function Page() {
   return (
