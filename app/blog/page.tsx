@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/blog/posts';
-import { PostList } from '@/components/blog/PostList';
+import { getAllPosts, getAllTags } from '@/lib/blog/posts';
 import { Button } from '@/components/ui/button';
 import { generateMetadata as createMetadata } from '@/lib/seo';
 import { Breadcrumb } from '@/components/seo';
+import { BlogContent } from '@/components/blog/BlogContent';
 
 /**
  * 블로그 메인 페이지 메타데이터
@@ -31,6 +31,7 @@ export const metadata: Metadata = createMetadata({
  */
 export default function BlogPage() {
   const posts = getAllPosts();
+  const tags = getAllTags();
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,18 +56,7 @@ export default function BlogPage() {
       </header>
 
       {/* 메인 콘텐츠 */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* 포스트 개수 */}
-        <div className="mb-6">
-          <p className="text-muted-foreground">
-            총 <span className="font-semibold text-foreground">{posts.length}</span>개의
-            포스트
-          </p>
-        </div>
-
-        {/* 포스트 목록 */}
-        <PostList posts={posts} />
-      </main>
+      <BlogContent posts={posts} tags={tags} />
 
       {/* 푸터 */}
       <footer className="mt-16 border-t bg-card">
