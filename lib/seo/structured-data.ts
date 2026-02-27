@@ -234,13 +234,15 @@ export function createBlogPostStructuredData(post: {
   title: string;
   excerpt: string;
   slug: string;
+  categorySlug: string;
+  category: string;
   date: string;
   author: string;
   tags: string[];
   updatedAt?: string;
   image?: string;
 }) {
-  const url = `${SITE_CONFIG.url}/blog/${post.slug}`;
+  const url = `${SITE_CONFIG.url}/blog/${post.categorySlug}/${post.slug}`;
 
   return {
     article: createArticleSchema({
@@ -256,6 +258,7 @@ export function createBlogPostStructuredData(post: {
     breadcrumb: createBreadcrumbSchema([
       { name: '홈', url: '/' },
       { name: '블로그', url: '/blog' },
+      { name: post.category, url: `/blog/${post.categorySlug}` },
       { name: post.title },
     ]),
   };
