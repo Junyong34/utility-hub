@@ -31,6 +31,7 @@ Next.js 13+ App Router 규칙을 따르는 페이지 및 라우팅 디렉토리�
 ```
 app/
 ├── layout.tsx              # 루트 레이아웃 (전역 UI)
+├── providers.tsx           # React Query Provider
 ├── page.tsx                # 홈페이지 (/)
 ├── (error)/
 │   └── not-found.tsx       # 404 페이지
@@ -44,8 +45,10 @@ app/
 ├── faq/
 │   └── page.tsx            # FAQ 페이지 (/faq)
 ├── blog/
-│   ├── page.tsx            # 블로그 목록 (/blog)
+│   ├── page.tsx            # 블로그 목록 (/blog) - 무한스크롤
 │   └── [category]/
+│       ├── page.tsx        # 카테고리별 목록 (/blog/[category])
+│       └── [category]/
 │       ├── page.tsx        # 카테고리별 목록 (/blog/[category])
 │       └── [slug]/
 │           └── page.tsx    # 블로그 상세 (/blog/[category]/[slug])
@@ -55,9 +58,9 @@ app/
 │       └── page.tsx        # 로또 생성기 (/tools/lotto)
 ├── rss.xml/
 │   └── route.ts            # RSS 피드 생성
-└── api/                    # API Routes (필요시 추가)
-    └── [endpoint]/
-        └── route.ts
+└── api/                    # API Routes
+    └── posts/
+        └── route.ts        # 블로그 페이지네이션 API
 ```
 
 ### 규칙

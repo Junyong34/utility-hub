@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     turbopackUseSystemTlsCerts: true,
   },
 
+  // Allow cross-origin requests from development devices
+  allowedDevOrigins: ['http://10.200.193.62', 'http://10.200.193.62:3000'],
+
   // 이미지 최적화 설정
   images: {
     formats: ['image/avif', 'image/webp'],
