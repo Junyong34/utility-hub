@@ -81,8 +81,7 @@ export function getAllSitemapEntries(): SitemapEntry[] {
   return [
     ...getStaticPages(),
     ...getBlogPostPages(),
-    // 태그 페이지가 구현되면 아래 주석 해제
-    // ...getTagPages(),
+    ...getTagPages(), // 태그 페이지 사이트맵 추가
   ];
 }
 

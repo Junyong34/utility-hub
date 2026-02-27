@@ -24,7 +24,48 @@
 ## 네비게이션 컴포넌트 규칙
 - 네비게이션 메뉴 설정은 `nav-config.ts`로 분리하여 중복 방지
 - 데스크톱과 모바일 네비게이션을 별도 컴포넌트로 관리
-- 반응형 디자인: 데스크톱(Header), 모바일(BottomNav)로 분리
+- 반응형 디자인: 데스크톱(DesktopNav), 모바일(BottomNav)로 분리
+
+## 블로그 컴포넌트 규칙
+
+### 카테고리 구조
+- **라우팅**: `/blog/[category]/[slug]` (2뎁스 구조)
+- **컨텐츠**: `content/posts/{category}/{slug}.md`
+- **Frontmatter 필수 필드**:
+  ```yaml
+  category: "개발"           # 카테고리 이름 (한글)
+  categorySlug: "development" # 카테고리 슬러그 (URL용)
+  ```
+
+### CategoryFilter 컴포넌트
+- **위치**: `components/blog/CategoryFilter.tsx`
+- **역할**: 카테고리별 블로그 포스트 필터링
+- **특징**:
+  - 탭(Tab) UI 패턴 사용
+  - 클라이언트 컴포넌트 (`'use client'`)
+  - 선택된 탭 하단에 primary 색상 강조선
+  - 카테고리별 포스트 개수 표시
+  - 반응형 flex-wrap 레이아웃
+
+### PostCard 컴포넌트
+- **카테고리 배지**: 포스트 상단에 카테고리 표시
+- **링크 구조**: `/blog/{categorySlug}/{slug}`
+- **Props**: `category`, `categorySlug` 포함
+
+### OG 이미지 지원
+- **Frontmatter 필드**: `ogImage: "/og-images/post/post-1.webp"`
+- **메타데이터**: `lib/seo/metadata.ts`의 `generateBlogPostMetadata()` 함수에서 처리
+- **이미지 저장**: `public/og-images/post/` 디렉토리
+
+## SEO 컴포넌트 규칙
+
+### AdSenseScript 컴포넌트
+- **위치**: `components/seo/AdSenseScript.tsx`
+- **역할**: Google AdSense 스크립트 로딩
+- **특징**:
+  - 클라이언트 컴포넌트
+  - 환경 변수로 AdSense ID 관리
+  - 비동기 스크립트 로딩
 
 ---
 

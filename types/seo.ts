@@ -236,3 +236,20 @@ export interface RSSFeedItem {
   categories?: string[];
   guid?: string;
 }
+
+/**
+ * ItemList 스키마 (블로그 목록용)
+ */
+export interface ItemListElement {
+  '@type': 'ListItem';
+  position: number;
+  url: string;
+  name?: string;
+  image?: string;
+}
+
+export interface ItemListSchema extends JsonLdBase {
+  '@type': 'ItemList';
+  itemListElement: ItemListElement[];
+  numberOfItems?: number;
+}

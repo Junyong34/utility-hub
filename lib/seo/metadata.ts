@@ -131,10 +131,11 @@ export function generateBlogPostMetadata(post: {
   author: string;
   tags: string[];
   slug: string;
+  categorySlug: string;
   ogImage?: string;
   updatedAt?: string;
 }): Metadata {
-  const url = `${SITE_CONFIG.url}/blog/${post.slug}`;
+  const url = `${SITE_CONFIG.url}/blog/${post.categorySlug}/${post.slug}`;
   const publishedTime = new Date(post.date).toISOString();
   const modifiedTime = post.updatedAt
     ? new Date(post.updatedAt).toISOString()

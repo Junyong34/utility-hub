@@ -9,6 +9,8 @@
   - 목차(TOC) 기능: H2/H3 헤딩 자동 추출 및 활성 섹션 추적
   - 반응형 레이아웃: 데스크탑(sticky 사이드바), 모바일(바텀시트)
   - 마크다운 처리: unified + rehype-pretty-code
+  - 태그 필터링: 태그별 포스트 필터링 기능
+  - OG 이미지: 블로그 포스트별 og:image 지원
 - **Lotto Number Generator**: Interactive number generator with CSR/SSR hybrid approach
 - **UI Component Library**: Built on shadcn/ui and Radix UI for accessibility
   - 재사용 가능한 BottomSheet 컴포넌트
@@ -16,6 +18,8 @@
 - **URL State Management**: nuqs library for shareable URL-based state
   - Type-safe query parameter management
   - Seamless link sharing with preserved state
+- **Static Pages**: About, FAQ 페이지
+- **SEO Optimization**: Naver 사이트 검증, 구조화 데이터, AdSense 지원
 
 ## General Instructions
 
@@ -54,13 +58,16 @@ pnpm format:check      # Check code formatting
 ```
 utility-hub/
 ├── app/                    # Next.js App Router (pages & routing)
-├── components/             # React components (ui/, blog/, lotto/, home/, layout/)
+├── components/             # React components (ui/, blog/, lotto/, home/, layout/, seo/)
 ├── hooks/                  # Custom React hooks
 ├── lib/                    # Business logic & utilities
 ├── content/                # Static content (markdown posts)
-├── public/                 # Static assets
+├── public/                 # Static assets (images, og-images)
 ├── rules/                  # Project guidelines (detailed)
-└── docs/                   # Project documentation
+├── docs/                   # Project documentation
+├── AI/                     # AI-related assets (prompts, images)
+├── .agents/                # Agent skills (blog-seo-writer, humanizer, etc.)
+└── .ai/                    # AI configuration
 ```
 
 **📖 상세 구조 정보**: [`rules/directory-structure.md`](./rules/directory-structure.md)

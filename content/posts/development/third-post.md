@@ -4,6 +4,8 @@ date: "2024-02-01"
 author: "개발팀"
 excerpt: "Next.js의 다양한 렌더링 전략(SSG, SSR, CSR)을 이해하고 프로젝트에 적합한 방법을 선택하는 방법을 알아봅니다."
 tags: ["Next.js", "SSG", "SSR", "CSR", "Performance"]
+category: "개발"
+categorySlug: "development"
 ogImage: "/og-images/post/post-3.webp"
 ---
 

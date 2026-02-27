@@ -13,7 +13,7 @@ import { extractTableOfContents } from '@/lib/blog/markdown-processor';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ category: string; slug: string }>;
 }
 
 /**
@@ -23,8 +23,8 @@ interface PageProps {
  * - Canonical URL
  */
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { category, slug } = await params;
+  const post = getPostBySlug(slug, category);
 
   if (!post) {
     return {
@@ -39,6 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     author: post.author,
     tags: post.tags,
     slug: post.slug,
+    categorySlug: post.categorySlug,
     ogImage: post.ogImage,
   });
 }
@@ -50,7 +51,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export async function generateStaticParams() {
   const slugs = getAllPostSlugs();
 
-  return slugs.map((slug) => ({
+  return slugs.map(({ slug, categorySlug }) => ({
+    category: categorySlug,
     slug,
   }));
 }
@@ -61,8 +63,8 @@ export async function generateStaticParams() {
  * - Breadcrumb 네비게이션
  */
 export default async function BlogPostPage({ params }: PageProps) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { category, slug } = await params;
+  const post = getPostBySlug(slug, category);
 
   // 포스트를 찾지 못한 경우 404 페이지 표시
   if (!post) {
@@ -70,13 +72,15 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   // 이전/다음 포스트 가져오기
-  const { prevPost, nextPost } = getAdjacentPosts(slug);
+  const { prevPost, nextPost } = getAdjacentPosts(slug, category);
 
   // 구조화 데이터 생성 (Article + Breadcrumb)
   const { article, breadcrumb } = createBlogPostStructuredData({
     title: post.title,
     excerpt: post.excerpt,
     slug: post.slug,
+    categorySlug: post.categorySlug,
+    category: post.category,
     date: post.date,
     author: post.author,
     tags: post.tags,
@@ -115,7 +119,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* 이전 포스트 */}
                   {prevPost ? (
-                    <Link href={`/blog/${prevPost.slug}`} className="block">
+                    <Link href={`/blog/${prevPost.categorySlug}/${prevPost.slug}`} className="block">
                       <Button variant="outline" className="w-full min-h-[100px] justify-start items-start group p-4 bg-card hover:bg-accent transition-colors">
                         <ChevronLeft className="mr-3 h-6 w-6 mt-1 flex-shrink-0 group-hover:-translate-x-1 transition-transform" />
                         <div className="text-left flex-1 min-w-0">
@@ -134,7 +138,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                   {/* 다음 포스트 */}
                   {nextPost ? (
-                    <Link href={`/blog/${nextPost.slug}`} className="block">
+                    <Link href={`/blog/${nextPost.categorySlug}/${nextPost.slug}`} className="block">
                       <Button variant="outline" className="w-full min-h-[100px] justify-end items-start group p-4 bg-card hover:bg-accent transition-colors">
                         <div className="text-right flex-1 min-w-0">
                           <div className="text-xs text-muted-foreground mb-2 font-medium">다음 글</div>

@@ -8,6 +8,7 @@ import { DesktopNav } from '@/components/layout/desktop-nav'
 import { BottomNav } from '@/components/layout/bottom-nav'
 import { FloatingShareButton } from '@/components/ui/floating-share-button'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { Providers } from './providers'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -144,16 +145,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NuqsAdapter>
-          <AdSenseScript />
-          <DesktopNav />
-          <main className="md:pt-20 pb-24 md:pb-0">{children}</main>
-          <BottomNav />
-          {/* PC width에서만 공유하기 버튼 표시 (모바일은 BottomNav에 포함) */}
-          <div className="hidden md:block">
-            <FloatingShareButton />
-          </div>
-        </NuqsAdapter>
+        <Providers>
+          <NuqsAdapter>
+            <AdSenseScript />
+            <DesktopNav />
+            <main className="md:pt-20 pb-24 md:pb-0">{children}</main>
+            <BottomNav />
+            {/* PC width에서만 공유하기 버튼 표시 (모바일은 BottomNav에 포함) */}
+            <div className="hidden md:block">
+              <FloatingShareButton />
+            </div>
+          </NuqsAdapter>
+        </Providers>
       </body>
     </html>
   )
