@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllPosts, getAllTags } from '@/lib/blog/posts';
+import { getAllPosts, getAllCategories } from '@/lib/blog/posts';
 import { Button } from '@/components/ui/button';
 import { generateMetadata as createMetadata } from '@/lib/seo';
 import { createPageStructuredData } from '@/lib/seo';
@@ -33,7 +33,7 @@ export const metadata: Metadata = createMetadata({
  */
 export default function BlogPage() {
   const posts = getAllPosts();
-  const tags = getAllTags();
+  const categories = getAllCategories();
   const { webPage, breadcrumb } = createPageStructuredData({
     name: '블로그',
     path: '/blog',
@@ -67,7 +67,7 @@ export default function BlogPage() {
         </header>
 
         {/* 메인 콘텐츠 */}
-        <BlogContent posts={posts} tags={tags} />
+        <BlogContent posts={posts} categories={categories} />
 
         {/* 푸터 */}
         <footer className="mt-16 border-t bg-card">

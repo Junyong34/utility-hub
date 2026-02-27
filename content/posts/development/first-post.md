@@ -4,6 +4,8 @@ date: "2024-01-15"
 author: "개발팀"
 excerpt: "Next.js와 TypeScript를 활용한 현대적인 웹 애플리케이션 개발 방법을 소개합니다."
 tags: ["Next.js", "TypeScript", "React", "Web Development"]
+category: "개발"
+categorySlug: "development"
 ogImage: "/og-images/post/post-1.webp"
 ---
 

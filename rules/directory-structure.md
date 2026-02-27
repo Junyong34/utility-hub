@@ -45,8 +45,10 @@ app/
 │   └── page.tsx            # FAQ 페이지 (/faq)
 ├── blog/
 │   ├── page.tsx            # 블로그 목록 (/blog)
-│   └── [slug]/
-│       └── page.tsx        # 블로그 상세 (/blog/[slug])
+│   └── [category]/
+│       ├── page.tsx        # 카테고리별 목록 (/blog/[category])
+│       └── [slug]/
+│           └── page.tsx    # 블로그 상세 (/blog/[category]/[slug])
 ├── tools/
 │   ├── page.tsx            # 도구 목록 (/tools)
 │   └── lotto/
@@ -119,7 +121,7 @@ components/
 │   ├── PostContent.tsx
 │   ├── BlogPostHeader.tsx
 │   ├── TableOfContents.tsx
-│   ├── TagFilter.tsx
+│   ├── CategoryFilter.tsx
 │   ├── BlogContent.tsx
 │   └── CopyButton.tsx
 ├── lotto/                  # 로또 관련 컴포넌트
@@ -282,9 +284,14 @@ export interface SeoMetadata {
 ```
 content/
 ├── posts/                 # 블로그 포스트 (마크다운)
-│   ├── first-post.md
-│   ├── second-post.md
-│   └── ...
+│   ├── development/       # 개발 카테고리
+│   │   ├── first-post.md
+│   │   ├── second-post.md
+│   │   └── ...
+│   ├── ai-image-creator/  # AI 카테고리
+│   │   └── sample-prompt.md
+│   └── [category]/        # 기타 카테고리
+│       └── *.md
 └── [content-type]/        # 기타 콘텐츠 타입
     └── *.md
 ```
@@ -294,6 +301,7 @@ content/
 1. **파일명**: kebab-case (URL friendly)
 2. **포맷**: 마크다운 (`.md`)
 3. **Frontmatter**: YAML 형식의 메타데이터 포함
+4. **카테고리 구조**: 디렉토리 기반 + Frontmatter 하이브리드 방식
 
 ### 블로그 포스트 예시
 
@@ -304,6 +312,9 @@ date: "2024-01-15"
 author: "작성자"
 excerpt: "요약"
 tags: ["tag1", "tag2"]
+category: "개발"           # 카테고리 이름 (한글)
+categorySlug: "development" # 카테고리 슬러그 (URL용)
+ogImage: "/og-images/post/post-1.webp"  # OG 이미지 (선택)
 ---
 
 # 포스트 내용...

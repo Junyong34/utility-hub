@@ -7,6 +7,8 @@ interface Post {
   author: string;
   excerpt: string;
   tags: string[];
+  category: string;
+  categorySlug: string;
   ogImage?: string;
 }
 

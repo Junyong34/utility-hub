@@ -28,14 +28,29 @@
 
 ## 블로그 컴포넌트 규칙
 
-### TagFilter 컴포넌트
-- **위치**: `components/blog/TagFilter.tsx`
-- **역할**: 태그별 블로그 포스트 필터링
+### 카테고리 구조
+- **라우팅**: `/blog/[category]/[slug]` (2뎁스 구조)
+- **컨텐츠**: `content/posts/{category}/{slug}.md`
+- **Frontmatter 필수 필드**:
+  ```yaml
+  category: "개발"           # 카테고리 이름 (한글)
+  categorySlug: "development" # 카테고리 슬러그 (URL용)
+  ```
+
+### CategoryFilter 컴포넌트
+- **위치**: `components/blog/CategoryFilter.tsx`
+- **역할**: 카테고리별 블로그 포스트 필터링
 - **특징**:
-  - Badge 컴포넌트 기반
+  - 탭(Tab) UI 패턴 사용
   - 클라이언트 컴포넌트 (`'use client'`)
-  - 선택된 태그 상태 관리
-  - 전체 보기 옵션 제공
+  - 선택된 탭 하단에 primary 색상 강조선
+  - 카테고리별 포스트 개수 표시
+  - 반응형 flex-wrap 레이아웃
+
+### PostCard 컴포넌트
+- **카테고리 배지**: 포스트 상단에 카테고리 표시
+- **링크 구조**: `/blog/{categorySlug}/{slug}`
+- **Props**: `category`, `categorySlug` 포함
 
 ### OG 이미지 지원
 - **Frontmatter 필드**: `ogImage: "/og-images/post/post-1.webp"`

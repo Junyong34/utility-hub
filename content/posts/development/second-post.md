@@ -4,6 +4,8 @@ date: "2024-01-22"
 author: "개발팀"
 excerpt: "Radix UI를 활용하여 접근성이 뛰어난 UI 컴포넌트를 만드는 방법을 알아봅니다."
 tags: ["Radix UI", "Accessibility", "React", "UI Components"]
+category: "개발"
+categorySlug: "development"
 ogImage: "/og-images/post/post-2.webp"
 ---
 

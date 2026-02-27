@@ -4,6 +4,8 @@ date: "2026-02-26"
 author: "관리자"
 excerpt: "초보자도 따라 할 수 있는 AS-IS/TO-BE 이미지 변환 프롬프트 3가지를 소개합니다. 스낵 제품을 예시로 제품 중심 광고 비주얼을 만드는 방법을 단계별로 정리했습니다."
 tags: ["AI로 이미지 만들기", "초보자 이미지 생성", "AS-IS TO-BE 이미지 변환", "쉬운 프롬프트 작성법"]
+category: "AI"
+categorySlug: "ai-image-creator"
 ogImage: "/og-images/post/post-1.webp"
 ---
 

@@ -10,6 +10,8 @@ interface PostCardProps {
   author: string;
   excerpt: string;
   tags: string[];
+  category: string;
+  categorySlug: string;
   ogImage?: string;
 }
 
@@ -24,6 +26,8 @@ export function PostCard({
   author,
   excerpt,
   tags,
+  category,
+  categorySlug,
   ogImage,
 }: PostCardProps) {
   // 날짜 포맷팅
@@ -34,7 +38,7 @@ export function PostCard({
   });
 
   return (
-    <Link href={`/blog/${slug}`} className="block group">
+    <Link href={`/blog/${categorySlug}/${slug}`} className="block group">
       <Card
         className={`overflow-hidden h-full transition-all hover:shadow-lg hover:border-primary ${!ogImage ? 'flex flex-col justify-center' : ''}`}
       >
@@ -52,6 +56,13 @@ export function PostCard({
         )}
 
         <div className="px-6 py-2">
+          {/* 카테고리 배지 */}
+          <div className="mb-2">
+            <Badge variant="outline" className="text-xs">
+              {category}
+            </Badge>
+          </div>
+
           {/* 제목 */}
           <h2 className="text-2xl font-bold mb-2 text-foreground group-hover:text-primary transition-colors">
             {title}

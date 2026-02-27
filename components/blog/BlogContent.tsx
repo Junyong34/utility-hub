@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { PostList } from './PostList';
-import { TagFilter } from './TagFilter';
+import { CategoryFilter } from './CategoryFilter';
 
 interface Post {
   slug: string;
@@ -11,40 +11,56 @@ interface Post {
   author: string;
   excerpt: string;
   tags: string[];
+  category: string;
+  categorySlug: string;
+  ogImage?: string;
+}
+
+interface Category {
+  name: string;
+  slug: string;
+  count: number;
 }
 
 interface BlogContentProps {
   posts: Post[];
-  tags: string[];
+  categories?: Category[];
 }
 
 /**
  * 블로그 콘텐츠 컴포넌트
- * 태그 필터링과 포스트 목록을 관리합니다
+ * 카테고리 필터링과 포스트 목록을 관리합니다
  */
-export function BlogContent({ posts, tags }: BlogContentProps) {
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+export function BlogContent({ posts, categories = [] }: BlogContentProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
-  // 선택된 태그에 따라 포스트 필터링
-  const filteredPosts = selectedTag
-    ? posts.filter((post) =>
-        post.tags.some((tag) => tag.toLowerCase() === selectedTag.toLowerCase())
-      )
+  // 선택된 카테고리에 따라 포스트 필터링
+  const filteredPosts = selectedCategory
+    ? posts.filter((post) => post.categorySlug === selectedCategory)
     : posts;
 
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* 태그 필터 */}
-      <TagFilter tags={tags} selectedTag={selectedTag} onTagSelect={setSelectedTag} />
+      {/* 카테고리 필터 */}
+      {categories.length > 0 && (
+        <CategoryFilter
+          categories={categories}
+          selectedCategory={selectedCategory}
+          onCategorySelect={setSelectedCategory}
+        />
+      )}
 
       {/* 포스트 개수 */}
       <div className="mb-6">
         <p className="text-muted-foreground">
-          {selectedTag ? (
+          {selectedCategory ? (
             <>
-              <span className="font-semibold text-foreground">{selectedTag}</span> 태그로
-              필터링: <span className="font-semibold text-foreground">{filteredPosts.length}</span>개의
-              포스트
+              <span className="font-semibold text-foreground">
+                {categories.find((c) => c.slug === selectedCategory)?.name}
+              </span>{' '}
+              카테고리:{' '}
+              <span className="font-semibold text-foreground">{filteredPosts.length}</span>
+              개의 포스트
             </>
           ) : (
             <>
