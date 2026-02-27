@@ -1,19 +1,8 @@
 import { PostCard } from './PostCard';
-
-interface Post {
-  slug: string;
-  title: string;
-  date: string;
-  author: string;
-  excerpt: string;
-  tags: string[];
-  category: string;
-  categorySlug: string;
-  ogImage?: string;
-}
+import { BlogListPost } from '@/lib/blog/types';
 
 interface PostListProps {
-  posts: Post[];
+  posts: BlogListPost[];
 }
 
 /**

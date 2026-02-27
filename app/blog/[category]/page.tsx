@@ -104,7 +104,7 @@ export default async function CategoryPage({ params }: PageProps) {
         </header>
 
         {/* 메인 콘텐츠 */}
-        <BlogContent posts={posts} />
+        <BlogContent posts={posts} fixedCategorySlug={category} />
 
         {/* 푸터 */}
         <footer className="mt-16 border-t bg-card">

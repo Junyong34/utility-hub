@@ -9,6 +9,8 @@ import type {
   FAQItem,
   HowToSchema,
   HowToStep,
+  ItemListSchema,
+  ItemListElement,
 } from '@/types/seo';
 import { SITE_CONFIG } from './metadata';
 
@@ -278,6 +280,31 @@ export function createCategoryStructuredData(category: {
       { name: '블로그', url: '/blog' },
       { name: category.name },
     ]),
+  };
+}
+
+/**
+ * ItemList 구조화 데이터 생성 (블로그 목록용)
+ * Google에게 무한스크롤 목록의 구조를 알려줍니다
+ */
+export function createItemListSchema(posts: Array<{
+  slug: string;
+  title: string;
+  ogImage?: string;
+}>): ItemListSchema {
+  const itemListElement: ItemListElement[] = posts.map((post, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    url: `${SITE_CONFIG.url}/blog/${post.slug}`,
+    name: post.title,
+    image: post.ogImage ? `${SITE_CONFIG.url}${post.ogImage}` : undefined,
+  }));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement,
+    numberOfItems: posts.length,
   };
 }
 

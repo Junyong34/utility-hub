@@ -1,15 +1,10 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-
-interface Category {
-  name: string;
-  slug: string;
-  count: number;
-}
+import { BlogCategory } from '@/lib/blog/types';
 
 interface CategoryFilterProps {
-  categories: Category[];
+  categories: BlogCategory[];
   selectedCategory: string | null;
   onCategorySelect: (categorySlug: string | null) => void;
 }
