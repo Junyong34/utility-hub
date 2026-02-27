@@ -10,6 +10,7 @@
   - 반응형 레이아웃: 데스크탑(sticky 사이드바), 모바일(바텀시트)
   - 마크다운 처리: unified + rehype-pretty-code
   - 카테고리 필터링: 탭 형태 카테고리 필터 (전체/development/ai-image-creator)
+  - 태그 필터링: 태그별 포스트 필터링 기능
   - 무한스크롤: React Query + Intersection Observer 기반 페이지네이션
   - OG 이미지: 블로그 포스트별 og:image 지원
   - SEO 최적화: ItemList Schema, noscript 태그, 사이트맵

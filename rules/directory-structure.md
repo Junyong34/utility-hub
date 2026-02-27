@@ -48,6 +48,8 @@ app/
 │   ├── page.tsx            # 블로그 목록 (/blog) - 무한스크롤
 │   └── [category]/
 │       ├── page.tsx        # 카테고리별 목록 (/blog/[category])
+│       └── [category]/
+│       ├── page.tsx        # 카테고리별 목록 (/blog/[category])
 │       └── [slug]/
 │           └── page.tsx    # 블로그 상세 (/blog/[category]/[slug])
 ├── tools/
