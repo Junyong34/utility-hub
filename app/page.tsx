@@ -1,7 +1,10 @@
 import { IntroSection } from "@/components/home/intro-section"
 import { DashboardSection } from "@/components/home/dashboard-section"
+import { getAllPosts } from "@/lib/blog/posts"
 
 export default function Page() {
+  const totalBlogPosts = getAllPosts().length;
+
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center">
       {/* 배경 그라데이션 */}
@@ -23,7 +26,7 @@ export default function Page() {
       </div>
 
       <IntroSection />
-      <DashboardSection />
+      <DashboardSection totalBlogPosts={totalBlogPosts} />
     </main>
   )
 }

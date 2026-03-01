@@ -17,8 +17,6 @@ import {
   CircleHelpIcon,
   FlameIcon,
   ArrowRightIcon,
-  DicesIcon,
-  FileTextIcon,
   CalendarIcon,
   BarChart3Icon,
 } from 'lucide-react';
@@ -86,18 +84,6 @@ const hotTopics = [
   },
 ];
 
-// Quick Access
-const quickTools = [
-  {
-    icon: DicesIcon,
-    name: '로또',
-    href: '/tools/lotto',
-    color: 'text-purple-500',
-  },
-  { icon: FileTextIcon, name: '블로그', href: '/blog', color: 'text-blue-500' },
-  { icon: InfoIcon, name: 'About', href: '/about', color: 'text-orange-500' },
-  { icon: CircleHelpIcon, name: 'FAQ', href: '/faq', color: 'text-green-500' },
-];
 
 // Recent Posts
 const recentPosts = [
@@ -127,11 +113,6 @@ interface StatCard {
   color: string;
 }
 
-const staticStatsData: StatCard[] = [
-  { value: '3', label: 'Blog Posts', color: 'text-blue-500' },
-  { value: '1', label: 'Tools', color: 'text-green-500' },
-];
-
 const numberFormatter = new Intl.NumberFormat('ko-KR');
 
 function formatUpdatedAt(value: string, timeZone: string): string {
@@ -147,7 +128,11 @@ function formatUpdatedAt(value: string, timeZone: string): string {
   });
 }
 
-export function DashboardSection() {
+interface DashboardSectionProps {
+  totalBlogPosts?: number;
+}
+
+export function DashboardSection({ totalBlogPosts = 0 }: DashboardSectionProps) {
   // 1) API 상태 수신: pending이면 대시, 실패면 "데이터 준비 중"으로 폴백
   const { data: visitorResponse, isPending } = useVisitorStats();
   const visitorData = visitorResponse?.data;
@@ -169,7 +154,8 @@ export function DashboardSection() {
       label: '누적 방문자',
       color: 'text-orange-500',
     },
-    ...staticStatsData,
+    { value: String(totalBlogPosts), label: 'Blog Posts', color: 'text-blue-500' },
+    { value: '1', label: 'Tools', color: 'text-green-500' },
   ];
 
   // 3) 업데이트 시각은 데이터가 있을 때만 계산
@@ -251,6 +237,36 @@ export function DashboardSection() {
           })}
         </div>
 
+        {/* Recent Posts */}
+        <div>
+          <div className="flex items-center gap-2 mb-6">
+            <CalendarIcon className="h-6 w-6 text-orange-500" />
+            <h2 className="text-2xl font-bold">최신 글</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {recentPosts.map(post => (
+              <Link key={post.id} href={post.href}>
+                <Card className="border-border/50 hover:border-primary/50 transition-all hover:shadow-lg group">
+                  <CardContent className="p-6 space-y-3">
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-base leading-relaxed group-hover:text-primary transition-colors line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <div className="text-sm text-muted-foreground">
+                        {post.date}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-primary">
+                      <span>읽어보기</span>
+                      <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* Hot Topics - 핫한 정보 */}
         <div>
           <div className="flex items-center gap-2 mb-6">
@@ -276,61 +292,6 @@ export function DashboardSection() {
                         <span>자세히 보기</span>
                         <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-all" />
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Quick Access */}
-        <div>
-          <div className="flex items-center gap-2 mb-6">
-            <WrenchIcon className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold">빠른 이동</h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {quickTools.map(tool => {
-              const Icon = tool.icon;
-              return (
-                <Link key={tool.name} href={tool.href}>
-                  <Card className="border-border/50 hover:border-primary/50 transition-all hover:shadow-md group">
-                    <CardContent className="flex flex-col items-center justify-center p-6 space-y-3">
-                      <div className="p-3 rounded-full bg-muted group-hover:scale-110 transition-transform">
-                        <Icon className={`h-8 w-8 ${tool.color}`} />
-                      </div>
-                      <span className="text-sm font-medium">{tool.name}</span>
-                    </CardContent>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Recent Posts */}
-        <div>
-          <div className="flex items-center gap-2 mb-6">
-            <CalendarIcon className="h-6 w-6 text-orange-500" />
-            <h2 className="text-2xl font-bold">최신 글</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {recentPosts.map(post => (
-              <Link key={post.id} href={post.href}>
-                <Card className="border-border/50 hover:border-primary/50 transition-all hover:shadow-lg group">
-                  <CardContent className="p-6 space-y-3">
-                    <div className="space-y-2">
-                      <h3 className="font-semibold text-base leading-relaxed group-hover:text-primary transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <div className="text-sm text-muted-foreground">
-                        {post.date}
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-primary">
-                      <span>읽어보기</span>
-                      <ArrowRightIcon className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </CardContent>
                 </Card>
