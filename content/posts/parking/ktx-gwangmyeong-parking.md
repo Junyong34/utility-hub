@@ -6,7 +6,7 @@ excerpt: "KTX 광명역 A·B·C·D 주차장의 요금, 할인, 거리, 시설 �
 tags: ["KTX 광명역 주차요금", "광명역 일주차 할인", "광명역 주차장 비교", "광명역 A B C D 주차장"]
 category: "주차"
 categorySlug: "parking"
-ogImage: "/og-images/post/post-1.webp"
+ogImage: "/og-images/post/ktx-gwangmyeong-parking.webp"
 ---
 
 # KTX 광명역 주차요금과 일주차 할인, 어떤 주차장을 선택하면 가장 유리할까?

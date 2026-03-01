@@ -12,7 +12,7 @@ tags:
   ]
 category: '주차'
 categorySlug: 'parking'
-ogImage: '/og-images/post/post-1.webp'
+ogImage: '/og-images/post/daegu-shinsegae-parking.webp'
 ---
 
 # 대구 신세계백화점 주차 무료 3시간, 어떻게 적용하고 요금은 얼마일까?

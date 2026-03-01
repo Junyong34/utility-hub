@@ -6,7 +6,7 @@ excerpt: "동탄역 SRT 주차장과 공영주차장 2곳(그린파킹파크, �
 tags: ["동탄역 SRT 주차장", "동탄역 공영주차장", "동탄역 일일주차", "동탄역 주차요금 비교"]
 category: "주차"
 categorySlug: "parking"
-ogImage: "/og-images/post/post-1.webp"
+ogImage: "/og-images/post/dongtan-srt-parking.webp"
 ---
 
 # 동탄역 SRT 주차장과 공영주차장, 일일요금은 어디가 더 저렴할까?
