@@ -14,6 +14,10 @@
   - 무한스크롤: React Query + Intersection Observer 기반 페이지네이션
   - OG 이미지: 블로그 포스트별 og:image 지원
   - SEO 최적화: ItemList Schema, noscript 태그, 사이트맵
+- **Analytics**: Google Analytics 4 통합
+  - 실시간 방문자 통계: 오늘 방문자 / 누적 방문자
+  - 서버 사이드 API: GA4 Data API 기반
+  - 캐싱 전략: 10분 TTL, stale-while-revalidate
 - **Lotto Number Generator**: Interactive number generator with CSR/SSR hybrid approach
 - **UI Component Library**: Built on shadcn/ui and Radix UI for accessibility
   - 재사용 가능한 BottomSheet 컴포넌트
