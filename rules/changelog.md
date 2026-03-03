@@ -4,6 +4,156 @@
 
 ## 2025-02-27
 
+### Google Analytics 4 통합
+
+#### 주요 변경사항
+1. **GA4 Data API 서버 사이드 통합**
+   - 서비스 계정 기반 인증 (google.auth.JWT)
+   - 실시간 방문자 통계 조회
+   - 10분 캐싱 전략 (stale-while-revalidate 1시간)
+
+2. **API Routes 추가**
+   - `/api/analytics/visitors` 엔드포인트 생성
+   - 오늘 방문자 / 누적 방문자 데이터 제공
+   - 503 에러 시 stale cache fallback
+
+3. **대시보드 UI**
+   - 홈페이지 방문자 통계 카드 추가
+   - 실시간 데이터 표시 (React Query)
+   - 로딩/에러 상태 처리
+
+4. **환경 설정**
+   - `.env.local`에 GA4 인증 정보 추가
+   - Netlify 환경 변수 보안 스캔 제외 설정
+   - Next.js `allowedDevOrigins` 설정 (개발 환경)
+
+#### 새로운 파일
+1. **`lib/analytics/ga4.ts`**
+   - GA4 Data API 통합 로직
+   - 캐싱 전략 구현
+   - activeUsers 메트릭 조회
+
+2. **`lib/analytics/types.ts`**
+   - VisitorStatsData 타입 정의
+   - API 응답 스키마
+
+3. **`app/api/analytics/visitors/route.ts`**
+   - GET 엔드포인트
+   - 200/503 응답 처리
+   - Cache-Control 헤더 설정
+
+4. **`hooks/useVisitorStats.ts`**
+   - React Query 훅
+   - 클라이언트 사이드 데이터 페칭
+   - 5분 refetch interval
+
+5. **`components/home/dashboard-section.tsx`**
+   - 방문자 통계 대시보드 UI
+   - 오늘/누적 방문자 카드
+   - 반응형 그리드 레이아웃
+
+#### 수정된 파일
+1. **`next.config.ts`**
+   - `allowedDevOrigins` 추가 (개발 환경 CORS)
+
+2. **`netlify.toml`**
+   - `SECRETS_SCAN_OMIT_KEYS`에 GA4 환경 변수 추가
+
+3. **`.env.example`**
+   - GA4 환경 변수 템플릿 추가
+
+4. **`README.md`**
+   - GA4 통합 기능 문서화
+   - 환경 변수 설정 가이드
+   - Google Cloud 설정 단계
+
+#### 환경 변수
+```env
+GA4_PROPERTY_ID=298617810
+GA4_CLIENT_EMAIL=your-service-account@project.iam.gserviceaccount.com
+GA4_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+GA4_BASELINE_DATE=2024-01-01
+GA4_TIMEZONE=Asia/Seoul
+```
+
+#### 기술 구현 세부사항
+
+**GA4 Data API 호출**:
+```typescript
+const auth = new google.auth.JWT({
+  email: config.clientEmail,
+  key: config.privateKey,
+  scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
+});
+
+const analyticsData = google.analyticsdata({ version: 'v1beta', auth });
+```
+
+**캐싱 전략**:
+- Fresh cache: 10분 TTL
+- Stale cache: 1시간 유효 (에러 시 fallback)
+- 메모리 기반 in-memory cache
+
+**메트릭 정의**:
+- `activeUsers`: 고유 사용자 수 (Client ID 기반)
+- 오늘 방문자: `today ~ today` 날짜 범위
+- 누적 방문자: `GA4_BASELINE_DATE ~ today` 범위
+
+**사용자 구분 기준**:
+- Google Analytics Client ID (브라우저 쿠키 `_ga`)
+- 같은 브라우저 = 같은 사용자
+- 쿠키 삭제/시크릿 모드 = 다른 사용자
+
+#### Google Cloud 설정 가이드
+1. **서비스 계정 생성**
+   - Google Cloud Console → IAM 및 관리자 → 서비스 계정
+   - JSON 키 파일 다운로드
+
+2. **Analytics Data API 활성화**
+   - API 및 서비스 → 라이브러리
+   - "Google Analytics Data API" 검색 및 활성화
+
+3. **GA4 속성 권한 설정**
+   - Google Analytics → 관리자 → 속성 액세스 관리
+   - 서비스 계정 이메일을 "뷰어" 권한으로 추가
+
+#### API 응답 형식
+```json
+{
+  "ok": true,
+  "data": {
+    "todayVisitors": 42,
+    "totalVisitors": 1234,
+    "metric": "activeUsers",
+    "timeZone": "Asia/Seoul",
+    "lastUpdatedAt": "2025-02-27T10:30:00.000Z"
+  },
+  "stale": false,
+  "cacheTtlSeconds": 600
+}
+```
+
+#### 개선 효과
+
+**실시간 통계**:
+- 대시보드에서 방문자 수 확인 가능
+- 10분마다 자동 갱신
+- 에러 발생 시에도 stale 데이터 제공
+
+**성능**:
+- 서버 사이드 API로 보안 강화
+- 메모리 캐싱으로 GA4 API 호출 최소화
+- React Query 클라이언트 사이드 캐싱
+
+**확장성**:
+- 추가 메트릭 (pageviews, sessions 등) 쉽게 추가 가능
+- 기간별 통계 차트 확장 가능
+- 다른 페이지에서도 재사용 가능
+
+---
+
+## 2025-02-27
+
 ### 블로그 무한스크롤 및 SEO 최적화
 
 #### 주요 변경사항
