@@ -9,7 +9,6 @@ categorySlug: "parking"
 ogImage: "/og-images/post/ktx-gwangmyeong-parking.webp"
 ---
 
-# KTX 광명역 주차요금과 일주차 할인, 어떤 주차장을 선택하면 가장 유리할까?
 
 ## TL;DR
 

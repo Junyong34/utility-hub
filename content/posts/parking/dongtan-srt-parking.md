@@ -9,7 +9,6 @@ categorySlug: "parking"
 ogImage: "/og-images/post/dongtan-srt-parking.webp"
 ---
 
-# 동탄역 주차장 요금 비교 2025: SRT 전용과 임시 공영, 어디가 유리할까?
 
 ## TL;DR
 
