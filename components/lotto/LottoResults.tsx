@@ -17,7 +17,7 @@ export function LottoResults({ games }: LottoResultsProps) {
       {games.map((numbers, index) => (
         <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-gray-600">
+            <span className="text-sm font-medium text-muted-foreground">
               게임 {index + 1}
             </span>
           </div>
@@ -30,7 +30,7 @@ export function LottoResults({ games }: LottoResultsProps) {
           </div>
 
           {/* 번호 텍스트 */}
-          <div className="text-center mt-4 text-sm text-gray-500 font-mono">
+          <div className="text-center mt-4 text-sm text-muted-foreground font-mono">
             {formatLottoNumbers(numbers)}
           </div>
         </Card>
@@ -43,13 +43,13 @@ export function LottoResults({ games }: LottoResultsProps) {
  * 로또 공 컴포넌트
  */
 function LottoBall({ number }: { number: number }) {
-  // 번호 범위에 따른 색상 결정
+  // 번호 범위에 따른 색상 결정 (실제 로또 색상 유지하되 다크모드 가독성 개선)
   const getColor = (num: number): string => {
-    if (num <= 10) return 'bg-yellow-400 text-yellow-900';
-    if (num <= 20) return 'bg-blue-500 text-white';
-    if (num <= 30) return 'bg-red-500 text-white';
-    if (num <= 40) return 'bg-gray-600 text-white';
-    return 'bg-green-600 text-white';
+    if (num <= 10) return 'bg-yellow-400 text-yellow-950 dark:bg-yellow-500 dark:text-yellow-950';
+    if (num <= 20) return 'bg-blue-500 text-white dark:bg-blue-600 dark:text-white';
+    if (num <= 30) return 'bg-red-500 text-white dark:bg-red-600 dark:text-white';
+    if (num <= 40) return 'bg-gray-600 text-white dark:bg-gray-500 dark:text-white';
+    return 'bg-green-600 text-white dark:bg-green-600 dark:text-white';
   };
 
   return (

@@ -73,7 +73,7 @@ export function LottoGenerator() {
           </Button>
 
           {/* 안내 문구 */}
-          <p className="text-sm text-gray-600 text-center">
+          <p className="text-sm text-muted-foreground text-center">
             1~45 사이의 중복되지 않는 6개의 숫자가 랜덤으로 생성됩니다
           </p>
         </div>
@@ -115,8 +115,8 @@ export function LottoGenerator() {
       {/* 빈 상태 */}
       {currentGames.length === 0 && history.length === 0 && !isGenerating && (
         <Card className="p-12 text-center">
-          <p className="text-gray-500 text-lg">아직 생성된 번호가 없습니다</p>
-          <p className="text-gray-400 text-sm mt-2">
+          <p className="text-muted-foreground text-lg">아직 생성된 번호가 없습니다</p>
+          <p className="text-muted-foreground/70 text-sm mt-2">
             위의 버튼을 눌러 로또 번호를 생성해보세요!
           </p>
         </Card>

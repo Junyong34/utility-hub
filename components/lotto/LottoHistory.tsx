@@ -20,10 +20,10 @@ export function LottoHistory({ history, onRemove }: LottoHistoryProps) {
         const date = new Date(item.savedAt);
 
         return (
-          <Card key={item.id} className="p-4 hover:bg-gray-50 transition-colors">
+          <Card key={item.id} className="p-4 hover:bg-accent transition-colors">
             <div className="flex justify-between items-start mb-3">
               {/* 날짜 */}
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-muted-foreground">
                 {date.toLocaleString('ko-KR', {
                   month: 'short',
                   day: 'numeric',
@@ -33,7 +33,7 @@ export function LottoHistory({ history, onRemove }: LottoHistoryProps) {
               </div>
 
               {/* 게임 수 */}
-              <div className="text-sm font-medium text-gray-700">
+              <div className="text-sm font-medium text-foreground">
                 {item.games.length}게임
               </div>
 
@@ -43,7 +43,7 @@ export function LottoHistory({ history, onRemove }: LottoHistoryProps) {
                   variant="ghost"
                   size="sm"
                   onClick={() => onRemove(item.id)}
-                  className="text-gray-400 hover:text-red-600 h-6 px-2"
+                  className="text-muted-foreground hover:text-destructive h-6 px-2"
                 >
                   삭제
                 </Button>
@@ -57,7 +57,7 @@ export function LottoHistory({ history, onRemove }: LottoHistoryProps) {
                   {numbers.map((num, numIdx) => (
                     <div
                       key={numIdx}
-                      className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-700"
+                      className="w-7 h-7 rounded-full bg-muted flex items-center justify-center font-semibold text-foreground"
                     >
                       {num}
                     </div>
@@ -65,7 +65,7 @@ export function LottoHistory({ history, onRemove }: LottoHistoryProps) {
                 </div>
               ))}
               {item.games.length > 3 && (
-                <div className="text-xs text-gray-500 text-center">
+                <div className="text-xs text-muted-foreground text-center">
                   +{item.games.length - 3}개 게임 더보기
                 </div>
               )}

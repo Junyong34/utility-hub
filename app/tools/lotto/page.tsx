@@ -40,9 +40,9 @@ export default function LottoPage() {
   return (
     <>
       <JsonLdMultiple data={[webPage, breadcrumb]} />
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="min-h-screen bg-background">
         {/* 헤더 */}
-        <header className="bg-white border-b shadow-sm">
+        <header className="bg-card border-b shadow-sm">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Breadcrumb
               items={[
@@ -53,10 +53,12 @@ export default function LottoPage() {
             />
             <div className="flex justify-between items-center">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
+                <h1 className="text-3xl font-bold text-foreground">
                   로또 번호 생성기
                 </h1>
-                <p className="mt-1 text-gray-600">행운의 번호를 찾아보세요</p>
+                <p className="mt-1 text-muted-foreground">
+                  행운의 번호를 찾아보세요
+                </p>
               </div>
               <Link href="/">
                 <Button variant="outline">홈으로</Button>
@@ -76,11 +78,11 @@ export default function LottoPage() {
             {/* 우측: 안내 정보 */}
             <div className="space-y-6">
               {/* 사용 방법 */}
-              <Card className="p-6 bg-gradient-to-br from-purple-100 to-pink-100 border-purple-200">
-                <h3 className="text-lg font-bold mb-3 text-purple-900">
+              <Card className="p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/20 dark:from-purple-500/20 dark:to-pink-500/20 dark:border-purple-500/30">
+                <h3 className="text-lg font-bold mb-3 text-foreground">
                   사용 방법
                 </h3>
-                <ul className="space-y-2 text-sm text-purple-800">
+                <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>• 생성할 게임 수를 선택하세요</li>
                   <li>• 번호 생성 버튼을 클릭하세요</li>
                   <li>• 마음에 드는 번호를 저장하세요</li>
@@ -90,19 +92,29 @@ export default function LottoPage() {
 
               {/* 로또 정보 */}
               <Card className="p-6">
-                <h3 className="text-lg font-bold mb-4">로또 안내</h3>
-                <div className="space-y-3 text-sm text-gray-700">
+                <h3 className="text-lg font-bold mb-4 text-foreground">
+                  로또 안내
+                </h3>
+                <div className="space-y-3 text-sm text-muted-foreground">
                   <div>
-                    <p className="font-semibold mb-1">번호 범위</p>
-                    <p className="text-gray-600">1~45 사이의 숫자</p>
+                    <p className="font-semibold mb-1 text-foreground">
+                      번호 범위
+                    </p>
+                    <p className="text-muted-foreground">1~45 사이의 숫자</p>
                   </div>
                   <div>
-                    <p className="font-semibold mb-1">선택 개수</p>
-                    <p className="text-gray-600">중복되지 않는 6개의 번호</p>
+                    <p className="font-semibold mb-1 text-foreground">
+                      선택 개수
+                    </p>
+                    <p className="text-muted-foreground">
+                      중복되지 않는 6개의 번호
+                    </p>
                   </div>
                   <div>
-                    <p className="font-semibold mb-1">저장 기능</p>
-                    <p className="text-gray-600">
+                    <p className="font-semibold mb-1 text-foreground">
+                      저장 기능
+                    </p>
+                    <p className="text-muted-foreground">
                       생성한 번호를 로컬에 저장할 수 있습니다
                     </p>
                   </div>
@@ -110,11 +122,11 @@ export default function LottoPage() {
               </Card>
 
               {/* 주의사항 */}
-              <Card className="p-6 bg-yellow-50 border-yellow-200">
-                <h3 className="text-sm font-bold mb-2 text-yellow-900">
+              <Card className="p-6 bg-yellow-500/10 border-yellow-500/20 dark:bg-yellow-500/20 dark:border-yellow-500/30">
+                <h3 className="text-sm font-bold mb-2 text-foreground">
                   주의사항
                 </h3>
-                <p className="text-xs text-yellow-800">
+                <p className="text-xs text-muted-foreground">
                   본 서비스는 엔터테인먼트 목적으로 제공되며, 당첨을 보장하지
                   않습니다. 책임감 있는 구매를 권장합니다.
                 </p>
@@ -124,10 +136,10 @@ export default function LottoPage() {
         </main>
 
         {/* 푸터 */}
-        <footer className="mt-16 border-t bg-white">
+        <footer className="mt-16 border-t bg-card">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <p className="text-center text-gray-600 text-sm">
-              © 2024 유용한 정보 허브. All rights reserved.
+            <p className="text-center text-muted-foreground text-sm">
+              © 2026 유용한 정보 허브. All rights reserved.
             </p>
           </div>
         </footer>
