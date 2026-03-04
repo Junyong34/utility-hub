@@ -12,6 +12,7 @@ tags:
   ]
 category: "주차"
 categorySlug: "parking"
+ogImage: "/og-images/post/airport-parking.webp"
 ---
 
 ## TL;DR
