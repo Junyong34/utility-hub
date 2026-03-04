@@ -15,21 +15,26 @@ interface LottoHistoryProps {
  */
 export function LottoHistory({ history, onRemove }: LottoHistoryProps) {
   return (
-    <div className="space-y-3">
+    <div className="space-y-3" role="list" aria-label="저장된 로또 기록">
       {history.map((item) => {
         const date = new Date(item.savedAt);
+        const formattedDate = date.toLocaleString('ko-KR', {
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        });
 
         return (
-          <Card key={item.id} className="p-4 hover:bg-accent transition-colors">
+          <Card
+            key={item.id}
+            className="p-4 hover:bg-accent transition-colors"
+            role="listitem"
+          >
             <div className="flex justify-between items-start mb-3">
               {/* 날짜 */}
               <div className="text-sm text-muted-foreground">
-                {date.toLocaleString('ko-KR', {
-                  month: 'short',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+                {formattedDate}
               </div>
 
               {/* 게임 수 */}
@@ -40,10 +45,12 @@ export function LottoHistory({ history, onRemove }: LottoHistoryProps) {
               {/* 삭제 버튼 */}
               {onRemove && (
                 <Button
+                  type="button"
                   variant="ghost"
                   size="sm"
                   onClick={() => onRemove(item.id)}
                   className="text-muted-foreground hover:text-destructive h-6 px-2"
+                  aria-label={`${formattedDate} 저장 기록 삭제`}
                 >
                   삭제
                 </Button>

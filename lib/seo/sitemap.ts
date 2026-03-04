@@ -2,6 +2,7 @@ import type { SitemapEntry } from '@/types/seo';
 import { getAllPosts, getAllTags } from '@/lib/blog/posts';
 import { SITE_CONFIG } from './metadata';
 import { getAllToolConfigs } from '@/lib/tools/tool-config';
+import { getLottoRoundResults } from '@/lib/lotto/round-data';
 
 /**
  * 정적 페이지 사이트맵 엔트리 생성
@@ -76,13 +77,37 @@ export function getTagPages(): SitemapEntry[] {
  */
 export function getToolPages(): SitemapEntry[] {
   const tools = getAllToolConfigs();
-
-  return tools.map((tool) => ({
+  const toolPages = tools.map((tool) => ({
     url: `${SITE_CONFIG.url}/tools/${tool.id}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
+
+  const hasLottoTool = tools.some((tool) => tool.id === 'lotto');
+  if (!hasLottoTool) {
+    return toolPages;
+  }
+
+  const lottoSubPages: SitemapEntry[] = [
+    {
+      url: `${SITE_CONFIG.url}/tools/lotto/stats`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.75,
+    },
+    ...getLottoRoundResults().map((round) => ({
+      url: `${SITE_CONFIG.url}/tools/lotto/round/${round.round}`,
+      lastModified: round.drawDate,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+  ];
+
+  return [
+    ...toolPages,
+    ...lottoSubPages,
+  ];
 }
 
 /**

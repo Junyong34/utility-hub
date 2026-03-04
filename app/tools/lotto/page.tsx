@@ -1,13 +1,17 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { LottoGenerator } from '@/components/lotto/LottoGenerator';
+import { LottoInfoPanel } from '@/components/lotto/LottoInfoPanel';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import {
+  assertToolStructuredData,
   generateToolMetadata,
   getToolStructuredDataArray,
 } from '@/lib/tools';
+import { getLatestLottoRoundResult } from '@/lib/lotto/round-data';
+
+assertToolStructuredData('lotto');
 
 /**
  * 로또 페이지 메타데이터
@@ -23,6 +27,7 @@ export const metadata: Metadata = generateToolMetadata('lotto');
 export default function LottoPage() {
   // 구조화 데이터 (WebPage, Breadcrumb, SoftwareApplication, FAQ, HowTo)
   const structuredData = getToolStructuredDataArray('lotto');
+  const latestRound = getLatestLottoRoundResult();
 
   return (
     <>
@@ -63,62 +68,7 @@ export default function LottoPage() {
             </div>
 
             {/* 우측: 안내 정보 */}
-            <div className="space-y-6">
-              {/* 사용 방법 */}
-              <Card className="p-6 bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/20 dark:from-purple-500/20 dark:to-pink-500/20 dark:border-purple-500/30">
-                <h3 className="text-lg font-bold mb-3 text-foreground">
-                  사용 방법
-                </h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li>• 생성할 게임 수를 선택하세요</li>
-                  <li>• 번호 생성 버튼을 클릭하세요</li>
-                  <li>• 마음에 드는 번호를 저장하세요</li>
-                  <li>• 생성된 번호를 복사해서 사용할 수 있습니다</li>
-                </ul>
-              </Card>
-
-              {/* 로또 정보 */}
-              <Card className="p-6">
-                <h3 className="text-lg font-bold mb-4 text-foreground">
-                  로또 안내
-                </h3>
-                <div className="space-y-3 text-sm text-muted-foreground">
-                  <div>
-                    <p className="font-semibold mb-1 text-foreground">
-                      번호 범위
-                    </p>
-                    <p className="text-muted-foreground">1~45 사이의 숫자</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1 text-foreground">
-                      선택 개수
-                    </p>
-                    <p className="text-muted-foreground">
-                      중복되지 않는 6개의 번호
-                    </p>
-                  </div>
-                  <div>
-                    <p className="font-semibold mb-1 text-foreground">
-                      저장 기능
-                    </p>
-                    <p className="text-muted-foreground">
-                      생성한 번호를 로컬에 저장할 수 있습니다
-                    </p>
-                  </div>
-                </div>
-              </Card>
-
-              {/* 주의사항 */}
-              <Card className="p-6 bg-yellow-500/10 border-yellow-500/20 dark:bg-yellow-500/20 dark:border-yellow-500/30">
-                <h3 className="text-sm font-bold mb-2 text-foreground">
-                  주의사항
-                </h3>
-                <p className="text-xs text-muted-foreground">
-                  본 서비스는 엔터테인먼트 목적으로 제공되며, 당첨을 보장하지
-                  않습니다. 책임감 있는 구매를 권장합니다.
-                </p>
-              </Card>
-            </div>
+            <LottoInfoPanel latestRound={latestRound?.round} />
           </div>
         </main>
 

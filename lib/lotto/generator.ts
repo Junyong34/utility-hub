@@ -15,6 +15,8 @@ export interface LottoGameSet {
   timestamp: number;
 }
 
+export type LottoStatsStrategy = 'hot' | 'cold' | 'mix';
+
 /**
  * 1~45 사이의 중복되지 않는 로또 번호 6개를 생성합니다.
  * @returns 오름차순으로 정렬된 로또 번호 배열
@@ -47,6 +49,75 @@ export function generateMultipleLottoNumbers(count: number = 5): LottoGameSet {
     games,
     timestamp: Date.now(),
   };
+}
+
+/**
+ * 생성 함수를 기반으로 여러 게임 번호를 생성합니다.
+ */
+export function generateLottoGames(
+  count: number,
+  generator: (index: number) => number[]
+): number[][] {
+  const games: number[][] = [];
+
+  for (let i = 0; i < count; i++) {
+    games.push(generator(i));
+  }
+
+  return games;
+}
+
+/**
+ * 문자열 시드를 기반으로 항상 동일한 번호를 생성합니다.
+ */
+export function generateLottoNumbersFromSeed(seed: string): number[] {
+  const rng = createSeededRng(seed);
+  return generateLottoNumbersByRng(rng);
+}
+
+/**
+ * 통계 전략 기반 번호를 생성합니다.
+ */
+export function generateStatsBasedLottoNumbers(
+  strategy: LottoStatsStrategy
+): number[] {
+  const stats = getRecentStats();
+  const seedNumbers =
+    strategy === 'hot'
+      ? stats.hotNumbers
+      : strategy === 'cold'
+        ? stats.coldNumbers
+        : [...stats.hotNumbers, ...stats.coldNumbers];
+
+  const numbers = new Set<number>();
+
+  while (numbers.size < 2) {
+    const picked =
+      seedNumbers[Math.floor(Math.random() * seedNumbers.length)] ?? 1;
+    numbers.add(picked);
+  }
+
+  while (numbers.size < 6) {
+    numbers.add(Math.floor(Math.random() * 45) + 1);
+  }
+
+  return Array.from(numbers).sort((a, b) => a - b);
+}
+
+/**
+ * 지정한 숫자를 반드시 포함하는 번호를 생성합니다.
+ */
+export function generateLottoNumbersWithLucky(
+  luckyNumber: number | null | undefined
+): number[] {
+  const normalizedLucky = normalizeLottoNumber(luckyNumber ?? 1);
+  const numbers = new Set<number>([normalizedLucky]);
+
+  while (numbers.size < 6) {
+    numbers.add(Math.floor(Math.random() * 45) + 1);
+  }
+
+  return Array.from(numbers).sort((a, b) => a - b);
 }
 
 /**
@@ -177,4 +248,45 @@ export function getRecentStats() {
     hotNumbers: [34, 27, 13], // 최근 10회 자주 나온 번호
     coldNumbers: [2, 41, 39], // 최근 10회 안 나온 번호
   };
+}
+
+function normalizeLottoNumber(value: number): number {
+  if (!Number.isFinite(value)) return 1;
+  const rounded = Math.round(value);
+  if (rounded < 1) return 1;
+  if (rounded > 45) return 45;
+  return rounded;
+}
+
+function hashStringToSeed(value: string): number {
+  let hash = 2166136261;
+
+  for (let i = 0; i < value.length; i++) {
+    hash ^= value.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return hash >>> 0;
+}
+
+function createSeededRng(seed: string): () => number {
+  let state = hashStringToSeed(seed);
+
+  return () => {
+    state += 0x6d2b79f5;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function generateLottoNumbersByRng(rng: () => number): number[] {
+  const numbers = new Set<number>();
+
+  while (numbers.size < 6) {
+    numbers.add(Math.floor(rng() * 45) + 1);
+  }
+
+  return Array.from(numbers).sort((a, b) => a - b);
 }

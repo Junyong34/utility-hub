@@ -40,6 +40,18 @@ interface SoftwareApplicationSchema {
   };
 }
 
+interface StructuredDataTypeCarrier {
+  '@type'?: string;
+}
+
+export interface ToolStructuredDataValidationResult {
+  toolId: string;
+  requiredTypes: string[];
+  presentTypes: string[];
+  missingTypes: string[];
+  isValid: boolean;
+}
+
 /**
  * Tool용 SoftwareApplication 구조화 데이터 생성
  * 검색엔진에 Tool을 웹 애플리케이션으로 인식시킴
@@ -135,6 +147,64 @@ export function createToolStructuredData(toolId: string) {
 }
 
 /**
+ * Tool 하위 페이지용 통합 구조화 데이터 생성
+ * (예: /tools/lotto/stats, /tools/lotto/round/[round])
+ */
+export function createToolSubPageStructuredData(options: {
+  toolId: string;
+  path: string;
+  name: string;
+  description: string;
+  breadcrumbs: Array<{ name: string; url?: string }>;
+}) {
+  const { toolId, path, name, description, breadcrumbs } = options;
+  const tool = getToolConfig(toolId);
+
+  if (!tool) {
+    throw new Error(`Tool configuration not found: ${toolId}`);
+  }
+
+  const webPage = createWebPageSchema({
+    name,
+    path,
+    description,
+  });
+
+  const breadcrumb = createBreadcrumbSchema(breadcrumbs);
+  const application = createToolApplicationSchema(tool);
+  const faq = tool.faq
+    ? createFAQSchema(
+        tool.faq.map((item) => ({
+          question: item.question,
+          answer: item.answer,
+        }))
+      )
+    : null;
+  const howTo = tool.howTo
+    ? createHowToSchema({
+        name: `${tool.name} 사용법`,
+        description: tool.description,
+        steps: tool.howTo.map((step) => ({
+          name: step.name,
+          text: step.text,
+          image: step.image,
+          url: step.url,
+        })),
+        totalTime: tool.estimatedTime,
+        tools: tool.tools,
+      })
+    : null;
+
+  return {
+    webPage,
+    breadcrumb,
+    application,
+    faq,
+    howTo,
+  };
+}
+
+/**
  * Tools 메인 페이지용 구조화 데이터
  */
 export function createToolsMainStructuredData() {
@@ -169,9 +239,73 @@ export function getToolStructuredDataArray(toolId: string) {
 }
 
 /**
+ * Tool 하위 페이지 구조화 데이터 배열
+ */
+export function getToolSubPageStructuredDataArray(options: {
+  toolId: string;
+  path: string;
+  name: string;
+  description: string;
+  breadcrumbs: Array<{ name: string; url?: string }>;
+}) {
+  const { webPage, breadcrumb, application, faq, howTo } =
+    createToolSubPageStructuredData(options);
+
+  return [webPage, breadcrumb, application, faq, howTo].filter(
+    (data) => data !== null
+  );
+}
+
+/**
  * Tools 메인 페이지 구조화 데이터 배열
  */
 export function getToolsMainStructuredDataArray() {
   const { webPage, breadcrumb } = createToolsMainStructuredData();
   return [webPage, breadcrumb];
+}
+
+function getStructuredDataTypes(toolId: string): string[] {
+  const data = getToolStructuredDataArray(toolId) as StructuredDataTypeCarrier[];
+  return data
+    .map((item) => item['@type'])
+    .filter((type): type is string => Boolean(type));
+}
+
+/**
+ * Tool 구조화 데이터 타입 유효성 검증
+ */
+export function validateToolStructuredData(
+  toolId: string,
+  requiredTypes: string[] = ['WebApplication', 'FAQPage', 'HowTo']
+): ToolStructuredDataValidationResult {
+  const presentTypes = getStructuredDataTypes(toolId);
+  const missingTypes = requiredTypes.filter(
+    (required) => !presentTypes.includes(required)
+  );
+
+  return {
+    toolId,
+    requiredTypes,
+    presentTypes,
+    missingTypes,
+    isValid: missingTypes.length === 0,
+  };
+}
+
+/**
+ * 필수 구조화 데이터 타입이 없는 경우 에러를 발생시킵니다.
+ */
+export function assertToolStructuredData(
+  toolId: string,
+  requiredTypes: string[] = ['WebApplication', 'FAQPage', 'HowTo']
+) {
+  const result = validateToolStructuredData(toolId, requiredTypes);
+
+  if (!result.isValid) {
+    throw new Error(
+      `[${toolId}] Missing structured data types: ${result.missingTypes.join(', ')}`
+    );
+  }
+
+  return result;
 }

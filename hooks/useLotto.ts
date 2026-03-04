@@ -46,6 +46,22 @@ export function useLotto() {
   }, []);
 
   /**
+   * 외부에서 전달받은 게임 목록으로 현재 번호를 갱신합니다.
+   * @param games - 표시할 로또 게임 목록
+   * @param delayMs - 생성 대기 시간
+   */
+  const generateFromGames = useCallback(
+    (games: number[][], delayMs: number = 300) => {
+      setIsGenerating(true);
+      setTimeout(() => {
+        setCurrentGames(games);
+        setIsGenerating(false);
+      }, delayMs);
+    },
+    []
+  );
+
+  /**
    * 현재 생성된 게임들을 히스토리에 저장합니다.
    */
   const saveToHistory = useCallback(() => {
@@ -141,6 +157,7 @@ export function useLotto() {
     // 액션
     generateSingle,
     generateMultiple,
+    generateFromGames,
     saveToHistory,
     loadHistory,
     deleteFromHistory,

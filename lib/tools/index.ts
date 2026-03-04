@@ -26,8 +26,12 @@ export {
 export {
   createToolApplicationSchema,
   createToolStructuredData,
+  createToolSubPageStructuredData,
   createToolsMainStructuredData,
+  validateToolStructuredData,
+  assertToolStructuredData,
   getToolStructuredDataArray,
+  getToolSubPageStructuredDataArray,
   getToolsMainStructuredDataArray,
 } from './tool-structured-data';
 

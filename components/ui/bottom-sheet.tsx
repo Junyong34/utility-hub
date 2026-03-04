@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useId } from 'react';
 import { cn } from '@/lib/utils';
 import { X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -26,6 +26,21 @@ export function BottomSheet({
   maxHeight = '70vh',
   showCloseButton = true,
 }: BottomSheetProps) {
+  const titleId = useId();
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   return (
     <>
       {/* 오버레이 */}
@@ -41,9 +56,11 @@ export function BottomSheet({
       <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby={title ? 'bottom-sheet-title' : undefined}
+        aria-labelledby={title ? titleId : undefined}
+        aria-hidden={!isOpen}
         className={cn(
           'fixed bottom-0 left-0 right-0 bg-card border-t rounded-t-2xl shadow-2xl z-50 transition-transform duration-300 ease-in-out',
+          !isOpen && 'pointer-events-none',
           isOpen ? 'translate-y-0' : 'translate-y-full'
         )}
         style={{ maxHeight }}
@@ -53,7 +70,7 @@ export function BottomSheet({
           {(title || showCloseButton) && (
             <div className="flex items-center justify-between mb-4">
               {title && (
-                <h2 id="bottom-sheet-title" className="font-semibold text-lg">
+                <h2 id={titleId} className="font-semibold text-lg">
                   {title}
                 </h2>
               )}
