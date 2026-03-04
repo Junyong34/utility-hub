@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';  // ← 이 한 줄 추가
+
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
