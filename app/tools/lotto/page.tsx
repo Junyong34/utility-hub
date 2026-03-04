@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';  // ← 이 한 줄 추가
 
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { LottoGenerator } from '@/components/lotto/LottoGenerator';
 import { LottoInfoPanel } from '@/components/lotto/LottoInfoPanel';
@@ -66,7 +67,9 @@ export default function LottoPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* 좌측: 생성기 (클라이언트 컴포넌트) */}
             <div className="lg:col-span-2">
-              <LottoGenerator />
+              <Suspense fallback={<div className="min-h-[720px]" aria-hidden />}>
+                <LottoGenerator />
+              </Suspense>
             </div>
 
             {/* 우측: 안내 정보 */}
