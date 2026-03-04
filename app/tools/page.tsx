@@ -3,24 +3,21 @@ import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { DicesIcon, ArrowRightIcon } from 'lucide-react';
-import {
-  generateMetadata as createMetadata,
-  createPageStructuredData,
-} from '@/lib/seo';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
+import {
+  generateToolsMainMetadata,
+  getToolsMainStructuredDataArray,
+  getAllToolConfigs,
+} from '@/lib/tools';
 
 /**
  * Tools 메인 페이지 메타데이터
+ * lib/tools에서 자동 생성
  */
-export const metadata: Metadata = createMetadata({
-  title: '도구 모음',
-  description: '다양한 유용한 도구를 한곳에서 바로 사용할 수 있습니다.',
-  canonical: 'https://www.zento.kr/tools',
-  keywords: ['도구', '유틸리티', '로또 번호 생성기', '온라인 도구'],
-});
+export const metadata: Metadata = generateToolsMainMetadata();
 
 /**
- * Tool 데이터 타입
+ * Tool 데이터 타입 (UI 렌더링용)
  */
 interface Tool {
   id: string;
@@ -33,35 +30,39 @@ interface Tool {
 }
 
 /**
- * 사용 가능한 도구 목록
+ * 아이콘 매핑
+ * tool-config.ts에서 문자열로 저장된 아이콘을 실제 컴포넌트로 변환
  */
-const TOOLS: Tool[] = [
-  {
-    id: 'lotto',
-    name: '로또 번호 생성기',
-    description: '행운의 로또 번호를 자동으로 생성해보세요. 1~45 사이의 랜덤 번호 6개를 생성합니다.',
-    icon: DicesIcon,
-    href: '/tools/lotto',
-    badge: '인기',
-    color: 'from-blue-500 to-purple-500',
-  },
-  // 추가 도구는 여기에 추가
-];
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  DicesIcon: DicesIcon,
+  // 향후 추가될 아이콘들
+};
+
+/**
+ * 사용 가능한 도구 목록
+ * TOOL_CONFIGS에서 자동으로 생성
+ */
+const toolConfigs = getAllToolConfigs();
+const TOOLS: Tool[] = toolConfigs.map((config) => ({
+  id: config.id,
+  name: config.name,
+  description: config.description,
+  icon: ICON_MAP[config.icon || 'DicesIcon'] || DicesIcon,
+  href: `/tools/${config.id}`,
+  badge: config.badge,
+  color: config.color || 'from-blue-500 to-purple-500',
+}));
 
 /**
  * Tools 메인 페이지
  */
 export default function ToolsPage() {
-  const { webPage, breadcrumb } = createPageStructuredData({
-    name: '도구 모음',
-    path: '/tools',
-    description: '다양한 유용한 도구를 한곳에서 바로 사용할 수 있습니다.',
-    breadcrumbs: [{ name: '홈', url: '/' }, { name: '도구' }],
-  });
+  // 구조화 데이터 (lib/tools에서 자동 생성)
+  const structuredData = getToolsMainStructuredDataArray();
 
   return (
     <>
-      <JsonLdMultiple data={[webPage, breadcrumb]} />
+      <JsonLdMultiple data={structuredData} />
       <div className="min-h-screen bg-background">
         {/* 헤더 섹션 */}
         <section className="relative overflow-hidden border-b">

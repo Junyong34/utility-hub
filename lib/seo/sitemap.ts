@@ -1,6 +1,7 @@
 import type { SitemapEntry } from '@/types/seo';
 import { getAllPosts, getAllTags } from '@/lib/blog/posts';
 import { SITE_CONFIG } from './metadata';
+import { getAllToolConfigs } from '@/lib/tools/tool-config';
 
 /**
  * 정적 페이지 사이트맵 엔트리 생성
@@ -25,12 +26,7 @@ export function getStaticPages(): SitemapEntry[] {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    {
-      url: `${SITE_CONFIG.url}/tools/lotto`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
+    // Note: 개별 Tool 페이지는 getToolPages()에서 자동으로 생성됨
     {
       url: `${SITE_CONFIG.url}/about`,
       lastModified: new Date(),
@@ -75,13 +71,29 @@ export function getTagPages(): SitemapEntry[] {
 }
 
 /**
+ * Tool 페이지 사이트맵 엔트리 생성
+ * TOOL_CONFIGS에서 자동으로 모든 Tool을 가져와 sitemap에 포함
+ */
+export function getToolPages(): SitemapEntry[] {
+  const tools = getAllToolConfigs();
+
+  return tools.map((tool) => ({
+    url: `${SITE_CONFIG.url}/tools/${tool.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+}
+
+/**
  * 전체 사이트맵 엔트리 생성
  */
 export function getAllSitemapEntries(): SitemapEntry[] {
   return [
     ...getStaticPages(),
-    ...getBlogPostPages(),
-    ...getTagPages(), // 태그 페이지 사이트맵 추가
+    ...getBlogPostPages(), // Blog 포스트
+    ...getTagPages(),      // Blog 태그
+    ...getToolPages(),     // Tools (자동 추가)
   ];
 }
 

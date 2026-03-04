@@ -3,43 +3,30 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { LottoGenerator } from '@/components/lotto/LottoGenerator';
-import {
-  generateMetadata as createMetadata,
-  createPageStructuredData,
-} from '@/lib/seo';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
+import {
+  generateToolMetadata,
+  getToolStructuredDataArray,
+} from '@/lib/tools';
 
 /**
  * 로또 페이지 메타데이터
+ * lib/tools에서 자동 생성
  */
-export const metadata: Metadata = createMetadata({
-  title: '로또 번호 생성기',
-  description:
-    '행운의 로또 번호를 자동으로 생성해보세요. 1~45 사이의 랜덤 번호 6개를 생성합니다.',
-  canonical: 'https://www.zento.kr/tools/lotto',
-  keywords: ['로또 번호 생성기', '랜덤 번호', '로또 도구', '번호 추천'],
-});
+export const metadata: Metadata = generateToolMetadata('lotto');
 
 /**
  * 로또 번호 생성 페이지 (CSR)
  * 클라이언트에서 인터랙티브한 번호 생성 기능 제공
+ * SEO: SoftwareApplication, FAQ, HowTo 스키마 적용
  */
 export default function LottoPage() {
-  const { webPage, breadcrumb } = createPageStructuredData({
-    name: '로또 번호 생성기',
-    path: '/tools/lotto',
-    description:
-      '행운의 로또 번호를 자동으로 생성해보세요. 1~45 사이의 랜덤 번호 6개를 생성합니다.',
-    breadcrumbs: [
-      { name: '홈', url: '/' },
-      { name: '도구', url: '/tools' },
-      { name: '로또 번호 생성기' },
-    ],
-  });
+  // 구조화 데이터 (WebPage, Breadcrumb, SoftwareApplication, FAQ, HowTo)
+  const structuredData = getToolStructuredDataArray('lotto');
 
   return (
     <>
-      <JsonLdMultiple data={[webPage, breadcrumb]} />
+      <JsonLdMultiple data={structuredData} />
       <div className="min-h-screen bg-background">
         {/* 헤더 */}
         <header className="bg-card border-b shadow-sm">

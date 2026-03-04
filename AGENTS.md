@@ -14,6 +14,12 @@
   - 무한스크롤: React Query + Intersection Observer 기반 페이지네이션
   - OG 이미지: 블로그 포스트별 og:image 지원
   - SEO 최적화: ItemList Schema, noscript 태그, 사이트맵
+- **Tools System**: Online utility tools with centralized SEO management
+  - 중앙 관리형 Tool 설정: `lib/tools/tool-config.ts`에서 모든 Tool 정보 관리
+  - 자동 SEO 적용: 메타데이터, 구조화 데이터, Sitemap 자동 생성
+  - Schema.org 통합: SoftwareApplication, HowTo, FAQPage 스키마
+  - **Blog SEO와 완전 분리**: 별도의 메타데이터/구조화 데이터 시스템
+  - 현재 제공 Tool: 로또 번호 생성기 (추가 확장 가능)
 - **Analytics**: Google Analytics 4 통합
   - 실시간 방문자 통계: 오늘 방문자 / 누적 방문자
   - 서버 사이드 API: GA4 Data API 기반
@@ -27,6 +33,9 @@
   - Seamless link sharing with preserved state
 - **Static Pages**: About, FAQ 페이지
 - **SEO Optimization**: Naver 사이트 검증, 구조화 데이터, AdSense 지원
+  - Blog SEO: Article, BlogPosting 스키마 (lib/blog, lib/seo)
+  - Tools SEO: SoftwareApplication, HowTo, FAQPage 스키마 (lib/tools)
+  - 자동 sitemap 생성: `/sitemap.xml` (Blog + Tools 통합)
 
 ## General Instructions
 
@@ -65,12 +74,22 @@ pnpm format:check      # Check code formatting
 ```
 utility-hub/
 ├── app/                    # Next.js App Router (pages & routing)
+│   ├── blog/              # Blog pages (SSG)
+│   ├── tools/             # Tools pages (SSR/CSR hybrid)
+│   └── sitemap.ts         # Next.js sitemap generation
 ├── components/             # React components (ui/, blog/, lotto/, home/, layout/, seo/)
 ├── hooks/                  # Custom React hooks
 ├── lib/                    # Business logic & utilities
+│   ├── blog/              # Blog 전용 로직
+│   ├── tools/             # Tools 전용 로직 (SEO 포함)
+│   └── seo/               # 공통 SEO 유틸리티
+├── types/                  # TypeScript type definitions
+│   ├── seo.ts             # SEO 타입
+│   └── tools.ts           # Tools 타입
 ├── content/                # Static content (markdown posts)
 ├── public/                 # Static assets (images, og-images)
 ├── rules/                  # Project guidelines (detailed)
+│   └── tools-seo-guidelines.md  # Tools SEO 가이드
 ├── docs/                   # Project documentation
 ├── AI/                     # AI-related assets (prompts, images)
 ├── .agents/                # Agent skills (blog-seo-writer, humanizer, etc.)
@@ -79,6 +98,7 @@ utility-hub/
 
 **📖 상세 구조 정보**: [`rules/directory-structure.md`](./rules/directory-structure.md)
 **📝 변경사항 이력**: [`rules/changelog.md`](./rules/changelog.md)
+**🔧 Tools SEO 가이드**: [`rules/tools-seo-guidelines.md`](./rules/tools-seo-guidelines.md)
 
 ## Code Style & Conventions
 
