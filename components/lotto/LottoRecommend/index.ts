@@ -15,5 +15,4 @@ export { LottoRecommendResultSheet } from './LottoRecommendResultSheet';
 export { LottoRecommendActions } from './LottoRecommendActions';
 export { LottoRecommendResults } from './LottoRecommendResults';
 export { LottoWeeklyRecommendation } from './LottoWeeklyRecommendation';
-export { LottoRecommendEmptyState } from './LottoRecommendEmptyState';
 export { LottoRecommend } from './LottoRecommend';

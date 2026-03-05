@@ -38,7 +38,6 @@ import {
   LottoStatsStrategy,
   validateLottoNumbers,
 } from '@/lib/lotto/generator';
-import { getLatestLottoRoundResult } from '@/lib/lotto/round-data';
 import {
   LOTTO_MBTI_OPTIONS,
   LOTTO_RECOMMEND_DEFAULTS,
@@ -53,7 +52,6 @@ import {
   isLottoRecommendCount,
 } from '@/lib/lotto/recommendation-spec';
 import { copyTextToClipboard } from '@/lib/clipboard';
-import { captureLottoResultsElement } from '@/lib/lotto/capture-lotto-results';
 
 export const LOTTO_STATS_STRATEGIES: LottoStatsStrategy[] = [
   ...LOTTO_STATS_STRATEGY_OPTIONS,
@@ -106,7 +104,6 @@ interface LottoRecommendActions {
   copyShareUrl: (numbers?: number[]) => Promise<boolean>;
   openResultSheet: () => void;
   closeResultSheet: () => void;
-  downloadResultsImage: () => Promise<boolean>;
 }
 
 /**
@@ -146,7 +143,6 @@ type PendingGamesQuerySync =
 const WEEKLY_PICK_STORAGE_KEY = 'lotto-weekly-pick';
 const DEFAULT_SHARE_PATH = '/tools/lotto';
 const SINGLE_GAME_COUNT: LottoRecommendCount = 1;
-const LATEST_ROUND = getLatestLottoRoundResult()?.round;
 const ANALYSIS_DURATION_MS = 4500;
 const ANALYSIS_PROGRESS_INTERVAL_MS = 100;
 const MODE_LABELS: Record<LottoRecommendMode, string> = {
@@ -733,27 +729,6 @@ export function LottoRecommendProvider({
     setResultSheetOpen(false);
   }, []);
 
-  const downloadResultsImage = useCallback(async () => {
-    if (currentGames.length === 0) return false;
-    const target =
-      document.getElementById('lotto-results-capture-root') ??
-      document.querySelector('[data-lotto-results-capture="true"]');
-    if (!(target instanceof HTMLElement)) return false;
-
-    const strategyLabel = `${selectedRecommendationLabel} - ${selectedRecommendationDetail}`;
-
-    const captured = await captureLottoResultsElement(target, {
-      filenamePrefix: 'zento-lotto-results',
-      round: LATEST_ROUND,
-      strategyLabel,
-    });
-    return captured !== null;
-  }, [
-    currentGames,
-    selectedRecommendationDetail,
-    selectedRecommendationLabel,
-  ]);
-
   const shareUrl = useMemo(() => {
     return getShareUrl(mode, count, currentGames);
   }, [count, currentGames, mode]);
@@ -790,7 +765,6 @@ export function LottoRecommendProvider({
         copyShareUrl,
         openResultSheet,
         closeResultSheet,
-        downloadResultsImage,
       },
       meta: {
         shareUrl,
@@ -801,7 +775,6 @@ export function LottoRecommendProvider({
       clearCurrent,
       copyNumbers,
       copyShareUrl,
-      downloadResultsImage,
       openResultSheet,
       closeResultSheet,
       count,

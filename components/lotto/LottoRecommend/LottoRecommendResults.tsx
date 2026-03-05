@@ -8,7 +8,6 @@
  * @remarks
  * - 6가지 추천 모드별 고유 색상 테마 적용
  * - 추천 방식 라벨과 상세 설명 표시
- * - 이미지 캡처를 위한 data 속성 포함 (data-lotto-results-capture)
  * - 번호가 없으면 렌더링하지 않음
  *
  * @module LottoRecommendResults
@@ -87,7 +86,10 @@ export function LottoRecommendResults() {
               )}
             >
               <CheckCircle2
-                className={cn('w-5 h-5', modeTextColors[mode] || modeTextColors.random)}
+                className={cn(
+                  'w-5 h-5',
+                  modeTextColors[mode] || modeTextColors.random
+                )}
               />
             </div>
             <div className="flex-1">
@@ -126,9 +128,7 @@ export function LottoRecommendResults() {
       </div>
 
       {/* Results */}
-      <div id="lotto-results-capture-root" data-lotto-results-capture="true">
-        <LottoResults games={currentGames} onCopyNumbers={copyNumbers} />
-      </div>
+      <LottoResults games={currentGames} onCopyNumbers={copyNumbers} />
     </div>
   );
 }

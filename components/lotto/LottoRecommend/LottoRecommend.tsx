@@ -2,7 +2,6 @@ import { LottoCountSelector } from './LottoCountSelector';
 import { LottoModeSwitcher } from './LottoModeSwitcher';
 import { LottoRecommendActions } from './LottoRecommendActions';
 import { LottoRecommendControls } from './LottoRecommendControls';
-import { LottoRecommendEmptyState } from './LottoRecommendEmptyState';
 import { LottoRecommendHeader } from './LottoRecommendHeader';
 import { LottoRecommendProvider } from './LottoRecommendProvider';
 import { LottoRecommendResults } from './LottoRecommendResults';
@@ -24,5 +23,4 @@ export const LottoRecommend = {
   Actions: LottoRecommendActions,
   Results: LottoRecommendResults,
   WeeklyRecommendation: LottoWeeklyRecommendation,
-  EmptyState: LottoRecommendEmptyState,
 };

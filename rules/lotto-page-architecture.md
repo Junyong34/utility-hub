@@ -10,7 +10,7 @@
 
 1. 1~45 번호 범위의 로또 조합 1개~5개를 실시간으로 생성해 사용자에게 즉시 제공
 2. 6가지 추천 모드(랜덤, 통계, 날짜, MBTI, 행운번호, 슬롯)로 생성 방식을 전환할 수 있게 제공
-3. URL 공유, 복사, 이미지 저장으로 생성 결과를 재사용 가능하게 제공
+3. URL 공유/복사로 생성 결과를 재사용 가능하게 제공
 4. 주간 추천, 회차 통계, FAQ, 면책 고지와 같은 보조 정보를 함께 노출
 5. SEO/구조화 데이터(FAQ, HowTo, WebPage, SoftwareApplication)를 함께 포함해 검색 노출 품질을 확보
 
@@ -57,10 +57,9 @@
 | `components/lotto/LottoRecommend/LottoCountSelector.tsx` | 생성 게임 수 선택(1~5) |
 | `components/lotto/LottoRecommend/LottoRecommendVariantPanel.tsx` | mode별 하위 설정 패널 스위치 |
 | `components/lotto/LottoRecommend/LottoRecommendResultSheet.tsx` | 분석 중/결과 표시 BottomSheet 제어 |
-| `components/lotto/LottoRecommend/LottoRecommendActions.tsx` | 링크 복사, 이미지 저장 버튼 처리 |
-| `components/lotto/LottoRecommend/LottoRecommendResults.tsx` | 결과 표시 카드 + 공유 URL 메타 헤더 |
+| `components/lotto/LottoRecommend/LottoRecommendActions.tsx` | 링크 복사 버튼 처리 |
+| `components/lotto/LottoRecommend/LottoRecommendResults.tsx` | 모드별 설명 헤더 + 결과 목록 렌더 |
 | `components/lotto/LottoRecommend/LottoWeeklyRecommendation.tsx` | 주간 추천 번호 노출 및 복사 |
-| `components/lotto/LottoRecommend/LottoRecommendEmptyState.tsx` | 최초 상태 메시지 |
 | `components/lotto/LottoRecommend/LottoAnalysisLoading.tsx` | 분석 진행률/단계 표시 |
 | `components/lotto/LottoRecommend/ModeDescription.tsx` | 모바일 모드 선택 후 요약 설명 |
 | `components/lotto/LottoRecommend/CompactModeButton.tsx` | 모바일 3x3 모드 버튼 |
@@ -87,7 +86,6 @@
 | `lib/lotto/algorithms/probability-statistical-recommendation.ts` | 6개 확률통계 전략 생성 알고리즘 |
 | `lib/lotto/algorithms/statistics-analyzer.ts` | frequency/odd-even/range/co-occurrence 통계 엔진 |
 | `lib/lotto/algorithms/validation.ts` | 번호 품질 규칙 검증(범위, 합계, 홀짝, 연속성 등) |
-| `lib/lotto/capture-lotto-results.ts` | 결과 영역 HTML → PNG 저장 |
 | `lib/lotto/image-generator.ts` | canvas 기반 번호 이미지 생성(현재는 호출 경로 없음, legacy 후보) |
 | `lib/lotto/mbti-profile.ts` | MBTI 유형별 프로필 텍스트/키워드 |
 
@@ -128,7 +126,6 @@
 5. `generate` 클릭 시 `LottoRecommendProvider.generate` 실행
 6. 생성 결과가 있으면 `ResultSheet`에서 loading/결과 표시 토글
 7. `WeeklyRecommendation`으로 주간 고정 번호 노출
-8. 결과가 없으면 `EmptyState` 표시
 
 ### 4-1. Provider 핵심 상태
 
@@ -136,7 +133,7 @@
 
 상태: `mode`, `count`, `statsStrategy`, `recommendDate`, `mbti`, `luckyNumber`, `currentGames`, `isGenerating`, `analysisStages`, `analysisStage`, `analysisStepIndex`, `analysisProgress`, `resultSheetOpen`, `selectedRecommendationLabel`, `selectedRecommendationDetail`
 
-액션: `setMode`, `setCount`, `setStatsStrategy`, `setRecommendDate`, `setMbti`, `setLuckyNumber`, `generate`, `clearCurrent`, `copyNumbers`, `copyShareUrl`, `openResultSheet`, `closeResultSheet`, `downloadResultsImage`
+액션: `setMode`, `setCount`, `setStatsStrategy`, `setRecommendDate`, `setMbti`, `setLuckyNumber`, `generate`, `clearCurrent`, `copyNumbers`, `copyShareUrl`, `openResultSheet`, `closeResultSheet`
 
 메타: `shareUrl`, `weeklyNumbers`
 
@@ -160,6 +157,7 @@
 3. 단계 텍스트는 `analysisStepMessages` 인덱스로 순차 변경
 4. `useLotto.generateFromGames(games, 4500)`로 4.5초 뒤 실제 게임 결과 반영
 5. `analysisFinalizeTimeout`에서 100% 표시와 최종 단계로 수렴
+6. 결과 데이터가 없거나 분석이 없으면 ResultSheet는 렌더되지 않아 빈 상태 별도 안내 UI가 없음
 
 이 흐름으로 사용자는 실제 계산이 없는 경우에도 분석 UX를 일관되게 체감합니다.
 
@@ -209,14 +207,13 @@
 - `LottoRecommendResultSheet`는 `isGenerating` 또는 결과가 있을 때만 렌더
 - 생성 중에는 `LottoAnalysisLoading`
 - 생성 후에는 `LottoRecommendActions` + `LottoRecommendResults`
-- `LottoRecommendActions`는 링크 복사/이미지 저장을 담당
+- `LottoRecommendActions`는 링크 복사만 담당
 - `LottoRecommendResults`는 추천 모드별 테마 헤더와 `LottoResults` 리스트 렌더
 
-### 6-4. 복사·저장
+### 6-4. 복사 액션
 
 - 번호 복사: `copyTextToClipboard(formatLottoNumbers(numbers))`
 - 공유 링크 복사: `copyShareUrl`
-- 이미지 저장: 결과 영역(`lotto-results-capture-root`)을 `captureLottoResultsElement`로 캡처
 
 ## 7) 슬롯/애니메이션 처리
 
@@ -283,7 +280,7 @@
 
 1. `app/tools/lotto/page.tsx`는 `components/lotto/*`, `LottoGenerator`, `getToolConfig`, `round-data`, `tool` 공용 유틸에 종속
 2. `LottoGenerator`는 `components/lotto/LottoRecommend/*`에만 의존
-3. Provider는 `hooks/useLotto` + `lib/lotto/*` + `hooks`/`capture` 유틸을 결합
+3. Provider는 `hooks/useLotto` + `lib/lotto/*` + `hooks`를 결합
 4. variant 패널은 `lib/lotto/recommendation-spec` + `mbti-profile` + generator 일부만 사용
 5. 통계/회차 페이지는 `round-data`, `generator`, `round-analysis` 계열만 직접 사용
 
@@ -292,7 +289,7 @@
 1. 회차 데이터 스키마 변경 시 `lotto_draws.json`과 `round-data` 매핑 검증(특히 drawDate 매핑)
 2. `nuqs` 쿼리 기본값 변경 시 공유 링크/재진입 동작이 뒤엉키지 않는지 점검
 3. `image-generator.ts` 사용 여부를 정리하고 불필요 코드 유무 판단
-4. `captureLottoResultsElement` 의존(html2canvas) 업그레이드 시 호환성 테스트
+4. 삭제된 `captureLottoResultsElement`/`html2canvas` 경로가 재도입되지 않았는지 정기 점검
 5. 통계 알고리즘 추가 시 `LOTTO_STATS_STRATEGY`/`LOTTO_RECOMMEND_MODES` 동기화
 
 ## 13) 문서 보존 이유
@@ -303,3 +300,14 @@
 2. SEO/공유/URL 동기화가 한 번에 보이지 않으면 디버깅 비용이 높아지는 구조를 선제 정리
 3. 보조 페이지(통계/회차)까지 포함해 기능 경계를 명확히 구분
 4. 신규 모드 추가 시 변경 포인트(상수 파일, 패널, 선택 UI, 전략 로직, UI 라벨)를 빠르게 확장할 수 있도록 기준 제공
+
+## 14) 최근 반영 사항
+
+1. 로또 생성기에서 이미지 저장 경로를 삭제
+   - `LottoRecommendActions`의 이미지 저장 버튼 제거
+   - `LottoRecommendProvider`의 `downloadResultsImage` 액션 제거
+   - 결과 캡처용 DOM 마커 및 유틸(`captureLottoResultsElement`) 제거
+   - `html2canvas` 의존성 삭제(`package.json`, `pnpm-lock.yaml`)
+2. 빈 상태 전용 컴포넌트 제거
+   - `LottoRecommend.EmptyState` 노출 경로 삭제
+   - `components/lotto/LottoRecommend/LottoRecommendEmptyState.tsx` 삭제

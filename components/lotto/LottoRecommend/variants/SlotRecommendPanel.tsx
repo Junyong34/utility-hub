@@ -64,7 +64,7 @@ export function SlotRecommendPanel() {
         {displayFrames.map((frame, gameIndex) => (
           <div key={`slot-game-${gameIndex}`} className="space-y-1">
             <p className="text-[11px] text-muted-foreground">
-              게임 {gameIndex + 1}
+              슬롯 {gameIndex + 1}
             </p>
             <SlotMachine numbers={frame} isSpinning={isGenerating} />
           </div>

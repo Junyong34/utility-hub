@@ -20,7 +20,6 @@ export function LottoGenerator() {
         </LottoRecommend.Controls>
         <LottoRecommend.ResultSheet />
         <LottoRecommend.WeeklyRecommendation />
-        <LottoRecommend.EmptyState />
       </LottoRecommend.Root>
     </LottoRecommend.Provider>
   );

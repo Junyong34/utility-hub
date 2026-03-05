@@ -58,7 +58,6 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       '최신 회차 데이터 기반 번호 생성',
       '생성된 번호 로컬 저장 기능',
       '번호 복사 및 공유 URL 복사 기능',
-      '번호 이미지 저장 기능',
       '즉시 사용 가능한 간편한 UI',
     ],
     useCases: [
