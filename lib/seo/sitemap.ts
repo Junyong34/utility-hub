@@ -1,5 +1,5 @@
 import type { SitemapEntry } from '@/types/seo';
-import { getAllPosts, getAllTags } from '@/lib/blog/posts';
+import { getAllPosts, getAllCategories } from '@/lib/blog/posts';
 import { SITE_CONFIG } from './metadata';
 import { getAllToolConfigs } from '@/lib/tools/tool-config';
 import { getLottoRoundResults } from '@/lib/lotto/round-data';
@@ -50,7 +50,7 @@ export function getBlogPostPages(): SitemapEntry[] {
   const posts = getAllPosts();
 
   return posts.map((post) => ({
-    url: `${SITE_CONFIG.url}/blog/${post.slug}`,
+    url: `${SITE_CONFIG.url}/blog/${post.categorySlug}/${post.slug}`,
     lastModified: post.date,
     changeFrequency: 'monthly' as const,
     priority: 0.8,
@@ -58,17 +58,25 @@ export function getBlogPostPages(): SitemapEntry[] {
 }
 
 /**
+ * 블로그 카테고리 페이지 사이트맵 엔트리 생성
+ */
+export function getBlogCategoryPages(): SitemapEntry[] {
+  const categories = getAllCategories();
+
+  return categories.map((category) => ({
+    url: `${SITE_CONFIG.url}/blog/${category.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.75,
+  }));
+}
+
+/**
  * 태그 페이지 사이트맵 엔트리 생성 (향후 태그 페이지 구현 시)
  */
 export function getTagPages(): SitemapEntry[] {
-  const tags = getAllTags();
-
-  return tags.map((tag) => ({
-    url: `${SITE_CONFIG.url}/blog/tag/${encodeURIComponent(tag.toLowerCase())}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.6,
-  }));
+  // 현재 /blog/tag 경로가 라우트로 구현되어 있지 않아 비활성화
+  return [];
 }
 
 /**
@@ -116,8 +124,9 @@ export function getToolPages(): SitemapEntry[] {
 export function getAllSitemapEntries(): SitemapEntry[] {
   return [
     ...getStaticPages(),
+    ...getBlogCategoryPages(), // Blog 카테고리
     ...getBlogPostPages(), // Blog 포스트
-    ...getTagPages(),      // Blog 태그
+    ...getTagPages(),      // Blog 태그 (구현 전까지 비활성화)
     ...getToolPages(),     // Tools (자동 추가)
   ];
 }

@@ -38,6 +38,7 @@ export const ROBOT_RULES: RobotRule[] = [
       'PerplexityBot',
       'ClaudeBot',
       'anthropic-ai',
+      'Yeti',
     ],
     allow: '/',
   },
