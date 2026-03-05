@@ -2,12 +2,12 @@ import type { SitemapEntry } from '@/types/seo';
 import { getAllPosts, getAllCategories } from '@/lib/blog/posts';
 import { SITE_CONFIG } from './metadata';
 import { getAllToolConfigs } from '@/lib/tools/tool-config';
-import { getLottoRoundResults } from '@/lib/lotto/round-data';
 
 /**
- * 정적 페이지 사이트맵 엔트리 생성
+ * 정적 페이지용 사이트맵 엔트리 생성
+ * (Next.js 라우트(app/(meta)/sitemap.ts)에서 사용하는 원본 데이터)
  */
-export function getStaticPages(): SitemapEntry[] {
+export function collectStaticPageEntries(): SitemapEntry[] {
   return [
     {
       url: SITE_CONFIG.url,
@@ -27,7 +27,7 @@ export function getStaticPages(): SitemapEntry[] {
       changeFrequency: 'weekly',
       priority: 0.8,
     },
-    // Note: 개별 Tool 페이지는 getToolPages()에서 자동으로 생성됨
+    // Note: 개별 Tool 페이지는 collectToolEntries()에서 자동으로 생성됨
     {
       url: `${SITE_CONFIG.url}/about`,
       lastModified: new Date(),
@@ -44,9 +44,9 @@ export function getStaticPages(): SitemapEntry[] {
 }
 
 /**
- * 블로그 포스트 사이트맵 엔트리 생성
+ * 블로그 포스트용 사이트맵 엔트리 생성
  */
-export function getBlogPostPages(): SitemapEntry[] {
+export function collectBlogPostEntries(): SitemapEntry[] {
   const posts = getAllPosts();
 
   return posts.map((post) => ({
@@ -58,9 +58,9 @@ export function getBlogPostPages(): SitemapEntry[] {
 }
 
 /**
- * 블로그 카테고리 페이지 사이트맵 엔트리 생성
+ * 블로그 카테고리 페이지용 사이트맵 엔트리 생성
  */
-export function getBlogCategoryPages(): SitemapEntry[] {
+export function collectBlogCategoryEntries(): SitemapEntry[] {
   const categories = getAllCategories();
 
   return categories.map((category) => ({
@@ -72,18 +72,19 @@ export function getBlogCategoryPages(): SitemapEntry[] {
 }
 
 /**
- * 태그 페이지 사이트맵 엔트리 생성 (향후 태그 페이지 구현 시)
+ * 태그 페이지용 사이트맵 엔트리 생성
+ * (현재는 /blog/tag 라우트 미구현으로 비활성화)
  */
-export function getTagPages(): SitemapEntry[] {
+export function collectBlogTagEntries(): SitemapEntry[] {
   // 현재 /blog/tag 경로가 라우트로 구현되어 있지 않아 비활성화
   return [];
 }
 
 /**
- * Tool 페이지 사이트맵 엔트리 생성
+ * Tool 페이지 및 서브페이지 사이트맵 엔트리 생성
  * TOOL_CONFIGS에서 자동으로 모든 Tool을 가져와 sitemap에 포함
  */
-export function getToolPages(): SitemapEntry[] {
+export function collectToolEntries(): SitemapEntry[] {
   const tools = getAllToolConfigs();
   const toolPages = tools.map((tool) => ({
     url: `${SITE_CONFIG.url}/tools/${tool.id}`,
@@ -104,12 +105,6 @@ export function getToolPages(): SitemapEntry[] {
       changeFrequency: 'weekly',
       priority: 0.75,
     },
-    ...getLottoRoundResults().map((round) => ({
-      url: `${SITE_CONFIG.url}/tools/lotto/round/${round.round}`,
-      lastModified: round.drawDate,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    })),
   ];
 
   return [
@@ -119,17 +114,29 @@ export function getToolPages(): SitemapEntry[] {
 }
 
 /**
+/**
  * 전체 사이트맵 엔트리 생성
  */
-export function getAllSitemapEntries(): SitemapEntry[] {
+export function collectSitemapEntries(): SitemapEntry[] {
   return [
-    ...getStaticPages(),
-    ...getBlogCategoryPages(), // Blog 카테고리
-    ...getBlogPostPages(), // Blog 포스트
-    ...getTagPages(),      // Blog 태그 (구현 전까지 비활성화)
-    ...getToolPages(),     // Tools (자동 추가)
+    ...collectStaticPageEntries(),
+    ...collectBlogCategoryEntries(), // Blog 카테고리
+    ...collectBlogPostEntries(), // Blog 포스트
+    ...collectBlogTagEntries(), // Blog 태그(구현 전까지 비활성화)
+    ...collectToolEntries(), // Tools (자동 추가)
   ];
 }
+
+/**
+ * 과거 호출 규약 호환성용 별칭
+ * (점진적으로 collect* 함수명으로 마이그레이션)
+ */
+export const getStaticPages = collectStaticPageEntries;
+export const getBlogPostPages = collectBlogPostEntries;
+export const getBlogCategoryPages = collectBlogCategoryEntries;
+export const getTagPages = collectBlogTagEntries;
+export const getToolPages = collectToolEntries;
+export const getAllSitemapEntries = collectSitemapEntries;
 
 /**
  * XML 사이트맵 생성
