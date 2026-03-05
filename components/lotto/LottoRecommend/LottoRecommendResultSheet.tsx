@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { LottoAnalysisLoading } from './LottoAnalysisLoading';
 import { LottoRecommendActions } from './LottoRecommendActions';
 import { LottoRecommendResults } from './LottoRecommendResults';
+import { LottoDhlotteryLinks } from './LottoDhlotteryLinks';
 import { useLottoRecommend } from './LottoRecommendProvider';
 
 export function LottoRecommendResultSheet() {
@@ -39,7 +40,7 @@ export function LottoRecommendResultSheet() {
       <BottomSheet
         isOpen={resultSheetOpen}
         onClose={closeResultSheet}
-        title={isGenerating ? '번호 분석 중' : '생성 결과'}
+        title={isGenerating ? '번호 분석 중' : '추천 번호 결과'}
         maxHeight="85vh"
       >
         <div
@@ -57,6 +58,11 @@ export function LottoRecommendResultSheet() {
             />
           ) : (
             <>
+              <LottoDhlotteryLinks
+                compact
+                title="동행복권 바로가기"
+                className="mb-4"
+              />
               <LottoRecommendActions />
               <LottoRecommendResults />
             </>

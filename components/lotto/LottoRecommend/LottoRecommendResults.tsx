@@ -66,28 +66,29 @@ export function LottoRecommendResults() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Enhanced Recommendation Info Card */}
       <div
         className={cn(
           'relative rounded-xl border-2 overflow-hidden',
+          'py-1.5',
           'bg-gradient-to-br',
           modeGradients[mode] || modeGradients.random,
           modeBorderColors[mode] || modeBorderColors.random
         )}
       >
-        <div className="px-5 py-4 space-y-3">
+        <div className="px-3 py-1.5 space-y-1">
           {/* Header with icon */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <div
               className={cn(
-                'p-1.5 rounded-lg bg-white dark:bg-slate-800 shadow-sm',
+                'p-0.5 rounded-[8px] bg-white/90 dark:bg-slate-800/90 shadow-sm',
                 modeBorderColors[mode] || modeBorderColors.random
               )}
             >
               <CheckCircle2
                 className={cn(
-                  'w-5 h-5',
+                  'w-3.5 h-3.5',
                   modeTextColors[mode] || modeTextColors.random
                 )}
               />
@@ -103,13 +104,13 @@ export function LottoRecommendResults() {
           <div>
             <h3
               className={cn(
-                'text-lg font-bold',
+                'text-base font-bold',
                 modeTextColors[mode] || modeTextColors.random
               )}
             >
               {selectedRecommendationLabel}
             </h3>
-            <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
+            <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
               {selectedRecommendationDetail}
             </p>
           </div>
@@ -122,9 +123,9 @@ export function LottoRecommendResults() {
       </div>
 
       {/* Results Section Header */}
-      <div className="flex items-center gap-2">
-        <div className="h-8 w-1 bg-gradient-to-b from-primary to-primary/50 rounded-full" />
-        <h3 className="text-xl font-bold">생성된 번호</h3>
+      <div className="flex items-center gap-1.5 mt-0.5">
+        <div className="h-6 w-1 bg-gradient-to-b from-primary to-primary/50 rounded-full" />
+        <h3 className="text-lg font-bold">생성된 번호</h3>
       </div>
 
       {/* Results */}
