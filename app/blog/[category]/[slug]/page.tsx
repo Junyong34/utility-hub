@@ -5,6 +5,7 @@ import {
   getAllPostSlugs,
   getPostBySlug,
   getAdjacentPosts,
+  getPostsByCategory,
 } from '@/lib/blog/posts';
 import { PostContent } from '@/components/blog/PostContent';
 import { BlogPostHeader } from '@/components/blog/BlogPostHeader';
@@ -95,6 +96,12 @@ export default async function BlogPostPage({ params }: PageProps) {
   // 목차 추출
   const tocItems = extractTableOfContents(post.content);
 
+  // 같은 카테고리의 포스트 목록 가져오기 (SelectBox용)
+  const categoryPosts = getPostsByCategory(category).map((p) => ({
+    slug: p.slug,
+    title: p.title,
+  }));
+
   return (
     <>
       {/* 구조화 데이터 (JSON-LD) */}
@@ -105,6 +112,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         <BlogPostHeader
           categoryName={post.category}
           categorySlug={post.categorySlug}
+          currentSlug={post.slug}
+          posts={categoryPosts}
         />
 
         {/* 메인 콘텐츠 영역 - 목차와 함께 배치 */}
