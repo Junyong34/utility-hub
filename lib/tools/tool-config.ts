@@ -45,7 +45,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       '로또 회차별 번호',
     ],
     category: 'generator',
-    ogImage: '/og-images/tool-lotto.png',
+    ogImage: '/og-images/tool-lotto.webp',
     badge: '인기',
     color: 'from-blue-500 to-purple-500',
     icon: 'DicesIcon',
@@ -165,9 +165,7 @@ export function getAllToolConfigs(): ToolConfig[] {
  * 카테고리별 Tool 가져오기
  */
 export function getToolsByCategory(category: string): ToolConfig[] {
-  return Object.values(TOOL_CONFIGS).filter(
-    (tool) => tool.category === category
-  );
+  return Object.values(TOOL_CONFIGS).filter(tool => tool.category === category);
 }
 
 /**
