@@ -63,9 +63,6 @@ export default function LottoPage() {
                   AI가 분석한 최적의 번호를 받아보세요
                 </p>
               </div>
-              <Link href="/">
-                <Button variant="outline">홈으로</Button>
-              </Link>
             </div>
           </div>
         </header>

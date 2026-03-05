@@ -15,7 +15,8 @@
     "lint:staged": "lint-staged",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "update-lotto": "node scripts/update-lotto-draws.js"
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",
