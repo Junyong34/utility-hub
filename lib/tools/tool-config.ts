@@ -45,7 +45,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       '로또 회차별 번호',
     ],
     category: 'generator',
-    ogImage: '/og-images/tool-lotto.webp',
+    ogImage: '/og-images/post/tool-lotto.webp',
     badge: '인기',
     color: 'from-blue-500 to-purple-500',
     icon: 'DicesIcon',
