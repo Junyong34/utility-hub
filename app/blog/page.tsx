@@ -7,6 +7,7 @@ import { createPageStructuredData, createItemListSchema } from '@/lib/seo';
 import { Breadcrumb } from '@/components/seo';
 import { JsonLdMultiple } from '@/components/seo';
 import { BlogContent } from '@/components/blog/BlogContent';
+import { getBlogMainBreadcrumbItems, getBlogStructuredDataBreadcrumbs } from '@/lib/blog/breadcrumb';
 
 /**
  * 블로그 메인 페이지 메타데이터
@@ -39,7 +40,7 @@ export default function BlogPage() {
     path: '/blog',
     description:
       'Next.js, TypeScript, React, 웹 개발에 관한 유용한 팁과 정보를 공유합니다.',
-    breadcrumbs: [{ name: '홈', url: '/' }, { name: '블로그' }],
+    breadcrumbs: getBlogStructuredDataBreadcrumbs(),
   });
 
   // ItemList Schema: 봇이 무한스크롤 목록을 인식할 수 있도록
@@ -53,7 +54,7 @@ export default function BlogPage() {
         <header className="bg-card border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             {/* Breadcrumb */}
-            <Breadcrumb items={[{ name: '블로그' }]} className="mb-4" />
+            <Breadcrumb items={getBlogMainBreadcrumbItems()} className="mb-4" />
 
             <div className="flex justify-between items-center">
               <div>

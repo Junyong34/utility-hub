@@ -40,6 +40,9 @@ export interface ToolConfig {
   /** 짧은 이름 (선택) */
   shortName?: string;
 
+  /** Breadcrumb에 표시될 라벨 (기본값: name) */
+  breadcrumbLabel?: string;
+
   /** 상세 설명 */
   description: string;
 

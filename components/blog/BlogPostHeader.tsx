@@ -1,17 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BlogBreadcrumb } from '@/components/seo';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { BlogSwitcher } from '@/components/blog/BlogSwitcher';
 
 interface PostOption {
   slug: string;
@@ -32,12 +25,6 @@ interface BlogPostHeaderProps {
  * - 블로그 포스트 선택 SelectBox
  */
 export function BlogPostHeader({ categoryName, categorySlug, currentSlug, posts }: BlogPostHeaderProps) {
-  const router = useRouter();
-
-  const handlePostChange = (newSlug: string) => {
-    router.push(`/blog/${categorySlug}/${newSlug}`);
-  };
-
   return (
     <header className="bg-card border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -52,18 +39,11 @@ export function BlogPostHeader({ categoryName, categorySlug, currentSlug, posts 
         </div>
 
         {/* 블로그 포스트 선택 SelectBox */}
-        <Select value={currentSlug} onValueChange={handlePostChange}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="포스트 선택" />
-          </SelectTrigger>
-          <SelectContent>
-            {posts.map((post) => (
-              <SelectItem key={post.slug} value={post.slug}>
-                <span className="truncate">{post.title}</span>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <BlogSwitcher
+          categorySlug={categorySlug}
+          currentSlug={currentSlug}
+          posts={posts}
+        />
       </div>
     </header>
   );

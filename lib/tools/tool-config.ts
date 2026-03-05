@@ -10,10 +10,105 @@ import type { ToolConfig } from '@/types/tools';
  * 새로운 Tool 추가 시 이곳에 설정을 추가하면 자동으로 SEO, Sitemap 등에 반영됨
  */
 export const TOOL_CONFIGS: Record<string, ToolConfig> = {
+  'loan-calculator': {
+    id: 'loan-calculator',
+    name: '대출 이자 계산기',
+    shortName: '대출 계산기',
+    breadcrumbLabel: '대출 계산기',
+    description:
+      '대출 금액, 연 이자율, 상환 기간을 입력하면 월 상환액과 총 상환금액, 총 이자액을 계산해주는 원리금균등상환 계산기입니다.',
+    keywords: [
+      '대출 계산기',
+      '원리금 계산기',
+      '월 상환액 계산',
+      '이자 계산',
+      '주택담보대출 계산기',
+      '신용대출 계산기',
+      '대출 상환액 계산',
+      '대출 원금 이자 계산',
+      '금리 계산기',
+      '대출 계획',
+      '대출 상환 계획표',
+      '재무 계산기',
+      '부동산 대출 계산',
+      '연 이자율 계산',
+      '총 상환금 계산',
+      '대출비용 계산',
+      '맞춤 상환 계산',
+    ],
+    category: 'calculator',
+    ogImage: '/og-images/tools-default.png',
+    badge: 'NEW',
+    color: 'from-emerald-500 to-teal-500',
+    icon: 'Calculator',
+    features: [
+      '월 상환액(원리금균등) 실시간 계산',
+      '총 이자/총 상환금액 즉시 확인',
+      '기간(년), 금리(%) 입력 기반 계산',
+      '반올림 처리된 월 상환액 및 비용 정리',
+      '모바일 친화 입력 폼',
+      '향후 원금균등/중도상환 확장 가능',
+    ],
+    useCases: [
+      '대출 상환 계획 수립',
+      '이자 부담 감안 월급부담 계산',
+      '주택담보대출 비교 분석',
+      '신용대출 부담 예측',
+      '가계 지출 계획 수립',
+    ],
+    faq: [
+      {
+        question: '원리금균등상환이 뭔가요?',
+        answer:
+          '매달 이자가 달라지지만, 상환금은 일정하게 유지되는 상환 방식입니다. 매달 원금 비중은 점차 커집니다.',
+      },
+      {
+        question: '이율이 0%일 때도 계산되나요?',
+        answer: '네, 연이율이 0%인 경우 월 상환액은 원금 ÷ 상환 개월 수로 계산됩니다.',
+      },
+      {
+        question: '금리 입력값은 소수점도 되나요?',
+        answer: '네, 연이율은 소수점 입력이 가능합니다. (예: 3.5)',
+      },
+      {
+        question: '총 상환 금액은 어떤 값을 의미하나요?',
+        answer: '총 상환 금액은 상환 기간 동안 납부하는 월 상환액의 합계로, 원금 + 이자입니다.',
+      },
+      {
+        question: '이 계산기는 법적 자문 도구인가요?',
+        answer:
+          '아니요. 가계 계획을 위한 참고용 계산기입니다. 실제 대출 조건은 금융기관 약관을 확인하세요.',
+      },
+    ],
+    howTo: [
+      {
+        name: '대출 원금 입력',
+        text: '대출 받을 금액(원 단위)을 입력합니다.',
+      },
+      {
+        name: '연 이자율 입력',
+        text: '연 이자율(%)을 숫자로 입력합니다. 0부터 입력 가능합니다.',
+      },
+      {
+        name: '상환 기간 입력',
+        text: '상환 기간을 년 단위로 입력하고 즉시 계산 결과를 확인합니다.',
+      },
+      {
+        name: '결과 확인',
+        text: '월 상환액, 총 이자, 총 상환액을 한눈에 확인하세요.',
+      },
+    ],
+    applicationCategory: 'UtilityApplication',
+    estimatedTime: 'PT1M',
+    tools: ['웹 브라우저'],
+    relatedTools: [],
+  },
+
   lotto: {
     id: 'lotto',
-    name: '로또 번호 생성기',
+    name: 'AI 추천 번호 생성',
     shortName: '로또',
+    breadcrumbLabel: 'AI 추천 번호 생성',
     description:
       'AI 로또 번호 추천과 확률통계 6전략을 무료로 제공하는 로또 번호 생성기입니다. 랜덤, 날짜, MBTI, 슬롯 방식까지 한 번에 비교하고 저장/공유할 수 있습니다.',
     keywords: [

@@ -1,19 +1,19 @@
 export const dynamic = 'force-dynamic';
 
 import { Metadata } from 'next';
-import Link from 'next/link';
 import { Suspense } from 'react';
-import { Button } from '@/components/ui/button';
 import { LottoGenerator } from '@/components/lotto/LottoGenerator';
 import { LottoContentSection } from '@/components/lotto/LottoContentSection';
 import { LottoDisclaimer } from '@/components/lotto/LottoDisclaimer';
 import { LottoFAQ } from '@/components/lotto/LottoFAQ';
 import { LottoInfoPanel } from '@/components/lotto/LottoInfoPanel';
+import { ToolSwitcher } from '@/components/tools/ToolSwitcher';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import {
   assertToolStructuredData,
   generateToolMetadata,
   getToolStructuredDataArray,
+  getToolBreadcrumbItems,
 } from '@/lib/tools';
 import { getToolConfig } from '@/lib/tools/tool-config';
 import { getLatestLottoRoundResult } from '@/lib/lotto/round-data';
@@ -43,27 +43,15 @@ export default function LottoPage() {
   return (
     <>
       <JsonLdMultiple data={structuredData} />
-      <div className="min-h-screen bg-background lotto-page-content">
+      <div className="min-h-screen bg-background">
         {/* 헤더 */}
         <header className="bg-card border-b shadow-sm">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Breadcrumb
-              items={[
-                { name: '도구', url: '/tools' },
-                { name: 'AI 추천 번호 생성' },
-              ]}
+              items={getToolBreadcrumbItems('lotto')}
               className="mb-4"
             />
-            <div className="flex justify-between items-center">
-              <div>
-                <h1 className="text-3xl font-bold text-foreground">
-                  AI 추천 번호 생성
-                </h1>
-                <p className="mt-1 text-muted-foreground">
-                  AI가 분석한 최적의 번호를 받아보세요
-                </p>
-              </div>
-            </div>
+            <ToolSwitcher currentToolId="lotto" />
           </div>
         </header>
 

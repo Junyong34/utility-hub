@@ -8,6 +8,7 @@ import { Breadcrumb } from '@/components/seo';
 import { JsonLdMultiple } from '@/components/seo';
 import { BlogContent } from '@/components/blog/BlogContent';
 import { notFound } from 'next/navigation';
+import { getBlogCategoryBreadcrumbItems, getBlogStructuredDataBreadcrumbs } from '@/lib/blog/breadcrumb';
 
 interface PageProps {
   params: Promise<{ category: string }>;
@@ -64,11 +65,7 @@ export default async function CategoryPage({ params }: PageProps) {
     name: `${categoryInfo.name} 카테고리`,
     path: `/blog/${category}`,
     description: `${categoryInfo.name} 카테고리의 블로그 포스트 목록입니다.`,
-    breadcrumbs: [
-      { name: '홈', url: '/' },
-      { name: '블로그', url: '/blog' },
-      { name: categoryInfo.name },
-    ],
+    breadcrumbs: getBlogStructuredDataBreadcrumbs(categoryInfo.name),
   });
 
   return (
@@ -80,10 +77,7 @@ export default async function CategoryPage({ params }: PageProps) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             {/* Breadcrumb */}
             <Breadcrumb
-              items={[
-                { name: '블로그', url: '/blog' },
-                { name: categoryInfo.name },
-              ]}
+              items={getBlogCategoryBreadcrumbItems(categoryInfo.name)}
               className="mb-4"
             />
 

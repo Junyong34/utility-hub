@@ -19,7 +19,7 @@ export function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex items-center space-x-2 text-sm ${className}`}
+      className={`flex items-center space-x-2 text-base ${className}`}
     >
       {/* 홈 아이콘 */}
       <Link
@@ -61,6 +61,7 @@ export function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
 
 /**
  * 블로그 포스트용 Breadcrumb
+ * lib/blog/breadcrumb.ts의 헬퍼 함수를 사용하여 일관성 유지
  */
 export function BlogBreadcrumb({
   categoryName,
@@ -69,6 +70,7 @@ export function BlogBreadcrumb({
   categoryName: string;
   categorySlug: string;
 }) {
+  // 동적 import를 피하기 위해 직접 구현 (클라이언트 컴포넌트에서 사용 가능)
   return (
     <Breadcrumb
       items={[

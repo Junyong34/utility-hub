@@ -14,6 +14,8 @@ import {
 import {
   assertToolStructuredData,
   getToolSubPageStructuredDataArray,
+  getToolBreadcrumbItems,
+  getToolStructuredDataBreadcrumbs,
 } from '@/lib/tools';
 
 assertToolStructuredData('lotto');
@@ -83,12 +85,11 @@ export default async function LottoRoundPage({ params }: PageProps) {
     path: `/tools/lotto/round/${roundData.round}`,
     name: `로또 ${roundData.round}회 번호 분석`,
     description: `로또 ${roundData.round}회 번호와 패턴 분석 정보를 제공합니다.`,
-    breadcrumbs: [
-      { name: '홈', url: '/' },
-      { name: '도구', url: '/tools' },
-      { name: '로또 번호 생성기', url: '/tools/lotto' },
-      { name: `로또 ${roundData.round}회` },
-    ],
+    breadcrumbs: getToolStructuredDataBreadcrumbs(
+      'lotto',
+      `round/${roundData.round}`,
+      `로또 ${roundData.round}회`
+    ),
   });
 
   return (
@@ -98,11 +99,9 @@ export default async function LottoRoundPage({ params }: PageProps) {
         <header className="bg-card border-b shadow-sm">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Breadcrumb
-              items={[
-                { name: '도구', url: '/tools' },
-                { name: '로또 번호 생성기', url: '/tools/lotto' },
+              items={getToolBreadcrumbItems('lotto', [
                 { name: `${roundData.round}회 번호` },
-              ]}
+              ])}
               className="mb-4"
             />
             <div className="flex flex-wrap justify-between items-center gap-3">

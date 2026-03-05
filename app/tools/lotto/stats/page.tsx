@@ -7,6 +7,8 @@ import { generateMetadata as createMetadata } from '@/lib/seo';
 import {
   assertToolStructuredData,
   getToolSubPageStructuredDataArray,
+  getToolBreadcrumbItems,
+  getToolStructuredDataBreadcrumbs,
 } from '@/lib/tools';
 import {
   getLottoHotColdNumbers,
@@ -49,12 +51,7 @@ export default function LottoStatsPage() {
     name: '로또 번호 통계 추천',
     description:
       '로또 번호 통계 기반 추천 정보를 제공합니다. hot/cold 번호, 출현 빈도, 회차별 통계를 확인하세요.',
-    breadcrumbs: [
-      { name: '홈', url: '/' },
-      { name: '도구', url: '/tools' },
-      { name: '로또 번호 생성기', url: '/tools/lotto' },
-      { name: '번호 통계' },
-    ],
+    breadcrumbs: getToolStructuredDataBreadcrumbs('lotto', 'stats', '번호 통계'),
   });
 
   return (
@@ -64,11 +61,7 @@ export default function LottoStatsPage() {
         <header className="bg-card border-b shadow-sm">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Breadcrumb
-              items={[
-                { name: '도구', url: '/tools' },
-                { name: '로또 번호 생성기', url: '/tools/lotto' },
-                { name: '번호 통계' },
-              ]}
+              items={getToolBreadcrumbItems('lotto', [{ name: '번호 통계' }])}
               className="mb-4"
             />
             <div className="flex flex-wrap justify-between items-center gap-3">

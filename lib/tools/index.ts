@@ -35,6 +35,24 @@ export {
   getToolsMainStructuredDataArray,
 } from './tool-structured-data';
 
+// Tool Breadcrumb
+export {
+  getToolsMainBreadcrumbItems,
+  getToolBreadcrumbItems,
+  getToolStructuredDataBreadcrumbs,
+  TOOLS_MAIN_LABEL,
+  TOOLS_MAIN_URL,
+} from './tool-breadcrumb';
+
+// Tool 아이콘
+export {
+  getToolIcon,
+  getToolIcons,
+  isValidIcon,
+  clearIconCache,
+  getAvailableIcons,
+} from './tool-icons';
+
 // 타입 re-export
 export type {
   ToolConfig,

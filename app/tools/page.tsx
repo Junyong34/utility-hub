@@ -2,12 +2,14 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { DicesIcon, ArrowRightIcon } from 'lucide-react';
+import { ArrowRightIcon } from 'lucide-react';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import {
   generateToolsMainMetadata,
   getToolsMainStructuredDataArray,
   getAllToolConfigs,
+  getToolsMainBreadcrumbItems,
+  getToolIcon,
 } from '@/lib/tools';
 
 /**
@@ -30,24 +32,15 @@ interface Tool {
 }
 
 /**
- * 아이콘 매핑
- * tool-config.ts에서 문자열로 저장된 아이콘을 실제 컴포넌트로 변환
- */
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  DicesIcon: DicesIcon,
-  // 향후 추가될 아이콘들
-};
-
-/**
  * 사용 가능한 도구 목록
- * TOOL_CONFIGS에서 자동으로 생성
+ * TOOL_CONFIGS에서 자동으로 생성 (아이콘 동적 로딩)
  */
 const toolConfigs = getAllToolConfigs();
 const TOOLS: Tool[] = toolConfigs.map((config) => ({
   id: config.id,
   name: config.name,
   description: config.description,
-  icon: ICON_MAP[config.icon || 'DicesIcon'] || DicesIcon,
+  icon: getToolIcon(config.icon),
   href: `/tools/${config.id}`,
   badge: config.badge,
   color: config.color || 'from-blue-500 to-purple-500',
@@ -72,7 +65,7 @@ export default function ToolsPage() {
           </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-            <Breadcrumb items={[{ name: '도구' }]} className="mb-5" />
+            <Breadcrumb items={getToolsMainBreadcrumbItems()} className="mb-5" />
             <div className="text-center space-y-4">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight">
                 <span className="text-primary">Tools</span>
