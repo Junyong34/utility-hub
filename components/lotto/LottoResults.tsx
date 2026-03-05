@@ -4,6 +4,7 @@ import { memo } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { formatLottoNumbers } from '@/lib/lotto/generator';
+import { LottoNumberAnimation } from './LottoNumberAnimation';
 
 interface LottoResultsProps {
   games: number[][];
@@ -20,39 +21,54 @@ export const LottoResults = memo(function LottoResults({
   onCopyNumbers,
   onCopyShareLink,
 }: LottoResultsProps) {
+  // games 배열을 반복 렌더링해 카드 단위로 결과를 표시하며,
+  // 복사 액션은 부모에서 optional callback으로 주입받아 재사용성을 확보합니다.
   return (
     <div className="space-y-4" role="list" aria-label="생성된 로또 번호 목록">
       {games.map((numbers, index) => (
         <Card
           key={index}
-          className="p-6 hover:shadow-lg transition-shadow"
+          className="p-6 hover:shadow-xl transition-all duration-300 hover:scale-[1.01] bg-gradient-to-br from-card to-card/80"
           role="listitem"
         >
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-muted-foreground">
-              게임 {index + 1}
-            </span>
+          <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <span className="text-sm font-bold text-primary">
+                  {index + 1}
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* 번호 표시 */}
-          <div className="flex gap-3 justify-center">
+          <div className="flex gap-2.5 sm:gap-3 justify-center mb-5">
             {numbers.map((num, idx) => (
-              <LottoBall key={idx} number={num} />
+              <LottoNumberAnimation
+                key={`${idx}-${num}`}
+                number={num}
+                delayMs={idx * 100}
+              />
             ))}
           </div>
 
           {/* 번호 텍스트 */}
-          <div className="text-center mt-4 text-sm text-muted-foreground font-mono">
-            {formatLottoNumbers(numbers)}
+          <div className="text-center mb-4">
+            <div className="inline-block px-4 py-2 rounded-lg bg-muted/50">
+              <span className="text-sm font-mono font-semibold text-foreground">
+                {formatLottoNumbers(numbers)}
+              </span>
+            </div>
           </div>
 
           {(onCopyNumbers || onCopyShareLink) && (
-            <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2 pt-2">
               {onCopyNumbers && (
                 <Button
                   type="button"
                   variant="outline"
                   size="sm"
+                  className="hover:bg-primary/10 hover:text-primary hover:border-primary/50 transition-colors"
                   aria-label={`게임 ${index + 1} 번호 복사`}
                   onClick={() => void onCopyNumbers(numbers)}
                 >
@@ -64,6 +80,7 @@ export const LottoResults = memo(function LottoResults({
                   type="button"
                   variant="outline"
                   size="sm"
+                  className="hover:bg-primary/10 hover:text-primary hover:border-primary/50 transition-colors"
                   aria-label={`게임 ${index + 1} 공유 링크 복사`}
                   onClick={() => void onCopyShareLink(numbers)}
                 >
@@ -77,27 +94,3 @@ export const LottoResults = memo(function LottoResults({
     </div>
   );
 });
-
-/**
- * 로또 공 컴포넌트
- */
-const LottoBall = memo(function LottoBall({ number }: { number: number }) {
-  const colorClass = getBallColor(number);
-
-  return (
-    <div
-      className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center font-bold text-lg md:text-xl shadow-lg ${colorClass}`}
-      aria-label={`번호 ${number}`}
-    >
-      {number}
-    </div>
-  );
-});
-
-function getBallColor(num: number): string {
-  if (num <= 10) return 'bg-yellow-400 text-yellow-950 dark:bg-yellow-500 dark:text-yellow-950';
-  if (num <= 20) return 'bg-blue-500 text-white dark:bg-blue-600 dark:text-white';
-  if (num <= 30) return 'bg-red-500 text-white dark:bg-red-600 dark:text-white';
-  if (num <= 40) return 'bg-gray-600 text-white dark:bg-gray-500 dark:text-white';
-  return 'bg-green-600 text-white dark:bg-green-600 dark:text-white';
-}

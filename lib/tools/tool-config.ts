@@ -15,19 +15,29 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     name: '로또 번호 생성기',
     shortName: '로또',
     description:
-      '로또 번호 추천을 빠르게 받아보세요. 랜덤, 통계, 날짜, MBTI, 행운번호, 슬롯 방식으로 1~45 번호를 생성하고 저장/공유할 수 있습니다.',
+      'AI 로또 번호 추천과 확률통계 6전략을 무료로 제공하는 로또 번호 생성기입니다. 랜덤, 날짜, MBTI, 슬롯 방식까지 한 번에 비교하고 저장/공유할 수 있습니다.',
     keywords: [
+      'AI 로또',
       '로또 번호 생성기',
       '로또 추천',
       '로또 번호 추천',
+      '이번주 로또 번호 추천',
+      '무료 로또 번호',
+      '무료 로또 번호 생성기',
       '로또 번호 자동 생성',
       '로또 번호 랜덤',
       '로또 번호 생성',
       '로또 번호 조합기',
       '로또 번호 추천 AI',
+      'AI 로또 번호 생성',
+      '인공지능 로또 분석',
       '로또 번호 추천 사이트',
       '로또 번호 자동 생성기',
       '로또 번호 통계 추천',
+      '로또 확률통계 추천',
+      '로또 핫넘버',
+      '로또 콜드넘버',
+      '로또 미출현 번호',
       '로또 번호 확률 계산',
       '로또 번호 추천 프로그램',
       '로또 번호 랜덤 추첨기',
@@ -40,12 +50,15 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     color: 'from-blue-500 to-purple-500',
     icon: 'DicesIcon',
     features: [
-      '랜덤/통계/날짜/MBTI/행운번호/슬롯 6가지 추천 방식',
+      'AI 가중 통계 추천 + 확률통계 6전략(고빈도/저빈도/미출현/균형/핫/콜드)',
+      '랜덤/날짜/MBTI/행운번호/슬롯 포함 멀티 추천 방식',
       '여러 게임 동시 생성 (최대 5게임)',
       '회차별 번호 분석 페이지 제공',
       '번호 통계 페이지 제공 (Hot/Cold/빈도)',
+      '최신 회차 데이터 기반 번호 생성',
       '생성된 번호 로컬 저장 기능',
       '번호 복사 및 공유 URL 복사 기능',
+      '번호 이미지 저장 기능',
       '즉시 사용 가능한 간편한 UI',
     ],
     useCases: [
@@ -73,7 +86,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       {
         question: '통계 추천은 어떤 기준으로 동작하나요?',
         answer:
-          '샘플 회차 데이터 기준으로 hot/cold/mix 전략을 선택할 수 있습니다. 운영 단계에서는 공식 데이터 소스로 확장할 예정입니다.',
+          'AI 가중 통계 추천(빈도/최근추세/동반출현/균형 보정)과 확률통계 6전략(고빈도/저빈도/미출현/균형/핫/콜드)을 제공합니다.',
       },
       {
         question: '공유 링크 기능은 무엇인가요?',
@@ -132,6 +145,9 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
 
 /**
  * Tool ID로 설정 가져오기
+ *
+ * URL 파라미터(id)에서 직접 가져온 문자열을 레지스트리 조회에 맞춰
+ * ToolConfig 형식으로 변환(없으면 null)합니다.
  */
 export function getToolConfig(toolId: string): ToolConfig | null {
   return TOOL_CONFIGS[toolId] || null;
@@ -139,6 +155,7 @@ export function getToolConfig(toolId: string): ToolConfig | null {
 
 /**
  * 모든 Tool 설정 가져오기
+ * sitemap, FAQ, 메타 생성 시 공용 데이터 소스로 사용됩니다.
  */
 export function getAllToolConfigs(): ToolConfig[] {
   return Object.values(TOOL_CONFIGS);

@@ -385,4 +385,85 @@
   .animate-scale-in {
     animation: scaleIn 0.3s ease-out forwards;
   }
+
+  @keyframes lotto-pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.55) translateY(10px);
+    }
+    70% {
+      opacity: 1;
+      transform: scale(1.08) translateY(-2px);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes lotto-reel-spin {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-88px);
+    }
+  }
+
+  .lotto-pop-in {
+    opacity: 0;
+    animation: lotto-pop-in 380ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  .lotto-slot-reel-track {
+    animation: lotto-reel-spin 120ms linear infinite;
+  }
+}
+
+/*---break---*/
+
+/* Lotto Page Font Size Enhancement */
+@layer components {
+  .lotto-page-content {
+    /* Increase base font sizes by 2px throughout lotto pages */
+  }
+
+  .lotto-page-content p,
+  .lotto-page-content span,
+  .lotto-page-content div {
+    font-size: calc(1em + 2px);
+  }
+
+  .lotto-page-content .text-xs {
+    font-size: calc(0.75rem + 2px);
+  }
+
+  .lotto-page-content .text-sm {
+    font-size: calc(0.875rem + 2px);
+  }
+
+  .lotto-page-content .text-base {
+    font-size: calc(1rem + 2px);
+  }
+
+  .lotto-page-content .text-lg {
+    font-size: calc(1.125rem + 2px);
+  }
+
+  .lotto-page-content .text-xl {
+    font-size: calc(1.25rem + 2px);
+  }
+
+  .lotto-page-content .text-2xl {
+    font-size: calc(1.5rem + 2px);
+  }
+
+  .lotto-page-content .text-3xl {
+    font-size: calc(1.875rem + 2px);
+  }
+
+  /* Reset button text to avoid over-sizing */
+  .lotto-page-content button {
+    font-size: inherit;
+  }
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { SlotMachine } from '@/components/lotto/SlotMachine';
 import { useLottoRecommend } from '../LottoRecommendProvider';
 
 function createSlotFrame(): number[] {
@@ -12,12 +13,17 @@ function createSlotFrames(count: number): number[][] {
 }
 
 export function SlotRecommendPanel() {
+  // 슬롯 모드에서 사용되는 프레임(릴 회전 화면)과 결과 화면을 분리해 관리합니다.
   const {
     state: { mode, isGenerating, count, currentGames },
   } = useLottoRecommend();
-  const [slotFrames, setSlotFrames] = useState<number[][]>(() =>
-    createSlotFrames(count)
-  );
+  const [slotFrames, setSlotFrames] = useState<number[][]>([]);
+  const [idleFrames, setIdleFrames] = useState<number[][]>([]);
+
+  // 클라이언트 사이드에서만 초기 idle frames 생성
+  useEffect(() => {
+    setIdleFrames(createSlotFrames(count));
+  }, [count]);
 
   useEffect(() => {
     if (!(mode === 'slot' && isGenerating)) return;
@@ -36,8 +42,6 @@ export function SlotRecommendPanel() {
     };
   }, [count, isGenerating, mode]);
 
-  const idleFrames = useMemo(() => createSlotFrames(count), [count]);
-
   const displayFrames = useMemo(() => {
     if (mode !== 'slot') return [];
     if (isGenerating) return slotFrames;
@@ -49,27 +53,20 @@ export function SlotRecommendPanel() {
     <div className="rounded-lg border bg-muted/20 p-4 space-y-3">
       <p className="text-sm font-semibold">슬롯 머신 추천</p>
       <p className="text-xs text-muted-foreground">
-        생성 중에는 슬롯처럼 숫자가 빠르게 변합니다.
+        생성 버튼을 누르면 2~3초 동안 숫자 릴이 회전한 뒤 최종 번호가
+        고정됩니다.
       </p>
-      <div className="space-y-2" aria-live="polite" aria-label="슬롯 프리뷰 번호">
+      <div
+        className="space-y-2"
+        aria-live="polite"
+        aria-label="슬롯 프리뷰 번호"
+      >
         {displayFrames.map((frame, gameIndex) => (
           <div key={`slot-game-${gameIndex}`} className="space-y-1">
             <p className="text-[11px] text-muted-foreground">
               게임 {gameIndex + 1}
             </p>
-            <div
-              className="flex flex-wrap gap-2"
-              aria-label={`슬롯 프리뷰 게임 ${gameIndex + 1}`}
-            >
-              {frame.map((num, numberIndex) => (
-                <div
-                  key={`slot-${gameIndex}-${numberIndex}-${num}`}
-                  className="h-10 w-10 rounded-md border bg-background flex items-center justify-center font-bold"
-                >
-                  {num}
-                </div>
-              ))}
-            </div>
+            <SlotMachine numbers={frame} isSpinning={isGenerating} />
           </div>
         ))}
       </div>

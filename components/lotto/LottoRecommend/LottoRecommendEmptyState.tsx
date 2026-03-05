@@ -4,11 +4,12 @@ import { Card } from '@/components/ui/card';
 import { useLottoRecommend } from './LottoRecommendProvider';
 
 export function LottoRecommendEmptyState() {
+  // currentGames가 비어있고 생성 중이 아닐 때만 진입 안내 메시지를 보여줍니다.
   const {
-    state: { currentGames, history, isGenerating },
+    state: { currentGames, isGenerating },
   } = useLottoRecommend();
 
-  if (currentGames.length > 0 || history.length > 0 || isGenerating) return null;
+  if (currentGames.length > 0 || isGenerating) return null;
 
   return (
     <Card className="p-12 text-center">
@@ -19,4 +20,3 @@ export function LottoRecommendEmptyState() {
     </Card>
   );
 }
-

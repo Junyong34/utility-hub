@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { useLottoRecommend } from '../LottoRecommendProvider';
 
 export function LuckyNumberRecommendPanel() {
+  // 행운 번호는 입력값이 1~45 범위로 정규화되어 생성 로직에 반영됩니다.
   const {
     state: { luckyNumber, isGenerating },
     actions: { setLuckyNumber },

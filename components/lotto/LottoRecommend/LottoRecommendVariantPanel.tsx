@@ -9,6 +9,8 @@ import { SlotRecommendPanel } from './variants/SlotRecommendPanel';
 import { StatsRecommendPanel } from './variants/StatsRecommendPanel';
 
 export function LottoRecommendVariantPanel() {
+  // 현재 선택한 추천 모드에 따라 입력 컴포넌트를 즉시 분기 렌더링합니다.
+  // 공통 레이아웃은 변하지 않고, 패널만 교체되는 구조입니다.
   const {
     state: { mode },
   } = useLottoRecommend();
@@ -29,4 +31,3 @@ export function LottoRecommendVariantPanel() {
       return <RandomRecommendPanel />;
   }
 }
-

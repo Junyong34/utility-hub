@@ -1,6 +1,20 @@
 /**
  * 로또 번호 생성 유틸리티
+ * - 공통 생성/검증 인터페이스
+ * - 알고리즘 모듈 래퍼 (AI 통계, 확률통계 전략)
  */
+
+import {
+  generateAIStatisticalNumbers,
+  type AIRecommendationConfig,
+} from './algorithms/ai-statistical-recommendation';
+import {
+  generateNumbersByStrategy,
+  getStrategyDescription,
+  type ProbabilityStrategy,
+  type StrategyConfig,
+} from './algorithms/probability-statistical-recommendation';
+import { analyzeLottoStatistics, getRecentStatistics } from './algorithms/statistics-analyzer';
 
 export interface LottoNumbers {
   id: string;
@@ -15,7 +29,31 @@ export interface LottoGameSet {
   timestamp: number;
 }
 
-export type LottoStatsStrategy = 'hot' | 'cold' | 'mix';
+export type LottoStatsStrategy = 'ai' | ProbabilityStrategy;
+
+export const LOTTO_STATS_STRATEGIES: LottoStatsStrategy[] = [
+  'ai',
+  'high-frequency',
+  'low-frequency',
+  'undrawn',
+  'balanced',
+  'hot',
+  'cold',
+];
+
+export interface LottoStatsSummary {
+  mostFrequent: number[];
+  leastFrequent: number[];
+  hotNumbers: number[];
+  coldNumbers: number[];
+  totalRounds: number;
+  recentRoundWindow: number;
+}
+
+interface StatsGenerateOptions {
+  aiConfig?: AIRecommendationConfig;
+  probabilityConfig?: StrategyConfig;
+}
 
 /**
  * 1~45 사이의 중복되지 않는 로또 번호 6개를 생성합니다.
@@ -75,33 +113,45 @@ export function generateLottoNumbersFromSeed(seed: string): number[] {
   return generateLottoNumbersByRng(rng);
 }
 
+function isProbabilityStrategy(
+  strategy: LottoStatsStrategy
+): strategy is ProbabilityStrategy {
+  return strategy !== 'ai';
+}
+
 /**
  * 통계 전략 기반 번호를 생성합니다.
+ * - ai: 가중치 기반 AI 통계 추천
+ * - 나머지: 6가지 확률통계 전략
  */
 export function generateStatsBasedLottoNumbers(
-  strategy: LottoStatsStrategy
+  strategy: LottoStatsStrategy,
+  options: StatsGenerateOptions = {}
 ): number[] {
-  const stats = getRecentStats();
-  const seedNumbers =
-    strategy === 'hot'
-      ? stats.hotNumbers
-      : strategy === 'cold'
-        ? stats.coldNumbers
-        : [...stats.hotNumbers, ...stats.coldNumbers];
+  try {
+    if (strategy === 'ai') {
+      return generateAIStatisticalNumbers(options.aiConfig);
+    }
 
-  const numbers = new Set<number>();
-
-  while (numbers.size < 2) {
-    const picked =
-      seedNumbers[Math.floor(Math.random() * seedNumbers.length)] ?? 1;
-    numbers.add(picked);
+    if (isProbabilityStrategy(strategy)) {
+      return generateNumbersByStrategy(strategy, options.probabilityConfig);
+    }
+  } catch {
+    // 알고리즘 예외 발생 시 랜덤 폴백
   }
 
-  while (numbers.size < 6) {
-    numbers.add(Math.floor(Math.random() * 45) + 1);
+  return generateLottoNumbers();
+}
+
+/**
+ * 통계 전략 설명을 반환합니다.
+ */
+export function getStatsStrategyDescription(strategy: LottoStatsStrategy): string {
+  if (strategy === 'ai') {
+    return '역대 출현 빈도, 최근 추세, 동반 출현을 가중 결합한 AI 추천';
   }
 
-  return Array.from(numbers).sort((a, b) => a - b);
+  return getStrategyDescription(strategy);
 }
 
 /**
@@ -127,7 +177,6 @@ export function generateLottoNumbersWithLucky(
 export function generateLottoNumbersWithBonus(): LottoNumbers {
   const numbers = new Set<number>();
 
-  // 중복되지 않는 7개의 숫자 생성
   while (numbers.size < 7) {
     const randomNum = Math.floor(Math.random() * 45) + 1;
     numbers.add(randomNum);
@@ -137,8 +186,8 @@ export function generateLottoNumbersWithBonus(): LottoNumbers {
 
   return {
     id: generateId(),
-    numbers: allNumbers.slice(0, 6), // 처음 6개
-    bonus: allNumbers[6], // 마지막 1개는 보너스
+    numbers: allNumbers.slice(0, 6),
+    bonus: allNumbers[6],
     timestamp: Date.now(),
   };
 }
@@ -157,8 +206,8 @@ export function analyzeLottoNumbers(numbers: number[]) {
   const oddCount = numbers.filter((num) => num % 2 !== 0).length;
   const evenCount = numbers.length - oddCount;
 
-  const lowCount = numbers.filter((num) => num <= 22).length; // 1~22
-  const highCount = numbers.length - lowCount; // 23~45
+  const lowCount = numbers.filter((num) => num <= 22).length;
+  const highCount = numbers.length - lowCount;
 
   const sum = calculateSum(numbers);
 
@@ -168,7 +217,7 @@ export function analyzeLottoNumbers(numbers: number[]) {
     low: lowCount,
     high: highCount,
     sum,
-    average: Math.round(sum / numbers.length * 10) / 10,
+    average: Math.round((sum / numbers.length) * 10) / 10,
   };
 }
 
@@ -176,14 +225,11 @@ export function analyzeLottoNumbers(numbers: number[]) {
  * 로또 번호가 유효한지 검증합니다
  */
 export function validateLottoNumbers(numbers: number[]): boolean {
-  // 정확히 6개의 번호인지 확인
   if (numbers.length !== 6) return false;
 
-  // 모든 번호가 1~45 범위 내인지 확인
   const allInRange = numbers.every((num) => num >= 1 && num <= 45);
   if (!allInRange) return false;
 
-  // 중복이 없는지 확인
   const uniqueNumbers = new Set(numbers);
   if (uniqueNumbers.size !== 6) return false;
 
@@ -239,14 +285,19 @@ export function formatLottoNumbers(numbers: number[]): string {
 }
 
 /**
- * 최근 당첨 통계 (더미 데이터)
+ * 최근 통계 요약 데이터를 반환합니다.
  */
-export function getRecentStats() {
+export function getRecentStats(recentRoundWindow = 100): LottoStatsSummary {
+  const allStats = analyzeLottoStatistics();
+  const recentStats = getRecentStatistics(recentRoundWindow);
+
   return {
-    mostFrequent: [34, 27, 13, 45, 17],
-    leastFrequent: [2, 41, 39, 6, 11],
-    hotNumbers: [34, 27, 13], // 최근 10회 자주 나온 번호
-    coldNumbers: [2, 41, 39], // 최근 10회 안 나온 번호
+    mostFrequent: allStats.mostFrequent.slice(0, 5).map((item) => item.number),
+    leastFrequent: allStats.leastFrequent.slice(0, 5).map((item) => item.number),
+    hotNumbers: recentStats.hotColdNumbers.hot.slice(0, 5),
+    coldNumbers: recentStats.hotColdNumbers.cold.slice(0, 5),
+    totalRounds: allStats.totalRounds,
+    recentRoundWindow,
   };
 }
 

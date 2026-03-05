@@ -8,6 +8,7 @@
 export const LOTTO_PHASE1_MODES = ['random', 'stats', 'date', 'mbti'] as const;
 export type LottoPhase1Mode = (typeof LOTTO_PHASE1_MODES)[number];
 
+/** 현재 지원되는 추천 모드(쿼리 값 검증 + 모드 스위치에 공통 사용) */
 export const LOTTO_RECOMMEND_MODES = [
   'random',
   'stats',
@@ -18,6 +19,7 @@ export const LOTTO_RECOMMEND_MODES = [
 ] as const;
 export type LottoRecommendMode = (typeof LOTTO_RECOMMEND_MODES)[number];
 
+/** MBTI 추천 모드에서 프로필을 선택할 때 사용하는 타입 목록 */
 export const LOTTO_MBTI_OPTIONS = [
   'INTJ',
   'INTP',
@@ -38,6 +40,7 @@ export const LOTTO_MBTI_OPTIONS = [
 ] as const;
 export type LottoMbtiType = (typeof LOTTO_MBTI_OPTIONS)[number];
 
+/** URL/사용자 입력에서 허용하는 게임 생성 개수 */
 export const LOTTO_RECOMMEND_COUNT_OPTIONS = [1, 2, 3, 4, 5] as const;
 export type LottoRecommendCount =
   (typeof LOTTO_RECOMMEND_COUNT_OPTIONS)[number];
@@ -48,9 +51,10 @@ export const LOTTO_RECOMMEND_QUERY_KEYS = {
   numbers: 'numbers',
 } as const;
 
+/** URL 쿼리 기본값 (값이 비거나 유효하지 않을 때 fallback) */
 export const LOTTO_RECOMMEND_DEFAULTS = {
   mode: 'random' as LottoRecommendMode,
-  count: 3 as LottoRecommendCount,
+  count: 5 as LottoRecommendCount,
 } as const;
 
 export const LOTTO_RECOMMEND_LAYOUT_SPEC = {
@@ -73,6 +77,7 @@ interface RecommendQueryInput {
   numbers?: string | null;
 }
 
+/** URL → 내부 상태 정규화의 결과 타입 */
 export interface LottoRecommendQueryState {
   mode: LottoRecommendMode;
   count: LottoRecommendCount;
@@ -88,6 +93,7 @@ export function isLottoPhase1Mode(value: string): value is LottoPhase1Mode {
   return LOTTO_RECOMMEND_MODES.includes(value as LottoPhase1Mode);
 }
 
+/** URL에 들어온 mode 문자열이 허용 목록인지 검사 */
 export function isLottoRecommendMode(
   value: string
 ): value is LottoRecommendMode {
@@ -101,6 +107,7 @@ export function parseLottoRecommendMode(
   return isLottoRecommendMode(value) ? value : LOTTO_RECOMMEND_DEFAULTS.mode;
 }
 
+/** count 문자열을 정수로 파싱 후 허용 범위 여부를 검증 */
 export function isLottoRecommendCount(
   value: number
 ): value is LottoRecommendCount {
@@ -120,6 +127,7 @@ export function parseLottoRecommendCount(
     : LOTTO_RECOMMEND_DEFAULTS.count;
 }
 
+/** 개별 게임 문자열(CSV: 6개 숫자)을 정렬·중복제거·범위 체크 후 파싱 */
 export function parseLottoRecommendNumbers(
   value?: string | null
 ): number[] | null {
@@ -143,6 +151,7 @@ export function parseLottoRecommendNumbers(
   return unique.sort((a, b) => a - b);
 }
 
+/** 개별 게임 배열을 CSV 문자열로 직렬화 */
 export function formatLottoRecommendNumbersForQuery(
   numbers: number[]
 ): string | null {
@@ -159,6 +168,7 @@ export function formatLottoRecommendNumbersForQuery(
   return [...unique].sort((a, b) => a - b).join(',');
 }
 
+/** 여러 게임을 파이프(`|`) 구분 문자열에서 게임 배열로 파싱 */
 export function parseLottoRecommendGames(
   value?: string | null
 ): number[][] | null {
@@ -166,8 +176,8 @@ export function parseLottoRecommendGames(
 
   const rawGames = value
     .split(LOTTO_QUERY_GAME_SEPARATOR)
-    .map((game) => game.trim())
-    .filter((game) => game.length > 0);
+    .map(game => game.trim())
+    .filter(game => game.length > 0);
 
   if (rawGames.length === 0 || rawGames.length > LOTTO_MAX_GAMES_PER_SHARE) {
     return null;
@@ -184,6 +194,7 @@ export function parseLottoRecommendGames(
   return parsedGames;
 }
 
+/** 여러 게임 배열을 파이프(`|`) 구분 문자열로 직렬화 */
 export function formatLottoRecommendGamesForQuery(
   games: number[][]
 ): string | null {
@@ -202,6 +213,7 @@ export function formatLottoRecommendGamesForQuery(
   return serializedGames.join(LOTTO_QUERY_GAME_SEPARATOR);
 }
 
+/** URL 쿼리 객체 전체를 내부 상태형으로 한 번에 변환 */
 export function parseLottoRecommendQuery(
   input: RecommendQueryInput
 ): LottoRecommendQueryState {

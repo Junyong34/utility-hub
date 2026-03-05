@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { useLottoRecommend } from '../LottoRecommendProvider';
 
 export function DateRecommendPanel() {
+  // 날짜 문자열은 mode가 date일 때 난수 seed로 사용되어 같은 날짜면 같은 결과를 보장합니다.
   const {
     state: { recommendDate, isGenerating },
     actions: { setRecommendDate },

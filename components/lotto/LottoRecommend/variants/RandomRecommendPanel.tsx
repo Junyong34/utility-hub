@@ -1,6 +1,7 @@
 'use client';
 
 export function RandomRecommendPanel() {
+  // 랜덤 모드는 별도 입력값이 없어 현재 모드 표시 텍스트만 출력됩니다.
   return (
     <div className="rounded-lg border bg-muted/20 p-4">
       <p className="text-sm font-semibold">랜덤 추천</p>
@@ -10,4 +11,3 @@ export function RandomRecommendPanel() {
     </div>
   );
 }
-

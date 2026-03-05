@@ -7,6 +7,7 @@ import { formatLottoNumbers } from '@/lib/lotto/generator';
 import { useLottoRecommend } from './LottoRecommendProvider';
 
 export function LottoWeeklyRecommendation() {
+  // provider에서 유지하는 weeklyNumbers를 그대로 읽어와 복사 가능한 카드로 노출합니다.
   const [copied, setCopied] = useState(false);
   const {
     meta: { weeklyNumbers },

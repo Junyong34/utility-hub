@@ -2,13 +2,16 @@
 
 import { LOTTO_MBTI_OPTIONS } from '@/lib/lotto/recommendation-spec';
 import { Label } from '@/components/ui/label';
+import { MBTI_LOTTO_PROFILES } from '@/lib/lotto/mbti-profile';
 import { useLottoRecommend } from '../LottoRecommendProvider';
 
 export function MbtiRecommendPanel() {
+  // MBTI 선택값은 매일 날짜 seed와 결합되어 날짜별 슬롯 추천처럼 재생성됩니다.
   const {
     state: { mbti, isGenerating },
     actions: { setMbti },
   } = useLottoRecommend();
+  const profile = MBTI_LOTTO_PROFILES[mbti];
 
   return (
     <div className="rounded-lg border bg-muted/20 p-4 space-y-2">
@@ -32,6 +35,24 @@ export function MbtiRecommendPanel() {
           </option>
         ))}
       </select>
+
+      <div className="rounded-lg border bg-background px-3 py-3 space-y-2">
+        <p className="text-sm font-semibold">{mbti} · {profile.title}</p>
+        <p className="text-xs text-muted-foreground leading-5">{profile.summary}</p>
+        <div className="flex flex-wrap gap-1.5">
+          {profile.keywords.map((keyword) => (
+            <span
+              key={keyword}
+              className="rounded-full border px-2 py-0.5 text-[11px] text-muted-foreground"
+            >
+              #{keyword}
+            </span>
+          ))}
+        </div>
+        <p className="text-[11px] text-muted-foreground">
+          재미 요소를 위한 설명이며, 당첨 확률을 보장하지 않습니다.
+        </p>
+      </div>
     </div>
   );
 }

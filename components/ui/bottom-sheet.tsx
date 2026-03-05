@@ -28,6 +28,7 @@ export function BottomSheet({
 }: BottomSheetProps) {
   const titleId = useId();
 
+  // isOpen일 때만 ESC 키를 바인딩하고, 닫힘 시 정리해 이벤트 중복 바인딩을 막습니다.
   useEffect(() => {
     if (!isOpen) return;
 
@@ -46,7 +47,7 @@ export function BottomSheet({
       {/* 오버레이 */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/50 z-[70] animate-in fade-in duration-200"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -59,13 +60,19 @@ export function BottomSheet({
         aria-labelledby={title ? titleId : undefined}
         aria-hidden={!isOpen}
         className={cn(
-          'fixed bottom-0 left-0 right-0 bg-card border-t rounded-t-2xl shadow-2xl z-50 transition-transform duration-300 ease-in-out',
+          'fixed bottom-0 left-0 right-0 bg-card border-t rounded-t-2xl shadow-2xl z-[80] transition-transform duration-300 ease-in-out',
           !isOpen && 'pointer-events-none',
           isOpen ? 'translate-y-0' : 'translate-y-full'
         )}
         style={{ maxHeight }}
       >
-        <div className="p-6 overflow-y-auto" style={{ maxHeight: `calc(${maxHeight} - 4rem)` }}>
+        <div
+          className={cn(
+            'p-6 overflow-y-auto transition-all duration-300',
+            isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
+          )}
+          style={{ maxHeight: `calc(${maxHeight} - 4rem)` }}
+        >
           {/* 헤더 */}
           {(title || showCloseButton) && (
             <div className="flex items-center justify-between mb-4">
