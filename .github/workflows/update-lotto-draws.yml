@@ -1,0 +1,62 @@
+name: Update Lotto Draws
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # UTC 00:00 on day 1 (09:00 KST)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-lotto:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run lotto update
+        run: pnpm run update-lotto
+
+      - name: Remove backup files
+        run: rm -f lib/lotto/lotto_draws.backup.*
+
+      - name: Check changed file
+        id: changed
+        run: |
+          if git diff --quiet -- lib/lotto/lotto_draws.json; then
+            echo "has_change=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_change=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create pull request
+        if: steps.changed.outputs.has_change == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/auto-update-lotto-draws
+          commit-message: 'chore(lotto): update lotto_draws.json'
+          title: 'chore: update lotto draws data'
+          body: |
+            자동 스케줄 실행으로 lotto_draws.json 갱신
+          add-paths: |
+            lib/lotto/lotto_draws.json
+          labels: |
+            automation
+          delete-branch: true
