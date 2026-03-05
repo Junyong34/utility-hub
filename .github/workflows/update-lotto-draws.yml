@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: '0 0 1 * *' # UTC 00:00 on day 1 (09:00 KST)
   workflow_dispatch:
+    inputs:
+      start_round:
+        description: '시작 회차 (예: 1000)'
+        required: false
+        type: number
+      end_round:
+        description: '종료 회차 (예: 2000)'
+        required: false
+        type: number
 
 permissions:
   contents: write
@@ -32,7 +41,15 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run lotto update
-        run: pnpm run update-lotto
+        run: |
+          if [ -n "${START_ROUND}" ] && [ -n "${END_ROUND}" ]; then
+            pnpm run update-lotto "$START_ROUND" "$END_ROUND"
+          else
+            pnpm run update-lotto
+          fi
+        env:
+          START_ROUND: ${{ github.event.inputs.start_round }}
+          END_ROUND: ${{ github.event.inputs.end_round }}
 
       - name: Remove backup files
         run: rm -f lib/lotto/lotto_draws.backup.*
