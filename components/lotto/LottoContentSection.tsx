@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
+import { LottoDhlotteryLinks } from '@/components/lotto/LottoRecommend/LottoDhlotteryLinks';
 
 /**
  * 로또 페이지 SEO 콘텐츠 섹션 컴포넌트
@@ -195,6 +196,11 @@ export function LottoContentSection({
               </li>
             ) : null}
           </ul>
+          <LottoDhlotteryLinks
+            compact
+            title="동행복권 바로가기"
+            className="pt-2"
+          />
           <p>
             로또는 완전 무작위 추첨이며 추천 방식이 달라도 모든 번호 조합의 당첨
             확률은 동일합니다. 본 서비스의 결과는 오락 및 참고 목적으로만 활용해

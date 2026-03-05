@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { LottoAnalysisLoading } from './LottoAnalysisLoading';
 import { LottoRecommendActions } from './LottoRecommendActions';
 import { LottoRecommendResults } from './LottoRecommendResults';
-import { LottoDhlotteryLinks } from './LottoDhlotteryLinks';
 import { useLottoRecommend } from './LottoRecommendProvider';
 
 export function LottoRecommendResultSheet() {
@@ -58,11 +57,6 @@ export function LottoRecommendResultSheet() {
             />
           ) : (
             <>
-              <LottoDhlotteryLinks
-                compact
-                title="동행복권 바로가기"
-                className="mb-4"
-              />
               <LottoRecommendActions />
               <LottoRecommendResults />
             </>
