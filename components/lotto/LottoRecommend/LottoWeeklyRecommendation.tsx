@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { formatLottoNumbers } from '@/lib/lotto/generator';
 import { useLottoRecommend } from './LottoRecommendProvider';
-import { LottoDhlotteryLinks } from './LottoDhlotteryLinks';
 
 export function LottoWeeklyRecommendation() {
   // provider에서 유지하는 weeklyNumbers를 그대로 읽어와 복사 가능한 카드로 노출합니다.
@@ -42,11 +41,6 @@ export function LottoWeeklyRecommendation() {
       <p className="font-mono text-sm text-muted-foreground" aria-live="polite">
         {formatLottoNumbers(weeklyNumbers)}
       </p>
-      <LottoDhlotteryLinks
-        compact
-        title="동행복권 링크"
-        className="mt-4 pt-4 border-t border-border/50"
-      />
     </Card>
   );
 }
