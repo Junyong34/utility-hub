@@ -29,7 +29,7 @@ export async function PostContent({ title, date, author, tags, content, ogImage 
   const processedContent = await processMarkdown(content);
 
   return (
-    <article className="w-full">
+    <article className="w-full max-w-full overflow-hidden">
       {/* OG 이미지 */}
       {ogImage && (
         <div className="relative w-full aspect-[2/1] mb-10 overflow-hidden rounded-lg">
@@ -47,7 +47,7 @@ export async function PostContent({ title, date, author, tags, content, ogImage 
       {/* 헤더 */}
       <header className="mb-10">
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">{title}</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight break-words">{title}</h1>
 
         {/* 메타 정보 */}
         <div className="flex items-center gap-3 text-muted-foreground mb-6">

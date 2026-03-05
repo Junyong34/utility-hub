@@ -1,7 +1,11 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getAllPostSlugs, getPostBySlug, getAdjacentPosts } from '@/lib/blog/posts';
+import {
+  getAllPostSlugs,
+  getPostBySlug,
+  getAdjacentPosts,
+} from '@/lib/blog/posts';
 import { PostContent } from '@/components/blog/PostContent';
 import { BlogPostHeader } from '@/components/blog/BlogPostHeader';
 import { TableOfContents } from '@/components/blog/TableOfContents';
@@ -22,7 +26,9 @@ interface PageProps {
  * - Article 타입
  * - Canonical URL
  */
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { category, slug } = await params;
   const post = getPostBySlug(slug, category);
 
@@ -96,14 +102,17 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       <div className="min-h-screen bg-background">
         {/* 헤더 */}
-        <BlogPostHeader postTitle={post.title} />
+        <BlogPostHeader
+          categoryName={post.category}
+          categorySlug={post.categorySlug}
+        />
 
         {/* 메인 콘텐츠 영역 - 목차와 함께 배치 */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex gap-8">
+          <div className="flex">
             {/* 콘텐츠 영역 */}
-            <main className="flex-1 max-w-4xl">
-              <article className="bg-card rounded-lg shadow-sm p-8 md:p-12">
+            <main className="flex-1 max-w-4xl min-w-0">
+              <article className="bg-card rounded-lg shadow-sm p-4 md:p-12 overflow-hidden">
                 <PostContent
                   title={post.title}
                   date={post.date}
@@ -119,12 +128,28 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* 이전 포스트 */}
                   {prevPost ? (
-                    <Link href={`/blog/${prevPost.categorySlug}/${prevPost.slug}`} className="block">
-                      <Button variant="outline" className="w-full min-h-[100px] justify-start items-start group p-4 bg-card hover:bg-accent transition-colors">
+                    <Link
+                      href={`/blog/${prevPost.categorySlug}/${prevPost.slug}`}
+                      className="block"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full min-h-[100px] justify-start items-start group p-4 bg-card hover:bg-accent transition-colors"
+                      >
                         <ChevronLeft className="mr-3 h-6 w-6 mt-1 flex-shrink-0 group-hover:-translate-x-1 transition-transform" />
                         <div className="text-left flex-1 min-w-0">
-                          <div className="text-xs text-muted-foreground mb-2 font-medium">이전 글</div>
-                          <div className="font-semibold text-base overflow-hidden text-ellipsis" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', wordBreak: 'break-word' }}>
+                          <div className="text-xs text-muted-foreground mb-2 font-medium">
+                            이전 글
+                          </div>
+                          <div
+                            className="font-semibold text-base overflow-hidden text-ellipsis"
+                            style={{
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical',
+                              wordBreak: 'break-word',
+                            }}
+                          >
                             {prevPost.title}
                           </div>
                         </div>
@@ -132,17 +157,35 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </Link>
                   ) : (
                     <div className="w-full min-h-[100px] flex items-center justify-center border border-dashed rounded-md p-4 bg-muted/30">
-                      <span className="text-sm text-muted-foreground">이전 글이 없습니다</span>
+                      <span className="text-sm text-muted-foreground">
+                        이전 글이 없습니다
+                      </span>
                     </div>
                   )}
 
                   {/* 다음 포스트 */}
                   {nextPost ? (
-                    <Link href={`/blog/${nextPost.categorySlug}/${nextPost.slug}`} className="block">
-                      <Button variant="outline" className="w-full min-h-[100px] justify-end items-start group p-4 bg-card hover:bg-accent transition-colors">
+                    <Link
+                      href={`/blog/${nextPost.categorySlug}/${nextPost.slug}`}
+                      className="block"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full min-h-[100px] justify-end items-start group p-4 bg-card hover:bg-accent transition-colors"
+                      >
                         <div className="text-right flex-1 min-w-0">
-                          <div className="text-xs text-muted-foreground mb-2 font-medium">다음 글</div>
-                          <div className="font-semibold text-base overflow-hidden text-ellipsis" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', wordBreak: 'break-word' }}>
+                          <div className="text-xs text-muted-foreground mb-2 font-medium">
+                            다음 글
+                          </div>
+                          <div
+                            className="font-semibold text-base overflow-hidden text-ellipsis"
+                            style={{
+                              display: '-webkit-box',
+                              WebkitLineClamp: 2,
+                              WebkitBoxOrient: 'vertical',
+                              wordBreak: 'break-word',
+                            }}
+                          >
                             {nextPost.title}
                           </div>
                         </div>
@@ -151,7 +194,9 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </Link>
                   ) : (
                     <div className="w-full min-h-[100px] flex items-center justify-center border border-dashed rounded-md p-4 bg-muted/30">
-                      <span className="text-sm text-muted-foreground">다음 글이 없습니다</span>
+                      <span className="text-sm text-muted-foreground">
+                        다음 글이 없습니다
+                      </span>
                     </div>
                   )}
                 </div>

@@ -138,6 +138,8 @@
 @layer components {
   .prose {
     @apply text-foreground max-w-none;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
 
   .prose :where(p):not(:where([class~="not-prose"] *)) {
@@ -217,7 +219,9 @@
   }
 
   .prose :where(pre):not(:where([class~="not-prose"] *)) {
-    @apply p-4 overflow-x-auto my-6;
+    @apply p-4 my-6;
+    overflow-x: auto;
+    max-width: 100%;
   }
 
   .prose :where(pre code):not(:where([class~="not-prose"] *)) {
@@ -233,7 +237,10 @@
   }
 
   .prose :where(table):not(:where([class~="not-prose"] *)) {
-    @apply w-full border-collapse my-6;
+    @apply border-collapse my-6;
+    width: 100%;
+    display: block;
+    overflow-x: auto;
   }
 
   .prose :where(th):not(:where([class~="not-prose"] *)) {
@@ -246,6 +253,8 @@
 
   .prose :where(img):not(:where([class~="not-prose"] *)) {
     @apply rounded-lg my-6;
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -282,7 +291,9 @@
 
   /* 코드 블록 기본 스타일 */
   pre {
-    @apply overflow-x-auto border border-border p-4 my-6;
+    @apply border border-border p-4 my-6;
+    overflow-x: auto;
+    max-width: 100%;
   }
 
   pre > code {

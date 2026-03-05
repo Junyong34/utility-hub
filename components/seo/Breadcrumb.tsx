@@ -62,12 +62,18 @@ export function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
 /**
  * 블로그 포스트용 Breadcrumb
  */
-export function BlogBreadcrumb({ postTitle }: { postTitle: string }) {
+export function BlogBreadcrumb({
+  categoryName,
+  categorySlug
+}: {
+  categoryName: string;
+  categorySlug: string;
+}) {
   return (
     <Breadcrumb
       items={[
         { name: '블로그', url: '/blog' },
-        { name: postTitle },
+        { name: categoryName, url: `/blog/${categorySlug}` },
       ]}
     />
   );

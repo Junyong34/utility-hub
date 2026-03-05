@@ -30,7 +30,7 @@ export function LottoRecommendResultSheet() {
     <div className="space-y-3">
       {!resultSheetOpen && (
         <div className="flex justify-end">
-          <Button type="button" variant="outline" size="sm" onClick={openResultSheet}>
+          <Button type="button" variant="outline" size="lg" onClick={openResultSheet}>
             {isGenerating ? '분석 창 다시 열기' : '결과 다시 보기'}
           </Button>
         </div>

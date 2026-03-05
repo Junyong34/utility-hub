@@ -5,6 +5,20 @@ import matter from 'gray-matter';
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
 /**
+ * 카테고리 슬러그를 한국어 이름으로 변환
+ */
+const CATEGORY_NAMES: Record<string, string> = {
+  parking: '주차',
+  development: '개발',
+  'ai-image-creator': 'AI',
+  uncategorized: '미분류',
+};
+
+export function getCategoryName(categorySlug: string): string {
+  return CATEGORY_NAMES[categorySlug] || categorySlug;
+}
+
+/**
  * 경로에서 카테고리 추출
  */
 function extractCategoryFromPath(filePath: string): { category: string; categorySlug: string } {
@@ -15,7 +29,7 @@ function extractCategoryFromPath(filePath: string): { category: string; category
   if (parts.length > 1) {
     const categorySlug = parts[0];
     return {
-      category: categorySlug,
+      category: getCategoryName(categorySlug),
       categorySlug,
     };
   }

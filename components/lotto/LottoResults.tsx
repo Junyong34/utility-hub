@@ -1,6 +1,6 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { formatLottoNumbers } from '@/lib/lotto/generator';
@@ -21,6 +21,50 @@ export const LottoResults = memo(function LottoResults({
   onCopyNumbers,
   onCopyShareLink,
 }: LottoResultsProps) {
+  const [copyFeedback, setCopyFeedback] = useState<Record<string, boolean>>({});
+  const copyFeedbackTimersRef = useRef<Record<string, number>>({});
+
+  useEffect(() => {
+    return () => {
+      Object.values(copyFeedbackTimersRef.current).forEach((timer) => {
+        clearTimeout(timer);
+      });
+    };
+  }, []);
+
+  const setFeedbackVisible = (key: string) => {
+    setCopyFeedback((prev) => ({ ...prev, [key]: true }));
+
+    if (copyFeedbackTimersRef.current[key]) {
+      clearTimeout(copyFeedbackTimersRef.current[key]);
+    }
+
+    copyFeedbackTimersRef.current[key] = window.setTimeout(() => {
+      setCopyFeedback((prev) => ({ ...prev, [key]: false }));
+      delete copyFeedbackTimersRef.current[key];
+    }, 1200);
+  };
+
+  const handleCopyNumbers = async (index: number, numbers: number[]) => {
+    if (!onCopyNumbers) return;
+
+    const success = await onCopyNumbers(numbers);
+    if (!success) return;
+
+    const key = `numbers-${index}`;
+    setFeedbackVisible(key);
+  };
+
+  const handleCopyShareLink = async (index: number, numbers: number[]) => {
+    if (!onCopyShareLink) return;
+
+    const success = await onCopyShareLink(numbers);
+    if (!success) return;
+
+    const key = `share-${index}`;
+    setFeedbackVisible(key);
+  };
+
   // games 배열을 반복 렌더링해 카드 단위로 결과를 표시하며,
   // 복사 액션은 부모에서 optional callback으로 주입받아 재사용성을 확보합니다.
   return (
@@ -43,7 +87,7 @@ export const LottoResults = memo(function LottoResults({
 
             {/* 복사 버튼 우측 상단으로 이동 */}
             {(onCopyNumbers || onCopyShareLink) && (
-              <div className="flex gap-1.5">
+              <div className="flex gap-1.5" aria-live="polite">
                 {onCopyNumbers && (
                   <Button
                     type="button"
@@ -51,9 +95,9 @@ export const LottoResults = memo(function LottoResults({
                     size="sm"
                     className="h-7 px-2 text-xs border hover:bg-primary/10 hover:text-primary hover:border-primary/50 transition-colors"
                     aria-label={`게임 ${index + 1} 번호 복사`}
-                    onClick={() => void onCopyNumbers(numbers)}
+                    onClick={() => void handleCopyNumbers(index, numbers)}
                   >
-                    번호 복사
+                    {copyFeedback[`numbers-${index}`] ? '복사됨' : '번호 복사'}
                   </Button>
                 )}
                 {onCopyShareLink && (
@@ -63,9 +107,9 @@ export const LottoResults = memo(function LottoResults({
                     size="sm"
                     className="h-7 px-2 text-xs border hover:bg-primary/10 hover:text-primary hover:border-primary/50 transition-colors"
                     aria-label={`게임 ${index + 1} 공유 링크 복사`}
-                    onClick={() => void onCopyShareLink(numbers)}
+                    onClick={() => void handleCopyShareLink(index, numbers)}
                   >
-                    공유
+                    {copyFeedback[`share-${index}`] ? '공유됨' : '공유'}
                   </Button>
                 )}
               </div>
