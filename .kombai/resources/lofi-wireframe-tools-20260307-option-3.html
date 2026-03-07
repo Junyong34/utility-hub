@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools 페이지 — Option 3: 사이드바 필터 + 검색 + 그리드</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+      background: #fff; color: #111;
+      padding: 20px; max-width: 1150px; margin: 0 auto;
+    }
+    .option-title {
+      text-align: center; border: 2px dashed #333;
+      padding: 14px 20px; margin-bottom: 24px; background: #f5f5f5;
+    }
+    .option-title h1 { font-size: 18px; margin-bottom: 4px; }
+    .option-title p { font-size: 12px; color: #555; }
+    .legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 24px; font-size: 12px; }
+    .legend span { display: flex; align-items: center; gap: 6px; }
+    .dot { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+    .dot-green { background: #4CAF50; }
+    .dot-orange { background: #FF9800; }
+    .badge-reuse, .badge-new {
+      position: absolute; top: -10px; right: 8px;
+      color: #fff; padding: 2px 7px; border-radius: 3px;
+      font-size: 10px; font-weight: bold; font-family: Arial, sans-serif; z-index: 10; white-space: nowrap;
+    }
+    .badge-reuse { background: #4CAF50; }
+    .badge-new { background: #FF9800; }
+    .section-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+    /* Nav */
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 2px solid #333; border-radius: 40px;
+      padding: 10px 24px; margin-bottom: 28px;
+      background: #f9f9f9; position: relative;
+    }
+    .nav-logo { font-size: 15px; font-weight: bold; border: 2px solid #333; border-radius: 6px; padding: 4px 10px; background: #fff; }
+    .nav-links { display: flex; gap: 20px; font-size: 13px; color: #555; }
+    .nav-links .active { font-weight: bold; color: #111; border-bottom: 2px solid #333; }
+    .icon-btn { width: 28px; height: 28px; border: 1.5px solid #bbb; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+    /* Page Header Bar (compact) */
+    .page-header-bar {
+      border: 2px solid #ddd; border-radius: 10px;
+      padding: 18px 20px; background: #fafafa;
+      margin-bottom: 20px; position: relative;
+    }
+    .breadcrumb { font-size: 11px; color: #aaa; margin-bottom: 8px; }
+    .header-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .header-title { font-size: 22px; font-weight: bold; margin-right: auto; }
+    .search-wrap { display: flex; align-items: center; gap: 6px; flex: 1; max-width: 400px; position: relative; }
+    .search-input {
+      flex: 1; border: 2px solid #999; border-radius: 8px;
+      padding: 8px 12px; font-size: 12px; font-family: inherit; background: #fff;
+    }
+    .search-btn {
+      border: 2px solid #333; border-radius: 8px;
+      padding: 8px 14px; font-size: 12px; font-family: inherit;
+      background: #333; color: #fff; cursor: pointer;
+    }
+    .sort-wrap { position: relative; }
+    .sort-select {
+      border: 2px solid #ccc; border-radius: 8px;
+      padding: 8px 12px; font-size: 12px; font-family: inherit;
+      background: #fff; cursor: pointer;
+    }
+
+    /* Main 2-col Layout */
+    .page-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      border: 2px solid #ddd; border-radius: 10px;
+      padding: 18px 16px; background: #fafafa; position: relative;
+    }
+    .sidebar-title { font-size: 13px; font-weight: bold; margin-bottom: 14px; color: #555; }
+    .filter-group { margin-bottom: 18px; }
+    .filter-group-title { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .filter-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 8px; border-radius: 6px; font-size: 12px;
+      cursor: pointer; margin-bottom: 2px; color: #555;
+    }
+    .filter-item.active { background: #333; color: #fff; border-radius: 6px; }
+    .filter-item.active .fcount { background: #555; color: #ddd; }
+    .fcount {
+      background: #ddd; color: #666; border-radius: 10px;
+      padding: 0 6px; font-size: 10px; font-family: Arial, sans-serif;
+    }
+    .filter-separator { border: none; border-top: 1px dashed #ddd; margin: 12px 0; }
+
+    /* Tool Grid (right side) */
+    .tools-area { min-height: 400px; }
+    .grid-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .grid-title { font-size: 15px; font-weight: bold; }
+    .view-toggle { display: flex; gap: 4px; }
+    .view-btn {
+      border: 1.5px solid #ccc; border-radius: 4px;
+      padding: 4px 8px; font-size: 11px; background: #fff; cursor: pointer;
+    }
+    .view-btn.active { background: #333; color: #fff; border-color: #333; }
+    .results-info { font-size: 11px; color: #999; margin-bottom: 12px; }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 20px;
+    }
+    .tool-card {
+      border: 2px solid #ddd; border-radius: 10px;
+      padding: 14px 12px; background: #fff;
+      position: relative; min-height: 130px;
+    }
+    .tool-card.placeholder {
+      border-style: dashed; background: #fafafa;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100px;
+    }
+    .tool-icon {
+      width: 36px; height: 36px; border: 2px solid #ddd; border-radius: 8px;
+      background: #f0f0f0; display: flex; align-items: center; justify-content: center;
+      font-size: 16px; margin-bottom: 8px;
+    }
+    .tool-badge-abs {
+      position: absolute; top: 8px; right: 8px;
+      border: 1.5px solid #bbb; border-radius: 4px;
+      padding: 1px 6px; font-size: 10px; color: #555;
+      background: #f5f5f5; font-family: Arial, sans-serif; font-weight: bold;
+    }
+    .tool-name { font-size: 12px; font-weight: bold; margin-bottom: 4px; }
+    .tool-desc { font-size: 11px; color: #888; line-height: 1.4; margin-bottom: 8px; }
+    .tool-link { font-size: 11px; color: #555; }
+    .tool-link::after { content: ' →'; }
+    .placeholder-text { font-size: 11px; color: #ccc; text-align: center; }
+
+    /* Pagination */
+    .pagination {
+      display: flex; gap: 6px; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .page-btn {
+      border: 1.5px solid #ccc; border-radius: 6px;
+      padding: 5px 10px; font-size: 12px; font-family: inherit;
+      background: #fff; cursor: pointer;
+    }
+    .page-btn.active { background: #333; color: #fff; border-color: #333; }
+
+    /* CTA (bottom) */
+    .cta-card {
+      border: 2px dashed #bbb; border-radius: 10px;
+      padding: 20px; text-align: center; background: #fafafa;
+      position: relative; margin-top: 20px;
+    }
+    .cta-card h2 { font-size: 15px; margin-bottom: 6px; }
+    .cta-card p { font-size: 11px; color: #777; margin-bottom: 12px; }
+    .cta-btn {
+      border: 2px solid #333; border-radius: 8px;
+      padding: 7px 18px; font-size: 12px; font-family: inherit;
+      background: #fff; cursor: pointer; position: relative; display: inline-block;
+    }
+
+    .wf-footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 32px; padding-top: 14px; border-top: 1px solid #eee; }
+
+    @media (max-width: 860px) {
+      .page-body { grid-template-columns: 1fr; }
+      .sidebar { order: -1; }
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="option-title">
+    <h1>Option 3: 사이드바 카테고리 필터 + 검색 헤더 + 카드 그리드 (혁신적)</h1>
+    <p>App-like 도구 탐색 · 좌측 카테고리 사이드바 · 상단 검색+정렬 · 뷰 전환 · 페이지네이션 대비</p>
+  </div>
+  <div class="legend">
+    <span><span class="dot dot-green"></span> [REUSE] 기존 컴포넌트 재사용</span>
+    <span><span class="dot dot-orange"></span> [NEW] 새로 만들 컴포넌트</span>
+  </div>
+
+  <!-- Nav -->
+  <div class="section-label">🧭 Floating Navigation</div>
+  <div class="nav-bar" style="position:relative;margin-bottom:20px;">
+    <span class="badge-reuse">[REUSE] DesktopNav</span>
+    <div class="nav-logo">⊕ Zento</div>
+    <nav class="nav-links">
+      <span>Blog</span><span class="active">Tools</span><span>About</span><span>FAQ</span>
+    </nav>
+    <div class="icon-btn">☀</div>
+  </div>
+
+  <!-- Compact Header Bar with Search -->
+  <div class="section-label">🔍 컴팩트 헤더 바 (제목 + 검색 + 정렬 한 줄)</div>
+  <div class="page-header-bar" style="position:relative;">
+    <span class="badge-new">[NEW] ToolsHeader</span>
+    <div class="breadcrumb" style="position:relative;display:inline-block;">
+      <span class="badge-reuse" style="position:absolute;top:-8px;right:-54px;font-size:9px;">[REUSE] Breadcrumb</span>
+      🏠 홈 &rsaquo; Tools
+    </div>
+    <div class="header-row">
+      <div class="header-title">🔧 Tools</div>
+      <!-- Search -->
+      <div class="search-wrap">
+        <span class="badge-new" style="position:absolute;top:-10px;right:80px;font-size:9px;">[NEW] ToolSearchBar</span>
+        <input class="search-input" placeholder="🔍  도구 검색..." readonly />
+        <button class="search-btn" style="position:relative;">
+          <span class="badge-reuse" style="top:-8px;right:-4px;font-size:9px;">[REUSE] Button</span>
+          검색
+        </button>
+      </div>
+      <!-- Sort -->
+      <div class="sort-wrap" style="position:relative;">
+        <span class="badge-new" style="top:-10px;right:0;font-size:9px;">[NEW] SortSelect</span>
+        <select class="sort-select">
+          <option>정렬: 인기순</option>
+          <option>정렬: 최신순</option>
+          <option>정렬: 이름순</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2-Col Body -->
+  <div class="page-body">
+
+    <!-- Sidebar -->
+    <div class="section-label" style="grid-column:1/2;"></div>
+    <div class="sidebar" style="position:relative;grid-column:1/2;grid-row:1/3;">
+      <span class="badge-new" style="top:-10px;right:8px;">[NEW] ToolsSidebar</span>
+      <div class="sidebar-title">🗂️ 카테고리 필터</div>
+
+      <div class="filter-group">
+        <div class="filter-group-title">전체</div>
+        <div class="filter-item active">전체 도구 <span class="fcount">2</span></div>
+      </div>
+
+      <hr class="filter-separator" />
+
+      <div class="filter-group">
+        <div class="filter-group-title">카테고리</div>
+        <div class="filter-item">🧮 계산기 <span class="fcount">1</span></div>
+        <div class="filter-item">🎲 생성기 <span class="fcount">1</span></div>
+        <div class="filter-item">🔄 변환기 <span class="fcount">0</span></div>
+        <div class="filter-item">📊 분석기 <span class="fcount">0</span></div>
+        <div class="filter-item">✏️ 편집기 <span class="fcount">0</span></div>
+        <div class="filter-item">📁 기타 <span class="fcount">0</span></div>
+      </div>
+
+      <hr class="filter-separator" />
+
+      <div class="filter-group">
+        <div class="filter-group-title">뱃지</div>
+        <div class="filter-item">⭐ 인기 <span class="fcount">1</span></div>
+        <div class="filter-item">🆕 NEW <span class="fcount">1</span></div>
+        <div class="filter-item">🆓 무료 <span class="fcount">2</span></div>
+      </div>
+
+      <hr class="filter-separator" />
+
+      <button style="width:100%;border:1.5px dashed #bbb;border-radius:6px;padding:7px;font-size:11px;color:#aaa;background:none;cursor:pointer;font-family:inherit;">
+        필터 초기화
+      </button>
+    </div>
+
+    <!-- Right: Grid Area -->
+    <div class="tools-area" style="position:relative;">
+      <div class="section-label">📦 도구 그리드 (정렬 + 뷰 전환 지원)</div>
+      <div class="grid-header">
+        <div class="grid-title">모든 도구</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <!-- View Toggle -->
+          <div class="view-toggle" style="position:relative;">
+            <span class="badge-new" style="position:absolute;top:-10px;right:0;font-size:9px;">[NEW] ViewToggle</span>
+            <button class="view-btn active">▦ 그리드</button>
+            <button class="view-btn">☰ 리스트</button>
+          </div>
+        </div>
+      </div>
+      <p class="results-info">2개 도구 표시 중 · &laquo; 전체 &raquo;</p>
+
+      <div class="tools-grid">
+        <!-- Tool 1 -->
+        <div class="tool-card" style="position:relative;">
+          <span class="badge-reuse">[REUSE] Card</span>
+          <div class="tool-badge-abs">인기</div>
+          <div class="tool-icon">🎲</div>
+          <div class="tool-name">AI 추천 번호 생성</div>
+          <div class="tool-desc">AI + 확률통계 6전략으로 로또 번호 생성, 저장/공유 지원</div>
+          <div class="tool-link">사용하기</div>
+        </div>
+        <!-- Tool 2 -->
+        <div class="tool-card" style="position:relative;">
+          <span class="badge-reuse">[REUSE] Card</span>
+          <div class="tool-badge-abs">NEW</div>
+          <div class="tool-icon">🧮</div>
+          <div class="tool-name">대출 이자 계산기</div>
+          <div class="tool-desc">원리금균등 기준 월 상환액 및 총 이자 즉시 계산</div>
+          <div class="tool-link">사용하기</div>
+        </div>
+        <!-- Placeholders -->
+        <div class="tool-card placeholder"><div class="placeholder-text">🔜 추가 예정</div></div>
+        <div class="tool-card placeholder"><div class="placeholder-text">🔜 추가 예정</div></div>
+        <div class="tool-card placeholder"><div class="placeholder-text">🔜 추가 예정</div></div>
+        <div class="tool-card placeholder"><div class="placeholder-text">🔜 추가 예정</div></div>
+      </div>
+
+      <!-- Pagination (ready for 10+ tools) -->
+      <div class="pagination" style="position:relative;">
+        <span class="badge-new" style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:9px;">[NEW] Pagination</span>
+        <button class="page-btn">← 이전</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <span style="font-size:13px;color:#ccc;align-self:center;">…</span>
+        <button class="page-btn">10</button>
+        <button class="page-btn">다음 →</button>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-card" style="position:relative;">
+        <span class="badge-reuse">[REUSE] Card</span>
+        <h2>원하는 도구가 없나요?</h2>
+        <p>필요하신 도구가 있다면 제안해 주세요. 지속적으로 새로운 도구를 추가합니다.</p>
+        <button class="cta-btn">
+          <span class="badge-reuse" style="top:-8px;right:0;font-size:9px;">[REUSE] Button</span>
+          자주 묻는 질문 보기 →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-footer">Tools 메인 — Option 3: Sidebar Filter + Search Header + Grid · Balsamiq-style Low-Fidelity</div>
+</body>
+</html>

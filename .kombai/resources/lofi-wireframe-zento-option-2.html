@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zento 홈 — Option 2: Split Hero with Feature Cards</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+      background: #fff; color: #111;
+      padding: 20px; max-width: 1100px; margin: 0 auto;
+    }
+    .option-title {
+      text-align: center; border: 2px dashed #333;
+      padding: 14px 20px; margin-bottom: 24px; background: #f5f5f5;
+    }
+    .option-title h1 { font-size: 20px; margin-bottom: 4px; }
+    .option-title p { font-size: 13px; color: #555; }
+    .legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 24px; font-size: 12px; }
+    .legend span { display: flex; align-items: center; gap: 6px; }
+    .dot { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+    .dot-green { background: #4CAF50; }
+    .dot-orange { background: #FF9800; }
+    .section-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .badge-reuse, .badge-new {
+      position: absolute; top: -10px; right: 8px;
+      color: #fff; padding: 2px 7px; border-radius: 3px;
+      font-size: 10px; font-weight: bold; font-family: Arial, sans-serif; z-index: 10; white-space: nowrap;
+    }
+    .badge-reuse { background: #4CAF50; }
+    .badge-new { background: #FF9800; }
+    .divider { border: none; border-top: 2px dashed #ddd; margin: 24px 0; }
+    .wf-footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 32px; padding-top: 14px; border-top: 1px solid #eee; }
+
+    /* Nav */
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 2px solid #333; border-radius: 40px;
+      padding: 10px 24px; margin-bottom: 32px;
+      background: #f9f9f9; position: relative;
+    }
+    .nav-logo { font-size: 15px; font-weight: bold; border: 2px solid #333; border-radius: 6px; padding: 4px 10px; background: #fff; position: relative; }
+    .nav-links { display: flex; gap: 20px; font-size: 13px; color: #555; }
+    .icon-btn { width: 28px; height: 28px; border: 1.5px solid #bbb; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+    /* Split Hero */
+    .hero-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 28px; border: 2px solid #ccc; border-radius: 14px;
+      padding: 40px 32px; background: #fafafa;
+      position: relative; margin-bottom: 24px;
+    }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; gap: 14px; }
+    .eyebrow {
+      display: inline-block; border: 1.5px solid #bbb; border-radius: 20px;
+      padding: 4px 14px; font-size: 12px; color: #666; background: #fff; width: fit-content;
+    }
+    .hero-title { font-size: 36px; font-weight: bold; line-height: 1.25; }
+    .hero-sub { font-size: 13px; color: #777; line-height: 1.7; max-width: 320px; }
+
+    .cta-list { display: flex; flex-direction: column; gap: 10px; }
+    .cta-row {
+      display: flex; align-items: center; gap: 12px;
+      border: 2px solid #ccc; border-radius: 8px;
+      padding: 12px 16px; background: #fff; position: relative; cursor: pointer;
+    }
+    .cta-row.primary { border-color: #333; background: #111; color: #fff; }
+    .cta-icon { font-size: 18px; }
+    .cta-label h4 { font-size: 13px; font-weight: bold; }
+    .cta-label p { font-size: 11px; color: #aaa; margin-top: 1px; }
+    .cta-row.primary .cta-label p { color: #777; }
+    .cta-arrow { margin-left: auto; font-size: 14px; }
+
+    .stat-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .stat-pill {
+      border: 1.5px solid #ccc; border-radius: 20px;
+      padding: 4px 12px; font-size: 11px; color: #777; background: #fff;
+    }
+
+    /* Right 2x2 grid */
+    .hero-right { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 14px; }
+    .feat-card {
+      border: 2px solid #ccc; border-radius: 10px;
+      padding: 16px 14px; background: #fff; position: relative;
+    }
+    .feat-icon {
+      width: 36px; height: 36px; border: 2px solid #ddd; border-radius: 8px;
+      background: #f0f0f0; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 8px;
+    }
+    .feat-title { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+    .feat-desc { font-size: 11px; color: #999; line-height: 1.4; margin-bottom: 8px; }
+    .feat-link { font-size: 11px; color: #666; }
+    .feat-link::after { content: ' →'; }
+
+    /* Stats row */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px; }
+    .stat-card {
+      border: 2px solid #ddd; border-radius: 8px;
+      padding: 16px 12px; text-align: center; background: #fafafa; position: relative;
+    }
+    .stat-val { font-size: 26px; font-weight: bold; color: #333; }
+    .stat-lbl { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+    /* Content grid */
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .sec-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .sec-icon { width: 22px; height: 22px; border: 1.5px solid #bbb; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; background: #f0f0f0; }
+    .sec-title { font-size: 17px; font-weight: bold; }
+    .post-card { border: 2px solid #ddd; border-radius: 8px; padding: 14px 16px; background: #fff; position: relative; margin-bottom: 10px; }
+    .post-title { font-size: 13px; font-weight: bold; line-height: 1.5; margin-bottom: 6px; }
+    .post-date { font-size: 11px; color: #bbb; margin-bottom: 6px; }
+    .post-link { font-size: 11px; color: #666; }
+    .post-link::after { content: ' →'; }
+    .topic-card { border: 2px solid #ddd; border-radius: 8px; padding: 14px 16px; background: #fff; position: relative; margin-bottom: 10px; }
+    .topic-badge { display: inline-block; border: 1.5px solid #bbb; border-radius: 4px; padding: 2px 8px; font-size: 10px; font-weight: bold; color: #666; margin-bottom: 6px; background: #f5f5f5; }
+    .topic-title { font-size: 13px; font-weight: bold; line-height: 1.5; margin-bottom: 6px; }
+    .topic-link { font-size: 11px; color: #666; }
+    .topic-link::after { content: ' →'; }
+
+    .note { border: 1.5px dashed #ccc; border-radius: 6px; padding: 8px 14px; font-size: 11px; color: #aaa; background: #fafafa; text-align: center; margin-bottom: 16px; }
+
+    @media (max-width: 768px) {
+      .hero-split { grid-template-columns: 1fr; }
+      .hero-right { grid-template-columns: repeat(2, 1fr); }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .content-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="option-title">
+    <h1>Option 2: Split Hero with Feature Cards (균형)</h1>
+    <p>데스크탑 2컬럼 분할 · 좌측 브랜드+CTA · 우측 2×2 서비스 카드 · 균형잡힌 정보 밀도</p>
+  </div>
+  <div class="legend">
+    <span><span class="dot dot-green"></span> [REUSE] 기존 컴포넌트 재사용</span>
+    <span><span class="dot dot-orange"></span> [NEW] 새로 만들 컴포넌트</span>
+  </div>
+
+  <!-- Nav -->
+  <div class="section-label">🧭 Floating Navigation</div>
+  <div class="nav-bar" style="position:relative;margin-bottom:32px;">
+    <span class="badge-reuse" title="components/layout/desktop-nav.tsx">[REUSE] DesktopNav</span>
+    <div class="nav-logo" style="position:relative;">
+      <span class="badge-reuse" style="top:-10px;right:4px;font-size:9px;">[REUSE] Logo</span>
+      ⊕ Zento
+    </div>
+    <nav class="nav-links">
+      <span>Blog</span><span>Tools</span><span>About</span><span>FAQ</span>
+    </nav>
+    <div class="icon-btn">☀</div>
+  </div>
+
+  <!-- Split Hero -->
+  <div class="section-label">🦸 Split Hero — 좌: 브랜드 메시지 · 우: 서비스 카드 2×2</div>
+  <div class="note">📱 모바일: 단일 컬럼 전환, 카드는 2열 유지</div>
+
+  <!-- NEW: HeroSplitSection -->
+  <div class="hero-split">
+    <span class="badge-new" title="components/home/hero-split-section.tsx (new)">[NEW] HeroSplitSection</span>
+
+    <!-- Left -->
+    <div class="hero-left">
+      <div class="eyebrow">✦ Zen + Info · 정보 허브</div>
+      <div class="hero-title">Zento<br/>생활의 모든 것</div>
+      <p class="hero-sub">유용한 정보부터 편리한 도구, 자주 묻는 질문까지 생활에 필요한 모든 것을 한곳에서</p>
+
+      <div class="cta-list">
+        <div class="cta-row primary" style="position:relative;">
+          <span class="badge-reuse">[REUSE] Button</span>
+          <span class="cta-icon">📖</span>
+          <div class="cta-label"><h4>블로그 읽기</h4><p>최신 글 · 개발 / AI</p></div>
+          <span class="cta-arrow">→</span>
+        </div>
+        <div class="cta-row" style="position:relative;">
+          <span class="badge-reuse">[REUSE] Button</span>
+          <span class="cta-icon">🔧</span>
+          <div class="cta-label"><h4>도구 사용하기</h4><p>로또 생성기 · 대출 계산기</p></div>
+          <span class="cta-arrow">→</span>
+        </div>
+      </div>
+
+      <div class="stat-pills">
+        <div class="stat-pill">오늘 방문자 <strong>—</strong></div>
+        <div class="stat-pill">누적 방문자 <strong>—</strong></div>
+        <div class="stat-pill">글 <strong>3편</strong></div>
+        <div class="stat-pill">도구 <strong>2개</strong></div>
+      </div>
+    </div>
+
+    <!-- Right 2x2 -->
+    <div class="hero-right">
+      <div class="feat-card" style="position:relative;">
+        <span class="badge-reuse" title="@/components/ui/card">[REUSE] Card</span>
+        <div class="feat-icon">📖</div>
+        <div class="feat-title">Blog Posts</div>
+        <div class="feat-desc">유용한 정보와 지식을 공유합니다</div>
+        <div class="feat-link">바로가기</div>
+      </div>
+      <div class="feat-card" style="position:relative;">
+        <span class="badge-reuse" title="@/components/ui/card">[REUSE] Card</span>
+        <div class="feat-icon">🔧</div>
+        <div class="feat-title">Tools</div>
+        <div class="feat-desc">편리한 계산기와 유틸리티 도구</div>
+        <div class="feat-link">바로가기</div>
+      </div>
+      <div class="feat-card" style="position:relative;">
+        <span class="badge-reuse" title="@/components/ui/card">[REUSE] Card</span>
+        <div class="feat-icon">ℹ️</div>
+        <div class="feat-title">About</div>
+        <div class="feat-desc">Zento 소개와 운영 원칙</div>
+        <div class="feat-link">바로가기</div>
+      </div>
+      <div class="feat-card" style="position:relative;">
+        <span class="badge-reuse" title="@/components/ui/card">[REUSE] Card</span>
+        <div class="feat-icon">❓</div>
+        <div class="feat-title">FAQ</div>
+        <div class="feat-desc">자주 묻는 질문과 빠른 답변</div>
+        <div class="feat-link">바로가기</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Posts + Hot Topics side-by-side -->
+  <div class="content-grid">
+    <div>
+      <div class="sec-header"><div class="sec-icon">📅</div><span class="sec-title">최신 글</span></div>
+      <div class="post-card" style="position:relative;"><span class="badge-reuse">[REUSE] Card</span>
+        <div class="post-title">SSG, SSR, CSR: 올바른 렌더링 전략 선택하기</div>
+        <div class="post-date">2024-02-01</div><div class="post-link">읽어보기</div>
+      </div>
+      <div class="post-card" style="position:relative;"><span class="badge-reuse">[REUSE] Card</span>
+        <div class="post-title">Radix UI로 구축하는 접근성 높은 컴포넌트</div>
+        <div class="post-date">2024-01-22</div><div class="post-link">읽어보기</div>
+      </div>
+      <div class="post-card" style="position:relative;"><span class="badge-reuse">[REUSE] Card</span>
+        <div class="post-title">Next.js와 TypeScript로 시작하는 현대적인 웹 개발</div>
+        <div class="post-date">2024-01-15</div><div class="post-link">읽어보기</div>
+      </div>
+    </div>
+    <div>
+      <div class="sec-header"><div class="sec-icon">🔥</div><span class="sec-title">핫한 정보</span></div>
+      <div class="topic-card" style="position:relative;"><span class="badge-reuse">[REUSE] Card</span>
+        <div style="position:relative;display:inline-block;margin-bottom:6px;"><span class="badge-reuse" style="top:-10px;">[REUSE] Badge</span><div class="topic-badge">NEW</div></div>
+        <div class="topic-title">SSG, SSR, CSR: 올바른 렌더링 전략 선택하기</div>
+        <div class="topic-link">자세히 보기</div>
+      </div>
+      <div class="topic-card" style="position:relative;"><span class="badge-reuse">[REUSE] Card</span>
+        <div class="topic-badge">POPULAR</div>
+        <div class="topic-title">Radix UI로 구축하는 접근성 높은 컴포넌트</div>
+        <div class="topic-link">자세히 보기</div>
+      </div>
+      <div class="topic-card" style="position:relative;"><span class="badge-reuse">[REUSE] Card</span>
+        <div class="topic-badge">GUIDE</div>
+        <div class="topic-title">Next.js와 TypeScript로 시작하는 현대적인 웹 개발</div>
+        <div class="topic-link">자세히 보기</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wf-footer">Zento 홈 — Option 2: Split Hero Wireframe · Balsamiq-style Low-Fidelity</div>
+</body>
+</html>

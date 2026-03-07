@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools 페이지 — Option 2: 히어로 검색 + 주요 도구 + 그리드</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+      background: #fff; color: #111;
+      padding: 20px; max-width: 1100px; margin: 0 auto;
+    }
+    .option-title {
+      text-align: center; border: 2px dashed #333;
+      padding: 14px 20px; margin-bottom: 24px; background: #f5f5f5;
+    }
+    .option-title h1 { font-size: 18px; margin-bottom: 4px; }
+    .option-title p { font-size: 12px; color: #555; }
+    .legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 24px; font-size: 12px; }
+    .legend span { display: flex; align-items: center; gap: 6px; }
+    .dot { width: 12px; height: 12px; border-radius: 2px; display: inline-block; }
+    .dot-green { background: #4CAF50; }
+    .dot-orange { background: #FF9800; }
+    .badge-reuse, .badge-new {
+      position: absolute; top: -10px; right: 8px;
+      color: #fff; padding: 2px 7px; border-radius: 3px;
+      font-size: 10px; font-weight: bold; font-family: Arial, sans-serif; z-index: 10; white-space: nowrap;
+    }
+    .badge-reuse { background: #4CAF50; }
+    .badge-new { background: #FF9800; }
+    .section-label { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+    /* Nav */
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      border: 2px solid #333; border-radius: 40px;
+      padding: 10px 24px; margin-bottom: 28px;
+      background: #f9f9f9; position: relative;
+    }
+    .nav-logo { font-size: 15px; font-weight: bold; border: 2px solid #333; border-radius: 6px; padding: 4px 10px; background: #fff; }
+    .nav-links { display: flex; gap: 20px; font-size: 13px; color: #555; }
+    .nav-links .active { font-weight: bold; color: #111; border-bottom: 2px solid #333; }
+    .icon-btn { width: 28px; height: 28px; border: 1.5px solid #bbb; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+
+    /* Hero Search Section */
+    .hero-search {
+      border: 2px solid #ccc; border-radius: 12px;
+      padding: 24px 28px 20px; background: #fafafa;
+      text-align: center; position: relative; margin-bottom: 20px;
+    }
+    .hero-eyebrow {
+      display: inline-block; border: 1.5px solid #bbb; border-radius: 20px;
+      padding: 2px 12px; font-size: 10px; color: #666; background: #fff;
+      margin-bottom: 10px;
+    }
+    .hero-title { font-size: 22px; font-weight: bold; margin-bottom: 6px; }
+    .hero-sub { font-size: 12px; color: #777; margin-bottom: 16px; line-height: 1.5; }
+    .search-row {
+      display: flex; align-items: center; gap: 8px;
+      max-width: 480px; margin: 0 auto 10px; position: relative;
+    }
+    .search-input {
+      flex: 1; border: 2px solid #999; border-radius: 8px;
+      padding: 9px 12px; font-size: 12px; font-family: inherit; background: #fff;
+    }
+    .search-btn {
+      border: 2px solid #333; border-radius: 8px;
+      padding: 9px 16px; font-size: 12px; font-family: inherit;
+      background: #333; color: #fff; cursor: pointer;
+    }
+    .stat-row {
+      display: flex; justify-content: center; gap: 16px;
+      font-size: 10px; color: #aaa;
+    }
+    .stat-row span strong { color: #555; }
+
+    /* Category Pills */
+    .cat-pills {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center; margin-bottom: 24px;
+    }
+    .cat-pill {
+      border: 2px solid #ccc; border-radius: 20px;
+      padding: 5px 14px; font-size: 12px; color: #555;
+      background: #fff; cursor: pointer;
+    }
+    .cat-pill.active { border-color: #333; background: #333; color: #fff; }
+    .cat-count {
+      display: inline-block; margin-left: 4px;
+      background: #ddd; color: #555; border-radius: 10px;
+      padding: 0 5px; font-size: 10px;
+    }
+    .cat-pill.active .cat-count { background: #555; color: #ddd; }
+
+    /* Featured Tools Row */
+    .section-header {
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 14px;
+    }
+    .section-header h2 { font-size: 17px; font-weight: bold; }
+    .sec-badge {
+      border: 1.5px solid #bbb; border-radius: 4px;
+      padding: 2px 8px; font-size: 10px; color: #666; background: #f5f5f5;
+    }
+
+    .featured-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin-bottom: 28px;
+    }
+    .featured-card {
+      border: 2px solid #ccc; border-radius: 10px;
+      padding: 20px 18px; background: #fff;
+      display: flex; align-items: flex-start; gap: 14px;
+      position: relative; cursor: pointer;
+    }
+    .feat-icon {
+      width: 48px; height: 48px; border: 2px solid #ddd; border-radius: 10px;
+      background: #f0f0f0; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .feat-body { flex: 1; }
+    .feat-badge {
+      display: inline-block; border: 1.5px solid #bbb; border-radius: 4px;
+      padding: 1px 7px; font-size: 10px; color: #555; background: #f5f5f5;
+      margin-bottom: 5px; font-family: Arial, sans-serif; font-weight: bold;
+    }
+    .feat-name { font-size: 15px; font-weight: bold; margin-bottom: 4px; }
+    .feat-desc { font-size: 11px; color: #888; line-height: 1.5; margin-bottom: 8px; }
+    .feat-link { font-size: 11px; color: #555; }
+    .feat-link::after { content: ' →'; }
+
+    /* Divider */
+    .divider { border: none; border-top: 2px dashed #ddd; margin: 20px 0; }
+
+    /* All Tools Grid */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 24px;
+    }
+    .tool-card {
+      border: 2px solid #ddd; border-radius: 10px;
+      padding: 16px 14px; background: #fff;
+      position: relative; min-height: 130px;
+    }
+    .tool-card.placeholder {
+      border-style: dashed; background: #fafafa;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100px;
+    }
+    .tool-icon {
+      width: 38px; height: 38px; border: 2px solid #ddd; border-radius: 8px;
+      background: #f0f0f0; display: flex; align-items: center; justify-content: center;
+      font-size: 18px; margin-bottom: 8px;
+    }
+    .tool-badge-abs {
+      position: absolute; top: 10px; right: 10px;
+      border: 1.5px solid #bbb; border-radius: 4px;
+      padding: 1px 7px; font-size: 10px; color: #555;
+      background: #f5f5f5; font-family: Arial, sans-serif; font-weight: bold;
+    }
+    .tool-name { font-size: 13px; font-weight: bold; margin-bottom: 4px; }
+    .tool-desc { font-size: 11px; color: #888; line-height: 1.4; margin-bottom: 8px; }
+    .tool-link { font-size: 11px; color: #555; }
+    .tool-link::after { content: ' →'; }
+    .placeholder-text { font-size: 11px; color: #ccc; text-align: center; }
+
+    /* CTA */
+    .cta-card {
+      border: 2px dashed #bbb; border-radius: 10px;
+      padding: 24px; text-align: center; background: #fafafa;
+      position: relative; margin-bottom: 24px;
+    }
+    .cta-card h2 { font-size: 17px; margin-bottom: 8px; }
+    .cta-card p { font-size: 12px; color: #777; margin-bottom: 14px; }
+    .cta-btn {
+      border: 2px solid #333; border-radius: 8px;
+      padding: 8px 22px; font-size: 13px; font-family: inherit;
+      background: #fff; cursor: pointer; position: relative; display: inline-block;
+    }
+
+    .results-info { font-size: 12px; color: #999; margin-bottom: 10px; }
+    .wf-footer { text-align: center; font-size: 11px; color: #bbb; margin-top: 32px; padding-top: 14px; border-top: 1px solid #eee; }
+
+    @media (max-width: 768px) {
+      .featured-row { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="option-title">
+    <h1>Option 2: 히어로 검색 + 주요 도구 + 전체 그리드 (균형)</h1>
+    <p>대형 히어로 검색창 · 인기/신규 도구 강조 · 카테고리 필 · 전체 그리드 · 확장성 고려</p>
+  </div>
+  <div class="legend">
+    <span><span class="dot dot-green"></span> [REUSE] 기존 컴포넌트 재사용</span>
+    <span><span class="dot dot-orange"></span> [NEW] 새로 만들 컴포넌트</span>
+  </div>
+
+  <!-- Nav -->
+  <div class="section-label">🧭 Floating Navigation</div>
+  <div class="nav-bar" style="position:relative;">
+    <span class="badge-reuse">[REUSE] DesktopNav</span>
+    <div class="nav-logo">⊕ Zento</div>
+    <nav class="nav-links">
+      <span>Blog</span><span class="active">Tools</span><span>About</span><span>FAQ</span>
+    </nav>
+    <div class="icon-btn">☀</div>
+  </div>
+
+  <!-- Hero Search -->
+  <div class="section-label">🔍 히어로 검색 섹션 (도구 탐색 허브)</div>
+  <div class="hero-search" style="position:relative;">
+    <span class="badge-new" style="top:-10px;right:8px;">[NEW] ToolsHeroSearch</span>
+
+    <div class="breadcrumb" style="font-size:11px;color:#aaa;margin-bottom:12px;position:relative;display:inline-block;">
+      <span class="badge-reuse" style="position:absolute;top:-8px;right:-54px;font-size:9px;">[REUSE] Breadcrumb</span>
+      🏠 홈 &rsaquo; Tools
+    </div>
+
+    <div class="hero-eyebrow">🔧 Zen + Tools · 실용 도구 허브</div>
+    <h1 class="hero-title">원하는 도구를 찾아보세요</h1>
+    <p class="hero-sub">계산기, 생성기, 변환기 등 생활·개발에 유용한 도구를 모았습니다.</p>
+
+    <div class="search-row">
+      <span class="badge-new" style="position:absolute;top:-10px;right:100px;font-size:9px;">[NEW] ToolSearchBar</span>
+      <input class="search-input" placeholder="🔍  도구 검색... (예: 대출, 로또, 단위변환)" readonly />
+      <button class="search-btn" style="position:relative;">
+        <span class="badge-reuse" style="top:-8px;right:-4px;font-size:9px;">[REUSE] Button</span>
+        검색
+      </button>
+    </div>
+    <div class="stat-row">
+      <span>전체 <strong>2개</strong> 도구</span>
+      <span>·</span>
+      <span>카테고리 <strong>6개</strong></span>
+      <span>·</span>
+      <span>계속 추가 예정 🚀</span>
+    </div>
+  </div>
+
+  <!-- Category Pills -->
+  <div class="section-label">🏷️ 카테고리 필터</div>
+  <div class="cat-pills" style="position:relative;">
+    <span class="badge-new" style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:9px;">[NEW] CategoryPills</span>
+    <div class="cat-pill active">전체 <span class="cat-count">2</span></div>
+    <div class="cat-pill">계산기 <span class="cat-count">1</span></div>
+    <div class="cat-pill">생성기 <span class="cat-count">1</span></div>
+    <div class="cat-pill">변환기 <span class="cat-count">0</span></div>
+    <div class="cat-pill">분석기 <span class="cat-count">0</span></div>
+    <div class="cat-pill">기타 <span class="cat-count">0</span></div>
+  </div>
+
+  <!-- Featured (Popular / New) Tools -->
+  <div class="section-label">⭐ 주요 도구 (인기 & 신규 하이라이트)</div>
+  <div class="section-header">
+    <h2>주요 도구</h2>
+    <span class="sec-badge">인기 · 신규 먼저</span>
+  </div>
+  <div class="featured-row">
+    <!-- Featured Card 1 -->
+    <div class="featured-card" style="position:relative;">
+      <span class="badge-reuse" style="top:-10px;right:8px;">[REUSE] Card</span>
+      <div class="feat-icon">🎲</div>
+      <div class="feat-body">
+        <div class="feat-badge">인기</div>
+        <div class="feat-name">AI 추천 번호 생성</div>
+        <div class="feat-desc">AI + 확률통계 6전략으로 로또 번호를 생성합니다</div>
+        <div class="feat-link">사용하기</div>
+      </div>
+    </div>
+    <!-- Featured Card 2 -->
+    <div class="featured-card" style="position:relative;">
+      <span class="badge-reuse" style="top:-10px;right:8px;">[REUSE] Card</span>
+      <div class="feat-icon">🧮</div>
+      <div class="feat-body">
+        <div class="feat-badge">NEW</div>
+        <div class="feat-name">대출 이자 계산기</div>
+        <div class="feat-desc">월 상환액과 총 이자를 빠르게 계산합니다</div>
+        <div class="feat-link">사용하기</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- All Tools Grid -->
+  <div class="section-label">📦 전체 도구 (도구 추가될수록 자동 확장)</div>
+  <div class="section-header">
+    <h2>모든 도구</h2>
+  </div>
+  <p class="results-info">2개 도구 표시 중</p>
+
+  <div class="tools-grid">
+    <div class="tool-card" style="position:relative;">
+      <span class="badge-reuse">[REUSE] Card</span>
+      <div class="tool-badge-abs">인기</div>
+      <div class="tool-icon">🎲</div>
+      <div class="tool-name">AI 추천 번호 생성</div>
+      <div class="tool-desc">AI + 확률통계 6전략으로 로또 번호 생성</div>
+      <div class="tool-link">사용하기</div>
+    </div>
+    <div class="tool-card" style="position:relative;">
+      <span class="badge-reuse">[REUSE] Card</span>
+      <div class="tool-badge-abs">NEW</div>
+      <div class="tool-icon">🧮</div>
+      <div class="tool-name">대출 이자 계산기</div>
+      <div class="tool-desc">원리금균등 기준 월 상환액 즉시 계산</div>
+      <div class="tool-link">사용하기</div>
+    </div>
+    <div class="tool-card placeholder"><div class="placeholder-text">🔜 추가 예정</div></div>
+    <div class="tool-card placeholder"><div class="placeholder-text">🔜 추가 예정</div></div>
+    <div class="tool-card placeholder"><div class="placeholder-text">🔜 추가 예정</div></div>
+    <div class="tool-card placeholder"><div class="placeholder-text">🔜 추가 예정</div></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-card" style="position:relative;">
+    <span class="badge-reuse">[REUSE] Card</span>
+    <h2>원하는 도구가 없나요?</h2>
+    <p>필요하신 도구가 있다면 제안해 주세요. 지속적으로 새로운 도구를 추가합니다.</p>
+    <button class="cta-btn">
+      <span class="badge-reuse" style="top:-8px;right:0;font-size:9px;">[REUSE] Button</span>
+      자주 묻는 질문 보기 →
+    </button>
+  </div>
+
+  <div class="wf-footer">Tools 메인 — Option 2: Hero Search + Featured + Grid · Balsamiq-style Low-Fidelity</div>
+</body>
+</html>
