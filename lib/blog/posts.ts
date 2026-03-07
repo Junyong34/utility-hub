@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { HomeFeaturedMeta } from '@/types/home';
+import type {
+  BlogCategory,
+  BlogPost,
+  BlogPostSummary,
+} from '@/lib/blog/types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
@@ -71,27 +75,10 @@ function getAllMarkdownFiles(dir: string): string[] {
   return files;
 }
 
-export interface PostMetadata {
-  title: string;
-  date: string;
-  author: string;
-  excerpt: string;
-  tags: string[];
-  category: string;
-  categorySlug: string;
-  ogImage?: string;
-  homeFeatured?: HomeFeaturedMeta;
-}
-
-export interface Post extends PostMetadata {
-  slug: string;
-  content: string;
-}
-
 /**
  * 모든 블로그 포스트의 메타데이터를 가져옵니다 (날짜 내림차순 정렬)
  */
-export function getAllPosts(): Omit<Post, 'content'>[] {
+export function getAllPosts(): BlogPostSummary[] {
   const markdownFiles = getAllMarkdownFiles(postsDirectory);
 
   const posts = markdownFiles.map(fullPath => {
@@ -134,7 +121,7 @@ export function getAllPosts(): Omit<Post, 'content'>[] {
 export function getPostBySlug(
   slug: string,
   categorySlug?: string
-): Post | null {
+): BlogPost | null {
   try {
     const markdownFiles = getAllMarkdownFiles(postsDirectory);
 
@@ -205,7 +192,7 @@ export function getAllPostSlugs(): Array<{
 /**
  * 특정 태그를 가진 포스트들을 가져옵니다
  */
-export function getPostsByTag(tag: string): Omit<Post, 'content'>[] {
+export function getPostsByTag(tag: string): BlogPostSummary[] {
   const allPosts = getAllPosts();
   return allPosts.filter(post =>
     post.tags.some(t => t.toLowerCase() === tag.toLowerCase())
@@ -229,11 +216,7 @@ export function getAllTags(): string[] {
 /**
  * 모든 카테고리 목록을 가져옵니다 (중복 제거)
  */
-export function getAllCategories(): Array<{
-  name: string;
-  slug: string;
-  count: number;
-}> {
+export function getAllCategories(): BlogCategory[] {
   const allPosts = getAllPosts();
   const categoryMap = new Map<string, { name: string; count: number }>();
 
@@ -263,7 +246,7 @@ export function getAllCategories(): Array<{
  */
 export function getPostsByCategory(
   categorySlug: string
-): Omit<Post, 'content'>[] {
+): BlogPostSummary[] {
   const allPosts = getAllPosts();
   return allPosts.filter(post => post.categorySlug === categorySlug);
 }
@@ -275,8 +258,8 @@ export function getAdjacentPosts(
   currentSlug: string,
   categorySlug?: string
 ): {
-  prevPost: Omit<Post, 'content'> | null;
-  nextPost: Omit<Post, 'content'> | null;
+  prevPost: BlogPostSummary | null;
+  nextPost: BlogPostSummary | null;
 } {
   const allPosts = getAllPosts();
   const currentIndex = allPosts.findIndex(

@@ -1,13 +1,5 @@
 import lottoDraws from './lotto_draws.json';
-
-export interface LottoRoundResult {
-  round: number;
-  numbers: number[];
-  bonus: number;
-  drawDate: string;
-  drawYear: string;
-  source: '동행복권';
-}
+import type { LottoRoundResult } from './types';
 
 type LottoDrawRow = Omit<LottoRoundResult, 'drawDate'>;
 

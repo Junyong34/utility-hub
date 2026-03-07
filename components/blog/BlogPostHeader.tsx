@@ -5,17 +5,13 @@ import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BlogBreadcrumb } from '@/components/seo';
 import { BlogSwitcher } from '@/components/blog/BlogSwitcher';
-
-interface PostOption {
-  slug: string;
-  title: string;
-}
+import type { BlogPostOption } from '@/lib/blog/types';
 
 interface BlogPostHeaderProps {
   categoryName: string;
   categorySlug: string;
   currentSlug: string;
-  posts: PostOption[];
+  posts: BlogPostOption[];
 }
 
 /**

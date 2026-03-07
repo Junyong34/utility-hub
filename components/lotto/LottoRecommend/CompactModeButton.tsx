@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { LottoRecommendMode } from '@/lib/lotto/recommendation-spec';
+import type { LottoRecommendMode } from '@/lib/lotto/types';
 import { Sparkles } from 'lucide-react';
 
 interface CompactModeButtonProps {

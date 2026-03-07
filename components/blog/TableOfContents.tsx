@@ -1,14 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { TocItem } from '@/lib/blog/markdown-processor';
+import type { BlogTocItem } from '@/lib/blog/types';
 import { cn } from '@/lib/utils';
 import { List } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BottomSheet } from '@/components/ui/bottom-sheet';
 
 interface TableOfContentsProps {
-  items: TocItem[];
+  items: BlogTocItem[];
 }
 
 /**

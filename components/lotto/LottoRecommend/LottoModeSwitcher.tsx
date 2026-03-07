@@ -5,8 +5,8 @@ import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import {
   LOTTO_RECOMMEND_MODES,
-  LottoRecommendMode,
-} from '@/lib/lotto/recommendation-spec';
+  type LottoRecommendMode,
+} from '@/lib/lotto/types';
 import { useLottoRecommend } from './LottoRecommendProvider';
 import {
   Dices,
@@ -149,7 +149,6 @@ export function LottoModeSwitcher() {
             description={MODE_CONFIG[mode].description}
             icon={MODE_CONFIG[mode].icon}
             iconBg={MODE_CONFIG[mode].iconBg}
-            gradient={MODE_CONFIG[mode].gradient}
           />
         </div>
       )}

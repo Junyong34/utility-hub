@@ -3,13 +3,13 @@
 import {
   getRecentStats,
   getStatsStrategyDescription,
-  type LottoStatsStrategy,
 } from '@/lib/lotto/generator';
-import { Button } from '@/components/ui/button';
 import {
-  useLottoRecommend,
   LOTTO_STATS_STRATEGIES,
-} from '../LottoRecommendProvider';
+  type LottoStatsStrategy,
+} from '@/lib/lotto/types';
+import { Button } from '@/components/ui/button';
+import { useLottoRecommend } from '../LottoRecommendProvider';
 
 const STRATEGY_LABELS: Record<LottoStatsStrategy, string> = {
   ai: 'AI 추천',

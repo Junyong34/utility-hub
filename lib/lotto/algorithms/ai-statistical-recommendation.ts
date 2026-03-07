@@ -18,32 +18,7 @@ import {
 } from './statistics-analyzer';
 import { validateLottoNumbers } from './validation';
 import { getLottoRoundResults } from '../round-data';
-
-/**
- * 번호별 가중치 정보
- */
-export interface NumberWeight {
-  number: number;
-  weight: number;
-  breakdown: {
-    frequencyWeight: number;
-    recentWeight: number;
-    coOccurrenceWeight: number;
-    balanceWeight: number;
-  };
-}
-
-/**
- * AI 추천 설정
- */
-export interface AIRecommendationConfig {
-  frequencyRatio: number; // 전체 빈도 비율 (기본 0.4)
-  recentRatio: number; // 최근 빈도 비율 (기본 0.35)
-  coOccurrenceRatio: number; // 동반 출현 비율 (기본 0.15)
-  balanceRatio: number; // 균형 보정 비율 (기본 0.1)
-  recentWindow: number; // 최근 회차 윈도우 (기본 100)
-  strictValidation: boolean; // 엄격한 검증 여부 (기본 false)
-}
+import type { AIRecommendationConfig, NumberWeight } from '../types';
 
 const DEFAULT_CONFIG: AIRecommendationConfig = {
   frequencyRatio: 0.4,

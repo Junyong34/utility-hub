@@ -6,49 +6,32 @@
 
 import {
   generateAIStatisticalNumbers,
-  type AIRecommendationConfig,
 } from './algorithms/ai-statistical-recommendation';
 import {
   generateNumbersByStrategy,
   getStrategyDescription,
-  type ProbabilityStrategy,
-  type StrategyConfig,
 } from './algorithms/probability-statistical-recommendation';
 import { analyzeLottoStatistics, getRecentStatistics } from './algorithms/statistics-analyzer';
+import {
+  type AIRecommendationConfig,
+  type LottoGameSet,
+  type LottoNumbers,
+  type LottoStatsStrategy,
+  type LottoStatsSummary,
+  type ProbabilityStrategy,
+  type StrategyConfig,
+} from './types';
 
-export interface LottoNumbers {
-  id: string;
-  numbers: number[];
-  bonus?: number;
-  timestamp: number;
-}
-
-export interface LottoGameSet {
-  id: string;
-  games: number[][];
-  timestamp: number;
-}
-
-export type LottoStatsStrategy = 'ai' | ProbabilityStrategy;
-
-export const LOTTO_STATS_STRATEGIES: LottoStatsStrategy[] = [
-  'ai',
-  'high-frequency',
-  'low-frequency',
-  'undrawn',
-  'balanced',
-  'hot',
-  'cold',
-];
-
-export interface LottoStatsSummary {
-  mostFrequent: number[];
-  leastFrequent: number[];
-  hotNumbers: number[];
-  coldNumbers: number[];
-  totalRounds: number;
-  recentRoundWindow: number;
-}
+export { LOTTO_STATS_STRATEGIES } from './types';
+export type {
+  AIRecommendationConfig,
+  LottoGameSet,
+  LottoNumbers,
+  LottoStatsStrategy,
+  LottoStatsSummary,
+  ProbabilityStrategy,
+  StrategyConfig,
+} from './types';
 
 interface StatsGenerateOptions {
   aiConfig?: AIRecommendationConfig;

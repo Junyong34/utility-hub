@@ -7,19 +7,13 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeReact from 'rehype-react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { CopyButton } from '@/components/blog/CopyButton';
+import type { BlogTocItem } from '@/lib/blog/types';
 import type { ReactNode } from 'react';
 
 /**
  * 마크다운을 React 컴포넌트로 변환하는 프로세서
  * rehype-pretty-code를 사용하여 코드 하이라이팅 제공
  */
-
-// 목차 항목 타입
-export interface TocItem {
-  id: string;
-  text: string;
-  level: number;
-}
 
 // 텍스트를 ID로 변환하는 헬퍼 함수
 function generateId(text: ReactNode): string {
@@ -102,9 +96,9 @@ function H3({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
 /**
  * 마크다운에서 헤딩(H2, H3)을 추출하여 목차 생성
  */
-export function extractTableOfContents(markdown: string): TocItem[] {
+export function extractTableOfContents(markdown: string): BlogTocItem[] {
   const headingRegex = /^(#{2,3})\s+(.+)$/gm;
-  const toc: TocItem[] = [];
+  const toc: BlogTocItem[] = [];
   let match;
 
   while ((match = headingRegex.exec(markdown)) !== null) {

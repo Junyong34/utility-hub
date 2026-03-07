@@ -12,7 +12,7 @@
  *
  * @module mbti-profile
  */
-import type { LottoMbtiType } from './recommendation-spec';
+import type { LottoMbtiType } from './types';
 
 /**
  * MBTI 로또 프로필 인터페이스

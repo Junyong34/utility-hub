@@ -1,6 +1,9 @@
 'use client';
 
-import { LOTTO_MBTI_OPTIONS } from '@/lib/lotto/recommendation-spec';
+import {
+  LOTTO_MBTI_OPTIONS,
+  type LottoMbtiType,
+} from '@/lib/lotto/types';
 import { Label } from '@/components/ui/label';
 import { MBTI_LOTTO_PROFILES } from '@/lib/lotto/mbti-profile';
 import { useLottoRecommend } from '../LottoRecommendProvider';
@@ -24,9 +27,7 @@ export function MbtiRecommendPanel() {
         id="lotto-recommend-mbti"
         value={mbti}
         disabled={isGenerating}
-        onChange={(event) =>
-          setMbti(event.target.value as (typeof LOTTO_MBTI_OPTIONS)[number])
-        }
+        onChange={(event) => setMbti(event.target.value as LottoMbtiType)}
         className="h-9 w-full rounded-lg border bg-transparent px-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         {LOTTO_MBTI_OPTIONS.map((option) => (

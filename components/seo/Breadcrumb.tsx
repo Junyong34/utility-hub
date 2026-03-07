@@ -1,13 +1,9 @@
 import Link from 'next/link';
 import { ChevronRight, Home } from 'lucide-react';
-
-interface BreadcrumbItem {
-  name: string;
-  url?: string;
-}
+import type { BreadcrumbLink } from '@/types/navigation';
 
 interface BreadcrumbProps {
-  items: BreadcrumbItem[];
+  items: BreadcrumbLink[];
   className?: string;
 }
 

@@ -1,12 +1,12 @@
-import type { PostMetadata } from '../blog/posts';
+import type { BlogPostMetadata } from '../blog/types';
 import { getAllPosts } from '../blog/posts';
 import { getAllToolConfigs } from '../tools/tool-config';
-import type { ToolConfig } from '../../types/tools';
+import type { ToolConfig } from '../tools/types';
 import type { DashboardContentItem, HomeFeaturedMeta } from '../../types/home';
 
 
 interface DashboardBlogSource extends Pick<
-  PostMetadata,
+  BlogPostMetadata,
   'title' | 'categorySlug' | 'date'
 > {
   slug: string;

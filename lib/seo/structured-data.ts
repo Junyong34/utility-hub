@@ -12,6 +12,7 @@ import type {
   ItemListSchema,
   ItemListElement,
 } from '@/types/seo';
+import type { BreadcrumbLink } from '@/types/navigation';
 import { SITE_CONFIG } from './metadata';
 
 /**
@@ -133,7 +134,7 @@ export function createArticleSchema(article: {
  * BreadcrumbList 구조화 데이터 생성
  */
 export function createBreadcrumbSchema(
-  breadcrumbs: Array<{ name: string; url?: string }>
+  breadcrumbs: BreadcrumbLink[]
 ): BreadcrumbListSchema {
   const itemListElement: BreadcrumbItem[] = breadcrumbs.map((crumb, index) => ({
     '@type': 'ListItem',
@@ -179,7 +180,7 @@ export function createPageStructuredData(page: {
   name: string;
   path: string;
   description?: string;
-  breadcrumbs: Array<{ name: string; url?: string }>;
+  breadcrumbs: BreadcrumbLink[];
 }) {
   return {
     webPage: createWebPageSchema({

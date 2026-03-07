@@ -2,16 +2,12 @@
 
 import { useRouter } from 'next/navigation';
 import { SharedSelectSwitcher } from '@/components/ui/shared-select-switcher';
-
-interface PostOption {
-  slug: string;
-  title: string;
-}
+import type { BlogPostOption } from '@/lib/blog/types';
 
 interface BlogSwitcherProps {
   categorySlug: string;
   currentSlug: string;
-  posts: PostOption[];
+  posts: BlogPostOption[];
   placeholder?: string;
 }
 

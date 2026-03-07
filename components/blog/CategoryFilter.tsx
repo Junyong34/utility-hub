@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { BlogCategory } from '@/lib/blog/types';
+import type { BlogCategory } from '@/lib/blog/types';
 
 interface CategoryFilterProps {
   categories: BlogCategory[];

@@ -7,28 +7,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import type { ToolCategory } from '@/types/tools';
+import type { ToolCategory, ToolListItem } from '@/lib/tools/types';
 import { getToolIcon } from '@/lib/tools';
 import { cn } from '@/lib/utils';
 
-/**
- * Server → Client 직렬화 가능한 도구 타입
- * icon 컴포넌트(함수)는 전달 불가 → iconName(문자열)으로 대체
- */
-export interface SerializableTool {
-  id: string;
-  name: string;
-  description: string;
-  iconName: string;
-  href: string;
-  badge?: string;
-  color: string;
-  category?: ToolCategory;
-}
-
 type CategoryKey = ToolCategory | 'all';
 
-const CATEGORY_CONFIG: { value: string; label: string }[] = [
+const CATEGORY_CONFIG: { value: CategoryKey; label: string }[] = [
   { value: 'all', label: '전체' },
   { value: 'calculator', label: '계산기' },
   { value: 'generator', label: '생성기' },
@@ -38,12 +23,12 @@ const CATEGORY_CONFIG: { value: string; label: string }[] = [
 ];
 
 interface ToolsPageClientProps {
-  tools: SerializableTool[];
+  tools: ToolListItem[];
 }
 
 export function ToolsPageClient({ tools }: ToolsPageClientProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>('all');
 
   // ── 카테고리별 도구 수 계산 ──
   const categoryCounts = useMemo(() => {

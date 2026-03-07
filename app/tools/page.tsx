@@ -5,7 +5,8 @@ import {
   getToolsMainStructuredDataArray,
   getAllToolConfigs,
 } from '@/lib/tools';
-import { ToolsPageClient, type SerializableTool } from '@/components/tools/ToolsPageClient';
+import type { ToolListItem } from '@/lib/tools';
+import { ToolsPageClient } from '@/components/tools/ToolsPageClient';
 
 /**
  * Tools 메인 페이지 메타데이터
@@ -13,11 +14,11 @@ import { ToolsPageClient, type SerializableTool } from '@/components/tools/Tools
 export const metadata: Metadata = generateToolsMainMetadata();
 
 /**
- * TOOL_CONFIGS → SerializableTool 변환 (서버 사이드)
+ * TOOL_CONFIGS → ToolListItem 변환 (서버 사이드)
  * icon 컴포넌트(함수)는 Client 경계를 넘길 수 없으므로 iconName(문자열)만 전달
  */
 const toolConfigs = getAllToolConfigs();
-const TOOLS: SerializableTool[] = toolConfigs.map((config) => ({
+const TOOLS: ToolListItem[] = toolConfigs.map((config) => ({
   id: config.id,
   name: config.name,
   description: config.description,

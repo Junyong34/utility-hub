@@ -2,11 +2,7 @@
  * Blog Breadcrumb 헬퍼 함수
  * Breadcrumb 항목을 중앙에서 관리하여 일관성 유지
  */
-
-export interface BreadcrumbItem {
-  name: string;
-  url?: string;
-}
+import type { BreadcrumbLink } from '@/types/navigation';
 
 /**
  * Blog 메인 라벨 상수
@@ -25,7 +21,7 @@ export const BLOG_MAIN_URL = '/blog';
  * // 결과: [{ name: '블로그' }]
  * ```
  */
-export function getBlogMainBreadcrumbItems(): BreadcrumbItem[] {
+export function getBlogMainBreadcrumbItems(): BreadcrumbLink[] {
   return [{ name: BLOG_MAIN_LABEL }];
 }
 
@@ -40,7 +36,7 @@ export function getBlogMainBreadcrumbItems(): BreadcrumbItem[] {
  * // 결과: [{ name: '블로그', url: '/blog' }, { name: '개발' }]
  * ```
  */
-export function getBlogCategoryBreadcrumbItems(categoryName: string): BreadcrumbItem[] {
+export function getBlogCategoryBreadcrumbItems(categoryName: string): BreadcrumbLink[] {
   return [
     { name: BLOG_MAIN_LABEL, url: BLOG_MAIN_URL },
     { name: categoryName },
@@ -62,7 +58,7 @@ export function getBlogCategoryBreadcrumbItems(categoryName: string): Breadcrumb
 export function getBlogPostBreadcrumbItems(
   categoryName: string,
   categorySlug: string
-): BreadcrumbItem[] {
+): BreadcrumbLink[] {
   return [
     { name: BLOG_MAIN_LABEL, url: BLOG_MAIN_URL },
     { name: categoryName, url: `${BLOG_MAIN_URL}/${categorySlug}` },
@@ -83,8 +79,10 @@ export function getBlogPostBreadcrumbItems(
  * // 결과: [{ name: '홈', url: '/' }, { name: '블로그', url: '/blog' }, { name: '개발' }]
  * ```
  */
-export function getBlogStructuredDataBreadcrumbs(categoryName?: string): BreadcrumbItem[] {
-  const items: BreadcrumbItem[] = [
+export function getBlogStructuredDataBreadcrumbs(
+  categoryName?: string
+): BreadcrumbLink[] {
+  const items: BreadcrumbLink[] = [
     { name: '홈', url: '/' },
     { name: BLOG_MAIN_LABEL, url: categoryName ? BLOG_MAIN_URL : undefined },
   ];

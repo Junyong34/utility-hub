@@ -2,14 +2,7 @@
  * 로또 번호 유효성 검증 및 후처리
  * PRD 6.3 명세 - 추천 번호 품질 관리
  */
-
-/**
- * 유효성 검증 결과
- */
-export interface ValidationResult {
-  isValid: boolean;
-  errors: string[];
-}
+import type { ValidationResult } from '../types';
 
 /**
  * 번호 세트의 기본 유효성을 검증합니다.

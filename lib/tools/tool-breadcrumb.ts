@@ -4,11 +4,7 @@
  */
 
 import { getToolConfig } from './tool-config';
-
-export interface BreadcrumbItem {
-  name: string;
-  url?: string;
-}
+import type { BreadcrumbLink } from '@/types/navigation';
 
 /**
  * Tools 메인 라벨 상수
@@ -27,7 +23,7 @@ export const TOOLS_MAIN_URL = '/tools';
  * // 결과: [{ name: '도구' }]
  * ```
  */
-export function getToolsMainBreadcrumbItems(): BreadcrumbItem[] {
+export function getToolsMainBreadcrumbItems(): BreadcrumbLink[] {
   return [{ name: TOOLS_MAIN_LABEL }];
 }
 
@@ -54,8 +50,8 @@ export function getToolsMainBreadcrumbItems(): BreadcrumbItem[] {
  */
 export function getToolBreadcrumbItems(
   toolId: string,
-  subItems?: Array<{ name: string; url?: string }>
-): BreadcrumbItem[] {
+  subItems?: BreadcrumbLink[]
+): BreadcrumbLink[] {
   const tool = getToolConfig(toolId);
 
   if (!tool) {
@@ -64,7 +60,7 @@ export function getToolBreadcrumbItems(
   }
 
   const toolLabel = tool.breadcrumbLabel || tool.shortName || tool.name;
-  const items: BreadcrumbItem[] = [
+  const items: BreadcrumbLink[] = [
     { name: TOOLS_MAIN_LABEL, url: TOOLS_MAIN_URL },
     {
       name: toolLabel,
@@ -110,7 +106,7 @@ export function getToolStructuredDataBreadcrumbs(
   toolId: string,
   subPath?: string,
   subName?: string
-): BreadcrumbItem[] {
+): BreadcrumbLink[] {
   const tool = getToolConfig(toolId);
 
   if (!tool) {
@@ -121,7 +117,7 @@ export function getToolStructuredDataBreadcrumbs(
   }
 
   const toolLabel = tool.breadcrumbLabel || tool.shortName || tool.name;
-  const items: BreadcrumbItem[] = [
+  const items: BreadcrumbLink[] = [
     { name: '홈', url: '/' },
     { name: TOOLS_MAIN_LABEL, url: subPath ? TOOLS_MAIN_URL : undefined },
   ];

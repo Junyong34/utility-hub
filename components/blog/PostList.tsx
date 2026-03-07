@@ -1,8 +1,8 @@
 import { PostCard } from './PostCard';
-import { BlogListPost } from '@/lib/blog/types';
+import type { BlogPostSummary } from '@/lib/blog/types';
 
 interface PostListProps {
-  posts: BlogListPost[];
+  posts: BlogPostSummary[];
 }
 
 /**

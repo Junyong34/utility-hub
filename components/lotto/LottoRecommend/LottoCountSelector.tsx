@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import {
   LOTTO_RECOMMEND_COUNT_OPTIONS,
-} from '@/lib/lotto/recommendation-spec';
+} from '@/lib/lotto/types';
 import { useLottoRecommend } from './LottoRecommendProvider';
 import { cn } from '@/lib/utils';
 

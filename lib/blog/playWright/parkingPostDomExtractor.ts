@@ -3,7 +3,7 @@
  * Playwright `page.evaluate()` 또는 브라우저 콘솔에서 직접 실행할 수 있는 구조를 제공합니다.
  */
 
-export interface TocItem {
+export interface ParkingPostTocLink {
   text: string;
   href: string;
 }
@@ -17,7 +17,7 @@ export interface ExtractedPostDom {
   url: string;
   title: string;
   contentHtml: string;
-  toc: TocItem[];
+  toc: ParkingPostTocLink[];
   images: ExtractedImage[];
   markdown: string;
 }
@@ -72,12 +72,12 @@ function removeExcludedNodes(root: Element, excludeSelectors: string[]): void {
   root.querySelectorAll(mergedSelectors).forEach(node => node.remove());
 }
 
-function extractTocItems(contentRoot: Element): TocItem[] {
+function extractTocItems(contentRoot: Element): ParkingPostTocLink[] {
   const tocRoot = contentRoot.querySelector(PARKING_POST_TOC_SELECTOR);
   if (!tocRoot) return [];
 
   const seen = new Set<string>();
-  const result: TocItem[] = [];
+  const result: ParkingPostTocLink[] = [];
 
   tocRoot.querySelectorAll<HTMLAnchorElement>(PARKING_POST_TOC_LINK_SELECTOR).forEach(link => {
     const text = normalizeText(link.textContent);
@@ -288,7 +288,7 @@ function compactEmptyLines(lines: string[]): string[] {
 function buildMarkdown(
   title: string,
   contentRoot: HTMLElement,
-  toc: TocItem[],
+  toc: ParkingPostTocLink[],
   baseUrl: string
 ): string {
   const lines: string[] = [];

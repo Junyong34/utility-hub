@@ -5,10 +5,11 @@
 
 import { Breadcrumb } from './Breadcrumb';
 import { getToolBreadcrumbItems } from '@/lib/tools/tool-breadcrumb';
+import type { BreadcrumbLink } from '@/types/navigation';
 
 interface ToolBreadcrumbProps {
   toolId: string;
-  subItems?: Array<{ name: string; url?: string }>;
+  subItems?: BreadcrumbLink[];
   className?: string;
 }
 

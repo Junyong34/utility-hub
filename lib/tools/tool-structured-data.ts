@@ -4,7 +4,8 @@
  * Blog SEO와 완전히 분리됨
  */
 
-import type { ToolConfig } from '@/types/tools';
+import type { ToolConfig } from '@/lib/tools/types';
+import type { BreadcrumbLink } from '@/types/navigation';
 import { SITE_CONFIG } from '@/lib/seo/metadata';
 import {
   createWebPageSchema,
@@ -155,7 +156,7 @@ export function createToolSubPageStructuredData(options: {
   path: string;
   name: string;
   description: string;
-  breadcrumbs: Array<{ name: string; url?: string }>;
+  breadcrumbs: BreadcrumbLink[];
 }) {
   const { toolId, path, name, description, breadcrumbs } = options;
   const tool = getToolConfig(toolId);

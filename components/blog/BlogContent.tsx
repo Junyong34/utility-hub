@@ -4,14 +4,14 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PostList } from './PostList';
 import { CategoryFilter } from './CategoryFilter';
-import {
+import type {
   BlogCategory,
-  BlogListPost,
+  BlogPostSummary,
   PostsPageResponse,
 } from '@/lib/blog/types';
 
 interface BlogContentProps {
-  posts: BlogListPost[];
+  posts: BlogPostSummary[];
   categories?: BlogCategory[];
   fixedCategorySlug?: string | null;
 }

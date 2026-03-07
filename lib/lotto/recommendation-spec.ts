@@ -5,57 +5,36 @@
  * - 모바일/데스크탑 레이아웃 기준
  */
 
-export const LOTTO_PHASE1_MODES = ['random', 'stats', 'date', 'mbti'] as const;
-export type LottoPhase1Mode = (typeof LOTTO_PHASE1_MODES)[number];
+import {
+  LOTTO_MBTI_OPTIONS,
+  LOTTO_PHASE1_MODES,
+  LOTTO_RECOMMEND_COUNT_OPTIONS,
+  LOTTO_RECOMMEND_DEFAULTS,
+  LOTTO_RECOMMEND_MODES,
+  LOTTO_RECOMMEND_QUERY_KEYS,
+} from './types'
+import type {
+  LottoPhase1Mode,
+  LottoRecommendCount,
+  LottoRecommendMode,
+  LottoRecommendQueryState,
+} from './types'
 
-/** 현재 지원되는 추천 모드(쿼리 값 검증 + 모드 스위치에 공통 사용) */
-export const LOTTO_RECOMMEND_MODES = [
-  'random',
-  'stats',
-  'date',
-  'mbti',
-  'lucky',
-  'slot',
-] as const;
-export type LottoRecommendMode = (typeof LOTTO_RECOMMEND_MODES)[number];
-
-/** MBTI 추천 모드에서 프로필을 선택할 때 사용하는 타입 목록 */
-export const LOTTO_MBTI_OPTIONS = [
-  'INTJ',
-  'INTP',
-  'ENTJ',
-  'ENTP',
-  'INFJ',
-  'INFP',
-  'ENFJ',
-  'ENFP',
-  'ISTJ',
-  'ISFJ',
-  'ESTJ',
-  'ESFJ',
-  'ISTP',
-  'ISFP',
-  'ESTP',
-  'ESFP',
-] as const;
-export type LottoMbtiType = (typeof LOTTO_MBTI_OPTIONS)[number];
-
-/** URL/사용자 입력에서 허용하는 게임 생성 개수 */
-export const LOTTO_RECOMMEND_COUNT_OPTIONS = [1, 2, 3, 4, 5] as const;
-export type LottoRecommendCount =
-  (typeof LOTTO_RECOMMEND_COUNT_OPTIONS)[number];
-
-export const LOTTO_RECOMMEND_QUERY_KEYS = {
-  mode: 'mode',
-  count: 'count',
-  numbers: 'numbers',
-} as const;
-
-/** URL 쿼리 기본값 (값이 비거나 유효하지 않을 때 fallback) */
-export const LOTTO_RECOMMEND_DEFAULTS = {
-  mode: 'random' as LottoRecommendMode,
-  count: 5 as LottoRecommendCount,
-} as const;
+export {
+  LOTTO_MBTI_OPTIONS,
+  LOTTO_PHASE1_MODES,
+  LOTTO_RECOMMEND_COUNT_OPTIONS,
+  LOTTO_RECOMMEND_DEFAULTS,
+  LOTTO_RECOMMEND_MODES,
+  LOTTO_RECOMMEND_QUERY_KEYS,
+}
+export type {
+  LottoMbtiType,
+  LottoPhase1Mode,
+  LottoRecommendCount,
+  LottoRecommendMode,
+  LottoRecommendQueryState,
+} from './types'
 
 export const LOTTO_RECOMMEND_LAYOUT_SPEC = {
   desktop: {
@@ -75,13 +54,6 @@ interface RecommendQueryInput {
   mode?: string | null;
   count?: string | null;
   numbers?: string | null;
-}
-
-/** URL → 내부 상태 정규화의 결과 타입 */
-export interface LottoRecommendQueryState {
-  mode: LottoRecommendMode;
-  count: LottoRecommendCount;
-  numbers: number[][] | null;
 }
 
 const LOTTO_MIN_NUMBER = 1;

@@ -1,7 +1,7 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { LottoRecommendMode } from '@/lib/lotto/recommendation-spec';
+import type { LottoRecommendMode } from '@/lib/lotto/types';
 import { cn } from '@/lib/utils';
 
 interface ModeDescriptionProps {
@@ -10,7 +10,6 @@ interface ModeDescriptionProps {
   description: string;
   icon: React.ComponentType<{ className?: string }>;
   iconBg: string;
-  gradient: string;
 }
 
 /**
@@ -23,7 +22,6 @@ export function ModeDescription({
   description,
   icon: Icon,
   iconBg,
-  gradient,
 }: ModeDescriptionProps) {
   // 모바일에서 현재 모드의 핵심 메타만 짧게 보여주기 위한 요약 카드
 

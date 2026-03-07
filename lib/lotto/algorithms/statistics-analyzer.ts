@@ -3,70 +3,15 @@
  * PRD 6.2 명세 기반 통계 분석 함수 모음
  */
 
-import { getLottoRoundResults, type LottoRoundResult } from '../round-data';
-
-/**
- * 번호별 출현 빈도 통계
- */
-export interface NumberFrequency {
-  number: number;
-  count: number;
-  rate: number; // 출현율 (%)
-  lastAppearance: number; // 마지막 출현 회차
-  consecutiveAbsence: number; // 연속 미출현 횟수
-}
-
-/**
- * 홀짝 비율 분석 결과
- */
-export interface OddEvenRatio {
-  odd: number;
-  even: number;
-  ratio: string; // "3:3" 형식
-}
-
-/**
- * 번호 구간 분포
- */
-export interface RangeDistribution {
-  range: string; // "1-10", "11-20" 등
-  count: number;
-  rate: number; // %
-  numbers: number[];
-}
-
-/**
- * 동반 출현 행렬 (Co-occurrence Matrix)
- */
-export interface CoOccurrenceData {
-  pair: [number, number];
-  count: number;
-  rate: number; // %
-}
-
-/**
- * Hot/Cold 번호 분류
- */
-export interface HotColdNumbers {
-  hot: number[]; // 최근 N회차 내 자주 출현
-  cold: number[]; // 최근 N회차 이상 미출현
-  neutral: number[]; // 중간
-}
-
-/**
- * 종합 통계 분석 결과
- */
-export interface LottoStatistics {
-  totalRounds: number;
-  frequencyMap: Map<number, NumberFrequency>;
-  mostFrequent: NumberFrequency[];
-  leastFrequent: NumberFrequency[];
-  hotColdNumbers: HotColdNumbers;
-  averageSum: number; // 6개 번호 합계 평균
-  oddEvenDistribution: Map<string, number>; // "3:3" -> count
-  rangeDistribution: RangeDistribution[];
-  topCoOccurrences: CoOccurrenceData[];
-}
+import { getLottoRoundResults } from '../round-data';
+import type {
+  CoOccurrenceData,
+  HotColdNumbers,
+  LottoStatistics,
+  LottoRoundResult,
+  NumberFrequency,
+  RangeDistribution,
+} from '../types';
 
 const NUMBER_RANGES = [
   { min: 1, max: 10, label: '1-10' },

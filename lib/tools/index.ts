@@ -59,5 +59,5 @@ export type {
   ToolCategory,
   ToolFAQItem,
   ToolHowToStep,
-  ToolDisplayItem,
-} from '@/types/tools';
+  ToolListItem,
+} from './types';

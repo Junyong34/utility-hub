@@ -3,7 +3,7 @@
  * 모든 Tool의 정보를 이곳에서 관리하여 일관성을 유지
  */
 
-import type { ToolConfig } from '@/types/tools';
+import type { ToolConfig } from '@/lib/tools/types';
 
 /**
  * Tool 설정 레지스트리

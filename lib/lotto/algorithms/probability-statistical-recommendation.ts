@@ -15,27 +15,7 @@ import {
   analyzeLottoStatistics,
 } from './statistics-analyzer';
 import { getLottoRoundResults } from '../round-data';
-
-/**
- * 확률통계 전략 타입
- */
-export type ProbabilityStrategy =
-  | 'high-frequency'
-  | 'low-frequency'
-  | 'undrawn'
-  | 'balanced'
-  | 'hot'
-  | 'cold';
-
-/**
- * 전략별 설정
- */
-export interface StrategyConfig {
-  poolSize?: number; // 번호 풀 크기 (기본 15)
-  recentWindow?: number; // 최근 회차 윈도우 (기본 20)
-  coldThreshold?: number; // Cold 임계값 (기본 30회차)
-  hotThreshold?: number; // Hot 임계값 (기본 2회)
-}
+import type { ProbabilityStrategy, StrategyConfig } from '../types';
 
 const DEFAULT_CONFIG: Required<StrategyConfig> = {
   poolSize: 15,

@@ -34,28 +34,26 @@ import {
   generateLottoNumbersWithLucky,
   generateStatsBasedLottoNumbers,
   getStatsStrategyDescription,
-  LOTTO_STATS_STRATEGIES as LOTTO_STATS_STRATEGY_OPTIONS,
-  LottoStatsStrategy,
   validateLottoNumbers,
 } from '@/lib/lotto/generator';
 import {
   LOTTO_MBTI_OPTIONS,
+  LOTTO_STATS_STRATEGIES,
   LOTTO_RECOMMEND_DEFAULTS,
   LOTTO_RECOMMEND_MODES,
   LOTTO_RECOMMEND_QUERY_KEYS,
-  LottoMbtiType,
-  LottoRecommendCount,
-  LottoRecommendMode,
+  type LottoMbtiType,
+  type LottoRecommendCount,
+  type LottoRecommendMode,
+  type LottoStatsStrategy,
+} from '@/lib/lotto/types';
+import {
   formatLottoRecommendGamesForQuery,
   parseLottoRecommendGames,
   isLottoRecommendMode,
   isLottoRecommendCount,
 } from '@/lib/lotto/recommendation-spec';
 import { copyTextToClipboard } from '@/lib/clipboard';
-
-export const LOTTO_STATS_STRATEGIES: LottoStatsStrategy[] = [
-  ...LOTTO_STATS_STRATEGY_OPTIONS,
-];
 
 /**
  * 로또 추천 상태 인터페이스
