@@ -25,7 +25,7 @@ export function createOrganizationSchema(): OrganizationSchema {
     url: SITE_CONFIG.url,
     logo: `${SITE_CONFIG.url}/asset/logo.png`,
     description: SITE_CONFIG.description,
-    sameAs: Object.values(SITE_CONFIG.social).filter(Boolean),
+    sameAs: Object.values(SITE_CONFIG.social as Record<string, string>).filter(Boolean),
   };
 }
 

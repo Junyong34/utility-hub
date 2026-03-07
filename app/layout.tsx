@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono, Roboto } from 'next/font/google'
+import Link from 'next/link'
 import './globals.css'
 import { generateMetadata as createMetadata, SITE_CONFIG } from '@/lib/seo'
 import { createWebSiteSchema, createOrganizationSchema } from '@/lib/seo'
@@ -9,6 +10,7 @@ import { BottomNav } from '@/components/layout/bottom-nav'
 import { FloatingShareButton } from '@/components/ui/floating-share-button'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Providers } from './providers'
+import { NAV_ITEMS } from '@/components/layout/nav-config'
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -155,6 +157,19 @@ export default function RootLayout({
             <div className="hidden md:block">
               <FloatingShareButton />
             </div>
+            {/*
+              크롤러용 상시 노출 네비게이션 앵커
+              BottomNav(md:hidden), DesktopNav(hidden md:block)가 뷰포트에 따라 숨겨지면
+              크롤러가 해당 링크를 zero-dimensions로 인식하는 문제를 방지.
+              sr-only는 display:none 대신 1px 크기로 렌더링되어 크롤러가 정상 인식함.
+            */}
+            <nav aria-label="사이트 내비게이션 링크" className="sr-only">
+              {NAV_ITEMS.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
           </NuqsAdapter>
         </Providers>
       </body>

@@ -282,6 +282,32 @@ BlogPosting 스키마에서 author 타입은 `Person`이지만, 실제 URL(autho
 
 ---
 
+---
+
+## 📌 수정 작업 체크리스트
+
+### 🔴 Critical
+- [x] **BottomNav 크롤링 불가 링크** — `app/layout.tsx`에 `sr-only` 상시 렌더링 nav 추가 (`NAV_ITEMS` 기반, 1px 크기로 크롤러 인식 가능)
+- [x] **Twitter creator `@yourusername` 제거** — `lib/seo/metadata.ts:97` creator 필드 주석 처리
+- [x] **Organization sameAs 가짜 GitHub URL 제거** — `lib/seo/metadata.ts:17` github URL 주석 처리
+
+### 🟠 High Priority
+- [ ] `<main>` 태그 중첩 해결 (`app/page.tsx`)
+- [ ] Footer 브랜드명/연도 수정 (`app/blog/page.tsx`, `app/blog/[category]/page.tsx`)
+- [ ] Google Search Console 인증 코드 설정 (`lib/seo/metadata.ts`)
+- [ ] WebSite SearchAction 스키마 추가 (`lib/seo/structured-data.ts`)
+
+### 🟡 Medium Priority
+- [ ] 홈페이지 WebPage 스키마 추가 (`app/page.tsx`)
+- [ ] 카테고리 페이지 meta description 개선 (`app/blog/[category]/page.tsx`)
+- [ ] Lotto 회차별 페이지 sitemap 추가 (`lib/seo/sitemap.ts`)
+
+### 🔵 Low Priority
+- [ ] hreflang 추가 (`app/layout.tsx`)
+- [ ] 이미지 사이트맵 구현 (`lib/seo/sitemap.ts`)
+
+---
+
 ## ✅ 이미 잘 되어 있는 항목
 
 - `robots.txt` — 크롤러별 세분화, AI 봇 허용, 유효

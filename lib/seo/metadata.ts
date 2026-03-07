@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
   locale: 'ko_KR',
   author: 'Zento',
   social: {
-    github: 'https://github.com/yourusername',
+    // github: 'https://github.com/yourusername', // 실제 URL로 교체 후 주석 해제
     // twitter: 'https://twitter.com/yourusername',
   },
 } as const;
@@ -94,7 +94,7 @@ export function generateMetadata(seo: SEOMetadata): Metadata {
       title,
       description,
       images: [fullOgImageUrl],
-      creator: '@yourusername', // 실제 트위터 핸들로 교체
+      // creator: '@yourusername', // 실제 계정 생성 후 교체
     },
 
     // 추가 메타 태그
