@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { ChevronRight, Home } from 'lucide-react';
 import type { BreadcrumbLink } from '@/types/navigation';
 
 interface BreadcrumbProps {
@@ -15,34 +14,30 @@ export function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className={`flex items-center space-x-2 text-base ${className}`}
+      className={`flex items-center gap-1.5 text-xs text-muted-foreground ${className}`}
     >
-      {/* 홈 아이콘 */}
-      <Link
-        href="/"
-        className="text-gray-500 hover:text-gray-700 transition-colors"
-        aria-label="홈"
-      >
-        <Home size={16} />
+      {/* 홈 링크 */}
+      <Link href="/" className="hover:text-foreground transition-colors">
+        홈
       </Link>
 
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
 
         return (
-          <div key={index} className="flex items-center space-x-2">
-            <ChevronRight size={16} className="text-gray-400" />
+          <div key={index} className="flex items-center gap-1.5">
+            <span>/</span>
 
             {item.url && !isLast ? (
               <Link
                 href={item.url}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
+                className="hover:text-foreground transition-colors"
               >
                 {item.name}
               </Link>
             ) : (
               <span
-                className={isLast ? 'text-gray-900 font-medium' : 'text-gray-500'}
+                className={isLast ? 'font-medium text-foreground' : undefined}
                 aria-current={isLast ? 'page' : undefined}
               >
                 {item.name}

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog Page – Option 1: Hero 박스 추가 (보수적)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    background: #fff;
+    color: #333;
+    font-size: 13px;
+  }
+  .page-title {
+    background: #f5f5f5;
+    border-bottom: 2px solid #999;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .page-title h1 { font-size: 15px; font-weight: bold; color: #000; }
+  .badge-tag {
+    background: #999;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+
+  /* Layout */
+  .nav-bar {
+    position: relative;
+    border: 2px dashed #ccc;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 20px;
+    background: #fafafa;
+    margin-bottom: 2px;
+  }
+  .nav-logo { font-weight: bold; font-size: 15px; border: 2px solid #999; padding: 4px 10px; border-radius: 20px; }
+  .nav-links { display: flex; gap: 16px; font-size: 12px; color: #666; margin-left: auto; }
+  .nav-links span { border-bottom: 1px solid #ccc; padding-bottom: 2px; cursor: pointer; }
+  .nav-links span.active { border-bottom: 2px solid #333; color: #333; font-weight: bold; }
+
+  .page-wrap { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+
+  /* Breadcrumb */
+  .breadcrumb { font-size: 11px; color: #999; margin-bottom: 12px; display: flex; gap: 4px; align-items: center; }
+  .breadcrumb span { cursor: pointer; }
+  .breadcrumb span:hover { color: #555; }
+
+  /* Hero Box – Tools 스타일 */
+  .hero-box {
+    border: 2px dashed #999;
+    border-radius: 10px;
+    background: #f9f9f9;
+    padding: 28px 24px;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #ccc;
+    background: #fff;
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+  .eyebrow-dot { width: 8px; height: 8px; background: #999; border-radius: 50%; display: inline-block; }
+  .hero-title { font-size: 24px; font-weight: bold; margin-bottom: 6px; line-height: 1.3; }
+  .hero-title u { text-decoration: underline; text-decoration-style: wavy; }
+  .hero-desc { font-size: 12px; color: #666; margin-bottom: 16px; max-width: 380px; margin-left: auto; margin-right: auto; }
+
+  /* Search Bar */
+  .search-bar { display: flex; gap: 8px; max-width: 420px; margin: 0 auto 14px; }
+  .search-wrap { position: relative; flex: 1; }
+  .search-icon { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); font-size: 12px; color: #999; pointer-events: none; }
+  .search-input { width: 100%; border: 2px solid #ccc; border-radius: 6px; padding: 7px 10px 7px 28px; font-size: 12px; font-family: inherit; background: #fff; }
+  .btn-search { border: 2px solid #555; border-radius: 6px; background: #555; color: #fff; padding: 7px 16px; font-size: 12px; font-family: inherit; cursor: pointer; white-space: nowrap; }
+
+  .stat-row { font-size: 11px; color: #999; display: flex; justify-content: center; gap: 8px; }
+  .stat-row strong { color: #333; }
+
+  /* Category Filter – 기존 탭 유지 */
+  .cat-filter { border-bottom: 2px solid #ddd; display: flex; gap: 4px; margin-bottom: 16px; flex-wrap: wrap; }
+  .cat-tab {
+    padding: 8px 14px;
+    font-size: 12px;
+    color: #999;
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    font-family: inherit;
+  }
+  .cat-tab.active { color: #333; font-weight: bold; }
+  .cat-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0; right: 0;
+    height: 2px;
+    background: #555;
+  }
+
+  /* Post count */
+  .post-count { font-size: 12px; color: #999; margin-bottom: 16px; }
+  .post-count strong { color: #333; }
+
+  /* Post Grid */
+  .post-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .post-card {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
+  }
+  .post-img { height: 100px; background: #e0e0e0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #999; margin: 8px; border-radius: 6px; }
+  .post-body { padding: 8px 12px 12px; }
+  .post-badge { display: inline-block; border: 1px solid #ccc; border-radius: 3px; padding: 1px 6px; font-size: 10px; color: #666; margin-bottom: 6px; }
+  .post-title { font-size: 13px; font-weight: bold; margin-bottom: 6px; line-height: 1.3; }
+  .post-meta { font-size: 10px; color: #999; margin-bottom: 6px; }
+  .post-excerpt { font-size: 11px; color: #666; line-height: 1.5; margin-bottom: 8px; }
+  .post-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .post-tag { font-size: 10px; background: #eee; padding: 2px 6px; border-radius: 3px; color: #666; }
+
+  /* Load more */
+  .load-more { text-align: center; padding: 24px 0; font-size: 12px; color: #999; border-top: 1px dashed #ddd; }
+
+  /* Footer */
+  .footer { border-top: 2px solid #ddd; margin-top: 24px; padding: 20px; text-align: center; font-size: 11px; color: #999; background: #fafafa; }
+
+  /* Reuse badge */
+  .reuse-badge {
+    position: absolute;
+    top: 4px; right: 4px;
+    background: #4CAF50;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+  }
+  .new-badge {
+    position: absolute;
+    top: 4px; right: 4px;
+    background: #FF9800;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+  }
+  .new-badge-top {
+    position: absolute;
+    top: -8px; right: -8px;
+    background: #FF9800;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+  }
+  .reuse-badge-top {
+    position: absolute;
+    top: -8px; right: -8px;
+    background: #4CAF50;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+  }
+  .relative { position: relative; }
+
+  /* option desc box */
+  .option-desc {
+    background: #fffbe6;
+    border: 2px solid #f0c040;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .option-desc strong { color: #000; }
+  .bg-blob { width:80px; height:80px; border-radius:50%; background:#eee; position:absolute; opacity:0.4; }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>📝 Blog Page – Option 1: Hero 박스 추가 (보수적)</h1>
+  <span class="badge-tag">기존 필터 그대로 유지</span>
+</div>
+
+<div class="page-wrap">
+
+  <div class="option-desc">
+    <strong>🟢 Option 1 – 보수적 접근</strong><br/>
+    Tools 페이지의 Hero Box 스타일만 채택하고, 기존 CategoryFilter 탭·PostList 그리드는 그대로 유지합니다.<br/>
+    변경 범위가 작아 빠르게 적용 가능하며, <strong>기존 컴포넌트 재사용률이 가장 높습니다.</strong>
+  </div>
+
+  <!-- NAV -->
+  <!-- REUSABLE: DesktopNav from components/layout/desktop-nav.tsx -->
+  <div class="nav-bar relative">
+    <span class="reuse-badge" title="components/layout/desktop-nav.tsx">[REUSE] DesktopNav</span>
+    <div class="nav-logo">Zento</div>
+    <div class="nav-links">
+      <span>홈</span>
+      <span>도구</span>
+      <span class="active">블로그</span>
+      <span>소개</span>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <div style="width:28px;height:28px;border:1px solid #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;">☀</div>
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <!-- Background gradient blobs (static visual) -->
+  <div style="position:relative;overflow:hidden;">
+    <div class="bg-blob" style="top:-20px;left:15%;"></div>
+    <div class="bg-blob" style="top:120px;right:10%;width:60px;height:60px;"></div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <!-- REUSABLE: Breadcrumb from components/seo/Breadcrumb.tsx -->
+  <div class="relative" style="display:inline-block;margin-bottom:10px;">
+    <span class="reuse-badge-top" title="components/seo/Breadcrumb.tsx">[REUSE] Breadcrumb</span>
+    <div class="breadcrumb">
+      <span>홈</span> <span style="color:#ccc">/</span> <span style="color:#333;font-weight:bold;">블로그</span>
+    </div>
+  </div>
+
+  <!-- Hero Box (NEW – 기존 plain header 대체) -->
+  <!-- NEW COMPONENT: BlogHeroSection (tools의 hero-box 스타일 적용) -->
+  <div class="hero-box relative">
+    <span class="new-badge" title="components/blog/BlogHeroSection.tsx (신규)">[NEW] BlogHeroSection</span>
+
+    <!-- eyebrow -->
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      Zen + Blog · 개발 인사이트 허브
+    </div>
+
+    <!-- title -->
+    <div class="hero-title">
+      유용한 <u>인사이트</u>를 찾아보세요
+    </div>
+    <div class="hero-desc">
+      일상, 개발, AI 등 다양한 주제의<br/>
+      유용한 정보와 인사이트를 공유합니다.
+    </div>
+
+    <!-- Search Bar (NEW) -->
+    <!-- NEW COMPONENT: BlogSearchBar -->
+    <div class="relative" style="display:inline-block;width:100%;">
+      <span class="new-badge-top" title="components/blog/BlogSearchBar.tsx">[NEW] BlogSearchBar</span>
+      <div class="search-bar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <!-- REUSABLE: Input from components/ui/input.tsx -->
+          <input class="search-input" type="text" placeholder="포스트 검색... (예: Next.js, TypeScript, AI)" />
+        </div>
+        <!-- REUSABLE: Button from components/ui/button.tsx -->
+        <button class="btn-search">검색</button>
+      </div>
+    </div>
+
+    <!-- Stat row -->
+    <div class="stat-row">
+      <span>전체 <strong>24개</strong> 포스트</span>
+      <span>·</span>
+      <span>카테고리 <strong>3개</strong></span>
+      <span>·</span>
+      <span>꾸준히 업데이트 중 ✍</span>
+    </div>
+  </div>
+
+  <!-- Category Filter (기존 그대로 유지) -->
+  <!-- REUSABLE: CategoryFilter from components/blog/CategoryFilter.tsx -->
+  <div class="relative">
+    <span class="reuse-badge-top" title="components/blog/CategoryFilter.tsx">[REUSE] CategoryFilter</span>
+    <div class="cat-filter">
+      <button class="cat-tab active">전체 (24)</button>
+      <button class="cat-tab">개발 (18)</button>
+      <button class="cat-tab">AI (6)</button>
+    </div>
+  </div>
+
+  <!-- Post count -->
+  <div class="post-count">총 <strong>24</strong>개의 포스트</div>
+
+  <!-- Post Grid -->
+  <!-- REUSABLE: PostList from components/blog/PostList.tsx -->
+  <div class="relative">
+    <span class="reuse-badge-top" title="components/blog/PostList.tsx">[REUSE] PostList</span>
+    <div class="post-grid">
+      <!-- Card 1 -->
+      <!-- REUSABLE: PostCard from components/blog/PostCard.tsx -->
+      <div class="post-card relative">
+        <span class="reuse-badge" title="components/blog/PostCard.tsx">[REUSE] PostCard</span>
+        <div class="post-img">[OG Image 16:10]</div>
+        <div class="post-body">
+          <span class="post-badge">development</span>
+          <div class="post-title">Next.js 14 App Router 완벽 가이드</div>
+          <div class="post-meta">2024년 3월 5일 · 김개발</div>
+          <div class="post-excerpt">App Router와 Server Components를 활용해 성능 최적화하는 방법을 알아봅니다...</div>
+          <div class="post-tags">
+            <span class="post-tag">Next.js</span>
+            <span class="post-tag">React</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="post-card relative">
+        <span class="reuse-badge" title="components/blog/PostCard.tsx">[REUSE] PostCard</span>
+        <div class="post-img">[OG Image 16:10]</div>
+        <div class="post-body">
+          <span class="post-badge">development</span>
+          <div class="post-title">TypeScript 유틸리티 타입 완전 정복</div>
+          <div class="post-meta">2024년 2월 22일 · 김개발</div>
+          <div class="post-excerpt">Partial, Required, Pick, Omit 등 자주 쓰는 유틸리티 타입 사용법...</div>
+          <div class="post-tags">
+            <span class="post-tag">TypeScript</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 (no image) -->
+      <div class="post-card relative" style="display:flex;flex-direction:column;justify-content:center;">
+        <span class="reuse-badge" title="components/blog/PostCard.tsx">[REUSE] PostCard</span>
+        <div class="post-body" style="padding-top:16px;">
+          <span class="post-badge">ai-image-creator</span>
+          <div class="post-title">AI 이미지 생성 프롬프트 작성법</div>
+          <div class="post-meta">2024년 2월 10일 · 김개발</div>
+          <div class="post-excerpt">Midjourney, DALL-E에서 원하는 이미지를 얻기 위한 프롬프트 전략...</div>
+          <div class="post-tags">
+            <span class="post-tag">AI</span>
+            <span class="post-tag">이미지</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="post-card relative">
+        <span class="reuse-badge" title="components/blog/PostCard.tsx">[REUSE] PostCard</span>
+        <div class="post-img">[OG Image 16:10]</div>
+        <div class="post-body">
+          <span class="post-badge">development</span>
+          <div class="post-title">React Query v5 마이그레이션 가이드</div>
+          <div class="post-meta">2024년 1월 30일 · 김개발</div>
+          <div class="post-excerpt">v4에서 v5로 마이그레이션 시 주의할 변경사항 정리...</div>
+          <div class="post-tags">
+            <span class="post-tag">React</span>
+            <span class="post-tag">TanStack</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-card relative">
+        <span class="reuse-badge" title="components/blog/PostCard.tsx">[REUSE] PostCard</span>
+        <div class="post-img">[OG Image 16:10]</div>
+        <div class="post-body">
+          <span class="post-badge">development</span>
+          <div class="post-title">Tailwind CSS v4 새로운 기능 미리보기</div>
+          <div class="post-meta">2024년 1월 15일 · 김개발</div>
+          <div class="post-excerpt">v4의 주요 변경사항과 새로운 유틸리티 클래스를 살펴봅니다...</div>
+          <div class="post-tags">
+            <span class="post-tag">CSS</span>
+            <span class="post-tag">Tailwind</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-card relative">
+        <span class="reuse-badge" title="components/blog/PostCard.tsx">[REUSE] PostCard</span>
+        <div style="height:8px;"></div>
+        <div class="post-body" style="padding-top:16px;">
+          <span class="post-badge">ai-image-creator</span>
+          <div class="post-title">Stable Diffusion 로컬 설치 완전 가이드</div>
+          <div class="post-meta">2024년 1월 5일 · 김개발</div>
+          <div class="post-excerpt">M1/M2 Mac과 Windows에서 SD를 설치하고 실행하는 방법...</div>
+          <div class="post-tags">
+            <span class="post-tag">AI</span>
+            <span class="post-tag">StableDiffusion</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Infinite scroll sentinel -->
+  <div class="load-more">
+    ⟳ 스크롤하면 더 많은 포스트가 로드됩니다 (무한스크롤)
+  </div>
+
+  <!-- Footer -->
+  <!-- REUSABLE: (existing footer markup in app/blog/page.tsx) -->
+  <div class="footer">
+    © 2024 Zento. All rights reserved.
+  </div>
+
+</div>
+
+<!-- Component Summary -->
+<div style="margin:24px 16px;padding:16px;border:2px solid #ddd;border-radius:8px;font-family:Arial,sans-serif;font-size:12px;background:#f9f9f9;">
+  <strong>컴포넌트 요약</strong>
+  <div style="display:flex;gap:24px;margin-top:10px;flex-wrap:wrap;">
+    <div>
+      <div style="color:#4CAF50;font-weight:bold;margin-bottom:4px;">🟢 재사용 (REUSE)</div>
+      <ul style="list-style:none;color:#555;line-height:1.8;">
+        <li>DesktopNav</li>
+        <li>Breadcrumb</li>
+        <li>CategoryFilter (기존 탭 유지)</li>
+        <li>PostList</li>
+        <li>PostCard</li>
+      </ul>
+    </div>
+    <div>
+      <div style="color:#FF9800;font-weight:bold;margin-bottom:4px;">🟠 신규 (NEW)</div>
+      <ul style="list-style:none;color:#555;line-height:1.8;">
+        <li>BlogHeroSection (tools Hero Box 스타일)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

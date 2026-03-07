@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { SearchIcon, ArrowRightIcon, WrenchIcon } from 'lucide-react';
+import { Breadcrumb } from '@/components/seo';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -77,13 +78,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
       {/* ── Hero Search ── */}
       <section className="pt-6 pb-5">
         {/* Breadcrumb */}
-        <nav className="mb-4 flex items-center gap-1.5 text-xs text-muted-foreground">
-          <Link href="/" className="hover:text-foreground transition-colors">
-            홈
-          </Link>
-          <span>/</span>
-          <span className="font-medium text-foreground">도구</span>
-        </nav>
+        <Breadcrumb items={[{ name: '도구' }]} className="mb-4" />
 
         {/* Hero Box */}
         <div className="rounded-xl border border-border/60 bg-muted/30 px-6 py-8 text-center backdrop-blur-sm">

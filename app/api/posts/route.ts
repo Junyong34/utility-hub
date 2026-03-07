@@ -12,14 +12,23 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get('page') || '1');
     const limit = parseInt(searchParams.get('limit') || '20');
     const category = searchParams.get('category') || undefined;
+    const search = searchParams.get('search') || undefined;
 
     // 모든 포스트 가져오기
     const allPosts = getAllPosts();
 
-    // 카테고리 필터링
-    const filteredPosts = category
-      ? allPosts.filter((post) => post.categorySlug === category)
-      : allPosts;
+    // 카테고리 + 검색어 필터링
+    const filteredPosts = allPosts.filter((post) => {
+      const matchesCategory = category ? post.categorySlug === category : true;
+      const matchesSearch = search
+        ? post.title.toLowerCase().includes(search.toLowerCase()) ||
+          post.excerpt?.toLowerCase().includes(search.toLowerCase()) ||
+          post.tags.some((tag) =>
+            tag.toLowerCase().includes(search.toLowerCase())
+          )
+        : true;
+      return matchesCategory && matchesSearch;
+    });
 
     // 페이지네이션
     const startIndex = (page - 1) * limit;
