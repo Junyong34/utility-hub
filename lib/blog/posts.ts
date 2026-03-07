@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import type { HomeFeaturedMeta } from '@/types/home';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
@@ -21,7 +22,10 @@ export function getCategoryName(categorySlug: string): string {
 /**
  * 경로에서 카테고리 추출
  */
-function extractCategoryFromPath(filePath: string): { category: string; categorySlug: string } {
+function extractCategoryFromPath(filePath: string): {
+  category: string;
+  categorySlug: string;
+} {
   const relativePath = path.relative(postsDirectory, filePath);
   const parts = relativePath.split(path.sep);
 
@@ -76,6 +80,7 @@ export interface PostMetadata {
   category: string;
   categorySlug: string;
   ogImage?: string;
+  homeFeatured?: HomeFeaturedMeta;
 }
 
 export interface Post extends PostMetadata {
@@ -89,7 +94,7 @@ export interface Post extends PostMetadata {
 export function getAllPosts(): Omit<Post, 'content'>[] {
   const markdownFiles = getAllMarkdownFiles(postsDirectory);
 
-  const posts = markdownFiles.map((fullPath) => {
+  const posts = markdownFiles.map(fullPath => {
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data } = matter(fileContents);
 
@@ -113,6 +118,7 @@ export function getAllPosts(): Omit<Post, 'content'>[] {
       category,
       categorySlug,
       ogImage: data.ogImage,
+      homeFeatured: data.homeFeatured,
     };
   });
 
@@ -125,12 +131,15 @@ export function getAllPosts(): Omit<Post, 'content'>[] {
 /**
  * 특정 slug의 블로그 포스트를 가져옵니다 (콘텐츠 포함)
  */
-export function getPostBySlug(slug: string, categorySlug?: string): Post | null {
+export function getPostBySlug(
+  slug: string,
+  categorySlug?: string
+): Post | null {
   try {
     const markdownFiles = getAllMarkdownFiles(postsDirectory);
 
     // slug와 일치하는 파일 찾기
-    const targetFile = markdownFiles.find((filePath) => {
+    const targetFile = markdownFiles.find(filePath => {
       const fileName = path.basename(filePath, '.md');
       if (categorySlug) {
         // 카테고리가 지정된 경우 카테고리도 확인
@@ -162,6 +171,7 @@ export function getPostBySlug(slug: string, categorySlug?: string): Post | null 
       category,
       categorySlug: finalCategorySlug,
       ogImage: data.ogImage,
+      homeFeatured: data.homeFeatured,
       content,
     };
   } catch (error) {
@@ -173,10 +183,13 @@ export function getPostBySlug(slug: string, categorySlug?: string): Post | null 
 /**
  * 모든 포스트의 slug 목록을 가져옵니다 (SSG용)
  */
-export function getAllPostSlugs(): Array<{ slug: string; categorySlug: string }> {
+export function getAllPostSlugs(): Array<{
+  slug: string;
+  categorySlug: string;
+}> {
   const markdownFiles = getAllMarkdownFiles(postsDirectory);
 
-  return markdownFiles.map((fullPath) => {
+  return markdownFiles.map(fullPath => {
     const slug = path.basename(fullPath, '.md');
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data } = matter(fileContents);
@@ -194,8 +207,8 @@ export function getAllPostSlugs(): Array<{ slug: string; categorySlug: string }>
  */
 export function getPostsByTag(tag: string): Omit<Post, 'content'>[] {
   const allPosts = getAllPosts();
-  return allPosts.filter((post) =>
-    post.tags.some((t) => t.toLowerCase() === tag.toLowerCase())
+  return allPosts.filter(post =>
+    post.tags.some(t => t.toLowerCase() === tag.toLowerCase())
   );
 }
 
@@ -206,8 +219,8 @@ export function getAllTags(): string[] {
   const allPosts = getAllPosts();
   const tagsSet = new Set<string>();
 
-  allPosts.forEach((post) => {
-    post.tags.forEach((tag) => tagsSet.add(tag));
+  allPosts.forEach(post => {
+    post.tags.forEach(tag => tagsSet.add(tag));
   });
 
   return Array.from(tagsSet).sort();
@@ -216,11 +229,15 @@ export function getAllTags(): string[] {
 /**
  * 모든 카테고리 목록을 가져옵니다 (중복 제거)
  */
-export function getAllCategories(): Array<{ name: string; slug: string; count: number }> {
+export function getAllCategories(): Array<{
+  name: string;
+  slug: string;
+  count: number;
+}> {
   const allPosts = getAllPosts();
   const categoryMap = new Map<string, { name: string; count: number }>();
 
-  allPosts.forEach((post) => {
+  allPosts.forEach(post => {
     const existing = categoryMap.get(post.categorySlug);
     if (existing) {
       existing.count++;
@@ -244,21 +261,28 @@ export function getAllCategories(): Array<{ name: string; slug: string; count: n
 /**
  * 특정 카테고리의 포스트들을 가져옵니다
  */
-export function getPostsByCategory(categorySlug: string): Omit<Post, 'content'>[] {
+export function getPostsByCategory(
+  categorySlug: string
+): Omit<Post, 'content'>[] {
   const allPosts = getAllPosts();
-  return allPosts.filter((post) => post.categorySlug === categorySlug);
+  return allPosts.filter(post => post.categorySlug === categorySlug);
 }
 
 /**
  * 이전/다음 포스트를 가져옵니다
  */
-export function getAdjacentPosts(currentSlug: string, categorySlug?: string): {
+export function getAdjacentPosts(
+  currentSlug: string,
+  categorySlug?: string
+): {
   prevPost: Omit<Post, 'content'> | null;
   nextPost: Omit<Post, 'content'> | null;
 } {
   const allPosts = getAllPosts();
   const currentIndex = allPosts.findIndex(
-    (post) => post.slug === currentSlug && (!categorySlug || post.categorySlug === categorySlug)
+    post =>
+      post.slug === currentSlug &&
+      (!categorySlug || post.categorySlug === categorySlug)
   );
 
   if (currentIndex === -1) {
@@ -267,6 +291,7 @@ export function getAdjacentPosts(currentSlug: string, categorySlug?: string): {
 
   return {
     prevPost: currentIndex > 0 ? allPosts[currentIndex - 1] : null,
-    nextPost: currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
+    nextPost:
+      currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
   };
 }

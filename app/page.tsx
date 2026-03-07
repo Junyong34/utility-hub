@@ -1,19 +1,19 @@
-import { HeroSplitSection } from "@/components/home/hero-split-section"
-import { DashboardSection } from "@/components/home/dashboard-section"
-import { getAllPosts } from "@/lib/blog/posts"
-import { getAllToolConfigs } from "@/lib/tools"
+import { HeroSplitSection } from '@/components/home/hero-split-section';
+import { DashboardSection } from '@/components/home/dashboard-section';
+import { getAllPosts } from '@/lib/blog/posts';
+import { getAllToolConfigs } from '@/lib/tools';
+import { buildDashboardContent } from '@/lib/home/dashboard-content';
 
 export default function Page() {
   const allPosts = getAllPosts();
-  const recentPosts = allPosts.slice(0, 3).map(({ slug, title, date, categorySlug }) => ({
-    slug,
-    title,
-    date,
-    categorySlug,
-  }));
-
   const toolConfigs = getAllToolConfigs();
-  const toolNames = toolConfigs.map((t) => t.shortName).filter((name): name is string => name !== undefined);
+  const { latestItems, hotItems } = buildDashboardContent(
+    allPosts,
+    toolConfigs
+  );
+  const toolNames = toolConfigs
+    .map(t => t.shortName)
+    .filter((name): name is string => name !== undefined);
 
   return (
     <main className="relative flex min-h-screen flex-col">
@@ -38,7 +38,7 @@ export default function Page() {
         totalTools={toolConfigs.length}
         toolNames={toolNames}
       />
-      <DashboardSection recentPosts={recentPosts} />
+      <DashboardSection latestItems={latestItems} hotItems={hotItems} />
     </main>
-  )
+  );
 }

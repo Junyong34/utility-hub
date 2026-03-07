@@ -15,6 +15,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     name: '대출 이자 계산기',
     shortName: '대출 계산기',
     breadcrumbLabel: '대출 계산기',
+    publishedAt: '2026-03-06',
     description:
       '대출 금액, 연 이자율, 상환 기간을 입력하면 월 상환액과 총 상환금액, 총 이자액을 계산해주는 원리금균등상환 계산기입니다.',
     keywords: [
@@ -41,6 +42,9 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     badge: 'NEW',
     color: 'from-emerald-500 to-teal-500',
     icon: 'Calculator',
+    homeFeatured: {
+      hotRank: 3,
+    },
     features: [
       '월 상환액(원리금균등) 실시간 계산',
       '총 이자/총 상환금액 즉시 확인',
@@ -64,7 +68,8 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       },
       {
         question: '이율이 0%일 때도 계산되나요?',
-        answer: '네, 연이율이 0%인 경우 월 상환액은 원금 ÷ 상환 개월 수로 계산됩니다.',
+        answer:
+          '네, 연이율이 0%인 경우 월 상환액은 원금 ÷ 상환 개월 수로 계산됩니다.',
       },
       {
         question: '금리 입력값은 소수점도 되나요?',
@@ -72,7 +77,8 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       },
       {
         question: '총 상환 금액은 어떤 값을 의미하나요?',
-        answer: '총 상환 금액은 상환 기간 동안 납부하는 월 상환액의 합계로, 원금 + 이자입니다.',
+        answer:
+          '총 상환 금액은 상환 기간 동안 납부하는 월 상환액의 합계로, 원금 + 이자입니다.',
       },
       {
         question: '이 계산기는 법적 자문 도구인가요?',
@@ -109,6 +115,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     name: 'AI 추천 번호 생성',
     shortName: '로또',
     breadcrumbLabel: 'AI 추천 번호 생성',
+    publishedAt: '2026-03-05',
     description:
       'AI 로또 번호 추천과 확률통계 6전략을 무료로 제공하는 로또 번호 생성기입니다. 랜덤, 날짜, MBTI, 슬롯 방식까지 한 번에 비교하고 저장/공유할 수 있습니다.',
     keywords: [
@@ -144,6 +151,10 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     badge: '인기',
     color: 'from-blue-500 to-purple-500',
     icon: 'DicesIcon',
+    homeFeatured: {
+      hotRank: 1,
+      badge: 'POPULAR',
+    },
     features: [
       'AI 가중 통계 추천 + 확률통계 6전략(고빈도/저빈도/미출현/균형/핫/콜드)',
       '랜덤/날짜/MBTI/행운번호/슬롯 포함 멀티 추천 방식',

@@ -1,3 +1,5 @@
+import type { HomeFeaturedMeta } from './home';
+
 /**
  * Tools 관련 타입 정의
  * Blog SEO와 완전히 분리된 Tools 전용 타입
@@ -6,7 +8,12 @@
 /**
  * Tool 카테고리
  */
-export type ToolCategory = 'generator' | 'converter' | 'calculator' | 'utility' | 'other';
+export type ToolCategory =
+  | 'generator'
+  | 'converter'
+  | 'calculator'
+  | 'utility'
+  | 'other';
 
 /**
  * FAQ 아이템
@@ -46,6 +53,9 @@ export interface ToolConfig {
   /** 상세 설명 */
   description: string;
 
+  /** 홈 대시보드 노출 기준일 */
+  publishedAt: string;
+
   /** SEO 키워드 */
   keywords: string[];
 
@@ -57,6 +67,9 @@ export interface ToolConfig {
 
   /** 배지 텍스트 (예: "인기", "신규") */
   badge?: string;
+
+  /** 홈 대시보드 수동 추천 메타데이터 */
+  homeFeatured?: HomeFeaturedMeta;
 
   /** 그라데이션 컬러 (Tailwind classes) */
   color?: string;
