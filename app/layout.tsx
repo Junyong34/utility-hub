@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import Script from "next/script";
 import { Geist, Geist_Mono, Roboto } from 'next/font/google'
 import Link from 'next/link'
 import './globals.css'
@@ -77,6 +78,19 @@ export default function RootLayout({
   return (
     <html lang="ko" className={roboto.variable}>
       <head>
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="//unpkg.com/react-grab/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        )}
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="//unpkg.com/@react-grab/mcp/dist/client.global.js"
+            strategy="lazyOnload"
+          />
+        )}
         {/* Favicon */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link

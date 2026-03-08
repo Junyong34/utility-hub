@@ -108,15 +108,17 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
             <div className="flex flex-col gap-3">
               {/* Primary CTA — Blog */}
               <Link href="/blog">
-                <div className="flex items-center gap-3 rounded-xl border-2 border-primary bg-primary px-4 py-3 text-primary-foreground hover:bg-primary/90 transition-all group cursor-pointer">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-foreground/10">
-                    <BookOpenIcon className="h-5 w-5" />
+                <div className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-3 text-foreground hover:border-primary/50 hover:bg-muted/50 transition-all group cursor-pointer">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted">
+                    <BookOpenIcon className="h-5 w-5 text-primary" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-semibold">블로그 읽기</div>
-                    <div className="text-xs text-primary-foreground/70 mt-0.5">최신 글 · 개발 / AI</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      최신 글 · 개발 / AI
+                    </div>
                   </div>
-                  <ArrowRightIcon className="h-4 w-4 shrink-0 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRightIcon className="h-4 w-4 shrink-0 text-muted-foreground group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
 
@@ -128,7 +130,9 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-semibold">도구 사용하기</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">{toolNames.join(' · ')}</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      {toolNames.join(' · ')}
+                    </div>
                   </div>
                   <ArrowRightIcon className="h-4 w-4 shrink-0 text-muted-foreground group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -137,13 +141,15 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
 
             {/* Stat Pills */}
             <div className="flex flex-wrap gap-2">
-              {statPills.map((pill) => (
+              {statPills.map(pill => (
                 <div
                   key={pill.label}
                   className="flex items-center gap-1.5 rounded-full border border-border bg-muted/50 px-3 py-1 text-xs text-muted-foreground"
                 >
                   <span>{pill.label}</span>
-                  <span className="font-semibold text-foreground">{pill.value}</span>
+                  <span className="font-semibold text-foreground">
+                    {pill.value}
+                  </span>
                 </div>
               ))}
             </div>
@@ -151,7 +157,7 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
 
           {/* ── 우: 서비스 카드 2×2 ── */}
           <div className="grid grid-cols-2 gap-4">
-            {serviceCards.map((service) => {
+            {serviceCards.map(service => {
               const Icon = service.icon;
               return (
                 <Link key={service.title} href={service.href}>
@@ -165,7 +171,9 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
                         <Icon className={`h-5 w-5 ${service.color}`} />
                       </div>
                       <div className="space-y-1">
-                        <div className="font-semibold text-sm">{service.title}</div>
+                        <div className="font-semibold text-sm">
+                          {service.title}
+                        </div>
                         <div className="text-xs text-muted-foreground leading-relaxed">
                           {service.description}
                         </div>
