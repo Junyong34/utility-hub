@@ -217,7 +217,7 @@ export function generateAIStatisticalNumbers(
 }
 
 /**
- * 여러 게임의 AI 추천 번호를 생성합니다.
+ * 여러 게임의 AI 로또 번호 추천을 생성합니다.
  */
 export function generateMultipleAINumbers(
   count: number,
