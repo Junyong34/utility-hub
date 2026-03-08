@@ -5,7 +5,7 @@ import { Card } from '@/components/ui/card';
 import { getToolConfig } from '@/lib/tools';
 
 const lottoTool = getToolConfig('lotto');
-const headerTitle = lottoTool?.name ?? 'AI 추천 번호 생성';
+const headerTitle = lottoTool?.name ?? 'AI 로또 번호 추천';
 const headerDescription = lottoTool?.description ?? 'AI와 확률통계 알고리즘으로 최적의 번호를 추천받아보세요.';
 const badgeText = lottoTool?.badge ?? '추천';
 

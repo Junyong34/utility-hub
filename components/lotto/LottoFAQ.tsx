@@ -48,7 +48,7 @@ export function LottoFAQ({ items }: LottoFAQProps) {
   return (
     <section aria-labelledby="lotto-faq-title" className="space-y-4">
       <h2 id="lotto-faq-title" className="text-2xl font-bold">
-        AI 추천 번호 FAQ
+        AI 로또 번호 추천 FAQ
       </h2>
       <Card className="p-4 md:p-6">
         <Accordion type="single" defaultValue="faq-0" className="space-y-2">

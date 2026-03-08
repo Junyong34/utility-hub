@@ -17,6 +17,28 @@ pnpm type-check   # Run TypeScript type checking (tsc --noEmit)
 pnpm format       # Format with Prettier
 pnpm format:check # Check formatting
 
+# lib
+{
+  "Project Type": "React",
+  "Framework": "NextJS 16",
+  "Component Library": "shadcn",
+  "CSS Implementation": "Vanilla CSS",
+  "Tailwind Version": "v4",
+  "TS/JS": "TS",
+  "State Management": "TanStack Query",
+  "API Client": "TanStack Query",
+  "Package Manager": "pnpm",
+  "Icon Set": "Lucide",
+  "component_indexes": [
+    {
+      "type": "local",
+      "path": "components",
+      "name": "components"
+    }
+  ]
+}
+
+
 # Bundle analysis
 ANALYZE=true pnpm build  # Generate bundle size report in analyze/
 ```

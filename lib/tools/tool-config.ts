@@ -112,9 +112,9 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
 
   lotto: {
     id: 'lotto',
-    name: 'AI 추천 번호 생성',
+    name: 'AI 로또 번호 추천',
     shortName: '로또',
-    breadcrumbLabel: 'AI 추천 번호 생성',
+    breadcrumbLabel: 'AI 로또 번호 추천',
     publishedAt: '2026-03-05',
     description:
       'AI 로또 번호 추천과 확률통계 6전략을 무료로 제공하는 로또 번호 생성기입니다. 랜덤, 날짜, MBTI, 슬롯 방식까지 한 번에 비교하고 저장/공유할 수 있습니다.',
