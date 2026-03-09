@@ -328,28 +328,37 @@ function PrepaymentFeeResultSummaryCard({
  * 대출 계산기 섹션
  */
 function LoanCalculatorSection() {
-  const [principal, setPrincipal] = useState('100000000');
-  const [principalDisplay, setPrincipalDisplay] = useState('100,000,000');
-  const [annualRate, setAnnualRate] = useState('3.5');
-  const [termMode, setTermMode] = useState<'year' | 'month'>('year');
-  const [termValue, setTermValue] = useState('20');
+  const [principal, setPrincipal] = useState('0');
+  const [principalDisplay, setPrincipalDisplay] = useState('0');
+  const [annualRate, setAnnualRate] = useState('');
+  const [termMode, setTermMode] = useState<'year' | 'month' | undefined>();
+  const [termValue, setTermValue] = useState('');
   const [method, setMethod] = useState<RepaymentMethod>('equal-payment');
   const [showResults, setShowResults] = useState(false);
+  const [hasCalculated, setHasCalculated] = useState(false);
 
-  const result = useMemo(() => {
-    const principalValue = getNumberInput(principal);
-    const rateValue = getNumberInput(annualRate);
-    const termNumValue = getNumberInput(termValue);
+  const principalValue = getNumberInput(principal);
+  const rateValue = getNumberInput(annualRate);
+  const termNumValue = getNumberInput(termValue);
+
+  const canCalculate = useMemo(() => {
+    if (!termMode) {
+      return false;
+    }
 
     if (
       !Number.isFinite(principalValue) ||
       !Number.isFinite(rateValue) ||
       !Number.isFinite(termNumValue)
     ) {
-      return null;
+      return false;
     }
 
-    if (principalValue <= 0 || rateValue < 0 || termNumValue <= 0) {
+    return principalValue > 0 && rateValue >= 0 && termNumValue > 0;
+  }, [principalValue, rateValue, termNumValue, termMode]);
+
+  const result = useMemo(() => {
+    if (!canCalculate || !termMode) {
       return null;
     }
 
@@ -359,34 +368,36 @@ function LoanCalculatorSection() {
         : Math.round(termNumValue);
 
     return calculateLoan(principalValue, rateValue, months, method, true);
-  }, [principal, annualRate, termValue, termMode, method]);
+  }, [canCalculate, principalValue, rateValue, termNumValue, termMode, method]);
 
   const handleTermModeChange = (newMode: 'year' | 'month') => {
     if (newMode === termMode) return;
 
     const currentValue = getNumberInput(termValue);
-    if (!Number.isFinite(currentValue) || currentValue <= 0) return;
 
-    // 모드 변경 시 자동으로 변환
-    if (newMode === 'month') {
-      // year to month
-      setTermValue(Math.round(currentValue * 12).toString());
-    } else {
-      // month to year - 버림 처리
-      setTermValue(Math.floor(currentValue / 12).toString());
+    if (termMode && Number.isFinite(currentValue) && currentValue > 0) {
+      // 모드 변경 시 자동으로 변환
+      if (newMode === 'month') {
+        // year to month
+        setTermValue(Math.round(currentValue * 12).toString());
+      } else {
+        // month to year - 버림 처리
+        setTermValue(Math.floor(currentValue / 12).toString());
+      }
     }
 
     setTermMode(newMode);
   };
 
   const handleReset = () => {
-    setPrincipal('100000000');
-    setPrincipalDisplay('100,000,000');
-    setAnnualRate('3.5');
-    setTermMode('year');
-    setTermValue('20');
+    setPrincipal('0');
+    setPrincipalDisplay('0');
+    setAnnualRate('');
+    setTermMode(undefined);
+    setTermValue('');
     setMethod('equal-payment');
     setShowResults(false);
+    setHasCalculated(false);
   };
 
   const handlePrincipalChange = (value: string) => {
@@ -396,7 +407,8 @@ function LoanCalculatorSection() {
   };
 
   const handleCalculate = () => {
-    if (result) {
+    if (canCalculate && result) {
+      setHasCalculated(true);
       setShowResults(true);
     }
   };
@@ -416,6 +428,8 @@ function LoanCalculatorSection() {
   };
 
   const addToTerm = (amount: number) => {
+    if (!termMode) return;
+
     const current = getNumberInput(termValue) || 0;
     if (termMode === 'year') {
       const newValue = Math.min(Math.max(current + amount, 0), 50);
@@ -450,7 +464,7 @@ function LoanCalculatorSection() {
                   label=""
                   value={principalDisplay}
                   onChange={handlePrincipalChange}
-                  placeholder="100,000,000"
+                  placeholder="대출 원금을 입력하세요"
                   unitText="원"
                   summaryText={
                     principal && getNumberInput(principal) > 0
@@ -501,7 +515,7 @@ function LoanCalculatorSection() {
                       max={100}
                       value={annualRate}
                       onChange={event => setAnnualRate(event.target.value)}
-                      placeholder="3.5"
+                      placeholder="이자율을 입력하세요"
                       step="0.01"
                       className="text-base h-10 max-w-md"
                     />
@@ -568,53 +582,64 @@ function LoanCalculatorSection() {
                           max={termMode === 'year' ? 50 : 600}
                           value={termValue}
                           onChange={event => setTermValue(event.target.value)}
-                          placeholder={termMode === 'year' ? '20' : '240'}
-                          className="text-base h-10"
+                          placeholder={
+                            termMode
+                              ? '상환 기간을 입력하세요'
+                              : '년/월 단위를 먼저 선택하세요'
+                          }
+                          disabled={!termMode}
+                          className="text-base h-10 disabled:cursor-not-allowed disabled:opacity-60"
                         />
                       </div>
-                      <span className="text-base font-semibold text-foreground min-w-fit">
-                        {termMode === 'year' ? '년' : '월'}
-                      </span>
+                      {termMode ? (
+                        <span className="text-base font-semibold text-foreground min-w-fit">
+                          {termMode === 'year' ? '년' : '월'}
+                        </span>
+                      ) : null}
                     </div>
                     {/* 빠른 입력 버튼 - 동적 변경 */}
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {termMode === 'year' ? (
-                        <>
-                          <QuickActionButton
-                            label="+1년"
-                            onClick={() => addToTerm(1)}
-                          />
-                          <QuickActionButton
-                            label="+5년"
-                            onClick={() => addToTerm(5)}
-                          />
-                          <QuickActionButton
-                            label="+10년"
-                            onClick={() => addToTerm(10)}
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <QuickActionButton
-                            label="+1개월"
-                            onClick={() => addToTerm(1)}
-                          />
-                          <QuickActionButton
-                            label="+6개월"
-                            onClick={() => addToTerm(6)}
-                          />
-                          <QuickActionButton
-                            label="+12개월"
-                            onClick={() => addToTerm(12)}
-                          />
-                        </>
-                      )}
-                    </div>
-                    <div className="text-xs text-muted-foreground pt-1">
-                      {termMode === 'year'
-                        ? '⚠️ 월 단위에서 년 변환 시 11개월 이하는 버려집니다'
-                        : '💡 년 단위 입력 시 자동으로 월 단위로 변환됩니다'}
-                    </div>
+                    {termMode ? (
+                      <>
+                        <div className="flex flex-wrap gap-2 pt-2">
+                          {termMode === 'year' ? (
+                            <>
+                              <QuickActionButton
+                                label="+1년"
+                                onClick={() => addToTerm(1)}
+                              />
+                              <QuickActionButton
+                                label="+5년"
+                                onClick={() => addToTerm(5)}
+                              />
+                              <QuickActionButton
+                                label="+10년"
+                                onClick={() => addToTerm(10)}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <QuickActionButton
+                                label="+1개월"
+                                onClick={() => addToTerm(1)}
+                              />
+                              <QuickActionButton
+                                label="+6개월"
+                                onClick={() => addToTerm(6)}
+                              />
+                              <QuickActionButton
+                                label="+12개월"
+                                onClick={() => addToTerm(12)}
+                              />
+                            </>
+                          )}
+                        </div>
+                        <div className="text-xs text-muted-foreground pt-1">
+                          {termMode === 'year'
+                            ? '⚠️ 월 단위에서 년 변환 시 11개월 이하는 버려집니다'
+                            : '💡 년 단위 입력 시 자동으로 월 단위로 변환됩니다'}
+                        </div>
+                      </>
+                    ) : null}
                   </div>
                 </FormFieldGroup>
               </FormSectionGroup>
@@ -659,7 +684,7 @@ function LoanCalculatorSection() {
               </Button>
               <Button
                 onClick={handleCalculate}
-                disabled={!result}
+                disabled={!canCalculate}
                 className="gap-2 h-11"
               >
                 계산하기
@@ -670,7 +695,7 @@ function LoanCalculatorSection() {
         </Card>
 
         {/* 빠른 결과 미리보기 */}
-        {result && (
+        {hasCalculated && result && (
           <LoanResultSummaryCard
             result={result}
             principal={principal}
@@ -681,12 +706,12 @@ function LoanCalculatorSection() {
 
         {/* 결과 Bottom Sheet */}
         <BottomSheet
-          isOpen={showResults}
+          isOpen={showResults && hasCalculated && !!result}
           onClose={() => setShowResults(false)}
           title="상환 계획 상세"
           maxHeight="90vh"
         >
-          {result && (
+          {hasCalculated && result && (
             <ResultsView
               result={result}
               principal={principal}
@@ -875,21 +900,44 @@ function ResultsView({
  * 중도상환수수료 계산기 섹션
  */
 function PrepaymentFeeCalculatorSection() {
-  const [repaymentAmount, setRepaymentAmount] = useState('30000000');
-  const [repaymentAmountDisplay, setRepaymentAmountDisplay] =
-    useState('30,000,000');
-  const [feeRate, setFeeRate] = useState('1.2');
-  const [loanDate, setLoanDate] = useState<Date | undefined>(
-    new Date('2024-01-01')
-  );
-  const [repaymentDate, setRepaymentDate] = useState<Date | undefined>(
-    new Date('2025-01-01')
-  );
-  const [maturityDate, setMaturityDate] = useState<Date | undefined>(
-    new Date('2027-01-01')
-  );
-  const [exemptionYears, setExemptionYears] = useState('3');
+  const [repaymentAmount, setRepaymentAmount] = useState('0');
+  const [repaymentAmountDisplay, setRepaymentAmountDisplay] = useState('0');
+  const [feeRate, setFeeRate] = useState('');
+  const [loanDate, setLoanDate] = useState<Date | undefined>();
+  const [repaymentDate, setRepaymentDate] = useState<Date | undefined>();
+  const [maturityDate, setMaturityDate] = useState<Date | undefined>();
+  const [exemptionYears, setExemptionYears] = useState('');
   const [showResults, setShowResults] = useState(false);
+  const [hasCalculated, setHasCalculated] = useState(false);
+
+  const repaymentAmountValue = getNumberInput(repaymentAmount);
+  const feeRateValue = getNumberInput(feeRate);
+  const exemptionYearsValue = getNumberInput(exemptionYears);
+
+  const canCalculate = useMemo(() => {
+    if (
+      !Number.isFinite(repaymentAmountValue) ||
+      !Number.isFinite(feeRateValue) ||
+      !Number.isFinite(exemptionYearsValue)
+    ) {
+      return false;
+    }
+
+    if (!loanDate || !repaymentDate || !maturityDate) {
+      return false;
+    }
+
+    return (
+      repaymentAmountValue > 0 && feeRateValue >= 0 && exemptionYearsValue >= 0
+    );
+  }, [
+    repaymentAmountValue,
+    feeRateValue,
+    exemptionYearsValue,
+    loanDate,
+    repaymentDate,
+    maturityDate,
+  ]);
 
   // 빠른 입력 헬퍼 함수
   const addToRepaymentAmount = (amount: number) => {
@@ -918,26 +966,7 @@ function PrepaymentFeeCalculatorSection() {
   };
 
   const result = useMemo(() => {
-    const repaymentAmountValue = getNumberInput(repaymentAmount);
-    const feeRateValue = getNumberInput(feeRate);
-    const exemptionYearsValue = getNumberInput(exemptionYears);
-
-    if (
-      !Number.isFinite(repaymentAmountValue) ||
-      !Number.isFinite(feeRateValue)
-    ) {
-      return null;
-    }
-
-    if (repaymentAmountValue <= 0 || feeRateValue < 0) {
-      return null;
-    }
-
-    if (!Number.isFinite(exemptionYearsValue) || exemptionYearsValue < 0) {
-      return null;
-    }
-
-    if (!loanDate || !repaymentDate || !maturityDate) {
+    if (!canCalculate || !loanDate || !repaymentDate || !maturityDate) {
       return null;
     }
 
@@ -950,27 +979,30 @@ function PrepaymentFeeCalculatorSection() {
       exemptionYearsValue
     );
   }, [
-    repaymentAmount,
-    feeRate,
+    canCalculate,
+    repaymentAmountValue,
+    feeRateValue,
     loanDate,
     repaymentDate,
     maturityDate,
-    exemptionYears,
+    exemptionYearsValue,
   ]);
 
   const handleReset = () => {
-    setRepaymentAmount('30000000');
-    setRepaymentAmountDisplay('30,000,000');
-    setFeeRate('1.2');
-    setLoanDate(new Date('2024-01-01'));
-    setRepaymentDate(new Date('2025-01-01'));
-    setMaturityDate(new Date('2027-01-01'));
-    setExemptionYears('3');
+    setRepaymentAmount('0');
+    setRepaymentAmountDisplay('0');
+    setFeeRate('');
+    setLoanDate(undefined);
+    setRepaymentDate(undefined);
+    setMaturityDate(undefined);
+    setExemptionYears('');
     setShowResults(false);
+    setHasCalculated(false);
   };
 
   const handleCalculate = () => {
-    if (result) {
+    if (canCalculate && result) {
+      setHasCalculated(true);
       setShowResults(true);
     }
   };
@@ -998,7 +1030,7 @@ function PrepaymentFeeCalculatorSection() {
                   label=""
                   value={repaymentAmountDisplay}
                   onChange={handleRepaymentAmountChange}
-                  placeholder="30,000,000"
+                  placeholder="상환 금액을 입력하세요"
                   unitText="원"
                   summaryText={
                     repaymentAmount && getNumberInput(repaymentAmount) > 0
@@ -1047,7 +1079,7 @@ function PrepaymentFeeCalculatorSection() {
                         max={100}
                         value={feeRate}
                         onChange={event => setFeeRate(event.target.value)}
-                        placeholder="1.2"
+                        placeholder="수수료율을 입력하세요"
                         step="0.01"
                         className="text-base h-10"
                       />
@@ -1093,7 +1125,7 @@ function PrepaymentFeeCalculatorSection() {
                         onChange={event =>
                           setExemptionYears(event.target.value)
                         }
-                        placeholder="3"
+                        placeholder="면제기간을 입력하세요"
                         className="text-base h-10 max-w-md"
                       />
                       <span className="text-base font-semibold text-foreground min-w-fit">
@@ -1172,7 +1204,7 @@ function PrepaymentFeeCalculatorSection() {
               </Button>
               <Button
                 onClick={handleCalculate}
-                disabled={!result}
+                disabled={!canCalculate}
                 className="gap-2 h-11"
               >
                 계산하기
@@ -1182,7 +1214,7 @@ function PrepaymentFeeCalculatorSection() {
           </CardContent>
         </Card>
 
-        {result && (
+        {hasCalculated && result && (
           <PrepaymentFeeResultSummaryCard
             result={result}
             repaymentAmount={repaymentAmount}
@@ -1192,12 +1224,12 @@ function PrepaymentFeeCalculatorSection() {
         )}
 
         <BottomSheet
-          isOpen={showResults}
+          isOpen={showResults && hasCalculated && !!result}
           onClose={() => setShowResults(false)}
           title="중도상환 수수료 결과"
           maxHeight="80vh"
         >
-          {result && (
+          {hasCalculated && result && (
             <div className="space-y-6 pb-6">
               <PrepaymentFeeResultSummaryCard
                 result={result}
