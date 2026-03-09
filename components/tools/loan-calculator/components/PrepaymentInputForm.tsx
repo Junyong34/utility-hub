@@ -10,6 +10,7 @@ import { AmountInputField } from '@/components/ui/AmountInputField';
 import { Button } from '@/components/ui/button';
 import { DatePicker } from '@/components/ui/date-picker';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
+import { type CalendarQuickAction } from '@/components/ui/calendar-date-utils';
 import {
   FormSectionGroup,
   FormFieldGroup,
@@ -17,6 +18,27 @@ import {
 import { DollarSign, Percent, Calendar, ChevronRight } from 'lucide-react';
 import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
 import { getNumberInput } from '../utils';
+
+const PREPAYMENT_DATE_QUICK_ACTIONS: CalendarQuickAction[] = [
+  {
+    label: '+1주일',
+    amount: 1,
+    unit: 'week',
+  },
+  {
+    label: '+1개월',
+    amount: 1,
+    unit: 'month',
+  },
+];
+
+const PREPAYMENT_DATE_PICKER_PROPS = {
+  closeOnSelect: true,
+  calendarProps: {
+    quickActions: PREPAYMENT_DATE_QUICK_ACTIONS,
+    quickActionBase: 'today' as const,
+  },
+};
 
 interface PrepaymentInputFormProps {
   repaymentAmount: string;
@@ -212,6 +234,7 @@ export function PrepaymentInputForm({
                 date={loanDate}
                 onDateChange={onLoanDateChange}
                 placeholder="대출일자 선택"
+                {...PREPAYMENT_DATE_PICKER_PROPS}
               />
             </FormFieldGroup>
           </FormSectionGroup>
@@ -226,6 +249,7 @@ export function PrepaymentInputForm({
                 date={repaymentDate}
                 onDateChange={onRepaymentDateChange}
                 placeholder="상환일자 선택"
+                {...PREPAYMENT_DATE_PICKER_PROPS}
               />
             </FormFieldGroup>
           </FormSectionGroup>
@@ -240,6 +264,7 @@ export function PrepaymentInputForm({
                 date={maturityDate}
                 onDateChange={onMaturityDateChange}
                 placeholder="만기일자 선택"
+                {...PREPAYMENT_DATE_PICKER_PROPS}
               />
             </FormFieldGroup>
           </FormSectionGroup>

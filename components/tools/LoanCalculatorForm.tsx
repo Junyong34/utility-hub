@@ -52,6 +52,7 @@ import {
   CollapsibleContent,
 } from '@/components/ui/collapsible';
 import { QuickActionButton } from '@/components/ui/QuickActionButton';
+import { type CalendarQuickAction } from '@/components/ui/calendar-date-utils';
 import {
   FormSectionGroup,
   FormFieldGroup,
@@ -85,6 +86,27 @@ const REPAYMENT_METHODS = [
     description: '만기에 원금상환',
   },
 ];
+
+const PREPAYMENT_DATE_QUICK_ACTIONS: CalendarQuickAction[] = [
+  {
+    label: '+1주일',
+    amount: 1,
+    unit: 'week',
+  },
+  {
+    label: '+1개월',
+    amount: 1,
+    unit: 'month',
+  },
+];
+
+const PREPAYMENT_DATE_PICKER_PROPS = {
+  closeOnSelect: true,
+  calendarProps: {
+    quickActions: PREPAYMENT_DATE_QUICK_ACTIONS,
+    quickActionBase: 'today' as const,
+  },
+};
 
 interface LoanResultSummaryCardProps {
   result: ReturnType<typeof calculateLoan>;
@@ -1164,6 +1186,7 @@ function PrepaymentFeeCalculatorSection() {
                     date={loanDate}
                     onDateChange={setLoanDate}
                     placeholder="대출일자 선택"
+                    {...PREPAYMENT_DATE_PICKER_PROPS}
                   />
                 </FormFieldGroup>
               </FormSectionGroup>
@@ -1178,6 +1201,7 @@ function PrepaymentFeeCalculatorSection() {
                     date={repaymentDate}
                     onDateChange={setRepaymentDate}
                     placeholder="상환일자 선택"
+                    {...PREPAYMENT_DATE_PICKER_PROPS}
                   />
                 </FormFieldGroup>
               </FormSectionGroup>
@@ -1192,6 +1216,7 @@ function PrepaymentFeeCalculatorSection() {
                     date={maturityDate}
                     onDateChange={setMaturityDate}
                     placeholder="만기일자 선택"
+                    {...PREPAYMENT_DATE_PICKER_PROPS}
                   />
                 </FormFieldGroup>
               </FormSectionGroup>

@@ -11,6 +11,7 @@ import {
 } from '@/lib/tools/formatting';
 import { currencyFormatter, REPAYMENT_METHODS } from '../constants';
 import { getNumberInput } from '../utils';
+import { ShareButton } from './ShareButton';
 
 interface LoanResultCardProps {
   result: {
@@ -40,6 +41,7 @@ export function LoanResultCard({
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-semibold">📊 계산 결과</CardTitle>
+          <ShareButton variant="outline" size="sm" showLabel={false} />
         </div>
       </CardHeader>
       <CardContent className="space-y-5">

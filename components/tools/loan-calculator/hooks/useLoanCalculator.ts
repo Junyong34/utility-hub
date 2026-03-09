@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
+import { useQueryStates } from 'nuqs';
 import {
   calculateLoan,
   type RepaymentMethod,
@@ -8,20 +9,34 @@ import {
   parseFormattedNumber,
 } from '@/lib/tools/formatting';
 import { getNumberInput } from '../utils';
+import { LOAN_QUERY_PARSERS } from './parsers';
 
 export function useLoanCalculator() {
-  const [principal, setPrincipal] = useState('0');
-  const [principalDisplay, setPrincipalDisplay] = useState('0');
-  const [annualRate, setAnnualRate] = useState('');
-  const [termMode, setTermMode] = useState<'year' | 'month' | undefined>();
-  const [termValue, setTermValue] = useState('');
-  const [method, setMethod] = useState<RepaymentMethod>('equal-payment');
+  // URL 쿼리 상태 (공유 가능한 상태)
+  const [queryState, setQueryState] = useQueryStates(LOAN_QUERY_PARSERS, {
+    shallow: true,
+    history: 'push',
+  });
+
+  // 로컬 UI 상태 (URL에 저장하지 않음)
   const [showResults, setShowResults] = useState(false);
   const [hasCalculated, setHasCalculated] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
 
-  const principalValue = getNumberInput(principal);
-  const rateValue = getNumberInput(annualRate);
-  const termNumValue = getNumberInput(termValue);
+  // URL 상태에서 파생된 값
+  const principal = (queryState.principal ?? 0).toString();
+  const principalDisplay = useMemo(
+    () => formatNumberWithCommas(queryState.principal ?? 0),
+    [queryState.principal]
+  );
+  const annualRate = (queryState.rate ?? 0).toString();
+  const termMode = queryState.termMode;
+  const termValue = (queryState.term ?? 0).toString();
+  const method = queryState.method;
+
+  const principalValue = queryState.principal ?? 0;
+  const rateValue = queryState.rate ?? 0;
+  const termNumValue = queryState.term ?? 0;
 
   const canCalculate = useMemo(() => {
     if (!termMode) {
@@ -55,34 +70,40 @@ export function useLoanCalculator() {
   const handleTermModeChange = (newMode: 'year' | 'month') => {
     if (newMode === termMode) return;
 
-    const currentValue = getNumberInput(termValue);
+    const currentValue = termNumValue;
 
     if (termMode && Number.isFinite(currentValue) && currentValue > 0) {
       if (newMode === 'month') {
-        setTermValue(Math.round(currentValue * 12).toString());
+        setQueryState({
+          termMode: newMode,
+          term: Math.round(currentValue * 12),
+        });
       } else {
-        setTermValue(Math.floor(currentValue / 12).toString());
+        setQueryState({
+          termMode: newMode,
+          term: Math.floor(currentValue / 12),
+        });
       }
+    } else {
+      setQueryState({ termMode: newMode });
     }
-
-    setTermMode(newMode);
   };
 
   const handleReset = () => {
-    setPrincipal('0');
-    setPrincipalDisplay('0');
-    setAnnualRate('');
-    setTermMode(undefined);
-    setTermValue('');
-    setMethod('equal-payment');
+    setQueryState({
+      principal: 0,
+      rate: 0,
+      term: 0,
+      termMode: null,
+      method: 'equal-payment',
+    });
     setShowResults(false);
     setHasCalculated(false);
   };
 
   const handlePrincipalChange = (value: string) => {
     const numValue = parseFormattedNumber(value);
-    setPrincipal(numValue.toString());
-    setPrincipalDisplay(formatNumberWithCommas(value));
+    setQueryState({ principal: numValue });
   };
 
   const handleCalculate = () => {
@@ -93,30 +114,42 @@ export function useLoanCalculator() {
   };
 
   const addToPrincipal = (amount: number) => {
-    const current = getNumberInput(principal) || 0;
+    const current = principalValue || 0;
     const newValue = Math.min(current + amount, 1000000000000);
-    setPrincipal(newValue.toString());
-    setPrincipalDisplay(formatNumberWithCommas(newValue));
+    setQueryState({ principal: newValue });
   };
 
   const addToRate = (amount: number) => {
-    const current = getNumberInput(annualRate) || 0;
+    const current = rateValue || 0;
     const newValue = Math.min(Math.max(current + amount, 0), 100);
-    setAnnualRate(newValue.toFixed(2));
+    setQueryState({ rate: Number(newValue.toFixed(2)) });
   };
 
   const addToTerm = (amount: number) => {
     if (!termMode) return;
 
-    const current = getNumberInput(termValue) || 0;
+    const current = termNumValue || 0;
     if (termMode === 'year') {
       const newValue = Math.min(Math.max(current + amount, 0), 50);
-      setTermValue(newValue.toString());
+      setQueryState({ term: newValue });
     } else {
       const newValue = Math.min(Math.max(current + amount, 0), 600);
-      setTermValue(newValue.toString());
+      setQueryState({ term: newValue });
     }
   };
+
+  // URL에서 값이 로드되었을 때 자동으로 계산 실행
+  useEffect(() => {
+    // 첫 렌더링 시에만 실행
+    if (!isInitialized) {
+      setIsInitialized(true);
+
+      // URL에 유효한 계산 파라미터가 있으면 자동으로 계산
+      if (canCalculate && result) {
+        setHasCalculated(true);
+      }
+    }
+  }, [canCalculate, result, isInitialized]);
 
   return {
     // State
@@ -131,9 +164,11 @@ export function useLoanCalculator() {
     canCalculate,
     result,
     // State setters
-    setAnnualRate,
-    setTermValue,
-    setMethod,
+    setAnnualRate: (value: string) =>
+      setQueryState({ rate: Number(value) || 0 }),
+    setTermValue: (value: string) =>
+      setQueryState({ term: Number(value) || 0 }),
+    setMethod: (value: RepaymentMethod) => setQueryState({ method: value }),
     setShowResults,
     // Handlers
     handleTermModeChange,
