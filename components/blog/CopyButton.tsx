@@ -5,13 +5,14 @@ import { Check, Copy } from 'lucide-react';
 
 interface CopyButtonProps {
   text: string;
+  className?: string;
 }
 
 /**
  * 코드 블록 복사 버튼 컴포넌트
  * rehype-pretty-code와 함께 사용됩니다
  */
-export function CopyButton({ text }: CopyButtonProps) {
+export function CopyButton({ text, className }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -27,7 +28,10 @@ export function CopyButton({ text }: CopyButtonProps) {
   return (
     <button
       onClick={handleCopy}
-      className="absolute top-2 right-2 p-2 rounded-md bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors duration-200"
+      className={
+        className ||
+        'absolute top-2 right-2 p-2 rounded-md bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors duration-200'
+      }
       aria-label={copied ? 'Copied!' : 'Copy code'}
       type="button"
     >

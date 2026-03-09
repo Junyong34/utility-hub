@@ -12,8 +12,8 @@ import type { ToolConfig } from '@/lib/tools/types';
 export const TOOL_CONFIGS: Record<string, ToolConfig> = {
   'loan-calculator': {
     id: 'loan-calculator',
-    name: '대출 이자 계산기',
-    shortName: '대출 계산기',
+    name: '대출, 중도상환수수료 계산기',
+    shortName: '대출, 중도상환수수료 계산기',
     breadcrumbLabel: '대출 계산기',
     publishedAt: '2026-03-06',
     description:
@@ -22,14 +22,12 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       '대출 계산기',
       '원리금 계산기',
       '월 상환액 계산',
+      '중도상환 수수료 계산',
       '이자 계산',
-      '주택담보대출 계산기',
-      '신용대출 계산기',
       '대출 상환액 계산',
       '대출 원금 이자 계산',
       '금리 계산기',
       '대출 계획',
-      '대출 상환 계획표',
       '재무 계산기',
       '부동산 대출 계산',
       '연 이자율 계산',
@@ -67,6 +65,16 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
           '매달 이자가 달라지지만, 상환금은 일정하게 유지되는 상환 방식입니다. 매달 원금 비중은 점차 커집니다.',
       },
       {
+        question: '원금균등상환과 원리금균등상환의 차이는?',
+        answer:
+          '원금균등은 원금을 균등하게 상환하고 이자는 점차 감소하며, 원리금균등은 월 상환액이 일정합니다. 원금균등이 총 이자는 적지만 초기 납입금이 큽니다.',
+      },
+      {
+        question: '만기일시상환은 뭔가요?',
+        answer:
+          '대출 기간 동안 이자만 납부하고 만기일에 원금을 일시 상환하는 방식입니다.',
+      },
+      {
         question: '이율이 0%일 때도 계산되나요?',
         answer:
           '네, 연이율이 0%인 경우 월 상환액은 원금 ÷ 상환 개월 수로 계산됩니다.',
@@ -74,6 +82,16 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       {
         question: '금리 입력값은 소수점도 되나요?',
         answer: '네, 연이율은 소수점 입력이 가능합니다. (예: 3.5)',
+      },
+      {
+        question: '중도상환수수료 계산기는 어떻게 사용하나요?',
+        answer:
+          '대출일, 상환일, 만기일을 입력하고 상환 금액과 수수료율을 설정하면 중도상환수수료를 계산할 수 있습니다.',
+      },
+      {
+        question: '면제기간이란?',
+        answer:
+          '대출일부터 일정 기간 동안 중도상환수수료가 면제되는 기간입니다. 금융기관마다 다르므로 확인이 필요합니다.',
       },
       {
         question: '총 상환 금액은 어떤 값을 의미하나요?',
@@ -96,12 +114,20 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
         text: '연 이자율(%)을 숫자로 입력합니다. 0부터 입력 가능합니다.',
       },
       {
+        name: '상환 방법 선택',
+        text: '원리금균등, 원금균등, 만기일시상환 중 원하는 상환 방식을 선택합니다.',
+      },
+      {
         name: '상환 기간 입력',
-        text: '상환 기간을 년 단위로 입력하고 즉시 계산 결과를 확인합니다.',
+        text: '상환 기간을 년/월 단위로 입력하고 즉시 계산 결과를 확인합니다.',
       },
       {
         name: '결과 확인',
         text: '월 상환액, 총 이자, 총 상환액을 한눈에 확인하세요.',
+      },
+      {
+        name: '중도상환 탭 선택',
+        text: '"중도상환 수수료" 탭을 선택하여 조기 상환 시 발생하는 수수료를 계산할 수 있습니다.',
       },
     ],
     applicationCategory: 'UtilityApplication',
