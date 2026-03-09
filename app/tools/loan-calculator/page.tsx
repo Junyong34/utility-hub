@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
-import { LoanCalculatorForm } from '@/components/tools/LoanCalculatorForm';
+import { LoanCalculatorForm } from '@/components/tools/loan-calculator';
 import { ToolSwitcher } from '@/components/tools/ToolSwitcher';
 import {
   assertToolStructuredData,
