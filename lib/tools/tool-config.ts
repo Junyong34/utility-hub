@@ -36,7 +36,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       '맞춤 상환 계산',
     ],
     category: 'calculator',
-    ogImage: '/og-images/tools-default.png',
+    ogImage: '/og-images/post/loan-calc.webp',
     badge: 'NEW',
     color: 'from-emerald-500 to-teal-500',
     icon: 'Calculator',
