@@ -16,6 +16,7 @@ tags:
   ]
 category: '투자'
 categorySlug: 'investment'
+ogImage: "/og-images/post/hbf-investment.webp"
 ---
 
 ## TL;DR
