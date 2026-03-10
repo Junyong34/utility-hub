@@ -66,7 +66,7 @@ export type LoanQueryState = {
   principal: number | null;
   rate: number | null;
   term: number | null;
-  termMode: 'year' | 'month' | null;
+  termMode?: 'year' | 'month';
   method: RepaymentMethod;
 };
 

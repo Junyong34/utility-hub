@@ -94,7 +94,7 @@ export function useLoanCalculator() {
       principal: 0,
       rate: 0,
       term: 0,
-      termMode: null,
+      termMode: undefined,
       method: 'equal-payment',
     });
     setShowResults(false);

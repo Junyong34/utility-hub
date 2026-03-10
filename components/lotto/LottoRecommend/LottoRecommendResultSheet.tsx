@@ -1,8 +1,10 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import { BottomSheet } from '@/components/ui/bottom-sheet';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { celebrate } from '@/components/magicui/confetti';
 import { LottoAnalysisLoading } from './LottoAnalysisLoading';
 import { LottoRecommendActions } from './LottoRecommendActions';
 import { LottoRecommendResults } from './LottoRecommendResults';
@@ -21,6 +23,26 @@ export function LottoRecommendResultSheet() {
     },
     actions: { openResultSheet, closeResultSheet },
   } = useLottoRecommend();
+
+  // Track previous isGenerating state to detect transition
+  const prevIsGeneratingRef = useRef<boolean>(isGenerating);
+
+  // Trigger confetti when analysis completes (번호 분석 중 -> 추천 번호 결과)
+  useEffect(() => {
+    const wasGenerating = prevIsGeneratingRef.current;
+    const justFinished = wasGenerating && !isGenerating;
+
+    if (justFinished && currentGames.length > 0 && resultSheetOpen) {
+      // Small delay to ensure the UI has updated
+      const timer = setTimeout(() => {
+        celebrate();
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+
+    prevIsGeneratingRef.current = isGenerating;
+  }, [isGenerating, currentGames.length, resultSheetOpen]);
 
   // 결과가 생성되었거나 분석 중일 때만 시트를 렌더링해 불필요한 DOM 생성 방지.
   const hasRenderableContent = isGenerating || currentGames.length > 0;

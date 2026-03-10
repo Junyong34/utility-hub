@@ -24,7 +24,7 @@ interface LoanInputFormProps {
   principal: string;
   principalDisplay: string;
   annualRate: string;
-  termMode?: 'year' | 'month';
+  termMode?: 'year' | 'month' | null;
   termValue: string;
   method: RepaymentMethod;
   canCalculate: boolean;
@@ -163,7 +163,7 @@ export function LoanInputForm({
               <div className="space-y-3">
                 <ToggleGroup
                   type="single"
-                  value={termMode}
+                  value={termMode ?? undefined}
                   onValueChange={value => {
                     if (value) onTermModeChange(value as 'year' | 'month');
                   }}

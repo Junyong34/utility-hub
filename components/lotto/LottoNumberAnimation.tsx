@@ -1,3 +1,5 @@
+import { getLottoBallColor } from '@/lib/lotto/lotto-number-style'
+
 /**
  * 로또 번호 애니메이션 컴포넌트
  *
@@ -49,29 +51,4 @@ export function LottoNumberAnimation({
   );
 }
 
-/**
- * 로또 번호에 따른 볼 색상 반환
- *
- * @param num - 로또 번호 (1-45)
- * @returns Tailwind CSS 클래스 문자열
- *
- * @example
- * ```tsx
- * const color = getLottoBallColor(15); // 'bg-blue-500 text-white ...'
- * ```
- */
-export function getLottoBallColor(num: number): string {
-  if (num <= 10) {
-    return 'bg-yellow-400 text-yellow-950 dark:bg-yellow-500 dark:text-yellow-950';
-  }
-  if (num <= 20) {
-    return 'bg-blue-500 text-white dark:bg-blue-600 dark:text-white';
-  }
-  if (num <= 30) {
-    return 'bg-red-500 text-white dark:bg-red-600 dark:text-white';
-  }
-  if (num <= 40) {
-    return 'bg-gray-600 text-white dark:bg-gray-500 dark:text-white';
-  }
-  return 'bg-green-600 text-white dark:bg-green-600 dark:text-white';
-}
+export { getLottoBallColor } from '@/lib/lotto/lotto-number-style'

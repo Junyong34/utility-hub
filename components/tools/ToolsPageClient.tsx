@@ -14,6 +14,27 @@ import { cn } from '@/lib/utils';
 
 type CategoryKey = ToolCategory | 'all';
 
+// badge 타입별 색상 스타일
+function getBadgeClassName(badge: string): string {
+  const lowerBadge = badge.toLowerCase();
+
+  if (lowerBadge === 'new' || lowerBadge === '신규') {
+    return 'border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400';
+  }
+  if (lowerBadge === 'popular' || lowerBadge === '인기') {
+    return 'border-rose-500/50 bg-rose-500/10 text-rose-700 dark:text-rose-400';
+  }
+  if (lowerBadge === 'beta' || lowerBadge === '베타') {
+    return 'border-blue-500/50 bg-blue-500/10 text-blue-700 dark:text-blue-400';
+  }
+  if (lowerBadge === 'updated' || lowerBadge === '업데이트') {
+    return 'border-amber-500/50 bg-amber-500/10 text-amber-700 dark:text-amber-400';
+  }
+
+  // 기본 스타일
+  return 'border-border bg-muted text-foreground';
+}
+
 const CATEGORY_CONFIG: { value: CategoryKey; label: string }[] = [
   { value: 'all', label: '전체' },
   { value: 'calculator', label: '계산기' },
@@ -188,7 +209,10 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
                           {tool.badge && (
                             <Badge
                               variant="outline"
-                              className="shrink-0 text-xs font-medium"
+                              className={cn(
+                                "shrink-0 text-xs font-medium",
+                                getBadgeClassName(tool.badge)
+                              )}
                             >
                               {tool.badge}
                             </Badge>
@@ -247,7 +271,10 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
                         {tool.badge && (
                           <Badge
                             variant="outline"
-                            className="shrink-0 text-xs font-medium"
+                            className={cn(
+                              "shrink-0 text-xs font-medium",
+                              getBadgeClassName(tool.badge)
+                            )}
                           >
                             {tool.badge}
                           </Badge>
