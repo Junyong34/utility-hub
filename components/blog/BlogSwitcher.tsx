@@ -28,6 +28,7 @@ export function BlogSwitcher({
       value={currentSlug}
       onValueChange={handlePostChange}
       placeholder={placeholder}
+      triggerAriaLabel="포스트 선택"
       emptyLabel="해당 카테고리에 포스트가 없습니다."
       options={posts.map((post) => ({
         value: post.slug,

@@ -17,6 +17,7 @@ import {
 import { DollarSign, Percent, Calendar, ChevronRight } from 'lucide-react';
 import type { InterestType, TaxType } from '@/lib/tools/savings-calculator';
 import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
+import { getSelectableOptionButtonState } from '../accessibility';
 import { INTEREST_TYPES, TAX_TYPES } from '../constants';
 import { getNumberInput } from '../utils';
 
@@ -263,27 +264,31 @@ export function DepositInputForm({
             description="단리 또는 복리 선택"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {INTEREST_TYPES.map(type => (
-                <button
-                  key={type.value}
-                  onClick={() => onInterestTypeChange(type.value)}
-                  className={`relative p-3 rounded-lg border-2 transition-all text-left ${
-                    interestType === type.value
-                      ? 'border-primary bg-primary/8 shadow-sm shadow-primary/20'
-                      : 'border-input bg-background hover:border-primary/30 hover:bg-primary/2'
-                  }`}
-                >
-                  <div className="font-semibold text-sm text-foreground">
-                    {type.label}
-                  </div>
-                  <div className="text-xs text-muted-foreground mt-1">
-                    {type.description}
-                  </div>
-                  {interestType === type.value && (
-                    <div className="absolute top-3 right-3 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" />
-                  )}
-                </button>
-              ))}
+              {INTEREST_TYPES.map(type => {
+                const buttonState = getSelectableOptionButtonState(
+                  interestType === type.value
+                );
+
+                return (
+                  <button
+                    key={type.value}
+                    type={buttonState.type}
+                    aria-pressed={buttonState['aria-pressed']}
+                    onClick={() => onInterestTypeChange(type.value)}
+                    className={buttonState.className}
+                  >
+                    <div className="font-semibold text-sm text-foreground">
+                      {type.label}
+                    </div>
+                    <div className={buttonState.descriptionClassName}>
+                      {type.description}
+                    </div>
+                    {interestType === type.value && (
+                      <div className="absolute top-3 right-3 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </FormFieldGroup>
         </FormSectionGroup>
@@ -295,30 +300,32 @@ export function DepositInputForm({
             description="일반과세, 세금우대, 비과세 중 선택"
           >
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              {TAX_TYPES.map(tax => (
-                <button
-                  key={tax.value}
-                  onClick={() => onTaxTypeChange(tax.value)}
-                  className={`relative p-3 rounded-lg border-2 transition-all text-left ${
-                    taxType === tax.value
-                      ? 'border-primary bg-primary/8 shadow-sm shadow-primary/20'
-                      : 'border-input bg-background hover:border-primary/30 hover:bg-primary/2'
-                  }`}
-                >
-                  <div className="font-semibold text-sm text-foreground">
-                    {tax.label}
-                  </div>
-                  <div className="text-xs text-muted-foreground mt-1">
-                    {tax.description}
-                  </div>
-                  <div className="text-xs text-primary font-medium mt-1">
-                    {tax.rate}
-                  </div>
-                  {taxType === tax.value && (
-                    <div className="absolute top-3 right-3 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" />
-                  )}
-                </button>
-              ))}
+              {TAX_TYPES.map(tax => {
+                const buttonState = getSelectableOptionButtonState(
+                  taxType === tax.value
+                );
+
+                return (
+                  <button
+                    key={tax.value}
+                    type={buttonState.type}
+                    aria-pressed={buttonState['aria-pressed']}
+                    onClick={() => onTaxTypeChange(tax.value)}
+                    className={buttonState.className}
+                  >
+                    <div className="font-semibold text-sm text-foreground">
+                      {tax.label}
+                    </div>
+                    <div className={buttonState.descriptionClassName}>
+                      {tax.description}
+                    </div>
+                    <div className={buttonState.metaClassName}>{tax.rate}</div>
+                    {taxType === tax.value && (
+                      <div className="absolute top-3 right-3 w-2.5 h-2.5 bg-primary rounded-full shadow-sm" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
 
             {/* 세금우대 세율 커스터마이징 */}

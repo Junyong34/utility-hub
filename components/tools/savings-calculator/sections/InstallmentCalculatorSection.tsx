@@ -40,9 +40,9 @@ export function InstallmentCalculatorSection() {
     <TooltipProvider delayDuration={0} skipDelayDuration={0}>
       <section className="space-y-6">
         <div className="rounded-lg bg-indigo-50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800 p-4">
-          <h3 className="text-sm font-semibold text-indigo-900 dark:text-indigo-100 mb-2">
+          <h2 className="text-sm font-semibold text-indigo-900 dark:text-indigo-100 mb-2">
             🏦 적금(정기적금)이란?
-          </h3>
+          </h2>
           <p className="text-sm text-indigo-800 dark:text-indigo-200">
             매월 일정 금액을 납입하여 만기에 모은 원금과 이자를 받는 금융상품입니다. 목돈
             마련을 위해 계획적으로 저축할 수 있으며, 각 납입금에 대해 이자가 계산됩니다.

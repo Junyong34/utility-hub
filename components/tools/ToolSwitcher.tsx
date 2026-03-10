@@ -33,6 +33,7 @@ export function ToolSwitcher({ currentToolId }: ToolSwitcherProps) {
       value={currentToolId}
       onValueChange={handleToolChange}
       placeholder="도구를 선택하세요"
+      triggerAriaLabel="도구 선택"
       options={tools.map((tool) => ({
         value: tool.id,
         label: tool.name,

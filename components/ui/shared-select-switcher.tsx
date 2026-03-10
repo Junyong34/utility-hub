@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { getSharedSelectTriggerA11yProps } from '@/components/ui/accessibility-helpers';
 
 interface Option {
   value: string;
@@ -18,6 +19,7 @@ interface SharedSelectSwitcherProps {
   onValueChange: (value: string) => void;
   options: Option[];
   placeholder: string;
+  triggerAriaLabel?: string;
   emptyLabel?: string;
   className?: string;
 }
@@ -27,6 +29,7 @@ export function SharedSelectSwitcher({
   onValueChange,
   options,
   placeholder,
+  triggerAriaLabel,
   emptyLabel = '선택할 항목이 없습니다.',
   className = 'w-full sm:w-80',
 }: SharedSelectSwitcherProps) {
@@ -40,7 +43,10 @@ export function SharedSelectSwitcher({
 
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger className={className}>
+      <SelectTrigger
+        className={className}
+        {...getSharedSelectTriggerA11yProps(triggerAriaLabel)}
+      >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

@@ -40,9 +40,9 @@ export function DepositCalculatorSection() {
     <TooltipProvider delayDuration={0} skipDelayDuration={0}>
       <section className="space-y-6">
         <div className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 p-4">
-          <h3 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2">
+          <h2 className="text-sm font-semibold text-blue-900 dark:text-blue-100 mb-2">
             💰 예금(정기예금)이란?
-          </h3>
+          </h2>
           <p className="text-sm text-blue-800 dark:text-blue-200">
             한 번에 목돈을 예치하고 만기에 원금과 이자를 받는 금융상품입니다. 예치 기간 동안
             자금을 인출하지 않고 고정된 이자율로 이자를 받을 수 있습니다.
