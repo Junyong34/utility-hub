@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Script from "next/script";
-import { Geist, Geist_Mono, Roboto } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import Link from 'next/link'
 import './globals.css'
 import { generateMetadata as createMetadata, SITE_CONFIG } from '@/lib/seo'
@@ -13,25 +13,18 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Providers } from './providers'
 import { NAV_ITEMS } from '@/components/layout/nav-config'
 
+/**
+ * Method A: Single font with display swap
+ * - Only Roboto (reduces network requests from 3 to 1)
+ * - display: 'swap' for faster perceived load (shows fallback immediately)
+ * - weights: [400, 500, 700] to cover all use cases
+ */
 const roboto = Roboto({
+  weight: ['400', '500', '700'],
   subsets: ['latin'],
   variable: '--font-sans',
-  display: 'optional',
+  display: 'swap',
   preload: true,
-})
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-  display: 'optional',
-  preload: true,
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-  display: 'optional',
-  preload: false,
 })
 
 /**
@@ -66,9 +59,10 @@ export const viewport: Viewport = {
 }
 
 /**
- * Root Layout
- * - 글로벌 SEO 구조화 데이터 (Organization, WebSite)
- * - 폰트 최적화 (display: swap)
+ * Root Layout - Method A Optimized
+ * - Single font (Roboto only)
+ * - display: swap for faster initial render
+ * - Removed redundant preconnect (next/font handles it)
  */
 export default function RootLayout({
   children,
@@ -81,9 +75,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={roboto.variable}>
       <head>
-        {/* Preconnect to external domains for faster loading */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preconnect only for non-font external resources */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
@@ -166,9 +158,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="antialiased">
         <Providers>
           <NuqsAdapter>
             <AdSenseScript />
