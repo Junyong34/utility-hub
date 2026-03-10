@@ -2,6 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { LoanCalculatorFAQ } from '@/components/tools/LoanCalculatorFAQ';
+import { CalculatorCategoryLinks } from '@/components/tools/CalculatorCategoryLinks';
 import { LoanCalculatorSection } from './sections/LoanCalculatorSection';
 import { PrepaymentFeeSection } from './sections/PrepaymentFeeSection';
 
@@ -22,6 +23,8 @@ export function LoanCalculatorForm() {
           <PrepaymentFeeSection />
         </TabsContent>
       </Tabs>
+
+      <CalculatorCategoryLinks currentToolId="loan-calculator" />
 
       <LoanCalculatorFAQ />
     </div>
