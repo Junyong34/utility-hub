@@ -16,19 +16,22 @@ import { NAV_ITEMS } from '@/components/layout/nav-config'
 const roboto = Roboto({
   subsets: ['latin'],
   variable: '--font-sans',
-  display: 'swap',
+  display: 'optional',
+  preload: true,
 })
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
-  display: 'swap',
+  display: 'optional',
+  preload: true,
 })
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
-  display: 'swap',
+  display: 'optional',
+  preload: false,
 })
 
 /**
@@ -78,6 +81,13 @@ export default function RootLayout({
   return (
     <html lang="ko" className={roboto.variable}>
       <head>
+        {/* Preconnect to external domains for faster loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+
         {process.env.NODE_ENV === "development" && (
           <Script
             src="//unpkg.com/react-grab/dist/index.global.js"
@@ -142,21 +152,19 @@ export default function RootLayout({
         {/* 구조화 데이터 (JSON-LD) */}
         <JsonLdMultiple data={structuredData} />
 
-        {/*     <!-- Google tag (gtag.js) --> */}
-        <script
-          async
+        {/* Google Analytics - Optimized with next/script */}
+        <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-KG82C2B3TH"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-KG82C2B3TH');
-            `,
-          }}
+          strategy="afterInteractive"
         />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-KG82C2B3TH');
+          `}
+        </Script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

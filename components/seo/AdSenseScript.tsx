@@ -10,6 +10,7 @@ const ADSENSE_SCRIPT_SRC =
  * Hydration 이후에 AdSense 스크립트를 동적으로 주입합니다.
  * - React가 관리하는 <head> 초기 마크업을 변경하지 않도록 분리
  * - 중복 주입 방지
+ * - requestIdleCallback을 사용하여 메인 스레드가 유휴 상태일 때 로드
  */
 export function AdSenseScript() {
   useEffect(() => {
@@ -22,12 +23,22 @@ export function AdSenseScript() {
       return
     }
 
-    const script = document.createElement('script')
-    script.id = ADSENSE_SCRIPT_ID
-    script.async = true
-    script.src = ADSENSE_SCRIPT_SRC
-    script.crossOrigin = 'anonymous'
-    document.head.appendChild(script)
+    // Use requestIdleCallback to defer script loading until the browser is idle
+    const loadScript = () => {
+      const script = document.createElement('script')
+      script.id = ADSENSE_SCRIPT_ID
+      script.async = true
+      script.src = ADSENSE_SCRIPT_SRC
+      script.crossOrigin = 'anonymous'
+      document.head.appendChild(script)
+    }
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadScript, { timeout: 2000 })
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      setTimeout(loadScript, 1000)
+    }
   }, [])
 
   return null

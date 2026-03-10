@@ -4,6 +4,8 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 const nextConfig: NextConfig = {
   experimental: {
     turbopackUseSystemTlsCerts: true,
+    // Optimize package imports for better tree shaking
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
 
   // Allow cross-origin requests from development devices
