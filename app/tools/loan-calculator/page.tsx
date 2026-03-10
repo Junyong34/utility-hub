@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import { LoanCalculatorForm } from '@/components/tools/loan-calculator';
 import { ToolSwitcher } from '@/components/tools/ToolSwitcher';
@@ -37,7 +38,9 @@ export default function LoanCalculatorPage() {
             </p>
           </section>
 
-          <LoanCalculatorForm />
+          <Suspense fallback={<div className="text-muted-foreground">로딩 중...</div>}>
+            <LoanCalculatorForm />
+          </Suspense>
         </main>
       </div>
     </>
