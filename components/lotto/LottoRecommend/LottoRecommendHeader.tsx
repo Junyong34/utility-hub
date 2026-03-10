@@ -24,9 +24,9 @@ export function LottoRecommendHeader() {
                 {headerDescription}
               </p>
             </div>
-            <Badge variant="secondary" className="shrink-0">
-              {badgeText}
-            </Badge>
+            {/*<Badge variant="secondary" className="shrink-0">*/}
+            {/*  {badgeText}*/}
+            {/*</Badge>*/}
           </div>
           {/*<p className="max-w-xl text-sm leading-6 text-muted-foreground/90">*/}
           {/*  1번부터 45번까지 번호 볼을 한눈에 보면서, 랜덤·날짜·MBTI·슬롯·통계 전략을 같은 화면에서 비교해볼 수 있습니다.*/}
