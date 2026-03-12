@@ -4,7 +4,7 @@ export {
   calculateDsrSummary,
   estimateMaxNewLoanAmount,
   resolveDsrPolicy,
-} from './calculator';
+} from './dsr-calculator';
 export type {
   AnnualDebtService,
   DsrCalculationInput,
