@@ -15,6 +15,7 @@ const postsDirectory = path.join(process.cwd(), 'content/posts');
 const CATEGORY_NAMES: Record<string, string> = {
   parking: '주차',
   development: '개발',
+  consumer: '소비자 정보',
   'ai-image-creator': 'AI',
   uncategorized: '미분류',
 };
