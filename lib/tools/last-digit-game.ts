@@ -124,8 +124,8 @@ export function formatStopwatchTime(milliseconds: number): string {
 
 export function parseSecondDigit(formattedTime: string): number {
   const parts = formattedTime.trim().split(':');
-  if (parts.length < 2) return 0;
-  const secondPart = parts[1]?.trim() ?? '';
+  if (parts.length < 3) return 0;
+  const secondPart = parts[2]?.trim() ?? '';
   if (!secondPart || secondPart.length === 0) return 0;
 
   const secondValue = Number(secondPart);

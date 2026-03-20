@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -236,7 +236,8 @@ function getPlacementLabel(rank: number, totalCount: number) {
   if (rank === totalCount) {
     return {
       label: '꼴등 💀',
-      variant: 'bg-zinc-500/20 text-zinc-700 border-zinc-500/50',
+      variant:
+        'bg-gradient-to-r from-zinc-600 to-zinc-700 text-white border-zinc-500/60',
     };
   }
 
@@ -262,6 +263,24 @@ function getRankName(rank: number, userStatus: LastDigitGameUser['status']) {
   return `${rank}위`;
 }
 
+function getRankMovement(delta: number) {
+  if (delta > 0) {
+    return {
+      label: `🔺 +${delta}`,
+      className: 'border-emerald-500/40 text-emerald-700 bg-emerald-500/10',
+    };
+  }
+
+  if (delta < 0) {
+    return {
+      label: `🔻 ${delta}`,
+      className: 'border-rose-500/40 text-rose-700 bg-rose-500/10',
+    };
+  }
+
+  return null;
+}
+
 export function LastDigitGameTool() {
   const [playerCountInput, setPlayerCountInput] = useState<string>(
     String(DEFAULT_LAST_DIGIT_GAME_PLAYERS)
@@ -278,6 +297,8 @@ export function LastDigitGameTool() {
   const attemptStartRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
   const dashboardRef = useRef<HTMLDivElement | null>(null);
+  const rankingRefs = useRef<Map<number, HTMLDivElement | null>>(new Map());
+  const previousRankingPositions = useRef<Map<number, number>>(new Map());
 
   const rankedUsers = useMemo(
     () => calculateRankedUsers(gameState.users),
@@ -530,6 +551,74 @@ export function LastDigitGameTool() {
     (gameState.isRunning ? !canStop(gameState) : !canStart(gameState));
   const isResetDisabled = gameState.isRunning;
   const isSetupDisabled = gameState.isRunning;
+  const previousRanksRef = useRef<Map<number, number>>(new Map());
+
+  const rankMovementMap = useMemo(() => {
+    const map = new Map<number, number>();
+    const hasHistory = previousRanksRef.current.size > 0;
+
+    if (!hasHistory) {
+      return map;
+    }
+
+    rankedUsers.forEach((user, index) => {
+      const previousRank = previousRanksRef.current.get(user.id);
+      if (previousRank === undefined) {
+        return;
+      }
+
+      map.set(user.id, previousRank - (index + 1));
+    });
+
+    return map;
+  }, [rankedUsers]);
+
+  useLayoutEffect(() => {
+    const previous = new Map(previousRankingPositions.current);
+    const nextPositions = new Map<number, number>();
+
+    rankedUsers.forEach(user => {
+      const element = rankingRefs.current.get(user.id);
+      if (!element) {
+        return;
+      }
+
+      const rect = element.getBoundingClientRect();
+      const previousTop = previous.get(user.id);
+      const currentTop = rect.top;
+      nextPositions.set(user.id, currentTop);
+
+      if (previousTop === undefined) {
+        return;
+      }
+
+      const deltaY = previousTop - currentTop;
+      if (Math.abs(deltaY) < 0.5) {
+        return;
+      }
+
+      const animation = element.animate(
+        [
+          { transform: `translateY(${deltaY}px)` },
+          { transform: 'translateY(0)' },
+        ],
+        {
+          duration: 280,
+          easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          fill: 'both',
+        }
+      );
+
+      animation.onfinish = () => {
+        element.style.transform = '';
+      };
+    });
+
+    previousRankingPositions.current = nextPositions;
+    previousRanksRef.current = new Map(
+      rankedUsers.map((user, index) => [user.id, index + 1])
+    );
+  }, [rankedUsers]);
 
   return (
     <div className="space-y-6">
@@ -549,8 +638,8 @@ export function LastDigitGameTool() {
           <p className="text-sm text-muted-foreground">{actionInfo.heading}</p>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="grid gap-4 md:grid-cols-2">
-            <section className="space-y-4">
+          <div className="grid gap-4 lg:grid-cols-1 xl:grid-cols-[1fr_1.5fr]">
+            <section className="space-y-4 min-w-0">
               <div className="rounded-lg border border-foreground/20 p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   참가자 설정
@@ -581,7 +670,7 @@ export function LastDigitGameTool() {
 
             </section>
 
-            <section className="space-y-4">
+            <section className="space-y-4 min-w-0">
               <div className="rounded-lg border border-foreground/20 p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   참가 순서 및 완료 대시보드
@@ -718,7 +807,7 @@ export function LastDigitGameTool() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2">
+          <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
             {rankedUsers.map((user, index) => {
               const rankLabel = getPlacementLabel(
                 user.rank,
@@ -736,19 +825,30 @@ export function LastDigitGameTool() {
               const isDone = user.status === 'done';
               const orderText =
                 userIndex >= 0 ? `${userIndex + 1}-순서` : '미확인';
+              const rankMovement = rankMovementMap.get(user.id);
+              const movementInfo =
+                rankMovement === undefined ? null : getRankMovement(rankMovement);
 
               return (
                 <div
                   key={user.id}
                   className={cn(
                     'rounded-lg border p-3 transition-all duration-300',
-                    isPlaying && 'ring-2 ring-emerald-500/40 bg-emerald-500/10',
+                      isPlaying && 'ring-2 ring-emerald-500/40 bg-emerald-500/10',
                     isCurrent && 'ring-2 ring-blue-500/40 bg-blue-500/10',
                     isDone &&
                       !isPlaying &&
                       'border-emerald-500/40 bg-emerald-500/5'
                   )}
-                >
+                  ref={element => {
+                      if (element) {
+                        rankingRefs.current.set(user.id, element);
+                        return;
+                      }
+
+                      rankingRefs.current.delete(user.id);
+                    }}
+                  >
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex min-w-0 items-center gap-2">
                       <span
@@ -767,6 +867,11 @@ export function LastDigitGameTool() {
                       <Badge className={cn('border', rankLabel.variant)}>
                         {rankLabel.label}
                       </Badge>
+                      {movementInfo && (
+                        <Badge className={cn('font-bold', movementInfo.className)}>
+                          {movementInfo.label}
+                        </Badge>
+                      )}
                       <Badge variant="outline">
                         {USER_STATUSES[user.status]}
                       </Badge>
@@ -778,9 +883,18 @@ export function LastDigitGameTool() {
                     </p>
                   </div>
                   <div className="mt-2 grid grid-cols-2 gap-2 text-sm text-muted-foreground">
-                    <p>기록1: {user.times[0] ?? '-'}</p>
-                    <p>기록2: {user.times[1] ?? '-'}</p>
-                    <p className="col-span-2">라벨: {user.label}</p>
+                    <p>
+                      기록1:{' '}
+                      <span className="font-bold text-foreground">
+                        {user.times[0] ?? '-'}
+                      </span>
+                    </p>
+                    <p>
+                      기록2:{' '}
+                      <span className="font-bold text-foreground">
+                        {user.times[1] ?? '-'}
+                      </span>
+                    </p>
                   </div>
                 </div>
               );
@@ -821,7 +935,9 @@ export function LastDigitGameTool() {
                   className={cn(
                     'rounded-md border px-3 py-2 text-sm transition-all duration-300',
                     index === 0
-                      ? 'border-amber-500/50 bg-amber-500/10'
+                      ? 'border-amber-500/50 bg-amber-500/15'
+                      : index === rankedUsers.length - 1
+                        ? 'border-zinc-500/60 bg-zinc-600/20'
                       : 'border-border/70'
                   )}
                 >
@@ -840,8 +956,14 @@ export function LastDigitGameTool() {
                     </p>
                   </div>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    라벨: {user.label} | 기록: {user.times[0] ?? '--'} /{' '}
-                    {user.times[1] ?? '--'}
+                    기록:{' '}
+                    <span className="font-bold text-foreground">
+                      {user.times[0] ?? '--'}
+                    </span>{' '}
+                    /{' '}
+                    <span className="font-bold text-foreground">
+                      {user.times[1] ?? '--'}
+                    </span>
                   </p>
                 </div>
               );
