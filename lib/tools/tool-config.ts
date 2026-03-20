@@ -521,7 +521,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     breadcrumbLabel: '랜덤 스톱워치 게임',
     publishedAt: '2026-03-20',
     description:
-      '최대 20명 참가자의 초 끝자리 점수 기반 경쟁형 스톱워치 게임입니다. Start/Stop으로 각 사용자의 1회차와 2회차 시간을 기록해 실시간 랭킹을 확인하세요.',
+      '최대 15명 참가자의 초 끝자리 점수 기반 경쟁형 스톱워치 게임입니다. Start/Stop으로 각 사용자의 1회차와 2회차 시간을 기록해 실시간 랭킹을 확인하세요.',
     keywords: [
       '랜덤 스톱워치 게임',
       '점수 경쟁',
