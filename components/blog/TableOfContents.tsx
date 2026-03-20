@@ -24,8 +24,8 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   // Intersection Observer로 현재 보이는 섹션 추적
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             setActiveId(entry.target.id);
           }
@@ -38,13 +38,15 @@ export function TableOfContents({ items }: TableOfContentsProps) {
     );
 
     // 모든 헤딩 요소 관찰
-    const headings = items.map((item) => document.getElementById(item.id)).filter(Boolean);
-    headings.forEach((heading) => {
+    const headings = items
+      .map(item => document.getElementById(item.id))
+      .filter(Boolean);
+    headings.forEach(heading => {
       if (heading) observer.observe(heading);
     });
 
     return () => {
-      headings.forEach((heading) => {
+      headings.forEach(heading => {
         if (heading) observer.unobserve(heading);
       });
     };
@@ -68,7 +70,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   // 목차 항목 렌더링 (데스크탑/모바일 공통)
   const renderTocItems = (isMobile = false) => (
     <nav className="space-y-1">
-      {items.map((item) => (
+      {items.map(item => (
         <button
           key={item.id}
           onClick={() => handleClick(item.id)}
@@ -91,7 +93,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   return (
     <>
       {/* 데스크탑: 우측 고정 사이드바 */}
-      <aside className="hidden lg:block lg:w-64 xl:w-72 flex-shrink-0">
+      <aside className="hidden lg:block ml-4 lg:w-64 xl:w-72 flex-shrink-0">
         <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
           <div className="p-4 bg-muted/30 rounded-lg border border-border">
             <p className="font-semibold text-sm mb-3 text-foreground">목차</p>
