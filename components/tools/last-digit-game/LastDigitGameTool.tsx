@@ -628,7 +628,10 @@ export function LastDigitGameTool() {
             <div>
               <CardTitle className="text-2xl">랜덤 스톱워치 게임</CardTitle>
               <CardDescription>
-                초 끝자리 추출 × 2회 기록, 점수 경쟁 게임
+                <span className="font-semibold text-foreground">
+                  초 끝자리 추출 × 2회 기록
+                </span>{' '}
+                기반 점수 경쟁 게임
               </CardDescription>
             </div>
             <Badge className={cn('px-3 py-1', phaseBadge.className)}>
@@ -636,6 +639,11 @@ export function LastDigitGameTool() {
             </Badge>
           </div>
           <p className="text-sm text-muted-foreground">{actionInfo.heading}</p>
+          <p className="text-sm font-semibold text-foreground/85">
+            <span className="underline decoration-dotted underline-offset-4">
+              {actionInfo.emphasis}
+            </span>
+          </p>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid gap-4 lg:grid-cols-1 xl:grid-cols-[1fr_1.5fr]">
@@ -667,7 +675,6 @@ export function LastDigitGameTool() {
                   </Button>
                 </div>
               </div>
-
             </section>
 
             <section className="space-y-4 min-w-0">
@@ -701,12 +708,12 @@ export function LastDigitGameTool() {
                 </div>
                 <div ref={dashboardRef} className="mt-4">
                   {hasPlayers ? (
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
                       {gameState.users.map((user, index) => (
                         <div
                           key={user.id}
                           className={cn(
-                            'flex flex-wrap items-center justify-between gap-2 rounded-md border px-2 py-2 text-xs',
+                            'flex flex-wrap items-start gap-2 rounded-md border px-2 py-2 text-[11px] leading-snug',
                             user.status === 'done'
                               ? 'border-white/25 bg-gradient-to-r text-white'
                               : index === gameState.currentUserIndex
@@ -716,10 +723,10 @@ export function LastDigitGameTool() {
                           )}
                         >
                           <p className="min-w-0 flex-1">
-                            <span className="mr-1 rounded-md border border-white/40 bg-white/20 px-1.5 py-0.5 text-xs font-bold text-white">
+                            <span className="mr-1 rounded-md border border-white/40 bg-white/20 px-1.5 py-0.5 text-sm font-bold text-white">
                               {index + 1}-순서
                             </span>{' '}
-                            <span className="font-semibold text-white">
+                            <span className="text-base font-extrabold text-white">
                               {user.name}
                             </span>
                           </p>
@@ -769,7 +776,7 @@ export function LastDigitGameTool() {
                     {currentActiveName}
                   </span>
                 </p>
-                <p className="mt-2 text-8xl font-black tracking-tight tabular-nums">
+                <p className="mt-2 w-full max-w-full overflow-hidden text-[clamp(2rem,14vw,5rem)] font-black leading-none tracking-tight tabular-nums">
                   {currentAttemptText}
                 </p>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -827,28 +834,30 @@ export function LastDigitGameTool() {
                 userIndex >= 0 ? `${userIndex + 1}-순서` : '미확인';
               const rankMovement = rankMovementMap.get(user.id);
               const movementInfo =
-                rankMovement === undefined ? null : getRankMovement(rankMovement);
+                rankMovement === undefined
+                  ? null
+                  : getRankMovement(rankMovement);
 
               return (
                 <div
                   key={user.id}
                   className={cn(
                     'rounded-lg border p-3 transition-all duration-300',
-                      isPlaying && 'ring-2 ring-emerald-500/40 bg-emerald-500/10',
+                    isPlaying && 'ring-2 ring-emerald-500/40 bg-emerald-500/10',
                     isCurrent && 'ring-2 ring-blue-500/40 bg-blue-500/10',
                     isDone &&
                       !isPlaying &&
                       'border-emerald-500/40 bg-emerald-500/5'
                   )}
                   ref={element => {
-                      if (element) {
-                        rankingRefs.current.set(user.id, element);
-                        return;
-                      }
+                    if (element) {
+                      rankingRefs.current.set(user.id, element);
+                      return;
+                    }
 
-                      rankingRefs.current.delete(user.id);
-                    }}
-                  >
+                    rankingRefs.current.delete(user.id);
+                  }}
+                >
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div className="flex min-w-0 items-center gap-2">
                       <span
@@ -868,7 +877,9 @@ export function LastDigitGameTool() {
                         {rankLabel.label}
                       </Badge>
                       {movementInfo && (
-                        <Badge className={cn('font-bold', movementInfo.className)}>
+                        <Badge
+                          className={cn('font-bold', movementInfo.className)}
+                        >
                           {movementInfo.label}
                         </Badge>
                       )}
@@ -938,7 +949,7 @@ export function LastDigitGameTool() {
                       ? 'border-amber-500/50 bg-amber-500/15'
                       : index === rankedUsers.length - 1
                         ? 'border-zinc-500/60 bg-zinc-600/20'
-                      : 'border-border/70'
+                        : 'border-border/70'
                   )}
                 >
                   <div className="flex items-center justify-between gap-2">

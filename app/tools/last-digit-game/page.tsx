@@ -36,13 +36,33 @@ export default function LastDigitGamePage() {
             <h1 className="text-3xl font-bold text-foreground">
               랜덤 스톱워치 게임 (Last Digit Game)
             </h1>
-            <p className="mt-1 text-muted-foreground">
-              참여자별 2회 스톱워치 기록에서 초(second)의 끝자리 곱으로 점수를 계산해
-              실시간 랭킹 경쟁을 진행합니다.
-            </p>
+            <div className="mt-3 rounded-lg border border-foreground/15 bg-card/80 p-4">
+              <p className="text-sm text-muted-foreground">
+                <strong className="font-bold text-foreground">요약</strong>:
+                참여자별 <strong>2회</strong> 기록을 받아{' '}
+                <strong>초(second) 끝자리</strong>를 추출해 점수를 계산하고
+                실시간으로 순위를 비교하는 게임입니다.
+              </p>
+              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                <li>
+                  🟢 <strong className="text-foreground">점수 규칙</strong>:
+                  기록1 × 기록2 (각각 초 끝자리 값)
+                </li>
+                <li>
+                  🟢 <strong className="text-foreground">정렬 규칙</strong>:
+                  점수 높은 순, 동점은 완료 순(시간) 우선
+                </li>
+                <li>
+                  🟢 <strong className="text-foreground">완주 조건</strong>:
+                  모든 참가자가 2회 측정을 완료
+                </li>
+              </ul>
+            </div>
           </section>
 
-          <Suspense fallback={<div className="text-muted-foreground">로딩 중...</div>}>
+          <Suspense
+            fallback={<div className="text-muted-foreground">로딩 중...</div>}
+          >
             <LastDigitGameTool />
           </Suspense>
         </main>
@@ -50,4 +70,3 @@ export default function LastDigitGamePage() {
     </>
   );
 }
-
