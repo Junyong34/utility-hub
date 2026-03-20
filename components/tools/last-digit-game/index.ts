@@ -1,0 +1,2 @@
+export { LastDigitGameTool } from './LastDigitGameTool';
+
