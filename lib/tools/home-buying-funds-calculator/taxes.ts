@@ -132,8 +132,9 @@ export function calculateNationalHousingBond(
   }
 
   const bondAmount = Math.floor(standardPrice * rate);
-  // 즉시 매각 시 약 20% 할인 (실거래 기준)
-  return Math.floor(bondAmount * 0.8);
+  // 즉시 매각 시 약 88~90% 가격으로 매도 = 약 10~12% 손실
+  // 보수적으로 12% 손실 기준 적용
+  return Math.floor(bondAmount * 0.12);
 }
 
 /**
@@ -148,7 +149,7 @@ export function calculateDefenseFundAmount(
     case 'seoul':
       return 55_000_000; // 서울: 5,500만원
     case 'overconcentration':
-      return 48_000_000; // 과밀억제권역: 4,800만원
+      return 50_000_000; // 과밀억제권역: 5,000만원
     case 'metro':
       return 28_000_000; // 광역시: 2,800만원
     case 'other':

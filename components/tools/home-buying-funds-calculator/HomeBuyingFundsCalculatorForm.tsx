@@ -25,7 +25,7 @@ export function HomeBuyingFundsCalculatorForm() {
 
           {/* 결과 섹션 */}
           <div className="lg:col-span-7">
-            <HomeBuyingResultSection result={result} currentCash={input.currentCash} />
+            <HomeBuyingResultSection result={result} currentCash={input.currentCash} input={input} />
           </div>
         </div>
 

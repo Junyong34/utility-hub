@@ -2,73 +2,68 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import type { HomeBuyingResult } from '@/lib/tools/home-buying-funds-calculator';
+import NumberTicker from '@/components/magicui/number-ticker';
 
 interface CostSummaryCardsProps {
   result: HomeBuyingResult;
 }
 
+interface StatItem {
+  label: string;
+  subLabel: string;
+  value: number;
+  accentClass: string;
+  valueClass: string;
+}
+
 export function CostSummaryCards({ result }: CostSummaryCardsProps) {
+  const stats: StatItem[] = [
+    {
+      label: '최소 필요현금',
+      subLabel: '대출 제외 실제 필요한 현금',
+      value: result.minRequiredCash,
+      accentClass: 'bg-primary',
+      valueClass: 'text-primary',
+    },
+    {
+      label: '권장 필요현금',
+      subLabel: '예비비 포함 권장 금액',
+      value: result.recommendedCash,
+      accentClass: 'bg-blue-400',
+      valueClass: 'text-blue-500 dark:text-blue-400',
+    },
+    {
+      label: '총 필요자기자본',
+      subLabel: '대출금 포함 전체 필요 자금',
+      value: result.totalRequiredEquity,
+      accentClass: 'bg-muted-foreground/40',
+      valueClass: 'text-foreground',
+    },
+  ];
+
   return (
-    <div className="grid gap-4 md:grid-cols-2">
-      {/* 총 필요 자기자본 */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-muted-foreground">총 필요 자기자본</p>
-            <p className="text-2xl font-bold">
-              {result.totalRequiredEquity.toLocaleString('ko-KR')}원
+    <div className="grid grid-cols-3 gap-3">
+      {stats.map(stat => (
+        <Card key={stat.label} className="overflow-hidden">
+          {/* 상단 컬러 액센트 라인 */}
+          <div className={`h-0.5 w-full ${stat.accentClass}`} />
+          <CardContent className="pt-4 pb-4 px-3 space-y-1.5">
+            <p className="text-xs font-medium text-muted-foreground leading-tight">
+              {stat.label}
             </p>
-            <p className="text-xs text-muted-foreground">
-              대출금 포함 전체 필요 자금
+            <p className={`text-lg font-bold leading-tight ${stat.valueClass}`}>
+              <NumberTicker
+                value={stat.value}
+                className={`text-lg font-bold ${stat.valueClass}`}
+              />
+              <span className="text-xs font-semibold ml-0.5">원</span>
             </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 최소 필요 현금 */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-muted-foreground">최소 필요 현금</p>
-            <p className="text-2xl font-bold text-primary">
-              {result.minRequiredCash.toLocaleString('ko-KR')}원
+            <p className="text-[11px] text-muted-foreground leading-tight">
+              {stat.subLabel}
             </p>
-            <p className="text-xs text-muted-foreground">
-              대출 제외 실제 필요한 현금
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 권장 필요 현금 */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-muted-foreground">권장 필요 현금</p>
-            <p className="text-2xl font-bold text-blue-600">
-              {result.recommendedCash.toLocaleString('ko-KR')}원
-            </p>
-            <p className="text-xs text-muted-foreground">
-              예비비 포함 권장 금액
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* 대출 없을 경우 */}
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-muted-foreground">대출 없을 경우</p>
-            <p className="text-2xl font-bold">
-              {result.cashWithoutLoan.toLocaleString('ko-KR')}원
-            </p>
-            <p className="text-xs text-muted-foreground">
-              현금 매수 시 필요 금액
-            </p>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }

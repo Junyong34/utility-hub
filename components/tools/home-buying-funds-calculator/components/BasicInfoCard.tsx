@@ -11,7 +11,6 @@ import type { HomeBuyingInput } from '@/lib/tools/home-buying-funds-calculator';
 import { FIELD_LABELS, FIELD_TOOLTIPS, QUICK_ACTIONS } from '../constants';
 import { ARIA_LABELS } from '../accessibility';
 import { DefenseFundInfoDialog } from './DefenseFundInfoDialog';
-import { NationalHousingBondInfoDialog } from './NationalHousingBondInfoDialog';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { calculateDefenseFundAmount } from '@/lib/tools/home-buying-funds-calculator/taxes';
 
@@ -70,7 +69,7 @@ export function BasicInfoCard({ input, onChange }: BasicInfoCardProps) {
           quickActions={QUICK_ACTIONS.salePrice.map(action => ({
             ...action,
             label: action.label,
-            onSelect: () => onChange({ salePrice: action.amount }),
+            onSelect: () => onChange({ salePrice: input.salePrice + action.amount }),
           }))}
         />
 
@@ -87,9 +86,12 @@ export function BasicInfoCard({ input, onChange }: BasicInfoCardProps) {
             quickActions={QUICK_ACTIONS.loanAmount.map(action => ({
               ...action,
               label: action.label,
-              onSelect: () => onChange({ loanAmount: action.amount }),
+              onSelect: () => onChange({ loanAmount: input.loanAmount + action.amount }),
             }))}
           />
+          <p className="text-xs text-muted-foreground">
+            * 인지세는 대출금액에 따라 자동 계산됩니다 (1천만원~5천만원: 5만원, 5천만원~1억: 10만원, 1억 초과: 15만원)
+          </p>
 
           {/* 방공제 체크박스 */}
           <div className="space-y-1">
@@ -133,7 +135,7 @@ export function BasicInfoCard({ input, onChange }: BasicInfoCardProps) {
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="overconcentration" id="regional-overconcentration-basic" />
                     <Label htmlFor="regional-overconcentration-basic" className="cursor-pointer font-normal text-sm">
-                      과밀억제권역 (4,800만원)
+                      과밀억제권역 (5,000만원)
                     </Label>
                   </div>
                   <div className="flex items-center space-x-2">
@@ -188,7 +190,7 @@ export function BasicInfoCard({ input, onChange }: BasicInfoCardProps) {
             quickActions={QUICK_ACTIONS.currentCash.map(action => ({
               ...action,
               label: action.label,
-              onSelect: () => onChange({ currentCash: action.amount }),
+              onSelect: () => onChange({ currentCash: input.currentCash + action.amount }),
             }))}
           />
 

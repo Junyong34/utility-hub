@@ -62,6 +62,8 @@ export function AdvancedOptionsCard({ input, onChange }: AdvancedOptionsCardProp
           </div>
           <p className="text-xs text-muted-foreground">
             예상치 못한 비용에 대비한 예비비입니다. 3~10% 권장합니다.
+            <br />
+            * 예비비는 부대비용(세금 + 실비용)을 기준으로 계산되며, 계약금과 잔금은 제외됩니다.
           </p>
         </div>
       </CardContent>

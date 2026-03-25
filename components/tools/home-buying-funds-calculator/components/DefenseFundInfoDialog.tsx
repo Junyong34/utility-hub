@@ -51,7 +51,7 @@ export function DefenseFundInfoDialog() {
               <p className="font-semibold text-foreground">지역별 기준액</p>
               <ul className="mt-2 space-y-1.5 text-sm">
                 <li>• <strong>서울</strong>: 5,500만원</li>
-                <li>• <strong>과밀억제권역</strong> (성남, 고양, 과천 등): 4,800만원</li>
+                <li>• <strong>과밀억제권역</strong> (성남, 고양, 과천 등): 5,000만원</li>
                 <li>• <strong>광역시</strong> (부산, 대구, 대전 등): 2,800만원</li>
                 <li>• <strong>기타 지방</strong>: 2,000만원</li>
               </ul>

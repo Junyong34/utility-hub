@@ -2,7 +2,12 @@
  * 주택 매수 필요자금 전체 계산 및 정규화
  */
 
-import type { HomeBuyingInput, HomeBuyingResult, CostBreakdownItem, FlowChartNode } from './types';
+import type {
+  HomeBuyingInput,
+  HomeBuyingResult,
+  CostBreakdownItem,
+  FlowChartNode,
+} from './types';
 import {
   calculateAcquisitionTax,
   calculateLocalEducationTax,
@@ -24,11 +29,15 @@ import { resolveManagementDepositAmount } from './management-deposit';
 /**
  * 전체 필요자금 계산
  */
-export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResult {
+export function calculateHomeBuyingFunds(
+  input: HomeBuyingInput
+): HomeBuyingResult {
   const breakdown: CostBreakdownItem[] = [];
 
   // 계약금
-  const downPayment = Math.floor(input.salePrice * (input.downPaymentRatio / 100));
+  const downPayment = Math.floor(
+    input.salePrice * (input.downPaymentRatio / 100)
+  );
   breakdown.push({
     id: 'down-payment',
     stage: 'contract',
@@ -72,7 +81,8 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
 
   // 농어촌특별세
   const ruralSpecialTax =
-    input.manualRuralSpecialTax ?? calculateRuralSpecialTax(input, acquisitionTax);
+    input.manualRuralSpecialTax ??
+    calculateRuralSpecialTax(input, acquisitionTax);
   breakdown.push({
     id: 'rural-special-tax',
     stage: 'balance',
@@ -86,7 +96,8 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
 
   // 등록면허세
   const registrationTax =
-    input.manualRegistrationTax ?? calculateRegistrationTax(input.standardPrice);
+    input.manualRegistrationTax ??
+    calculateRegistrationTax(input.standardPrice);
   breakdown.push({
     id: 'registration-tax',
     stage: 'registration',
@@ -112,9 +123,13 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   });
 
   // 국민주택채권
-  const isMetro = input.regionalType === 'seoul' || input.regionalType === 'overconcentration' || input.regionalType === 'metro';
+  const isMetro =
+    input.regionalType === 'seoul' ||
+    input.regionalType === 'overconcentration' ||
+    input.regionalType === 'metro';
   const nationalHousingBond =
-    input.manualNationalHousingBond ?? calculateNationalHousingBond(input.standardPrice, isMetro);
+    input.manualNationalHousingBond ??
+    calculateNationalHousingBond(input.standardPrice, isMetro);
   breakdown.push({
     id: 'national-housing-bond',
     stage: 'registration',
@@ -129,7 +144,9 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   // 방공제 (소액임차보증금 우선변제 보호액)
   // 은행이 대출금액에서 미리 차감하므로, 실제로는 현금이 더 필요함
   if (input.hasDefenseFund) {
-    const defenseFundAmount = input.manualDefenseFundAmount ?? calculateDefenseFundAmount(input.regionalType);
+    const defenseFundAmount =
+      input.manualDefenseFundAmount ??
+      calculateDefenseFundAmount(input.regionalType);
     breakdown.push({
       id: 'defense-fund',
       stage: 'loan',
@@ -149,7 +166,7 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
     id: 'brokerage-fee',
     stage: 'contract',
     category: 'practical',
-    label: '중개보수',
+    label: '중개보수(복비)',
     amount: brokerageFee,
     calculationMode: input.manualBrokerageFee ? 'manual' : 'auto',
     confidence: input.manualBrokerageFee ? 'high' : 'medium',
@@ -157,7 +174,8 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   });
 
   // 법무사 비용
-  const lawyerFee = input.manualLawyerFee ?? calculateLawyerFee(input.salePrice);
+  const lawyerFee =
+    input.manualLawyerFee ?? calculateLawyerFee(input.salePrice);
   breakdown.push({
     id: 'lawyer-fee',
     stage: 'registration',
@@ -170,7 +188,9 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   });
 
   // 관리비예치금
-  const managementDeposit = resolveManagementDepositAmount(input.manualManagementDeposit);
+  const managementDeposit = resolveManagementDepositAmount(
+    input.manualManagementDeposit
+  );
   breakdown.push({
     id: 'management-deposit',
     stage: 'move',
@@ -185,7 +205,7 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   // 청소 비용
   const cleaningFee =
     input.cleaningFeePreset === 'manual'
-      ? input.manualCleaningFee ?? 0
+      ? (input.manualCleaningFee ?? 0)
       : calculateCleaningFee(input.cleaningFeePreset);
   if (cleaningFee > 0) {
     breakdown.push({
@@ -202,7 +222,7 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   // 이사 비용
   const movingFee =
     input.movingFeePreset === 'manual'
-      ? input.manualMovingFee ?? 0
+      ? (input.manualMovingFee ?? 0)
       : calculateMovingFee(input.movingFeePreset);
   if (movingFee > 0) {
     breakdown.push({
@@ -219,7 +239,7 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   // 인테리어 비용
   const interiorFee =
     input.interiorFeePreset === 'manual'
-      ? input.manualInteriorFee ?? 0
+      ? (input.manualInteriorFee ?? 0)
       : calculateInteriorFee(input.salePrice, input.interiorFeePreset);
   if (interiorFee > 0) {
     breakdown.push({
@@ -233,9 +253,13 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
     });
   }
 
-  // 예비비
-  const totalBeforeContingency = breakdown.reduce((sum, item) => sum + item.amount, 0);
-  const contingency = Math.floor(totalBeforeContingency * (input.contingencyRatio / 100));
+  // 예비비 (계약금과 잔금을 제외한 부대비용만 대상)
+  const totalBeforeContingency = breakdown
+    .filter(item => item.id !== 'down-payment' && item.id !== 'balance')
+    .reduce((sum, item) => sum + item.amount, 0);
+  const contingency = Math.floor(
+    totalBeforeContingency * (input.contingencyRatio / 100)
+  );
   if (contingency > 0) {
     breakdown.push({
       id: 'contingency',
@@ -245,7 +269,7 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
       amount: contingency,
       calculationMode: 'auto',
       confidence: 'medium',
-      formula: `합계 × ${input.contingencyRatio}%`,
+      formula: `부대비용 합계 × ${input.contingencyRatio}%`,
     });
   }
 
@@ -263,7 +287,10 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   });
 
   // 총 필요 자기자본 (이미 대출금이 제외된 금액)
-  const totalRequiredEquity = breakdown.reduce((sum, item) => sum + item.amount, 0);
+  const totalRequiredEquity = breakdown.reduce(
+    (sum, item) => sum + item.amount,
+    0
+  );
 
   // 최소 필요 현금 = 총 필요 자기자본 (대출금은 이미 잔금 계산에서 제외됨)
   const minRequiredCash = totalRequiredEquity;
@@ -274,8 +301,13 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
   // 대출 없을 경우 필요 현금 (잔금에 대출금을 더함)
   const cashWithoutLoan = minRequiredCash + input.loanAmount;
 
+  // 실제 보유 현금 (계약금 지불 완료 시 계약금을 더함)
+  const actualCash = input.hasDownPaymentPaid
+    ? input.currentCash + downPayment
+    : input.currentCash;
+
   // 현재 보유 현금 대비 부족액/여유자금
-  const cashGap = input.currentCash - minRequiredCash;
+  const cashGap = actualCash - minRequiredCash;
 
   return {
     totalRequiredEquity,
@@ -290,7 +322,9 @@ export function calculateHomeBuyingFunds(input: HomeBuyingInput): HomeBuyingResu
 /**
  * 플로우 차트 노드 생성
  */
-export function generateFlowChartNodes(breakdown: CostBreakdownItem[]): FlowChartNode[] {
+export function generateFlowChartNodes(
+  breakdown: CostBreakdownItem[]
+): FlowChartNode[] {
   const stages: Array<CostBreakdownItem['stage']> = [
     'contract',
     'loan',
