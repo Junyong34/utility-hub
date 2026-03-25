@@ -7,20 +7,35 @@ import { PracticalCostCard } from '../components/PracticalCostCard';
 import { AdvancedOptionsCard } from '../components/AdvancedOptionsCard';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
 
 interface HomeBuyingInputSectionProps {
   input: HomeBuyingInput;
   onChange: (updates: Partial<HomeBuyingInput>) => void;
+  onReset: () => void;
 }
 
-export function HomeBuyingInputSection({ input, onChange }: HomeBuyingInputSectionProps) {
+export function HomeBuyingInputSection({ input, onChange, onReset }: HomeBuyingInputSectionProps) {
   const [isPracticalOpen, setIsPracticalOpen] = useState(false);
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
   return (
     <div className="space-y-6">
+      {/* 초기화 버튼 */}
+      <div className="flex justify-end">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onReset}
+          className="gap-2"
+          type="button"
+        >
+          <RotateCcw className="h-4 w-4" />
+          초기화
+        </Button>
+      </div>
+
       {/* 기본 정보 - 항상 표시 */}
       <BasicInfoCard input={input} onChange={onChange} />
 

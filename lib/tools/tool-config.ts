@@ -623,7 +623,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
 
   'home-buying-funds-calculator': {
     id: 'home-buying-funds-calculator',
-    name: '주택 매수시 필요자금 계산기',
+    name: '주택 매수 시 필요자금 계산기',
     shortName: '주택 매수 필요자금 계산기',
     breadcrumbLabel: '매수 필요자금 계산기',
     publishedAt: '2026-03-25',
@@ -647,7 +647,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
       '아파트 구매 준비 자금',
     ],
     category: 'calculator',
-    badge: 'NEW',
+    badge: '인기',
     color: 'from-green-500 to-emerald-500',
     icon: 'Home',
     features: [

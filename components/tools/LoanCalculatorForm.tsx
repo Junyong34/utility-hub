@@ -40,7 +40,6 @@ import {
 import {
   ChevronRight,
   ChevronDown,
-  DollarSign,
   Percent,
   Calendar,
   Info,
@@ -478,7 +477,7 @@ function LoanCalculatorSection() {
             <FormSectionGroup>
               <FormFieldGroup
                 label="대출 원금"
-                icon={<DollarSign className="w-4 h-4" />}
+                icon={<span className="flex w-4 h-4 items-center justify-center text-sm font-bold">₩</span>}
                 description="최대 1조원까지 입력 가능합니다"
               >
                 <AmountInputField
@@ -1044,7 +1043,7 @@ function PrepaymentFeeCalculatorSection() {
             <FormSectionGroup>
               <FormFieldGroup
                 label="중도 상환 금액"
-                icon={<DollarSign className="w-4 h-4" />}
+                icon={<span className="flex w-4 h-4 items-center justify-center text-sm font-bold">₩</span>}
                 description="최대 1조원까지 입력 가능합니다"
               >
                 <AmountInputField

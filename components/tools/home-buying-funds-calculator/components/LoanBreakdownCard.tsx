@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { DollarSign, Minus, Plus, Equal, ChevronDown, ChevronUp } from 'lucide-react';
+import { Minus, Plus, Equal, ChevronDown, ChevronUp } from 'lucide-react';
 import NumberTicker from '@/components/magicui/number-ticker';
 import { Button } from '@/components/ui/button';
 
@@ -39,7 +39,7 @@ export function LoanBreakdownCard({
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="flex items-center gap-2">
-            <DollarSign className="h-5 w-5" />
+            <span className="flex h-5 w-5 items-center justify-center text-base font-bold">₩</span>
             자금 구성 한눈에 보기
           </CardTitle>
           <Button

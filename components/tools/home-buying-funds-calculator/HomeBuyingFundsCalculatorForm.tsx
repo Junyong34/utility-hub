@@ -7,7 +7,7 @@ import { HomeBuyingResultSection } from './sections/HomeBuyingResultSection';
 import { HomeBuyingFundsCalculatorFAQ } from './HomeBuyingFundsCalculatorFAQ';
 
 export function HomeBuyingFundsCalculatorForm() {
-  const { input, result, setState } = useHomeBuyingFundsCalculator();
+  const { input, result, setState, reset } = useHomeBuyingFundsCalculator();
 
   const handleChange = (updates: Partial<typeof input>) => {
     setState(updates);
@@ -20,7 +20,7 @@ export function HomeBuyingFundsCalculatorForm() {
         <div className="grid gap-6 lg:grid-cols-12">
           {/* 입력 섹션 */}
           <div className="lg:col-span-5">
-            <HomeBuyingInputSection input={input} onChange={handleChange} />
+            <HomeBuyingInputSection input={input} onChange={handleChange} onReset={reset} />
           </div>
 
           {/* 결과 섹션 */}

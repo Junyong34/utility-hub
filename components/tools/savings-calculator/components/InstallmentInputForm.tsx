@@ -14,7 +14,7 @@ import {
   FormSectionGroup,
   FormFieldGroup,
 } from '@/components/ui/FormSectionGroup';
-import { DollarSign, Percent, Calendar, ChevronRight } from 'lucide-react';
+import { Percent, Calendar, ChevronRight } from 'lucide-react';
 import type { InterestType, TaxType } from '@/lib/tools/savings-calculator';
 import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
 import { getSelectableOptionButtonState } from '../accessibility';
@@ -81,7 +81,7 @@ export function InstallmentInputForm({
         <FormSectionGroup>
           <FormFieldGroup
             label="월 납입금액"
-            icon={<DollarSign className="w-4 h-4" />}
+            icon={<span className="flex w-4 h-4 items-center justify-center text-sm font-bold">₩</span>}
             description="매월 납입할 금액을 입력하세요"
           >
             <AmountInputField
