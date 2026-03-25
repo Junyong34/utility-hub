@@ -16,6 +16,7 @@ interface LoanBreakdownCardProps {
   totalTaxes: number;
   totalPracticalCosts: number;
   totalOtherCosts: number;
+  hasDownPaymentPaid: boolean;
 }
 
 export function LoanBreakdownCard({
@@ -28,6 +29,7 @@ export function LoanBreakdownCard({
   totalTaxes,
   totalPracticalCosts,
   totalOtherCosts,
+  hasDownPaymentPaid,
 }: LoanBreakdownCardProps) {
   const [isOpen, setIsOpen] = useState(true);
   const actualLoanAmount = hasDefenseFund ? loanAmount - defenseFundAmount : loanAmount;
@@ -86,12 +88,36 @@ export function LoanBreakdownCard({
             <div className="flex items-center justify-between text-sm">
               <span className="flex items-center gap-1.5">
                 <Minus className="h-3.5 w-3.5 text-muted-foreground" />
-                대출금
+                대출금 {hasDefenseFund && '(요청금액)'}
               </span>
               <span className="tabular-nums text-muted-foreground">
                 <NumberTicker value={loanAmount} className="text-muted-foreground" />원
               </span>
             </div>
+
+            {/* 방공제 (매매가 구성에서 표시) */}
+            {hasDefenseFund && (
+              <>
+                <div className="flex items-center justify-between text-sm pl-4">
+                  <span className="flex items-center gap-1.5 text-xs">
+                    <Minus className="h-3 w-3 text-destructive" />
+                    방공제 차감분
+                  </span>
+                  <span className="tabular-nums text-destructive text-xs">
+                    <NumberTicker value={defenseFundAmount} className="text-destructive" />원
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="flex items-center gap-1.5">
+                    <Minus className="h-3.5 w-3.5 text-muted-foreground" />
+                    대출 (승인액)
+                  </span>
+                  <span className="tabular-nums text-muted-foreground">
+                    <NumberTicker value={actualLoanAmount} className="text-muted-foreground" />원
+                  </span>
+                </div>
+              </>
+            )}
 
             <div className="h-px bg-border" />
 
@@ -203,10 +229,19 @@ export function LoanBreakdownCard({
         <div className="space-y-3">
           <h4 className="text-sm font-semibold text-muted-foreground">💵 필요 현금 계산</h4>
           <div className="space-y-2 rounded-lg bg-primary/5 p-4 border-2 border-primary/20">
+            {!hasDownPaymentPaid && (
+              <div className="flex items-center justify-between text-sm">
+                <span>계약금</span>
+                <span className="tabular-nums">
+                  <NumberTicker value={downPayment} />원
+                </span>
+              </div>
+            )}
+
             <div className="flex items-center justify-between text-sm">
-              <span>계약금 + 잔금</span>
+              <span>{hasDownPaymentPaid ? '잔금' : '+ 잔금'}</span>
               <span className="tabular-nums">
-                <NumberTicker value={downPayment + balance} />원
+                <NumberTicker value={balance} />원
               </span>
             </div>
 
@@ -220,6 +255,12 @@ export function LoanBreakdownCard({
               </span>
             </div>
 
+            {hasDownPaymentPaid && (
+              <p className="text-xs text-muted-foreground">
+                * 계약금({downPayment.toLocaleString('ko-KR')}원)은 이미 지불 완료
+              </p>
+            )}
+
             <div className="h-px bg-primary/20" />
 
             <div className="flex items-center justify-between text-base font-bold">
@@ -229,7 +270,11 @@ export function LoanBreakdownCard({
               </span>
               <span className="tabular-nums text-primary">
                 <NumberTicker
-                  value={downPayment + balance + totalTaxes + totalPracticalCosts + totalOtherCosts}
+                  value={
+                    hasDownPaymentPaid
+                      ? balance + totalTaxes + totalPracticalCosts + totalOtherCosts
+                      : downPayment + balance + totalTaxes + totalPracticalCosts + totalOtherCosts
+                  }
                   className="text-primary font-bold"
                 />
                 원

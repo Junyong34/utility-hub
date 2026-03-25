@@ -6,6 +6,7 @@ import { STAGE_LABELS } from '../constants';
 
 interface SpendingFlowChartProps {
   breakdown: CostBreakdownItem[];
+  hasDownPaymentPaid?: boolean;
 }
 
 const STAGE_ORDER = ['contract', 'loan', 'balance', 'registration', 'move'] as const;
@@ -26,7 +27,7 @@ const STAGE_CONNECTOR_COLORS: Record<string, string> = {
   move: 'border-green-500/40',
 };
 
-export function SpendingFlowChart({ breakdown }: SpendingFlowChartProps) {
+export function SpendingFlowChart({ breakdown, hasDownPaymentPaid = false }: SpendingFlowChartProps) {
   // 단계별로 그룹화 및 금액 합산
   const stageGroups = breakdown.reduce(
     (acc, item) => {
@@ -54,7 +55,11 @@ export function SpendingFlowChart({ breakdown }: SpendingFlowChartProps) {
   );
 
   const flowItems = STAGE_ORDER.map(stage => stageGroups[stage]).filter(Boolean);
+
+  // 계약금 지불 완료 시 총 비용에서 제외
+  const downPaymentAmount = breakdown.find(item => item.id === 'down-payment')?.amount ?? 0;
   const totalAmount = breakdown.reduce((sum, item) => sum + item.amount, 0);
+  const displayTotalAmount = hasDownPaymentPaid ? totalAmount - downPaymentAmount : totalAmount;
 
   return (
     <Card>
@@ -101,7 +106,10 @@ export function SpendingFlowChart({ breakdown }: SpendingFlowChartProps) {
                           key={subItem.id}
                           className="flex items-baseline justify-between gap-2 text-xs"
                         >
-                          <span className="text-muted-foreground">{subItem.label}</span>
+                          <span className="text-muted-foreground">
+                            {subItem.label}
+                            {subItem.id === 'down-payment' && hasDownPaymentPaid && ' (지불완료)'}
+                          </span>
                           <span className="font-medium tabular-nums text-foreground shrink-0">
                             {subItem.amount.toLocaleString('ko-KR')}원
                           </span>
@@ -120,10 +128,15 @@ export function SpendingFlowChart({ breakdown }: SpendingFlowChartProps) {
           <div className="flex items-baseline justify-between">
             <span className="text-sm font-semibold text-muted-foreground">전체 합계</span>
             <span className="text-2xl font-bold text-primary tabular-nums">
-              {totalAmount.toLocaleString('ko-KR')}
+              {displayTotalAmount.toLocaleString('ko-KR')}
               <span className="text-base ml-0.5">원</span>
             </span>
           </div>
+          {hasDownPaymentPaid && downPaymentAmount > 0 && (
+            <p className="text-xs text-muted-foreground mt-2 text-right">
+              * 계약금({downPaymentAmount.toLocaleString('ko-KR')}원)은 이미 지불 완료
+            </p>
+          )}
         </div>
       </CardContent>
     </Card>

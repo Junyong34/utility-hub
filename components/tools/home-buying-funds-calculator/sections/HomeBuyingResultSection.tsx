@@ -63,6 +63,7 @@ export function HomeBuyingResultSection({ result, currentCash, input }: HomeBuyi
         totalTaxes={totalTaxes}
         totalPracticalCosts={totalPracticalCosts}
         totalOtherCosts={totalOtherCosts}
+        hasDownPaymentPaid={input.hasDownPaymentPaid}
       />
 
       {/* 상세 탭: 필요한 지출 / 순서 흐름도 */}
@@ -73,11 +74,11 @@ export function HomeBuyingResultSection({ result, currentCash, input }: HomeBuyi
         </TabsList>
 
         <TabsContent value="breakdown" className="mt-4">
-          <CostBreakdownTable breakdown={result.breakdown} />
+          <CostBreakdownTable breakdown={result.breakdown} hasDownPaymentPaid={input.hasDownPaymentPaid} />
         </TabsContent>
 
         <TabsContent value="flow" className="mt-4">
-          <SpendingFlowChart breakdown={result.breakdown} />
+          <SpendingFlowChart breakdown={result.breakdown} hasDownPaymentPaid={input.hasDownPaymentPaid} />
         </TabsContent>
       </Tabs>
     </div>

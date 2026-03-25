@@ -141,23 +141,8 @@ export function calculateHomeBuyingFunds(
     note: '즉시 매각 시 할인 반영',
   });
 
-  // 방공제 (소액임차보증금 우선변제 보호액)
-  // 은행이 대출금액에서 미리 차감하므로, 실제로는 현금이 더 필요함
-  if (input.hasDefenseFund) {
-    const defenseFundAmount =
-      input.manualDefenseFundAmount ??
-      calculateDefenseFundAmount(input.regionalType);
-    breakdown.push({
-      id: 'defense-fund',
-      stage: 'loan',
-      category: 'other',
-      label: '방공제 (대출 차감액)',
-      amount: defenseFundAmount,
-      calculationMode: input.manualDefenseFundAmount ? 'manual' : 'auto',
-      confidence: 'high',
-      note: '은행이 대출금액에서 차감하는 금액 (소액임차인 보호)',
-    });
-  }
+  // 방공제는 대출금에서 차감되므로 잔금 계산에만 반영하고 breakdown에는 추가하지 않음
+  // (실제 지출이 아니라 대출 승인액과 실제 받는 금액의 차이일 뿐)
 
   // 중개보수
   const brokerageFee =
@@ -273,8 +258,13 @@ export function calculateHomeBuyingFunds(
     });
   }
 
-  // 잔금 (매매가 - 계약금 - 대출금)
-  const balance = input.salePrice - downPayment - input.loanAmount;
+  // 실제 받는 대출금 (방공제 차감 후)
+  const actualLoanAmount = input.hasDefenseFund
+    ? input.loanAmount - (input.manualDefenseFundAmount ?? calculateDefenseFundAmount(input.regionalType))
+    : input.loanAmount;
+
+  // 잔금 (매매가 - 계약금 - 실제받는대출금)
+  const balance = input.salePrice - downPayment - actualLoanAmount;
   breakdown.push({
     id: 'balance',
     stage: 'balance',
@@ -283,7 +273,9 @@ export function calculateHomeBuyingFunds(
     amount: balance,
     calculationMode: 'auto',
     confidence: 'high',
-    formula: '매매가 - 계약금 - 대출금',
+    formula: input.hasDefenseFund
+      ? '매매가 - 계약금 - 실제받는대출금 (방공제 차감 후)'
+      : '매매가 - 계약금 - 대출금',
   });
 
   // 총 필요 자기자본 (이미 대출금이 제외된 금액)
