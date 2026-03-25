@@ -59,7 +59,7 @@ function AmountInputField({
                   aria-label={`${label} 도움말`}
                   className="text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  <Info className="h-4 w-4 cursor-help" />
+                  <Info className="h-4 w-4" />
                 </button>
               </TooltipTrigger>
               <TooltipContent side="right">
