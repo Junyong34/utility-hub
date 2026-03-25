@@ -5,20 +5,20 @@
 import { createParser, parseAsFloat, parseAsInteger, parseAsBoolean } from 'nuqs';
 
 // 기본 정보
-export const salePriceParser = parseAsInteger.withDefault(500_000_000);
-export const loanAmountParser = parseAsInteger.withDefault(350_000_000);
-export const currentCashParser = parseAsInteger.withDefault(150_000_000);
+export const salePriceParser = parseAsInteger.withDefault(0);
+export const loanAmountParser = parseAsInteger.withDefault(0);
+export const currentCashParser = parseAsInteger.withDefault(0);
 export const downPaymentRatioParser = parseAsFloat.withDefault(10);
-export const hasDefenseFundParser = parseAsBoolean.withDefault(true);
+export const hasDefenseFundParser = parseAsBoolean.withDefault(false);
 export const hasDownPaymentPaidParser = parseAsBoolean.withDefault(false);
 
 // 세금/규제 정보
 export const isAdjustedAreaParser = parseAsBoolean.withDefault(false);
-export const houseCountParser = parseAsInteger.withDefault(1);
+export const houseCountParser = parseAsInteger.withDefault(0);
 export const isOver85m2Parser = parseAsBoolean.withDefault(false);
 export const isFirstTimeParser = parseAsBoolean.withDefault(false);
 export const isTempTwoHouseParser = parseAsBoolean.withDefault(false);
-export const standardPriceParser = parseAsInteger.withDefault(350_000_000);
+export const standardPriceParser = parseAsInteger.withDefault(0);
 export const regionalTypeParser = createParser({
   parse: (value: string) => {
     if (value === 'seoul' || value === 'overconcentration' || value === 'metro' || value === 'other') return value;
