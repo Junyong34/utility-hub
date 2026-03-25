@@ -623,10 +623,11 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
 
   'home-buying-funds-calculator': {
     id: 'home-buying-funds-calculator',
-    name: '주택 매수 필요자금 계산기',
+    name: '주택 매수시 필요자금 계산기',
     shortName: '주택 매수 필요자금 계산기',
     breadcrumbLabel: '매수 필요자금 계산기',
     publishedAt: '2026-03-25',
+    ogImage: '/og-images/post/home-buying-funds.webp',
     description:
       '아파트 매매 시 필요한 자기자본을 계산해주는 계산기입니다. 매매가, 대출금, 취득세, 중개보수, 등기비용 등 법정 부대비용을 자동 계산하고 직접 입력도 지원합니다.',
     keywords: [

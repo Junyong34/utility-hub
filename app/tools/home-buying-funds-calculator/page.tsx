@@ -12,10 +12,14 @@ import {
 
 assertToolStructuredData('home-buying-funds-calculator');
 
-export const metadata: Metadata = generateToolMetadata('home-buying-funds-calculator');
+export const metadata: Metadata = generateToolMetadata(
+  'home-buying-funds-calculator'
+);
 
 export default function HomeBuyingFundsCalculatorPage() {
-  const structuredData = getToolStructuredDataArray('home-buying-funds-calculator');
+  const structuredData = getToolStructuredDataArray(
+    'home-buying-funds-calculator'
+  );
 
   return (
     <>
@@ -33,13 +37,18 @@ export default function HomeBuyingFundsCalculatorPage() {
 
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
           <section>
-            <h1 className="text-3xl font-bold text-foreground">주택 매수 필요자금 계산기</h1>
+            <h1 className="text-3xl font-bold text-foreground">
+              주택 매수시 필요한 자금 계산기
+            </h1>
             <p className="mt-1 text-muted-foreground">
-              집값과 대출로 필요한 자기자본을 계산하고, 취득세·중개보수·등기비용 등 부대비용을 자동으로 확인하세요.
+              집값과 대출로 필요한 자기자본을 계산하고, 취득세·중개보수·등기비용
+              등 부대비용을 자동으로 확인하세요.
             </p>
           </section>
 
-          <Suspense fallback={<div className="text-muted-foreground">로딩 중...</div>}>
+          <Suspense
+            fallback={<div className="text-muted-foreground">로딩 중...</div>}
+          >
             <HomeBuyingFundsCalculatorForm />
           </Suspense>
         </main>
