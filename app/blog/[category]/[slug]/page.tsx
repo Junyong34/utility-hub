@@ -13,7 +13,9 @@ import { TableOfContents } from '@/components/blog/TableOfContents';
 import { Button } from '@/components/ui/button';
 import { generateBlogPostMetadata } from '@/lib/seo';
 import { createBlogPostStructuredData } from '@/lib/seo';
+import { createFAQSchema } from '@/lib/seo';
 import { JsonLdMultiple } from '@/components/seo';
+import { extractFaqItems } from '@/lib/blog/markdown';
 import { extractTableOfContents } from '@/lib/blog/markdown-processor';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -95,6 +97,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   // 목차 추출
   const tocItems = extractTableOfContents(post.content);
+  const faqItems = extractFaqItems(post.content);
+  const faqSchema = faqItems.length > 0 ? createFAQSchema(faqItems) : null;
 
   // 같은 카테고리의 포스트 목록 가져오기 (SelectBox용)
   const categoryPosts = getPostsByCategory(category).map((p) => ({
@@ -105,7 +109,9 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <>
       {/* 구조화 데이터 (JSON-LD) */}
-      <JsonLdMultiple data={[article, breadcrumb]} />
+      <JsonLdMultiple
+        data={[article, breadcrumb, ...(faqSchema ? [faqSchema] : [])]}
+      />
 
       <div className="min-h-screen bg-background">
         {/* 헤더 */}

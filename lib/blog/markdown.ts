@@ -2,6 +2,11 @@
  * 마크다운 관련 유틸리티 함수
  */
 
+export interface FaqItem {
+  question: string
+  answer: string
+}
+
 /**
  * 마크다운 텍스트에서 첫 번째 이미지 URL을 추출합니다.
  * @param markdown - 마크다운 텍스트
@@ -31,6 +36,80 @@ export function extractHeadings(markdown: string): { level: number; text: string
   }
 
   return headings;
+}
+
+/**
+ * 마크다운 텍스트에서 FAQ 섹션의 질문/답변 항목을 추출합니다.
+ */
+export function extractFaqItems(markdown: string): FaqItem[] {
+  const lines = markdown.split('\n');
+  const faqItems: FaqItem[] = [];
+
+  let inFaqSection = false;
+  let currentQuestion: string | null = null;
+  let currentAnswerLines: string[] = [];
+
+  const flushCurrentItem = () => {
+    if (!currentQuestion) {
+      currentAnswerLines = [];
+      return;
+    }
+
+    const answer = currentAnswerLines.join('\n').trim();
+
+    faqItems.push({
+      question: currentQuestion,
+      answer,
+    });
+
+    currentQuestion = null;
+    currentAnswerLines = [];
+  };
+
+  for (const line of lines) {
+    const headingMatch = /^(#{1,6})\s+(.+?)\s*$/.exec(line);
+
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      const headingText = headingMatch[2].trim();
+      const normalizedHeading = headingText.replace(/\s+/g, ' ');
+
+      if (level === 2) {
+        if (inFaqSection) {
+          flushCurrentItem();
+          break;
+        }
+
+        if (/^FAQ(?:\s+.*)?$/i.test(normalizedHeading)) {
+          inFaqSection = true;
+        }
+
+        continue;
+      }
+
+      if (inFaqSection && level === 3) {
+        flushCurrentItem();
+        currentQuestion = headingText;
+        continue;
+      }
+
+      if (inFaqSection && currentQuestion) {
+        currentAnswerLines.push(line);
+      }
+
+      continue;
+    }
+
+    if (inFaqSection && currentQuestion !== null) {
+      currentAnswerLines.push(line);
+    }
+  }
+
+  if (inFaqSection) {
+    flushCurrentItem();
+  }
+
+  return faqItems.filter((item) => item.question && item.answer);
 }
 
 /**
