@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import { generateMetadata as createMetadata } from '@/lib/seo';
+import { buildCustomOgImagePath } from '@/lib/seo/og';
 import {
   assertToolStructuredData,
   getToolSubPageStructuredDataArray,
@@ -31,7 +32,15 @@ export const metadata: Metadata = createMetadata({
     '로또 번호 빈도',
     '로또 번호 분석',
   ],
-  ogImage: '/og-images/tool-lotto.png',
+  ogImage: buildCustomOgImagePath({
+    title: '로또 번호 통계 추천',
+    description:
+      '로또 번호 통계 기반 추천 정보를 확인하세요. 최근 회차 기준 hot/cold 번호와 출현 빈도를 한눈에 볼 수 있습니다.',
+    image: '/og-images/post/tool-lotto.webp',
+    label: 'LOTTO',
+    bgColor: '#0f172a',
+    accentColor: '#3b82f6',
+  }),
 });
 
 export default function LottoStatsPage() {

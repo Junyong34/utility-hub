@@ -17,6 +17,7 @@ import { createFAQSchema } from '@/lib/seo';
 import { JsonLdMultiple } from '@/components/seo';
 import { extractFaqItems } from '@/lib/blog/markdown';
 import { extractTableOfContents } from '@/lib/blog/markdown-processor';
+import { resolveBlogPostOgImage } from '@/lib/seo/og-policy';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PageProps {
@@ -93,12 +94,22 @@ export default async function BlogPostPage({ params }: PageProps) {
     date: post.date,
     author: post.author,
     tags: post.tags,
+    image: resolveBlogPostOgImage({
+      slug: post.slug,
+      categorySlug: post.categorySlug,
+      ogImage: post.ogImage,
+    }),
   });
 
   // 목차 추출
   const tocItems = extractTableOfContents(post.content);
   const faqItems = extractFaqItems(post.content);
   const faqSchema = faqItems.length > 0 ? createFAQSchema(faqItems) : null;
+  const displayOgImage = resolveBlogPostOgImage({
+    slug: post.slug,
+    categorySlug: post.categorySlug,
+    ogImage: post.ogImage,
+  });
 
   // 같은 카테고리의 포스트 목록 가져오기 (SelectBox용)
   const categoryPosts = getPostsByCategory(category).map((p) => ({
@@ -134,7 +145,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                   author={post.author}
                   tags={post.tags}
                   content={post.content}
-                  ogImage={post.ogImage}
+                  ogImage={displayOgImage}
                 />
               </article>
 

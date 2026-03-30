@@ -11,7 +11,6 @@ tags:
   - "가열식 가습기"
 category: "소비자 정보"
 categorySlug: "consumer"
-ogImage: "/og-images/post/kca-humidifier-comparison.webp"
 ---
 
 ![한국소비자원의 가습기 구매·선택 가이드](/images/blog/kca-humidifier-comparison/01-selection-guide.webp)

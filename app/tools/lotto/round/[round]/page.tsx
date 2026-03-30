@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { LottoRoundYearFilter } from '@/components/lotto/LottoRoundYearFilter';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import { generateMetadata as createMetadata } from '@/lib/seo';
+import { buildCustomOgImagePath } from '@/lib/seo/og';
 import {
   analyzeLottoRoundPattern,
   getLottoRoundResult,
@@ -53,7 +54,14 @@ export async function generateMetadata({
       '로또 회차별 번호',
       '로또 번호 패턴 분석',
     ],
-    ogImage: '/og-images/tool-lotto.png',
+    ogImage: buildCustomOgImagePath({
+      title: `로또 ${roundData.round}회 번호 분석`,
+      description: `로또 ${roundData.round}회 번호, 보너스 번호, 패턴 분석 정보를 확인할 수 있습니다.`,
+      image: '/og-images/post/tool-lotto.webp',
+      label: `LOTTO ${roundData.round}`,
+      bgColor: '#0f172a',
+      accentColor: '#3b82f6',
+    }),
   });
 }
 
