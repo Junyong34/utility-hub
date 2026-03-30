@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
     // Optimize package imports for better tree shaking
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
+  serverExternalPackages: ['@takumi-rs/core'],
 
   // Allow cross-origin requests from development devices
   allowedDevOrigins: ['http://10.200.193.62', 'http://10.200.193.62:3000'],

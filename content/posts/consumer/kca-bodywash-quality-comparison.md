@@ -11,7 +11,6 @@ tags:
   - "한국소비자원"
 category: "소비자 정보"
 categorySlug: "consumer"
-ogImage: "/og-images/post/kca-bodywash-quality-comparison.webp"
 ---
 
 ![바디워시 종합 비교 요약표](/images/blog/bodywash-quality-comparison/01-cover.webp)

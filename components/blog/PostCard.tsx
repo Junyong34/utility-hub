@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { resolveBlogPostOgImage } from '@/lib/seo/og-policy';
 
 interface PostCardProps {
   slug: string;
@@ -36,20 +37,25 @@ export function PostCard({
     month: 'long',
     day: 'numeric',
   });
+  const resolvedOgImage = resolveBlogPostOgImage({
+    slug,
+    categorySlug,
+    ogImage,
+  });
 
   return (
     <Link href={`/blog/${categorySlug}/${slug}`} className="block group">
       <Card
-        className={`overflow-hidden h-full transition-all hover:shadow-lg hover:border-primary ${!ogImage ? 'flex flex-col justify-center' : ''}`}
+        className="overflow-hidden h-full transition-all hover:shadow-lg hover:border-primary"
       >
         {/* OG 이미지 */}
-        {ogImage && (
+        {resolvedOgImage && (
           <div className="relative aspect-[16/10] overflow-hidden bg-muted m-4 rounded-lg">
             <Image
-              src={ogImage}
+              src={resolvedOgImage}
               alt={title}
               fill
-              className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+              className="object-contain object-center p-2"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>

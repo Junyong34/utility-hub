@@ -11,7 +11,6 @@ tags:
   - "1인 가구 가전"
 category: "소비자 정보"
 categorySlug: "consumer"
-ogImage: "/og-images/post/kca-small-dishwasher-comparison.webp"
 ---
 
 ![소형 식기세척기 품질비교 요약표](/images/blog/mini-dishwasher-quality-comparison/01-cover.webp)

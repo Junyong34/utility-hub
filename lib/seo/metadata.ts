@@ -1,5 +1,9 @@
 import type { Metadata } from 'next';
 import type { SEOMetadata, OpenGraphImage } from '@/types/seo';
+import {
+  buildCustomOgImagePath,
+} from '@/lib/seo/og';
+import { resolveBlogPostOgImage } from '@/lib/seo/og-policy';
 
 /**
  * 사이트 기본 설정
@@ -145,7 +149,11 @@ export function generateBlogPostMetadata(post: {
     title: post.title,
     description: post.excerpt,
     canonical: url,
-    ogImage: post.ogImage,
+    ogImage: resolveBlogPostOgImage({
+      slug: post.slug,
+      categorySlug: post.categorySlug,
+      ogImage: post.ogImage,
+    }),
     ogType: 'article',
     publishedTime,
     modifiedTime,
@@ -204,14 +212,11 @@ export function createOGImage(
   title: string,
   description?: string
 ): OpenGraphImage {
-  // 동적 OG 이미지 생성 API를 사용하는 경우
-  const params = new URLSearchParams({
-    title,
-    ...(description && { description }),
-  });
-
   return {
-    url: `${SITE_CONFIG.url}/api/og?${params.toString()}`,
+    url: `${SITE_CONFIG.url}${buildCustomOgImagePath({
+      title,
+      description,
+    })}`,
     width: 1200,
     height: 630,
     alt: title,

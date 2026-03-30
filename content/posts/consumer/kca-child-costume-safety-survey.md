@@ -10,7 +10,6 @@ tags:
   - "안전기준"
 category: "소비자 정보"
 categorySlug: "consumer"
-ogImage: "/og-images/post/kca-child-costume-safety-survey.webp"
 ---
 
 ## 한눈에 요약 🧾
