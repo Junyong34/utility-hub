@@ -1,6 +1,6 @@
 ---
 name: blog-post-from-source
-description: Use this skill whenever the user wants a Korean blog post generated from a source URL or provided text for this project. It should remove or mask PII, make the structure readable, apply SEO-ready sections, run humanized writing review and blog-SEO checks, infer category and slug when they are omitted, and rely on the blog's default OG generation unless a custom screenshot-based thumbnail is explicitly needed. Use Playwright MCP when generating a custom OG image.
+description: Use this skill whenever the user wants a Korean blog post generated from a source URL or provided text for this project. It should remove or mask PII, make the structure readable, apply SEO-ready sections, use the `humanizer` and `blog-seo-writer` skills when they are available, infer category and slug when they are omitted, and rely on the blog's default OG generation unless a custom screenshot-based thumbnail is explicitly needed. Use Playwright MCP when generating a custom OG image.
 ---
 
 # blog-post-from-source: 링크/텍스트 기반 블로그 포스트 생성 스킬
@@ -61,12 +61,16 @@ description: Use this skill whenever the user wants a Korean blog post generated
   - 결론
 
 5. `humanizer` 검수
-- 초안에 AI 흔적이 보이면 `humanizer` 스킬로 문장 톤을 자연스럽게 조정.
-- 변경 사항 2~4개와 근거를 변경 로그에 기록.
+- `.agents/skills/humanizer` 또는 동등한 `humanizer` 스킬이 사용 가능하면 반드시 사용한다.
+- 초안에 AI 흔적이 보이면 `humanizer` 스킬로 문장 톤을 자연스럽게 조정한다.
+- 스킬이 없으면 동일한 기준으로 수동 자연화하되, 의미/사실/수치/링크는 바꾸지 않는다.
+- 변경 사항 2~4개와 근거를 변경 로그에 기록한다.
 
 6. `blog-seo-writer` 보정
-- SEO용 개선, FAQ, JSON-LD, 검색 의도 분해를 점검.
-- 태그/메타 설명/최신 업데이트 문구를 정합성 있게 정리.
+- `.agents/skills/blog-seo-writer` 또는 동등한 `blog-seo-writer` 스킬이 사용 가능하면 반드시 사용한다.
+- SEO용 개선, FAQ, JSON-LD, 검색 의도 분해를 점검한다.
+- 스킬이 없으면 같은 체크리스트를 수동 적용하되, FAQ, JSON-LD, 키워드 분산, 최신성 표기를 빠뜨리지 않는다.
+- 태그/메타 설명/최신 업데이트 문구를 정합성 있게 정리한다.
 
 7. OG 이미지 결정
 - 기본값은 커스텀 OG를 만들지 않는 것이다.
