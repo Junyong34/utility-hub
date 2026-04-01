@@ -27,3 +27,6 @@
 
 - 공통 작성 템플릿: [_phase-template.md](./_phase-template.md)
 
+## 매뉴얼
+
+- [gstack 사용 매뉴얼](./manuals/gstack/README.md)

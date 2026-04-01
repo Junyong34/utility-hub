@@ -6,6 +6,8 @@
 import * as LucideIcons from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
+const lucideIconMap = LucideIcons as Record<string, unknown>;
+
 /**
  * 아이콘 캐시
  * 동일한 아이콘을 여러 번 조회할 때 성능 향상
@@ -44,16 +46,18 @@ export function getToolIcon(iconName?: string): LucideIcon {
   }
 
   // lucide-react에서 아이콘 찾기
-  const icon = (LucideIcons as Record<string, any>)[iconName];
+  const icon = lucideIconMap[iconName];
 
-  if (icon && typeof icon === 'function') {
+  if (icon && (typeof icon === 'function' || typeof icon === 'object')) {
     // 캐시에 저장
     iconCache.set(iconName, icon as LucideIcon);
     return icon as LucideIcon;
   }
 
   // 아이콘을 찾을 수 없으면 경고 후 기본 아이콘 반환
-  console.warn(`Icon "${iconName}" not found in lucide-react. Using default icon.`);
+  console.warn(
+    `Icon "${iconName}" not found in lucide-react. Using default icon.`
+  );
   iconCache.set(iconName, DEFAULT_ICON);
   return DEFAULT_ICON;
 }
@@ -86,7 +90,10 @@ export function getToolIcons(iconNames: string[]): LucideIcon[] {
  * ```
  */
 export function isValidIcon(iconName: string): boolean {
-  return iconName in LucideIcons && typeof (LucideIcons as any)[iconName] === 'function';
+  return (
+    iconName in LucideIcons &&
+    ['function', 'object'].includes(typeof lucideIconMap[iconName])
+  );
 }
 
 /**
@@ -102,6 +109,6 @@ export function clearIconCache(): void {
  */
 export function getAvailableIcons(): string[] {
   return Object.keys(LucideIcons).filter(
-    (key) => typeof (LucideIcons as any)[key] === 'function'
+    key => ['function', 'object'].includes(typeof lucideIconMap[key])
   );
 }
