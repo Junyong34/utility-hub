@@ -41,9 +41,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return createMetadata({
     title: `${categoryInfo.name} 카테고리`,
-    description: `${categoryInfo.name} 카테고리의 블로그 포스트 목록입니다. 총 ${categoryInfo.count}개의 글이 있습니다.`,
+    description: `${categoryInfo.name} 관련 실전 가이드와 참고 글을 모았습니다. 총 ${categoryInfo.count}개의 글이 있습니다.`,
     canonical: `https://www.zento.kr/blog/${category}`,
-    keywords: [categoryInfo.name, '블로그', '포스트'],
+    keywords: [categoryInfo.name, '실전 가이드', '비교', '체크리스트'],
   });
 }
 
@@ -64,7 +64,7 @@ export default async function CategoryPage({ params }: PageProps) {
   const { webPage, breadcrumb } = createPageStructuredData({
     name: `${categoryInfo.name} 카테고리`,
     path: `/blog/${category}`,
-    description: `${categoryInfo.name} 카테고리의 블로그 포스트 목록입니다.`,
+    description: `${categoryInfo.name} 관련 비교와 판단에 도움이 되는 글 모음입니다.`,
     breadcrumbs: getBlogStructuredDataBreadcrumbs(categoryInfo.name),
   });
 
@@ -104,7 +104,7 @@ export default async function CategoryPage({ params }: PageProps) {
         <footer className="mt-16 border-t bg-card">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <p className="text-center text-muted-foreground text-sm">
-              © 2024 유용한 정보 허브. All rights reserved.
+              © Zento. 비교와 계산으로 생활의 결정을 돕습니다.
             </p>
           </div>
         </footer>

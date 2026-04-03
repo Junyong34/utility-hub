@@ -212,7 +212,7 @@ export function createToolsMainStructuredData() {
   const webPage = createWebPageSchema({
     name: '도구 모음',
     path: '/tools',
-    description: '다양한 유용한 도구를 한곳에서 바로 사용할 수 있습니다.',
+    description: '비용 계산과 조건 비교를 빠르게 정리하는 실전 도구 모음입니다.',
   });
 
   const breadcrumb = createBreadcrumbSchema([

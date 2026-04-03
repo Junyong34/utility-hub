@@ -86,7 +86,7 @@ export default function LottoPage() {
           <LottoDisclaimer variant="banner" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <p className="text-center text-muted-foreground text-sm">
-              © 2026 유용한 정보 허브. All rights reserved.
+              © Zento. 비교와 계산으로 생활의 결정을 돕습니다.
             </p>
           </div>
         </footer>

@@ -44,7 +44,7 @@ export function DashboardSection({
           <div>
             <div className="flex items-center gap-2 mb-5">
               <CalendarIcon className="h-5 w-5 text-orange-500" />
-              <h2 className="text-xl font-bold">최신 콘텐츠</h2>
+              <h2 className="text-xl font-bold">최신 가이드</h2>
             </div>
             <div className="flex flex-col gap-3">
               {latestItems.map(item => (
@@ -83,7 +83,7 @@ export function DashboardSection({
           <div>
             <div className="flex items-center gap-2 mb-5">
               <FlameIcon className="h-5 w-5 text-red-500" />
-              <h2 className="text-xl font-bold">핫한 정보</h2>
+              <h2 className="text-xl font-bold">추천 콘텐츠</h2>
             </div>
             <div className="flex flex-col gap-3">
               {hotItems.map(item => (

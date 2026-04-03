@@ -11,9 +11,6 @@ export default function Page() {
     allPosts,
     toolConfigs
   );
-  const toolNames = toolConfigs
-    .map(t => t.shortName)
-    .filter((name): name is string => name !== undefined);
 
   return (
     <main className="relative flex min-h-screen flex-col">
@@ -36,7 +33,6 @@ export default function Page() {
       <HeroSplitSection
         totalBlogPosts={allPosts.length}
         totalTools={toolConfigs.length}
-        toolNames={toolNames}
       />
       <DashboardSection latestItems={latestItems} hotItems={hotItems} />
     </main>

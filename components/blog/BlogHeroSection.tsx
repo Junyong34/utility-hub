@@ -30,17 +30,17 @@ export function BlogHeroSection({
         {/* Eyebrow */}
         <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/80 px-3 py-1 text-xs text-muted-foreground">
           <PenLineIcon className="h-3 w-3 text-primary" />
-          Zen + Tools · 실용 도구 허브
+          Zento Blog · 비교와 판단을 돕는 실전 가이드
         </span>
 
         {/* Title */}
         <h1 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
-          유용한 <span className="text-primary">인사이트</span>를 찾아보세요
+          바로 써먹을 <span className="text-primary">실전 가이드</span>를 찾아보세요
         </h1>
-        <p className="mb-6 max-w-md mx-auto text-sm leading-relaxed text-muted-foreground">
-          일상, AI, 꿀팁 등 다양한 주제의
+        <p className="mb-6 max-w-lg mx-auto text-sm leading-relaxed text-muted-foreground">
+          주차, 소비자 비교, 생활비 계산과 연결되는 글을
           <br />
-          유용한 정보와 인사이트를 공유합니다.
+          비교표와 체크리스트 중심으로 정리합니다.
         </p>
 
         {/* Search Bar */}
@@ -52,7 +52,7 @@ export function BlogHeroSection({
               value={searchQuery}
               onChange={e => onSearchChange(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && onSearchSubmit()}
-              placeholder="포스트 검색..."
+              placeholder="주차, 비교, 계산, 소비자 정보 검색..."
               className="h-9 bg-background pl-8"
             />
           </div>

@@ -10,9 +10,9 @@ import { resolveBlogPostOgImage } from '@/lib/seo/og-policy';
  */
 export const SITE_CONFIG = {
   name: 'Zento',
-  title: 'Zento - 복잡한 정보를 단순하게',
+  title: 'Zento - 비교하고 계산해 결정하는 생활 가이드',
   description:
-    '복잡한 정보를 단순하게 정리해주는 공간. 일상과 개발에 유용한 팁, 도구, 정보를 제공합니다.',
+    '주차, 소비자 비교, 대출·저축·주택 비용 계산까지. 사기 전, 가기 전, 신청하기 전에 비용과 선택을 빠르게 정리해주는 실전 가이드와 도구를 제공합니다.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.zento.kr',
   ogImage: '/og-images/main-og-image.png',
   locale: 'ko_KR',

@@ -32,29 +32,29 @@ interface Highlight {
 const HIGH_LEVEL_SECTIONS: AboutSection[] = [
   {
     title: '무엇을 제공하나요?',
-    description: 'Zento는 정보 탐색, 실행, 정리, 공유까지 이어지는 실무형 사용 플로우를 한 곳에서 경험할 수 있게 만든 웹 플랫폼입니다.',
+    description: 'Zento는 사기 전, 가기 전, 신청하기 전에 필요한 판단 기준을 빠르게 정리해주는 실전형 사이트입니다.',
     details: [
-      '블로그에서는 개념/팁/실전 가이드를 제공하고, 툴에서 바로 입출력을 처리해 즉시 확인할 수 있습니다.',
-      '도구별 URL 상태 관리로 결과 공유가 쉬워, 링크 복사 한 번으로 동일한 입력값을 재현할 수 있습니다.',
-      '구조화 데이터와 내부 링크로 검색/탐색에 유리한 페이지 설계를 유지합니다.',
+      '블로그에서는 주차, 소비자 비교, 비용 판단에 도움이 되는 가이드를 비교표와 체크리스트 중심으로 정리합니다.',
+      '도구에서는 대출, 저축, DSR, 주택 구입 비용처럼 실제 돈이 걸린 계산을 빠르게 확인할 수 있습니다.',
+      '콘텐츠를 읽고 끝나는 것이 아니라, 계산과 비교까지 이어져 바로 의사결정에 쓰이도록 설계합니다.',
     ],
   },
   {
     title: '어떤 상황에 유용한가요?',
-    description: '일회성 계산보다 반복 작업이 있는 상황에서 시간을 줄이고 오해를 막는 데 초점을 맞췄습니다.',
+    description: '검색 결과를 많이 읽어도 결론이 잘 안 나는 순간, 기준을 한 장으로 정리해 주는 쪽에 초점을 맞췄습니다.',
     details: [
-      '금리·대출 조건 비교 전에 빠르게 금액 감각을 잡고 싶을 때',
-      '로또 번호 추출 규칙을 테스트하거나 시뮬레이션 기반으로 기록할 때',
-      '공유 받은 링크의 동일 조건 재확인을 빠르게 할 때',
+      '공항이나 역 주차를 앞두고 총비용과 이동 동선을 함께 비교하고 싶을 때',
+      '소비자원 비교 결과를 실제 구매 판단에 맞게 해석하고 싶을 때',
+      '대출, 저축, 집 살 때 필요한 비용을 계산기로 빠르게 가늠하고 싶을 때',
     ],
   },
   {
-    title: '신뢰성 운영 방식',
-    description: '콘텐츠와 계산 결과의 오해를 줄이기 위해 설명·경고·FAQ를 한 번에 확인할 수 있게 구성합니다.',
+    title: '어떻게 신뢰를 쌓나요?',
+    description: '단순 요약보다 출처, 적용 조건, 예외를 함께 보여줘서 오해를 줄이는 방식으로 운영합니다.',
     details: [
-      '결과 수치의 성격(참고용/의사결정 보조)을 명확히 구분해 제공합니다.',
-      '정책, 금리, 게임성 성격 등 민감 주제는 주의 문구를 고정 탭으로 노출합니다.',
-      '공통 FAQ와 툴별 FAQ를 분리해 문제 해결과 사용법 학습이 각각 바로 이어지도록 설계합니다.',
+      '공식 기관·공개 자료를 우선 출처로 삼고, 변동 가능성이 있는 정보는 별도로 표시합니다.',
+      '계산 결과는 참고용인지 실제 신청 전 검토용인지 성격을 분명히 나눠 설명합니다.',
+      '공통 FAQ와 도구별 FAQ를 나눠 사용법과 주의사항을 빠르게 확인할 수 있게 구성합니다.',
     ],
   },
 ]
@@ -62,59 +62,58 @@ const HIGH_LEVEL_SECTIONS: AboutSection[] = [
 const GUIDE_STEPS: FlowStep[] = [
   {
     number: 1,
-    title: '주제를 찾는다',
-    description: '블로그/FAQ에서 배경지식을 먼저 확인해 용어와 전제 조건을 맞춥니다.',
+    title: '상황을 찾는다',
+    description: '블로그와 FAQ에서 내 상황에 맞는 기준과 전제 조건을 먼저 확인합니다.',
   },
   {
     number: 2,
-    title: '툴을 실행한다',
-    description: '원하는 도구를 활용하여 유용한 정보 및 팁을 얻어가세요.',
+    title: '계산하고 비교한다',
+    description: '관련 도구를 열어 금액, 조건, 총비용을 빠르게 계산하고 비교합니다.',
   },
   {
     number: 3,
-    title: '링크로 공유한다',
-    description: '입력값이 반영된 결과 URL을 보내 같은 조건을 팀/가족/동료와 즉시 공유합니다.',
+    title: '결정 전에 다시 확인한다',
+    description: '공유 링크나 체크리스트로 같은 조건을 다시 보며 실수를 줄입니다.',
   },
 ]
 
 const STATS_HIGHLIGHTS: Highlight[] = [
   {
     icon: BlocksIcon,
-    title: '정보와 도구의 연결',
-    description: '콘텐츠만 읽는 단계에서 끝나지 않고 바로 실행 가능한 도구로 이어집니다.',
+    title: '가이드와 도구의 연결',
+    description: '읽고 끝나는 글이 아니라, 바로 계산하고 비교하는 도구로 이어집니다.',
   },
   {
     icon: CpuIcon,
-    title: '실행 중심 설계',
-    description: '복잡한 기준을 한 번에 정리해 입력 → 출력 → 확인까지 바로 체감되는 동선을 제공합니다.',
+    title: '비용 판단 중심 설계',
+    description: '복잡한 조건을 한 번에 정리해 입력 → 계산 → 비교까지 바로 이어지게 구성합니다.',
   },
   {
     icon: LightbulbIcon,
-    title: '문제 해결 중심 UX',
-    description: '공통/도구별 FAQ를 통해 흔한 오류를 먼저 해결하고, 다음 행동으로 연결됩니다.',
+    title: '비교표와 체크리스트',
+    description: '숫자와 선택 기준을 함께 보여줘서 결론을 내리기 쉽게 돕습니다.',
   },
   {
     icon: ShieldCheckIcon,
-    title: '안전한 안내',
-    description: '면책, 주의사항, 사용 한계를 명시해 오해가 생길 여지를 줄입니다.',
+    title: '출처와 한계 표시',
+    description: '주의사항과 적용 조건을 함께 적어 오해가 생길 여지를 줄입니다.',
   },
 ]
 
 export const metadata: Metadata = createMetadata({
   title: 'Zento 소개',
   description:
-    'Zento 소개 페이지: 블로그, 금융 계산기, 로또/재미형 도구를 한 곳에 묶은 실용형 정보 허브의 목적, 구성, 이용 방식, 신뢰 가이드를 설명합니다.',
+    'Zento 소개 페이지: 주차, 소비자 비교, 비용 계산 중심의 실전 생활 가이드 사이트가 무엇을 다루고 어떤 기준으로 정보를 정리하는지 설명합니다.',
   canonical: 'https://www.zento.kr/about',
   keywords: [
     'Zento 소개',
-    '정보 허브',
-    '유틸리티 웹사이트',
-    '금융 계산기',
-    '로또 번호 생성기',
-    'FAQ',
-    '블로그',
+    '생활 가이드',
+    '비용 비교',
+    '주차 비교',
+    '소비자 비교',
+    '비용 계산',
     '도구 사용법',
-    'URL 공유',
+    'FAQ',
   ],
 })
 
@@ -139,7 +138,7 @@ export default function AboutPage() {
   const { webPage, breadcrumb } = createPageStructuredData({
     name: 'Zento 소개',
     path: '/about',
-    description: 'Zento는 정보 탐색 후 즉시 실행 가능한 툴 사용까지 이어지는 실무형 웹 플랫폼입니다.',
+    description: 'Zento는 비용과 선택을 빠르게 정리해주는 실전 생활 가이드 사이트입니다.',
     breadcrumbs: [{ name: '홈', url: '/' }, { name: '소개' }],
   })
 
@@ -153,8 +152,8 @@ export default function AboutPage() {
             <Badge variant="secondary">Zento Overview</Badge>
             <h1 className="text-3xl font-bold text-foreground sm:text-4xl">Zento에 대해</h1>
             <p className="max-w-3xl text-base leading-relaxed text-muted-foreground">
-              Zento는 정보 탐색의 마지막까지를 아우르는 구조를 갖춘 사이트입니다. 블로그에서 배경을 이해하고,
-              도구에서 실행 결과를 확인한 뒤, 필요하면 링크를 통해 결과를 바로 공유해 빠르게 협업할 수 있도록 설계했습니다.
+              Zento는 생활 속 의사결정에서 가장 자주 부딪히는 문제를 빠르게 정리하는 사이트입니다.
+              블로그에서는 비교와 판단 기준을 읽고, 도구에서는 비용과 조건을 계산해 바로 다음 행동으로 이어질 수 있게 설계했습니다.
             </p>
             <Breadcrumb items={[{ name: '소개' }]} />
           </div>
@@ -207,14 +206,14 @@ export default function AboutPage() {
             <Card className="border-primary/20 bg-gradient-to-br from-primary/10 via-card to-card p-6">
               <h2 className="text-xl font-semibold">한눈에 보는 안내</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                금융 계산기와 로또 기능은 물론, 여러 유틸리티를 같은 방식으로 사용할 수 있어 학습→실행→검증 흐름을 빠르게 반복할 수 있습니다.
+                핵심 축은 비용 계산과 비교입니다. 일부 추천·실험형 기능도 함께 운영하지만, 메인 목적은 생활 판단을 빠르게 돕는 것입니다.
               </p>
               <div className="mt-4 space-y-2">
                 <p className="text-sm font-medium text-foreground">핵심 경로</p>
                 <div className="flex flex-wrap gap-2 text-sm">
-                  <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">블로그/FAQ로 배경 이해</span>
-                  <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">도구로 실행/확인</span>
-                  <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">결과 확인·공유</span>
+                  <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">가이드로 기준 확인</span>
+                  <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">도구로 계산·비교</span>
+                  <span className="rounded-full border border-border px-3 py-1 text-muted-foreground">결정 전 다시 검토</span>
                 </div>
               </div>
               <div className="mt-5 flex flex-wrap gap-3">

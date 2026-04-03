@@ -86,6 +86,11 @@
       "sourceType": "github",
       "computedHash": "139b3e3c9d43b79b4e6ccffaeb874265bc916d7d90662950e9f05581d6e0c06a"
     },
+    "recharts": {
+      "source": "tartinerlabs/skills",
+      "sourceType": "github",
+      "computedHash": "232a01aa1198a72b6578620577cd0ba17cb28fd43f69efaf4134b16666d2b898"
+    },
     "seo-geo": {
       "source": "resciencelab/opc-skills",
       "sourceType": "github",

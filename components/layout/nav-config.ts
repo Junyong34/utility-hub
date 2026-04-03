@@ -17,8 +17,8 @@ export interface NavItem {
  * Header와 BottomNav에서 동일하게 사용
  */
 export const NAV_ITEMS: NavItem[] = [
-  { name: "Blog", href: "/blog", icon: BookOpenIcon },
-  { name: "Tools", href: "/tools", icon: WrenchIcon },
-  { name: "About", href: "/about", icon: InfoIcon },
+  { name: "블로그", href: "/blog", icon: BookOpenIcon },
+  { name: "도구", href: "/tools", icon: WrenchIcon },
+  { name: "소개", href: "/about", icon: InfoIcon },
   { name: "FAQ", href: "/faq", icon: CircleHelpIcon },
 ]

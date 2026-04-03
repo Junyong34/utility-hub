@@ -40,7 +40,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Zento는 어떤 사이트인가요?',
     answer:
-      'Zento는 일상과 업무에 바로 도움이 되는 유용한 정보와 꿀팁, 그리고 실용적인 도구를 무료로 제공하는 웹사이트입니다. AI 프롬프트, 주차정보, 로또, 투자 등 다양한 주제의 블로그와 함께 대출, 예금, DSR, 주택 구입 비용 등 금융 계산기를 제공합니다.',
+      'Zento는 사기 전, 가기 전, 신청하기 전에 필요한 판단 기준을 빠르게 정리해주는 사이트입니다. 주차와 이동, 소비자 비교, 생활비와 금융 계산처럼 실제 선택에 바로 도움이 되는 글과 도구를 무료로 제공합니다.',
   },
   {
     question: '어떤 계산기 도구를 제공하나요?',
@@ -55,7 +55,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: '블로그에는 어떤 카테고리가 있나요?',
     answer:
-      '주차, AI(AI 이미지 생성), 개발, 소비자 정보, 투자, 로또 등 다양한 주제의 카테고리로 구성되어 있습니다. 각 카테고리별로 실용적인 정보와 꿀팁을 제공하며, 지속적으로 새로운 콘텐츠를 업데이트하고 있습니다.',
+      '현재는 주차, 소비자 정보, AI, 개발, 투자, 로또 등 여러 카테고리가 있지만, 메인 축은 주차/이동, 소비자 비교, 비용 계산과 연결되는 실전 가이드입니다. 새로운 글도 이 방향에 맞춰 계속 정리하고 있습니다.',
   },
   {
     question: 'DSR 계산기로 무엇을 확인할 수 있나요?',
@@ -182,16 +182,15 @@ const RECREATION_TOOL_FAQ_GROUPS: ToolFAQGroup[] = [
 export const metadata: Metadata = createMetadata({
   title: '자주 묻는 질문',
   description:
-    'Zento FAQ에서 서비스 이용 방법, 금융 계산기 사용법, 공유와 오류 대응, 면책 안내를 한 번에 확인하세요.',
+    'Zento FAQ에서 생활 비용 판단에 도움이 되는 도구 사용법, 계산기 안내, 공유와 오류 대응, 면책 정보를 한 번에 확인하세요.',
   canonical: 'https://www.zento.kr/faq',
   keywords: [
     'FAQ',
     '자주 묻는 질문',
     'Zento',
     '도구 사용 가이드',
-    'AI 프롬프트',
-    '주차정보',
-    '로또 추첨번호',
+    '주차 비교',
+    '소비자 비교',
     '대출 계산기',
     'DSR 계산기',
     '예금 적금 계산기',
@@ -285,7 +284,7 @@ export default function FaqPage() {
     name: '자주 묻는 질문',
     path: '/faq',
     description:
-      'Zento 이용 전 자주 묻는 질문을 확인하세요. 유용한 정보와 꿀팁, 도구 사용, 문의 및 협력 방법을 제공합니다.',
+      'Zento 이용 전 자주 묻는 질문을 확인하세요. 계산기 사용, 비용 판단, 공유와 문의 방법을 정리했습니다.',
     breadcrumbs: [{ name: '홈', url: '/' }, { name: 'FAQ' }],
   })
 
@@ -333,8 +332,8 @@ export default function FaqPage() {
               자주 묻는 질문 (FAQ)
             </h1>
             <p className="mt-3 max-w-3xl text-muted-foreground">
-              Zento의 유용한 정보와 꿀팁, 도구 이용 방법, 문의 및 협력
-              안내를 한곳에 모았습니다.
+              Zento의 계산기 사용법, 비용 판단 가이드, 문의 및 협력 안내를
+              한곳에 모았습니다.
             </p>
           </div>
         </header>
@@ -344,8 +343,8 @@ export default function FaqPage() {
             <h2 className="text-lg font-semibold">FAQ 개요</h2>
             <p className="mt-3 leading-relaxed text-muted-foreground">
               Zento FAQ는 사이트 이용, 각 계산기 사용, 공유 동작, 오류 대응,
-              면책 사항까지 실사용 중심으로 정리했습니다. FAQ는 기능을 빠르게
-              확인할 수 있는 가이드 역할입니다.
+              면책 사항까지 실사용 중심으로 정리했습니다. 숫자와 조건이 걸린
+              판단을 빠르게 확인할 수 있는 보조 가이드 역할을 합니다.
             </p>
           </Card>
 
@@ -375,7 +374,7 @@ export default function FaqPage() {
           ))}
 
           <Card className="p-6">
-            <h2 className="text-lg font-semibold">재미·추천형 기능 FAQ</h2>
+            <h2 className="text-lg font-semibold">추천·오락형 기능 FAQ</h2>
             <p className="mt-1 text-sm text-muted-foreground">
               로또/게임 섹션은 참고·오락 목적의 사용 가이드에 맞춰 확인하세요.
             </p>

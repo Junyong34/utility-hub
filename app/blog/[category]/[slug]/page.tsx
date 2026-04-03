@@ -238,7 +238,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <footer className="mt-16 border-t bg-card">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <p className="text-center text-muted-foreground text-sm">
-              © 2024 유용한 정보 허브. All rights reserved.
+              © Zento. 비교와 계산으로 생활의 결정을 돕습니다.
             </p>
           </div>
         </footer>

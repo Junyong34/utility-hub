@@ -37,16 +37,17 @@ export function generateToolsMainMetadata(): Metadata {
   return generateMetadata({
     title: '도구 모음',
     description:
-      '다양한 유용한 도구를 한곳에서 바로 사용할 수 있습니다. 로또 번호 생성기, 계산기, 변환기 등 실생활과 개발에 필요한 온라인 도구 모음.',
+      '대출, DSR, 저축, 주택 구입 비용처럼 돈이 걸린 판단을 빠르게 정리하는 계산·비교 도구 모음입니다. 일부 추천·실험형 도구도 함께 제공합니다.',
     canonical: 'https://www.zento.kr/tools',
     keywords: [
-      '온라인 도구',
-      '유틸리티',
-      '로또 번호 생성기',
-      '무료 도구',
-      '웹 도구',
+      '비용 계산 도구',
+      '비교 도구',
+      '대출 계산기',
+      'DSR 계산기',
+      '저축 계산기',
+      '주택 구입 비용 계산기',
       '계산기',
-      '변환기',
+      '무료 도구',
     ],
     ogType: 'website',
   });

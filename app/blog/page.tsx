@@ -13,15 +13,15 @@ import { getBlogStructuredDataBreadcrumbs } from '@/lib/blog/breadcrumb';
 export const metadata: Metadata = createMetadata({
   title: '블로그',
   description:
-    'Next.js, TypeScript, React, 웹 개발에 관한 유용한 팁과 정보를 공유합니다. 실무에 도움이 되는 개발 블로그 포스트 모음.',
+    '주차, 소비자 비교, 생활비와 비용 계산에 도움이 되는 실전 가이드를 모았습니다. 비교표와 체크리스트 중심으로 빠르게 판단할 수 있게 정리합니다.',
   canonical: 'https://www.zento.kr/blog',
   keywords: [
-    'Next.js 블로그',
-    'React 튜토리얼',
-    'TypeScript 가이드',
-    '웹 개발',
-    '프론트엔드',
-    '개발 팁',
+    '생활 가이드',
+    '주차 비교',
+    '소비자 비교',
+    '생활비 절약',
+    '비용 계산',
+    '실전 체크리스트',
   ],
 });
 
@@ -36,7 +36,7 @@ export default function BlogPage() {
     name: '블로그',
     path: '/blog',
     description:
-      'Next.js, TypeScript, React, 웹 개발에 관한 유용한 팁과 정보를 공유합니다.',
+      '비용과 선택을 빠르게 정리하는 실전 가이드 모음입니다.',
     breadcrumbs: getBlogStructuredDataBreadcrumbs(),
   });
 
@@ -87,7 +87,7 @@ export default function BlogPage() {
         <footer className="mt-8 border-t bg-card">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <p className="text-center text-muted-foreground text-sm">
-              © 2024 유용한 정보 허브. All rights reserved.
+              © Zento. 비교와 계산으로 생활의 결정을 돕습니다.
             </p>
           </div>
         </footer>

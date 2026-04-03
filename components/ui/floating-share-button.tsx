@@ -9,8 +9,8 @@ import { cn } from "@/lib/utils"
 // Client Component에서는 직접 정의 (fs 모듈 import 방지)
 const SITE_CONFIG = {
   name: 'Zento',
-  title: 'Zento - 복잡한 정보를 단순하게',
-  description: '복잡한 정보를 단순하게 정리해주는 공간. 일상과 개발에 유용한 팁, 도구, 정보를 제공합니다.',
+  title: 'Zento - 비교하고 계산해 결정하는 생활 가이드',
+  description: '주차, 소비자 비교, 대출·저축·주택 비용 계산까지. 비용과 선택을 빠르게 정리해주는 실전 가이드와 도구를 제공합니다.',
   url: typeof window !== 'undefined' ? window.location.origin : 'https://www.zento.kr',
 }
 
@@ -57,11 +57,11 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
       title = `${document.title} - ${SITE_CONFIG.name}`
       description = document.querySelector('meta[name="description"]')?.getAttribute("content") || description
     } else if (pathname === "/blog") {
-      title = `Blog - ${SITE_CONFIG.name}`
-      description = "유용한 정보와 개발 팁을 공유합니다."
+      title = `블로그 - ${SITE_CONFIG.name}`
+      description = "비교표와 체크리스트로 판단하는 실전 생활 가이드를 모았습니다."
     } else if (pathname === "/tools") {
-      title = `Tools - ${SITE_CONFIG.name}`
-      description = "일상과 개발에 유용한 도구들을 모았습니다."
+      title = `도구 - ${SITE_CONFIG.name}`
+      description = "비용 계산과 조건 비교에 도움이 되는 실전 도구를 모았습니다."
     } else if (pathname === "/") {
       title = SITE_CONFIG.title
       description = SITE_CONFIG.description
@@ -159,7 +159,7 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
       try {
         await navigator.clipboard.writeText(url)
         copied = true
-      } catch (error) {
+      } catch {
         copied = false
       }
     }

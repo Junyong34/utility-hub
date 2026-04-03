@@ -1,17 +1,17 @@
-import type { Metadata, Viewport } from 'next'
-import Script from "next/script";
-import { Roboto } from 'next/font/google'
-import Link from 'next/link'
-import './globals.css'
-import { generateMetadata as createMetadata, SITE_CONFIG } from '@/lib/seo'
-import { createWebSiteSchema, createOrganizationSchema } from '@/lib/seo'
-import { AdSenseScript, JsonLdMultiple } from '@/components/seo'
-import { DesktopNav } from '@/components/layout/desktop-nav'
-import { BottomNav } from '@/components/layout/bottom-nav'
-import { FloatingShareButton } from '@/components/ui/floating-share-button'
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import { Providers } from './providers'
-import { NAV_ITEMS } from '@/components/layout/nav-config'
+import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
+import { Roboto } from 'next/font/google';
+import Link from 'next/link';
+import './globals.css';
+import { generateMetadata as createMetadata, SITE_CONFIG } from '@/lib/seo';
+import { createWebSiteSchema, createOrganizationSchema } from '@/lib/seo';
+import { AdSenseScript, JsonLdMultiple } from '@/components/seo';
+import { DesktopNav } from '@/components/layout/desktop-nav';
+import { BottomNav } from '@/components/layout/bottom-nav';
+import { FloatingShareButton } from '@/components/ui/floating-share-button';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { Providers } from './providers';
+import { NAV_ITEMS } from '@/components/layout/nav-config';
 
 /**
  * Method A: Single font with display swap
@@ -25,7 +25,7 @@ const roboto = Roboto({
   variable: '--font-sans',
   display: 'swap',
   preload: true,
-})
+});
 
 /**
  * 글로벌 메타데이터 설정
@@ -35,19 +35,18 @@ export const metadata: Metadata = createMetadata({
   description: SITE_CONFIG.description,
   canonical: SITE_CONFIG.url,
   keywords: [
-    'Next.js',
-    'React',
-    'TypeScript',
-    '웹 개발',
-    '유틸리티',
-    '팁',
-    '도구',
-    'AI',
-    'Prompt',
-    '프롬프트',
-    '블로그',
+    '생활 가이드',
+    '비용 비교',
+    '주차 비교',
+    '소비자 비교',
+    '생활비 절약',
+    '대출 계산기',
+    'DSR 계산기',
+    '저축 계산기',
+    '주택 구입 비용 계산기',
+    '실전 의사결정',
   ],
-})
+});
 
 /**
  * Viewport 설정 (Core Web Vitals 최적화)
@@ -56,7 +55,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   themeColor: '#ffffff',
-}
+};
 
 /**
  * Root Layout - Method A Optimized
@@ -67,10 +66,10 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   // 구조화 데이터 생성
-  const structuredData = [createWebSiteSchema(), createOrganizationSchema()]
+  const structuredData = [createWebSiteSchema(), createOrganizationSchema()];
 
   return (
     <html lang="ko" className={roboto.variable}>
@@ -80,14 +79,14 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
 
-        {process.env.NODE_ENV === "development" && (
-          <Script
-            src="//unpkg.com/react-grab/dist/index.global.js"
-            crossOrigin="anonymous"
-            strategy="beforeInteractive"
-          />
-        )}
-        {process.env.NODE_ENV === "development" && (
+        {/*{process.env.NODE_ENV === "development" && (*/}
+        {/*  <Script*/}
+        {/*    src="//unpkg.com/react-grab/dist/index.global.js"*/}
+        {/*    crossOrigin="anonymous"*/}
+        {/*    strategy="beforeInteractive"*/}
+        {/*  />*/}
+        {/*)}*/}
+        {process.env.NODE_ENV === 'development' && (
           <Script
             src="//unpkg.com/@react-grab/mcp/dist/client.global.js"
             strategy="lazyOnload"
@@ -176,7 +175,7 @@ export default function RootLayout({
               sr-only는 display:none 대신 1px 크기로 렌더링되어 크롤러가 정상 인식함.
             */}
             <nav aria-label="사이트 내비게이션 링크" className="sr-only">
-              {NAV_ITEMS.map((item) => (
+              {NAV_ITEMS.map(item => (
                 <Link key={item.href} href={item.href}>
                   {item.name}
                 </Link>
@@ -186,5 +185,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  )
+  );
 }

@@ -14,8 +14,8 @@ import { useVisitorStats } from '@/hooks/useVisitorStats';
 const serviceCards = [
   {
     icon: BookOpenIcon,
-    title: 'Blog Posts',
-    description: '유용한 정보와 지식을 공유합니다',
+    title: '가이드',
+    description: '비교표와 체크리스트로 바로 판단하는 글',
     href: '/blog',
     color: 'text-blue-500',
     bgColor: 'bg-blue-500/10',
@@ -23,8 +23,8 @@ const serviceCards = [
   },
   {
     icon: WrenchIcon,
-    title: 'Tools',
-    description: '편리한 계산기와 유틸리티 도구',
+    title: '도구',
+    description: '비용 계산과 조건 비교를 빠르게 정리하는 도구',
     href: '/tools',
     color: 'text-green-500',
     bgColor: 'bg-green-500/10',
@@ -32,8 +32,8 @@ const serviceCards = [
   },
   {
     icon: InfoIcon,
-    title: 'About',
-    description: 'Zento 소개와 운영 원칙',
+    title: '소개',
+    description: '무엇을 어떤 기준으로 정리하는 사이트인지 안내',
     href: '/about',
     color: 'text-orange-500',
     bgColor: 'bg-orange-500/10',
@@ -55,10 +55,9 @@ const numberFormatter = new Intl.NumberFormat('ko-KR');
 interface HeroSplitSectionProps {
   totalBlogPosts?: number;
   totalTools?: number;
-  toolNames?: string[];
 }
 
-export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames = [] }: HeroSplitSectionProps) {
+export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0 }: HeroSplitSectionProps) {
   const { data: visitorResponse, isPending } = useVisitorStats();
   const visitorData = visitorResponse?.data;
   const fallback = isPending ? '—' : '—';
@@ -85,7 +84,7 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
             {/* Eyebrow */}
             <div className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-1.5 text-sm text-muted-foreground w-fit">
               <span className="text-primary">✦</span>
-              <span>Zen + Info · 정보 허브</span>
+              <span>Zen + Info · 비교와 절약을 돕는 생활 가이드</span>
             </div>
 
             {/* Title */}
@@ -93,15 +92,15 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
                 <span className="text-primary">Zento</span>
                 <br />
-                <span className="text-foreground">생활의 모든 것</span>
+                <span className="text-foreground">비용과 선택을 빠르게 정리하는 실전 가이드</span>
               </h1>
             </div>
 
             {/* Description */}
-            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-sm">
-              유용한 정보부터 편리한 도구, 자주 묻는 질문까지
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-lg">
+              사기 전, 가기 전, 신청하기 전에 필요한 정보를
               <br />
-              생활에 필요한 모든 것을 한곳에서
+              비교표, 체크리스트, 계산 도구로 빠르게 정리해 드립니다.
             </p>
 
             {/* CTA Rows */}
@@ -115,7 +114,7 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-semibold">블로그 읽기</div>
                     <div className="text-xs text-muted-foreground mt-0.5">
-                      최신 글 · 개발 / AI
+                      주차 · 소비자 비교 · 생활비 가이드
                     </div>
                   </div>
                   <ArrowRightIcon className="h-4 w-4 shrink-0 text-muted-foreground group-hover:translate-x-1 transition-transform" />
@@ -131,7 +130,7 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0, toolNames
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-semibold">도구 사용하기</div>
                     <div className="text-xs text-muted-foreground mt-0.5">
-                      {toolNames.join(' · ')}
+                      대출 · DSR · 주택 비용 · 저축 계산
                     </div>
                   </div>
                   <ArrowRightIcon className="h-4 w-4 shrink-0 text-muted-foreground group-hover:translate-x-1 transition-transform" />
