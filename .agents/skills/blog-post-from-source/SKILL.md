@@ -60,11 +60,13 @@ description: Use this skill whenever the user wants a Korean blog post generated
   - 출처 정리
   - 결론
 
-5. `humanizer` 검수
+5. `humanizer` `write-tropes` 검수
 - `.agents/skills/humanizer` 또는 동등한 `humanizer` 스킬이 사용 가능하면 반드시 사용한다.
 - 초안에 AI 흔적이 보이면 `humanizer` 스킬로 문장 톤을 자연스럽게 조정한다.
+- `.agents/skills/write-tropes` 또는 동등한 `write-tropes` 스킬이 사용 가능하면 반드시 사용한다.
+-  글작성시 `write-tropes` 사용하여 문장 톤을 자연스럽게 조정한다.
 - 스킬이 없으면 동일한 기준으로 수동 자연화하되, 의미/사실/수치/링크는 바꾸지 않는다.
-- 변경 사항 2~4개와 근거를 변경 로그에 기록한다.
+
 
 6. `blog-seo-writer` 보정
 - `.agents/skills/blog-seo-writer` 또는 동등한 `blog-seo-writer` 스킬이 사용 가능하면 반드시 사용한다.
