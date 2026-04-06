@@ -24,6 +24,7 @@
 - `08-calculator-framework-implementation-plan.md`
 - `09-start-here-checklist.md`
 - `10-og-image-rebrand-implementation-plan.md`
+- `11-ga-event-implementation-plan.md`
 
 ## Chunk 1: 데이터와 계산기 기반
 
@@ -93,6 +94,16 @@
 
 - [ ] **Step 1: `/benefits` 허브와 기본 카드 구조를 구현한다**
 - [ ] **Step 2: 관련 도구/장소 링크 규칙을 확인한다**
+
+### Task 5-bis: GA 이벤트 추적 구조 추가
+
+**Files:**
+
+- Follow: `11-ga-event-implementation-plan.md`
+
+- [ ] **Step 1: 공통 gtag 이벤트 헬퍼를 추가한다**
+- [ ] **Step 2: nav, 홈 CTA, 검색, 도구, 공유 버튼에 핵심 이벤트를 붙인다**
+- [ ] **Step 3: 계산기 `calculator_submit`과 `share` 이벤트를 붙인다**
 
 ## Chunk 5: 브랜드 시각 자산
 

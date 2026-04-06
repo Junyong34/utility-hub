@@ -507,6 +507,7 @@ Phase A는 공급 난이도에 따라 두 버킷으로 시작한다.
 7. `docs/superpowers/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md`
 8. `docs/superpowers/specs/parenting-guide-rebrand/08-calculator-design-and-visualization.md`
 9. `docs/superpowers/specs/parenting-guide-rebrand/09-og-image-rebrand-system.md`
+10. `docs/superpowers/specs/parenting-guide-rebrand/10-ga-event-tracking-strategy.md`
 
 메뉴별 계획 문서:
 

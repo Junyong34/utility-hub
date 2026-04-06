@@ -17,6 +17,7 @@
 7. `07-data-sourcing-and-trust-model.md`
 8. `08-calculator-design-and-visualization.md`
 9. `09-og-image-rebrand-system.md`
+10. `10-ga-event-tracking-strategy.md`
 
 문서 역할:
 
