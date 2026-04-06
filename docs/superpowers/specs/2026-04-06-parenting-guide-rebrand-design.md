@@ -450,12 +450,23 @@
 
 이 스펙 승인 후 아래 문서 묶음을 작성한다.
 
-1. 제품 전략과 메시지 문서
-2. 정보구조와 라우트 설계 문서
-3. 콘텐츠 모델과 메타 필드 문서
-4. 도구 우선순위와 상세 요구사항 문서
-5. 혜택·지원금 콘텐츠 운영 문서
-6. 단계별 실행 계획 문서
+공통 설계 문서:
+
+1. `docs/superpowers/specs/parenting-guide-rebrand/01-product-strategy-and-messaging.md`
+2. `docs/superpowers/specs/parenting-guide-rebrand/02-information-architecture-and-routing.md`
+3. `docs/superpowers/specs/parenting-guide-rebrand/03-content-model-and-taxonomy.md`
+4. `docs/superpowers/specs/parenting-guide-rebrand/04-tools-strategy-and-priority.md`
+5. `docs/superpowers/specs/parenting-guide-rebrand/05-benefits-content-strategy.md`
+6. `docs/superpowers/specs/parenting-guide-rebrand/06-roadmap-and-measurement.md`
+
+메뉴별 계획 문서:
+
+1. `docs/superpowers/plans/parenting-guide-rebrand/01-home-menu-plan.md`
+2. `docs/superpowers/plans/parenting-guide-rebrand/02-places-menu-plan.md`
+3. `docs/superpowers/plans/parenting-guide-rebrand/03-tools-menu-plan.md`
+4. `docs/superpowers/plans/parenting-guide-rebrand/04-benefits-menu-plan.md`
+5. `docs/superpowers/plans/parenting-guide-rebrand/05-blog-menu-plan.md`
+6. `docs/superpowers/plans/parenting-guide-rebrand/06-about-menu-plan.md`
 
 이 문서 묶음은 실제 구현 시작 전에 작업 단위를 더 잘게 나누는 기준이 된다.
 
