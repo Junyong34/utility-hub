@@ -49,7 +49,7 @@
 - Modify: `lib/tools/tool-config.ts`
 - Create: `docs/superpowers/plans/parenting-guide-rebrand/execution/tool-prd-index.md`
 
-- [ ] **Step 1: 1차 육아 도구 2~3개를 실제 구현 후보로 확정한다**
+- [ ] **Step 1: 1차 육아 도구는 `연령/개월수`, `가족 나들이 예산`, `키즈카페·체험 월예산`, `지역 혜택 자가진단` 우선으로 확정한다**
 - [ ] **Step 2: 각 도구가 연결될 장소 글과 혜택 글을 적는다**
 - [ ] **Step 3: 아직 구현되지 않은 도구는 허브에서 과도하게 노출하지 않도록 정책을 정한다**
 

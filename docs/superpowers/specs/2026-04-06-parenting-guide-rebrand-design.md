@@ -246,6 +246,14 @@
 2. 글 안에는 반복 가능한 표준 카드 블록을 넣는다.
 3. 카드 데이터는 나중에 장소 DB로 확장 가능한 구조를 가진다.
 
+Phase A 소스 오브 트루스는 `place seed + blog linkage`로 고정한다.
+
+정책:
+
+1. 운영 사실 데이터는 `content/places/<region>/*.json` place seed에 둔다.
+2. 블로그 글은 `placeIds`로 place seed를 참조한다.
+3. 가격/운영시간/주차 같은 운영 사실은 blog frontmatter에 중복 저장하지 않는다.
+
 ### 7.2 Primary Content Buckets
 
 블로그는 아래 세 축으로 운영한다.
@@ -327,14 +335,18 @@
 
 ### 8.2 Launch Priority
 
-1차 우선순위는 아래와 같다.
+Phase A 상위 도구는 핵심 JTBD를 직접 강화하는 순서로 둔다.
 
 1. 연령/개월수 계산기
-2. 성장 계산기
-3. 자녀 비과세 증여 계산기
-4. 가족 나들이 예산 계산기
-5. 키즈카페·체험 월예산 계산기
-6. 어린이집·유치원 비용 계산기
+2. 가족 나들이 예산 계산기
+3. 키즈카페·체험 월예산 계산기
+4. 지역 혜택 자가진단 도구
+
+Phase A 보조 도구:
+
+5. 성장 계산기
+6. 자녀 비과세 증여 계산기
+7. 어린이집·유치원 비용 계산기
 
 ### 8.3 Tool Rules
 
@@ -409,15 +421,49 @@
 
 ## 11. Success Metrics
 
-초기 성공 기준은 아래 세 가지다.
+### 11.1 North Star
+
+`주간 계획 세션 수`
+
+정의:
+
+- 사용자가 장소 글 또는 장소 허브에 진입하고
+- 같은 세션 안에서 도구 클릭, 혜택 진입, 다른 관련 글 이동 중 하나 이상을 수행한 세션 수
+
+### 11.2 Phase A 핵심 지표
+
+초기 성공 기준은 아래를 본다.
 
 1. 검색 유입이 늘어나는가
-2. 글 유입 후 도구 클릭이 발생하는가
-3. 사용자 한 명이 2페이지 이상 이동하는가
+2. Places 진입 후 2차 행동률이 올라가는가
+3. 7일 재방문 사용자 수가 늘어나는가
+4. 도구 재사용 세션 비율이 생기는가
+5. 사용자 한 명이 2페이지 이상 이동하는가
+
+### 11.3 Owned Loop
+
+Phase A에서 최소 하나의 owned loop를 둔다.
+
+후보:
+
+- 카카오 채널 구독
+- 이메일 뉴스레터 구독
+- 주간 큐레이션 링크 재방문
 
 정량 예시는 구현 계획 단계에서 확정한다.
 
 이 스펙 단계에서는 측정 축만 고정한다.
+
+### 11.4 Supply Strategy
+
+Phase A는 공급 난이도에 따라 두 버킷으로 시작한다.
+
+1. `서울 공공형 심층 허브`
+   - 공공서비스예약, 육아지원센터, 공공 체험시설 중심
+2. `경기 남부 상업형 제한 허브`
+   - 수동 검증 가능한 상업형 키즈카페/체험시설 소수 시드 중심
+
+경기 북부와 인천은 Phase A 안에 포함하더라도, 위 두 버킷 이후 순차적으로 깊이를 늘린다.
 
 ## 12. Risks and Guardrails
 
@@ -458,6 +504,9 @@
 4. `docs/superpowers/specs/parenting-guide-rebrand/04-tools-strategy-and-priority.md`
 5. `docs/superpowers/specs/parenting-guide-rebrand/05-benefits-content-strategy.md`
 6. `docs/superpowers/specs/parenting-guide-rebrand/06-roadmap-and-measurement.md`
+7. `docs/superpowers/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md`
+8. `docs/superpowers/specs/parenting-guide-rebrand/08-calculator-design-and-visualization.md`
+9. `docs/superpowers/specs/parenting-guide-rebrand/09-og-image-rebrand-system.md`
 
 메뉴별 계획 문서:
 

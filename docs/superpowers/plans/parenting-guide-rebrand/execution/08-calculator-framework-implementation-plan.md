@@ -25,16 +25,19 @@
 
 ## Chunk 2: 1차 계산기 선정
 
-### Task 2: 첫 2개 계산기 요구사항 고정
+### Task 2: 첫 4개 핵심 wedge 도구 요구사항 고정
 
 **Files:**
 
 - Create: `docs/superpowers/plans/parenting-guide-rebrand/execution/age-calculator-prd.md`
 - Create: `docs/superpowers/plans/parenting-guide-rebrand/execution/outing-budget-calculator-prd.md`
+- Create: `docs/superpowers/plans/parenting-guide-rebrand/execution/kids-activity-budget-calculator-prd.md`
+- Create: `docs/superpowers/plans/parenting-guide-rebrand/execution/local-benefits-self-check-prd.md`
 
 - [ ] **Step 1: 연령/개월수 계산기의 입력/출력/연결 콘텐츠를 고정한다**
 - [ ] **Step 2: 나들이 예산 계산기의 비용 항목과 기본 시각화를 고정한다**
-- [ ] **Step 3: 두 계산기의 CTA와 연결 글 세트를 적는다**
+- [ ] **Step 3: 키즈카페·체험 월예산과 지역 혜택 자가진단의 입력/출력 구조를 고정한다**
+- [ ] **Step 4: 네 도구의 CTA와 연결 글 세트를 적는다**
 
 ## Chunk 3: 정책형 계산기 준비
 

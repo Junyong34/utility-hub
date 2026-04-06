@@ -4,7 +4,7 @@
 
 **Goal:** 장소/시설/혜택 정보를 발행 가능한 데이터로 만드는 최소 수집-검증 파이프라인을 설계한다.
 
-**Architecture:** 초기에는 크롤러가 아니라 수동 시드 + 정규화 스키마로 시작한다. 데이터 구조는 향후 `lib/places/*`, `content/posts/*` frontmatter, 또는 별도 JSON 시드 파일로 확장 가능하게 정의한다.
+**Architecture:** 초기에는 크롤러가 아니라 수동 시드 + 정규화 스키마로 시작한다. Phase A 소스 오브 트루스는 `content/places/<region>/*.json` place seed이며, 블로그 글은 `placeIds`로 이 seed를 참조한다.
 
 **Tech Stack:** Markdown frontmatter, TypeScript types, 필요 시 JSON seed files
 
@@ -19,6 +19,7 @@
 - Create: `types/place-source.ts`
 - Create: `lib/places/source-policy.ts`
 - Create: `docs/superpowers/specs/parenting-guide-rebrand/place-card-schema-reference.md`
+- Create: `content/places/README.md`
 
 - [ ] **Step 1: 상업형 시설과 공공 시설이 공통으로 쓰는 최소 필드를 정의한다**
 - [ ] **Step 2: 검증 상태(`official_verified`, `semi_verified` 등) enum을 정의한다**
@@ -26,16 +27,16 @@
 
 ## Chunk 2: 시드 데이터
 
-### Task 2: 서울 + 경기 남부 시드 20~30건 만들기
+### Task 2: 서울 공공형 + 경기 남부 상업형 시드 20~30건 만들기
 
 **Files:**
 
-- Create: `content/places/seoul/*.md` or JSON seed structure
-- Create: `content/places/gyeonggi-south/*.md` or JSON seed structure
+- Create: `content/places/seoul/*.json`
+- Create: `content/places/gyeonggi-south/*.json`
 - Create: `docs/superpowers/plans/parenting-guide-rebrand/execution/place-seed-checklist.md`
 
-- [ ] **Step 1: 서울 10건, 경기 남부 10건 정도의 초기 시드 목표를 정한다**
-- [ ] **Step 2: 키즈카페, 공공 놀이시설, 체험시설을 섞어 넣는다**
+- [ ] **Step 1: 서울 공공형 10~15건, 경기 남부 상업형 10~15건의 초기 시드 목표를 정한다**
+- [ ] **Step 2: 서울은 공공형 위주, 경기 남부는 상업형 위주로 수집 전략을 분리한다**
 - [ ] **Step 3: 각 항목에 공식 확인 링크와 마지막 검증일을 넣는다**
 - [ ] **Step 4: 발행 가능 상태와 재검수 필요 상태를 나눠 표시한다**
 
