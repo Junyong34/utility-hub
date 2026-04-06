@@ -35,6 +35,9 @@ interface StudioCustomValues {
   bgColor: string
   accentColor: string
   label: string
+  themePreset: string
+  layoutVariant: string
+  mascotEnabled: boolean
 }
 
 const BLOG_OPTIONS = getAllPosts().map((post) => ({
@@ -52,9 +55,12 @@ const DEFAULT_CUSTOM_VALUES: StudioCustomValues = {
   description: 'Takumi 기반으로 배경, 텍스트, 이미지를 조합한 미리보기입니다.',
   image: '/og-images/main-og-image.png',
   imageEnabled: true,
-  bgColor: '#0f172a',
-  accentColor: '#38bdf8',
-  label: 'CUSTOM',
+  bgColor: '#FFF8EF',
+  accentColor: '#FF8D73',
+  label: 'GUIDE',
+  themePreset: 'cream',
+  layoutVariant: 'play-card',
+  mascotEnabled: true,
 }
 
 export const metadata: Metadata = createMetadata({
@@ -67,8 +73,8 @@ export const metadata: Metadata = createMetadata({
     title: 'OG Image Studio',
     description: 'Takumi 기반 OG 이미지 미리보기와 다운로드',
     label: 'STUDIO',
-    bgColor: '#0f172a',
-    accentColor: '#38bdf8',
+    themePreset: 'cream',
+    layoutVariant: 'play-card',
   }),
 })
 
@@ -94,7 +100,7 @@ function hasSearchParam(
 
 function resolveTextInputValue(
   searchParams: Record<string, string | string[] | undefined>,
-  key: keyof Omit<StudioCustomValues, 'imageEnabled'>,
+  key: keyof Omit<StudioCustomValues, 'imageEnabled' | 'mascotEnabled'>,
   fallback: string
 ): string {
   if (!hasSearchParam(searchParams, key)) {
@@ -157,6 +163,17 @@ function resolveToolSelection(
   return TOOL_OPTIONS[0]?.value ?? ''
 }
 
+function resolveMascotEnabled(
+  searchParams: Record<string, string | string[] | undefined>
+): boolean {
+  if (!hasSearchParam(searchParams, 'mascotEnabled')) {
+    return DEFAULT_CUSTOM_VALUES.mascotEnabled
+  }
+
+  const value = readValue(searchParams, 'mascotEnabled')
+  return value !== '0' && value !== 'false'
+}
+
 function resolveCustomValues(
   searchParams: Record<string, string | string[] | undefined>
 ): StudioCustomValues {
@@ -192,6 +209,9 @@ function resolveCustomValues(
       'label',
       DEFAULT_CUSTOM_VALUES.label
     ),
+    themePreset: readValue(searchParams, 'themePreset') ?? DEFAULT_CUSTOM_VALUES.themePreset,
+    layoutVariant: readValue(searchParams, 'layoutVariant') ?? DEFAULT_CUSTOM_VALUES.layoutVariant,
+    mascotEnabled: resolveMascotEnabled(searchParams),
   }
 }
 
@@ -359,7 +379,7 @@ export default async function OgImageStudioPage({ searchParams }: PageProps) {
                 width={1200}
                 height={630}
                 unoptimized
-                className="w-full rounded-2xl border bg-slate-950 object-cover shadow-sm"
+                className="w-full rounded-2xl border bg-muted/30 object-cover shadow-sm"
               />
 
               <div className="space-y-4 rounded-xl border border-border/60 bg-muted/20 p-4">
