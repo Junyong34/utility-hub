@@ -20,6 +20,8 @@
 8. `07-source-ingestion-and-verification-plan.md`
 9. `08-calculator-framework-implementation-plan.md`
 10. `09-start-here-checklist.md`
+11. `10-og-image-rebrand-implementation-plan.md`
+12. `11-og-asset-production-checklist.md`
 
 간단한 결론:
 

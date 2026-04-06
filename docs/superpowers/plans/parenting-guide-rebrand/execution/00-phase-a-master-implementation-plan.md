@@ -23,6 +23,8 @@
 - `07-source-ingestion-and-verification-plan.md`
 - `08-calculator-framework-implementation-plan.md`
 - `09-start-here-checklist.md`
+- `10-og-image-rebrand-implementation-plan.md`
+- `11-og-asset-production-checklist.md`
 
 ## Chunk 1: 데이터와 계산기 기반
 
@@ -93,9 +95,22 @@
 - [ ] **Step 1: `/benefits` 허브와 기본 카드 구조를 구현한다**
 - [ ] **Step 2: 관련 도구/장소 링크 규칙을 확인한다**
 
-## Chunk 5: 아카이브와 신뢰 페이지
+## Chunk 5: 브랜드 시각 자산
 
-### Task 6: 블로그 허브 재구성
+### Task 6: OG 이미지 리브랜딩
+
+**Files:**
+
+- Follow: `10-og-image-rebrand-implementation-plan.md`
+- Follow: `11-og-asset-production-checklist.md`
+
+- [ ] **Step 1: 육아형 OG 테마와 레이아웃 시스템을 구현한다**
+- [ ] **Step 2: 마스코트와 패턴 자산을 연결한다**
+- [ ] **Step 3: 블로그/도구/custom OG 샘플을 검수한다**
+
+## Chunk 6: 아카이브와 신뢰 페이지
+
+### Task 7: 블로그 허브 재구성
 
 **Files:**
 
@@ -104,7 +119,7 @@
 - [ ] **Step 1: 블로그 허브 구현 계획 문서를 따라 카테고리와 메타 축을 정리한다**
 - [ ] **Step 2: 기존 포스트 노출이 깨지지 않는지 확인한다**
 
-### Task 7: 소개 페이지 리브랜딩
+### Task 8: 소개 페이지 리브랜딩
 
 **Files:**
 
@@ -113,9 +128,9 @@
 - [ ] **Step 1: 소개 페이지 구현 계획 문서를 따라 실용형 소개 페이지로 재작성한다**
 - [ ] **Step 2: 브랜드 표기 일관성을 확인한다**
 
-## Chunk 6: 검증
+## Chunk 7: 검증
 
-### Task 8: 전체 검증
+### Task 9: 전체 검증
 
 **Files:**
 
