@@ -1,5 +1,6 @@
 import { getPostBySlug } from '@/lib/blog/posts'
 import { createOgImageResponse } from '@/lib/seo/og-renderer'
+import { resolveBlogCategoryPresetName } from '@/lib/seo/og-theme'
 
 export const runtime = 'nodejs'
 
@@ -27,7 +28,9 @@ export async function GET(
     title: post.title,
     description: post.excerpt,
     label: post.category,
-    accentColor: '#38bdf8',
     footerText: `zento.kr/blog/${post.categorySlug}`,
+    layoutVariant: 'play-card',
+    themePreset: resolveBlogCategoryPresetName(post.categorySlug),
+    mascotEnabled: true,
   })
 }

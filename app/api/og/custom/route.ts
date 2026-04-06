@@ -26,15 +26,25 @@ export async function GET(request: Request): Promise<Response> {
   const { searchParams } = new URL(request.url)
   const format = pickFormat(searchParams)
   const shouldDownload = searchParams.get('download') === '1'
+  const mascotEnabled = searchParams.get('mascotEnabled') !== '0'
+  const layoutVariant = pickValue(searchParams, 'layoutVariant') as
+    | 'play-card'
+    | 'tool-card'
+    | 'custom-studio'
+    | undefined
+  const themePreset = pickValue(searchParams, 'themePreset')
 
   return await createOgImageResponse(request, {
     title: pickValue(searchParams, 'title') || 'Zento OG Image',
     description: pickValue(searchParams, 'description'),
     image: pickValue(searchParams, 'image'),
-    label: pickValue(searchParams, 'label') || 'CUSTOM',
+    label: pickValue(searchParams, 'label') || 'GUIDE',
     bgColor: pickValue(searchParams, 'bgColor'),
     accentColor: pickValue(searchParams, 'accentColor'),
     footerText: 'zento.kr/custom-og',
+    themePreset: themePreset ?? 'cream',
+    layoutVariant: layoutVariant ?? 'play-card',
+    mascotEnabled,
   }, {
     format,
     filename: shouldDownload

@@ -13,6 +13,9 @@ export interface CustomOgImagePathInput {
   bgColor?: string
   accentColor?: string
   label?: string
+  themePreset?: string
+  layoutVariant?: string
+  mascotEnabled?: boolean
 }
 
 export function buildBlogOgImagePath({
@@ -51,6 +54,18 @@ export function buildCustomOgImagePath(
 
   if (input.label) {
     params.set('label', input.label)
+  }
+
+  if (input.themePreset) {
+    params.set('themePreset', input.themePreset)
+  }
+
+  if (input.layoutVariant) {
+    params.set('layoutVariant', input.layoutVariant)
+  }
+
+  if (input.mascotEnabled === false) {
+    params.set('mascotEnabled', '0')
   }
 
   if (input.format) {
