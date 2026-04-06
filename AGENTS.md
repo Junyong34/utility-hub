@@ -201,6 +201,15 @@ utility-hub/
 
 ## Development Guidelines
 
+### Required Implementation Stack
+- 구현 작업은 기본적으로 `React` + `TypeScript` 기준으로 진행합니다.
+- UI 컴포넌트는 기존 `shadcn/ui`와 `components/ui/*` 패턴을 우선 사용합니다.
+- 차트/데이터 시각화는 기본적으로 `recharts`를 사용합니다.
+- 날짜 계산과 날짜 상태 처리는 기본적으로 `date-fns`를 사용합니다.
+- 아이콘은 기본적으로 `lucide-react`를 사용합니다.
+- 애니메이션은 기본적으로 `framer-motion`을 사용합니다.
+- 기존 패턴으로 해결 가능한데도 새로운 UI/차트/날짜/아이콘/애니메이션 라이브러리를 추가하지 않습니다.
+
 ### Rebrand Work
 - 리브랜딩 작업 전에는 반드시 위 `Rebrand Source Docs`를 먼저 확인합니다.
 - 메뉴/허브 작업은 공통 스펙이 아니라 **메뉴별 계획 문서 + execution 문서**를 기준으로 진행합니다.
@@ -249,6 +258,11 @@ utility-hub/
 
 ## Useful Docs In This Repo
 
+- `package.json`
+- `components/ui/*`
+- `components/blog/*`
+- `components/tools/*`
+- `components/layout/*`
 - `docs/superpowers/specs/2026-04-06-parenting-guide-rebrand-design.md`
 - `docs/superpowers/specs/parenting-guide-rebrand/README.md`
 - `docs/superpowers/plans/parenting-guide-rebrand/README.md`
