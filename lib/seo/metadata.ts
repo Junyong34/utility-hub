@@ -10,9 +10,9 @@ import { resolveBlogPostOgImage } from '@/lib/seo/og-policy';
  */
 export const SITE_CONFIG = {
   name: 'Zento',
-  title: 'Zento - 비교하고 계산해 결정하는 생활 가이드',
+  title: 'Zento - 아이와 갈 곳, 조건별로 빠르게 찾으세요',
   description:
-    '주차, 소비자 비교, 대출·저축·주택 비용 계산까지. 사기 전, 가기 전, 신청하기 전에 비용과 선택을 빠르게 정리해주는 실전 가이드와 도구를 제공합니다.',
+    '서울·경기 중심으로 아이와 가볼 곳을 지역, 연령, 날씨, 예산 기준으로 빠르게 정리합니다. 나들이 예산 계산, 육아 혜택·지원금 정보까지 한 번에.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.zento.kr',
   ogImage: '/og-images/main-og-image.png',
   locale: 'ko_KR',

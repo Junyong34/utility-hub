@@ -2,6 +2,7 @@ import type { SitemapEntry } from '@/types/seo';
 import { getAllPosts, getAllCategories } from '@/lib/blog/posts';
 import { SITE_CONFIG } from './metadata';
 import { getAllToolConfigs } from '@/lib/tools/tool-config';
+import { PHASE_A_REGION_SLUGS } from '@/lib/places/region-config';
 
 /**
  * 정적 페이지용 사이트맵 엔트리 생성
@@ -20,6 +21,18 @@ export function collectStaticPageEntries(): SitemapEntry[] {
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
+    },
+    {
+      url: `${SITE_CONFIG.url}/places`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_CONFIG.url}/benefits`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
     },
     {
       url: `${SITE_CONFIG.url}/tools`,
@@ -114,12 +127,24 @@ export function collectToolEntries(): SitemapEntry[] {
 }
 
 /**
+ * 장소 허브 페이지 사이트맵 엔트리 생성
+ */
+export function collectPlaceEntries(): SitemapEntry[] {
+  return PHASE_A_REGION_SLUGS.map(slug => ({
+    url: `${SITE_CONFIG.url}/places/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+}
+
 /**
  * 전체 사이트맵 엔트리 생성
  */
 export function collectSitemapEntries(): SitemapEntry[] {
   return [
     ...collectStaticPageEntries(),
+    ...collectPlaceEntries(), // Places 지역 허브
     ...collectBlogCategoryEntries(), // Blog 카테고리
     ...collectBlogPostEntries(), // Blog 포스트
     ...collectBlogTagEntries(), // Blog 태그(구현 전까지 비활성화)

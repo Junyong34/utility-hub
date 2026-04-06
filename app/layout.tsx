@@ -8,6 +8,7 @@ import { createWebSiteSchema, createOrganizationSchema } from '@/lib/seo';
 import { AdSenseScript, JsonLdMultiple } from '@/components/seo';
 import { DesktopNav } from '@/components/layout/desktop-nav';
 import { BottomNav } from '@/components/layout/bottom-nav';
+import { SiteFooter } from '@/components/layout/site-footer';
 import { FloatingShareButton } from '@/components/ui/floating-share-button';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Providers } from './providers';
@@ -35,16 +36,16 @@ export const metadata: Metadata = createMetadata({
   description: SITE_CONFIG.description,
   canonical: SITE_CONFIG.url,
   keywords: [
-    '생활 가이드',
-    '비용 비교',
-    '주차 비교',
-    '소비자 비교',
-    '생활비 절약',
-    '대출 계산기',
-    'DSR 계산기',
-    '저축 계산기',
-    '주택 구입 비용 계산기',
-    '실전 의사결정',
+    '아이와 가볼 곳',
+    '서울 아이 놀이시설',
+    '경기 키즈카페',
+    '육아 나들이',
+    '주말 아이 장소',
+    '육아 혜택',
+    '아동수당',
+    '부모급여',
+    '나들이 예산 계산기',
+    '수도권 육아',
   ],
 });
 
@@ -163,6 +164,7 @@ export default function RootLayout({
             <AdSenseScript />
             <DesktopNav />
             <main className="md:pt-20 pb-24 md:pb-0">{children}</main>
+            <SiteFooter />
             <BottomNav />
             {/* PC width에서만 공유하기 버튼 표시 (모바일은 BottomNav에 포함) */}
             <div className="hidden md:block">

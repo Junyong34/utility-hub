@@ -25,33 +25,33 @@
 
 ### Phase 0. 문서와 스키마 잠그기
 
-- [ ] `07-data-sourcing-and-trust-model.md` 읽기
+- [x] `07-data-sourcing-and-trust-model.md` 읽기
 - [ ] `08-calculator-design-and-visualization.md` 읽기
-- [ ] 장소 카드 최소 필드 정의
-- [ ] 검증 상태 enum 정의
-- [ ] 육아형 블로그 메타 필드 초안 정의
+- [x] 장소 카드 최소 필드 정의 → `types/place-source.ts`
+- [x] 검증 상태 enum 정의 → `official_verified / semi_verified / needs_refresh / discovery_only`
+- [ ] 육아형 블로그 메타 필드 초안 정의 → `lib/blog/types.ts` 미수정
 
 ### Phase 1. 시드 데이터 만들기
 
-- [ ] 서울 공공형 10~15건 시드 입력
-- [ ] 경기 남부 상업형 10~15건 시드 입력
-- [ ] 공급 유형별로 검증 전략 분리
-- [ ] 각 항목에 공식 확인 링크와 검증일 입력
+- [x] 서울 공공형 10~15건 시드 입력 → 10건 완료
+- [x] 경기 남부 상업형 10~15건 시드 입력 → 8건 완료 (목표 10건 대비 2건 미달, 추가 필요)
+- [x] 공급 유형별로 검증 전략 분리 → `lib/places/source-policy.ts`
+- [x] 각 항목에 공식 확인 링크와 검증일 입력 → `sourceUrl`, `verifiedAt` 전 항목 입력
 
 ### Phase 2. 장소 허브 뼈대 만들기
 
-- [ ] `/places` 페이지 추가
-- [ ] `/places/seoul`
-- [ ] `/places/gyeonggi-south`
-- [ ] 지역 카드 UI 추가
-- [ ] 대표 글/대표 카드 노출
+- [x] `/places` 페이지 추가
+- [x] `/places/seoul`
+- [x] `/places/gyeonggi-south`
+- [x] 지역 카드 UI 추가 → `RegionCard.tsx`, `PlaceCard.tsx`
+- [ ] 대표 글/대표 카드 노출 → 장소 카드 렌더링은 됨, 블로그 글 연결(`placeIds`) 미완
 
 ### Phase 3. 홈을 새 구조로 바꾸기
 
-- [ ] 홈 히어로 교체
-- [ ] 지역/상황 바로가기 추가
-- [ ] 도구/혜택 카드 추가
-- [ ] 기존 블로그/도구 데이터와 연결
+- [x] 홈 히어로 교체 → `ParentingHeroSection` 신규 생성
+- [x] 지역/상황 바로가기 추가 → 퀵 필터 칩 + 허브 카드
+- [x] 도구/혜택 카드 추가 → 홈 허브 카드 4개 (가볼 곳/도구/혜택/블로그)
+- [x] 기존 블로그/도구 데이터와 연결 → `DashboardSection` 최신·추천 항목 유지
 
 ### Phase 4. 첫 계산기 2개 만들기
 
@@ -68,7 +68,7 @@
 
 ### Phase 5. 혜택 허브와 블로그 정리
 
-- [ ] `/benefits` 허브 추가
+- [x] `/benefits` 허브 추가 → 카테고리 구조 + 공식 소스 안내 포함
 - [ ] 블로그 카테고리 재정리
 - [ ] 혜택 글 템플릿 적용
 
@@ -77,37 +77,37 @@
 ### 코드 작업 시작 전
 
 - [ ] `docs/superpowers/specs/2026-04-06-parenting-guide-rebrand-design.md`
-- [ ] `docs/superpowers/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md`
+- [x] `docs/superpowers/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md`
 - [ ] `docs/superpowers/specs/parenting-guide-rebrand/08-calculator-design-and-visualization.md`
-- [ ] `docs/superpowers/plans/parenting-guide-rebrand/execution/00-phase-a-master-implementation-plan.md`
+- [x] `docs/superpowers/plans/parenting-guide-rebrand/execution/00-phase-a-master-implementation-plan.md`
 
 ### 첫 코드 작업으로 권장하는 파일
 
-- [ ] `types/place-source.ts`
-- [ ] `content/places/README.md`
-- [ ] `content/places/seoul/*.json`
-- [ ] `lib/places/region-config.ts`
-- [ ] `lib/places/place-content.ts`
-- [ ] `lib/blog/types.ts`
-- [ ] `app/places/page.tsx`
+- [x] `types/place-source.ts`
+- [x] `content/places/README.md`
+- [x] `content/places/seoul/*.json`
+- [x] `lib/places/region-config.ts`
+- [x] `lib/places/place-content.ts`
+- [ ] `lib/blog/types.ts` → `placeIds` 등 육아형 frontmatter 필드 미추가
+- [x] `app/places/page.tsx`
 
 이 파일/경로들이 초기 구조의 기준점이다.
 
 ## 첫 주 목표
 
-- [ ] 장소 스키마 고정
-- [ ] 수도권 시드 20건 입력
-- [ ] `/places` 메인 허브 초안 렌더링
-- [ ] 홈에서 `/places` 진입 링크 반영
+- [x] 장소 스키마 고정
+- [ ] 수도권 시드 20건 입력 → 현재 18건 (서울 10 + 경기남부 8), 2건 추가 필요
+- [x] `/places` 메인 허브 초안 렌더링
+- [x] 홈에서 `/places` 진입 링크 반영
 
 ## 첫 번째 릴리스 기준
 
 다음이 되면 Phase A 첫 공개 최소 조건으로 본다.
 
-- [ ] `/places` 허브 동작
-- [ ] 홈 리브랜딩 1차 반영
+- [x] `/places` 허브 동작
+- [x] 홈 리브랜딩 1차 반영
 - [ ] 첫 계산기 1개 공개
-- [ ] 혜택 허브 기본 구조 공개
+- [x] 혜택 허브 기본 구조 공개
 - [ ] 블로그 카테고리 육아형 전환 시작
 
 ## 하지 말아야 할 시작 방식
