@@ -16,10 +16,20 @@
 5. `05-blog-menu-plan.md`
 6. `06-about-menu-plan.md`
 
+실행용 구현 문서:
+
+- `execution/00-phase-a-master-implementation-plan.md`
+- `execution/01-home-implementation-plan.md`
+- `execution/02-places-implementation-plan.md`
+- `execution/03-tools-implementation-plan.md`
+- `execution/04-benefits-implementation-plan.md`
+- `execution/05-blog-implementation-plan.md`
+- `execution/06-about-implementation-plan.md`
+
 읽는 순서:
 
 `홈 → 아이와 가볼 곳 → 도구 → 혜택·지원금 → 블로그 → 소개`
 
 간단한 결론:
 
-이 폴더는 구현 전 메뉴별 범위와 우선순위를 잠그는 용도다.
+이 폴더는 메뉴 범위를 잠그고, `execution/` 아래 문서는 실제 구현 순서와 체크리스트를 잡는 용도다.
