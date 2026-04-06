@@ -16,8 +16,29 @@
 2. 기존 금융/생활비 도구는 숨기더라도 즉시 제거하지 않는다.
 3. 리브랜딩 Phase A는 수도권 범위만 구현한다.
 4. 각 허브는 독립 라우트로 구현하되, 상세 글 구조는 최대한 재사용한다.
+5. 구현 시작은 화면보다 데이터 스키마와 시드 데이터 확보를 우선한다.
 
-## Chunk 1: 공통 기반
+## 선행 문서
+
+- `07-source-ingestion-and-verification-plan.md`
+- `08-calculator-framework-implementation-plan.md`
+- `09-start-here-checklist.md`
+
+## Chunk 1: 데이터와 계산기 기반
+
+### Task 0: 데이터 소스와 계산기 기준 잠그기
+
+**Files:**
+
+- Follow: `07-source-ingestion-and-verification-plan.md`
+- Follow: `08-calculator-framework-implementation-plan.md`
+- Follow: `09-start-here-checklist.md`
+
+- [ ] **Step 1: 시설 데이터 스키마와 검증 상태 모델을 확정한다**
+- [ ] **Step 2: 서울 + 경기 남부 시드 데이터 목표를 확정한다**
+- [ ] **Step 3: 첫 계산기 2개의 요구사항을 확정한다**
+
+## Chunk 2: 공통 기반
 
 ### Task 1: 공통 네비게이션과 브랜드 표기 준비
 
@@ -32,7 +53,7 @@
 - [ ] **Step 3: 기존 메뉴가 깨지지 않도록 링크 호환성을 확인한다**
 - [ ] **Step 4: `pnpm type-check`를 실행해 공통 레이아웃 회귀가 없는지 확인한다**
 
-## Chunk 2: 사용자 진입 허브
+## Chunk 3: 사용자 진입 허브
 
 ### Task 2: 홈 리브랜딩 구현
 
@@ -52,7 +73,7 @@
 - [ ] **Step 1: 장소 허브 계획 문서를 따라 `/places`와 지역 허브를 구현한다**
 - [ ] **Step 2: 기존 블로그 자산을 재사용하는 연결 흐름을 확인한다**
 
-## Chunk 3: 보조 허브
+## Chunk 4: 보조 허브
 
 ### Task 4: 도구 허브 재구성
 
@@ -72,7 +93,7 @@
 - [ ] **Step 1: `/benefits` 허브와 기본 카드 구조를 구현한다**
 - [ ] **Step 2: 관련 도구/장소 링크 규칙을 확인한다**
 
-## Chunk 4: 아카이브와 신뢰 페이지
+## Chunk 5: 아카이브와 신뢰 페이지
 
 ### Task 6: 블로그 허브 재구성
 
@@ -92,7 +113,7 @@
 - [ ] **Step 1: 소개 페이지 구현 계획 문서를 따라 실용형 소개 페이지로 재작성한다**
 - [ ] **Step 2: 브랜드 표기 일관성을 확인한다**
 
-## Chunk 5: 검증
+## Chunk 6: 검증
 
 ### Task 8: 전체 검증
 

@@ -14,6 +14,8 @@
 4. `04-tools-strategy-and-priority.md`
 5. `05-benefits-content-strategy.md`
 6. `06-roadmap-and-measurement.md`
+7. `07-data-sourcing-and-trust-model.md`
+8. `08-calculator-design-and-visualization.md`
 
 문서 역할:
 

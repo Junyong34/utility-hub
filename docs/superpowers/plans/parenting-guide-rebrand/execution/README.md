@@ -17,6 +17,9 @@
 5. `04-benefits-implementation-plan.md`
 6. `05-blog-implementation-plan.md`
 7. `06-about-implementation-plan.md`
+8. `07-source-ingestion-and-verification-plan.md`
+9. `08-calculator-framework-implementation-plan.md`
+10. `09-start-here-checklist.md`
 
 간단한 결론:
 
