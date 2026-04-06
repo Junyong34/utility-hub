@@ -40,18 +40,18 @@
 
 ### 3. 시작 체크리스트
 
-- `docs/superpowers/plans/parenting-guide-rebrand/execution/09-start-here-checklist.md`
+- `docs/superpowers/plans/parenting-guide-rebrand/execution/01-start-here-checklist.md`
 
 실제 첫 작업 순서를 잡는다.
 
 ### 4. 메뉴/기능별 실행 문서
 
-- `02-places-implementation-plan.md`
-- `03-tools-implementation-plan.md`
-- `04-benefits-implementation-plan.md`
-- `05-blog-implementation-plan.md`
-- `10-og-image-rebrand-implementation-plan.md`
-- `11-ga-event-implementation-plan.md`
+- `11-places-implementation-plan.md`
+- `12-tools-implementation-plan.md`
+- `13-benefits-implementation-plan.md`
+- `14-blog-implementation-plan.md`
+- `22-og-image-rebrand-implementation-plan.md`
+- `23-ga-event-implementation-plan.md`
 
 실제 구현 지시 단위다.
 
@@ -63,9 +63,9 @@
 
 다룰 문서:
 
-- `07-source-ingestion-and-verification-plan.md`
-- `08-calculator-framework-implementation-plan.md`
-- `09-start-here-checklist.md`
+- `20-source-ingestion-and-verification-plan.md`
+- `21-calculator-framework-implementation-plan.md`
+- `01-start-here-checklist.md`
 
 구현 지시 단위:
 
@@ -89,7 +89,7 @@
 
 다룰 문서:
 
-- `02-places-implementation-plan.md`
+- `11-places-implementation-plan.md`
 
 구현 지시 단위:
 
@@ -113,7 +113,7 @@
 
 다룰 문서:
 
-- `01-home-implementation-plan.md`
+- `10-home-implementation-plan.md`
 
 구현 지시 단위:
 
@@ -137,8 +137,8 @@
 
 다룰 문서:
 
-- `03-tools-implementation-plan.md`
-- `08-calculator-framework-implementation-plan.md`
+- `12-tools-implementation-plan.md`
+- `21-calculator-framework-implementation-plan.md`
 
 구현 지시 단위:
 
@@ -159,7 +159,7 @@
 
 다룰 문서:
 
-- `04-benefits-implementation-plan.md`
+- `13-benefits-implementation-plan.md`
 
 구현 지시 단위:
 
@@ -179,7 +179,7 @@
 
 다룰 문서:
 
-- `05-blog-implementation-plan.md`
+- `14-blog-implementation-plan.md`
 
 구현 지시 단위:
 
@@ -198,8 +198,8 @@
 
 다룰 문서:
 
-- `10-og-image-rebrand-implementation-plan.md`
-- `11-ga-event-implementation-plan.md`
+- `22-og-image-rebrand-implementation-plan.md`
+- `23-ga-event-implementation-plan.md`
 
 구현 지시 단위:
 
@@ -232,11 +232,11 @@
 
 ### 예시 1, places부터
 
-`Stage 1만 진행해줘. 02-places-implementation-plan.md 기준으로 /places 메인 허브와 /places/seoul, 서울 공공형 시드 3건까지만 구현해줘. 끝나면 다음 단계는 하지 말고 확인 요청해줘.`
+`Stage 1만 진행해줘. 11-places-implementation-plan.md 기준으로 /places 메인 허브와 /places/seoul, 서울 공공형 시드 3건까지만 구현해줘. 끝나면 다음 단계는 하지 말고 확인 요청해줘.`
 
 ### 예시 2, 홈 연결만
 
-`Stage 2만 진행해줘. 01-home-implementation-plan.md 기준으로 홈 히어로와 /places 연결만 구현해줘. 다른 문서는 건드리지 말고 확인받아.`
+`Stage 2만 진행해줘. 10-home-implementation-plan.md 기준으로 홈 히어로와 /places 연결만 구현해줘. 다른 문서는 건드리지 말고 확인받아.`
 
 ### 예시 3, 도구 2개만
 

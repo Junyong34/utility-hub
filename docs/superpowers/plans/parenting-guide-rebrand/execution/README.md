@@ -11,18 +11,26 @@
 읽는 순서:
 
 1. `00-phase-a-master-implementation-plan.md`
-2. `01-home-implementation-plan.md`
-3. `02-places-implementation-plan.md`
-4. `03-tools-implementation-plan.md`
-5. `04-benefits-implementation-plan.md`
-6. `05-blog-implementation-plan.md`
-7. `06-about-implementation-plan.md`
-8. `07-source-ingestion-and-verification-plan.md`
-9. `08-calculator-framework-implementation-plan.md`
-10. `09-start-here-checklist.md`
-11. `10-og-image-rebrand-implementation-plan.md`
-12. `11-ga-event-implementation-plan.md`
-13. `12-implementation-manager-playbook.md`
+2. `01-start-here-checklist.md`
+3. `02-implementation-manager-playbook.md`
+4. `10-home-implementation-plan.md`
+5. `11-places-implementation-plan.md`
+6. `12-tools-implementation-plan.md`
+7. `13-benefits-implementation-plan.md`
+8. `14-blog-implementation-plan.md`
+9. `15-about-implementation-plan.md`
+10. `20-source-ingestion-and-verification-plan.md`
+11. `21-calculator-framework-implementation-plan.md`
+12. `22-og-image-rebrand-implementation-plan.md`
+13. `23-ga-event-implementation-plan.md`
+
+번호 체계:
+
+- `00` = 전체 실행 지도
+- `01` = 실제 시작 순서
+- `02` = 승인 게이트 중심 매니저 문서
+- `10대` = 메뉴별 구현
+- `20대` = 데이터/도구/OG/GA 같은 기반 작업
 
 간단한 결론:
 

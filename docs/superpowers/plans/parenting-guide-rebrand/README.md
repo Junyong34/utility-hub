@@ -19,12 +19,25 @@
 실행용 구현 문서:
 
 - `execution/00-phase-a-master-implementation-plan.md`
-- `execution/01-home-implementation-plan.md`
-- `execution/02-places-implementation-plan.md`
-- `execution/03-tools-implementation-plan.md`
-- `execution/04-benefits-implementation-plan.md`
-- `execution/05-blog-implementation-plan.md`
-- `execution/06-about-implementation-plan.md`
+- `execution/01-start-here-checklist.md`
+- `execution/02-implementation-manager-playbook.md`
+- `execution/10-home-implementation-plan.md`
+- `execution/11-places-implementation-plan.md`
+- `execution/12-tools-implementation-plan.md`
+- `execution/13-benefits-implementation-plan.md`
+- `execution/14-blog-implementation-plan.md`
+- `execution/15-about-implementation-plan.md`
+- `execution/20-source-ingestion-and-verification-plan.md`
+- `execution/21-calculator-framework-implementation-plan.md`
+- `execution/22-og-image-rebrand-implementation-plan.md`
+- `execution/23-ga-event-implementation-plan.md`
+
+번호 규칙:
+
+- `00` = 전체 마스터 플랜
+- `01~02` = 시작/운영 관리 문서
+- `10대` = 메뉴별 구현 문서
+- `20대` = 기반/공통 기능 문서
 
 읽는 순서:
 

@@ -20,11 +20,11 @@
 
 ## 선행 문서
 
-- `07-source-ingestion-and-verification-plan.md`
-- `08-calculator-framework-implementation-plan.md`
-- `09-start-here-checklist.md`
-- `10-og-image-rebrand-implementation-plan.md`
-- `11-ga-event-implementation-plan.md`
+- `20-source-ingestion-and-verification-plan.md`
+- `21-calculator-framework-implementation-plan.md`
+- `01-start-here-checklist.md`
+- `22-og-image-rebrand-implementation-plan.md`
+- `23-ga-event-implementation-plan.md`
 
 ## Chunk 1: 데이터와 계산기 기반
 
@@ -32,9 +32,9 @@
 
 **Files:**
 
-- Follow: `07-source-ingestion-and-verification-plan.md`
-- Follow: `08-calculator-framework-implementation-plan.md`
-- Follow: `09-start-here-checklist.md`
+- Follow: `20-source-ingestion-and-verification-plan.md`
+- Follow: `21-calculator-framework-implementation-plan.md`
+- Follow: `01-start-here-checklist.md`
 
 - [ ] **Step 1: 시설 데이터 스키마와 검증 상태 모델을 확정한다**
 - [ ] **Step 2: 서울 + 경기 남부 시드 데이터 목표를 확정한다**
@@ -61,7 +61,7 @@
 
 **Files:**
 
-- Follow: `01-home-implementation-plan.md`
+- Follow: `10-home-implementation-plan.md`
 
 - [ ] **Step 1: 홈 구현 계획 문서를 따라 새 홈 IA를 구현한다**
 - [ ] **Step 2: 홈에서 `/places`, `/tools`, `/benefits`, `/blog` 이동이 연결되는지 확인한다**
@@ -70,7 +70,7 @@
 
 **Files:**
 
-- Follow: `02-places-implementation-plan.md`
+- Follow: `11-places-implementation-plan.md`
 
 - [ ] **Step 1: 장소 허브 계획 문서를 따라 `/places`와 지역 허브를 구현한다**
 - [ ] **Step 2: 기존 블로그 자산을 재사용하는 연결 흐름을 확인한다**
@@ -81,7 +81,7 @@
 
 **Files:**
 
-- Follow: `03-tools-implementation-plan.md`
+- Follow: `12-tools-implementation-plan.md`
 
 - [ ] **Step 1: 도구 허브 구현 계획 문서를 따라 카테고리와 연결 구조를 정리한다**
 - [ ] **Step 2: 신규 육아 도구 우선순위와 기존 도구 공존 정책을 반영한다**
@@ -90,7 +90,7 @@
 
 **Files:**
 
-- Follow: `04-benefits-implementation-plan.md`
+- Follow: `13-benefits-implementation-plan.md`
 
 - [ ] **Step 1: `/benefits` 허브와 기본 카드 구조를 구현한다**
 - [ ] **Step 2: 관련 도구/장소 링크 규칙을 확인한다**
@@ -99,7 +99,7 @@
 
 **Files:**
 
-- Follow: `11-ga-event-implementation-plan.md`
+- Follow: `23-ga-event-implementation-plan.md`
 
 - [ ] **Step 1: 공통 gtag 이벤트 헬퍼를 추가한다**
 - [ ] **Step 2: nav, 홈 CTA, 검색, 도구, 공유 버튼에 핵심 이벤트를 붙인다**
@@ -111,7 +111,7 @@
 
 **Files:**
 
-- Follow: `10-og-image-rebrand-implementation-plan.md`
+- Follow: `22-og-image-rebrand-implementation-plan.md`
 
 - [x] **Step 1: 육아형 OG 테마와 레이아웃 시스템을 구현한다**
 - [x] **Step 2: `public/images/mascot/mascot_dinosaur.jpg`를 기준 마스코트로 연결한다**
@@ -123,7 +123,7 @@
 
 **Files:**
 
-- Follow: `05-blog-implementation-plan.md`
+- Follow: `14-blog-implementation-plan.md`
 
 - [ ] **Step 1: 블로그 허브 구현 계획 문서를 따라 카테고리와 메타 축을 정리한다**
 - [ ] **Step 2: 기존 포스트 노출이 깨지지 않는지 확인한다**
@@ -132,7 +132,7 @@
 
 **Files:**
 
-- Follow: `06-about-implementation-plan.md`
+- Follow: `15-about-implementation-plan.md`
 
 - [ ] **Step 1: 소개 페이지 구현 계획 문서를 따라 실용형 소개 페이지로 재작성한다**
 - [ ] **Step 2: 브랜드 표기 일관성을 확인한다**
