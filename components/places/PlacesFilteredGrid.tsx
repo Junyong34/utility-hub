@@ -14,6 +14,10 @@ export function PlacesFilteredGrid({ places }: PlacesFilteredGridProps) {
   const [filters] = useQueryStates(placesFilterParsers);
 
   const filtered = places.filter(p => {
+    // 카테고리 필터
+    if (filters.category) {
+      if (p.category !== filters.category) return false;
+    }
     // 연령 필터
     if (filters.age && filters.age !== 'all') {
       const matches = p.ageBands.includes('all') || p.ageBands.includes(filters.age);
