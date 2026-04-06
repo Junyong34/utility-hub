@@ -6,6 +6,8 @@
 
 이 문서는 색상, 레이아웃, 타이포, 마스코트 자리, 라우트별 적용 원칙을 정의한다.
 
+기본 캐릭터 기준 이미지는 `public/images/mascot/mascot_dinosaur.jpg`다.
+
 ## 현재 상태 요약
 
 현재 OG 시스템은 공용 렌더러를 중심으로 동작한다.
@@ -45,6 +47,7 @@
 3. 둥근 카드, 부드러운 블롭, 작은 패턴은 허용하되 산만하면 안 된다.
 4. 블로그/도구/커스텀 모드가 서로 다른 템플릿을 쓸 수 있어야 한다.
 5. 마스코트는 `있을 때 더 좋아지는 요소`여야지, 없으면 무너지는 구조면 안 된다.
+6. 캐릭터는 새로 생성하지 않고 `public/images/mascot/mascot_dinosaur.jpg`를 기준으로 사용한다.
 
 ## 권장 컬러 시스템
 
@@ -166,6 +169,8 @@
 
 ## 마스코트 자리 규칙
 
+기본 마스코트는 `mascot_dinosaur.jpg`를 참조한다.
+
 마스코트는 우측 하단 또는 우측 중앙 하단에 둔다.
 
 금지 규칙:
@@ -222,7 +227,6 @@
 - `themePreset`
 - `layoutVariant`
 - `mascotEnabled`
-- `mascotVariant`
 - `patternStyle`
 - `categoryTone`
 
@@ -242,7 +246,7 @@
 
 - `lib/seo/og-theme.ts`
 - `lib/seo/og-layouts.tsx`
-- `public/og-images/brand/*`
+- `public/images/mascot/mascot_dinosaur.jpg`
 
 ## 성공 기준
 

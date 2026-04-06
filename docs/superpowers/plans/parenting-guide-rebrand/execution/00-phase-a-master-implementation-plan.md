@@ -24,7 +24,6 @@
 - `08-calculator-framework-implementation-plan.md`
 - `09-start-here-checklist.md`
 - `10-og-image-rebrand-implementation-plan.md`
-- `11-og-asset-production-checklist.md`
 
 ## Chunk 1: 데이터와 계산기 기반
 
@@ -102,10 +101,9 @@
 **Files:**
 
 - Follow: `10-og-image-rebrand-implementation-plan.md`
-- Follow: `11-og-asset-production-checklist.md`
 
 - [ ] **Step 1: 육아형 OG 테마와 레이아웃 시스템을 구현한다**
-- [ ] **Step 2: 마스코트와 패턴 자산을 연결한다**
+- [ ] **Step 2: `public/images/mascot/mascot_dinosaur.jpg`를 기준 마스코트로 연결한다**
 - [ ] **Step 3: 블로그/도구/custom OG 샘플을 검수한다**
 
 ## Chunk 6: 아카이브와 신뢰 페이지
