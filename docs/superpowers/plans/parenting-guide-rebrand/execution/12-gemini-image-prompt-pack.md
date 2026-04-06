@@ -93,6 +93,29 @@ Important constraints:
 - readable even when scaled down in a 1200x630 OG card
 ```
 
+### Prompt M, 공룡 마스코트 기본형
+
+```text
+Create an original mascot character for a Korean parenting guide brand.
+
+Character type: a cute baby dinosaur, friendly and gentle, slightly chubby proportions
+Style: clean vector-like illustration, rounded shapes, simple face, premium flat illustration, child-friendly but not overly childish
+Mood: warm, cheerful, safe, playful, trustworthy
+Colors: cream, mint, coral, soft sky blue pastel palette
+Pose: standing upright, facing slightly left, one tiny arm raised in a friendly hello
+Details: small rounded head, short tail, tiny spikes or back plates simplified into soft rounded shapes, dot eyes, tiny smile, compact body
+Background: transparent background
+Composition: centered full body character
+Output: mascot only, no text, no frame, no heavy shadows
+
+Important constraints:
+- completely original character
+- no resemblance to any copyrighted dinosaur or famous animation character
+- no Disney, Pixar, Sanrio, Ghibli, franchise, or toy-brand style
+- silhouette must stay simple and readable at thumbnail size
+- keep the dinosaur cute and friendly, not aggressive
+```
+
 ## 2. 리파인 프롬프트
 
 아래 프롬프트는 기본형 1개를 고른 뒤 넣는다.
@@ -253,7 +276,7 @@ No resemblance to any copyrighted character or franchise.
 
 ### 첫 실행
 
-1. Prompt A, B, C 중 하나 선택
+1. Prompt A, B, C, M 중 하나 선택
 2. 6~10개 시안 생성
 3. 가장 좋은 2개만 남김
 
@@ -280,6 +303,14 @@ No resemblance to any copyrighted character or franchise.
 - 육아 서비스와 잘 맞고
 - 과하게 유아틱하지 않고
 - OG 카드 우측 하단에 넣기 좋다
+
+공룡이 더 마음에 들면 아래 조합으로 가면 된다.
+
+1. `Prompt M`으로 공룡 기본형 생성
+2. `Prompt E`로 덜 장난감 같고 더 브랜드형으로 리파인
+3. `Prompt F/G/H`로 `wave`, `study`, `sparkle` 3포즈 생성
+
+이 조합은 `재미`가 더 크고, 키즈카페/놀이시설 콘텐츠와 특히 잘 맞는다.
 
 ## 신뢰도 메모
 
