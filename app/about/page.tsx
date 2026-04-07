@@ -135,7 +135,7 @@ export default function AboutPage() {
     <>
       <JsonLdMultiple data={[webPage, breadcrumb]} />
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         <header className="border-b border-border bg-card/80">
           <div className="mx-auto max-w-5xl space-y-4 px-4 py-10 sm:px-6 lg:px-8">
             <Badge variant="secondary">Zento Overview</Badge>

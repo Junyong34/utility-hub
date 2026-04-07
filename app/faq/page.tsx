@@ -308,7 +308,7 @@ export default function FaqPage() {
   return (
     <>
       <JsonLdMultiple data={[webPage, breadcrumb, faqSchema]} />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         <header className="border-b bg-card">
           <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
             <Breadcrumb items={[{ name: 'FAQ' }]} className="mb-4" />
