@@ -106,7 +106,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
           {/* Eyebrow */}
           <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/80 px-3 py-1 text-xs text-muted-foreground">
             <WrenchIcon className="h-3 w-3 text-primary" />
-            Zento Tools · 계산과 비교를 돕는 실전 도구
+            Zento Tools · 장소 탐색 다음 단계에서 쓰는 계산·비교 도구
           </span>
 
           {/* Title */}
@@ -115,7 +115,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
             <span className="text-primary">찾아보세요</span>
           </h1>
           <p className="mb-6 max-w-lg mx-auto text-sm leading-relaxed text-muted-foreground">
-            대출, 저축, 주택 비용처럼 돈이 걸린 판단을 빠르게 정리하고
+            아이와 나들이 예산, 생활비, 금융 판단처럼 다음 행동에 바로 연결되는 계산을 빠르게 정리하고
             <br />
             일부 추천·실험형 도구까지 한곳에서 바로 확인할 수 있습니다.
           </p>
@@ -128,7 +128,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="도구 검색... (예: 대출, DSR, 주택, 로또)"
+                placeholder="도구 검색... (예: 예산, 대출, DSR, 주택, 로또)"
                 className="h-9 bg-background pl-8"
               />
             </div>
@@ -147,7 +147,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
               <strong className="text-foreground">{distinctCategoryCount}개</strong>
             </span>
             <span>·</span>
-            <span>실전 계산 도구를 계속 보강 중</span>
+            <span>장소 탐색 뒤 바로 쓰는 도구를 계속 보강 중</span>
           </div>
         </div>
       </section>

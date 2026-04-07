@@ -1,29 +1,20 @@
 import { Metadata } from 'next';
 import { getAllPosts, getAllCategories } from '@/lib/blog/posts';
-import { generateMetadata as createMetadata } from '@/lib/seo';
+import { buildBlogPostPath } from '@/lib/blog/url';
+import { SITE_CONFIG, generateMetadata as createMetadata } from '@/lib/seo';
 import { createPageStructuredData, createItemListSchema } from '@/lib/seo';
 import { JsonLdMultiple } from '@/components/seo';
 import { BlogContent } from '@/components/blog/BlogContent';
 import { getBlogStructuredDataBreadcrumbs } from '@/lib/blog/breadcrumb';
+import { createBlogIndexMetadataInput } from '@/lib/seo/site-section-seo';
 
 /**
  * 블로그 메인 페이지 메타데이터
  * - 키워드, OG, Twitter Card 최적화
  */
-export const metadata: Metadata = createMetadata({
-  title: '블로그',
-  description:
-    '주차, 소비자 비교, 생활비와 비용 계산에 도움이 되는 실전 가이드를 모았습니다. 비교표와 체크리스트 중심으로 빠르게 판단할 수 있게 정리합니다.',
-  canonical: 'https://www.zento.kr/blog',
-  keywords: [
-    '생활 가이드',
-    '주차 비교',
-    '소비자 비교',
-    '생활비 절약',
-    '비용 계산',
-    '실전 체크리스트',
-  ],
-});
+export const metadata: Metadata = createMetadata(
+  createBlogIndexMetadataInput(SITE_CONFIG.url)
+);
 
 /**
  * 블로그 목록 페이지 (SSG)
@@ -57,7 +48,10 @@ export default function BlogPage() {
               {posts.map(post => (
                 <li key={post.slug}>
                   <a
-                    href={`/blog/${post.slug}`}
+                    href={buildBlogPostPath({
+                      categorySlug: post.categorySlug,
+                      slug: post.slug,
+                    })}
                     className="text-blue-600 hover:underline"
                   >
                     {post.title}

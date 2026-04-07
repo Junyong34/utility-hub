@@ -13,6 +13,7 @@ import type {
   ItemListElement,
 } from '@/types/seo';
 import type { BreadcrumbLink } from '@/types/navigation';
+import { buildBlogPostUrl } from '@/lib/blog/url';
 import { SITE_CONFIG } from './metadata';
 
 /**
@@ -290,13 +291,17 @@ export function createCategoryStructuredData(category: {
  */
 export function createItemListSchema(posts: Array<{
   slug: string;
+  categorySlug: string;
   title: string;
   ogImage?: string;
 }>): ItemListSchema {
   const itemListElement: ItemListElement[] = posts.map((post, index) => ({
     '@type': 'ListItem',
     position: index + 1,
-    url: `${SITE_CONFIG.url}/blog/${post.slug}`,
+    url: buildBlogPostUrl(SITE_CONFIG.url, {
+      categorySlug: post.categorySlug,
+      slug: post.slug,
+    }),
     name: post.title,
     image: post.ogImage ? `${SITE_CONFIG.url}${post.ogImage}` : undefined,
   }));

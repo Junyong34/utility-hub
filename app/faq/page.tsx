@@ -11,6 +11,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import {
+  SITE_CONFIG,
   generateMetadata as createMetadata,
   createPageStructuredData,
   createFAQSchema,
@@ -18,6 +19,7 @@ import {
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo'
 import { getAllToolConfigs } from '@/lib/tools'
 import type { ToolConfig, ToolFAQItem } from '@/lib/tools/types'
+import { createFaqMetadataInput } from '@/lib/seo/site-section-seo'
 
 interface FaqItem {
   question: string
@@ -40,7 +42,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: 'Zento는 어떤 사이트인가요?',
     answer:
-      'Zento는 사기 전, 가기 전, 신청하기 전에 필요한 판단 기준을 빠르게 정리해주는 사이트입니다. 주차와 이동, 소비자 비교, 생활비와 금융 계산처럼 실제 선택에 바로 도움이 되는 글과 도구를 무료로 제공합니다.',
+      'Zento는 수도권 부모가 아이와 갈 곳을 먼저 찾고, 이어서 필요한 도구와 혜택 정보를 확인할 수 있게 정리한 사이트입니다. 장소 탐색이 메인 축이고, 생활비·금융 계산기와 실전 가이드는 그 다음 판단을 돕는 보조 축으로 함께 제공합니다.',
   },
   {
     question: '어떤 계산기 도구를 제공하나요?',
@@ -55,7 +57,7 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: '블로그에는 어떤 카테고리가 있나요?',
     answer:
-      '현재는 주차, 소비자 정보, AI, 개발, 투자, 로또 등 여러 카테고리가 있지만, 메인 축은 주차/이동, 소비자 비교, 비용 계산과 연결되는 실전 가이드입니다. 새로운 글도 이 방향에 맞춰 계속 정리하고 있습니다.',
+      '현재는 소비자 정보, 투자, 로또, AI 등 기존 카테고리와 새 장소·혜택 중심 자산이 함께 존재합니다. 리브랜딩 이후에도 기존 글은 유지하되, 메인 탐색 과업인 아이와 가볼 곳과 연결되는 가이드를 우선순위 높게 정리하고 있습니다.',
   },
   {
     question: 'DSR 계산기로 무엇을 확인할 수 있나요?',
@@ -179,27 +181,9 @@ const RECREATION_TOOL_FAQ_GROUPS: ToolFAQGroup[] = [
   },
 ]
 
-export const metadata: Metadata = createMetadata({
-  title: '자주 묻는 질문',
-  description:
-    'Zento FAQ에서 생활 비용 판단에 도움이 되는 도구 사용법, 계산기 안내, 공유와 오류 대응, 면책 정보를 한 번에 확인하세요.',
-  canonical: 'https://www.zento.kr/faq',
-  keywords: [
-    'FAQ',
-    '자주 묻는 질문',
-    'Zento',
-    '도구 사용 가이드',
-    '주차 비교',
-    '소비자 비교',
-    '대출 계산기',
-    'DSR 계산기',
-    '예금 적금 계산기',
-    '주택 구입 비용 계산기',
-    '공유 링크',
-    '계산기 오류',
-    '면책 안내',
-  ],
-})
+export const metadata: Metadata = createMetadata(
+  createFaqMetadataInput(SITE_CONFIG.url)
+)
 
 function buildToolFAQSections(
   toolConfigs: ToolConfig[],
@@ -284,7 +268,7 @@ export default function FaqPage() {
     name: '자주 묻는 질문',
     path: '/faq',
     description:
-      'Zento 이용 전 자주 묻는 질문을 확인하세요. 계산기 사용, 비용 판단, 공유와 문의 방법을 정리했습니다.',
+      'Zento 이용 전 자주 묻는 질문을 확인하세요. 장소 탐색, 계산 도구 사용, 혜택 확인, 공유와 문의 방법을 정리했습니다.',
     breadcrumbs: [{ name: '홈', url: '/' }, { name: 'FAQ' }],
   })
 
@@ -332,7 +316,7 @@ export default function FaqPage() {
               자주 묻는 질문 (FAQ)
             </h1>
             <p className="mt-3 max-w-3xl text-muted-foreground">
-              Zento의 계산기 사용법, 비용 판단 가이드, 문의 및 협력 안내를
+              Zento의 장소 탐색 흐름, 계산 도구 사용법, 혜택 확인, 문의 및 협력 안내를
               한곳에 모았습니다.
             </p>
           </div>
@@ -342,9 +326,9 @@ export default function FaqPage() {
           <Card className="p-6">
             <h2 className="text-lg font-semibold">FAQ 개요</h2>
             <p className="mt-3 leading-relaxed text-muted-foreground">
-              Zento FAQ는 사이트 이용, 각 계산기 사용, 공유 동작, 오류 대응,
-              면책 사항까지 실사용 중심으로 정리했습니다. 숫자와 조건이 걸린
-              판단을 빠르게 확인할 수 있는 보조 가이드 역할을 합니다.
+              Zento FAQ는 사이트 이용, 장소 탐색 흐름, 각 계산기 사용, 공유 동작, 오류 대응,
+              면책 사항까지 실사용 중심으로 정리했습니다. 부모가 다음 행동을 정하기 전에
+              빠르게 기준을 다시 확인할 수 있는 보조 가이드 역할을 합니다.
             </p>
           </Card>
 

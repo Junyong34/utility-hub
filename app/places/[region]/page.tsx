@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import { JsonLdMultiple } from '@/components/seo';
 import { RegionHub } from '@/components/places/RegionHub';
 import { PaperPageShell } from '@/components/ui/paper-page-shell';
 import {
@@ -8,6 +9,12 @@ import {
 } from '@/lib/places/region-config';
 import { getPublishablePlacesByRegion } from '@/lib/places/place-content';
 import type { RegionSlug } from '@/types/place-source';
+import {
+  SITE_CONFIG,
+  createPageStructuredData,
+  generateMetadata as createMetadata,
+} from '@/lib/seo';
+import { createPlaceRegionMetadataInput } from '@/lib/seo/site-section-seo';
 
 interface PageProps {
   params: Promise<{ region: string }>;
@@ -22,14 +29,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const region = getRegionBySlug(regionSlug);
   if (!region) return {};
 
-  return {
-    title: `${region.name} 아이와 가볼 곳 | Zento`,
-    description: region.description,
-    openGraph: {
-      title: `${region.name} 아이와 가볼 곳 | Zento`,
-      description: region.description,
-    },
-  };
+  return createMetadata(createPlaceRegionMetadataInput(SITE_CONFIG.url, region));
 }
 
 export default async function RegionPage({ params }: PageProps) {
@@ -41,15 +41,28 @@ export default async function RegionPage({ params }: PageProps) {
   }
 
   const places = getPublishablePlacesByRegion(regionSlug as RegionSlug);
+  const { webPage, breadcrumb } = createPageStructuredData({
+    name: `${region.name} 아이와 가볼 곳`,
+    path: `/places/${region.slug}`,
+    description: region.description,
+    breadcrumbs: [
+      { name: '홈', url: '/' },
+      { name: '아이와 가볼 곳', url: '/places' },
+      { name: region.name },
+    ],
+  });
 
   return (
-    <PaperPageShell
-      glowClassName="bg-[radial-gradient(circle_at_top_left,rgba(201,176,137,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(128,151,134,0.1),transparent_24%)]"
-      gridClassName="h-[34rem] opacity-35"
-    >
-      <div className="mx-auto max-w-screen-xl px-4 pt-10 pb-16 md:pt-24 xl:pt-32 sm:pb-24">
-        <RegionHub region={region} places={places} />
-      </div>
-    </PaperPageShell>
+    <>
+      <JsonLdMultiple data={[webPage, breadcrumb]} />
+      <PaperPageShell
+        glowClassName="bg-[radial-gradient(circle_at_top_left,rgba(201,176,137,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(128,151,134,0.1),transparent_24%)]"
+        gridClassName="h-[34rem] opacity-35"
+      >
+        <div className="mx-auto max-w-screen-xl px-4 pt-10 pb-16 md:pt-24 xl:pt-32 sm:pb-24">
+          <RegionHub region={region} places={places} />
+        </div>
+      </PaperPageShell>
+    </>
   );
 }

@@ -1,4 +1,3 @@
-// @ts-expect-error Node strip-types tests require the explicit `.ts` extension.
 import { buildBlogOgImagePath, buildToolOgImagePath } from './og.ts'
 
 interface BlogOgPolicyInput {
