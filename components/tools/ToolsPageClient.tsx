@@ -97,7 +97,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
       {/* ── Hero Search ── */}
-      <section className="pt-6 pb-5">
+      <section className="pt-0 pb-5">
         {/* Breadcrumb */}
         <Breadcrumb items={[{ name: '도구' }]} className="mb-4" />
 

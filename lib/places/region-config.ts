@@ -34,7 +34,7 @@ export const REGION_CONFIGS: RegionConfig[] = [
     shortName: '경기북부',
     description: '자연과 함께하는 경기 북부 가족 여행지',
     primaryType: 'mixed',
-    isPhaseA: false,
+    isPhaseA: true,
   },
   {
     slug: 'incheon',
@@ -42,7 +42,7 @@ export const REGION_CONFIGS: RegionConfig[] = [
     shortName: '인천',
     description: '바다와 항구가 있는 인천 아이와 가볼 곳',
     primaryType: 'mixed',
-    isPhaseA: false,
+    isPhaseA: true,
   },
 ];
 

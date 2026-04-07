@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { BenefitsHub } from '@/components/benefits/BenefitsHub';
+import { PaperPageShell } from '@/components/ui/paper-page-shell';
 
 export const metadata: Metadata = {
   title: '육아 혜택·지원금 | Zento',
@@ -14,8 +15,10 @@ export const metadata: Metadata = {
 
 export default function BenefitsPage() {
   return (
-    <main className="max-w-screen-xl mx-auto px-4 pt-24 pb-16 sm:pt-32">
-      <BenefitsHub />
-    </main>
+    <PaperPageShell>
+      <div className="mx-auto max-w-screen-xl px-4 pt-10 pb-16 md:pt-24 xl:pt-32 sm:pb-24">
+        <BenefitsHub />
+      </div>
+    </PaperPageShell>
   );
 }

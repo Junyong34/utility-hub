@@ -124,7 +124,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         data={[article, breadcrumb, ...(faqSchema ? [faqSchema] : [])]}
       />
 
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         {/* 헤더 */}
         <BlogPostHeader
           categoryName={post.category}

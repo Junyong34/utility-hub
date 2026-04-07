@@ -76,7 +76,7 @@ export function HeroSplitSection({ totalBlogPosts = 0, totalTools = 0 }: HeroSpl
   ];
 
   return (
-    <section className="w-full pt-24 pb-12 sm:pt-32 sm:pb-16">
+    <section className="w-full pt-10 pb-12 md:pt-24 xl:pt-32 sm:pb-16">
       <div className="max-w-screen-2xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* ── 좌: 브랜드 메시지 & CTA ── */}

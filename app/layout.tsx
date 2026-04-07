@@ -163,7 +163,7 @@ export default function RootLayout({
           <NuqsAdapter>
             <AdSenseScript />
             <DesktopNav />
-            <main className="md:pt-20 pb-24 md:pb-0">{children}</main>
+            <main className="pb-24 md:pb-0">{children}</main>
             <SiteFooter />
             <BottomNav />
             {/* PC width에서만 공유하기 버튼 표시 (모바일은 BottomNav에 포함) */}

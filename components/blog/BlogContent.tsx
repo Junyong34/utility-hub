@@ -193,7 +193,7 @@ export function BlogContent({
       {showHero && (
         <>
           {/* Breadcrumb */}
-          <nav className="pt-6 mb-0">
+          <nav className="pt-0 mb-0">
             <Breadcrumb items={getBlogMainBreadcrumbItems()} />
           </nav>
 

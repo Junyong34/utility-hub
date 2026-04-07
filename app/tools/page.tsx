@@ -18,7 +18,7 @@ export const metadata: Metadata = generateToolsMainMetadata();
  * icon 컴포넌트(함수)는 Client 경계를 넘길 수 없으므로 iconName(문자열)만 전달
  */
 const toolConfigs = getAllToolConfigs();
-const TOOLS: ToolListItem[] = toolConfigs.map((config) => ({
+const TOOLS: ToolListItem[] = toolConfigs.map(config => ({
   id: config.id,
   name: config.name,
   description: config.description,
@@ -38,13 +38,7 @@ export default function ToolsPage() {
   return (
     <>
       <JsonLdMultiple data={structuredData} />
-      <div className="relative min-h-screen bg-background">
-        {/* 배경 그라데이션 */}
-        <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-cyan-500/8 rounded-full blur-3xl" />
-        </div>
+      <div className="relative min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         <ToolsPageClient tools={TOOLS} />
       </div>
     </>

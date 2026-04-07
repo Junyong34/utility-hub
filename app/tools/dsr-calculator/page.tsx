@@ -20,7 +20,7 @@ export default function DsrCalculatorPage() {
   return (
     <>
       <JsonLdMultiple data={structuredData} />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         <header className="border-b bg-card">
           <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
             <Breadcrumb items={getToolBreadcrumbItems('dsr-calculator')} className="mb-4" />

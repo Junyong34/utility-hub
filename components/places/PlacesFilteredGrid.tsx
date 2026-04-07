@@ -55,14 +55,23 @@ export function PlacesFilteredGrid({ places }: PlacesFilteredGridProps) {
       <PlacesFilterBar totalCount={places.length} filteredCount={filtered.length} />
 
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map(place => (
             <PlaceCard key={place.id} place={place} />
           ))}
         </div>
       ) : (
-        <div className="rounded-xl border border-border/50 bg-muted/20 px-6 py-12 text-center">
-          <p className="text-muted-foreground text-sm">
+        <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
+          <p
+            className="text-lg font-semibold tracking-tight text-[#2f2922]"
+            style={{
+              fontFamily:
+                '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+            }}
+          >
+            지금 조건에 딱 맞는 장소가 아직 없습니다
+          </p>
+          <p className="mt-2 text-sm text-[#6a5d4d]">
             조건에 맞는 장소가 없습니다. 필터를 조정해보세요.
           </p>
         </div>

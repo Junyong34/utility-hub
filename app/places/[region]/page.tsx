@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { RegionHub } from '@/components/places/RegionHub';
+import { PaperPageShell } from '@/components/ui/paper-page-shell';
 import {
   getRegionBySlug,
   PHASE_A_REGION_SLUGS,
@@ -42,8 +43,13 @@ export default async function RegionPage({ params }: PageProps) {
   const places = getPublishablePlacesByRegion(regionSlug as RegionSlug);
 
   return (
-    <main className="max-w-screen-xl mx-auto px-4 pt-24 pb-16 sm:pt-32">
-      <RegionHub region={region} places={places} />
-    </main>
+    <PaperPageShell
+      glowClassName="bg-[radial-gradient(circle_at_top_left,rgba(201,176,137,0.18),transparent_28%),radial-gradient(circle_at_top_right,rgba(128,151,134,0.1),transparent_24%)]"
+      gridClassName="h-[34rem] opacity-35"
+    >
+      <div className="mx-auto max-w-screen-xl px-4 pt-10 pb-16 md:pt-24 xl:pt-32 sm:pb-24">
+        <RegionHub region={region} places={places} />
+      </div>
+    </PaperPageShell>
   );
 }
