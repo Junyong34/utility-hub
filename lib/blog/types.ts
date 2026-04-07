@@ -11,7 +11,7 @@ export interface BlogPostMetadata {
   categorySlug: string
   ogImage?: string
   homeFeatured?: HomeFeaturedMeta
-  /** 연관 장소 seed ID 목록 (content/places/<region>/*.json의 id 참조) */
+  /** 연관 장소 seed ID 목록 (content/places/<region>/index.ts의 id 참조) */
   placeIds?: string[]
   /** 연관 수도권 지역 슬러그 */
   regions?: RegionSlug[]

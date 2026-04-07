@@ -7,15 +7,20 @@
 ```
 content/places/
 ├── README.md                    # 이 파일
-├── seoul/                       # 서울 공공형 시설
-│   ├── *.json                   # 개별 장소 파일
-└── gyeonggi-south/              # 경기 남부 상업형 시설
-    └── *.json                   # 개별 장소 파일
+├── index.ts                     # 전체 지역 집계 엔트리
+├── seoul/
+│   └── index.ts                 # 서울 place seed
+├── gyeonggi-south/
+│   └── index.ts                 # 경기 남부 place seed
+├── gyeonggi-north/
+│   └── index.ts                 # 경기 북부 place seed
+└── incheon/
+    └── index.ts                 # 인천 place seed
 ```
 
 ## 스키마
 
-각 JSON 파일은 `PlaceSource` 타입을 따릅니다.
+각 지역 `index.ts`의 place seed 배열은 `PlaceSource[]` 타입을 따릅니다.
 `types/place-source.ts` 참고.
 
 ## 발행 기준

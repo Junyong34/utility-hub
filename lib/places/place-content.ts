@@ -1,74 +1,49 @@
-import fs from 'fs';
-import path from 'path';
-import type { PlaceSource, RegionSlug, PlaceCategory, AgeBand } from '@/types/place-source';
-import { PUBLISHABLE_STATUSES } from './source-policy';
-
-const PLACES_DIR = path.join(process.cwd(), 'content/places');
-
-/** 단일 JSON 파일에서 장소 데이터 로드 */
-function loadPlaceFile(filePath: string): PlaceSource | null {
-  try {
-    const raw = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(raw) as PlaceSource;
-  } catch {
-    return null;
-  }
-}
-
-/** 지역 디렉토리에서 모든 장소 데이터 로드 */
-function loadPlacesByRegion(regionSlug: RegionSlug): PlaceSource[] {
-  const regionDir = path.join(PLACES_DIR, regionSlug);
-  if (!fs.existsSync(regionDir)) return [];
-
-  return fs
-    .readdirSync(regionDir)
-    .filter(f => f.endsWith('.json'))
-    .map(f => loadPlaceFile(path.join(regionDir, f)))
-    .filter((p): p is PlaceSource => p !== null);
-}
+import { ALL_PLACES, PLACES_BY_REGION } from '../../content/places/index.ts';
+import type {
+  AgeBand,
+  PlaceCategory,
+  PlaceSource,
+  RegionSlug,
+} from '../../types/place-source.ts';
+import {
+  getPlaceByIdFrom,
+  getPlaceCountByRegionFrom,
+  getPlacesByAgeBandFrom,
+  getPublishablePlacesByCategoryFrom,
+  getPublishablePlacesByRegionFrom,
+  getPublishablePlacesFrom,
+} from './place-queries.ts';
 
 /** 모든 지역의 모든 장소 데이터 로드 */
 export function getAllPlaces(): PlaceSource[] {
-  if (!fs.existsSync(PLACES_DIR)) return [];
-
-  return fs
-    .readdirSync(PLACES_DIR)
-    .filter(entry => {
-      const full = path.join(PLACES_DIR, entry);
-      return fs.statSync(full).isDirectory();
-    })
-    .flatMap(region => loadPlacesByRegion(region as RegionSlug));
+  return ALL_PLACES;
 }
 
 /** 발행 가능한 장소만 반환 */
 export function getPublishablePlaces(): PlaceSource[] {
-  return getAllPlaces().filter(p => PUBLISHABLE_STATUSES.has(p.verificationStatus));
+  return getPublishablePlacesFrom(ALL_PLACES);
 }
 
 /** 지역별 발행 가능 장소 반환 */
 export function getPublishablePlacesByRegion(regionSlug: RegionSlug): PlaceSource[] {
-  return loadPlacesByRegion(regionSlug).filter(p =>
-    PUBLISHABLE_STATUSES.has(p.verificationStatus)
-  );
+  return getPublishablePlacesByRegionFrom(PLACES_BY_REGION, regionSlug);
 }
 
 /** 카테고리별 발행 가능 장소 반환 */
-export function getPublishablePlacesByCategory(category: PlaceCategory): PlaceSource[] {
-  return getPublishablePlaces().filter(p => p.category === category);
+export function getPublishablePlacesByCategory(
+  category: PlaceCategory
+): PlaceSource[] {
+  return getPublishablePlacesByCategoryFrom(ALL_PLACES, category);
 }
 
 /** ID로 장소 조회 */
 export function getPlaceById(id: string): PlaceSource | undefined {
-  return getAllPlaces().find(p => p.id === id);
+  return getPlaceByIdFrom(ALL_PLACES, id);
 }
 
 /** 지역별 장소 수 반환 */
 export function getPlaceCountByRegion(): Record<string, number> {
-  const places = getPublishablePlaces();
-  return places.reduce<Record<string, number>>((acc, p) => {
-    acc[p.region] = (acc[p.region] ?? 0) + 1;
-    return acc;
-  }, {});
+  return getPlaceCountByRegionFrom(ALL_PLACES);
 }
 
 /** 연령대에 맞는 장소 반환
@@ -76,8 +51,5 @@ export function getPlaceCountByRegion(): Record<string, number> {
  * - `ageBand: 'all'` 쿼리는 모든 장소 반환
  */
 export function getPlacesByAgeBand(ageBand: AgeBand): PlaceSource[] {
-  if (ageBand === 'all') return getPublishablePlaces();
-  return getPublishablePlaces().filter(
-    p => p.ageBands.includes('all') || p.ageBands.includes(ageBand)
-  );
+  return getPlacesByAgeBandFrom(ALL_PLACES, ageBand);
 }
