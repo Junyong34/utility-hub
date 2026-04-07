@@ -173,7 +173,7 @@ export function ParentingFeaturedPlaceCard({
             <Link
               href={item.href}
               className={cn(
-                'inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-foreground transition-all',
+                'inline-flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-foreground transition-all',
                 tone.panel
               )}
             >
@@ -186,7 +186,7 @@ export function ParentingFeaturedPlaceCard({
                 href={item.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 transition-colors hover:text-foreground"
+                className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-medium text-foreground/60 transition-colors hover:text-foreground"
               >
                 <span>공식 사이트</span>
                 <ExternalLinkIcon className="h-3.5 w-3.5" />

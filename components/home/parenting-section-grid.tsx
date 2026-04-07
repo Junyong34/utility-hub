@@ -48,7 +48,7 @@ export function ParentingSectionGrid({
         {href ? (
           <Link
             href={href}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
+            className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-medium text-foreground/70 transition-colors hover:text-foreground"
           >
             <span>{hrefLabel}</span>
             <ArrowRightIcon className="h-3.5 w-3.5" />

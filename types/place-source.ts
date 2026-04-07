@@ -105,6 +105,8 @@ export interface PlaceVerificationMeta {
  * 장소 카드 권장 부가 필드
  */
 export interface PlaceOptionalFields {
+  /** 네이버 지도 링크 (없으면 이름+주소 기반 검색 링크 생성 가능) */
+  naverMapUrl?: string;
   /** 시설 설명 (1~2문장) */
   description?: string;
   /** 주소 */

@@ -9,9 +9,11 @@ import {
 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { getPlaceNaverMapUrl } from '@/lib/places/place-map-links';
 import { VERIFICATION_STATUS_LABELS } from '@/lib/places/source-policy';
 import { cn } from '@/lib/utils';
 import type { PlaceSource, PlaceCategory } from '@/types/place-source';
+import { PlaceAddressCopyButton } from './PlaceAddressCopyButton';
 import { AGE_BAND_LABELS } from './PlacesFilterBar';
 
 const CATEGORY_LABELS: Record<PlaceCategory, string> = {
@@ -100,6 +102,8 @@ export function PlaceCard({ place }: PlaceCardProps) {
     : place.ageBands.map(b => ({ key: b, label: AGE_BAND_LABELS[b] ?? b }));
 
   const visualStyles = CATEGORY_STYLES[place.category];
+  const naverMapUrl = getPlaceNaverMapUrl(place);
+  const placeAddress = place.address ?? place.subRegion;
 
   const conditions: string[] = [];
   if (place.indoorOutdoor === 'indoor') conditions.push('실내');
@@ -233,9 +237,35 @@ export function PlaceCard({ place }: PlaceCardProps) {
         </div>
 
         <div className="mt-auto space-y-2.5 rounded-[22px] bg-white/70 p-4">
-          <div className="flex items-center gap-2 text-sm text-foreground/72">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-foreground/72">
             <MapPinIcon className="h-4 w-4 shrink-0 text-[#7c6956]" />
-            <span>{place.subRegion}</span>
+            {naverMapUrl ? (
+              <Link
+                href={naverMapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${place.name} 네이버지도`}
+                className="inline-flex size-6 items-center justify-center rounded-[8px] bg-white/80 shadow-[0_6px_18px_rgba(59,46,31,0.08)] ring-1 ring-black/6 transition-all duration-200 hover:-translate-y-px hover:shadow-[0_10px_22px_rgba(59,46,31,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#03c75a]/35"
+              >
+                <span
+                  aria-hidden="true"
+                  className="size-[18px] rounded-[5px] bg-contain bg-center bg-no-repeat"
+                  style={{
+                    backgroundImage: "url('/asset/naver-map-favicon.ico')",
+                  }}
+                />
+                <span className="sr-only">네이버지도</span>
+              </Link>
+            ) : null}
+            <span className="min-w-0 flex-1 break-keep leading-5 text-[#5f5242]">
+              {placeAddress}
+            </span>
+            {place.address ? (
+              <PlaceAddressCopyButton
+                address={place.address}
+                placeName={place.name}
+              />
+            ) : null}
           </div>
 
           {place.stayMinutes ? (
@@ -263,7 +293,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
               href={place.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/68 transition-colors hover:text-foreground"
+              className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-medium text-foreground/68 transition-colors hover:text-foreground"
             >
               <span>공식 사이트</span>
               <ExternalLinkIcon className="h-3.5 w-3.5" />

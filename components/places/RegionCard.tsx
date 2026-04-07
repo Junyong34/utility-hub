@@ -64,7 +64,7 @@ export function RegionCard({ region, placeCount }: RegionCardProps) {
     <Link
       href={`/places/${region.slug}`}
       className={cn(
-        'group relative overflow-hidden rounded-[28px] border p-5 shadow-[0_18px_45px_rgba(56,46,33,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(56,46,33,0.1)]',
+        'group relative cursor-pointer overflow-hidden rounded-[28px] border p-5 shadow-[0_18px_45px_rgba(56,46,33,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(56,46,33,0.1)]',
         styles.frame
       )}
     >

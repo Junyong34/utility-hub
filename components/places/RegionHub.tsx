@@ -61,7 +61,7 @@ export function RegionHub({ region, places }: RegionHubProps) {
           <div className="space-y-4">
             <Link
               href="/places"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-[#6d604f] transition-colors hover:text-foreground"
+              className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-medium text-[#6d604f] transition-colors hover:text-foreground"
             >
               <ArrowLeftIcon className="h-3.5 w-3.5" />
               <span>전체 지역 보기</span>
@@ -189,7 +189,7 @@ export function RegionHub({ region, places }: RegionHubProps) {
         <div className="grid gap-3 sm:grid-cols-2">
           <Link
             href="/tools"
-            className="group rounded-[24px] border border-[#d3dbe6] bg-[linear-gradient(180deg,rgba(248,250,252,0.98),rgba(241,245,249,0.96))] p-5 transition-all hover:-translate-y-0.5 hover:border-[#9fb7d6]"
+            className="group cursor-pointer rounded-[24px] border border-[#d3dbe6] bg-[linear-gradient(180deg,rgba(248,250,252,0.98),rgba(241,245,249,0.96))] p-5 transition-all hover:-translate-y-0.5 hover:border-[#9fb7d6]"
           >
             <div className="flex items-start gap-3">
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#e7eef7] text-[#49627d]">
@@ -215,7 +215,7 @@ export function RegionHub({ region, places }: RegionHubProps) {
 
           <Link
             href="/benefits"
-            className="group rounded-[24px] border border-[#e7d2ca] bg-[linear-gradient(180deg,rgba(252,247,245,0.98),rgba(247,238,233,0.96))] p-5 transition-all hover:-translate-y-0.5 hover:border-[#d09d8b]"
+            className="group cursor-pointer rounded-[24px] border border-[#e7d2ca] bg-[linear-gradient(180deg,rgba(252,247,245,0.98),rgba(247,238,233,0.96))] p-5 transition-all hover:-translate-y-0.5 hover:border-[#d09d8b]"
           >
             <div className="flex items-start gap-3">
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#f7e2dc] text-[#8a5446]">

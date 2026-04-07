@@ -3,7 +3,6 @@ import {
   ArrowRightIcon,
   MapPinIcon,
   SearchIcon,
-  SparklesIcon,
 } from 'lucide-react';
 import type {
   HomeFilterChip,
@@ -69,8 +68,10 @@ export function ParentingHeroSection({
       <div className="mx-auto max-w-screen-2xl px-4 pb-14">
         <div className="grid gap-7 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <div className="flex flex-col gap-5 rounded-[32px] border border-[#eadfce] bg-[rgba(255,252,246,0.86)] p-6 shadow-[0_18px_55px_rgba(63,50,34,0.08)] sm:p-7">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#ddd2c2] bg-white/80 px-4 py-2 text-xs font-semibold tracking-[0.04em] text-[#6b5b48]">
-              <SparklesIcon className="h-3.5 w-3.5 text-[#55715d]" />
+            <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-[#d7c29f] bg-[linear-gradient(135deg,rgba(248,224,183,0.95),rgba(232,242,226,0.98))] px-3 py-2 text-xs font-semibold tracking-[0.04em] text-[#5f4b35] shadow-[0_12px_30px_rgba(98,76,46,0.14)]">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#4c6651] text-[#f8f3ea] shadow-[0_8px_18px_rgba(76,102,81,0.24)]">
+                <MapPinIcon className="h-3.5 w-3.5" />
+              </span>
               <span>수도권 주말 계획, 장소부터 빠르게</span>
             </div>
 
@@ -108,7 +109,7 @@ export function ParentingHeroSection({
               </div>
               <button
                 type="submit"
-                className="inline-flex min-h-14 items-center justify-center gap-2 rounded-[20px] bg-[#4c6651] px-5 text-sm font-semibold text-[#f7f4ee] transition-colors hover:bg-[#405845]"
+                className="inline-flex min-h-14 cursor-pointer items-center justify-center gap-2 rounded-[20px] bg-[#4c6651] px-5 text-sm font-semibold text-[#f7f4ee] transition-colors hover:bg-[#405845]"
               >
                 <span>장소 탐색 시작</span>
                 <ArrowRightIcon className="h-4 w-4" />
@@ -120,7 +121,7 @@ export function ParentingHeroSection({
                 <Link
                   key={filter.id}
                   href={filter.href}
-                  className="rounded-full border border-[#ddd2c2] bg-white/80 px-3.5 py-1.5 text-xs font-medium text-[#5f5547] transition-colors hover:border-[#bfa88b] hover:text-[#2f2922]"
+                  className="cursor-pointer rounded-full border border-[#ddd2c2] bg-white/80 px-3.5 py-1.5 text-xs font-medium text-[#5f5547] transition-colors hover:border-[#bfa88b] hover:text-[#2f2922]"
                 >
                   {filter.label}
                 </Link>
@@ -185,7 +186,7 @@ export function ParentingHeroSection({
                       key={region.id}
                       href={region.href}
                       className={cn(
-                        'group rounded-[24px] border p-4 transition-all hover:-translate-y-0.5',
+                        'group cursor-pointer rounded-[24px] border p-4 transition-all hover:-translate-y-0.5',
                         tone.border,
                         'bg-white/75 hover:bg-white'
                       )}
@@ -250,7 +251,7 @@ export function ParentingHeroSection({
                       key={scenario.id}
                       href={scenario.href}
                       className={cn(
-                        'group flex min-h-28 flex-col justify-between rounded-[24px] border p-4 transition-all hover:-translate-y-0.5',
+                        'group cursor-pointer flex min-h-28 flex-col justify-between rounded-[24px] border p-4 transition-all hover:-translate-y-0.5',
                         tone.border,
                         tone.bg
                       )}
