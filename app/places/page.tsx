@@ -3,7 +3,10 @@ import { JsonLdMultiple } from '@/components/seo';
 import { PlacesHub } from '@/components/places/PlacesHub';
 import { PaperPageShell } from '@/components/ui/paper-page-shell';
 import { getPhaseARegions } from '@/lib/places/region-config';
-import { getPlaceCountByRegion, getPublishablePlaces } from '@/lib/places/place-content';
+import {
+  getPlaceCountByRegion,
+  getPublishablePlaces,
+} from '@/lib/places/place-content';
 import {
   SITE_CONFIG,
   createPageStructuredData,
@@ -23,11 +26,8 @@ export default function PlacesPage() {
     name: '아이와 가볼 곳',
     path: '/places',
     description:
-      '서울·경기·인천 중심으로 아이와 가볼 곳을 지역, 연령, 날씨, 예산 기준으로 빠르게 정리한 장소 허브입니다.',
-    breadcrumbs: [
-      { name: '홈', url: '/' },
-      { name: '아이와 가볼 곳' },
-    ],
+      '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 허브입니다.',
+    breadcrumbs: [{ name: '홈', url: '/' }, { name: '아이와 가볼 곳' }],
   });
 
   return (

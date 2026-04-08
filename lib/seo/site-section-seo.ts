@@ -21,7 +21,7 @@ export function createPlacesMetadataInput(baseUrl: string): MetadataInput {
   return {
     title: '아이와 가볼 곳',
     description:
-      '서울·경기·인천 중심으로 아이와 가볼 곳을 지역, 연령, 날씨, 예산 기준으로 빠르게 정리했습니다. 공식 소스로 검증한 장소 허브입니다.',
+      '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 허브입니다. 출처와 확인 시점을 함께 안내합니다.',
     canonical: `${siteUrl}/places`,
     keywords: [
       '아이와 가볼 곳',

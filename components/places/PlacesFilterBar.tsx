@@ -107,27 +107,52 @@ interface PlacesFilterBarProps {
   filteredCount: number;
 }
 
-export function PlacesFilterBar({ totalCount, filteredCount }: PlacesFilterBarProps) {
+export function PlacesFilterBar({
+  totalCount,
+  filteredCount,
+}: PlacesFilterBarProps) {
   const [filters, setFilters] = useQueryStates(placesFilterParsers, {
     shallow: false,
   });
 
-  const isActive = filters.age || filters.category || filters.indoor || filters.outdoor || filters.free || filters.feeding || filters.stroller || filters.rain;
+  const isActive =
+    filters.age ||
+    filters.category ||
+    filters.indoor ||
+    filters.outdoor ||
+    filters.free ||
+    filters.feeding ||
+    filters.stroller ||
+    filters.rain;
 
   function toggleAge(band: (typeof AGE_BANDS)[number]) {
     setFilters(prev => ({ ...prev, age: prev.age === band ? null : band }));
   }
 
   function toggleCategory(cat: (typeof CATEGORIES)[number]) {
-    setFilters(prev => ({ ...prev, category: prev.category === cat ? null : cat }));
+    setFilters(prev => ({
+      ...prev,
+      category: prev.category === cat ? null : cat,
+    }));
   }
 
-  function toggleBoolean(key: 'indoor' | 'outdoor' | 'free' | 'feeding' | 'stroller' | 'rain') {
+  function toggleBoolean(
+    key: 'indoor' | 'outdoor' | 'free' | 'feeding' | 'stroller' | 'rain'
+  ) {
     setFilters(prev => ({ ...prev, [key]: prev[key] ? null : true }));
   }
 
   function clearAll() {
-    setFilters({ age: null, category: null, indoor: null, outdoor: null, free: null, feeding: null, stroller: null, rain: null });
+    setFilters({
+      age: null,
+      category: null,
+      indoor: null,
+      outdoor: null,
+      free: null,
+      feeding: null,
+      stroller: null,
+      rain: null,
+    });
   }
 
   return (
@@ -146,128 +171,149 @@ export function PlacesFilterBar({ totalCount, filteredCount }: PlacesFilterBarPr
           조건으로 더 좁혀보기
         </h3>
         <p className="text-sm leading-6 text-[#665949]">
-          필터를 누르면 바로 URL에 반영됩니다. 홈의 빠른 버튼 흐름을 이어받아
-          여기서 더 세밀하게 줄이는 구조입니다.
+          필터를 누르면 URL에 바로 반영됩니다. 지금 필요한 조건만 골라 장소를 더
+          구체적으로 좁혀보세요.
         </p>
       </div>
 
       <div className="space-y-4">
-      {/* 결과 수 + 초기화 */}
-      <div className="flex min-h-[20px] items-center justify-between gap-4">
-        {isActive ? (
-          <p className="text-sm text-[#6a5d4d]">
-            <span className="font-semibold text-[#2e2821]">{totalCount}곳</span> 중{' '}
-            <span className="font-semibold text-[#2e2821]">{filteredCount}곳</span> 표시
-          </p>
-        ) : (
-          <p className="text-sm text-[#6a5d4d]">
-            총 <span className="font-semibold text-[#2e2821]">{totalCount}곳</span>
-          </p>
-        )}
-        {isActive && (
-          <button
-            onClick={clearAll}
-            className="text-sm font-medium text-[#7b6853] underline underline-offset-2 transition-colors hover:text-[#3a332b]"
-          >
-            초기화
-          </button>
-        )}
-      </div>
+        {/* 결과 수 + 초기화 */}
+        <div className="flex min-h-[20px] items-center justify-between gap-4">
+          {isActive ? (
+            <p className="text-sm text-[#6a5d4d]">
+              <span className="font-semibold text-[#2e2821]">
+                {totalCount}곳
+              </span>{' '}
+              중{' '}
+              <span className="font-semibold text-[#2e2821]">
+                {filteredCount}곳
+              </span>{' '}
+              표시
+            </p>
+          ) : (
+            <p className="text-sm text-[#6a5d4d]">
+              총{' '}
+              <span className="font-semibold text-[#2e2821]">
+                {totalCount}곳
+              </span>
+            </p>
+          )}
+          {isActive && (
+            <button
+              onClick={clearAll}
+              className="text-sm font-medium text-[#7b6853] underline underline-offset-2 transition-colors hover:text-[#3a332b]"
+            >
+              초기화
+            </button>
+          )}
+        </div>
 
-      {/* 카테고리 필터 */}
-      <div className="flex flex-wrap items-start gap-2.5">
-        <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#f5ecde] px-2.5 py-1 text-[11px] font-semibold text-[#7b6443]">
-          종류
-        </span>
-        {CATEGORIES.map(cat => (
+        {/* 카테고리 필터 */}
+        <div className="flex flex-wrap items-start gap-2.5">
+          <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#f5ecde] px-2.5 py-1 text-[11px] font-semibold text-[#7b6443]">
+            종류
+          </span>
+          {CATEGORIES.map(cat => (
+            <button
+              key={cat}
+              onClick={() => toggleCategory(cat)}
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                filters.category === cat
+                  ? FILTER_CHIP_STYLES.category.active
+                  : FILTER_CHIP_STYLES.category.inactive
+              }`}
+            >
+              {CATEGORY_LABELS[cat]}
+            </button>
+          ))}
+        </div>
+
+        {/* 연령 필터 */}
+        <div className="flex flex-wrap items-start gap-2.5">
+          <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#f0edf6] px-2.5 py-1 text-[11px] font-semibold text-[#675b80]">
+            연령
+          </span>
+          {AGE_BANDS.map(band => (
+            <button
+              key={band}
+              onClick={() => toggleAge(band)}
+              className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                filters.age === band
+                  ? FILTER_CHIP_STYLES.age.active
+                  : FILTER_CHIP_STYLES.age.inactive
+              }`}
+            >
+              {AGE_BAND_LABELS[band]}
+            </button>
+          ))}
+        </div>
+
+        {/* 조건 필터 */}
+        <div className="flex flex-wrap items-start gap-2.5">
+          <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#eef3e8] px-2.5 py-1 text-[11px] font-semibold text-[#57684e]">
+            조건
+          </span>
           <button
-            key={cat}
-            onClick={() => toggleCategory(cat)}
+            onClick={() => toggleBoolean('indoor')}
             className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-              filters.category === cat
-                ? FILTER_CHIP_STYLES.category.active
-                : FILTER_CHIP_STYLES.category.inactive
+              filters.indoor
+                ? FILTER_CHIP_STYLES.indoor.active
+                : FILTER_CHIP_STYLES.indoor.inactive
             }`}
           >
-            {CATEGORY_LABELS[cat]}
+            실내
           </button>
-        ))}
-      </div>
-
-      {/* 연령 필터 */}
-      <div className="flex flex-wrap items-start gap-2.5">
-        <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#f0edf6] px-2.5 py-1 text-[11px] font-semibold text-[#675b80]">
-          연령
-        </span>
-        {AGE_BANDS.map(band => (
           <button
-            key={band}
-            onClick={() => toggleAge(band)}
+            onClick={() => toggleBoolean('outdoor')}
             className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-              filters.age === band
-                ? FILTER_CHIP_STYLES.age.active
-                : FILTER_CHIP_STYLES.age.inactive
+              filters.outdoor
+                ? FILTER_CHIP_STYLES.outdoor.active
+                : FILTER_CHIP_STYLES.outdoor.inactive
             }`}
           >
-            {AGE_BAND_LABELS[band]}
+            야외
           </button>
-        ))}
-      </div>
-
-      {/* 조건 필터 */}
-      <div className="flex flex-wrap items-start gap-2.5">
-        <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#eef3e8] px-2.5 py-1 text-[11px] font-semibold text-[#57684e]">
-          조건
-        </span>
-        <button
-          onClick={() => toggleBoolean('indoor')}
-          className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-            filters.indoor ? FILTER_CHIP_STYLES.indoor.active : FILTER_CHIP_STYLES.indoor.inactive
-          }`}
-        >
-          실내
-        </button>
-        <button
-          onClick={() => toggleBoolean('outdoor')}
-          className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-            filters.outdoor ? FILTER_CHIP_STYLES.outdoor.active : FILTER_CHIP_STYLES.outdoor.inactive
-          }`}
-        >
-          야외
-        </button>
-        <button
-          onClick={() => toggleBoolean('free')}
-          className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-            filters.free ? FILTER_CHIP_STYLES.free.active : FILTER_CHIP_STYLES.free.inactive
-          }`}
-        >
-          무료
-        </button>
-        <button
-          onClick={() => toggleBoolean('feeding')}
-          className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-            filters.feeding ? FILTER_CHIP_STYLES.feeding.active : FILTER_CHIP_STYLES.feeding.inactive
-          }`}
-        >
-          수유실
-        </button>
-        <button
-          onClick={() => toggleBoolean('stroller')}
-          className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-            filters.stroller ? FILTER_CHIP_STYLES.stroller.active : FILTER_CHIP_STYLES.stroller.inactive
-          }`}
-        >
-          유모차 가능
-        </button>
-        <button
-          onClick={() => toggleBoolean('rain')}
-          className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
-            filters.rain ? FILTER_CHIP_STYLES.rain.active : FILTER_CHIP_STYLES.rain.inactive
-          }`}
-        >
-          우천 가능
-        </button>
-      </div>
+          <button
+            onClick={() => toggleBoolean('free')}
+            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+              filters.free
+                ? FILTER_CHIP_STYLES.free.active
+                : FILTER_CHIP_STYLES.free.inactive
+            }`}
+          >
+            무료
+          </button>
+          <button
+            onClick={() => toggleBoolean('feeding')}
+            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+              filters.feeding
+                ? FILTER_CHIP_STYLES.feeding.active
+                : FILTER_CHIP_STYLES.feeding.inactive
+            }`}
+          >
+            수유실
+          </button>
+          <button
+            onClick={() => toggleBoolean('stroller')}
+            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+              filters.stroller
+                ? FILTER_CHIP_STYLES.stroller.active
+                : FILTER_CHIP_STYLES.stroller.inactive
+            }`}
+          >
+            유모차 가능
+          </button>
+          <button
+            onClick={() => toggleBoolean('rain')}
+            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+              filters.rain
+                ? FILTER_CHIP_STYLES.rain.active
+                : FILTER_CHIP_STYLES.rain.inactive
+            }`}
+          >
+            우천 가능
+          </button>
+        </div>
       </div>
     </div>
   );

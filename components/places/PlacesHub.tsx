@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import {
   ArrowRightIcon,
   GiftIcon,
@@ -51,14 +52,14 @@ export function PlacesHub({
                     '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
                 }}
               >
-                아이와 가볼 곳,
+                아이와 가볼 곳을
                 <br />
-                지역부터 조건까지 빠르게 찾으세요
+                지역과 조건으로 찾아보세요
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-[#645849] sm:text-[15px]">
-                홈에서 고른 흐름을 그대로 이어받아, 여기서는 지역과 필터를
-                더 세밀하게 줄입니다. 감성 큐레이션보다 지금 바로 갈 수 있는
-                장소 선택이 먼저 보이도록 만들었습니다.
+                서울·경기·인천에서 아이와 가볼 곳을 한곳에 모았습니다. 먼저
+                지역을 고르고, 연령과 실내 여부 같은 조건으로 원하는 장소만
+                빠르게 좁혀보세요.
               </p>
             </div>
 
@@ -102,7 +103,7 @@ export function PlacesHub({
                 {totalPlaceCount}곳
               </p>
               <p className="mt-1 text-sm leading-6 text-[#6a5c49]">
-                지금 바로 필터로 줄일 수 있는 발행 가능 장소 기준입니다.
+                현재 공개된 장소를 기준으로 집계한 수입니다.
               </p>
             </div>
             <div className="rounded-[24px] bg-[#eef4e8] px-5 py-4">
@@ -113,7 +114,7 @@ export function PlacesHub({
                 지역 먼저, 조건은 그 다음
               </p>
               <p className="mt-1 text-sm leading-6 text-[#6a5c49]">
-                홈과 같은 흐름입니다. 먼저 권역을 고르고 세부 조건을 덧씌웁니다.
+                먼저 권역을 고른 뒤, 연령과 조건으로 다시 좁혀봅니다.
               </p>
             </div>
             <div className="rounded-[24px] bg-[#f4e7df] px-5 py-4">
@@ -124,7 +125,8 @@ export function PlacesHub({
                 공식·준공식 검증 중심
               </p>
               <p className="mt-1 text-sm leading-6 text-[#6a5c49]">
-                운영시간과 가격은 변동 가능성이 커서 출처와 검증일을 함께 봅니다.
+                운영시간과 이용 요금은 자주 바뀔 수 있어, 출처와 확인 시점을
+                함께 안내합니다.
               </p>
             </div>
           </div>
@@ -148,8 +150,8 @@ export function PlacesHub({
                 먼저 권역부터 좁혀보세요
               </h2>
               <p className="text-sm leading-6 text-muted-foreground sm:text-[15px]">
-                지역 카드의 색과 톤을 홈과 맞췄습니다. 각 지역의 성격과 현재
-                정리 수를 함께 보여줘서 다음 클릭을 빠르게 돕습니다.
+                각 권역의 특징과 정리된 장소 수를 함께 보여줍니다. 어디부터
+                살펴볼지 빠르게 고를 수 있게 구성했습니다.
               </p>
             </div>
           </div>
@@ -183,8 +185,8 @@ export function PlacesHub({
                 여기서 더 세밀하게 줄이면 됩니다
               </h2>
               <p className="text-sm leading-6 text-muted-foreground sm:text-[15px]">
-                필터 보드는 홈의 빠른 버튼과 같은 색 체계를 이어받습니다. 지역을
-                고른 뒤에는 연령, 실내·야외, 무료 여부로 더 좁히는 흐름입니다.
+                지역을 고른 뒤에는 연령, 실내·야외, 무료 여부 같은 조건으로
+                원하는 장소만 더 정확하게 좁혀볼 수 있습니다.
               </p>
             </div>
           </div>
@@ -194,7 +196,26 @@ export function PlacesHub({
           </div>
         </div>
 
-        <PlacesFilteredGrid places={allPlaces} />
+        <Suspense
+          fallback={
+            <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
+              <p
+                className="text-lg font-semibold tracking-tight text-[#2f2922]"
+                style={{
+                  fontFamily:
+                    '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                }}
+              >
+                필터를 불러오는 중입니다
+              </p>
+              <p className="mt-2 text-sm text-[#6a5d4d]">
+                조건 보드를 준비한 뒤 장소 목록을 보여드립니다.
+              </p>
+            </div>
+          }
+        >
+          <PlacesFilteredGrid places={allPlaces} />
+        </Suspense>
       </section>
 
       <section className="rounded-[32px] border border-[#e8ddcf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] p-6 shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
@@ -230,7 +251,8 @@ export function PlacesHub({
                   나들이 예산 계산기
                 </p>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  입장료, 교통, 식사 비용을 한 번에 정리해 실제 부담을 가늠합니다.
+                  입장료, 교통, 식사 비용을 한 번에 정리해 실제 부담을
+                  가늠합니다.
                 </p>
               </div>
             </div>
@@ -256,7 +278,8 @@ export function PlacesHub({
                   지역별 육아 혜택 확인
                 </p>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  부모급여, 아동수당, 지역 지원 정책을 장소 탐색 흐름 아래에서 바로 이어봅니다.
+                  부모급여, 아동수당, 지역 지원 정책을 장소 탐색 흐름 아래에서
+                  바로 이어봅니다.
                 </p>
               </div>
             </div>
