@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -151,7 +152,26 @@ export function RegionHub({ region, places }: RegionHubProps) {
             </div>
           </div>
 
-          <PlacesFilteredGrid places={places} />
+          <Suspense
+            fallback={
+              <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
+                <p
+                  className="text-lg font-semibold tracking-tight text-[#2f2922]"
+                  style={{
+                    fontFamily:
+                      '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                  }}
+                >
+                  필터를 불러오는 중입니다
+                </p>
+                <p className="mt-2 text-sm text-[#6a5d4d]">
+                  조건 보드를 준비한 뒤 장소 목록을 보여드립니다.
+                </p>
+              </div>
+            }
+          >
+            <PlacesFilteredGrid places={places} />
+          </Suspense>
         </section>
       ) : (
         <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
