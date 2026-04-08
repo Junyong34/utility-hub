@@ -136,6 +136,75 @@
 
 /* Prose (Typography) 스타일 */
 @layer components {
+  .places-filter-rail-track {
+    position: relative;
+    isolation: isolate;
+    overscroll-behavior-x: contain;
+  }
+
+  .places-filter-rail-content {
+    flex: none;
+  }
+
+  .places-filter-rail-edge {
+    position: sticky;
+    inset-block: -0.25rem;
+    z-index: 2;
+    display: block;
+    width: 0;
+    flex: none;
+    align-self: stretch;
+    overflow: visible;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 180ms ease;
+  }
+
+  .places-filter-rail-edge-start {
+    inset-inline-start: 0;
+  }
+
+  .places-filter-rail-edge-end {
+    inset-inline-end: 0;
+  }
+
+  .places-filter-rail-edge-layer {
+    position: absolute;
+    inset-block: 0;
+    width: var(--places-filter-rail-edge-width);
+    border-radius: 9999px;
+    opacity: var(--places-filter-rail-edge-opacity);
+    backdrop-filter: blur(var(--places-filter-rail-edge-blur));
+    -webkit-backdrop-filter: blur(var(--places-filter-rail-edge-blur));
+  }
+
+  .places-filter-rail-edge-layer-start {
+    inset-inline-start: 0;
+    background:
+      linear-gradient(
+        90deg,
+        rgba(252, 249, 244, 0.94) 0%,
+        rgba(252, 249, 244, 0.66) 58%,
+        rgba(252, 249, 244, 0) 100%
+      );
+    mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.88) 52%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.88) 52%, transparent 100%);
+  }
+
+  .places-filter-rail-edge-layer-end {
+    inset-inline-end: 0;
+    background:
+      linear-gradient(
+        270deg,
+        rgba(252, 249, 244, 0.94) 0%,
+        rgba(252, 249, 244, 0.66) 58%,
+        rgba(252, 249, 244, 0) 100%
+      );
+    mask-image: linear-gradient(270deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.88) 52%, transparent 100%);
+    -webkit-mask-image: linear-gradient(270deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.88) 52%, transparent 100%);
+  }
+
   .prose {
     @apply text-foreground max-w-none;
     overflow-wrap: break-word;

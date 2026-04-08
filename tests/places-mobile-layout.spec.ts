@@ -116,6 +116,36 @@ test.describe('/places mobile layout', () => {
     expect(copiedUrl).toBe('http://127.0.0.1:3000/places?indoor=true&free=true');
   });
 
+  test('does not trigger hydration mismatch when native share is available', async ({
+    page,
+  }) => {
+    const pageErrors: string[] = [];
+
+    page.on('pageerror', error => {
+      pageErrors.push(String(error));
+    });
+
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, 'share', {
+        configurable: true,
+        value: async () => undefined,
+      });
+    });
+
+    await page.setViewportSize({ width: 390, height: 900 });
+    await page.goto('/places', { waitUntil: 'networkidle' });
+
+    await expect(
+      page.getByRole('button', { name: '현재 필터 링크 공유' })
+    ).toBeVisible();
+
+    await page.waitForTimeout(500);
+
+    expect(
+      pageErrors.some(message => message.includes('Hydration failed'))
+    ).toBe(false);
+  });
+
   test('category filter lane supports horizontal drag scrolling on mobile', async ({
     page,
   }) => {
@@ -151,5 +181,66 @@ test.describe('/places mobile layout', () => {
     );
 
     expect(finalScrollLeft).toBeGreaterThan(initialMetrics.scrollLeft);
+  });
+
+  test('category filter lane shows edge blur only on the scrollable side', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 900 });
+    await page.goto('/places', { waitUntil: 'networkidle' });
+
+    const categoryTrack = page.getByTestId('places-filter-track-category');
+    const startEdge = page.getByTestId('places-filter-track-category-edge-start');
+    const endEdge = page.getByTestId('places-filter-track-category-edge-end');
+
+    await expect(categoryTrack).toBeVisible();
+    await categoryTrack.scrollIntoViewIfNeeded();
+
+    const metrics = await categoryTrack.evaluate(element => ({
+      clientWidth: element.clientWidth,
+      scrollWidth: element.scrollWidth,
+    }));
+
+    expect(metrics.scrollWidth).toBeGreaterThan(metrics.clientWidth);
+
+    const readEdgeState = async () => ({
+      start: await startEdge.evaluate(element => ({
+        opacity: getComputedStyle(element).opacity,
+        visibility: getComputedStyle(element).visibility,
+      })),
+      end: await endEdge.evaluate(element => ({
+        opacity: getComputedStyle(element).opacity,
+        visibility: getComputedStyle(element).visibility,
+      })),
+    });
+
+    await expect
+      .poll(readEdgeState)
+      .toEqual({
+        start: { opacity: '0', visibility: 'hidden' },
+        end: { opacity: '1', visibility: 'visible' },
+      });
+
+    await categoryTrack.evaluate(element => {
+      element.scrollLeft = (element.scrollWidth - element.clientWidth) / 2;
+    });
+
+    await expect
+      .poll(readEdgeState)
+      .toEqual({
+        start: { opacity: '1', visibility: 'visible' },
+        end: { opacity: '1', visibility: 'visible' },
+      });
+
+    await categoryTrack.evaluate(element => {
+      element.scrollLeft = element.scrollWidth - element.clientWidth;
+    });
+
+    await expect
+      .poll(readEdgeState)
+      .toEqual({
+        start: { opacity: '1', visibility: 'visible' },
+        end: { opacity: '0', visibility: 'hidden' },
+      });
   });
 });

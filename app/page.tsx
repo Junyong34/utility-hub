@@ -51,11 +51,9 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-2">
-            {homeContent.featuredPlaces.map((place, index) => (
-              <div key={place.id} className={index === 0 ? 'col-span-2' : undefined}>
-                <ParentingFeaturedPlaceCard item={place} />
-              </div>
+          <div className="grid gap-4 xl:grid-cols-2">
+            {homeContent.featuredPlaces.map(place => (
+              <ParentingFeaturedPlaceCard key={place.id} item={place} />
             ))}
           </div>
         </section>

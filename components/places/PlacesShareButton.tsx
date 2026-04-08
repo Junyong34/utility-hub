@@ -1,14 +1,27 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { CheckIcon, Link2Icon, Share2Icon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { copyTextToClipboard } from '@/lib/clipboard';
 
+function subscribeNativeShareSupport(): () => void {
+  return () => {};
+}
+
+function getNativeShareSnapshot(): boolean {
+  return (
+    typeof navigator !== 'undefined' && typeof navigator.share === 'function'
+  );
+}
+
 export function PlacesShareButton() {
   const [copied, setCopied] = useState(false);
-  const canNativeShare =
-    typeof navigator !== 'undefined' && typeof navigator.share === 'function';
+  const canNativeShare = useSyncExternalStore(
+    subscribeNativeShareSupport,
+    getNativeShareSnapshot,
+    () => false
+  );
 
   useEffect(() => {
     if (!copied) {

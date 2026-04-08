@@ -1,6 +1,14 @@
 'use client';
 
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import {
+  useEffect,
+  useInsertionEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type MouseEvent,
+  type ReactNode,
+} from 'react';
 import { cn } from '@/lib/utils';
 
 interface PlacesFilterRailProps {
@@ -9,6 +17,32 @@ interface PlacesFilterRailProps {
   trackTestId?: string;
   children: ReactNode;
 }
+
+const EDGE_BLUR_LAYERS = [
+  { width: '4.25rem', blur: '2px', opacity: 0.26 },
+  { width: '3.25rem', blur: '5px', opacity: 0.34 },
+  { width: '2.375rem', blur: '9px', opacity: 0.42 },
+  { width: '1.5rem', blur: '14px', opacity: 0.52 },
+] as const;
+
+const SCROLL_STATE_STYLE_ID = 'places-filter-rail-scroll-state-styles';
+const SCROLL_STATE_STYLE = `
+  @supports (container-type: scroll-state) {
+    @container scroll-state(scrollable: inline-start) {
+      .places-filter-rail-edge-start {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    @container scroll-state(scrollable: inline-end) {
+      .places-filter-rail-edge-end {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+`;
 
 export function PlacesFilterRail({
   label,
@@ -24,6 +58,21 @@ export function PlacesFilterRail({
   });
   const suppressClickRef = useRef(false);
   const [isDragging, setIsDragging] = useState(false);
+
+  useInsertionEffect(() => {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    if (document.getElementById(SCROLL_STATE_STYLE_ID)) {
+      return;
+    }
+
+    const style = document.createElement('style');
+    style.id = SCROLL_STATE_STYLE_ID;
+    style.textContent = SCROLL_STATE_STYLE;
+    document.head.appendChild(style);
+  }, []);
 
   function resetDrag(): void {
     dragStateRef.current = {
@@ -94,6 +143,40 @@ export function PlacesFilterRail({
     suppressClickRef.current = false;
   }
 
+  function renderEdge(side: 'start' | 'end') {
+    return (
+      <span
+        aria-hidden="true"
+        data-testid={trackTestId ? `${trackTestId}-edge-${side}` : undefined}
+        className={cn(
+          'places-filter-rail-edge',
+          side === 'start'
+            ? 'places-filter-rail-edge-start'
+            : 'places-filter-rail-edge-end'
+        )}
+      >
+        {EDGE_BLUR_LAYERS.map(layer => (
+          <span
+            key={`${side}-${layer.width}-${layer.blur}`}
+            className={cn(
+              'places-filter-rail-edge-layer',
+              side === 'start'
+                ? 'places-filter-rail-edge-layer-start'
+                : 'places-filter-rail-edge-layer-end'
+            )}
+            style={
+              {
+                '--places-filter-rail-edge-width': layer.width,
+                '--places-filter-rail-edge-blur': layer.blur,
+                '--places-filter-rail-edge-opacity': layer.opacity,
+              } as CSSProperties
+            }
+          />
+        ))}
+      </span>
+    );
+  }
+
   return (
     <div
       role="group"
@@ -117,14 +200,19 @@ export function PlacesFilterRail({
       <div
         ref={trackRef}
         data-testid={trackTestId}
+        style={{ containerType: 'scroll-state' }}
         className={cn(
-          'flex gap-2 overflow-x-auto pb-1 pr-3 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [touch-action:pan-x]',
+          'places-filter-rail-track flex overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [touch-action:pan-x]',
           isDragging ? 'cursor-grabbing' : 'cursor-grab'
         )}
         onMouseDown={handleMouseDown}
         onClickCapture={handleClickCapture}
       >
-        {children}
+        {renderEdge('start')}
+        <div className="places-filter-rail-content flex min-w-max gap-2 pr-3">
+          {children}
+        </div>
+        {renderEdge('end')}
       </div>
     </div>
   );
