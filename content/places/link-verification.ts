@@ -48,6 +48,10 @@ const PLACE_LINK_EXPECTATIONS: Partial<Record<string, LinkExpectation>> = {
     sourceMatchAny: ['에버랜드', 'everland'],
     naverRejectAny: ['롯데월드'],
   },
+  'incheon-aisarang-dream-center-seo-gu-4': {
+    naverMatchAny: ['청라호수공원한신더휴', '호수공원한신더휴'],
+    naverRejectAny: ['더벤티'],
+  },
 };
 
 function uniqueTerms(terms: Array<string | undefined>): string[] {

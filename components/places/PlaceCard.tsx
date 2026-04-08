@@ -112,8 +112,8 @@ export function PlaceCard({ place }: PlaceCardProps) {
   if (place.rainFriendly) conditions.push('우천 가능');
 
   return (
-    <Card className="group h-full overflow-hidden rounded-[30px] border-[#e8dbc8] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] shadow-[0_18px_50px_rgba(59,46,31,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#ccb28a] hover:shadow-[0_26px_58px_rgba(59,46,31,0.12)]">
-      <div className="relative min-h-44 overflow-hidden border-b border-[#eadfce]">
+    <Card className="group h-full gap-3 overflow-hidden rounded-[26px] border-[#e8dbc8] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] py-3 shadow-[0_18px_50px_rgba(59,46,31,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#ccb28a] hover:shadow-[0_26px_58px_rgba(59,46,31,0.12)] sm:gap-4 sm:rounded-[30px] sm:py-4">
+      <div className="relative min-h-36 overflow-hidden border-b border-[#eadfce] sm:min-h-44">
         {place.thumbnailImage ? (
           <Image
             src={place.thumbnailImage}
@@ -125,7 +125,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
         ) : (
           <div
             className={cn(
-              'relative flex h-full min-h-44 flex-col justify-between bg-gradient-to-br p-5',
+              'relative flex h-full min-h-36 flex-col justify-between bg-gradient-to-br p-4 sm:min-h-44 sm:p-5',
               visualStyles.fallback
             )}
           >
@@ -140,28 +140,28 @@ export function PlaceCard({ place }: PlaceCardProps) {
             <div className="relative flex items-center justify-between gap-3">
               <span
                 className={cn(
-                  'inline-flex rounded-full px-3 py-1 text-[11px] font-semibold',
+                  'inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold sm:px-3 sm:text-[11px]',
                   visualStyles.badge
                 )}
               >
                 {CATEGORY_LABELS[place.category]}
               </span>
-              <span className="text-[11px] font-semibold text-foreground/58">
+              <span className="text-[10px] font-semibold text-foreground/58 sm:text-[11px]">
                 {place.subRegion}
               </span>
             </div>
 
-            <div className="relative space-y-2">
+            <div className="relative space-y-1.5 sm:space-y-2">
               <p
                 className={cn(
-                  'text-[11px] font-semibold uppercase tracking-[0.18em]',
+                  'text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-[11px] sm:tracking-[0.18em]',
                   visualStyles.overlay
                 )}
               >
                 {conditions[0] ?? '장소 정보'}
               </p>
               <p
-                className="max-w-[14rem] text-2xl font-semibold leading-tight tracking-tight text-foreground"
+                className="max-w-[13rem] text-[1.4rem] font-semibold leading-tight tracking-tight text-foreground sm:max-w-[14rem] sm:text-2xl"
                 style={{
                   fontFamily:
                     '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -174,8 +174,8 @@ export function PlaceCard({ place }: PlaceCardProps) {
         )}
       </div>
 
-      <CardContent className="flex h-full flex-col gap-4 p-5">
-        <div className="flex flex-wrap gap-1.5">
+      <CardContent className="flex h-full flex-col gap-3 p-4 sm:gap-4 sm:p-5">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5">
           <Badge variant="outline" className={visualStyles.badge}>
             {CATEGORY_LABELS[place.category]}
           </Badge>
@@ -210,7 +210,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
           ) : null}
         </div>
 
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {ageBands.map(({ key, label }) => (
             <Badge key={key} variant="outline" className={BADGE.age}>
               {label}
@@ -218,9 +218,9 @@ export function PlaceCard({ place }: PlaceCardProps) {
           ))}
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-1.5 sm:space-y-2">
           <h3
-            className="text-[1.15rem] font-semibold leading-tight tracking-tight text-foreground"
+            className="text-[1.05rem] font-semibold leading-tight tracking-tight text-foreground sm:text-[1.15rem]"
             style={{
               fontFamily:
                 '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -229,15 +229,15 @@ export function PlaceCard({ place }: PlaceCardProps) {
             {place.name}
           </h3>
           {place.description ? (
-            <p className="text-sm leading-6 text-muted-foreground">
+            <p className="line-clamp-3 text-[13px] leading-5 text-muted-foreground sm:line-clamp-none sm:text-sm sm:leading-6">
               {place.description}
             </p>
           ) : null}
         </div>
 
-        <div className="mt-auto space-y-2.5 rounded-[22px] bg-white/70 p-4">
-          <div className="flex flex-wrap items-center gap-2 text-sm text-foreground/72">
-            <MapPinIcon className="h-4 w-4 shrink-0 text-[#7c6956]" />
+        <div className="mt-auto space-y-2 rounded-[18px] bg-white/70 p-3 sm:space-y-2.5 sm:rounded-[22px] sm:p-4">
+          <div className="flex flex-wrap items-center gap-2 text-[13px] text-foreground/72 sm:text-sm">
+            <MapPinIcon className="h-3.5 w-3.5 shrink-0 text-[#7c6956] sm:h-4 sm:w-4" />
             <span className="min-w-0 flex-1 break-keep leading-5 text-[#5f5242]">
               {placeAddress}
             </span>
@@ -268,33 +268,33 @@ export function PlaceCard({ place }: PlaceCardProps) {
           </div>
 
           {place.stayMinutes ? (
-            <div className="flex items-center gap-2 text-sm text-foreground/72">
-              <ClockIcon className="h-4 w-4 shrink-0 text-[#7c6956]" />
+            <div className="flex items-center gap-2 text-[13px] text-foreground/72 sm:text-sm">
+              <ClockIcon className="h-3.5 w-3.5 shrink-0 text-[#7c6956] sm:h-4 sm:w-4" />
               <span>권장 체류 약 {place.stayMinutes}분</span>
             </div>
           ) : null}
 
           {place.parking ? (
-            <div className="flex items-center gap-2 text-sm text-foreground/72">
-              <CarIcon className="h-4 w-4 shrink-0 text-[#7c6956]" />
+            <div className="flex items-center gap-2 text-[13px] text-foreground/72 sm:text-sm">
+              <CarIcon className="h-3.5 w-3.5 shrink-0 text-[#7c6956] sm:h-4 sm:w-4" />
               <span>주차 가능</span>
             </div>
           ) : null}
         </div>
 
-        <div className="flex flex-wrap items-center justify-end gap-3 pt-1">
+        <div className="flex flex-wrap items-center justify-end gap-3 pt-0.5 sm:pt-1">
           {place.sourceUrl ? (
             <Link
               href={place.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-medium text-foreground/68 transition-colors hover:text-foreground"
+              className="inline-flex cursor-pointer items-center gap-1.5 text-[13px] font-medium text-foreground/68 transition-colors hover:text-foreground sm:text-sm"
             >
               <span>공식 사이트</span>
               <ExternalLinkIcon className="h-3.5 w-3.5" />
             </Link>
           ) : (
-            <div className="inline-flex items-center gap-1 text-sm font-medium text-foreground/55">
+            <div className="inline-flex items-center gap-1 text-[13px] font-medium text-foreground/55 sm:text-sm">
               <span>장소 정보 확인</span>
               <ArrowRightIcon className="h-3.5 w-3.5" />
             </div>

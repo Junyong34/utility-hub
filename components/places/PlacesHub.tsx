@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { RegionCard } from './RegionCard';
 import { PlacesFilteredGrid } from './PlacesFilteredGrid';
+import { PlacesShareButton } from './PlacesShareButton';
 import type { RegionConfig } from '@/lib/places/region-config';
 import type { PlaceSource } from '@/types/place-source';
 
@@ -26,8 +27,8 @@ export function PlacesHub({
   const totalPlaceCount = allPlaces.length;
 
   return (
-    <div className="space-y-12 sm:space-y-16">
-      <section className="relative overflow-hidden rounded-[34px] border border-[#e8dcc8] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] p-6 shadow-[0_20px_60px_rgba(60,47,31,0.08)] sm:p-8">
+    <div className="space-y-10 sm:space-y-16">
+      <section className="relative overflow-hidden rounded-[30px] border border-[#e8dcc8] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] p-5 shadow-[0_20px_60px_rgba(60,47,31,0.08)] sm:rounded-[34px] sm:p-8">
         <div
           className="absolute inset-0 opacity-40"
           style={{
@@ -37,16 +38,16 @@ export function PlacesHub({
           }}
         />
 
-        <div className="relative grid gap-6 xl:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)]">
-          <div className="space-y-5">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#cfc1af] bg-[#fffdf9] px-4 py-2 text-xs font-semibold tracking-[0.04em] text-[#4f4336] shadow-[0_8px_20px_rgba(60,47,31,0.06)]">
+        <div className="relative grid gap-5 sm:gap-6 xl:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)]">
+          <div className="space-y-4 sm:space-y-5">
+            <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#cfc1af] bg-[#fffdf9] px-3 py-1.5 text-[11px] font-semibold tracking-[0.03em] text-[#4f4336] shadow-[0_8px_20px_rgba(60,47,31,0.06)] sm:gap-2 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.04em]">
               <ShieldCheckIcon className="h-3.5 w-3.5 text-[#42624d]" />
               <span>수도권 중심 · 지역·조건별 탐색</span>
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               <h1
-                className="text-[clamp(1.95rem,4.2vw,3.6rem)] font-semibold leading-[1.08] tracking-[-0.05em] text-[#27231d]"
+                className="text-[clamp(1.75rem,8.6vw,2.65rem)] font-semibold leading-[1.05] tracking-[-0.05em] text-[#27231d] sm:text-[clamp(1.95rem,4.2vw,3.6rem)] sm:leading-[1.08]"
                 style={{
                   fontFamily:
                     '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -56,45 +57,45 @@ export function PlacesHub({
                 <br />
                 지역과 조건으로 찾아보세요
               </h1>
-              <p className="max-w-2xl text-sm leading-7 text-[#645849] sm:text-[15px]">
+              <p className="max-w-2xl text-[13px] leading-6 text-[#645849] sm:text-[15px] sm:leading-7">
                 서울·경기·인천에서 아이와 가볼 곳을 한곳에 모았습니다. 먼저
                 지역을 고르고, 연령과 실내 여부 같은 조건으로 원하는 장소만
                 빠르게 좁혀보세요.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2.5">
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3.5 py-1.5 text-xs font-medium text-[#665848]">
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
                 서울
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3.5 py-1.5 text-xs font-medium text-[#665848]">
+              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
                 경기 남부
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3.5 py-1.5 text-xs font-medium text-[#665848]">
+              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
                 경기 북부
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3.5 py-1.5 text-xs font-medium text-[#665848]">
+              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
                 인천
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3.5 py-1.5 text-xs font-medium text-[#665848]">
+              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
                 실내
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3.5 py-1.5 text-xs font-medium text-[#665848]">
+              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
                 무료
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3.5 py-1.5 text-xs font-medium text-[#665848]">
+              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
                 비 오는 날
               </span>
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
-            <div className="rounded-[24px] bg-[#f7f0e4] px-5 py-4">
+          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 xl:grid-cols-1">
+            <div className="col-span-2 rounded-[22px] bg-[#f7f0e4] px-4 py-3 sm:col-span-1 sm:rounded-[24px] sm:px-5 sm:py-4">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8f7550]">
                 정리된 장소
               </p>
               <p
-                className="mt-2 text-3xl font-semibold tracking-tight text-[#2d271f]"
+                className="mt-1.5 text-[1.9rem] font-semibold tracking-tight text-[#2d271f] sm:mt-2 sm:text-3xl"
                 style={{
                   fontFamily:
                     '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -102,29 +103,29 @@ export function PlacesHub({
               >
                 {totalPlaceCount}곳
               </p>
-              <p className="mt-1 text-sm leading-6 text-[#6a5c49]">
+              <p className="mt-1 text-[13px] leading-5 text-[#6a5c49] sm:text-sm sm:leading-6">
                 현재 공개된 장소를 기준으로 집계한 수입니다.
               </p>
             </div>
-            <div className="rounded-[24px] bg-[#eef4e8] px-5 py-4">
+            <div className="rounded-[22px] bg-[#eef4e8] px-4 py-3 sm:rounded-[24px] sm:px-5 sm:py-4">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#5d6c54]">
                 탐색 방식
               </p>
-              <p className="mt-2 text-lg font-semibold tracking-tight text-[#2d271f]">
+              <p className="mt-1.5 text-base font-semibold tracking-tight text-[#2d271f] sm:mt-2 sm:text-lg">
                 지역 먼저, 조건은 그 다음
               </p>
-              <p className="mt-1 text-sm leading-6 text-[#6a5c49]">
+              <p className="mt-1 text-[13px] leading-5 text-[#6a5c49] sm:text-sm sm:leading-6">
                 먼저 권역을 고른 뒤, 연령과 조건으로 다시 좁혀봅니다.
               </p>
             </div>
-            <div className="rounded-[24px] bg-[#f4e7df] px-5 py-4">
+            <div className="rounded-[22px] bg-[#f4e7df] px-4 py-3 sm:rounded-[24px] sm:px-5 sm:py-4">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a5b4a]">
                 신뢰 기준
               </p>
-              <p className="mt-2 text-lg font-semibold tracking-tight text-[#2d271f]">
+              <p className="mt-1.5 text-base font-semibold tracking-tight text-[#2d271f] sm:mt-2 sm:text-lg">
                 공식·준공식 검증 중심
               </p>
-              <p className="mt-1 text-sm leading-6 text-[#6a5c49]">
+              <p className="mt-1 text-[13px] leading-5 text-[#6a5c49] sm:text-sm sm:leading-6">
                 운영시간과 이용 요금은 자주 바뀔 수 있어, 출처와 확인 시점을
                 함께 안내합니다.
               </p>
@@ -133,15 +134,15 @@ export function PlacesHub({
         </div>
       </section>
 
-      <section className="space-y-5">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl space-y-2">
+      <section className="space-y-4 sm:space-y-5">
+        <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl space-y-1.5 sm:space-y-2">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
               지역별 탐색
             </p>
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <h2
-                className="text-2xl font-semibold tracking-tight text-foreground sm:text-[2rem]"
+                className="text-[1.75rem] font-semibold tracking-tight text-foreground sm:text-[2rem]"
                 style={{
                   fontFamily:
                     '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -149,7 +150,7 @@ export function PlacesHub({
               >
                 먼저 권역부터 좁혀보세요
               </h2>
-              <p className="text-sm leading-6 text-muted-foreground sm:text-[15px]">
+              <p className="text-[13px] leading-5 text-muted-foreground sm:text-[15px] sm:leading-6">
                 각 권역의 특징과 정리된 장소 수를 함께 보여줍니다. 어디부터
                 살펴볼지 빠르게 고를 수 있게 구성했습니다.
               </p>
@@ -157,7 +158,7 @@ export function PlacesHub({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 min-[380px]:grid-cols-2 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
           {regions.map(region => (
             <RegionCard
               key={region.slug}
@@ -168,15 +169,15 @@ export function PlacesHub({
         </div>
       </section>
 
-      <section className="space-y-5">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl space-y-2">
+      <section className="space-y-4 sm:space-y-5">
+        <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl space-y-1.5 sm:space-y-2">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
               조건별 탐색
             </p>
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <h2
-                className="text-2xl font-semibold tracking-tight text-foreground sm:text-[2rem]"
+                className="text-[1.75rem] font-semibold tracking-tight text-foreground sm:text-[2rem]"
                 style={{
                   fontFamily:
                     '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -184,15 +185,18 @@ export function PlacesHub({
               >
                 여기서 더 세밀하게 줄이면 됩니다
               </h2>
-              <p className="text-sm leading-6 text-muted-foreground sm:text-[15px]">
+              <p className="text-[13px] leading-5 text-muted-foreground sm:text-[15px] sm:leading-6">
                 지역을 고른 뒤에는 연령, 실내·야외, 무료 여부 같은 조건으로
                 원하는 장소만 더 정확하게 좁혀볼 수 있습니다.
               </p>
             </div>
           </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#e5d9c8] bg-white/70 px-4 py-2 text-sm font-medium text-[#6e604d]">
-            <SlidersHorizontalIcon className="h-4 w-4" />
-            <span>필터는 URL과 동기화</span>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="inline-flex h-8 items-center gap-1.5 rounded-full border border-[#e5d9c8] bg-white/75 px-3 text-[11px] font-medium text-[#6e604d] shadow-[0_8px_20px_rgba(59,46,31,0.05)] sm:h-9 sm:gap-2 sm:px-4 sm:text-sm">
+              <SlidersHorizontalIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <span>필터는 URL과 동기화</span>
+            </div>
+            <PlacesShareButton />
           </div>
         </div>
 
