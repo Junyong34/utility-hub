@@ -40,7 +40,7 @@ export function PlacesHub({
           <div className="space-y-5">
             <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#cfc1af] bg-[#fffdf9] px-4 py-2 text-xs font-semibold tracking-[0.04em] text-[#4f4336] shadow-[0_8px_20px_rgba(60,47,31,0.06)]">
               <ShieldCheckIcon className="h-3.5 w-3.5 text-[#42624d]" />
-              <span>수도권 중심 · 공식 소스 검증</span>
+              <span>수도권 중심 · 지역·조건별 탐색</span>
             </div>
 
             <div className="space-y-3">
