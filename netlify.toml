@@ -1,6 +1,7 @@
 [build]
-  command = "pnpm build"
+  command = "NODE_OPTIONS='--max-old-space-size=4096' pnpm build"
   publish = ".next"
+
 
 [build.environment]
   NODE_VERSION = "22"
