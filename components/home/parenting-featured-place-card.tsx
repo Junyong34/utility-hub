@@ -58,12 +58,12 @@ export function ParentingFeaturedPlaceCard({
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-[30px] border p-4 shadow-[0_18px_50px_rgba(59,46,31,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_26px_58px_rgba(59,46,31,0.12)]',
+        'group relative overflow-hidden rounded-[28px] border p-3.5 shadow-[0_18px_50px_rgba(59,46,31,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_26px_58px_rgba(59,46,31,0.12)] sm:rounded-[30px] sm:p-4',
         tone.frame
       )}
     >
-      <div className="grid gap-4 md:grid-cols-[1.1fr_1fr]">
-        <div className="relative min-h-56 overflow-hidden rounded-[24px]">
+      <div className="grid gap-3 sm:gap-4 md:grid-cols-[1.1fr_1fr]">
+        <div className="relative min-h-44 overflow-hidden rounded-[22px] sm:min-h-56 sm:rounded-[24px]">
           {item.thumbnailImage ? (
             <Image
               src={item.thumbnailImage}
@@ -75,7 +75,7 @@ export function ParentingFeaturedPlaceCard({
           ) : (
             <div
               className={cn(
-                'relative flex h-full min-h-56 flex-col justify-between overflow-hidden rounded-[24px] bg-gradient-to-br p-5',
+                'relative flex h-full min-h-44 flex-col justify-between overflow-hidden rounded-[22px] bg-gradient-to-br p-4 sm:min-h-56 sm:rounded-[24px] sm:p-5',
                 tone.fallback
               )}
             >
@@ -106,7 +106,7 @@ export function ParentingFeaturedPlaceCard({
                   {item.categoryLabel}
                 </p>
                 <p
-                  className="max-w-[16rem] text-2xl font-semibold leading-tight tracking-tight text-foreground"
+                  className="max-w-[16rem] text-[1.35rem] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl"
                   style={{
                     fontFamily:
                       '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -119,7 +119,7 @@ export function ParentingFeaturedPlaceCard({
           )}
         </div>
 
-        <div className="flex min-w-0 flex-col gap-4 rounded-[24px] bg-white/70 p-5">
+        <div className="flex min-w-0 flex-col gap-3 rounded-[22px] bg-white/70 p-4 sm:gap-4 sm:rounded-[24px] sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
             <span
               className={cn(
@@ -134,12 +134,12 @@ export function ParentingFeaturedPlaceCard({
             </span>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-1.5 sm:space-y-2">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/45">
               이번 주 인기 장소
             </p>
             <h3
-              className="text-[1.4rem] font-semibold leading-tight tracking-tight text-foreground"
+              className="text-[1.2rem] font-semibold leading-tight tracking-tight text-foreground sm:text-[1.4rem]"
               style={{
                 fontFamily:
                   '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -147,7 +147,7 @@ export function ParentingFeaturedPlaceCard({
             >
               {item.title}
             </h3>
-            <p className="text-sm leading-6 text-muted-foreground">
+            <p className="text-[13px] leading-5 text-muted-foreground sm:text-sm sm:leading-6">
               {item.description}
             </p>
           </div>
@@ -169,11 +169,11 @@ export function ParentingFeaturedPlaceCard({
             ))}
           </div>
 
-          <div className="mt-auto flex flex-wrap items-center gap-3 pt-3">
+          <div className="mt-auto flex flex-wrap items-center gap-2.5 pt-2 sm:gap-3 sm:pt-3">
             <Link
               href={item.href}
               className={cn(
-                'inline-flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-foreground transition-all',
+                'inline-flex cursor-pointer items-center gap-1.5 rounded-full px-3.5 py-2 text-[13px] font-semibold text-foreground transition-all sm:px-4 sm:text-sm',
                 tone.panel
               )}
             >
@@ -186,7 +186,7 @@ export function ParentingFeaturedPlaceCard({
                 href={item.sourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-medium text-foreground/60 transition-colors hover:text-foreground"
+                className="inline-flex cursor-pointer items-center gap-1.5 text-[13px] font-medium text-foreground/60 transition-colors hover:text-foreground sm:text-sm"
               >
                 <span>공식 사이트</span>
                 <ExternalLinkIcon className="h-3.5 w-3.5" />

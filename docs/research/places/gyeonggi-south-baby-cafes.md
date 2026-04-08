@@ -29,7 +29,7 @@
 
 | 지역 | 세부지역 | 시설명 | 유형 | 검증상태 | 보완 사유 | 보조 검증 링크 | 네이버지도 | 검증일 | 비고 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 경기남부 | 시흥시 배곧동 | 뚜비뚜바 베이비카페 | 영아 특화 베이비카페 | discovery_only | `36개월 이하 이용` 후기는 보이지만 공식 홈페이지·공식 SNS·점주 운영 채널을 고정하지 못함 | [맘맘](https://mom-mom.net/travel/places/6773728f7407464ebfdb8ec3) / [후기](https://investaromi.co.kr/%EC%8B%9C%ED%9D%A5-%EB%B0%B0%EA%B3%A7-%EB%B2%A0%EC%9D%B4%EB%B9%84%EC%B9%B4%ED%8E%98-%EB%9A%9C%EB%B9%84%EB%9A%9C%EB%B0%94-%EB%82%B4%EB%8F%88%EB%82%B4%EC%82%B0-%EC%9D%B4%EC%9A%A9%ED%9B%84%EA%B8%B0/) | [네이버지도](https://map.naver.com/p/search/%EB%9A%9C%EB%B9%84%EB%9A%9C%EB%B0%94%20%EB%B2%A0%EC%9D%B4%EB%B9%84%EC%B9%B4%ED%8E%98%20%EC%8B%9C%ED%9D%A5%EC%8B%9C%20%EC%84%9C%EC%9A%B8%EB%8C%80%ED%95%99%EB%A1%9C278%EB%B2%88%EA%B8%B8%208) | 2026-04-07 | 배곧권 후속 검증 우선 |
+| 경기남부 | 시흥시 배곧동 | 뚜비뚜바 베이비카페 | 영아 특화 베이비카페 | discovery_only | `36개월 이하 이용` 후기는 보이지만 공식 홈페이지·공식 SNS·점주 운영 채널을 고정하지 못함 | [후기](https://investaromi.co.kr/%EC%8B%9C%ED%9D%A5-%EB%B0%B0%EA%B3%A7-%EB%B2%A0%EC%9D%B4%EB%B9%84%EC%B9%B4%ED%8E%98-%EB%9A%9C%EB%B9%84%EB%9A%9C%EB%B0%94-%EB%82%B4%EB%8F%88%EB%82%B4%EC%82%B0-%EC%9D%B4%EC%9A%A9%ED%9B%84%EA%B8%B0/) | [네이버지도](https://map.naver.com/p/search/%EB%9A%9C%EB%B9%84%EB%9A%9C%EB%B0%94%20%EB%B2%A0%EC%9D%B4%EB%B9%84%EC%B9%B4%ED%8E%98%20%EC%8B%9C%ED%9D%A5%EC%8B%9C%20%EC%84%9C%EC%9A%B8%EB%8C%80%ED%95%99%EB%A1%9C278%EB%B2%88%EA%B8%B8%208) | 2026-04-07 | 배곧권 후속 검증 우선 |
 
 ## 메모
 

@@ -23,7 +23,7 @@ export function ParentingSectionGrid({
   gridClassName,
 }: ParentingSectionGridProps) {
   return (
-    <section className="space-y-5">
+    <section className="space-y-4 sm:space-y-5">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="max-w-2xl space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
@@ -31,7 +31,7 @@ export function ParentingSectionGrid({
           </p>
           <div className="space-y-2">
             <h2
-              className="text-2xl font-semibold tracking-tight text-foreground sm:text-[2rem]"
+              className="text-[1.35rem] font-semibold tracking-tight text-foreground sm:text-[2rem]"
               style={{
                 fontFamily:
                   '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -39,7 +39,7 @@ export function ParentingSectionGrid({
             >
               {title}
             </h2>
-            <p className="text-sm leading-6 text-muted-foreground sm:text-[15px]">
+            <p className="text-[13px] leading-5 text-muted-foreground sm:text-[15px] sm:leading-6">
               {description}
             </p>
           </div>
@@ -58,7 +58,7 @@ export function ParentingSectionGrid({
 
       <div
         className={cn(
-          'grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4',
+          'grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-4',
           gridClassName
         )}
       >

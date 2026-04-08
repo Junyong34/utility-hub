@@ -32,8 +32,8 @@ export default function Page() {
         quickFilters={homeContent.heroQuickFilters}
       />
 
-      <div className="mx-auto max-w-screen-2xl space-y-16 px-4 pb-16 sm:space-y-20 sm:pb-24">
-        <section className="space-y-5">
+      <div className="mx-auto max-w-screen-2xl space-y-12 px-4 pb-14 sm:space-y-20 sm:pb-24">
+        <section className="space-y-4 sm:space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl space-y-2">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
@@ -41,7 +41,7 @@ export default function Page() {
               </p>
               <div className="space-y-2">
                 <h2
-                  className="text-2xl font-semibold tracking-tight text-foreground sm:text-[2rem]"
+                  className="text-[1.35rem] font-semibold tracking-tight text-foreground sm:text-[2rem]"
                   style={{
                     fontFamily:
                       '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -50,7 +50,7 @@ export default function Page() {
                   사진이 없어도 허전하지 않게, 바로 눌러볼 만한 장소만 앞에
                   둡니다
                 </h2>
-                <p className="text-sm leading-6 text-muted-foreground sm:text-[15px]">
+                <p className="text-[13px] leading-5 text-muted-foreground sm:text-[15px] sm:leading-6">
                   이미지가 있는 카드는 사진을 쓰고, 없는 카드는 질감 있는 대체
                   비주얼과 지역·카테고리 메타로 채웁니다. 홈이 빈 박스처럼
                   보이지 않게 만드는 게 핵심입니다.
@@ -59,9 +59,11 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="grid gap-4 xl:grid-cols-2">
-            {homeContent.featuredPlaces.map(place => (
-              <ParentingFeaturedPlaceCard key={place.id} item={place} />
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-2">
+            {homeContent.featuredPlaces.map((place, index) => (
+              <div key={place.id} className={index === 0 ? 'col-span-2' : undefined}>
+                <ParentingFeaturedPlaceCard item={place} />
+              </div>
             ))}
           </div>
         </section>

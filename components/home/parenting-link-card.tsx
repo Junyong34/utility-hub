@@ -53,19 +53,19 @@ export function ParentingLinkCard({ item }: ParentingLinkCardProps) {
     <Link
       href={item.href}
       className={cn(
-        'group relative cursor-pointer overflow-hidden rounded-[28px] border p-5 shadow-[0_18px_45px_rgba(56,46,33,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(56,46,33,0.1)]',
+        'group relative cursor-pointer overflow-hidden rounded-[26px] border p-4 shadow-[0_18px_45px_rgba(56,46,33,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(56,46,33,0.1)] sm:rounded-[28px] sm:p-5',
         tone.frame
       )}
     >
-      <div className="relative flex h-full flex-col gap-4">
+      <div className="relative flex h-full flex-col gap-3 sm:gap-4">
         <div
           className={cn(
-            'rounded-[22px] bg-gradient-to-b p-4',
+            'rounded-[20px] bg-gradient-to-b p-3.5 sm:rounded-[22px] sm:p-4',
             tone.accent
           )}
         >
           <div className="flex items-start justify-between gap-3">
-            <div className="space-y-2">
+            <div className="space-y-1.5 sm:space-y-2">
               <p
                 className={cn(
                   'text-[11px] font-semibold uppercase tracking-[0.2em]',
@@ -74,7 +74,7 @@ export function ParentingLinkCard({ item }: ParentingLinkCardProps) {
               >
                 {item.eyebrow}
               </p>
-              <h3 className="text-lg font-semibold tracking-tight text-foreground">
+              <h3 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
                 {item.title}
               </h3>
             </div>
@@ -82,7 +82,7 @@ export function ParentingLinkCard({ item }: ParentingLinkCardProps) {
             {item.countLabel ? (
               <span
                 className={cn(
-                  'inline-flex rounded-full px-3 py-1 text-[11px] font-semibold',
+                  'inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold sm:px-3',
                   tone.badge
                 )}
               >
@@ -92,15 +92,15 @@ export function ParentingLinkCard({ item }: ParentingLinkCardProps) {
           </div>
         </div>
 
-        <p className="text-sm leading-6 text-muted-foreground">
+        <p className="text-[13px] leading-5 text-muted-foreground sm:text-sm sm:leading-6">
           {item.description}
         </p>
 
         <div className="mt-auto flex items-end justify-between gap-3">
-          <div className="min-h-10 text-xs font-medium leading-5 text-foreground/55">
+          <div className="text-[11px] font-medium leading-4 text-foreground/55 sm:min-h-10 sm:text-xs sm:leading-5">
             {item.meta}
           </div>
-          <div className="inline-flex items-center gap-1 text-sm font-semibold text-foreground/72 transition-colors group-hover:text-foreground">
+          <div className="inline-flex items-center gap-1 text-[13px] font-semibold text-foreground/72 transition-colors group-hover:text-foreground sm:text-sm">
             <span>{item.ctaLabel}</span>
             <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </div>
