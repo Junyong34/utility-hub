@@ -72,7 +72,7 @@ export function ParentingHeroSection({
               <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#4c6651] text-[#f8f3ea] shadow-[0_8px_18px_rgba(76,102,81,0.24)]">
                 <MapPinIcon className="h-3.5 w-3.5" />
               </span>
-              <span>수도권 주말 계획, 장소부터 빠르게</span>
+              <span>오늘 아이와 어디 갈지 고민될 때</span>
             </div>
 
             <div className="space-y-3">
@@ -88,9 +88,9 @@ export function ParentingHeroSection({
                 조건별로 빠르게 찾으세요
               </h1>
               <p className="max-w-xl text-sm leading-7 text-[#645849] sm:text-[15px]">
-                서울, 경기, 인천에서 지역과 연령, 날씨, 예산 기준으로 바로
-                들어갈 수 있게 정리했습니다. 브랜드 설명보다 첫 선택이 먼저
-                보이도록 만든 홈입니다.
+                서울, 경기, 인천에서 지역과 연령, 날씨, 예산에 맞는 장소만
+                먼저 보여줍니다. 실내, 무료, 비 오는 날 같은 조건으로 바로
+                좁혀서 오늘 갈 곳을 빠르게 정해보세요.
               </p>
             </div>
 
@@ -102,7 +102,7 @@ export function ParentingHeroSection({
                 <SearchIcon className="h-4 w-4 text-[#6c5e4b]" />
                 <input
                   readOnly
-                  value="서울 실내 무료 / 1~3세 / 비 오는 날"
+                  value="서울 실내 / 1~3세 / 무료 / 비 오는 날"
                   aria-label="장소 탐색 시작 예시"
                   className="h-full w-full border-none bg-transparent p-0 text-sm text-[#3c352c] outline-none"
                 />
@@ -111,7 +111,7 @@ export function ParentingHeroSection({
                 type="submit"
                 className="inline-flex min-h-14 cursor-pointer items-center justify-center gap-2 rounded-[20px] bg-[#4c6651] px-5 text-sm font-semibold text-[#f7f4ee] transition-colors hover:bg-[#405845]"
               >
-                <span>장소 탐색 시작</span>
+                <span>아이와 갈 곳 찾기</span>
                 <ArrowRightIcon className="h-4 w-4" />
               </button>
             </form>
@@ -131,26 +131,26 @@ export function ParentingHeroSection({
             <div className="grid gap-3 border-t border-[#ebdfd2] pt-4 text-sm text-[#5b4f41] sm:grid-cols-3">
               <div className="rounded-[20px] bg-[#f7f0e4] px-4 py-3">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8f7550]">
-                  Region First
+                  지역부터
                 </p>
                 <p className="mt-1 leading-6">
-                  지역을 먼저 고른 뒤 세부 조건을 줄이는 흐름
+                  가까운 지역부터 고르고, 필요한 조건만 더 좁혀보세요
                 </p>
               </div>
               <div className="rounded-[20px] bg-[#eef4e8] px-4 py-3">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#5d6c54]">
-                  Quick Filters
+                  상황별
                 </p>
                 <p className="mt-1 leading-6">
-                  비 오는 날, 무료, 실내 같은 현실 조건을 바로 반영
+                  비 오는 날, 실내, 무료처럼 오늘 필요한 조건을 바로 고를 수 있어요
                 </p>
               </div>
               <div className="rounded-[20px] bg-[#f4e7df] px-4 py-3">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a5b4a]">
-                  No Fluff
+                  빠른 결정
                 </p>
                 <p className="mt-1 leading-6">
-                  감성 소개보다 바로 눌러볼 수 있는 선택지를 먼저 배치
+                  설명보다 바로 비교할 장소를 먼저 보여줘서 고르기 편합니다
                 </p>
               </div>
             </div>
@@ -161,7 +161,7 @@ export function ParentingHeroSection({
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#745e3e]">
-                    Region Board
+                    지역별 바로가기
                   </p>
                   <h2
                     className="mt-2 text-2xl font-semibold tracking-tight text-[#2a261f]"
@@ -170,7 +170,7 @@ export function ParentingHeroSection({
                         '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
                     }}
                   >
-                    지역부터 바로 고르기
+                    가까운 지역부터 고르기
                   </h2>
                 </div>
                 <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#f2e4cf] text-[#81623e]">
@@ -230,7 +230,7 @@ export function ParentingHeroSection({
             <div className="rounded-[32px] border border-[#e7dccf] bg-[rgba(255,252,246,0.88)] p-5 shadow-[0_18px_55px_rgba(63,50,34,0.07)]">
               <div className="mb-4">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#6c5c46]">
-                  Situation Shortcuts
+                  상황별 바로가기
                 </p>
                 <h2
                   className="mt-2 text-2xl font-semibold tracking-tight text-[#2a261f]"
@@ -239,7 +239,7 @@ export function ParentingHeroSection({
                       '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
                   }}
                 >
-                  조건으로 바로 줄이기
+                  오늘 조건에 맞게 줄이기
                 </h2>
               </div>
 
