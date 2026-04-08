@@ -265,7 +265,7 @@ export default async function OgImageStudioPage({ searchParams }: PageProps) {
       : previewPath
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
       <header className="border-b bg-card">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-6 sm:px-6 lg:px-8">
           <Breadcrumb

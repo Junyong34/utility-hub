@@ -16,6 +16,7 @@ const eslintConfig = defineConfig([
     "content/**",
     "rules/**",
     ".agents/**",
+    ".claude/**",
     ".codex/**",
     "dist/**",
     "coverage/**",

@@ -17,6 +17,8 @@ const CATEGORY_NAMES: Record<string, string> = {
   development: '개발',
   consumer: '소비자 정보',
   'ai-image-creator': 'AI',
+  investment: '투자',
+  lotto: '로또',
   uncategorized: '미분류',
 };
 

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAllPosts } from '@/lib/blog/posts';
+import { buildBlogPostUrl } from '@/lib/blog/url';
 import { SITE_CONFIG } from '@/lib/seo';
 
 /**
@@ -11,7 +12,10 @@ export async function GET() {
 
   const rssItems = posts
     .map((post) => {
-      const postUrl = `${SITE_CONFIG.url}/blog/${post.slug}`;
+      const postUrl = buildBlogPostUrl(SITE_CONFIG.url, {
+        categorySlug: post.categorySlug,
+        slug: post.slug,
+      });
       const pubDate = new Date(post.date).toUTCString();
 
       return `

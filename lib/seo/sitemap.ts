@@ -1,13 +1,37 @@
 import type { SitemapEntry } from '@/types/seo';
 import { getAllPosts, getAllCategories } from '@/lib/blog/posts';
+import {
+  getPublishablePlaces,
+  getPublishablePlacesByRegion,
+} from '@/lib/places/place-content';
 import { SITE_CONFIG } from './metadata';
 import { getAllToolConfigs } from '@/lib/tools/tool-config';
+import { PHASE_A_REGION_SLUGS } from '@/lib/places/region-config';
+import { pickLatestDate } from './date-utils';
+
+function getLatestPostDate(): string | undefined {
+  return pickLatestDate(getAllPosts().map(post => post.date));
+}
+
+function getLatestToolDate(): string | undefined {
+  return pickLatestDate(getAllToolConfigs().map(tool => tool.publishedAt));
+}
+
+function getLatestPlaceDate(): string | undefined {
+  return pickLatestDate(
+    getPublishablePlaces().flatMap(place => [place.lastObservedAt, place.verifiedAt])
+  );
+}
 
 /**
  * 정적 페이지용 사이트맵 엔트리 생성
  * (Next.js 라우트(app/(meta)/sitemap.ts)에서 사용하는 원본 데이터)
  */
 export function collectStaticPageEntries(): SitemapEntry[] {
+  const latestPostDate = getLatestPostDate();
+  const latestToolDate = getLatestToolDate();
+  const latestPlaceDate = getLatestPlaceDate();
+
   return [
     {
       url: SITE_CONFIG.url,
@@ -17,13 +41,25 @@ export function collectStaticPageEntries(): SitemapEntry[] {
     },
     {
       url: `${SITE_CONFIG.url}/blog`,
-      lastModified: new Date(),
+      lastModified: latestPostDate ?? new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
-      url: `${SITE_CONFIG.url}/tools`,
+      url: `${SITE_CONFIG.url}/places`,
+      lastModified: latestPlaceDate ?? new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_CONFIG.url}/benefits`,
       lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_CONFIG.url}/tools`,
+      lastModified: latestToolDate ?? new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -62,10 +98,16 @@ export function collectBlogPostEntries(): SitemapEntry[] {
  */
 export function collectBlogCategoryEntries(): SitemapEntry[] {
   const categories = getAllCategories();
+  const posts = getAllPosts();
 
   return categories.map((category) => ({
     url: `${SITE_CONFIG.url}/blog/${category.slug}`,
-    lastModified: new Date(),
+    lastModified:
+      pickLatestDate(
+        posts
+          .filter(post => post.categorySlug === category.slug)
+          .map(post => post.date)
+      ) ?? new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.75,
   }));
@@ -88,7 +130,7 @@ export function collectToolEntries(): SitemapEntry[] {
   const tools = getAllToolConfigs();
   const toolPages = tools.map((tool) => ({
     url: `${SITE_CONFIG.url}/tools/${tool.id}`,
-    lastModified: new Date(),
+    lastModified: tool.publishedAt ?? new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
@@ -114,12 +156,33 @@ export function collectToolEntries(): SitemapEntry[] {
 }
 
 /**
+ * 장소 허브 페이지 사이트맵 엔트리 생성
+ */
+export function collectPlaceEntries(): SitemapEntry[] {
+  return PHASE_A_REGION_SLUGS.map(slug => {
+    const latestRegionDate = pickLatestDate(
+      getPublishablePlacesByRegion(slug).flatMap(place => [
+        place.lastObservedAt,
+        place.verifiedAt,
+      ])
+    );
+
+    return {
+      url: `${SITE_CONFIG.url}/places/${slug}`,
+      lastModified: latestRegionDate ?? new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    };
+  });
+}
+
 /**
  * 전체 사이트맵 엔트리 생성
  */
 export function collectSitemapEntries(): SitemapEntry[] {
   return [
     ...collectStaticPageEntries(),
+    ...collectPlaceEntries(), // Places 지역 허브
     ...collectBlogCategoryEntries(), // Blog 카테고리
     ...collectBlogPostEntries(), // Blog 포스트
     ...collectBlogTagEntries(), // Blog 태그(구현 전까지 비활성화)

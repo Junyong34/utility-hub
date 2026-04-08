@@ -71,7 +71,7 @@ export default async function CategoryPage({ params }: PageProps) {
   return (
     <>
       <JsonLdMultiple data={[webPage, breadcrumb]} />
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         {/* 헤더 */}
         <header className="bg-card border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
