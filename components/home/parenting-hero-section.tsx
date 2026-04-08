@@ -88,9 +88,7 @@ export function ParentingHeroSection({
                 조건별로 빠르게 찾으세요
               </h1>
               <p className="max-w-xl text-[13px] leading-6 text-[#645849] sm:text-[15px] sm:leading-7">
-                서울, 경기, 인천에서 지역과 연령, 날씨, 예산에 맞는 장소만
-                먼저 보여줍니다. 실내, 무료, 비 오는 날 같은 조건으로 바로
-                좁혀서 오늘 갈 곳을 빠르게 정해보세요.
+                서울·경기·인천에서 아이와 함께 갈 수 있는 장소를 지역·연령·날씨·예산에 맞게 추려드립니다. 오늘 갈 곳, 조건만 고르면 바로 찾아요.
               </p>
             </div>
 

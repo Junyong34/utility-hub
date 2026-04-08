@@ -186,8 +186,7 @@ export function PlacesHub({
                 여기서 더 세밀하게 줄이면 됩니다
               </h2>
               <p className="text-[13px] leading-5 text-muted-foreground sm:text-[15px] sm:leading-6">
-                지역을 고른 뒤에는 연령, 실내·야외, 무료 여부 같은 조건으로
-                원하는 장소만 더 정확하게 좁혀볼 수 있습니다.
+                지역을 고른 다음, 연령·실내 여부·무료 조건으로 더 좁혀보세요. 오늘 바로 갈 수 있는 곳만 남습니다.
               </p>
             </div>
           </div>
@@ -203,17 +202,8 @@ export function PlacesHub({
         <Suspense
           fallback={
             <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
-              <p
-                className="text-lg font-semibold tracking-tight text-[#2f2922]"
-                style={{
-                  fontFamily:
-                    '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
-                }}
-              >
-                필터를 불러오는 중입니다
-              </p>
-              <p className="mt-2 text-sm text-[#6a5d4d]">
-                조건 보드를 준비한 뒤 장소 목록을 보여드립니다.
+              <p className="text-sm text-[#6a5d4d]">
+                장소 목록을 불러오는 중입니다...
               </p>
             </div>
           }
