@@ -183,9 +183,9 @@ export const SEOUL_PLACES = [
   },
   {
     id: 'seoul-kids-book-museum',
-    name: '서울 어린이도서관',
+    name: '서울특별시교육청 어린이도서관',
     region: 'seoul',
-    subRegion: '성북구',
+    subRegion: '종로구',
     category: 'library',
     ageBands: ['0-12m', '1-3y', '3-6y', '6-10y'],
     indoorOutdoor: 'indoor',
@@ -200,7 +200,7 @@ export const SEOUL_PLACES = [
     verificationStatus: 'official_verified',
     description:
       '어린이를 위한 전용 공공 도서관. 다양한 독서 프로그램과 공간 운영.',
-    address: '서울 성북구 안암로 145',
+    address: '서울 종로구 사직로9길 7 (사직동 1-28)',
     operatingHours: '09:00-18:00 (월요일 휴관)',
     priceInfo: '무료',
     feedingRoom: true,

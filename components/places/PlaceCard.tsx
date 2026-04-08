@@ -239,6 +239,9 @@ export function PlaceCard({ place }: PlaceCardProps) {
         <div className="mt-auto space-y-2.5 rounded-[22px] bg-white/70 p-4">
           <div className="flex flex-wrap items-center gap-2 text-sm text-foreground/72">
             <MapPinIcon className="h-4 w-4 shrink-0 text-[#7c6956]" />
+            <span className="min-w-0 flex-1 break-keep leading-5 text-[#5f5242]">
+              {placeAddress}
+            </span>
             {naverMapUrl ? (
               <Link
                 href={naverMapUrl}
@@ -257,9 +260,6 @@ export function PlaceCard({ place }: PlaceCardProps) {
                 <span className="sr-only">네이버지도</span>
               </Link>
             ) : null}
-            <span className="min-w-0 flex-1 break-keep leading-5 text-[#5f5242]">
-              {placeAddress}
-            </span>
             {place.address ? (
               <PlaceAddressCopyButton
                 address={place.address}

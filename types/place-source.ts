@@ -34,7 +34,10 @@ export type IndoorOutdoor = 'indoor' | 'outdoor' | 'both';
 export type PriceType = 'free' | 'paid' | 'partial-free';
 
 /** 운영 주체 유형 */
-export type OperatorType = 'public' | 'commercial' | 'non-profit';
+export type OperatorType =
+  | 'public'      // 지자체, 공공기관, 시립/구립 시설 등 공공 운영
+  | 'commercial'  // 민간 사업자, 프랜차이즈, 유료 사설 시설 등 영리 운영
+  | 'non-profit'; // 재단, 협회, 사회복지법인 등 비영리 운영
 
 /** 소스 레벨 (신뢰도 수준) */
 export type SourceType =

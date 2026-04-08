@@ -15,9 +15,10 @@
     "lint:staged": "lint-staged",
     "type-check": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "test:places:naver-map": "node --experimental-strip-types --test lib/places/place-map-links.test.mjs && playwright test tests/places-naver-map.e2e.spec.ts --project=chrome",
-    "test:places:naver-map:unit": "node --experimental-strip-types --test lib/places/place-map-links.test.mjs",
-    "test:places:naver-map:e2e": "playwright test tests/places-naver-map.e2e.spec.ts --project=chrome",
+    "test:places:contracts": "node --experimental-strip-types --test content/places/link-contract.test.mjs",
+    "test:places:links": "playwright test -c playwright.places-links.config.ts",
+    "test:places:links:source": "playwright test -c playwright.places-links.config.ts --grep sourceUrl",
+    "test:places:links:naver": "playwright test -c playwright.places-links.config.ts --grep naverMapUrl",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "update-lotto": "node scripts/update-lotto-draws.js"

@@ -3,7 +3,7 @@ import type { PlaceSource } from '../../../types/place-source.ts';
 export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'ansan-astro-camp',
-    name: '안산천문대',
+    name: '안산어린이천문대',
     region: 'gyeonggi-south',
     subRegion: '안산시',
     category: 'experience',
@@ -13,8 +13,8 @@ export const GYEONGGI_SOUTH_PLACES = [
     reservationRequired: true,
     parking: true,
     sourceType: 'official',
-    sourceUrl: 'https://www.astro.ansan.go.kr/',
-    naverMapUrl: 'https://map.naver.com/p/entry/place/37458089',
+    sourceUrl: 'https://cafe.naver.com/astroansan',
+    naverMapUrl: 'https://map.naver.com/p/entry/place/37458087',
     verifiedAt: '2026-04-01',
     lastObservedAt: '2026-04-01',
     verificationStatus: 'official_verified',
@@ -160,7 +160,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     reservationRequired: false,
     parking: true,
     sourceType: 'official',
-    sourceUrl: 'https://www.suwonhc.kr/',
+    sourceUrl: 'https://www.swcf.or.kr/',
     naverMapUrl: 'https://map.naver.com/p/entry/place/13491459',
     verifiedAt: '2026-04-01',
     lastObservedAt: '2026-04-01',

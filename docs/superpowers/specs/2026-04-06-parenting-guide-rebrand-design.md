@@ -250,7 +250,7 @@ Phase A 소스 오브 트루스는 `place seed + blog linkage`로 고정한다.
 
 정책:
 
-1. 운영 사실 데이터는 `content/places/<region>/*.json` place seed에 둔다.
+1. 운영 사실 데이터는 `content/places/<region>/index.ts` place seed에 둔다.
 2. 블로그 글은 `placeIds`로 place seed를 참조한다.
 3. 가격/운영시간/주차 같은 운영 사실은 blog frontmatter에 중복 저장하지 않는다.
 
