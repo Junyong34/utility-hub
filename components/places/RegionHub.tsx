@@ -70,7 +70,7 @@ export function RegionHub({ region, places }: RegionHubProps) {
 
             <div className="space-y-3">
               <div className={`inline-flex rounded-full px-3.5 py-1.5 text-xs font-semibold ${tone.chip}`}>
-                {region.name} 지역 보드
+                {region.name} 나들이 장소 모음
               </div>
               <h1
                 className="text-[clamp(2rem,5vw,3.8rem)] font-semibold leading-[1.08] tracking-[-0.05em] text-[#27231d]"
@@ -82,9 +82,7 @@ export function RegionHub({ region, places }: RegionHubProps) {
                 {region.name} 아이와 가볼 곳
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-[#645849] sm:text-[15px]">
-                {region.description} 이 페이지에서는 해당 권역의 장소만 모아 봅니다.
-                홈과 같은 종이톤 보드를 유지하면서, 실제 장소 카드는 더 밀도 있게
-                비교할 수 있게 구성했습니다.
+                {region.description} 연령·실내 여부·무료 조건으로 좁혀서 오늘 갈 곳을 빠르게 골라보세요.
               </p>
             </div>
           </div>
@@ -127,44 +125,18 @@ export function RegionHub({ region, places }: RegionHubProps) {
       {places.length > 0 ? (
         <section className="space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-2xl space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
-                Places Directory
-              </p>
-              <h2
-                className="text-2xl font-semibold tracking-tight text-foreground sm:text-[2rem]"
-                style={{
-                  fontFamily:
-                    '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
-                }}
-              >
-                이 지역 안에서 조건으로 다시 줄일 수 있는 장소들
-              </h2>
-              <p className="text-sm leading-6 text-muted-foreground sm:text-[15px]">
-                이제 {region.name} 안에서만 연령, 실내·야외, 무료 여부,
-                우천 가능 여부를 다시 줄일 수 있습니다.
-              </p>
-            </div>
+            <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#e5d9c8] bg-white/70 px-4 py-2 text-sm font-medium text-[#6e604d]">
               <MapPinIcon className="h-4 w-4" />
-              <span>{region.name} 기준</span>
+              <span>{region.name} 장소만 보기</span>
             </div>
           </div>
 
           <Suspense
             fallback={
               <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
-                <p
-                  className="text-lg font-semibold tracking-tight text-[#2f2922]"
-                  style={{
-                    fontFamily:
-                      '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
-                  }}
-                >
-                  필터를 불러오는 중입니다
-                </p>
-                <p className="mt-2 text-sm text-[#6a5d4d]">
-                  조건 보드를 준비한 뒤 장소 목록을 보여드립니다.
+                <p className="text-sm text-[#6a5d4d]">
+                  장소 목록을 불러오는 중입니다...
                 </p>
               </div>
             }
@@ -191,17 +163,14 @@ export function RegionHub({ region, places }: RegionHubProps) {
 
       <section className="rounded-[32px] border border-[#e8ddcf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] p-6 shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
         <div className="mb-4">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#745e3e]">
-            다음 행동
-          </p>
           <h2
-            className="mt-2 text-2xl font-semibold tracking-tight text-[#2d271f]"
+            className="text-2xl font-semibold tracking-tight text-[#2d271f]"
             style={{
               fontFamily:
                 '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
             }}
           >
-            장소를 본 다음 바로 이어지는 도구와 혜택
+            장소를 정했다면 다음 단계로
           </h2>
         </div>
 
@@ -248,7 +217,7 @@ export function RegionHub({ region, places }: RegionHubProps) {
                   {region.name} 육아 혜택 확인
                 </p>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  지역 지원 정책과 절약 정보까지 같은 흐름으로 이어서 봅니다.
+                  {region.name} 육아 가족을 위한 지역 지원 정책과 혜택을 확인해보세요.
                 </p>
               </div>
             </div>
