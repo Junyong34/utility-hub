@@ -1,14 +1,14 @@
 # Places Seed 반영 체크리스트
 
-- 기준 문서 수: `95건` (`docs/research/places`의 `확정 후보`)
-- 신규 추가 완료: `11건`
+- 기준 문서 수: `98건` (`docs/research/places`의 `확정 후보`)
+- 신규 추가 완료: `22건`
 - 기존 보강 완료: `3건`
 - 기존 반영: `2건`
-- 미반영: `79건`
+- 미반영: `71건`
 
 ## 상태 정의
 
-- `신규 추가 완료`: 이번 작업에서 `content/places`에 새 seed와 썸네일을 추가한 항목
+- `신규 추가 완료`: 이번 작업에서 `content/places`에 새 seed를 추가한 항목
 - `기존 보강 완료`: 기존 seed는 유지하고 어린이 전용 공간 정보만 통합 보강한 항목
 - `기존 반영`: 이번 작업 전부터 이미 seed에 있던 항목
 - `미반영`: 이번 차수 기준 미반영. 주로 썸네일 미확보 또는 추가 검토 필요 항목
@@ -77,14 +77,17 @@
 | gyeonggi-south-private-kids-cafes.md | 별마당 키즈 스타필드 안성 | 신규 추가 완료 | 별마당 키즈 스타필드 안성 | content/places에 신규 seed 추가 + 썸네일 연결 완료 |
 | gyeonggi-south-private-kids-cafes.md | 토이킹덤 스타필드 수원 | 신규 추가 완료 | 토이킹덤 스타필드 수원 | content/places에 신규 seed 추가 + 썸네일 연결 완료 |
 | gyeonggi-south-private-kids-cafes.md | 토이킹덤 스타필드 안성 | 신규 추가 완료 | 토이킹덤 스타필드 안성 | content/places에 신규 seed 추가 + 썸네일 연결 완료 |
-| incheon-baby-cafes.md | 아이사랑꿈터 중구 1호점 | 미반영 | - | 이번 차수 미반영 |
-| incheon-baby-cafes.md | 아이사랑꿈터 동구 1호점 | 미반영 | - | 이번 차수 미반영 |
-| incheon-baby-cafes.md | 아이사랑꿈터 미추홀구 1호점 | 미반영 | - | 이번 차수 미반영 |
-| incheon-baby-cafes.md | 아이사랑꿈터 연수구 2호점 | 미반영 | - | 이번 차수 미반영 |
-| incheon-baby-cafes.md | 아이사랑꿈터 남동구 4호점 | 미반영 | - | 이번 차수 미반영 |
-| incheon-baby-cafes.md | 아이사랑꿈터 계양구 4호점 | 미반영 | - | 이번 차수 미반영 |
-| incheon-baby-cafes.md | 아이사랑꿈터 서구 1호점 | 미반영 | - | 이번 차수 미반영 |
-| incheon-baby-cafes.md | 아이사랑꿈터 서구 4호점 | 미반영 | - | 이번 차수 미반영 |
+| incheon-baby-cafes.md | 아이사랑꿈터 중구 1호점 | 신규 추가 완료 | 아이사랑꿈터 중구 1호점 | content/places에 신규 seed 추가 완료 |
+| incheon-baby-cafes.md | 아이사랑꿈터 동구 1호점 | 신규 추가 완료 | 아이사랑꿈터 동구 1호점 | content/places에 신규 seed 추가 완료 |
+| incheon-baby-cafes.md | 아이사랑꿈터 미추홀구 1호점 | 신규 추가 완료 | 아이사랑꿈터 미추홀구 1호점 | content/places에 신규 seed 추가 완료 |
+| incheon-baby-cafes.md | 아이사랑꿈터 연수구 2호점 | 신규 추가 완료 | 아이사랑꿈터 연수구 2호점 | content/places에 신규 seed 추가 완료 |
+| incheon-baby-cafes.md | 아이사랑꿈터 남동구 4호점 | 신규 추가 완료 | 아이사랑꿈터 남동구 4호점 | content/places에 신규 seed 추가 완료 |
+| incheon-baby-cafes.md | 아이사랑꿈터 계양구 4호점 | 신규 추가 완료 | 아이사랑꿈터 계양구 4호점 | content/places에 신규 seed 추가 완료 |
+| incheon-baby-cafes.md | 아이사랑꿈터 서구 1호점 | 신규 추가 완료 | 아이사랑꿈터 서구 1호점 | content/places에 신규 seed 추가 완료 |
+| incheon-baby-cafes.md | 아이사랑꿈터 서구 4호점 | 신규 추가 완료 | 아이사랑꿈터 서구 4호점 | content/places에 신규 seed 추가 완료 |
+| incheon-outing-facilities.md | 인천어린이과학관 | 신규 추가 완료 | 인천어린이과학관 | content/places에 신규 seed 추가 완료 |
+| incheon-outing-facilities.md | 인천학생과학관 | 신규 추가 완료 | 인천학생과학관 | content/places에 신규 seed 추가 완료 |
+| incheon-outing-facilities.md | 옥토끼우주센터 | 신규 추가 완료 | 옥토끼우주센터 | content/places에 신규 seed 추가 완료 |
 | seoul-baby-cafes.md | 서울형 키즈카페 시립 공예마을점 | 미반영 | - | 이번 차수 미반영 |
 | seoul-baby-cafes.md | 서울형 키즈카페 시립 뚝섬자벌레점 | 미반영 | - | 이번 차수 미반영 |
 | seoul-baby-cafes.md | 서울형 키즈카페 서초구 양재1동점(서리풀노리학교 양재1동점) | 미반영 | - | 이번 차수 미반영 |

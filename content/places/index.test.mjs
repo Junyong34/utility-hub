@@ -18,13 +18,15 @@ test('places index aggregates current region seeds', async () => {
     ALL_PLACES,
     GYEONGGI_NORTH_PLACES,
     GYEONGGI_SOUTH_PLACES,
+    INCHEON_PLACES,
     SEOUL_PLACES,
   } = await import('./index.ts');
 
   assert.equal(SEOUL_PLACES.length, 11);
   assert.equal(GYEONGGI_SOUTH_PLACES.length, 13);
   assert.equal(GYEONGGI_NORTH_PLACES.length, 4);
-  assert.equal(ALL_PLACES.length, 28);
+  assert.equal(INCHEON_PLACES.length, 11);
+  assert.equal(ALL_PLACES.length, 39);
 });
 
 test('places index preserves important ids and verification state', async () => {
@@ -40,6 +42,10 @@ test('places index preserves important ids and verification state', async () => 
   assert.equal(placeIds.has('wonder-village-goyang'), true);
   assert.equal(placeIds.has('byeolmadang-kids-suwon'), true);
   assert.equal(placeIds.has('toy-kingdom-anseong'), true);
+  assert.equal(placeIds.has('incheon-children-science-museum'), true);
+  assert.equal(placeIds.has('incheon-student-science-museum'), true);
+  assert.equal(placeIds.has('oktokki-space-center'), true);
+  assert.equal(placeIds.has('incheon-aisarang-dream-center-jung-gu-1'), true);
 
   const siheungKidsCafe = ALL_PLACES.find(
     place => place.id === 'siheung-kids-cafe-sample'
