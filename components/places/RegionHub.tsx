@@ -125,7 +125,6 @@ export function RegionHub({ region, places }: RegionHubProps) {
       {places.length > 0 ? (
         <section className="space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#e5d9c8] bg-white/70 px-4 py-2 text-sm font-medium text-[#6e604d]">
               <MapPinIcon className="h-4 w-4" />
               <span>{region.name} 장소만 보기</span>
