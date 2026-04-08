@@ -38,14 +38,14 @@ export function PlacesHub({
 
         <div className="relative grid gap-6 xl:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)]">
           <div className="space-y-5">
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#ddd2c2] bg-white/80 px-4 py-2 text-xs font-semibold tracking-[0.04em] text-[#6b5b48]">
-              <ShieldCheckIcon className="h-3.5 w-3.5 text-[#55715d]" />
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#cfc1af] bg-[#fffdf9] px-4 py-2 text-xs font-semibold tracking-[0.04em] text-[#4f4336] shadow-[0_8px_20px_rgba(60,47,31,0.06)]">
+              <ShieldCheckIcon className="h-3.5 w-3.5 text-[#42624d]" />
               <span>수도권 중심 · 공식 소스 검증</span>
             </div>
 
             <div className="space-y-3">
               <h1
-                className="text-[clamp(2.2rem,5vw,4.2rem)] font-semibold leading-[1.08] tracking-[-0.05em] text-[#27231d]"
+                className="text-[clamp(1.95rem,4.2vw,3.6rem)] font-semibold leading-[1.08] tracking-[-0.05em] text-[#27231d]"
                 style={{
                   fontFamily:
                     '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -53,7 +53,7 @@ export function PlacesHub({
               >
                 아이와 가볼 곳,
                 <br />
-                지역과 조건으로 바로 줄이세요
+                지역부터 조건까지 빠르게 찾으세요
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-[#645849] sm:text-[15px]">
                 홈에서 고른 흐름을 그대로 이어받아, 여기서는 지역과 필터를

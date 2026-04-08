@@ -10,7 +10,6 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { getPlaceNaverMapUrl } from '@/lib/places/place-map-links';
-import { VERIFICATION_STATUS_LABELS } from '@/lib/places/source-policy';
 import { cn } from '@/lib/utils';
 import type { PlaceSource, PlaceCategory } from '@/types/place-source';
 import { PlaceAddressCopyButton } from './PlaceAddressCopyButton';
@@ -283,11 +282,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
           ) : null}
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-          <span className="rounded-full bg-[#f6efe3] px-3 py-1 text-[11px] font-semibold text-[#6e604d]">
-            {VERIFICATION_STATUS_LABELS[place.verificationStatus]}
-          </span>
-
+        <div className="flex flex-wrap items-center justify-end gap-3 pt-1">
           {place.sourceUrl ? (
             <Link
               href={place.sourceUrl}

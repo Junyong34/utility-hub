@@ -21,6 +21,7 @@
 - [`gyeonggi-south-private-kids-cafes.md`](./gyeonggi-south-private-kids-cafes.md)
 - [`gyeonggi-south-local-kids-cafes-semi-verified.md`](./gyeonggi-south-local-kids-cafes-semi-verified.md)
 - [`gyeonggi-south-baby-cafes.md`](./gyeonggi-south-baby-cafes.md)
+- [`incheon-outing-facilities.md`](./incheon-outing-facilities.md)
 - [`incheon-baby-cafes.md`](./incheon-baby-cafes.md)
 
 ## 기준 문서
