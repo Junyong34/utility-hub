@@ -1,6 +1,7 @@
 'use client';
 
 import { parseAsStringLiteral, parseAsBoolean, useQueryStates } from 'nuqs';
+import { PlacesFilterRail } from './PlacesFilterRail';
 import type { AgeBand, PlaceCategory } from '@/types/place-source';
 
 const AGE_BANDS = ['0-12m', '1-3y', '3-6y', '6-10y'] as const;
@@ -156,13 +157,13 @@ export function PlacesFilterBar({
   }
 
   return (
-    <div className="rounded-[30px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] p-5 shadow-[0_18px_45px_rgba(59,46,31,0.06)]">
-      <div className="mb-5 space-y-2">
+    <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] p-4 shadow-[0_18px_45px_rgba(59,46,31,0.06)] sm:rounded-[30px] sm:p-5">
+      <div className="mb-4 space-y-1.5 sm:mb-5 sm:space-y-2">
         <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#7a6445]">
           Filter Board
         </p>
         <h3
-          className="text-2xl font-semibold tracking-tight text-[#2a261f]"
+          className="text-[1.65rem] font-semibold tracking-tight text-[#2a261f] sm:text-2xl"
           style={{
             fontFamily:
               '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
@@ -170,17 +171,17 @@ export function PlacesFilterBar({
         >
           조건으로 더 좁혀보기
         </h3>
-        <p className="text-sm leading-6 text-[#665949]">
+        <p className="text-[13px] leading-5 text-[#665949] sm:text-sm sm:leading-6">
           필터를 누르면 URL에 바로 반영됩니다. 지금 필요한 조건만 골라 장소를 더
           구체적으로 좁혀보세요.
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {/* 결과 수 + 초기화 */}
-        <div className="flex min-h-[20px] items-center justify-between gap-4">
+        <div className="flex min-h-[20px] items-center justify-between gap-3 sm:gap-4">
           {isActive ? (
-            <p className="text-sm text-[#6a5d4d]">
+            <p className="text-[13px] text-[#6a5d4d] sm:text-sm">
               <span className="font-semibold text-[#2e2821]">
                 {totalCount}곳
               </span>{' '}
@@ -191,7 +192,7 @@ export function PlacesFilterBar({
               표시
             </p>
           ) : (
-            <p className="text-sm text-[#6a5d4d]">
+            <p className="text-[13px] text-[#6a5d4d] sm:text-sm">
               총{' '}
               <span className="font-semibold text-[#2e2821]">
                 {totalCount}곳
@@ -201,23 +202,23 @@ export function PlacesFilterBar({
           {isActive && (
             <button
               onClick={clearAll}
-              className="text-sm font-medium text-[#7b6853] underline underline-offset-2 transition-colors hover:text-[#3a332b]"
+              className="text-[13px] font-medium text-[#7b6853] underline underline-offset-2 transition-colors hover:text-[#3a332b] sm:text-sm"
             >
               초기화
             </button>
           )}
         </div>
 
-        {/* 카테고리 필터 */}
-        <div className="flex flex-wrap items-start gap-2.5">
-          <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#f5ecde] px-2.5 py-1 text-[11px] font-semibold text-[#7b6443]">
-            종류
-          </span>
+        <PlacesFilterRail
+          label="종류"
+          labelClassName="bg-[#f5ecde] text-[#7b6443]"
+          trackTestId="places-filter-track-category"
+        >
           {CATEGORIES.map(cat => (
             <button
               key={cat}
               onClick={() => toggleCategory(cat)}
-              className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+              className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-medium leading-none transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
                 filters.category === cat
                   ? FILTER_CHIP_STYLES.category.active
                   : FILTER_CHIP_STYLES.category.inactive
@@ -226,18 +227,18 @@ export function PlacesFilterBar({
               {CATEGORY_LABELS[cat]}
             </button>
           ))}
-        </div>
+        </PlacesFilterRail>
 
-        {/* 연령 필터 */}
-        <div className="flex flex-wrap items-start gap-2.5">
-          <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#f0edf6] px-2.5 py-1 text-[11px] font-semibold text-[#675b80]">
-            연령
-          </span>
+        <PlacesFilterRail
+          label="연령"
+          labelClassName="bg-[#f0edf6] text-[#675b80]"
+          trackTestId="places-filter-track-age"
+        >
           {AGE_BANDS.map(band => (
             <button
               key={band}
               onClick={() => toggleAge(band)}
-              className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+              className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-medium leading-none transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
                 filters.age === band
                   ? FILTER_CHIP_STYLES.age.active
                   : FILTER_CHIP_STYLES.age.inactive
@@ -246,16 +247,16 @@ export function PlacesFilterBar({
               {AGE_BAND_LABELS[band]}
             </button>
           ))}
-        </div>
+        </PlacesFilterRail>
 
-        {/* 조건 필터 */}
-        <div className="flex flex-wrap items-start gap-2.5">
-          <span className="mt-1 inline-flex w-11 shrink-0 rounded-full bg-[#eef3e8] px-2.5 py-1 text-[11px] font-semibold text-[#57684e]">
-            조건
-          </span>
+        <PlacesFilterRail
+          label="조건"
+          labelClassName="bg-[#eef3e8] text-[#57684e]"
+          trackTestId="places-filter-track-condition"
+        >
           <button
             onClick={() => toggleBoolean('indoor')}
-            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-medium leading-none transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
               filters.indoor
                 ? FILTER_CHIP_STYLES.indoor.active
                 : FILTER_CHIP_STYLES.indoor.inactive
@@ -265,7 +266,7 @@ export function PlacesFilterBar({
           </button>
           <button
             onClick={() => toggleBoolean('outdoor')}
-            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-medium leading-none transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
               filters.outdoor
                 ? FILTER_CHIP_STYLES.outdoor.active
                 : FILTER_CHIP_STYLES.outdoor.inactive
@@ -275,7 +276,7 @@ export function PlacesFilterBar({
           </button>
           <button
             onClick={() => toggleBoolean('free')}
-            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-medium leading-none transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
               filters.free
                 ? FILTER_CHIP_STYLES.free.active
                 : FILTER_CHIP_STYLES.free.inactive
@@ -285,7 +286,7 @@ export function PlacesFilterBar({
           </button>
           <button
             onClick={() => toggleBoolean('feeding')}
-            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-medium leading-none transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
               filters.feeding
                 ? FILTER_CHIP_STYLES.feeding.active
                 : FILTER_CHIP_STYLES.feeding.inactive
@@ -295,7 +296,7 @@ export function PlacesFilterBar({
           </button>
           <button
             onClick={() => toggleBoolean('stroller')}
-            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-medium leading-none transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
               filters.stroller
                 ? FILTER_CHIP_STYLES.stroller.active
                 : FILTER_CHIP_STYLES.stroller.inactive
@@ -305,7 +306,7 @@ export function PlacesFilterBar({
           </button>
           <button
             onClick={() => toggleBoolean('rain')}
-            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-colors ${
+            className={`shrink-0 whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-medium leading-none transition-colors sm:px-3.5 sm:py-1.5 sm:text-xs ${
               filters.rain
                 ? FILTER_CHIP_STYLES.rain.active
                 : FILTER_CHIP_STYLES.rain.inactive
@@ -313,7 +314,7 @@ export function PlacesFilterBar({
           >
             우천 가능
           </button>
-        </div>
+        </PlacesFilterRail>
       </div>
     </div>
   );

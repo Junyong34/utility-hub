@@ -142,8 +142,7 @@ export function RegionHub({ region, places }: RegionHubProps) {
               </h2>
               <p className="text-sm leading-6 text-muted-foreground sm:text-[15px]">
                 이제 {region.name} 안에서만 연령, 실내·야외, 무료 여부,
-                우천 가능 여부를 다시 줄일 수 있습니다. 홈과 places 허브에서
-                쓰던 필터 흐름을 권역 상세까지 그대로 이어붙였습니다.
+                우천 가능 여부를 다시 줄일 수 있습니다.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 rounded-full border border-[#e5d9c8] bg-white/70 px-4 py-2 text-sm font-medium text-[#6e604d]">
