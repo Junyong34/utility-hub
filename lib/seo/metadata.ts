@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import type { SEOMetadata, OpenGraphImage } from '@/types/seo';
-import {
-  buildCustomOgImagePath,
-} from '@/lib/seo/og';
+import { buildCustomOgImagePath } from '@/lib/seo/og';
 import { resolveBlogPostOgImage } from '@/lib/seo/og-policy';
 
 /**
@@ -14,7 +12,7 @@ export const SITE_CONFIG = {
   description:
     '서울·경기 중심으로 아이와 가볼 곳을 지역, 연령, 날씨, 예산 기준으로 빠르게 정리합니다. 나들이 예산 계산, 육아 혜택·지원금 정보까지 한 번에.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.zento.kr',
-  ogImage: '/og-images/main-og-image.png',
+  ogImage: '/og-images/main-og-image.webp',
   locale: 'ko_KR',
   author: 'Zento',
   social: {
@@ -58,7 +56,7 @@ export function generateMetadata(seo: SEOMetadata): Metadata {
     },
     description,
     keywords: keywords?.join(', '),
-    authors: authors?.map((name) => ({ name })),
+    authors: authors?.map(name => ({ name })),
     creator: SITE_CONFIG.author,
     publisher: SITE_CONFIG.author,
 
@@ -174,7 +172,10 @@ export function generatePaginationMetadata(
   basePath: string
 ): Metadata {
   const title = page > 1 ? `${baseTitle} - 페이지 ${page}` : baseTitle;
-  const url = page > 1 ? `${SITE_CONFIG.url}${basePath}?page=${page}` : `${SITE_CONFIG.url}${basePath}`;
+  const url =
+    page > 1
+      ? `${SITE_CONFIG.url}${basePath}?page=${page}`
+      : `${SITE_CONFIG.url}${basePath}`;
 
   const metadata = generateMetadata({
     title,
@@ -188,9 +189,10 @@ export function generatePaginationMetadata(
   };
 
   if (page > 1) {
-    const prevUrl = page === 2
-      ? `${SITE_CONFIG.url}${basePath}`
-      : `${SITE_CONFIG.url}${basePath}?page=${page - 1}`;
+    const prevUrl =
+      page === 2
+        ? `${SITE_CONFIG.url}${basePath}`
+        : `${SITE_CONFIG.url}${basePath}?page=${page - 1}`;
     paginationAlternates.prev = prevUrl;
   }
 

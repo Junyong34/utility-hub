@@ -18,13 +18,15 @@ test('places index aggregates current region seeds', async () => {
     ALL_PLACES,
     GYEONGGI_NORTH_PLACES,
     GYEONGGI_SOUTH_PLACES,
+    INCHEON_PLACES,
     SEOUL_PLACES,
   } = await import('./index.ts');
 
-  assert.equal(SEOUL_PLACES.length, 11);
-  assert.equal(GYEONGGI_SOUTH_PLACES.length, 13);
-  assert.equal(GYEONGGI_NORTH_PLACES.length, 4);
-  assert.equal(ALL_PLACES.length, 28);
+  assert.equal(SEOUL_PLACES.length, 15);
+  assert.equal(GYEONGGI_SOUTH_PLACES.length, 17);
+  assert.equal(GYEONGGI_NORTH_PLACES.length, 6);
+  assert.equal(INCHEON_PLACES.length, 11);
+  assert.equal(ALL_PLACES.length, 49);
 });
 
 test('places index preserves important ids and verification state', async () => {
@@ -40,6 +42,12 @@ test('places index preserves important ids and verification state', async () => 
   assert.equal(placeIds.has('wonder-village-goyang'), true);
   assert.equal(placeIds.has('byeolmadang-kids-suwon'), true);
   assert.equal(placeIds.has('toy-kingdom-anseong'), true);
+  assert.equal(placeIds.has('seoul-sangsangnara'), true);
+  assert.equal(placeIds.has('national-children-science-center'), true);
+  assert.equal(placeIds.has('yongin-children-imagination-forest'), true);
+  assert.equal(placeIds.has('aquaplanet-gwanggyo'), true);
+  assert.equal(placeIds.has('gyeonggi-northern-childrens-museum'), true);
+  assert.equal(placeIds.has('goyang-children-museum'), true);
 
   const siheungKidsCafe = ALL_PLACES.find(
     place => place.id === 'siheung-kids-cafe-sample'
@@ -51,7 +59,9 @@ test('places index preserves important ids and verification state', async () => 
 test('merged parent museum entries keep child-focused reservation guidance', async () => {
   const { ALL_PLACES } = await import('./index.ts');
 
-  const folkMuseum = ALL_PLACES.find(place => place.id === 'national-folk-museum');
+  const folkMuseum = ALL_PLACES.find(
+    place => place.id === 'national-folk-museum'
+  );
   const centralMuseum = ALL_PLACES.find(
     place => place.id === 'seoul-national-museum-of-korea'
   );
@@ -75,7 +85,10 @@ test('thumbnailImage paths point to existing local assets', async () => {
   for (const place of ALL_PLACES) {
     if (!place.thumbnailImage) continue;
 
-    const thumbnailUrl = new URL(`../../public${place.thumbnailImage}`, import.meta.url);
+    const thumbnailUrl = new URL(
+      `../../public${place.thumbnailImage}`,
+      import.meta.url
+    );
     assert.equal(
       existsSync(thumbnailUrl),
       true,

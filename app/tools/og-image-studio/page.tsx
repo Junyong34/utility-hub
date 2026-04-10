@@ -1,59 +1,59 @@
-import Link from 'next/link'
-import type { Metadata } from 'next'
-import Image from 'next/image'
-import { Breadcrumb } from '@/components/seo'
-import { CustomOgForm } from '@/components/tools/og-image-studio/CustomOgForm'
-import { Button } from '@/components/ui/button'
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { Breadcrumb } from '@/components/seo';
+import { CustomOgForm } from '@/components/tools/og-image-studio/CustomOgForm';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { getAllPosts } from '@/lib/blog/posts'
-import { generateMetadata as createMetadata } from '@/lib/seo'
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { getAllPosts } from '@/lib/blog/posts';
+import { generateMetadata as createMetadata } from '@/lib/seo';
 import {
   buildBlogOgImagePath,
   buildCustomOgImagePath,
   buildToolOgImagePath,
-} from '@/lib/seo/og'
-import { getAllToolConfigs } from '@/lib/tools'
+} from '@/lib/seo/og';
+import { getAllToolConfigs } from '@/lib/tools';
 
-type StudioMode = 'blog' | 'tool' | 'custom'
+type StudioMode = 'blog' | 'tool' | 'custom';
 
 interface PageProps {
-  searchParams: Promise<Record<string, string | string[] | undefined>>
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 interface StudioCustomValues {
-  title: string
-  description: string
-  image: string
-  imageEnabled: boolean
-  bgColor: string
-  accentColor: string
-  label: string
-  themePreset: string
-  layoutVariant: string
-  mascotEnabled: boolean
+  title: string;
+  description: string;
+  image: string;
+  imageEnabled: boolean;
+  bgColor: string;
+  accentColor: string;
+  label: string;
+  themePreset: string;
+  layoutVariant: string;
+  mascotEnabled: boolean;
 }
 
-const BLOG_OPTIONS = getAllPosts().map((post) => ({
+const BLOG_OPTIONS = getAllPosts().map(post => ({
   value: `${post.categorySlug}/${post.slug}`,
   label: `${post.category} · ${post.title}`,
-}))
+}));
 
-const TOOL_OPTIONS = getAllToolConfigs().map((tool) => ({
+const TOOL_OPTIONS = getAllToolConfigs().map(tool => ({
   value: tool.id,
   label: tool.name,
-}))
+}));
 
 const DEFAULT_CUSTOM_VALUES: StudioCustomValues = {
   title: 'Zento OG Image',
   description: 'Takumi 기반으로 배경, 텍스트, 이미지를 조합한 미리보기입니다.',
-  image: '/og-images/main-og-image.png',
+  image: '/og-images/',
   imageEnabled: true,
   bgColor: '#FFF8EF',
   accentColor: '#FF8D73',
@@ -61,7 +61,7 @@ const DEFAULT_CUSTOM_VALUES: StudioCustomValues = {
   themePreset: 'cream',
   layoutVariant: 'play-card',
   mascotEnabled: true,
-}
+};
 
 export const metadata: Metadata = createMetadata({
   title: 'OG Image Studio',
@@ -76,26 +76,26 @@ export const metadata: Metadata = createMetadata({
     themePreset: 'cream',
     layoutVariant: 'play-card',
   }),
-})
+});
 
 function readValue(
   searchParams: Record<string, string | string[] | undefined>,
   key: string
 ): string | undefined {
-  const rawValue = searchParams[key]
+  const rawValue = searchParams[key];
 
   if (Array.isArray(rawValue)) {
-    return rawValue[0]
+    return rawValue[0];
   }
 
-  return rawValue
+  return rawValue;
 }
 
 function hasSearchParam(
   searchParams: Record<string, string | string[] | undefined>,
   key: string
 ): boolean {
-  return Object.prototype.hasOwnProperty.call(searchParams, key)
+  return Object.prototype.hasOwnProperty.call(searchParams, key);
 }
 
 function resolveTextInputValue(
@@ -104,74 +104,68 @@ function resolveTextInputValue(
   fallback: string
 ): string {
   if (!hasSearchParam(searchParams, key)) {
-    return fallback
+    return fallback;
   }
 
-  return readValue(searchParams, key) ?? ''
+  return readValue(searchParams, key) ?? '';
 }
 
 function resolveImageEnabled(
   searchParams: Record<string, string | string[] | undefined>
 ): boolean {
   if (!hasSearchParam(searchParams, 'imageEnabled')) {
-    return DEFAULT_CUSTOM_VALUES.imageEnabled
+    return DEFAULT_CUSTOM_VALUES.imageEnabled;
   }
 
-  const value = readValue(searchParams, 'imageEnabled')
-  return value !== '0' && value !== 'false'
+  const value = readValue(searchParams, 'imageEnabled');
+  return value !== '0' && value !== 'false';
 }
 
 function resolveMode(
   searchParams: Record<string, string | string[] | undefined>
 ): StudioMode {
-  const mode = readValue(searchParams, 'mode')
+  const mode = readValue(searchParams, 'mode');
 
   if (mode === 'tool' || mode === 'custom') {
-    return mode
+    return mode;
   }
 
-  return 'blog'
+  return 'blog';
 }
 
 function resolveBlogSelection(
   searchParams: Record<string, string | string[] | undefined>
 ): string {
-  const selected = readValue(searchParams, 'postKey')
+  const selected = readValue(searchParams, 'postKey');
 
-  if (
-    selected &&
-    BLOG_OPTIONS.some((option) => option.value === selected)
-  ) {
-    return selected
+  if (selected && BLOG_OPTIONS.some(option => option.value === selected)) {
+    return selected;
   }
 
-  return BLOG_OPTIONS[0]?.value ?? ''
+  return BLOG_OPTIONS[0]?.value ?? '';
 }
 
 function resolveToolSelection(
   searchParams: Record<string, string | string[] | undefined>
 ): string {
-  const selected = readValue(searchParams, 'toolId')
+  const selected = readValue(searchParams, 'toolId');
 
-  if (
-    selected &&
-    TOOL_OPTIONS.some((option) => option.value === selected)
-  ) {
-    return selected
+  if (selected && TOOL_OPTIONS.some(option => option.value === selected)) {
+    return selected;
   }
 
-  return TOOL_OPTIONS[0]?.value ?? ''
+  return TOOL_OPTIONS[0]?.value ?? '';
 }
 
 function resolveMascotEnabled(
   searchParams: Record<string, string | string[] | undefined>
 ): boolean {
   if (!hasSearchParam(searchParams, 'mascotEnabled')) {
-    return DEFAULT_CUSTOM_VALUES.mascotEnabled
+    return DEFAULT_CUSTOM_VALUES.mascotEnabled;
   }
 
-  const value = readValue(searchParams, 'mascotEnabled')
-  return value !== '0' && value !== 'false'
+  const value = readValue(searchParams, 'mascotEnabled');
+  return value !== '0' && value !== 'false';
 }
 
 function resolveCustomValues(
@@ -209,52 +203,56 @@ function resolveCustomValues(
       'label',
       DEFAULT_CUSTOM_VALUES.label
     ),
-    themePreset: readValue(searchParams, 'themePreset') ?? DEFAULT_CUSTOM_VALUES.themePreset,
-    layoutVariant: readValue(searchParams, 'layoutVariant') ?? DEFAULT_CUSTOM_VALUES.layoutVariant,
+    themePreset:
+      readValue(searchParams, 'themePreset') ??
+      DEFAULT_CUSTOM_VALUES.themePreset,
+    layoutVariant:
+      readValue(searchParams, 'layoutVariant') ??
+      DEFAULT_CUSTOM_VALUES.layoutVariant,
     mascotEnabled: resolveMascotEnabled(searchParams),
-  }
+  };
 }
 
 function buildPreviewPath(options: {
-  mode: StudioMode
-  blogSelection: string
-  toolSelection: string
-  customValues: StudioCustomValues
+  mode: StudioMode;
+  blogSelection: string;
+  toolSelection: string;
+  customValues: StudioCustomValues;
 }): string {
-  const { mode, blogSelection, toolSelection, customValues } = options
+  const { mode, blogSelection, toolSelection, customValues } = options;
 
   if (mode === 'tool') {
-    return buildToolOgImagePath(toolSelection)
+    return buildToolOgImagePath(toolSelection);
   }
 
   if (mode === 'custom') {
-    return buildCustomOgImagePath(customValues)
+    return buildCustomOgImagePath(customValues);
   }
 
-  const [categorySlug, slug] = blogSelection.split('/')
+  const [categorySlug, slug] = blogSelection.split('/');
 
   return buildBlogOgImagePath({
     categorySlug,
     slug,
-  })
+  });
 }
 
 function buildModeHref(mode: StudioMode): string {
-  return `/tools/og-image-studio?mode=${mode}`
+  return `/tools/og-image-studio?mode=${mode}`;
 }
 
 export default async function OgImageStudioPage({ searchParams }: PageProps) {
-  const resolvedSearchParams = await searchParams
-  const mode = resolveMode(resolvedSearchParams)
-  const blogSelection = resolveBlogSelection(resolvedSearchParams)
-  const toolSelection = resolveToolSelection(resolvedSearchParams)
-  const customValues = resolveCustomValues(resolvedSearchParams)
+  const resolvedSearchParams = await searchParams;
+  const mode = resolveMode(resolvedSearchParams);
+  const blogSelection = resolveBlogSelection(resolvedSearchParams);
+  const toolSelection = resolveToolSelection(resolvedSearchParams);
+  const customValues = resolveCustomValues(resolvedSearchParams);
   const previewPath = buildPreviewPath({
     mode,
     blogSelection,
     toolSelection,
     customValues,
-  })
+  });
   const downloadPath =
     mode === 'custom'
       ? buildCustomOgImagePath({
@@ -262,7 +260,7 @@ export default async function OgImageStudioPage({ searchParams }: PageProps) {
           format: 'webp',
           download: true,
         })
-      : previewPath
+      : previewPath;
 
   return (
     <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
@@ -281,8 +279,8 @@ export default async function OgImageStudioPage({ searchParams }: PageProps) {
                 OG Image Studio
               </h1>
               <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-                blog, tool, custom 모드로 Takumi OG 이미지를 미리보고 새 탭
-                열기 또는 브라우저 다운로드를 할 수 있습니다.
+                blog, tool, custom 모드로 Takumi OG 이미지를 미리보고 새 탭 열기
+                또는 브라우저 다운로드를 할 수 있습니다.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -328,7 +326,7 @@ export default async function OgImageStudioPage({ searchParams }: PageProps) {
                       defaultValue={blogSelection}
                       className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-10 w-full rounded-lg border bg-transparent px-3 text-sm outline-none focus-visible:ring-3"
                     >
-                      {BLOG_OPTIONS.map((option) => (
+                      {BLOG_OPTIONS.map(option => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -347,7 +345,7 @@ export default async function OgImageStudioPage({ searchParams }: PageProps) {
                       defaultValue={toolSelection}
                       className="border-input focus-visible:border-ring focus-visible:ring-ring/50 h-10 w-full rounded-lg border bg-transparent px-3 text-sm outline-none focus-visible:ring-3"
                     >
-                      {TOOL_OPTIONS.map((option) => (
+                      {TOOL_OPTIONS.map(option => (
                         <option key={option.value} value={option.value}>
                           {option.label}
                         </option>
@@ -399,7 +397,9 @@ export default async function OgImageStudioPage({ searchParams }: PageProps) {
                   <Button variant="outline" asChild>
                     <a
                       href={downloadPath}
-                      download={mode === 'custom' ? 'custom-og-image.webp' : true}
+                      download={
+                        mode === 'custom' ? 'custom-og-image.webp' : true
+                      }
                     >
                       다운로드
                     </a>
@@ -411,5 +411,5 @@ export default async function OgImageStudioPage({ searchParams }: PageProps) {
         </div>
       </main>
     </div>
-  )
+  );
 }
