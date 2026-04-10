@@ -1,10 +1,10 @@
 # Places Seed 반영 체크리스트
 
 - 기준 문서 수: `95건` (`docs/research/places`의 `확정 후보`)
-- 신규 추가 완료: `21건`
+- 신규 추가 완료: `31건`
 - 기존 보강 완료: `3건`
 - 기존 반영: `2건`
-- 미반영: `69건`
+- 미반영: `59건`
 
 ## 상태 정의
 
@@ -32,10 +32,10 @@
 | gyeonggi-north-outing-facilities.md              | 전곡선사박물관                                             | 신규 추가 완료 | 전곡선사박물관                        | content/places에 신규 seed 추가 + 썸네일 연결 완료           |
 | gyeonggi-north-outing-facilities.md              | 실학박물관                                                 | 신규 추가 완료 | 실학박물관                            | content/places에 신규 seed 추가 + 썸네일 연결 완료           |
 | gyeonggi-north-outing-facilities.md              | 고양어린이박물관                                           | 신규 추가 완료 | 고양어린이박물관                      | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
-| gyeonggi-north-outing-facilities.md              | 의정부 모두의 놀이터 2호점                                 | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-north-outing-facilities.md              | 롯데mom편한 모두의 놀이터 3호점                            | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-north-outing-facilities.md              | 장난감도서관 옥정점                                        | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-north-outing-facilities.md              | 퍼스트가든                                                 | 미반영         | -                                     | 이번 차수 미반영                                             |
+| gyeonggi-north-outing-facilities.md              | 의정부 모두의 놀이터 2호점                                 | 신규 추가 완료 | 의정부 모두의 놀이터 2호점            | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| gyeonggi-north-outing-facilities.md              | 롯데mom편한 모두의 놀이터 3호점                            | 신규 추가 완료 | 롯데mom편한 모두의 놀이터 3호점       | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| gyeonggi-north-outing-facilities.md              | 장난감도서관 옥정점                                        | 신규 추가 완료 | 장난감도서관 옥정점                   | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| gyeonggi-north-outing-facilities.md              | 퍼스트가든                                                 | 신규 추가 완료 | 퍼스트가든                            | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | gyeonggi-north-private-kids-cafes.md             | 챔피언1250X 스타필드 고양                                  | 신규 추가 완료 | 챔피언1250X 스타필드 고양             | content/places에 신규 seed 추가 + 썸네일 연결 완료           |
 | gyeonggi-north-private-kids-cafes.md             | 토이킹덤플레이 스타필드 고양                               | 미반영         | -                                     | 이번 차수 미반영                                             |
 | gyeonggi-north-private-kids-cafes.md             | 브릭라이브 스타필드 고양                                   | 미반영         | -                                     | 이번 차수 미반영                                             |
@@ -102,11 +102,11 @@
 | seoul-outing-facilities.md                       | 서울백제어린이박물관                                       | 신규 추가 완료 | 서울백제어린이박물관                  | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | seoul-outing-facilities.md                       | 둘리뮤지엄                                                 | 신규 추가 완료 | 둘리뮤지엄                            | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | seoul-outing-facilities.md                       | 서대문자연사박물관                                         | 기존 반영      | 서대문자연사박물관                    | 이번 차수 이전부터 seed에 반영됨                             |
-| seoul-outing-facilities.md                       | 서울형 키즈카페 시립 1호점                                 | 미반영         | -                                     | 이번 차수 미반영                                             |
-| seoul-outing-facilities.md                       | 서울형 키즈카페 시립 목동점                                | 미반영         | -                                     | 이번 차수 미반영                                             |
-| seoul-outing-facilities.md                       | 서울형 키즈카페 시립 보라매공원점                          | 미반영         | -                                     | 이번 차수 미반영                                             |
-| seoul-outing-facilities.md                       | 서울형 키즈카페 자양4동 2호점(꾸미팡팡 놀이터)             | 미반영         | -                                     | 이번 차수 미반영                                             |
-| seoul-outing-facilities.md                       | 서울형 키즈카페 답십리1동점                                | 미반영         | -                                     | 이번 차수 미반영                                             |
-| seoul-outing-facilities.md                       | 서울형 키즈카페 신도림동점                                 | 미반영         | -                                     | 이번 차수 미반영                                             |
+| seoul-outing-facilities.md                       | 서울형 키즈카페 시립 1호점                                 | 신규 추가 완료 | 서울형 키즈카페 시립 1호점            | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| seoul-outing-facilities.md                       | 서울형 키즈카페 시립 목동점                                | 신규 추가 완료 | 서울형 키즈카페 시립 목동점           | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| seoul-outing-facilities.md                       | 서울형 키즈카페 시립 보라매공원점                          | 신규 추가 완료 | 서울형 키즈카페 시립 보라매공원점     | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| seoul-outing-facilities.md                       | 서울형 키즈카페 자양4동 2호점(꾸미팡팡 놀이터)             | 신규 추가 완료 | 서울형 키즈카페 자양4동 2호점         | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| seoul-outing-facilities.md                       | 서울형 키즈카페 답십리1동점                                | 신규 추가 완료 | 서울형 키즈카페 답십리1동점           | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| seoul-outing-facilities.md                       | 서울형 키즈카페 신도림동점                                 | 신규 추가 완료 | 서울형 키즈카페 신도림동점            | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | seoul-private-kids-cafes.md                      | 청담점                                                     | 미반영         | -                                     | 이번 차수 미반영                                             |
 | seoul-private-kids-cafes.md                      | 고척점                                                     | 미반영         | -                                     | 이번 차수 미반영                                             |

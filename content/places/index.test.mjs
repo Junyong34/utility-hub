@@ -22,11 +22,11 @@ test('places index aggregates current region seeds', async () => {
     SEOUL_PLACES,
   } = await import('./index.ts');
 
-  assert.equal(SEOUL_PLACES.length, 15);
+  assert.equal(SEOUL_PLACES.length, 21);
   assert.equal(GYEONGGI_SOUTH_PLACES.length, 17);
-  assert.equal(GYEONGGI_NORTH_PLACES.length, 6);
-  assert.equal(INCHEON_PLACES.length, 11);
-  assert.equal(ALL_PLACES.length, 49);
+  assert.equal(GYEONGGI_NORTH_PLACES.length, 10);
+  assert.equal(INCHEON_PLACES.length, 21);
+  assert.equal(ALL_PLACES.length, 69);
 });
 
 test('places index preserves important ids and verification state', async () => {
@@ -48,6 +48,18 @@ test('places index preserves important ids and verification state', async () => 
   assert.equal(placeIds.has('aquaplanet-gwanggyo'), true);
   assert.equal(placeIds.has('gyeonggi-northern-childrens-museum'), true);
   assert.equal(placeIds.has('goyang-children-museum'), true);
+  assert.equal(placeIds.has('seoul-public-kids-cafe-1'), true);
+  assert.equal(placeIds.has('seoul-public-kids-cafe-sindorim'), true);
+  assert.equal(placeIds.has('uijeongbu-public-playground-2'), true);
+  assert.equal(placeIds.has('okjeong-toy-library'), true);
+  assert.equal(placeIds.has('first-garden'), true);
+  assert.equal(placeIds.has('ganghwa-history-museum'), true);
+  assert.equal(
+    placeIds.has('national-institute-of-biological-resources'),
+    true
+  );
+  assert.equal(placeIds.has('national-incheon-marine-museum'), true);
+  assert.equal(placeIds.has('geomdan-prehistory-museum'), true);
 
   const siheungKidsCafe = ALL_PLACES.find(
     place => place.id === 'siheung-kids-cafe-sample'
