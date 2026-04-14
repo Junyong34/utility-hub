@@ -2,11 +2,8 @@ import type { Metadata } from 'next';
 import { JsonLdMultiple } from '@/components/seo';
 import { PlacesHub } from '@/components/places/PlacesHub';
 import { PaperPageShell } from '@/components/ui/paper-page-shell';
+import { getPlaceCountByRegion, queryPlaceList } from '@/lib/places';
 import { getPhaseARegions } from '@/lib/places/region-config';
-import {
-  getPlaceCountByRegion,
-  getPublishablePlaces,
-} from '@/lib/places/place-content';
 import {
   SITE_CONFIG,
   createPageStructuredData,
@@ -14,14 +11,19 @@ import {
 } from '@/lib/seo';
 import { createPlacesMetadataInput } from '@/lib/seo/site-section-seo';
 
+interface PageProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
+
 export const metadata: Metadata = createMetadata(
   createPlacesMetadataInput(SITE_CONFIG.url)
 );
 
-export default function PlacesPage() {
+export default async function PlacesPage({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
   const regions = getPhaseARegions();
   const placeCountByRegion = getPlaceCountByRegion();
-  const allPlaces = getPublishablePlaces();
+  const initialPage = queryPlaceList(resolvedSearchParams);
   const { webPage, breadcrumb } = createPageStructuredData({
     name: '아이와 가볼 곳',
     path: '/places',
@@ -38,7 +40,7 @@ export default function PlacesPage() {
           <PlacesHub
             regions={regions}
             placeCountByRegion={placeCountByRegion}
-            allPlaces={allPlaces}
+            initialPage={initialPage}
           />
         </div>
       </PaperPageShell>

@@ -112,7 +112,10 @@ export function PlaceCard({ place }: PlaceCardProps) {
   if (place.rainFriendly) conditions.push('우천 가능');
 
   return (
-    <Card className="group h-full gap-3 overflow-hidden rounded-[26px] border-[#e8dbc8] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] py-3 shadow-[0_18px_50px_rgba(59,46,31,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#ccb28a] hover:shadow-[0_26px_58px_rgba(59,46,31,0.12)] sm:gap-4 sm:rounded-[30px] sm:py-4">
+    <Card
+      data-testid="place-card"
+      className="group h-full gap-3 overflow-hidden rounded-[26px] border-[#e8dbc8] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] py-3 shadow-[0_18px_50px_rgba(59,46,31,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#ccb28a] hover:shadow-[0_26px_58px_rgba(59,46,31,0.12)] sm:gap-4 sm:rounded-[30px] sm:py-4"
+    >
       <div className="relative min-h-36 overflow-hidden border-b border-[#eadfce] sm:min-h-44">
         {place.thumbnailImage ? (
           <Image

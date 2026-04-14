@@ -7,7 +7,7 @@ import {
   getRegionBySlug,
   PHASE_A_REGION_SLUGS,
 } from '@/lib/places/region-config';
-import { getPublishablePlacesByRegion } from '@/lib/places/place-content';
+import { queryPlaceList } from '@/lib/places';
 import type { RegionSlug } from '@/types/place-source';
 import {
   SITE_CONFIG,
@@ -18,29 +18,38 @@ import { createPlaceRegionMetadataInput } from '@/lib/seo/site-section-seo';
 
 interface PageProps {
   params: Promise<{ region: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateStaticParams() {
   return PHASE_A_REGION_SLUGS.map(slug => ({ region: slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { region: regionSlug } = await params;
   const region = getRegionBySlug(regionSlug);
   if (!region) return {};
 
-  return createMetadata(createPlaceRegionMetadataInput(SITE_CONFIG.url, region));
+  return createMetadata(
+    createPlaceRegionMetadataInput(SITE_CONFIG.url, region)
+  );
 }
 
-export default async function RegionPage({ params }: PageProps) {
+export default async function RegionPage({ params, searchParams }: PageProps) {
   const { region: regionSlug } = await params;
+  const resolvedSearchParams = await searchParams;
   const region = getRegionBySlug(regionSlug);
 
   if (!region || !region.isPhaseA) {
     notFound();
   }
 
-  const places = getPublishablePlacesByRegion(regionSlug as RegionSlug);
+  const initialPage = queryPlaceList({
+    ...resolvedSearchParams,
+    region: regionSlug as RegionSlug,
+  });
   const { webPage, breadcrumb } = createPageStructuredData({
     name: `${region.name} 아이와 가볼 곳`,
     path: `/places/${region.slug}`,
@@ -60,7 +69,7 @@ export default async function RegionPage({ params }: PageProps) {
         gridClassName="h-[34rem] opacity-35"
       >
         <div className="mx-auto max-w-screen-xl px-4 pt-10 pb-16 md:pt-24 xl:pt-32 sm:pb-24">
-          <RegionHub region={region} places={places} />
+          <RegionHub region={region} initialPage={initialPage} />
         </div>
       </PaperPageShell>
     </>

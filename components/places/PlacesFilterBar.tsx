@@ -104,16 +104,17 @@ export const FILTER_CHIP_STYLES = {
 } as const;
 
 interface PlacesFilterBarProps {
-  totalCount: number;
-  filteredCount: number;
+  scopeTotalCount: number;
+  matchedTotalCount: number;
 }
 
 export function PlacesFilterBar({
-  totalCount,
-  filteredCount,
+  scopeTotalCount,
+  matchedTotalCount,
 }: PlacesFilterBarProps) {
   const [filters, setFilters] = useQueryStates(placesFilterParsers, {
-    shallow: false,
+    shallow: true,
+    history: 'push',
   });
 
   const isActive =
@@ -183,19 +184,18 @@ export function PlacesFilterBar({
           {isActive ? (
             <p className="text-[13px] text-[#6a5d4d] sm:text-sm">
               <span className="font-semibold text-[#2e2821]">
-                {totalCount}곳
-              </span>{' '}
-              중{' '}
+                전체 {scopeTotalCount}곳
+              </span>
+              에서{' '}
               <span className="font-semibold text-[#2e2821]">
-                {filteredCount}곳
-              </span>{' '}
-              표시
+                조건 일치 {matchedTotalCount}곳
+              </span>
             </p>
           ) : (
             <p className="text-[13px] text-[#6a5d4d] sm:text-sm">
               총{' '}
               <span className="font-semibold text-[#2e2821]">
-                {totalCount}곳
+                {scopeTotalCount}곳
               </span>
             </p>
           )}

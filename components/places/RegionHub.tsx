@@ -8,12 +8,12 @@ import {
   WrenchIcon,
 } from 'lucide-react';
 import { PlacesFilteredGrid } from './PlacesFilteredGrid';
+import type { PlaceListPageResponse } from '@/lib/places';
 import type { RegionConfig } from '@/lib/places/region-config';
-import type { PlaceSource } from '@/types/place-source';
 
 interface RegionHubProps {
   region: RegionConfig;
-  places: PlaceSource[];
+  initialPage: PlaceListPageResponse;
 }
 
 const REGION_SURFACE: Record<
@@ -50,8 +50,9 @@ const REGION_SURFACE: Record<
   },
 };
 
-export function RegionHub({ region, places }: RegionHubProps) {
+export function RegionHub({ region, initialPage }: RegionHubProps) {
   const tone = REGION_SURFACE[region.slug];
+  const placeCount = initialPage.scopeTotal;
 
   return (
     <div className="space-y-10 sm:space-y-12">
@@ -69,7 +70,9 @@ export function RegionHub({ region, places }: RegionHubProps) {
             </Link>
 
             <div className="space-y-3">
-              <div className={`inline-flex rounded-full px-3.5 py-1.5 text-xs font-semibold ${tone.chip}`}>
+              <div
+                className={`inline-flex rounded-full px-3.5 py-1.5 text-xs font-semibold ${tone.chip}`}
+              >
                 {region.name} 나들이 장소 모음
               </div>
               <h1
@@ -82,14 +85,17 @@ export function RegionHub({ region, places }: RegionHubProps) {
                 {region.name} 아이와 가볼 곳
               </h1>
               <p className="max-w-2xl text-sm leading-7 text-[#645849] sm:text-[15px]">
-                {region.description} 연령·실내 여부·무료 조건으로 좁혀서 오늘 갈 곳을 빠르게 골라보세요.
+                {region.description} 연령·실내 여부·무료 조건으로 좁혀서 오늘 갈
+                곳을 빠르게 골라보세요.
               </p>
             </div>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
             <div className="rounded-[24px] bg-white/72 px-5 py-4">
-              <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.accent}`}>
+              <p
+                className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.accent}`}
+              >
                 현재 정리 수
               </p>
               <p
@@ -99,11 +105,13 @@ export function RegionHub({ region, places }: RegionHubProps) {
                     '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
                 }}
               >
-                {places.length}곳
+                {placeCount}곳
               </p>
             </div>
             <div className="rounded-[24px] bg-white/72 px-5 py-4">
-              <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.accent}`}>
+              <p
+                className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.accent}`}
+              >
                 추천 방식
               </p>
               <p className="mt-2 text-lg font-semibold tracking-tight text-[#2d271f]">
@@ -111,7 +119,9 @@ export function RegionHub({ region, places }: RegionHubProps) {
               </p>
             </div>
             <div className="rounded-[24px] bg-white/72 px-5 py-4">
-              <p className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.accent}`}>
+              <p
+                className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${tone.accent}`}
+              >
                 확인 포인트
               </p>
               <p className="mt-2 text-lg font-semibold tracking-tight text-[#2d271f]">
@@ -122,7 +132,7 @@ export function RegionHub({ region, places }: RegionHubProps) {
         </div>
       </section>
 
-      {places.length > 0 ? (
+      {placeCount > 0 ? (
         <section className="space-y-5">
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#e5d9c8] bg-white/70 px-4 py-2 text-sm font-medium text-[#6e604d]">
@@ -140,7 +150,10 @@ export function RegionHub({ region, places }: RegionHubProps) {
               </div>
             }
           >
-            <PlacesFilteredGrid places={places} />
+            <PlacesFilteredGrid
+              initialPage={initialPage}
+              regionSlug={region.slug}
+            />
           </Suspense>
         </section>
       ) : (
@@ -216,7 +229,8 @@ export function RegionHub({ region, places }: RegionHubProps) {
                   {region.name} 육아 혜택 확인
                 </p>
                 <p className="text-sm leading-6 text-muted-foreground">
-                  {region.name} 육아 가족을 위한 지역 지원 정책과 혜택을 확인해보세요.
+                  {region.name} 육아 가족을 위한 지역 지원 정책과 혜택을
+                  확인해보세요.
                 </p>
               </div>
             </div>

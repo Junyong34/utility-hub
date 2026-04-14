@@ -10,21 +10,21 @@ import {
 import { RegionCard } from './RegionCard';
 import { PlacesFilteredGrid } from './PlacesFilteredGrid';
 import { PlacesShareButton } from './PlacesShareButton';
+import type { PlaceListPageResponse } from '@/lib/places';
 import type { RegionConfig } from '@/lib/places/region-config';
-import type { PlaceSource } from '@/types/place-source';
 
 interface PlacesHubProps {
   regions: RegionConfig[];
   placeCountByRegion: Record<string, number>;
-  allPlaces: PlaceSource[];
+  initialPage: PlaceListPageResponse;
 }
 
 export function PlacesHub({
   regions,
   placeCountByRegion,
-  allPlaces,
+  initialPage,
 }: PlacesHubProps) {
-  const totalPlaceCount = allPlaces.length;
+  const totalPlaceCount = initialPage.scopeTotal;
 
   return (
     <div className="space-y-10 sm:space-y-16">
@@ -186,7 +186,8 @@ export function PlacesHub({
                 여기서 더 세밀하게 줄이면 됩니다
               </h2>
               <p className="text-[13px] leading-5 text-muted-foreground sm:text-[15px] sm:leading-6">
-                지역을 고른 다음, 연령·실내 여부·무료 조건으로 더 좁혀보세요. 오늘 바로 갈 수 있는 곳만 남습니다.
+                지역을 고른 다음, 연령·실내 여부·무료 조건으로 더 좁혀보세요.
+                오늘 바로 갈 수 있는 곳만 남습니다.
               </p>
             </div>
           </div>
@@ -208,7 +209,7 @@ export function PlacesHub({
             </div>
           }
         >
-          <PlacesFilteredGrid places={allPlaces} />
+          <PlacesFilteredGrid initialPage={initialPage} />
         </Suspense>
       </section>
 
