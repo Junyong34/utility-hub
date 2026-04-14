@@ -22,11 +22,11 @@ test('places index aggregates current region seeds', async () => {
     SEOUL_PLACES,
   } = await import('./index.ts');
 
-  assert.equal(SEOUL_PLACES.length, 21);
-  assert.equal(GYEONGGI_SOUTH_PLACES.length, 17);
-  assert.equal(GYEONGGI_NORTH_PLACES.length, 10);
+  assert.equal(SEOUL_PLACES.length, 23);
+  assert.equal(GYEONGGI_SOUTH_PLACES.length, 21);
+  assert.equal(GYEONGGI_NORTH_PLACES.length, 14);
   assert.equal(INCHEON_PLACES.length, 21);
-  assert.equal(ALL_PLACES.length, 69);
+  assert.equal(ALL_PLACES.length, 79);
 });
 
 test('places index preserves important ids and verification state', async () => {
@@ -48,8 +48,18 @@ test('places index preserves important ids and verification state', async () => 
   assert.equal(placeIds.has('aquaplanet-gwanggyo'), true);
   assert.equal(placeIds.has('gyeonggi-northern-childrens-museum'), true);
   assert.equal(placeIds.has('goyang-children-museum'), true);
+  assert.equal(placeIds.has('goyang-ilovemom-cafe-hwajeong'), true);
+  assert.equal(placeIds.has('guri-ilovemom-cafe-inchang'), true);
+  assert.equal(placeIds.has('guri-isarang-playground-galmae'), true);
+  assert.equal(placeIds.has('paju-ilovemom-cafe'), true);
   assert.equal(placeIds.has('seoul-public-kids-cafe-1'), true);
+  assert.equal(placeIds.has('seoul-public-kids-cafe-ttukseom-jabeolle'), true);
+  assert.equal(placeIds.has('seoul-public-kids-cafe-yangjae1'), true);
   assert.equal(placeIds.has('seoul-public-kids-cafe-sindorim'), true);
+  assert.equal(placeIds.has('seongnam-isarang-playground-sunae'), true);
+  assert.equal(placeIds.has('bucheon-ilovemom-cafe-bambak'), true);
+  assert.equal(placeIds.has('bucheon-ilovemom-cafe-simgokbon'), true);
+  assert.equal(placeIds.has('bucheon-ilovemom-cafe-gogangbon'), true);
   assert.equal(placeIds.has('uijeongbu-public-playground-2'), true);
   assert.equal(placeIds.has('okjeong-toy-library'), true);
   assert.equal(placeIds.has('first-garden'), true);

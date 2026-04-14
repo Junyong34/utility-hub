@@ -52,6 +52,25 @@ const PLACE_LINK_EXPECTATIONS: Partial<Record<string, LinkExpectation>> = {
     naverMatchAny: ['청라호수공원한신더휴', '호수공원한신더휴'],
     naverRejectAny: ['더벤티'],
   },
+  'goyang-ilovemom-cafe-hwajeong': {
+    naverMatchAny: ['고양특례시육아종합지원센터', '고양시육아종합지원센터'],
+  },
+  'paju-ilovemom-cafe': {
+    sourceMatchAny: ['파주시육아종합지원센터', '아이러브맘카페'],
+    naverMatchAny: ['파주시육아종합지원센터', '아이러브맘카페'],
+  },
+  'seongnam-isarang-playground-sunae': {
+    sourceMatchAny: [
+      '수내아이사랑놀이터',
+      '수내 아이사랑놀이터',
+      '수내',
+      '아이사랑놀이터',
+    ],
+  },
+  'seoul-public-kids-cafe-yangjae1': {
+    sourceMatchAny: ['서리풀노리학교', '양재1동점'],
+    naverMatchAny: ['서리풀노리학교', '양재1동점', '양재공영주차빌딩'],
+  },
 };
 
 function uniqueTerms(terms: Array<string | undefined>): string[] {

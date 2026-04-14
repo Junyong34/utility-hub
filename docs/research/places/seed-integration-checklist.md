@@ -1,10 +1,10 @@
 # Places Seed 반영 체크리스트
 
 - 기준 문서 수: `95건` (`docs/research/places`의 `확정 후보`)
-- 신규 추가 완료: `31건`
+- 신규 추가 완료: `41건`
 - 기존 보강 완료: `3건`
 - 기존 반영: `2건`
-- 미반영: `59건`
+- 미반영: `49건`
 
 ## 상태 정의
 
@@ -15,13 +15,13 @@
 
 | 문서                                             | 시설명                                                     | 현재 상태      | seed 대상                             | 비고                                                         |
 | ------------------------------------------------ | ---------------------------------------------------------- | -------------- | ------------------------------------- | ------------------------------------------------------------ |
-| gyeonggi-north-baby-cafes.md                     | 화정육아종합지원센터 아이러브맘카페                        | 미반영         | -                                     | 이번 차수 미반영                                             |
+| gyeonggi-north-baby-cafes.md                     | 화정육아종합지원센터 아이러브맘카페                        | 신규 추가 완료 | 화정육아종합지원센터 아이러브맘카페   | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | gyeonggi-north-baby-cafes.md                     | 탄현위브더제니스 아이러브맘카페                            | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-north-baby-cafes.md                     | 아이러브맘카페(인창점)                                     | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-north-baby-cafes.md                     | 아이사랑놀이터(갈매점)                                     | 미반영         | -                                     | 이번 차수 미반영                                             |
+| gyeonggi-north-baby-cafes.md                     | 아이러브맘카페(인창점)                                     | 신규 추가 완료 | 아이러브맘카페(인창점)                | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| gyeonggi-north-baby-cafes.md                     | 아이사랑놀이터(갈매점)                                     | 신규 추가 완료 | 아이사랑놀이터(갈매점)                | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | gyeonggi-north-baby-cafes.md                     | 의정부아이사랑놀이터                                       | 미반영         | -                                     | 이번 차수 미반영                                             |
 | gyeonggi-north-baby-cafes.md                     | 의정부시 아이러브맘카페                                    | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-north-baby-cafes.md                     | 파주시 아이러브맘카페                                      | 미반영         | -                                     | 이번 차수 미반영                                             |
+| gyeonggi-north-baby-cafes.md                     | 파주시 아이러브맘카페                                      | 신규 추가 완료 | 파주시 아이러브맘카페                 | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | gyeonggi-north-family-friendly-cafes.md          | IKEA 고양 스웨디시 카페                                    | 미반영         | -                                     | 이번 차수 미반영                                             |
 | gyeonggi-north-local-kids-cafes-semi-verified.md | 잼잼키즈룸 화정점                                          | 미반영         | -                                     | 이번 차수 미반영                                             |
 | gyeonggi-north-local-kids-cafes-semi-verified.md | 위바운스 키즈카페                                          | 미반영         | -                                     | 이번 차수 미반영                                             |
@@ -42,10 +42,10 @@
 | gyeonggi-north-private-kids-cafes.md             | 원더빌리지 & 카페 드 아쿠아                                | 신규 추가 완료 | 원더빌리지 & 카페 드 아쿠아           | content/places에 신규 seed 추가 + 썸네일 연결 완료           |
 | gyeonggi-north-private-kids-cafes.md             | IKEA 고양점 스몰란드                                       | 미반영         | -                                     | 이번 차수 미반영                                             |
 | gyeonggi-south-baby-cafes.md                     | 시청1·2호 아이사랑놀이터                                   | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-south-baby-cafes.md                     | 수내 아이사랑놀이터                                        | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-south-baby-cafes.md                     | 범박휴먼시아 아이러브맘카페                                | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-south-baby-cafes.md                     | 심곡본동 아이러브맘카페                                    | 미반영         | -                                     | 이번 차수 미반영                                             |
-| gyeonggi-south-baby-cafes.md                     | 고강본동 아이러브맘카페                                    | 미반영         | -                                     | 이번 차수 미반영                                             |
+| gyeonggi-south-baby-cafes.md                     | 수내 아이사랑놀이터                                        | 신규 추가 완료 | 수내 아이사랑놀이터                   | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| gyeonggi-south-baby-cafes.md                     | 범박휴먼시아 아이러브맘카페                                | 신규 추가 완료 | 범박휴먼시아 아이러브맘카페           | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| gyeonggi-south-baby-cafes.md                     | 심곡본동 아이러브맘카페                                    | 신규 추가 완료 | 심곡본동 아이러브맘카페               | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| gyeonggi-south-baby-cafes.md                     | 고강본동 아이러브맘카페                                    | 신규 추가 완료 | 고강본동 아이러브맘카페               | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | gyeonggi-south-baby-cafes.md                     | 안산시 아이러브맘카페                                      | 미반영         | -                                     | 이번 차수 미반영                                             |
 | gyeonggi-south-baby-cafes.md                     | 아이러브맘카페 향남1호점                                   | 미반영         | -                                     | 이번 차수 미반영                                             |
 | gyeonggi-south-baby-cafes.md                     | 아이러브맘카페 반송점                                      | 미반영         | -                                     | 이번 차수 미반영                                             |
@@ -86,8 +86,8 @@
 | incheon-baby-cafes.md                            | 아이사랑꿈터 서구 1호점                                    | 미반영         | -                                     | 이번 차수 미반영                                             |
 | incheon-baby-cafes.md                            | 아이사랑꿈터 서구 4호점                                    | 미반영         | -                                     | 이번 차수 미반영                                             |
 | seoul-baby-cafes.md                              | 서울형 키즈카페 시립 공예마을점                            | 미반영         | -                                     | 이번 차수 미반영                                             |
-| seoul-baby-cafes.md                              | 서울형 키즈카페 시립 뚝섬자벌레점                          | 미반영         | -                                     | 이번 차수 미반영                                             |
-| seoul-baby-cafes.md                              | 서울형 키즈카페 서초구 양재1동점(서리풀노리학교 양재1동점) | 미반영         | -                                     | 이번 차수 미반영                                             |
+| seoul-baby-cafes.md                              | 서울형 키즈카페 시립 뚝섬자벌레점                          | 신규 추가 완료 | 서울형 키즈카페 시립 뚝섬자벌레점     | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
+| seoul-baby-cafes.md                              | 서울형 키즈카페 서초구 양재1동점(서리풀노리학교 양재1동점) | 신규 추가 완료 | 서울형 키즈카페 서초구 양재1동점      | content/places에 신규 seed 추가 + 네이버 지도 링크 반영 완료 |
 | seoul-family-friendly-cafes.md                   | 행복플러스카페(서울상상나라 내)                            | 미반영         | -                                     | 이번 차수 미반영                                             |
 | seoul-local-kids-cafes-semi-verified.md          | 쏠키즈랜드                                                 | 미반영         | -                                     | 이번 차수 미반영                                             |
 | seoul-local-kids-cafes-semi-verified.md          | 슈슈풀레이스                                               | 미반영         | -                                     | 이번 차수 미반영                                             |
