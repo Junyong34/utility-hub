@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { MovingBudgetChecklistPageClient } from '@/components/tools/moving-budget-checklist';
 
 export const metadata: Metadata = {
@@ -16,5 +17,9 @@ export const metadata: Metadata = {
 };
 
 export default function MovingBudgetChecklistPage() {
-  return <MovingBudgetChecklistPageClient />;
+  return (
+    <Suspense fallback={<div className="text-muted-foreground">로딩 중...</div>}>
+      <MovingBudgetChecklistPageClient />
+    </Suspense>
+  );
 }
