@@ -75,8 +75,11 @@ export interface MovingBudgetComparisonDatum extends MovingBudgetChartDatum {
 
 export interface MovingBudgetSummary {
   totalAssets: number;
+  totalAvailableFunds: number;
+  plannedLoanAmount: number;
   totalEstimatedCost: number;
   balanceAmount: number;
+  apartmentCashNeeded: number;
   isShortage: boolean;
   completedChecklistCount: number;
   totalChecklistCount: number;

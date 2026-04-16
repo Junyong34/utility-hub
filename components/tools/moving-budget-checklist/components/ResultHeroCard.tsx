@@ -18,7 +18,8 @@ interface ResultHeroCardProps {
 }
 
 export function ResultHeroCard({ summary }: ResultHeroCardProps) {
-  const isEmpty = summary.totalAssets === 0 && summary.totalEstimatedCost === 0;
+  const isEmpty =
+    summary.totalAvailableFunds === 0 && summary.totalEstimatedCost === 0;
   const balanceAmount = Math.abs(summary.balanceAmount);
   const dominantGroup = summary.groupSummaries.find(
     (group) => group.id === summary.dominantGroupId
@@ -54,8 +55,8 @@ export function ResultHeroCard({ summary }: ResultHeroCardProps) {
   const description = isEmpty
     ? '현금, 보증금, 대출 예정금과 주요 비용을 먼저 입력해 보세요.'
     : summary.isShortage
-      ? `총예상비용이 총자산보다 ${formatCurrencyToKoreanUnits(balanceAmount)} 더 큽니다.`
-      : `현재 ${formatCurrencyToKoreanUnits(balanceAmount)} 여유가 남아 있습니다.`;
+      ? `총예상비용이 대출 포함 가용자금보다 ${formatCurrencyToKoreanUnits(balanceAmount)} 더 큽니다.`
+      : `현재 대출 포함 가용자금 기준으로 ${formatCurrencyToKoreanUnits(balanceAmount)} 여유가 남아 있습니다.`;
 
   return (
     <Card className="overflow-hidden">
@@ -99,9 +100,9 @@ export function ResultHeroCard({ summary }: ResultHeroCardProps) {
           ) : null}
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <div className="rounded-lg border border-border/70 bg-muted/20 p-3">
-            <p className="text-xs text-muted-foreground">총자산</p>
+            <p className="text-xs text-muted-foreground">총현금자산</p>
             <p className="mt-1 text-base font-semibold text-foreground">
               {formatCurrencyToKoreanUnits(summary.totalAssets)}
             </p>
@@ -110,6 +111,15 @@ export function ResultHeroCard({ summary }: ResultHeroCardProps) {
             <p className="text-xs text-muted-foreground">총예상비용</p>
             <p className="mt-1 text-base font-semibold text-foreground">
               {formatCurrencyToKoreanUnits(summary.totalEstimatedCost)}
+            </p>
+          </div>
+          <div className="rounded-lg border border-border/70 bg-muted/20 p-3">
+            <p className="text-xs text-muted-foreground">아파트 실지급액</p>
+            <p className="mt-1 text-base font-semibold text-foreground">
+              {formatCurrencyToKoreanUnits(summary.apartmentCashNeeded)}
+            </p>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              아파트 가격 - 대출 예정금
             </p>
           </div>
           <div className="rounded-lg border border-border/70 bg-muted/20 p-3">
@@ -128,6 +138,42 @@ export function ResultHeroCard({ summary }: ResultHeroCardProps) {
                 style={{ width: `${summary.progressPercentage}%` }}
               />
             </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-border/70 bg-muted/10">
+          <div className="border-b border-border/70 px-3 py-2">
+            <p className="text-sm font-medium text-foreground">대출+현금 표</p>
+          </div>
+          <div className="px-3 py-2">
+            <table className="w-full text-sm">
+              <tbody>
+                <tr className="border-b border-border/50">
+                  <th className="py-2 text-left font-normal text-muted-foreground">
+                    총현금자산
+                  </th>
+                  <td className="py-2 text-right font-medium text-foreground">
+                    {formatCurrencyToKoreanUnits(summary.totalAssets)}
+                  </td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <th className="py-2 text-left font-normal text-muted-foreground">
+                    대출 예정금
+                  </th>
+                  <td className="py-2 text-right font-medium text-foreground">
+                    {formatCurrencyToKoreanUnits(summary.plannedLoanAmount)}
+                  </td>
+                </tr>
+                <tr>
+                  <th className="py-2 text-left font-medium text-foreground">
+                    대출 포함 가용자금
+                  </th>
+                  <td className="py-2 text-right font-semibold text-foreground">
+                    {formatCurrencyToKoreanUnits(summary.totalAvailableFunds)}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </CardContent>

@@ -10,6 +10,9 @@ test.describe('/tools/home-check', () => {
       page.getByRole('heading', { name: '이사 예산 체크리스트' })
     ).toBeVisible();
     await expect(page.getByText('현재 결론')).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: '현재 이사 예산 체크리스트 링크 복사' })
+    ).toBeVisible();
     await expect(page.getByLabel('줄눈', { exact: true })).toBeVisible();
     await expect(page.getByText('목표일')).toHaveCount(0);
 
@@ -40,10 +43,17 @@ test.describe('/tools/home-check', () => {
     await expect(page.getByLabel('입주청소', { exact: true })).toHaveValue('350,000');
 
     await expect(page.getByText('현재 예산으로는 자금이 부족합니다')).toBeVisible();
-    await expect(page.getByText('총자산')).toBeVisible();
-    await expect(page.getByText('6,000만원')).toBeVisible();
+    await expect(page.getByText('총현금자산')).toBeVisible();
+    await expect(page.getByText('2억 9,000만원')).toBeVisible();
     await expect(page.getByText('총예상비용')).toBeVisible();
     await expect(page.getByText('4억 5,105만원')).toBeVisible();
+    await expect(page.getByText('아파트 실지급액')).toBeVisible();
+    await expect(page.getByText('3억 5,000만원')).toBeVisible();
+    await expect(page.getByText('대출+현금 표')).toBeVisible();
+    await expect(page.getByText('대출 예정금')).toBeVisible();
+    await expect(page.getByText('1억원')).toBeVisible();
+    await expect(page.getByText('대출 포함 가용자금')).toBeVisible();
+    await expect(page.getByText('3억 9,000만원')).toBeVisible();
     await expect(page.getByText('비용 구조 해석')).toBeVisible();
     await expect(page.getByText('조정 가능 비교')).toBeVisible();
     await expect(page.getByText('그룹 상태 보드')).toBeVisible();

@@ -87,7 +87,9 @@ export function calculateMovingBudgetSummary(
   );
   const normalizedCustomItems = rawState.customItems.map(normalizeCustomItem);
 
-  const totalAssets = Object.values(assets).reduce((sum, amount) => sum + amount, 0);
+  const totalAssets =
+    assets.cash + assets.stocks + assets.deposit + assets.savings;
+  const totalAvailableFunds = totalAssets + assets.loan;
   const validChecklistIds = new Set(
     MOVING_BUDGET_TEMPLATE_ITEMS.map((item) => item.id)
   );
@@ -134,11 +136,15 @@ export function calculateMovingBudgetSummary(
     (sum, group) => sum + group.totalAmount,
     0
   );
+  const apartmentCashNeeded = Math.max(
+    normalizedTemplateItems.apartmentPrice.amount - assets.loan,
+    0
+  );
   const groupSummariesWithShare = groupSummaries.map((group) => ({
     ...group,
     sharePercentage: calculateRatio(group.totalAmount, totalEstimatedCost),
   }));
-  const balanceAmount = totalAssets - totalEstimatedCost;
+  const balanceAmount = totalAvailableFunds - totalEstimatedCost;
   const totalChecklistCount = MOVING_BUDGET_TEMPLATE_ITEMS.length;
   const completedChecklistCount = normalizedChecklistProgress.length;
   const progressPercentage =
@@ -184,8 +190,11 @@ export function calculateMovingBudgetSummary(
 
   return {
     totalAssets,
+    totalAvailableFunds,
+    plannedLoanAmount: assets.loan,
     totalEstimatedCost,
     balanceAmount,
+    apartmentCashNeeded,
     isShortage: balanceAmount < 0,
     completedChecklistCount,
     totalChecklistCount,
