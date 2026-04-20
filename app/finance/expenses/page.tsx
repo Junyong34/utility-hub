@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { ExpensesAnalysisSection } from '@/components/finance/detail/ExpensesAnalysisSection';
 import {
   buildFinanceDashboardSummary,
-  createFinanceRepository,
   FINANCE_PAGE_METADATA,
   parseFinanceCompareParam,
   parseFinanceMonthParam,
 } from '@/lib/finance';
 import { FinanceShell } from '@/components/finance/FinanceShell';
+import { createFinanceRepository } from '@/lib/finance/server';
 
 interface PageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

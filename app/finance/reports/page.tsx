@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { ReportsSection } from '@/components/finance/detail/ReportsSection';
 import {
   buildFinanceReportsSummary,
-  createFinanceRepository,
   FINANCE_PAGE_METADATA,
   parseFinanceCompareParam,
   parseFinanceMonthParam,
   resolveFinanceMonth,
 } from '@/lib/finance';
 import { FinanceShell } from '@/components/finance/FinanceShell';
+import { createFinanceRepository } from '@/lib/finance/server';
 
 interface PageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

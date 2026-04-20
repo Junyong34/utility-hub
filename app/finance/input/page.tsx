@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { FinanceShell } from '@/components/finance/FinanceShell';
 import { FinanceInputPageClient } from '@/components/finance/input/FinanceInputPageClient';
+import { FinanceImportDialog } from '@/components/finance/input/FinanceImportDialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
-  createFinanceRepository,
   FINANCE_PAGE_METADATA,
   getNextFinanceMonth,
   getPreviousFinanceMonth,
@@ -13,8 +13,10 @@ import {
   parseFinanceMonthParam,
   resolveFinanceMonth,
 } from '@/lib/finance';
+import { createFinanceRepository } from '@/lib/finance/server';
 import {
   createFinanceMonthAction,
+  importFinanceSnapshotAction,
   saveFinanceSnapshotAction,
 } from './actions';
 
@@ -137,6 +139,7 @@ export default async function FinanceInputPage({ searchParams }: PageProps) {
             snapshot={snapshot}
             saved={resolvedSearchParams.saved === '1'}
             duplicateMonthAlert={duplicateMonthAlert}
+            importAction={importFinanceSnapshotAction}
             action={saveFinanceSnapshotAction}
           />
         ) : (
@@ -149,6 +152,10 @@ export default async function FinanceInputPage({ searchParams }: PageProps) {
                 아직 생성된 월 스냅샷이 없습니다. 먼저 월을 만들면 수입, 자산,
                 부채, 투자, 지출을 탭으로 입력할 수 있습니다.
               </p>
+              <FinanceImportDialog
+                action={importFinanceSnapshotAction}
+                buttonClassName="w-full justify-center"
+              />
               <Button asChild variant="outline">
                 <Link href={month ? `/finance?month=${month}` : '/finance'}>
                   대시보드로 돌아가기

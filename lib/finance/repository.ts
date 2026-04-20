@@ -325,6 +325,35 @@ async function writeDatasetToFile(
   await rename(tempFilePath, filePath);
 }
 
+function dedupeAndSortSnapshots(
+  snapshots: FinanceMonthlySnapshot[]
+): FinanceMonthlySnapshot[] {
+  const snapshotByMonth = new Map<string, FinanceMonthlySnapshot>();
+
+  for (const snapshot of snapshots) {
+    snapshotByMonth.set(snapshot.month, snapshot);
+  }
+
+  return [...snapshotByMonth.values()].sort((left, right) =>
+    left.month.localeCompare(right.month)
+  );
+}
+
+function upsertSnapshots(
+  existingSnapshots: FinanceMonthlySnapshot[],
+  incomingSnapshots: FinanceMonthlySnapshot[]
+): FinanceMonthlySnapshot[] {
+  const snapshotByMonth = new Map(
+    existingSnapshots.map((snapshot) => [snapshot.month, snapshot])
+  );
+
+  for (const snapshot of incomingSnapshots) {
+    snapshotByMonth.set(snapshot.month, snapshot);
+  }
+
+  return dedupeAndSortSnapshots([...snapshotByMonth.values()]);
+}
+
 export interface FinanceRepositoryOptions {
   filePath?: string;
 }
@@ -358,26 +387,37 @@ export function createFinanceRepository(options: FinanceRepositoryOptions = {}) 
     snapshot: FinanceMonthlySnapshot
   ): Promise<FinanceMonthlySnapshot> {
     const targetMonth = ensureMonth(snapshot.month);
-    const dataset = await readDatasetFromFile(filePath);
-    const normalizedSnapshot = normalizeSnapshot(snapshot, 0);
-    const nextSnapshots = dataset.snapshots.filter(
-      (item) => item.month !== targetMonth
-    );
-
-    nextSnapshots.push({
-      ...normalizedSnapshot,
+    const savedSnapshot = {
+      ...normalizeSnapshot(snapshot, 0),
       month: targetMonth,
       updatedAt: new Date().toISOString(),
-    });
+    };
+
+    await saveSnapshots([savedSnapshot]);
+
+    return savedSnapshot;
+  }
+
+  async function saveSnapshots(
+    snapshots: FinanceMonthlySnapshot[]
+  ): Promise<FinanceMonthlySnapshot[]> {
+    if (snapshots.length === 0) {
+      return [];
+    }
+
+    const dataset = await readDatasetFromFile(filePath);
+    const normalizedSnapshots = dedupeAndSortSnapshots(
+      snapshots.map((snapshot, index) => normalizeSnapshot(snapshot, index))
+    );
 
     const nextDataset: FinanceSnapshotsDataset = {
       version: DATASET_VERSION,
-      snapshots: sortSnapshots(nextSnapshots),
+      snapshots: upsertSnapshots(dataset.snapshots, normalizedSnapshots),
     };
 
     await writeDatasetToFile(filePath, nextDataset);
 
-    return nextDataset.snapshots.find((item) => item.month === targetMonth)!;
+    return normalizedSnapshots;
   }
 
   async function createSnapshotFromPrevious(
@@ -425,6 +465,7 @@ export function createFinanceRepository(options: FinanceRepositoryOptions = {}) 
     getLatestMonth,
     getSnapshot,
     saveSnapshot,
+    saveSnapshots,
     createSnapshotFromPrevious,
   };
 }

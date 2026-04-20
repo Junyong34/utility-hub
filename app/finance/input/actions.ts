@@ -2,10 +2,11 @@
 
 import { redirect } from 'next/navigation';
 import {
-  createFinanceRepository,
+  importFinanceSnapshotsFromRawJson,
   parseFinanceMonthParam,
   type FinanceMonthlySnapshot,
 } from '@/lib/finance';
+import { createFinanceRepository } from '@/lib/finance/server';
 
 export async function createFinanceMonthAction(formData: FormData) {
   const rawMonth = formData.get('month');
@@ -53,4 +54,26 @@ export async function saveFinanceSnapshotAction(formData: FormData) {
   await repository.saveSnapshot(parsed);
 
   redirect(`/finance/input?month=${month}&saved=1`);
+}
+
+export async function importFinanceSnapshotAction(formData: FormData) {
+  const rawImportJson = formData.get('importJson');
+
+  if (typeof rawImportJson !== 'string') {
+    throw new Error('가져올 재무 JSON이 필요합니다.');
+  }
+
+  const repository = createFinanceRepository();
+  const snapshots = await importFinanceSnapshotsFromRawJson(
+    rawImportJson,
+    repository
+  );
+
+  const latestSnapshot = snapshots.at(-1);
+
+  if (!latestSnapshot) {
+    throw new Error('가져올 스냅샷이 없습니다.');
+  }
+
+  return latestSnapshot.month;
 }

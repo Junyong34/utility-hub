@@ -10,6 +10,7 @@ interface FinanceInputPageClientProps {
   snapshot: FinanceMonthlySnapshot;
   saved: boolean;
   duplicateMonthAlert: boolean;
+  importAction: (formData: FormData) => Promise<string>;
   action: (formData: FormData) => void | Promise<void>;
 }
 
@@ -28,6 +29,7 @@ export function FinanceInputPageClient({
   snapshot,
   saved,
   duplicateMonthAlert,
+  importAction,
   action,
 }: FinanceInputPageClientProps) {
   const [draft, setDraft] = useState(() => cloneSnapshot(snapshot));
@@ -35,6 +37,11 @@ export function FinanceInputPageClient({
   const serializedDraft = useMemo(() => JSON.stringify(draft), [draft]);
   const dirty = serializedDraft !== baseline;
   const duplicateAlertShown = useRef(false);
+
+  useEffect(() => {
+    setDraft(cloneSnapshot(snapshot));
+    setBaseline(JSON.stringify(snapshot));
+  }, [snapshot]);
 
   useEffect(() => {
     if (duplicateMonthAlert && !duplicateAlertShown.current) {
@@ -74,6 +81,7 @@ export function FinanceInputPageClient({
             updatedAt={draft.updatedAt}
             dirty={dirty}
             saved={saved}
+            importAction={importAction}
             onReset={handleReset}
           />
           <CardContent className="pt-4">

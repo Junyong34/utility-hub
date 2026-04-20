@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { createDefaultExpenseRows } from '../lib/finance/defaults.ts';
+import type { FinanceMonthlySnapshot } from '../lib/finance/types.ts';
 
 const FINANCE_DATA_PATH = path.join(
   process.cwd(),
@@ -131,6 +133,35 @@ async function seedFinanceData() {
   );
 }
 
+function createImportSnapshot(
+  month: string,
+  overrides: Partial<FinanceMonthlySnapshot> = {}
+) {
+  return {
+    month,
+    updatedAt: `${month}-28T12:00:00.000Z`,
+    incomes: {
+      husbandSalary: 5000000,
+      wifeSalary: 4000000,
+      memo: '',
+      ...(overrides.incomes ?? {}),
+    },
+    assets: overrides.assets ?? [
+      {
+        id: `${month}-asset-1`,
+        owner: 'joint',
+        category: 'deposit',
+        name: '생활비 통장',
+        amount: 20000000,
+        memo: '',
+      },
+    ],
+    debts: overrides.debts ?? [],
+    investments: overrides.investments ?? [],
+    expenses: overrides.expenses ?? createDefaultExpenseRows(),
+  };
+}
+
 test.describe.configure({ mode: 'serial' });
 
 test.describe('/finance', () => {
@@ -210,5 +241,145 @@ test.describe('/finance', () => {
     await page.getByRole('link', { name: '투자', exact: true }).click();
     await expect(page).toHaveURL(/\/finance\/investments\?month=2026-02/);
     await expect(page.getByText('ETF 계좌: 10,000,000원')).toBeVisible();
+  });
+
+  test('JSON 문자열을 붙여넣어 가져오면 해당 월 스냅샷이 저장되고 새로고침 후 유지된다', async ({
+    page,
+  }) => {
+    await seedFinanceData();
+    await page.goto('/finance/input?month=2026-02', { waitUntil: 'networkidle' });
+
+    await page.getByRole('button', { name: '가져오기' }).first().click();
+    const snapshotPayload = JSON.stringify(
+      createImportSnapshot('2026-03', {
+        incomes: {
+          husbandSalary: 6100000,
+          wifeSalary: 4200000,
+          memo: 'imported',
+        },
+        assets: [
+          {
+            id: 'asset-import-1',
+            owner: 'joint',
+            category: 'deposit',
+            name: '새 생활비 통장',
+            amount: 25000000,
+            memo: '',
+          },
+        ],
+      }),
+      null,
+      2
+    );
+
+    const dialog = page.getByRole('dialog');
+    await dialog.getByLabel('JSON 문자열').fill(snapshotPayload);
+    await expect(dialog.getByText('2026.03', { exact: true })).toBeVisible();
+    await dialog.getByRole('button', { name: '가져오기' }).click();
+
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-03&saved=1/);
+    await expect(page.getByLabel('남편 월급')).toHaveValue('6,100,000');
+    await expect(page.getByLabel('아내 월급')).toHaveValue('4,200,000');
+    await page.reload({ waitUntil: 'networkidle' });
+    await expect(page.getByLabel('남편 월급')).toHaveValue('6,100,000');
+    await expect(page.getByLabel('아내 월급')).toHaveValue('4,200,000');
+    await page.getByRole('tab', { name: '자산' }).click();
+    await expect(page.getByLabel('자산명')).toHaveValue('새 생활비 통장');
+    await expect(page.getByLabel('금액')).toHaveValue('25,000,000');
+  });
+
+  test('JSON 파일을 업로드해도 모든 월 스냅샷을 저장한다', async ({ page }) => {
+    await seedFinanceData();
+    await page.goto('/finance/input?month=2026-02', { waitUntil: 'networkidle' });
+
+    await page.getByRole('button', { name: '가져오기' }).first().click();
+    const datasetPayload = JSON.stringify(
+      {
+        version: 1,
+        snapshots: [
+          createImportSnapshot('2026-04', {
+            incomes: {
+              husbandSalary: 5300000,
+              wifeSalary: 4300000,
+            },
+            assets: [
+              {
+                id: 'asset-2026-04-1',
+                owner: 'joint',
+                category: 'deposit',
+                name: '4월 통장',
+                amount: 21000000,
+                memo: '',
+              },
+            ],
+          }),
+          createImportSnapshot('2026-06', {
+            incomes: {
+              husbandSalary: 6300000,
+              wifeSalary: 4400000,
+            },
+            assets: [
+              {
+                id: 'asset-2026-06-1',
+                owner: 'joint',
+                category: 'deposit',
+                name: '6월 통장',
+                amount: 28000000,
+                memo: '',
+              },
+            ],
+          }),
+          createImportSnapshot('2026-05', {
+            incomes: {
+              husbandSalary: 5800000,
+              wifeSalary: 4350000,
+            },
+            assets: [
+              {
+                id: 'asset-2026-05-1',
+                owner: 'joint',
+                category: 'deposit',
+                name: '5월 통장',
+                amount: 24000000,
+                memo: '',
+              },
+            ],
+          }),
+        ],
+      },
+      null,
+      2
+    );
+
+    await page
+      .getByLabel('JSON 파일')
+      .setInputFiles({
+        name: 'finance-import.json',
+        mimeType: 'application/json',
+        buffer: Buffer.from(datasetPayload, 'utf8'),
+      });
+
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByText('선택된 파일: finance-import.json')).toBeVisible();
+    await expect(dialog.getByText('2026.06', { exact: true })).toBeVisible();
+    await expect(dialog.getByText('총 3개월')).toBeVisible();
+    await dialog.getByRole('button', { name: '가져오기' }).click();
+
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-06&saved=1/);
+    await expect(page.getByLabel('남편 월급')).toHaveValue('6,300,000');
+    await expect(page.getByLabel('아내 월급')).toHaveValue('4,400,000');
+
+    const persisted = JSON.parse(await readFile(FINANCE_DATA_PATH, 'utf8'));
+    const persistedMonths = persisted.snapshots.map(
+      (snapshot: { month: string }) => snapshot.month
+    );
+    expect(persistedMonths).toContain('2026-04');
+    expect(persistedMonths).toContain('2026-05');
+    expect(persistedMonths).toContain('2026-06');
+    expect(persistedMonths.at(-1)).toBe('2026-06');
+
+    await page.getByRole('tab', { name: '자산' }).click();
+    await expect(page.getByLabel('자산명')).toHaveValue('6월 통장');
+    await expect(page.getByLabel('금액')).toHaveValue('28,000,000');
   });
 });
