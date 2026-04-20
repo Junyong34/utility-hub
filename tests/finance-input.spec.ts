@@ -236,18 +236,34 @@ test.describe('/finance', () => {
 
     await page.getByRole('link', { name: '자산', exact: true }).click();
     await expect(page).toHaveURL(/\/finance\/assets\?month=2026-02/);
-    await expect(page.getByText('생활비 통장: 18,000,000원')).toBeVisible();
+    await expect(
+      page.getByTestId('finance-assets-composition').getByText('생활비 통장')
+    ).toBeVisible();
+    await expect(
+      page
+        .getByTestId('finance-assets-composition')
+        .getByText('18,000,000원 · 100%')
+    ).toBeVisible();
 
     await page.getByRole('link', { name: '투자', exact: true }).click();
     await expect(page).toHaveURL(/\/finance\/investments\?month=2026-02/);
-    await expect(page.getByText('ETF 계좌: 10,000,000원')).toBeVisible();
+    await expect(
+      page.getByTestId('finance-investments-composition').getByText('ETF')
+    ).toBeVisible();
+    await expect(
+      page
+        .getByTestId('finance-investments-composition')
+        .getByText('10,000,000원 · 100%')
+    ).toBeVisible();
   });
 
-  test('JSON 문자열을 붙여넣어 가져오면 해당 월 스냅샷이 저장되고 새로고침 후 유지된다', async ({
+  test('JSON 문자열을 붙여넣어 가져오면 브라우저에 보관되고 초기화할 때만 원본으로 돌아간다', async ({
     page,
   }) => {
     await seedFinanceData();
-    await page.goto('/finance/input?month=2026-02', { waitUntil: 'networkidle' });
+    await page.goto('/finance/input?month=2026-02', {
+      waitUntil: 'networkidle',
+    });
 
     await page.getByRole('button', { name: '가져오기' }).first().click();
     const snapshotPayload = JSON.stringify(
@@ -277,20 +293,42 @@ test.describe('/finance', () => {
     await expect(dialog.getByText('2026.03', { exact: true })).toBeVisible();
     await dialog.getByRole('button', { name: '가져오기' }).click();
 
-    await expect(page).toHaveURL(/\/finance\/input\?month=2026-03&saved=1/);
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-03&local=1/);
     await expect(page.getByLabel('남편 월급')).toHaveValue('6,100,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,200,000');
+
+    const persisted = JSON.parse(await readFile(FINANCE_DATA_PATH, 'utf8'));
+    const persistedMonths = persisted.snapshots.map(
+      (snapshot: { month: string }) => snapshot.month
+    );
+    expect(persistedMonths).not.toContain('2026-03');
+
     await page.reload({ waitUntil: 'networkidle' });
     await expect(page.getByLabel('남편 월급')).toHaveValue('6,100,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,200,000');
     await page.getByRole('tab', { name: '자산' }).click();
     await expect(page.getByLabel('자산명')).toHaveValue('새 생활비 통장');
     await expect(page.getByLabel('금액')).toHaveValue('25,000,000');
+
+    page.once('dialog', resetDialog => resetDialog.accept());
+    await page.getByRole('button', { name: '가져온 데이터 초기화' }).click();
+
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-02$/);
+    await expect(page.getByLabel('남편 월급')).toHaveValue('5,200,000');
+    await expect(page.getByLabel('아내 월급')).toHaveValue('4,100,000');
+
+    await page.reload({ waitUntil: 'networkidle' });
+    await expect(page.getByLabel('남편 월급')).toHaveValue('5,200,000');
+    await expect(page.getByLabel('아내 월급')).toHaveValue('4,100,000');
   });
 
-  test('JSON 파일을 업로드해도 모든 월 스냅샷을 저장한다', async ({ page }) => {
+  test('JSON 파일 업로드 후 수정한 값은 새로고침에 유지되고 JSON으로 다운로드된다', async ({
+    page,
+  }) => {
     await seedFinanceData();
-    await page.goto('/finance/input?month=2026-02', { waitUntil: 'networkidle' });
+    await page.goto('/finance/input?month=2026-02', {
+      waitUntil: 'networkidle',
+    });
 
     await page.getByRole('button', { name: '가져오기' }).first().click();
     const datasetPayload = JSON.stringify(
@@ -351,21 +389,21 @@ test.describe('/finance', () => {
       2
     );
 
-    await page
-      .getByLabel('JSON 파일')
-      .setInputFiles({
-        name: 'finance-import.json',
-        mimeType: 'application/json',
-        buffer: Buffer.from(datasetPayload, 'utf8'),
-      });
+    await page.getByLabel('JSON 파일').setInputFiles({
+      name: 'finance-import.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from(datasetPayload, 'utf8'),
+    });
 
     const dialog = page.getByRole('dialog');
-    await expect(dialog.getByText('선택된 파일: finance-import.json')).toBeVisible();
+    await expect(
+      dialog.getByText('선택된 파일: finance-import.json')
+    ).toBeVisible();
     await expect(dialog.getByText('2026.06', { exact: true })).toBeVisible();
     await expect(dialog.getByText('총 3개월')).toBeVisible();
     await dialog.getByRole('button', { name: '가져오기' }).click();
 
-    await expect(page).toHaveURL(/\/finance\/input\?month=2026-06&saved=1/);
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-06&local=1/);
     await expect(page.getByLabel('남편 월급')).toHaveValue('6,300,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,400,000');
 
@@ -373,13 +411,30 @@ test.describe('/finance', () => {
     const persistedMonths = persisted.snapshots.map(
       (snapshot: { month: string }) => snapshot.month
     );
-    expect(persistedMonths).toContain('2026-04');
-    expect(persistedMonths).toContain('2026-05');
-    expect(persistedMonths).toContain('2026-06');
-    expect(persistedMonths.at(-1)).toBe('2026-06');
+    expect(persistedMonths).not.toContain('2026-04');
+    expect(persistedMonths).not.toContain('2026-05');
+    expect(persistedMonths).not.toContain('2026-06');
 
     await page.getByRole('tab', { name: '자산' }).click();
     await expect(page.getByLabel('자산명')).toHaveValue('6월 통장');
     await expect(page.getByLabel('금액')).toHaveValue('28,000,000');
+
+    await page.getByRole('tab', { name: '수입' }).click();
+    await page.getByLabel('남편 월급').fill('6400000');
+    await page.reload({ waitUntil: 'networkidle' });
+    await expect(page.getByLabel('남편 월급')).toHaveValue('6,400,000');
+
+    const downloadPromise = page.waitForEvent('download');
+    await page.getByRole('button', { name: 'JSON 다운로드' }).click();
+    const download = await downloadPromise;
+    const downloadPath = await download.path();
+    expect(downloadPath).not.toBeNull();
+    const downloadedSnapshot = JSON.parse(
+      await readFile(downloadPath!, 'utf8')
+    ) as FinanceMonthlySnapshot;
+
+    expect(download.suggestedFilename()).toBe('finance-snapshot-2026-06.json');
+    expect(downloadedSnapshot.month).toBe('2026-06');
+    expect(downloadedSnapshot.incomes.husbandSalary).toBe(6400000);
   });
 });
