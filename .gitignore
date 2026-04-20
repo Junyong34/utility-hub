@@ -49,3 +49,6 @@ next-env.d.ts
 .idea
 .gstack/
 .superpowers/
+
+# private finance snapshots
+/data/private/finance-snapshots.json

@@ -1,0 +1,238 @@
+{
+  "version": 1,
+  "snapshots": [
+    {
+      "month": "2026-01",
+      "updatedAt": "2026-01-31T12:00:00.000Z",
+      "incomes": {
+        "husbandSalary": 4200000,
+        "wifeSalary": 5100000,
+        "memo": ""
+      },
+      "assets": [
+        {
+          "id": "asset-1",
+          "owner": "joint",
+          "category": "deposit",
+          "name": "생활비 통장",
+          "amount": 18000000,
+          "memo": ""
+        },
+        {
+          "id": "asset-2",
+          "owner": "husband",
+          "category": "cash",
+          "name": "비상금",
+          "amount": 2000000,
+          "memo": ""
+        }
+      ],
+      "debts": [
+        {
+          "id": "debt-1",
+          "owner": "joint",
+          "category": "mortgage",
+          "name": "주택담보대출",
+          "balance": 210000000,
+          "interestRate": 3.4,
+          "monthlyPayment": 980000,
+          "monthlyInterest": 590000,
+          "memo": ""
+        }
+      ],
+      "investments": [
+        {
+          "id": "investment-1",
+          "owner": "wife",
+          "category": "etf",
+          "name": "ETF 계좌",
+          "principal": 15000000,
+          "valuation": 16800000,
+          "memo": ""
+        }
+      ],
+      "expenses": [
+        {
+          "id": "fixed-insurance",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "insurance",
+          "name": "보험",
+          "amount": 210000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "fixed-housing",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "housing",
+          "name": "주거비",
+          "amount": 800000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "fixed-loan_interest",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "loan_interest",
+          "name": "대출이자",
+          "amount": 590000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "fixed-child_education",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "child_education",
+          "name": "자녀 교육비",
+          "amount": 350000,
+          "childRelated": true,
+          "memo": ""
+        },
+        {
+          "id": "fixed-child_care",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "child_care",
+          "name": "자녀 돌봄/보육비",
+          "amount": 180000,
+          "childRelated": true,
+          "memo": ""
+        },
+        {
+          "id": "fixed-communication",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "communication",
+          "name": "통신비",
+          "amount": 130000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "fixed-subscription",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "subscription",
+          "name": "구독료",
+          "amount": 65000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "fixed-maintenance_fee",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "maintenance_fee",
+          "name": "관리비",
+          "amount": 170000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "fixed-other_fixed",
+          "owner": "joint",
+          "type": "fixed",
+          "category": "other_fixed",
+          "name": "기타 고정지출",
+          "amount": 0,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-food",
+          "owner": "joint",
+          "type": "variable",
+          "category": "food",
+          "name": "식비",
+          "amount": 620000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-transport",
+          "owner": "joint",
+          "type": "variable",
+          "category": "transport",
+          "name": "교통비",
+          "amount": 180000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-shopping",
+          "owner": "joint",
+          "type": "variable",
+          "category": "shopping",
+          "name": "쇼핑",
+          "amount": 250000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-medical",
+          "owner": "joint",
+          "type": "variable",
+          "category": "medical",
+          "name": "의료비",
+          "amount": 40000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-dining",
+          "owner": "joint",
+          "type": "variable",
+          "category": "dining",
+          "name": "외식",
+          "amount": 210000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-leisure",
+          "owner": "joint",
+          "type": "variable",
+          "category": "leisure",
+          "name": "문화/여가",
+          "amount": 90000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-living",
+          "owner": "joint",
+          "type": "variable",
+          "category": "living",
+          "name": "생활용품",
+          "amount": 130000,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-event",
+          "owner": "joint",
+          "type": "variable",
+          "category": "event",
+          "name": "경조사비",
+          "amount": 0,
+          "childRelated": false,
+          "memo": ""
+        },
+        {
+          "id": "variable-other_variable",
+          "owner": "joint",
+          "type": "variable",
+          "category": "other_variable",
+          "name": "기타 변동지출",
+          "amount": 0,
+          "childRelated": false,
+          "memo": ""
+        }
+      ]
+    }
+  ]
+}
