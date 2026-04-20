@@ -26,6 +26,25 @@ export const DEFAULT_FINANCE_SNAPSHOTS_PATH = path.join(
   process.cwd(),
   'data/private/finance-snapshots.json'
 );
+const NETLIFY_FINANCE_SNAPSHOTS_PATH = '/tmp/finance-snapshots.json';
+const FINANCE_SNAPSHOTS_EXAMPLE_PATH = path.join(
+  process.cwd(),
+  'data/private/finance-snapshots.example.json'
+);
+
+function isNetlifyRuntime(): boolean {
+  return (
+    process.env.NETLIFY === 'true' ||
+    process.env.NETLIFY === '1' ||
+    Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME)
+  );
+}
+
+function resolveDefaultSnapshotsPath(): string {
+  return isNetlifyRuntime()
+    ? NETLIFY_FINANCE_SNAPSHOTS_PATH
+    : DEFAULT_FINANCE_SNAPSHOTS_PATH;
+}
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -301,6 +320,17 @@ async function readDatasetFromFile(filePath: string): Promise<FinanceSnapshotsDa
       'code' in error &&
       error.code === 'ENOENT'
     ) {
+      if (filePath === NETLIFY_FINANCE_SNAPSHOTS_PATH) {
+        try {
+          const example = await readFile(FINANCE_SNAPSHOTS_EXAMPLE_PATH, 'utf8');
+          const seededDataset = normalizeDataset(JSON.parse(example) as unknown);
+          await writeDatasetToFile(filePath, seededDataset);
+          return seededDataset;
+        } catch {
+          return createEmptyDataset();
+        }
+      }
+
       return createEmptyDataset();
     }
 
@@ -359,7 +389,7 @@ export interface FinanceRepositoryOptions {
 }
 
 export function createFinanceRepository(options: FinanceRepositoryOptions = {}) {
-  const filePath = options.filePath ?? DEFAULT_FINANCE_SNAPSHOTS_PATH;
+  const filePath = options.filePath ?? resolveDefaultSnapshotsPath();
 
   async function listMonths(): Promise<string[]> {
     const dataset = await readDatasetFromFile(filePath);

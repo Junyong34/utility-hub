@@ -8,20 +8,27 @@ import {
   type ChangeEvent,
   type FormEvent,
 } from 'react';
-import { useRouter } from 'next/navigation';
 import { Upload } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { parseFinanceSnapshotImports } from '@/lib/finance';
 import { formatFinanceMonthLabel } from '@/lib/finance/formatting';
+import type { FinanceMonthlySnapshot } from '@/lib/finance/types';
 import { cn } from '@/lib/utils';
 
 interface FinanceImportDialogProps {
-  action: (formData: FormData) => Promise<string>;
+  onImport: (snapshots: FinanceMonthlySnapshot[]) => void;
   dirty?: boolean;
   buttonClassName?: string;
 }
@@ -40,13 +47,14 @@ function buildImportPreview(rawJson: string): ImportPreview {
     const snapshots = parseFinanceSnapshotImports(rawJson);
 
     return {
-      snapshots: snapshots.map((snapshot) => snapshot.month),
+      snapshots: snapshots.map(snapshot => snapshot.month),
       error: null,
     };
   } catch (error) {
     return {
       snapshots: [],
-      error: error instanceof Error ? error.message : '가져올 JSON을 확인해 주세요.',
+      error:
+        error instanceof Error ? error.message : '가져올 JSON을 확인해 주세요.',
     };
   }
 }
@@ -58,7 +66,7 @@ function resetFileInput(input: HTMLInputElement | null) {
 }
 
 export function FinanceImportDialog({
-  action,
+  onImport,
   dirty = false,
   buttonClassName,
 }: FinanceImportDialogProps) {
@@ -69,7 +77,6 @@ export function FinanceImportDialog({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const router = useRouter();
   const titleId = useId();
   const descriptionId = useId();
   const fileInputId = `${titleId}-file`;
@@ -135,29 +142,27 @@ export function FinanceImportDialog({
 
     if (
       dirty &&
-      !window.confirm('현재 저장되지 않은 변경사항이 있습니다. 가져오기를 진행할까요?')
+      !window.confirm(
+        '현재 저장되지 않은 변경사항이 있습니다. 가져오기를 진행할까요?'
+      )
     ) {
       return;
     }
 
-    const formData = new FormData();
-    formData.set('importJson', rawJson);
-
     setIsSubmitting(true);
-    handleOpenChange(false);
 
     try {
-      const targetMonth = await action(formData);
-      setIsSubmitting(false);
+      const snapshots = parseFinanceSnapshotImports(rawJson);
+      onImport(snapshots);
       resetDialog();
-      router.replace(`/finance/input?month=${targetMonth}&saved=1`);
+      setOpen(false);
     } catch (error) {
-      setIsSubmitting(false);
       setSubmitError(
         error instanceof Error ? error.message : '가져오기에 실패했습니다.'
       );
-      handleOpenChange(true);
       textareaRef.current?.focus();
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -176,13 +181,16 @@ export function FinanceImportDialog({
         가져오기
       </Button>
       <DialogContent className="h-[min(90vh,48rem)] overflow-hidden sm:max-w-3xl">
-        <form onSubmit={handleSubmit} className="flex h-full min-h-0 flex-col gap-5">
+        <form
+          onSubmit={handleSubmit}
+          className="flex h-full min-h-0 flex-col gap-5"
+        >
           <DialogHeader>
             <DialogTitle id={titleId}>JSON 가져오기</DialogTitle>
             <DialogDescription id={descriptionId}>
-              JSON 파일을 올리거나 문자열을 붙여넣으면 월별 재무 스냅샷을
-              현재 저장소에 반영합니다. 데이터셋 JSON은 포함된 모든 월을
-              가져오고, 마지막 월 화면으로 이동합니다.
+              JSON 파일을 올리거나 문자열을 붙여넣으면 월별 재무 스냅샷을 이
+              브라우저에 보관합니다. 데이터셋 JSON은 포함된 월 중 마지막 월을
+              입력 화면에 불러옵니다.
             </DialogDescription>
           </DialogHeader>
 
@@ -197,7 +205,9 @@ export function FinanceImportDialog({
                 onChange={handleFileChange}
               />
               <p className="text-xs text-muted-foreground">
-                {fileName ? `선택된 파일: ${fileName}` : '파일을 선택하거나 아래에 JSON을 붙여넣으세요.'}
+                {fileName
+                  ? `선택된 파일: ${fileName}`
+                  : '파일을 선택하거나 아래에 JSON을 붙여넣으세요.'}
               </p>
             </div>
 
@@ -235,7 +245,7 @@ export function FinanceImportDialog({
                 </span>
               ) : (
                 <span className="text-xs text-muted-foreground">
-                  가져오면 JSON에 포함된 모든 월을 저장하고 마지막 월 화면을 다시 엽니다.
+                  가져오면 서버에 저장하지 않고 브라우저에만 보관합니다.
                 </span>
               )}
             </div>
@@ -258,7 +268,10 @@ export function FinanceImportDialog({
             >
               닫기
             </Button>
-            <Button type="submit" disabled={Boolean(validationError) || isSubmitting}>
+            <Button
+              type="submit"
+              disabled={Boolean(validationError) || isSubmitting}
+            >
               {isSubmitting ? '가져오는 중...' : '가져오기'}
             </Button>
           </DialogFooter>

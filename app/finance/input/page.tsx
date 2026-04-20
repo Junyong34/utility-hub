@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { FinanceShell } from '@/components/finance/FinanceShell';
 import { FinanceInputPageClient } from '@/components/finance/input/FinanceInputPageClient';
-import { FinanceImportDialog } from '@/components/finance/input/FinanceImportDialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -14,11 +12,7 @@ import {
   resolveFinanceMonth,
 } from '@/lib/finance';
 import { createFinanceRepository } from '@/lib/finance/server';
-import {
-  createFinanceMonthAction,
-  importFinanceSnapshotAction,
-  saveFinanceSnapshotAction,
-} from './actions';
+import { createFinanceMonthAction, saveFinanceSnapshotAction } from './actions';
 
 interface PageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -39,7 +33,9 @@ export default async function FinanceInputPage({ searchParams }: PageProps) {
   const snapshot = month ? await repository.getSnapshot(month) : null;
   const now = new Date();
   const suggestedMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-  const createMonthDefault = month ? getNextFinanceMonth(month) : suggestedMonth;
+  const createMonthDefault = month
+    ? getNextFinanceMonth(month)
+    : suggestedMonth;
   const previousMonthDefault = month ? getPreviousFinanceMonth(month) : null;
 
   return (
@@ -64,14 +60,22 @@ export default async function FinanceInputPage({ searchParams }: PageProps) {
             {month && previousMonthDefault ? (
               <div className="grid gap-2 sm:grid-cols-2">
                 <form action={createFinanceMonthAction}>
-                  <input type="hidden" name="month" value={previousMonthDefault} />
+                  <input
+                    type="hidden"
+                    name="month"
+                    value={previousMonthDefault}
+                  />
                   <input type="hidden" name="sourceMonth" value={month} />
                   <Button type="submit" variant="outline" className="w-full">
                     이전 월 스냅샷 생성
                   </Button>
                 </form>
                 <form action={createFinanceMonthAction}>
-                  <input type="hidden" name="month" value={createMonthDefault} />
+                  <input
+                    type="hidden"
+                    name="month"
+                    value={createMonthDefault}
+                  />
                   <input type="hidden" name="sourceMonth" value={month} />
                   <Button type="submit" variant="outline" className="w-full">
                     다음 월 스냅샷 생성
@@ -109,7 +113,7 @@ export default async function FinanceInputPage({ searchParams }: PageProps) {
                   className="h-9 w-full rounded-lg border bg-background px-3 text-sm text-foreground"
                 >
                   <option value="">가장 가까운 이전 월</option>
-                  {availableMonths.map((availableMonth) => (
+                  {availableMonths.map(availableMonth => (
                     <option key={availableMonth} value={availableMonth}>
                       {availableMonth}
                     </option>
@@ -133,37 +137,13 @@ export default async function FinanceInputPage({ searchParams }: PageProps) {
           </CardContent>
         </Card>
 
-        {snapshot ? (
-          <FinanceInputPageClient
-            key={snapshot.month}
-            snapshot={snapshot}
-            saved={resolvedSearchParams.saved === '1'}
-            duplicateMonthAlert={duplicateMonthAlert}
-            importAction={importFinanceSnapshotAction}
-            action={saveFinanceSnapshotAction}
-          />
-        ) : (
-          <Card>
-            <CardHeader>
-              <CardTitle>입력 준비 상태</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3 text-sm text-muted-foreground">
-              <p>
-                아직 생성된 월 스냅샷이 없습니다. 먼저 월을 만들면 수입, 자산,
-                부채, 투자, 지출을 탭으로 입력할 수 있습니다.
-              </p>
-              <FinanceImportDialog
-                action={importFinanceSnapshotAction}
-                buttonClassName="w-full justify-center"
-              />
-              <Button asChild variant="outline">
-                <Link href={month ? `/finance?month=${month}` : '/finance'}>
-                  대시보드로 돌아가기
-                </Link>
-              </Button>
-            </CardContent>
-          </Card>
-        )}
+        <FinanceInputPageClient
+          key={snapshot?.month ?? 'empty'}
+          snapshot={snapshot}
+          saved={resolvedSearchParams.saved === '1'}
+          duplicateMonthAlert={duplicateMonthAlert}
+          action={saveFinanceSnapshotAction}
+        />
       </div>
     </FinanceShell>
   );
