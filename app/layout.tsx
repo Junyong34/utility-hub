@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
-import { Roboto } from 'next/font/google';
+import localFont from 'next/font/local';
 import Link from 'next/link';
 import './globals.css';
 import { generateMetadata as createMetadata, SITE_CONFIG } from '@/lib/seo';
@@ -14,18 +14,21 @@ import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Providers } from './providers';
 import { NAV_ITEMS } from '@/components/layout/nav-config';
 
-/**
- * Method A: Single font with display swap
- * - Only Roboto (reduces network requests from 3 to 1)
- * - display: 'swap' for faster perceived load (shows fallback immediately)
- * - weights: [400, 500, 700] to cover all use cases
- */
-const roboto = Roboto({
-  weight: ['400', '500', '700'],
-  subsets: ['latin'],
+const notoSansKr = localFont({
+  src: [
+    {
+      path: '../public/fonts/og/noto-sans-kr-korean-400-normal.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/og/noto-sans-kr-korean-700-normal.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
   variable: '--font-sans',
   display: 'swap',
-  preload: true,
 });
 
 /**
@@ -59,10 +62,9 @@ export const viewport: Viewport = {
 };
 
 /**
- * Root Layout - Method A Optimized
- * - Single font (Roboto only)
+ * Root Layout
+ * - Local Korean font to avoid runtime network fetches
  * - display: swap for faster initial render
- * - Removed redundant preconnect (next/font handles it)
  */
 export default function RootLayout({
   children,
@@ -73,7 +75,7 @@ export default function RootLayout({
   const structuredData = [createWebSiteSchema(), createOrganizationSchema()];
 
   return (
-    <html lang="ko" className={roboto.variable}>
+    <html lang="ko" className={notoSansKr.variable}>
       <head>
         {/* Preconnect only for non-font external resources */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />

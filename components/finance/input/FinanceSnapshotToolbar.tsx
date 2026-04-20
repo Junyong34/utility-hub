@@ -4,12 +4,14 @@ import { useFormStatus } from 'react-dom';
 import { RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatFinanceMonthLabel } from '@/lib/finance/formatting';
+import { FinanceImportDialog } from './FinanceImportDialog';
 
 interface FinanceSnapshotToolbarProps {
   month: string;
   updatedAt: string;
   dirty: boolean;
   saved: boolean;
+  importAction: (formData: FormData) => Promise<string>;
   onReset: () => void;
 }
 
@@ -28,6 +30,7 @@ export function FinanceSnapshotToolbar({
   updatedAt,
   dirty,
   saved,
+  importAction,
   onReset,
 }: FinanceSnapshotToolbarProps) {
   return (
@@ -47,7 +50,8 @@ export function FinanceSnapshotToolbar({
             : '현재 스냅샷이 저장되어 있습니다.'}
         </p>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
+        <FinanceImportDialog action={importAction} dirty={dirty} />
         <Button
           type="button"
           variant="outline"
