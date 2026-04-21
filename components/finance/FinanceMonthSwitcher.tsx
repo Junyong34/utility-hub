@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 interface FinanceMonthSwitcherProps {
   currentPath: string;
   availableMonths: string[];
+  temporaryMonths?: string[];
   month: string | null;
   compare: FinanceComparisonMode;
 }
@@ -19,28 +20,36 @@ interface FinanceMonthSwitcherProps {
 export function FinanceMonthSwitcher({
   currentPath,
   availableMonths,
+  temporaryMonths = [],
   month,
   compare,
 }: FinanceMonthSwitcherProps) {
   const router = useRouter();
+  const displayMonths = useMemo(
+    () => [...new Set([...availableMonths, ...temporaryMonths])].sort(),
+    [availableMonths, temporaryMonths]
+  );
   const availableMonthSet = useMemo(
-    () => new Set(availableMonths),
-    [availableMonths]
+    () => new Set(displayMonths),
+    [displayMonths]
   );
   const availableYears = useMemo(
-    () => [...new Set(availableMonths.map((item) => item.slice(0, 4)))].sort(),
-    [availableMonths]
+    () => [...new Set(displayMonths.map(item => item.slice(0, 4)))].sort(),
+    [displayMonths]
   );
   const [selectedYearState, setSelectedYearState] = useState(() => ({
     sourceMonth: month,
-    year: month?.slice(0, 4) ?? availableYears.at(-1) ?? String(new Date().getFullYear()),
+    year:
+      month?.slice(0, 4) ??
+      availableYears.at(-1) ??
+      String(new Date().getFullYear()),
   }));
   const selectedYear =
     selectedYearState.sourceMonth === month
       ? selectedYearState.year
-      : month?.slice(0, 4) ?? selectedYearState.year;
+      : (month?.slice(0, 4) ?? selectedYearState.year);
 
-  if (!month || availableMonths.length === 0) {
+  if (!month || displayMonths.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
         아직 생성된 월 데이터가 없습니다.
@@ -48,12 +57,12 @@ export function FinanceMonthSwitcher({
     );
   }
 
-  const currentIndex = availableMonths.indexOf(month);
+  const currentIndex = displayMonths.indexOf(month);
   const previousMonth =
-    currentIndex > 0 ? availableMonths[currentIndex - 1] : null;
+    currentIndex > 0 ? displayMonths[currentIndex - 1] : null;
   const nextMonth =
-    currentIndex >= 0 && currentIndex < availableMonths.length - 1
-      ? availableMonths[currentIndex + 1]
+    currentIndex >= 0 && currentIndex < displayMonths.length - 1
+      ? displayMonths[currentIndex + 1]
       : null;
   const monthButtons = Array.from({ length: 12 }, (_, index) => {
     const monthValue = String(index + 1).padStart(2, '0');
@@ -76,7 +85,7 @@ export function FinanceMonthSwitcher({
         <select
           id="finance-month-select"
           value={selectedYear}
-          onChange={(event) => {
+          onChange={event => {
             setSelectedYearState({
               sourceMonth: month,
               year: event.target.value,
@@ -84,7 +93,7 @@ export function FinanceMonthSwitcher({
           }}
           className="h-9 w-full rounded-lg border bg-background px-3 text-sm font-medium text-foreground"
         >
-          {availableYears.map((year) => (
+          {availableYears.map(year => (
             <option key={year} value={year}>
               {year}년
             </option>
@@ -129,7 +138,7 @@ export function FinanceMonthSwitcher({
         </div>
       </div>
       <div className="grid grid-cols-4 gap-1 sm:grid-cols-6">
-        {monthButtons.map((item) => {
+        {monthButtons.map(item => {
           if (!item.available) {
             return (
               <button
@@ -168,8 +177,11 @@ export function FinanceMonthSwitcher({
         })}
       </div>
       <p className="text-xs text-muted-foreground">
-        총 {availableMonths.length}개월 저장됨 · 현재{' '}
-        {formatFinanceMonthLabel(month)}
+        총 {availableMonths.length}개월 저장됨
+        {temporaryMonths.length > 0
+          ? ` · 임시 ${temporaryMonths.length}개월`
+          : ''}{' '}
+        · 현재 {formatFinanceMonthLabel(month)}
       </p>
     </div>
   );

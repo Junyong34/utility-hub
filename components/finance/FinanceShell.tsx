@@ -8,6 +8,7 @@ interface FinanceShellProps {
   description: string;
   currentPath: string;
   availableMonths: string[];
+  temporaryMonths?: string[];
   month: string | null;
   compare?: FinanceComparisonMode;
   children: ReactNode;
@@ -18,6 +19,7 @@ export function FinanceShell({
   description,
   currentPath,
   availableMonths,
+  temporaryMonths = [],
   month,
   compare = 'half',
   children,
@@ -52,6 +54,7 @@ export function FinanceShell({
           <FinanceMonthSwitcher
             currentPath={currentPath}
             availableMonths={availableMonths}
+            temporaryMonths={temporaryMonths}
             month={month}
             compare={compare}
           />
