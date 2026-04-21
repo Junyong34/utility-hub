@@ -8,6 +8,7 @@ const FINANCE_DATA_PATH = path.join(
   process.cwd(),
   'data/private/finance-snapshots.json'
 );
+const LOCAL_DRAFT_STORAGE_KEY = 'zento-finance-input-local-draft-v1';
 let originalFinanceData: string | null = null;
 
 async function readExistingFinanceData(): Promise<string | null> {
@@ -314,6 +315,14 @@ test.describe('/finance', () => {
     await page.getByRole('button', { name: '가져온 데이터 초기화' }).click();
 
     await expect(page).toHaveURL(/\/finance\/input\?month=2026-02$/);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          key => window.localStorage.getItem(key),
+          LOCAL_DRAFT_STORAGE_KEY
+        )
+      )
+      .toBeNull();
     await expect(page.getByLabel('남편 월급')).toHaveValue('5,200,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,100,000');
 

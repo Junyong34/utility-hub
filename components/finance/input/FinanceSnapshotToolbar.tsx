@@ -1,6 +1,5 @@
 'use client';
 
-import { useFormStatus } from 'react-dom';
 import { Download, RotateCcw, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatFinanceMonthLabel } from '@/lib/finance/formatting';
@@ -13,17 +12,25 @@ interface FinanceSnapshotToolbarProps {
   dirty: boolean;
   saved: boolean;
   localDraft: boolean;
+  savePending: boolean;
+  onSave: () => void;
   onImport: (snapshots: FinanceMonthlySnapshot[]) => void;
   onDownload: () => void;
   onClearLocalDraft: () => void;
   onReset: () => void;
 }
 
-function SaveButton({ dirty }: { dirty: boolean }) {
-  const { pending } = useFormStatus();
-
+function SaveButton({
+  dirty,
+  pending,
+  onSave,
+}: {
+  dirty: boolean;
+  pending: boolean;
+  onSave: () => void;
+}) {
   return (
-    <Button type="submit" disabled={pending || !dirty}>
+    <Button type="button" onClick={onSave} disabled={pending || !dirty}>
       {pending ? '저장 중...' : dirty ? '스냅샷 저장' : '저장됨'}
     </Button>
   );
@@ -35,6 +42,8 @@ export function FinanceSnapshotToolbar({
   dirty,
   saved,
   localDraft,
+  savePending,
+  onSave,
   onImport,
   onDownload,
   onClearLocalDraft,
@@ -80,7 +89,7 @@ export function FinanceSnapshotToolbar({
             가져온 데이터 초기화
           </Button>
         ) : (
-          <SaveButton dirty={dirty} />
+          <SaveButton dirty={dirty} pending={savePending} onSave={onSave} />
         )}
       </div>
     </div>
