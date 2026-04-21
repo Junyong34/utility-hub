@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   useEffect,
   useMemo,
@@ -19,7 +20,6 @@ interface FinanceInputPageClientProps {
   snapshot: FinanceMonthlySnapshot | null;
   saved: boolean;
   duplicateMonthAlert: boolean;
-  action: (formData: FormData) => void | Promise<void>;
 }
 
 const LOCAL_DRAFT_STORAGE_KEY = 'zento-finance-input-local-draft-v1';
@@ -28,6 +28,11 @@ const LOCAL_DRAFT_STORAGE_EVENT = 'finance-input-local-draft-change';
 interface StoredLocalDraft {
   version: 1;
   snapshot: FinanceMonthlySnapshot;
+}
+
+interface SaveSnapshotResponse {
+  redirectTo?: string;
+  error?: string;
 }
 
 function cloneSnapshot(
@@ -116,28 +121,12 @@ function clearLocalDraft() {
   emitLocalDraftChange();
 }
 
-function replaceUrlForLocalDraft(month: string) {
-  const nextUrl = new URL(window.location.href);
-  nextUrl.searchParams.set('month', month);
-  nextUrl.searchParams.set('local', '1');
-  nextUrl.searchParams.delete('saved');
-  nextUrl.searchParams.delete('duplicate');
-  window.history.replaceState({}, '', nextUrl.pathname + nextUrl.search);
+function buildLocalDraftHref(month: string) {
+  return `/finance/input?month=${month}&local=1`;
 }
 
-function replaceUrlForServerSnapshot(snapshot: FinanceMonthlySnapshot | null) {
-  const nextUrl = new URL(window.location.href);
-  nextUrl.searchParams.delete('local');
-  nextUrl.searchParams.delete('saved');
-  nextUrl.searchParams.delete('duplicate');
-
-  if (snapshot) {
-    nextUrl.searchParams.set('month', snapshot.month);
-  } else {
-    nextUrl.searchParams.delete('month');
-  }
-
-  window.history.replaceState({}, '', nextUrl.pathname + nextUrl.search);
+function buildServerSnapshotHref(snapshot: FinanceMonthlySnapshot | null) {
+  return snapshot ? `/finance/input?month=${snapshot.month}` : '/finance/input';
 }
 
 function downloadSnapshotJson(snapshot: FinanceMonthlySnapshot) {
@@ -154,12 +143,34 @@ function downloadSnapshotJson(snapshot: FinanceMonthlySnapshot) {
   URL.revokeObjectURL(url);
 }
 
+async function saveFinanceSnapshot(
+  snapshot: FinanceMonthlySnapshot
+): Promise<string> {
+  const response = await fetch('/api/finance/snapshots', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      intent: 'save',
+      snapshot,
+    }),
+  });
+  const payload = (await response.json()) as SaveSnapshotResponse;
+
+  if (!response.ok || !payload.redirectTo) {
+    throw new Error(payload.error ?? '스냅샷 저장에 실패했습니다.');
+  }
+
+  return payload.redirectTo;
+}
+
 export function FinanceInputPageClient({
   snapshot,
   saved,
   duplicateMonthAlert,
-  action,
 }: FinanceInputPageClientProps) {
+  const router = useRouter();
   const localDraftRaw = useSyncExternalStore(
     subscribeToLocalDraft,
     getLocalDraftSnapshot,
@@ -182,7 +193,7 @@ export function FinanceInputPageClient({
     const clonedDraft = cloneSnapshot(nextDraft);
 
     writeLocalDraft(clonedDraft);
-    replaceUrlForLocalDraft(clonedDraft.month);
+    router.replace(buildLocalDraftHref(clonedDraft.month), { scroll: false });
   };
 
   const handleClearLocalDraft = () => {
@@ -195,7 +206,8 @@ export function FinanceInputPageClient({
     }
 
     clearLocalDraft();
-    replaceUrlForServerSnapshot(snapshot);
+    router.replace(buildServerSnapshotHref(snapshot), { scroll: false });
+    router.refresh();
   };
 
   if (!activeSnapshot) {
@@ -228,7 +240,6 @@ export function FinanceInputPageClient({
       localDraft={localDraft}
       saved={saved}
       duplicateMonthAlert={duplicateMonthAlert}
-      action={action}
       onImport={handleImport}
       onClearLocalDraft={handleClearLocalDraft}
     />
@@ -240,7 +251,6 @@ interface FinanceInputDraftEditorProps {
   localDraft: boolean;
   saved: boolean;
   duplicateMonthAlert: boolean;
-  action: (formData: FormData) => void | Promise<void>;
   onImport: (snapshots: FinanceMonthlySnapshot[]) => void;
   onClearLocalDraft: () => void;
 }
@@ -250,16 +260,18 @@ function FinanceInputDraftEditor({
   localDraft,
   saved,
   duplicateMonthAlert,
-  action,
   onImport,
   onClearLocalDraft,
 }: FinanceInputDraftEditorProps) {
+  const router = useRouter();
   const [draft, setDraft] = useState<FinanceMonthlySnapshot>(() =>
     cloneSnapshot(initialSnapshot)
   );
   const [baseline, setBaseline] = useState(() =>
     JSON.stringify(initialSnapshot)
   );
+  const [savePending, setSavePending] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const serializedDraft = useMemo(() => JSON.stringify(draft), [draft]);
   const dirty = serializedDraft !== baseline;
   const duplicateAlertShown = useRef(false);
@@ -301,6 +313,24 @@ function FinanceInputDraftEditor({
     downloadSnapshotJson(draft);
   };
 
+  const handleSave = async () => {
+    setSaveError(null);
+    setSavePending(true);
+
+    try {
+      const redirectTo = await saveFinanceSnapshot(draft);
+      setBaseline(serializedDraft);
+      router.push(redirectTo);
+      router.refresh();
+    } catch (error) {
+      setSaveError(
+        error instanceof Error ? error.message : '스냅샷 저장에 실패했습니다.'
+      );
+    } finally {
+      setSavePending(false);
+    }
+  };
+
   const formContent = (
     <>
       <FinanceSnapshotToolbar
@@ -309,6 +339,8 @@ function FinanceInputDraftEditor({
         dirty={dirty}
         saved={saved}
         localDraft={localDraft}
+        savePending={savePending}
+        onSave={handleSave}
         onImport={onImport}
         onDownload={handleDownload}
         onClearLocalDraft={onClearLocalDraft}
@@ -319,6 +351,9 @@ function FinanceInputDraftEditor({
           draft={draft}
           onChange={nextDraft => setDraft(nextDraft)}
         />
+        {saveError ? (
+          <p className="mt-4 text-sm text-destructive">{saveError}</p>
+        ) : null}
       </CardContent>
     </>
   );
@@ -326,19 +361,7 @@ function FinanceInputDraftEditor({
   return (
     <div className="space-y-4">
       <Card>
-        {localDraft ? (
-          <div>{formContent}</div>
-        ) : (
-          <form
-            action={async formData => {
-              setBaseline(serializedDraft);
-              await action(formData);
-            }}
-          >
-            <input type="hidden" name="snapshot" value={serializedDraft} />
-            {formContent}
-          </form>
-        )}
+        <div>{formContent}</div>
       </Card>
     </div>
   );

@@ -8,6 +8,7 @@ const FINANCE_DATA_PATH = path.join(
   process.cwd(),
   'data/private/finance-snapshots.json'
 );
+const LOCAL_DRAFT_STORAGE_KEY = 'zento-finance-input-local-draft-v1';
 let originalFinanceData: string | null = null;
 
 async function readExistingFinanceData(): Promise<string | null> {
@@ -294,6 +295,8 @@ test.describe('/finance', () => {
     await dialog.getByRole('button', { name: '가져오기' }).click();
 
     await expect(page).toHaveURL(/\/finance\/input\?month=2026-03&local=1/);
+    await expect(page.getByText('임시 1개월')).toBeVisible();
+    await expect(page.getByRole('button', { name: '3월' })).toBeEnabled();
     await expect(page.getByLabel('남편 월급')).toHaveValue('6,100,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,200,000');
 
@@ -314,6 +317,14 @@ test.describe('/finance', () => {
     await page.getByRole('button', { name: '가져온 데이터 초기화' }).click();
 
     await expect(page).toHaveURL(/\/finance\/input\?month=2026-02$/);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          key => window.localStorage.getItem(key),
+          LOCAL_DRAFT_STORAGE_KEY
+        )
+      )
+      .toBeNull();
     await expect(page.getByLabel('남편 월급')).toHaveValue('5,200,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,100,000');
 
@@ -404,6 +415,8 @@ test.describe('/finance', () => {
     await dialog.getByRole('button', { name: '가져오기' }).click();
 
     await expect(page).toHaveURL(/\/finance\/input\?month=2026-06&local=1/);
+    await expect(page.getByText('임시 1개월')).toBeVisible();
+    await expect(page.getByRole('button', { name: '6월' })).toBeEnabled();
     await expect(page.getByLabel('남편 월급')).toHaveValue('6,300,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,400,000');
 
