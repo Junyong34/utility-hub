@@ -75,7 +75,7 @@ export default function RootLayout({
   const structuredData = [createWebSiteSchema(), createOrganizationSchema()];
 
   return (
-    <html lang="ko" className={notoSansKr.variable}>
+    <html lang="ko" className={notoSansKr.variable} suppressHydrationWarning>
       <head>
         {/* Preconnect only for non-font external resources */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />

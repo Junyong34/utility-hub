@@ -29,7 +29,6 @@ import { cn } from '@/lib/utils';
 
 interface FinanceImportDialogProps {
   onImport: (snapshots: FinanceMonthlySnapshot[]) => void;
-  dirty?: boolean;
   buttonClassName?: string;
 }
 
@@ -67,7 +66,6 @@ function resetFileInput(input: HTMLInputElement | null) {
 
 export function FinanceImportDialog({
   onImport,
-  dirty = false,
   buttonClassName,
 }: FinanceImportDialogProps) {
   const [open, setOpen] = useState(false);
@@ -137,15 +135,6 @@ export function FinanceImportDialog({
     if (!latestMonth || validationError) {
       setSubmitError(validationError ?? '가져올 JSON을 확인해 주세요.');
       textareaRef.current?.focus();
-      return;
-    }
-
-    if (
-      dirty &&
-      !window.confirm(
-        '현재 저장되지 않은 변경사항이 있습니다. 가져오기를 진행할까요?'
-      )
-    ) {
       return;
     }
 
@@ -239,15 +228,10 @@ export function FinanceImportDialog({
               {snapshotCount > 1 ? (
                 <Badge variant="outline">총 {snapshotCount}개월</Badge>
               ) : null}
-              {dirty ? (
-                <span className="text-xs text-muted-foreground">
-                  현재 편집 내용은 가져오기 후 유지되지 않습니다.
-                </span>
-              ) : (
-                <span className="text-xs text-muted-foreground">
-                  가져오면 서버에 저장하지 않고 브라우저에만 보관합니다.
-                </span>
-              )}
+              <span className="text-xs text-muted-foreground">
+                가져오면 현재 입력 내용은 JSON 데이터로 교체되고, 결과는 이
+                브라우저에만 보관합니다.
+              </span>
             </div>
 
             {activeError ? (

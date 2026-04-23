@@ -184,7 +184,7 @@ test.describe('/finance', () => {
     await writeFile(FINANCE_DATA_PATH, originalFinanceData, 'utf8');
   });
 
-  test('첫 월 생성 후 수입과 자산을 저장하면 새로고침 후 유지된다', async ({
+  test('입력 화면은 처음에는 비어 있고 빈 입력 시작 후 로컬 드래프트가 유지된다', async ({
     page,
   }) => {
     await page.goto('/finance/input', { waitUntil: 'networkidle' });
@@ -193,12 +193,16 @@ test.describe('/finance', () => {
       'content',
       /noindex/
     );
-    await expect(page.getByText('월 일괄 덮어쓰기')).toHaveCount(0);
+    await expect(
+      page.getByText('아직 생성된 월 데이터가 없습니다.')
+    ).toBeVisible();
+    await expect(page.getByText('아직 입력 데이터가 없습니다.')).toBeVisible();
     await page.getByLabel('새 월 생성').fill('2026-01');
-    await page.getByRole('button', { name: '월 스냅샷 생성/복사' }).click();
+    await page.getByRole('button', { name: '빈 입력 시작' }).click();
 
-    await expect(page).toHaveURL(/\/finance\/input\?month=2026-01/);
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-01&local=1/);
     await expect(page.getByText('2026.01 스냅샷')).toBeVisible();
+    await expect(page.getByText('임시 1개월')).toBeVisible();
 
     await page.getByLabel('남편 월급').fill('5200000');
     await page.getByLabel('아내 월급').fill('4100000');
@@ -206,9 +210,6 @@ test.describe('/finance', () => {
     await page.getByRole('button', { name: '자산 추가' }).click();
     await page.getByLabel('자산명').fill('생활비 통장');
     await page.getByLabel('금액').fill('18000000');
-    await page.getByRole('button', { name: '스냅샷 저장' }).click();
-
-    await expect(page).toHaveURL(/\/finance\/input\?month=2026-01&saved=1/);
     await page.reload({ waitUntil: 'networkidle' });
 
     await expect(page.getByLabel('남편 월급')).toHaveValue('5,200,000');
@@ -216,6 +217,12 @@ test.describe('/finance', () => {
     await page.getByRole('tab', { name: '자산' }).click();
     await expect(page.getByLabel('자산명')).toHaveValue('생활비 통장');
     await expect(page.getByLabel('금액')).toHaveValue('18,000,000');
+    expect(
+      await page.evaluate(
+        key => window.localStorage.getItem(key),
+        LOCAL_DRAFT_STORAGE_KEY
+      )
+    ).not.toBeNull();
   });
 
   test('대시보드와 상세 페이지는 기준 월을 유지하고 noindex를 가진다', async ({
@@ -261,10 +268,13 @@ test.describe('/finance', () => {
   test('JSON 문자열을 붙여넣어 가져오면 브라우저에 보관되고 초기화할 때만 원본으로 돌아간다', async ({
     page,
   }) => {
-    await seedFinanceData();
-    await page.goto('/finance/input?month=2026-02', {
-      waitUntil: 'networkidle',
-    });
+    await page.goto('/finance/input', { waitUntil: 'networkidle' });
+
+    await page.getByLabel('새 월 생성').fill('2026-02');
+    await page.getByRole('button', { name: '빈 입력 시작' }).click();
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-02&local=1/);
+    await page.getByLabel('남편 월급').fill('5100000');
+    await page.getByLabel('아내 월급').fill('4050000');
 
     await page.getByRole('button', { name: '가져오기' }).first().click();
     const snapshotPayload = JSON.stringify(
@@ -300,12 +310,6 @@ test.describe('/finance', () => {
     await expect(page.getByLabel('남편 월급')).toHaveValue('6,100,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,200,000');
 
-    const persisted = JSON.parse(await readFile(FINANCE_DATA_PATH, 'utf8'));
-    const persistedMonths = persisted.snapshots.map(
-      (snapshot: { month: string }) => snapshot.month
-    );
-    expect(persistedMonths).not.toContain('2026-03');
-
     await page.reload({ waitUntil: 'networkidle' });
     await expect(page.getByLabel('남편 월급')).toHaveValue('6,100,000');
     await expect(page.getByLabel('아내 월급')).toHaveValue('4,200,000');
@@ -313,10 +317,10 @@ test.describe('/finance', () => {
     await expect(page.getByLabel('자산명')).toHaveValue('새 생활비 통장');
     await expect(page.getByLabel('금액')).toHaveValue('25,000,000');
 
-    page.once('dialog', resetDialog => resetDialog.accept());
-    await page.getByRole('button', { name: '가져온 데이터 초기화' }).click();
+    page.once('dialog', dialogEvent => dialogEvent.accept());
+    await page.getByRole('button', { name: '입력 데이터 초기화' }).click();
 
-    await expect(page).toHaveURL(/\/finance\/input\?month=2026-02$/);
+    await expect(page).toHaveURL(/\/finance\/input$/);
     await expect
       .poll(() =>
         page.evaluate(
@@ -325,76 +329,48 @@ test.describe('/finance', () => {
         )
       )
       .toBeNull();
-    await expect(page.getByLabel('남편 월급')).toHaveValue('5,200,000');
-    await expect(page.getByLabel('아내 월급')).toHaveValue('4,100,000');
+    await expect(page.getByText('아직 입력 데이터가 없습니다.')).toBeVisible();
+    await expect(
+      page.getByText('아직 생성된 월 데이터가 없습니다.')
+    ).toBeVisible();
 
     await page.reload({ waitUntil: 'networkidle' });
-    await expect(page.getByLabel('남편 월급')).toHaveValue('5,200,000');
-    await expect(page.getByLabel('아내 월급')).toHaveValue('4,100,000');
+    await expect(page.getByText('아직 입력 데이터가 없습니다.')).toBeVisible();
   });
 
   test('JSON 파일 업로드 후 수정한 값은 새로고침에 유지되고 JSON으로 다운로드된다', async ({
     page,
   }) => {
-    await seedFinanceData();
-    await page.goto('/finance/input?month=2026-02', {
-      waitUntil: 'networkidle',
-    });
+    await page.goto('/finance/input', { waitUntil: 'networkidle' });
+    await page.getByLabel('새 월 생성').fill('2027-01');
+    await page.getByRole('button', { name: '빈 입력 시작' }).click();
+    await expect(page).toHaveURL(/\/finance\/input\?month=2027-01&local=1/);
 
     await page.getByRole('button', { name: '가져오기' }).first().click();
+    const yearlySnapshots = Array.from({ length: 12 }, (_, index) => {
+      const month = `2026-${String(index + 1).padStart(2, '0')}`;
+
+      return createImportSnapshot(month, {
+        incomes: {
+          husbandSalary: 5000000 + (index + 1) * 100000,
+          wifeSalary: 4000000 + (index + 1) * 50000,
+        },
+        assets: [
+          {
+            id: `asset-${month}`,
+            owner: 'joint',
+            category: 'deposit',
+            name: `${index + 1}월 통장`,
+            amount: 20000000 + (index + 1) * 1000000,
+            memo: '',
+          },
+        ],
+      });
+    });
     const datasetPayload = JSON.stringify(
       {
         version: 1,
-        snapshots: [
-          createImportSnapshot('2026-04', {
-            incomes: {
-              husbandSalary: 5300000,
-              wifeSalary: 4300000,
-            },
-            assets: [
-              {
-                id: 'asset-2026-04-1',
-                owner: 'joint',
-                category: 'deposit',
-                name: '4월 통장',
-                amount: 21000000,
-                memo: '',
-              },
-            ],
-          }),
-          createImportSnapshot('2026-06', {
-            incomes: {
-              husbandSalary: 6300000,
-              wifeSalary: 4400000,
-            },
-            assets: [
-              {
-                id: 'asset-2026-06-1',
-                owner: 'joint',
-                category: 'deposit',
-                name: '6월 통장',
-                amount: 28000000,
-                memo: '',
-              },
-            ],
-          }),
-          createImportSnapshot('2026-05', {
-            incomes: {
-              husbandSalary: 5800000,
-              wifeSalary: 4350000,
-            },
-            assets: [
-              {
-                id: 'asset-2026-05-1',
-                owner: 'joint',
-                category: 'deposit',
-                name: '5월 통장',
-                amount: 24000000,
-                memo: '',
-              },
-            ],
-          }),
-        ],
+        snapshots: yearlySnapshots,
       },
       null,
       2
@@ -410,27 +386,36 @@ test.describe('/finance', () => {
     await expect(
       dialog.getByText('선택된 파일: finance-import.json')
     ).toBeVisible();
-    await expect(dialog.getByText('2026.06', { exact: true })).toBeVisible();
-    await expect(dialog.getByText('총 3개월')).toBeVisible();
+    await expect(dialog.getByText('2026.12', { exact: true })).toBeVisible();
+    await expect(dialog.getByText('총 12개월')).toBeVisible();
     await dialog.getByRole('button', { name: '가져오기' }).click();
 
-    await expect(page).toHaveURL(/\/finance\/input\?month=2026-06&local=1/);
-    await expect(page.getByText('임시 1개월')).toBeVisible();
-    await expect(page.getByRole('button', { name: '6월' })).toBeEnabled();
-    await expect(page.getByLabel('남편 월급')).toHaveValue('6,300,000');
-    await expect(page.getByLabel('아내 월급')).toHaveValue('4,400,000');
-
-    const persisted = JSON.parse(await readFile(FINANCE_DATA_PATH, 'utf8'));
-    const persistedMonths = persisted.snapshots.map(
-      (snapshot: { month: string }) => snapshot.month
-    );
-    expect(persistedMonths).not.toContain('2026-04');
-    expect(persistedMonths).not.toContain('2026-05');
-    expect(persistedMonths).not.toContain('2026-06');
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-12&local=1/);
+    await expect(page.getByText('임시 12개월')).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: '1월', exact: true })
+    ).toBeEnabled();
+    await expect(
+      page.getByRole('button', { name: '6월', exact: true })
+    ).toBeEnabled();
+    await expect(
+      page.getByRole('button', { name: '12월', exact: true })
+    ).toBeEnabled();
+    await expect(page.getByLabel('남편 월급')).toHaveValue('6,200,000');
+    await expect(page.getByLabel('아내 월급')).toHaveValue('4,600,000');
 
     await page.getByRole('tab', { name: '자산' }).click();
-    await expect(page.getByLabel('자산명')).toHaveValue('6월 통장');
-    await expect(page.getByLabel('금액')).toHaveValue('28,000,000');
+    await expect(page.getByLabel('자산명')).toHaveValue('12월 통장');
+    await expect(page.getByLabel('금액')).toHaveValue('32,000,000');
+
+    await page.getByRole('button', { name: '1월', exact: true }).click();
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-01&local=1/);
+    await page.getByRole('tab', { name: '수입' }).click();
+    await expect(page.getByLabel('남편 월급')).toHaveValue('5,100,000');
+    await expect(page.getByLabel('아내 월급')).toHaveValue('4,050,000');
+    await page.getByRole('tab', { name: '자산' }).click();
+    await expect(page.getByLabel('자산명')).toHaveValue('1월 통장');
+    await expect(page.getByLabel('금액')).toHaveValue('21,000,000');
 
     await page.getByRole('tab', { name: '수입' }).click();
     await page.getByLabel('남편 월급').fill('6400000');
@@ -446,8 +431,8 @@ test.describe('/finance', () => {
       await readFile(downloadPath!, 'utf8')
     ) as FinanceMonthlySnapshot;
 
-    expect(download.suggestedFilename()).toBe('finance-snapshot-2026-06.json');
-    expect(downloadedSnapshot.month).toBe('2026-06');
+    expect(download.suggestedFilename()).toBe('finance-snapshot-2026-01.json');
+    expect(downloadedSnapshot.month).toBe('2026-01');
     expect(downloadedSnapshot.incomes.husbandSalary).toBe(6400000);
   });
 });

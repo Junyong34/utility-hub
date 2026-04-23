@@ -1,13 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useMemo, useState, useSyncExternalStore } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import type { FinanceComparisonMode } from '@/lib/finance/types';
 import { buildFinanceHref } from '@/lib/finance/url-state';
 import { formatFinanceMonthLabel } from '@/lib/finance/formatting';
 import { cn } from '@/lib/utils';
+import {
+  getLocalDraftMonths,
+  getLocalDraftSnapshot,
+  getServerLocalDraftSnapshot,
+  subscribeToLocalDraft,
+} from './input/localDraft';
 
 interface FinanceMonthSwitcherProps {
   currentPath: string;
@@ -25,10 +31,48 @@ export function FinanceMonthSwitcher({
   compare,
 }: FinanceMonthSwitcherProps) {
   const router = useRouter();
-  const displayMonths = useMemo(
-    () => [...new Set([...availableMonths, ...temporaryMonths])].sort(),
-    [availableMonths, temporaryMonths]
+  const searchParams = useSearchParams();
+  const localDraftRaw = useSyncExternalStore(
+    subscribeToLocalDraft,
+    getLocalDraftSnapshot,
+    getServerLocalDraftSnapshot
   );
+  const inputLocalMonths = useMemo(
+    () =>
+      currentPath === '/finance/input'
+        ? getLocalDraftMonths(localDraftRaw)
+        : [],
+    [currentPath, localDraftRaw]
+  );
+  const requestedMonth = searchParams.get('month');
+  const localInputMode =
+    currentPath === '/finance/input' && inputLocalMonths.length > 0;
+  const effectiveMonth = useMemo(() => {
+    if (!localInputMode) {
+      return month;
+    }
+
+    if (requestedMonth && inputLocalMonths.includes(requestedMonth)) {
+      return requestedMonth;
+    }
+
+    return inputLocalMonths.at(-1) ?? month;
+  }, [inputLocalMonths, localInputMode, month, requestedMonth]);
+  const displayMonths = useMemo(() => {
+    if (localInputMode) {
+      return [...inputLocalMonths];
+    }
+
+    return [...new Set([...availableMonths, ...temporaryMonths])].sort();
+  }, [availableMonths, inputLocalMonths, localInputMode, temporaryMonths]);
+  const localOnlyMonthCount = useMemo(
+    () =>
+      displayMonths.filter(monthValue => !availableMonths.includes(monthValue))
+        .length,
+    [availableMonths, displayMonths]
+  );
+  const preserveLocalDraft =
+    currentPath === '/finance/input' && localOnlyMonthCount > 0;
   const availableMonthSet = useMemo(
     () => new Set(displayMonths),
     [displayMonths]
@@ -38,18 +82,18 @@ export function FinanceMonthSwitcher({
     [displayMonths]
   );
   const [selectedYearState, setSelectedYearState] = useState(() => ({
-    sourceMonth: month,
+    sourceMonth: effectiveMonth,
     year:
-      month?.slice(0, 4) ??
+      effectiveMonth?.slice(0, 4) ??
       availableYears.at(-1) ??
       String(new Date().getFullYear()),
   }));
   const selectedYear =
-    selectedYearState.sourceMonth === month
+    selectedYearState.sourceMonth === effectiveMonth
       ? selectedYearState.year
-      : (month?.slice(0, 4) ?? selectedYearState.year);
+      : (effectiveMonth?.slice(0, 4) ?? selectedYearState.year);
 
-  if (!month || displayMonths.length === 0) {
+  if (!effectiveMonth || displayMonths.length === 0) {
     return (
       <p className="text-sm text-muted-foreground">
         아직 생성된 월 데이터가 없습니다.
@@ -57,7 +101,7 @@ export function FinanceMonthSwitcher({
     );
   }
 
-  const currentIndex = displayMonths.indexOf(month);
+  const currentIndex = displayMonths.indexOf(effectiveMonth);
   const previousMonth =
     currentIndex > 0 ? displayMonths[currentIndex - 1] : null;
   const nextMonth =
@@ -72,9 +116,22 @@ export function FinanceMonthSwitcher({
       label: `${index + 1}월`,
       value: targetMonth,
       available: availableMonthSet.has(targetMonth),
-      active: targetMonth === month,
+      active: targetMonth === effectiveMonth,
     };
   });
+
+  const buildMonthHref = (targetMonth: string) => {
+    const baseHref = buildFinanceHref(currentPath, {
+      month: targetMonth,
+      compare,
+    });
+
+    if (!preserveLocalDraft) {
+      return baseHref;
+    }
+
+    return `${baseHref}${baseHref.includes('?') ? '&' : '?'}local=1`;
+  };
 
   return (
     <div className="space-y-2">
@@ -87,7 +144,7 @@ export function FinanceMonthSwitcher({
           value={selectedYear}
           onChange={event => {
             setSelectedYearState({
-              sourceMonth: month,
+              sourceMonth: effectiveMonth,
               year: event.target.value,
             });
           }}
@@ -103,10 +160,7 @@ export function FinanceMonthSwitcher({
         <div className="flex items-center justify-between gap-2 sm:justify-end">
           {previousMonth ? (
             <Link
-              href={buildFinanceHref(currentPath, {
-                month: previousMonth,
-                compare,
-              })}
+              href={buildMonthHref(previousMonth)}
               className="inline-flex h-9 items-center gap-1 rounded-lg border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
             >
               <ChevronLeftIcon className="size-4" aria-hidden="true" />
@@ -120,10 +174,7 @@ export function FinanceMonthSwitcher({
           )}
           {nextMonth ? (
             <Link
-              href={buildFinanceHref(currentPath, {
-                month: nextMonth,
-                compare,
-              })}
+              href={buildMonthHref(nextMonth)}
               className="inline-flex h-9 items-center gap-1 rounded-lg border border-border px-2.5 text-sm text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
             >
               다음
@@ -157,12 +208,7 @@ export function FinanceMonthSwitcher({
               key={item.value}
               type="button"
               onClick={() => {
-                router.push(
-                  buildFinanceHref(currentPath, {
-                    month: item.value,
-                    compare,
-                  })
-                );
+                router.push(buildMonthHref(item.value));
               }}
               className={cn(
                 'h-8 whitespace-nowrap rounded-lg border px-1 text-xs transition-colors',
@@ -178,10 +224,8 @@ export function FinanceMonthSwitcher({
       </div>
       <p className="text-xs text-muted-foreground">
         총 {availableMonths.length}개월 저장됨
-        {temporaryMonths.length > 0
-          ? ` · 임시 ${temporaryMonths.length}개월`
-          : ''}{' '}
-        · 현재 {formatFinanceMonthLabel(month)}
+        {localOnlyMonthCount > 0 ? ` · 임시 ${localOnlyMonthCount}개월` : ''} ·
+        현재 {formatFinanceMonthLabel(effectiveMonth)}
       </p>
     </div>
   );
