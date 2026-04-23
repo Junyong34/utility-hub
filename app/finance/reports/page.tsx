@@ -1,13 +1,10 @@
 import type { Metadata } from 'next';
-import { ReportsSection } from '@/components/finance/detail/ReportsSection';
+import { FinanceWorkspacePageClient } from '@/components/finance/FinanceWorkspacePageClient';
 import {
-  buildFinanceReportsSummary,
   FINANCE_PAGE_METADATA,
   parseFinanceCompareParam,
   parseFinanceMonthParam,
-  resolveFinanceMonth,
 } from '@/lib/finance';
-import { FinanceShell } from '@/components/finance/FinanceShell';
 import { createFinanceRepository } from '@/lib/finance/server';
 
 interface PageProps {
@@ -21,23 +18,17 @@ export default async function FinanceReportsPage({ searchParams }: PageProps) {
   const repository = createFinanceRepository();
   const snapshots = await repository.getSnapshots();
   const compare = parseFinanceCompareParam(resolvedSearchParams.compare);
-  const availableMonths = snapshots.map((snapshot) => snapshot.month);
-  const month = resolveFinanceMonth(
-    availableMonths,
-    parseFinanceMonthParam(resolvedSearchParams.month)
-  );
-  const reports = buildFinanceReportsSummary(snapshots);
+  const requestedMonth = parseFinanceMonthParam(resolvedSearchParams.month);
 
   return (
-    <FinanceShell
+    <FinanceWorkspacePageClient
+      view="reports"
       title="리포트"
       description="분기, 반기, 연도 기준 bucket으로 순자산과 지출 흐름을 확인합니다."
       currentPath="/finance/reports"
-      availableMonths={availableMonths}
-      month={month}
+      fallbackSnapshots={snapshots}
+      requestedMonth={requestedMonth}
       compare={compare}
-    >
-      <ReportsSection reports={reports} />
-    </FinanceShell>
+    />
   );
 }

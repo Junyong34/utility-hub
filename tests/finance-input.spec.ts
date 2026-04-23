@@ -417,6 +417,24 @@ test.describe('/finance', () => {
     await expect(page.getByLabel('자산명')).toHaveValue('1월 통장');
     await expect(page.getByLabel('금액')).toHaveValue('21,000,000');
 
+    await page.getByRole('link', { name: '자산', exact: true }).click();
+    await expect(page).toHaveURL(/\/finance\/assets\?month=2026-01/);
+    await expect(
+      page.getByTestId('finance-assets-composition').getByText('1월 통장')
+    ).toBeVisible();
+    await expect(
+      page
+        .getByTestId('finance-assets-composition')
+        .getByText('21,000,000원 · 100%')
+    ).toBeVisible();
+
+    await page.getByRole('link', { name: '리포트', exact: true }).click();
+    await expect(page).toHaveURL(/\/finance\/reports\?month=2026-01/);
+    await expect(page.getByText('리포트 요약')).toBeVisible();
+    await expect(page.getByText('총 12개월 저장됨')).toBeVisible();
+
+    await page.getByRole('link', { name: '입력', exact: true }).click();
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-01/);
     await page.getByRole('tab', { name: '수입' }).click();
     await page.getByLabel('남편 월급').fill('6400000');
     await page.reload({ waitUntil: 'networkidle' });
@@ -434,5 +452,106 @@ test.describe('/finance', () => {
     expect(download.suggestedFilename()).toBe('finance-snapshot-2026-01.json');
     expect(downloadedSnapshot.month).toBe('2026-01');
     expect(downloadedSnapshot.incomes.husbandSalary).toBe(6400000);
+  });
+
+  test('JSON으로 가져온 로컬 스냅샷은 자산·부채·투자 상세 화면에 같은 월 데이터로 반영된다', async ({
+    page,
+  }) => {
+    await page.goto('/finance/input', { waitUntil: 'networkidle' });
+
+    await page.getByRole('button', { name: '가져오기' }).first().click();
+    const datasetPayload = JSON.stringify(
+      {
+        version: 1,
+        snapshots: [
+          createImportSnapshot('2026-01', {
+            assets: [
+              {
+                id: 'asset-import-jan',
+                owner: 'joint',
+                category: 'deposit',
+                name: '로컬 가져오기 자산',
+                amount: 21000000,
+                memo: '',
+              },
+            ],
+            debts: [
+              {
+                id: 'debt-import-jan',
+                owner: 'joint',
+                category: 'mortgage',
+                name: '로컬 가져오기 부채',
+                balance: 7000000,
+                interestRate: null,
+                monthlyPayment: null,
+                monthlyInterest: null,
+                memo: '',
+              },
+            ],
+            investments: [
+              {
+                id: 'investment-import-jan',
+                owner: 'wife',
+                category: 'etf',
+                name: '로컬 가져오기 투자',
+                principal: 8000000,
+                valuation: 9500000,
+                memo: '',
+              },
+            ],
+          }),
+        ],
+      },
+      null,
+      2
+    );
+
+    await page.getByLabel('JSON 파일').setInputFiles({
+      name: 'finance-import.json',
+      mimeType: 'application/json',
+      buffer: Buffer.from(datasetPayload, 'utf8'),
+    });
+    await page.getByRole('dialog').getByRole('button', { name: '가져오기' }).click();
+
+    await expect(page).toHaveURL(/\/finance\/input\?month=2026-01&local=1/);
+
+    await page.getByRole('link', { name: '자산', exact: true }).click();
+    await expect(page).toHaveURL(/\/finance\/assets\?month=2026-01/);
+    await expect(
+      page
+        .getByTestId('finance-assets-composition')
+        .getByText('로컬 가져오기 자산')
+    ).toBeVisible();
+    await expect(
+      page
+        .getByTestId('finance-assets-composition')
+        .getByText('21,000,000원 · 100%')
+    ).toBeVisible();
+
+    await page.getByRole('link', { name: '부채', exact: true }).click();
+    await expect(page).toHaveURL(/\/finance\/debts\?month=2026-01/);
+    await expect(
+      page
+        .getByTestId('finance-debts-composition')
+        .getByText('로컬 가져오기 부채')
+    ).toBeVisible();
+    await expect(
+      page
+        .getByTestId('finance-debts-composition')
+        .getByText('7,000,000원 · 100%')
+    ).toBeVisible();
+
+    await page.getByRole('link', { name: '투자', exact: true }).click();
+    await expect(page).toHaveURL(/\/finance\/investments\?month=2026-01/);
+    await expect(
+      page
+        .getByTestId('finance-investments-composition')
+        .getByText('로컬 가져오기 투자')
+    ).toBeVisible();
+    await expect(
+      page
+        .getByTestId('finance-investments-composition')
+        .getByText('9,500,000원 · 100%')
+    ).toBeVisible();
   });
 });

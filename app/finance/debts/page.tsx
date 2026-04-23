@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
-import { DebtsDetailSection } from '@/components/finance/detail/DebtsDetailSection';
+import { FinanceWorkspacePageClient } from '@/components/finance/FinanceWorkspacePageClient';
 import {
-  buildFinanceDashboardSummary,
   FINANCE_PAGE_METADATA,
   parseFinanceCompareParam,
   parseFinanceMonthParam,
 } from '@/lib/finance';
-import { FinanceShell } from '@/components/finance/FinanceShell';
 import { createFinanceRepository } from '@/lib/finance/server';
 
 interface PageProps {
@@ -20,19 +18,17 @@ export default async function FinanceDebtsPage({ searchParams }: PageProps) {
   const repository = createFinanceRepository();
   const snapshots = await repository.getSnapshots();
   const compare = parseFinanceCompareParam(resolvedSearchParams.compare);
-  const month = parseFinanceMonthParam(resolvedSearchParams.month);
-  const dashboard = buildFinanceDashboardSummary(snapshots, month, compare);
+  const requestedMonth = parseFinanceMonthParam(resolvedSearchParams.month);
 
   return (
-    <FinanceShell
+    <FinanceWorkspacePageClient
+      view="debts"
       title="부채 상세"
       description="기준 월의 부채 잔액과 자산 대비 부채 비율을 확인합니다."
       currentPath="/finance/debts"
-      availableMonths={dashboard.availableMonths}
-      month={dashboard.effectiveMonth}
+      fallbackSnapshots={snapshots}
+      requestedMonth={requestedMonth}
       compare={compare}
-    >
-      <DebtsDetailSection summary={dashboard.current} />
-    </FinanceShell>
+    />
   );
 }
