@@ -18,7 +18,7 @@ export default function BenefitsPage() {
     name: '육아 혜택·지원금',
     path: '/benefits',
     description:
-      '정부 지원, 지역 혜택, 절약 가이드를 공식 출처 기준으로 정리한 육아 혜택 허브입니다.',
+      '정부 지원, 지역 혜택, 절약 가이드를 공식 출처 기준으로 정리한 육아 혜택 입니다.',
     breadcrumbs: [
       { name: '홈', url: '/' },
       { name: '육아 혜택·지원금' },

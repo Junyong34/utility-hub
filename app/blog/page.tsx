@@ -52,7 +52,7 @@ export default function BlogPage() {
                       categorySlug: post.categorySlug,
                       slug: post.slug,
                     })}
-                    className="text-blue-600 hover:underline"
+                    className="text-primary hover:underline"
                   >
                     {post.title}
                   </a>

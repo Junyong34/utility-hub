@@ -25,7 +25,7 @@ const TOOLS: ToolListItem[] = toolConfigs.map(config => ({
   iconName: config.icon ?? '',
   href: `/tools/${config.id}`,
   badge: config.badge,
-  color: config.color ?? 'from-blue-500 to-purple-500',
+  color: config.color ?? 'from-primary to-sunshine-900',
   category: config.category,
 }));
 

@@ -22,7 +22,7 @@ export default function Page() {
 
   return (
     <PaperPageShell
-      glowClassName="h-80 bg-[radial-gradient(circle_at_top_left,rgba(201,176,137,0.22),transparent_30%),radial-gradient(circle_at_top_right,rgba(128,151,134,0.14),transparent_24%)]"
+      glowClassName="h-80 bg-[radial-gradient(circle_at_top_left,color-mix(in_srgb,var(--sunshine-500)_24%,transparent),transparent_30%),radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--primary)_14%,transparent),transparent_24%)]"
       gridClassName="inset-x-8 top-64 h-[42rem] rounded-[40px] opacity-50"
       gridStyle={{ backgroundSize: '34px 34px' }}
     >
@@ -42,8 +42,7 @@ export default function Page() {
               <h2
                 className="text-2xl font-semibold tracking-tight text-foreground sm:text-[2rem]"
                 style={{
-                  fontFamily:
-                    '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                  fontFamily: 'var(--font-editorial)',
                 }}
               >
                 이번 주 많이 찾은 장소
@@ -63,7 +62,7 @@ export default function Page() {
           title="지역 단위로 다시 한 번 좁혀보기"
           description="어느 지역부터 볼지 고민 중이라면, 권역별로 모아둔 장소를 먼저 살펴보세요."
           href="/places"
-          hrefLabel="전체 장소 허브 보기"
+          hrefLabel="전체 장소  보기"
         >
           {homeContent.regionLinks.map(region => (
             <ParentingLinkCard key={region.id} item={region} />
@@ -100,7 +99,7 @@ export default function Page() {
           title="지원과 절약 정보를 공식 출처 흐름으로 보기"
           description="놓치기 쉬운 정부 지원금과 지역 육아 혜택을 공식 출처 기준으로 모았습니다."
           href="/benefits"
-          hrefLabel="혜택 허브 보기"
+          hrefLabel="혜택  보기"
           gridClassName="xl:grid-cols-3"
         >
           {homeContent.benefitLinks.map(benefit => (

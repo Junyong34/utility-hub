@@ -156,7 +156,7 @@ export function collectToolEntries(): SitemapEntry[] {
 }
 
 /**
- * 장소 허브 페이지 사이트맵 엔트리 생성
+ * 장소  페이지 사이트맵 엔트리 생성
  */
 export function collectPlaceEntries(): SitemapEntry[] {
   return PHASE_A_REGION_SLUGS.map(slug => {
@@ -182,7 +182,7 @@ export function collectPlaceEntries(): SitemapEntry[] {
 export function collectSitemapEntries(): SitemapEntry[] {
   return [
     ...collectStaticPageEntries(),
-    ...collectPlaceEntries(), // Places 지역 허브
+    ...collectPlaceEntries(), // Places 지역 
     ...collectBlogCategoryEntries(), // Blog 카테고리
     ...collectBlogPostEntries(), // Blog 포스트
     ...collectBlogTagEntries(), // Blog 태그(구현 전까지 비활성화)

@@ -20,7 +20,7 @@ export function QuickActionButton({
         variant="ghost"
         size="sm"
         onClick={onClick}
-        className="h-8 px-2.5 text-xs font-medium rounded-full border border-input bg-background hover:bg-primary/5 hover:text-primary hover:border-primary/30 transition-all"
+        className="h-8 rounded-md border border-input bg-background px-2.5 text-xs font-medium transition-all hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
       >
         {label}
       </Button>
@@ -33,7 +33,7 @@ export function QuickActionButton({
       variant="outline"
       size="sm"
       onClick={onClick}
-      className="h-9 px-3 text-xs font-semibold rounded-full bg-background hover:bg-primary/10 hover:border-primary/50 active:bg-primary/20 transition-all"
+      className="h-9 rounded-md bg-background px-3 text-xs font-semibold transition-all hover:border-primary/50 hover:bg-primary/10 active:bg-primary/20"
     >
       {label}
     </Button>

@@ -19,20 +19,20 @@ function getBadgeClassName(badge: string): string {
   const lowerBadge = badge.toLowerCase();
 
   if (lowerBadge === 'new' || lowerBadge === '신규') {
-    return 'border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400';
+    return 'border-primary/40 bg-primary/10 text-primary';
   }
   if (lowerBadge === 'popular' || lowerBadge === '인기') {
-    return 'border-rose-500/50 bg-rose-500/10 text-rose-700 dark:text-rose-400';
+    return 'border-sunshine-700/50 bg-sunshine-700/12 text-sunshine-900 dark:text-sunshine-300';
   }
   if (lowerBadge === 'beta' || lowerBadge === '베타') {
-    return 'border-blue-500/50 bg-blue-500/10 text-blue-700 dark:text-blue-400';
+    return 'border-beige-deep bg-cream text-foreground';
   }
   if (lowerBadge === 'updated' || lowerBadge === '업데이트') {
-    return 'border-amber-500/50 bg-amber-500/10 text-amber-700 dark:text-amber-400';
+    return 'border-yellow-saturated/70 bg-yellow-saturated/20 text-foreground';
   }
 
   // 기본 스타일
-  return 'border-border bg-muted text-foreground';
+  return 'border-hairline bg-cream-soft text-foreground';
 }
 
 const CATEGORY_CONFIG: { value: CategoryKey; label: string }[] = [
@@ -55,7 +55,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
   // ── 카테고리별 도구 수 계산 ──
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { all: tools.length };
-    tools.forEach((tool) => {
+    tools.forEach(tool => {
       const cat = tool.category ?? 'other';
       counts[cat] = (counts[cat] ?? 0) + 1;
     });
@@ -64,24 +64,24 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
 
   // 도구가 1개 이상인 카테고리만 표시 (전체 포함)
   const visibleCategories = CATEGORY_CONFIG.filter(
-    (cat) => cat.value === 'all' || (categoryCounts[cat.value] ?? 0) > 0,
+    cat => cat.value === 'all' || (categoryCounts[cat.value] ?? 0) > 0
   );
 
   // 배지가 있는 주요 도구
-  const featuredTools = useMemo(() => tools.filter((t) => t.badge), [tools]);
+  const featuredTools = useMemo(() => tools.filter(t => t.badge), [tools]);
 
   // 검색 + 카테고리 필터 적용
   const filteredTools = useMemo(() => {
     let result = [...tools];
     if (activeCategory !== 'all') {
-      result = result.filter((t) => (t.category ?? 'other') === activeCategory);
+      result = result.filter(t => (t.category ?? 'other') === activeCategory);
     }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
-        (t) =>
+        t =>
           t.name.toLowerCase().includes(q) ||
-          t.description.toLowerCase().includes(q),
+          t.description.toLowerCase().includes(q)
       );
     }
     return result;
@@ -90,44 +90,44 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
   const isFiltered = activeCategory !== 'all' || searchQuery.trim() !== '';
   const showFeatured = !isFiltered && featuredTools.length > 0;
   const distinctCategoryCount = CATEGORY_CONFIG.filter(
-    (c) => c.value !== 'all' && (categoryCounts[c.value] ?? 0) > 0,
+    c => c.value !== 'all' && (categoryCounts[c.value] ?? 0) > 0
   ).length;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
       {/* ── Hero Search ── */}
       <section className="pt-0 pb-5">
         {/* Breadcrumb */}
         <Breadcrumb items={[{ name: '도구' }]} className="mb-4" />
 
         {/* Hero Box */}
-        <div className="rounded-xl border border-border/60 bg-muted/30 px-6 py-8 text-center backdrop-blur-sm">
+        <div className="rounded-lg border border-hairline-soft bg-cream-soft px-6 py-8 text-center backdrop-blur-sm">
           {/* Eyebrow */}
-          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/80 px-3 py-1 text-xs text-muted-foreground">
+          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-beige-deep bg-cream px-3 py-1 text-xs text-slate">
             <WrenchIcon className="h-3 w-3 text-primary" />
             Zento Tools · 장소 탐색 다음 단계에서 쓰는 계산·비교 도구
           </span>
 
           {/* Title */}
-          <h1 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
+          <h1 className="font-editorial mb-2 text-3xl font-normal tracking-[-0.02em] sm:text-4xl">
             필요한 계산과 비교를{' '}
             <span className="text-primary">찾아보세요</span>
           </h1>
-          <p className="mb-6 max-w-lg mx-auto text-sm leading-relaxed text-muted-foreground">
-            아이와 나들이 예산, 생활비, 금융 판단처럼 다음 행동에 바로 연결되는 계산을 빠르게 정리하고
+          <p className="mx-auto mb-6 w-full max-w-[32rem] text-sm leading-relaxed text-muted-foreground">
+            아이와 나들이 예산, 생활비, 금융 판단처럼 다음 행동에 바로 연결되는
+            계산을 빠르게 정리하고
             <br />
             일부 추천·실험형 도구까지 한곳에서 바로 확인할 수 있습니다.
           </p>
 
           {/* Search Bar */}
-          <div className="flex gap-2 max-w-lg mx-auto mb-4">
+          <div className="mx-auto mb-4 flex w-full max-w-[32rem] gap-2">
             <div className="relative flex-1">
               <SearchIcon className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 placeholder="도구 검색... (예: 예산, 대출, DSR, 주택, 로또)"
                 className="h-9 bg-background pl-8"
               />
@@ -138,13 +138,15 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
           {/* Stat row */}
           <div className="flex items-center justify-center gap-3 text-xs text-muted-foreground">
             <span>
-              전체{' '}
-              <strong className="text-foreground">{tools.length}개</strong> 도구
+              전체 <strong className="text-foreground">{tools.length}개</strong>{' '}
+              도구
             </span>
             <span>·</span>
             <span>
               카테고리{' '}
-              <strong className="text-foreground">{distinctCategoryCount}개</strong>
+              <strong className="text-foreground">
+                {distinctCategoryCount}개
+              </strong>
             </span>
             <span>·</span>
             <span>장소 탐색 뒤 바로 쓰는 도구를 계속 보강 중</span>
@@ -155,24 +157,24 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
       {/* ── Category Pills ── */}
       <section className="pb-6">
         <div className="flex flex-wrap gap-2">
-          {visibleCategories.map((cat) => (
+          {visibleCategories.map(cat => (
             <button
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
               className={cn(
-                'inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-all',
+                'inline-flex items-center gap-1.5 rounded-md border px-3.5 py-1.5 text-sm font-medium transition-all',
                 activeCategory === cat.value
                   ? 'border-primary bg-primary text-primary-foreground shadow-sm'
-                  : 'border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground',
+                  : 'border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground'
               )}
             >
               {cat.label}
               <span
                 className={cn(
-                  'rounded-full px-1.5 text-xs',
+                  'rounded-sm px-1.5 text-xs',
                   activeCategory === cat.value
                     ? 'bg-primary-foreground/20 text-primary-foreground'
-                    : 'bg-muted text-muted-foreground',
+                    : 'bg-muted text-muted-foreground'
                 )}
               >
                 {categoryCounts[cat.value] ?? 0}
@@ -192,14 +194,14 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
             </Badge>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {featuredTools.map((tool) => {
+            {featuredTools.map(tool => {
               const Icon = getToolIcon(tool.iconName);
               return (
                 <Link key={tool.id} href={tool.href}>
                   <Card className="group cursor-pointer py-0 transition-all duration-200 hover:border-primary/30 hover:shadow-md">
                     <CardContent className="flex items-start gap-4 p-5">
                       <div
-                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.color} text-white`}
+                        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.color} text-ink`}
                       >
                         <Icon className="h-6 w-6" />
                       </div>
@@ -212,7 +214,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
                             <Badge
                               variant="outline"
                               className={cn(
-                                "shrink-0 text-xs font-medium",
+                                'shrink-0 text-xs font-medium',
                                 getBadgeClassName(tool.badge)
                               )}
                             >
@@ -253,7 +255,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredTools.map((tool) => {
+            {filteredTools.map(tool => {
               const Icon = getToolIcon(tool.iconName);
               return (
                 <Link key={tool.id} href={tool.href}>
@@ -266,7 +268,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
                       {/* 아이콘 + 배지 */}
                       <div className="mb-3 flex items-start justify-between">
                         <div
-                          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.color} text-white`}
+                          className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${tool.color} text-ink`}
                         >
                           <Icon className="h-5 w-5" />
                         </div>
@@ -274,7 +276,7 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
                           <Badge
                             variant="outline"
                             className={cn(
-                              "shrink-0 text-xs font-medium",
+                              'shrink-0 text-xs font-medium',
                               getBadgeClassName(tool.badge)
                             )}
                           >
@@ -305,15 +307,18 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
 
       {/* ── CTA Card ── */}
       <section className="pb-10">
-        <Card className="relative overflow-hidden border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 py-0">
-          <CardContent className="p-8 text-center md:p-10">
-            <h2 className="mb-2 text-xl font-bold md:text-2xl">
+        <Card className="relative w-full overflow-hidden border-primary/20 bg-gradient-to-br from-primary/5 to-sunshine-500/10 py-0">
+          <CardContent className="w-full p-8 text-center md:p-10">
+            <h2 className="mb-2 whitespace-nowrap text-xl font-bold md:text-2xl">
               원하는 도구가 없나요?
             </h2>
-            <p className="mb-6 max-w-md mx-auto text-sm leading-relaxed text-muted-foreground">
-              필요하신 도구가 있다면 제안해 주세요.
-              <br />
-              지속적으로 새로운 도구를 추가하고 있습니다.
+            <p className="mx-auto mb-6 w-full max-w-[28rem] break-keep text-center text-sm leading-relaxed text-muted-foreground">
+              <span className="block whitespace-nowrap">
+                필요하신 도구가 있다면 제안해 주세요.
+              </span>
+              <span className="block whitespace-nowrap">
+                지속적으로 새로운 도구를 추가하고 있습니다.
+              </span>
             </p>
             <Button size="lg" asChild>
               <Link href="/faq">
@@ -324,7 +329,6 @@ export function ToolsPageClient({ tools }: ToolsPageClientProps) {
           </CardContent>
         </Card>
       </section>
-
     </div>
   );
 }

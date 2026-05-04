@@ -7,21 +7,21 @@ import {
   createPlacesMetadataInput,
 } from './site-section-seo.ts';
 
-test('createPlacesMetadataInput은 places 허브 canonical과 제목을 반환한다', () => {
+test('createPlacesMetadataInput은 places  canonical과 제목을 반환한다', () => {
   const result = createPlacesMetadataInput('https://www.zento.kr');
 
   assert.equal(result.title, '아이와 가볼 곳');
   assert.equal(result.canonical, 'https://www.zento.kr/places');
 });
 
-test('createBenefitsMetadataInput은 benefits 허브 canonical과 제목을 반환한다', () => {
+test('createBenefitsMetadataInput은 benefits  canonical과 제목을 반환한다', () => {
   const result = createBenefitsMetadataInput('https://www.zento.kr');
 
   assert.equal(result.title, '육아 혜택·지원금');
   assert.equal(result.canonical, 'https://www.zento.kr/benefits');
 });
 
-test('createPlaceRegionMetadataInput은 지역 허브 canonical과 제목을 반환한다', () => {
+test('createPlaceRegionMetadataInput은 지역  canonical과 제목을 반환한다', () => {
   const result = createPlaceRegionMetadataInput('https://www.zento.kr', {
     slug: 'seoul',
     name: '서울',

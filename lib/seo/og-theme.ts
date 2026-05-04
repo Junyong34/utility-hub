@@ -6,118 +6,118 @@
 
 /* ── Base Colors ── */
 export const OG_COLORS = {
-  'cream-50': '#FFF8EF',
-  'peach-100': '#FFE3D2',
-  'butter-200': '#FFE7A8',
-  'mint-200': '#D9F5E6',
-  'sky-200': '#D9EEFF',
+  'cream-50': '#FFFDF8',
+  'cream-100': '#FFF8E7',
+  'cream-200': '#FFF2CD',
+  'cream-300': '#F3D997',
+  'orange-500': '#FF6A00',
+  'orange-700': '#F47B20',
+  'orange-900': '#A83A08',
+  'sun-300': '#FFD58A',
+  'sun-500': '#FFB238',
+  'yellow-500': '#FFD21F',
+  'ink-900': '#211712',
+  'ink-700': '#3D3027',
+  'slate-600': '#695C4C',
+  'line-200': '#EEE3CF',
+} as const;
 
-  'coral-500': '#FF8D73',
-  'sun-500': '#FFC94A',
-  'mint-500': '#57C79A',
-  'sky-500': '#6EB8FF',
-
-  'ink-900': '#25303B',
-  'ink-700': '#4D5A67',
-  'line-200': '#E9E1D7',
-} as const
-
-export type OgColorToken = keyof typeof OG_COLORS
+export type OgColorToken = keyof typeof OG_COLORS;
 
 /* ── Theme Preset ── */
 export interface OgThemePreset {
-  name: string
-  bg: string
-  accent: string
-  labelBg: string
-  labelText: string
-  titleColor: string
-  descColor: string
-  footerColor: string
-  footerDotColor: string
-  barColor: string
+  name: string;
+  bg: string;
+  accent: string;
+  labelBg: string;
+  labelText: string;
+  titleColor: string;
+  descColor: string;
+  footerColor: string;
+  footerDotColor: string;
+  barColor: string;
 }
 
 export const OG_THEME_PRESETS: Record<string, OgThemePreset> = {
   cream: {
     name: '크림',
     bg: OG_COLORS['cream-50'],
-    accent: OG_COLORS['coral-500'],
-    labelBg: OG_COLORS['coral-500'],
-    labelText: '#FFFFFF',
+    accent: OG_COLORS['orange-500'],
+    labelBg: OG_COLORS['orange-500'],
+    labelText: '#FFFAF0',
     titleColor: OG_COLORS['ink-900'],
-    descColor: OG_COLORS['ink-700'],
-    footerColor: OG_COLORS['ink-700'],
-    footerDotColor: OG_COLORS['coral-500'],
-    barColor: OG_COLORS['coral-500'],
+    descColor: OG_COLORS['slate-600'],
+    footerColor: OG_COLORS['slate-600'],
+    footerDotColor: OG_COLORS['orange-500'],
+    barColor: OG_COLORS['orange-500'],
   },
   mint: {
-    name: '민트',
-    bg: OG_COLORS['mint-200'],
-    accent: OG_COLORS['mint-500'],
-    labelBg: OG_COLORS['mint-500'],
-    labelText: '#FFFFFF',
+    name: '크림 소프트',
+    bg: OG_COLORS['cream-100'],
+    accent: OG_COLORS['orange-700'],
+    labelBg: OG_COLORS['orange-700'],
+    labelText: '#FFFAF0',
     titleColor: OG_COLORS['ink-900'],
-    descColor: OG_COLORS['ink-700'],
-    footerColor: OG_COLORS['ink-700'],
-    footerDotColor: OG_COLORS['mint-500'],
-    barColor: OG_COLORS['mint-500'],
+    descColor: OG_COLORS['slate-600'],
+    footerColor: OG_COLORS['slate-600'],
+    footerDotColor: OG_COLORS['orange-700'],
+    barColor: OG_COLORS['orange-700'],
   },
   sky: {
-    name: '스카이',
-    bg: OG_COLORS['sky-200'],
-    accent: OG_COLORS['sky-500'],
-    labelBg: OG_COLORS['sky-500'],
-    labelText: '#FFFFFF',
-    titleColor: OG_COLORS['ink-900'],
-    descColor: OG_COLORS['ink-700'],
-    footerColor: OG_COLORS['ink-700'],
-    footerDotColor: OG_COLORS['sky-500'],
-    barColor: OG_COLORS['sky-500'],
-  },
-  sun: {
-    name: '선',
-    bg: '#FFFCF0',
+    name: '선셋 라이트',
+    bg: OG_COLORS['cream-200'],
     accent: OG_COLORS['sun-500'],
     labelBg: OG_COLORS['sun-500'],
     labelText: OG_COLORS['ink-900'],
     titleColor: OG_COLORS['ink-900'],
-    descColor: OG_COLORS['ink-700'],
-    footerColor: OG_COLORS['ink-700'],
+    descColor: OG_COLORS['slate-600'],
+    footerColor: OG_COLORS['slate-600'],
+    footerDotColor: OG_COLORS['sun-500'],
+    barColor: OG_COLORS['sun-500'],
+  },
+  sun: {
+    name: '선',
+    bg: '#FFFBEC',
+    accent: OG_COLORS['sun-500'],
+    labelBg: OG_COLORS['sun-500'],
+    labelText: OG_COLORS['ink-900'],
+    titleColor: OG_COLORS['ink-900'],
+    descColor: OG_COLORS['slate-600'],
+    footerColor: OG_COLORS['slate-600'],
     footerDotColor: OG_COLORS['sun-500'],
     barColor: OG_COLORS['sun-500'],
   },
   peach: {
-    name: '피치',
-    bg: OG_COLORS['peach-100'],
-    accent: OG_COLORS['coral-500'],
-    labelBg: OG_COLORS['coral-500'],
-    labelText: '#FFFFFF',
+    name: '오렌지 크림',
+    bg: OG_COLORS['cream-300'],
+    accent: OG_COLORS['orange-900'],
+    labelBg: OG_COLORS['orange-900'],
+    labelText: '#FFFAF0',
     titleColor: OG_COLORS['ink-900'],
     descColor: OG_COLORS['ink-700'],
     footerColor: OG_COLORS['ink-700'],
-    footerDotColor: OG_COLORS['coral-500'],
-    barColor: OG_COLORS['coral-500'],
+    footerDotColor: OG_COLORS['orange-900'],
+    barColor: OG_COLORS['orange-900'],
   },
   /** 기존 다크 테마 — 레거시 호환용 */
   dark: {
     name: '다크 (레거시)',
-    bg: '#0f172a',
-    accent: '#38bdf8',
-    labelBg: 'rgba(255,255,255,0.14)',
-    labelText: '#f8fafc',
-    titleColor: '#f8fafc',
-    descColor: 'rgba(248,250,252,0.82)',
-    footerColor: 'rgba(248,250,252,0.78)',
-    footerDotColor: '#38bdf8',
-    barColor: '#38bdf8',
+    bg: '#17120F',
+    accent: OG_COLORS['orange-500'],
+    labelBg: 'rgba(255,106,0,0.22)',
+    labelText: '#FFF8E7',
+    titleColor: '#FFF8E7',
+    descColor: 'rgba(255,248,231,0.82)',
+    footerColor: 'rgba(255,248,231,0.76)',
+    footerDotColor: OG_COLORS['orange-500'],
+    barColor: OG_COLORS['orange-500'],
   },
-} as const
+} as const;
 
-export const DEFAULT_THEME_PRESET = 'cream'
+export const DEFAULT_THEME_PRESET = 'cream';
 
 /* ── Layout Variant ── */
-export type OgLayoutVariant = 'play-card' | 'tool-card' | 'custom-studio'
+export type OgLayoutVariant = 'play-card' | 'tool-card' | 'custom-studio';
 
 /* ── Category → Theme 매핑 ── */
 export const BLOG_CATEGORY_THEME_MAP: Record<string, string> = {
@@ -136,7 +136,7 @@ export const BLOG_CATEGORY_THEME_MAP: Record<string, string> = {
   // 금융/비용
   finance: 'sun',
   cost: 'sun',
-}
+};
 
 export const TOOL_CATEGORY_THEME_MAP: Record<string, string> = {
   // 연령/성장
@@ -148,18 +148,18 @@ export const TOOL_CATEGORY_THEME_MAP: Record<string, string> = {
   // 세금/증여
   tax: 'peach',
   gift: 'peach',
-}
+};
 
 /* ── Helpers ── */
 export function resolveThemePreset(presetName?: string): OgThemePreset {
-  if (!presetName) return OG_THEME_PRESETS[DEFAULT_THEME_PRESET]
-  return OG_THEME_PRESETS[presetName] ?? OG_THEME_PRESETS[DEFAULT_THEME_PRESET]
+  if (!presetName) return OG_THEME_PRESETS[DEFAULT_THEME_PRESET];
+  return OG_THEME_PRESETS[presetName] ?? OG_THEME_PRESETS[DEFAULT_THEME_PRESET];
 }
 
 export function resolveBlogCategoryPresetName(categorySlug: string): string {
-  return BLOG_CATEGORY_THEME_MAP[categorySlug] ?? DEFAULT_THEME_PRESET
+  return BLOG_CATEGORY_THEME_MAP[categorySlug] ?? DEFAULT_THEME_PRESET;
 }
 
 export function resolveBlogCategoryTheme(categorySlug: string): OgThemePreset {
-  return resolveThemePreset(resolveBlogCategoryPresetName(categorySlug))
+  return resolveThemePreset(resolveBlogCategoryPresetName(categorySlug));
 }

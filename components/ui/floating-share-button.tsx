@@ -1,181 +1,194 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import { usePathname } from "next/navigation"
-import { Share2, Link2, Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import * as React from 'react';
+import { usePathname } from 'next/navigation';
+import { Share2, Link2, Check } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 // Client Component에서는 직접 정의 (fs 모듈 import 방지)
 const SITE_CONFIG = {
   name: 'Zento',
   title: 'Zento - 비교하고 계산해 결정하는 생활 가이드',
-  description: '주차, 소비자 비교, 대출·저축·주택 비용 계산까지. 비용과 선택을 빠르게 정리해주는 실전 가이드와 도구를 제공합니다.',
-  url: typeof window !== 'undefined' ? window.location.origin : 'https://www.zento.kr',
-}
+  description:
+    '주차, 소비자 비교, 대출·저축·주택 비용 계산까지. 비용과 선택을 빠르게 정리해주는 실전 가이드와 도구를 제공합니다.',
+  url:
+    typeof window !== 'undefined'
+      ? window.location.origin
+      : 'https://www.zento.kr',
+};
 
 interface FloatingShareButtonProps {
-  className?: string
+  className?: string;
 }
 
 const copyWithExecCommand = (value: string): boolean => {
-  if (typeof document === "undefined") return false
+  if (typeof document === 'undefined') return false;
 
-  const textarea = document.createElement("textarea")
-  textarea.value = value
-  textarea.setAttribute("readonly", "")
-  textarea.style.position = "fixed"
-  textarea.style.left = "-9999px"
+  const textarea = document.createElement('textarea');
+  textarea.value = value;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-9999px';
 
-  document.body.appendChild(textarea)
-  textarea.focus()
-  textarea.select()
-  textarea.setSelectionRange(0, textarea.value.length)
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  textarea.setSelectionRange(0, textarea.value.length);
 
-  const copied = document.execCommand("copy")
-  document.body.removeChild(textarea)
+  const copied = document.execCommand('copy');
+  document.body.removeChild(textarea);
 
-  return copied
-}
+  return copied;
+};
 
 export function FloatingShareButton({ className }: FloatingShareButtonProps) {
-  const pathname = usePathname()
-  const [isOpen, setIsOpen] = React.useState(false)
-  const [canNativeShare, setCanNativeShare] = React.useState(false)
-  const [feedback, setFeedback] = React.useState("")
-  const containerRef = React.useRef<HTMLDivElement>(null)
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [canNativeShare, setCanNativeShare] = React.useState(false);
+  const [feedback, setFeedback] = React.useState('');
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   // 동적으로 현재 페이지 정보 가져오기
   const getShareData = React.useCallback(() => {
-    const url = typeof window !== "undefined" ? window.location.href : SITE_CONFIG.url
+    const url =
+      typeof window !== 'undefined' ? window.location.href : SITE_CONFIG.url;
 
     // 페이지별 제목 생성
-    let title = SITE_CONFIG.title
-    let description = SITE_CONFIG.description
+    let title = SITE_CONFIG.title;
+    let description = SITE_CONFIG.description;
 
-    if (pathname?.startsWith("/blog/") && pathname !== "/blog") {
-      title = `${document.title} - ${SITE_CONFIG.name}`
-      description = document.querySelector('meta[name="description"]')?.getAttribute("content") || description
-    } else if (pathname === "/blog") {
-      title = `블로그 - ${SITE_CONFIG.name}`
-      description = "비교표와 체크리스트로 판단하는 실전 생활 가이드를 모았습니다."
-    } else if (pathname === "/tools") {
-      title = `도구 - ${SITE_CONFIG.name}`
-      description = "비용 계산과 조건 비교에 도움이 되는 실전 도구를 모았습니다."
-    } else if (pathname === "/") {
-      title = SITE_CONFIG.title
-      description = SITE_CONFIG.description
+    if (pathname?.startsWith('/blog/') && pathname !== '/blog') {
+      title = `${document.title} - ${SITE_CONFIG.name}`;
+      description =
+        document
+          .querySelector('meta[name="description"]')
+          ?.getAttribute('content') || description;
+    } else if (pathname === '/blog') {
+      title = `블로그 - ${SITE_CONFIG.name}`;
+      description =
+        '비교표와 체크리스트로 판단하는 실전 생활 가이드를 모았습니다.';
+    } else if (pathname === '/tools') {
+      title = `도구 - ${SITE_CONFIG.name}`;
+      description =
+        '비용 계산과 조건 비교에 도움이 되는 실전 도구를 모았습니다.';
+    } else if (pathname === '/') {
+      title = SITE_CONFIG.title;
+      description = SITE_CONFIG.description;
     }
 
-    return { title, description, url }
-  }, [pathname])
+    return { title, description, url };
+  }, [pathname]);
 
   React.useEffect(() => {
-    if (typeof navigator === "undefined") return
-    setCanNativeShare(typeof navigator.share === "function")
-  }, [])
+    if (typeof navigator === 'undefined') return;
+    setCanNativeShare(typeof navigator.share === 'function');
+  }, []);
 
   React.useEffect(() => {
-    if (!isOpen || typeof window === "undefined") return
+    if (!isOpen || typeof window === 'undefined') return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen(false)
-    }
+      if (event.key === 'Escape') setIsOpen(false);
+    };
 
-    window.addEventListener("keydown", onKeyDown)
-    return () => window.removeEventListener("keydown", onKeyDown)
-  }, [isOpen])
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isOpen]);
 
   React.useEffect(() => {
     if (
       !isOpen ||
-      typeof window === "undefined" ||
-      typeof document === "undefined"
+      typeof window === 'undefined' ||
+      typeof document === 'undefined'
     )
-      return
+      return;
 
     const closeMenu = () => {
-      setIsOpen(false)
-    }
+      setIsOpen(false);
+    };
 
     const onOutsidePointerDown = (event: MouseEvent | TouchEvent) => {
-      const container = containerRef.current
+      const container = containerRef.current;
 
-      if (!container) return
+      if (!container) return;
       if (event.target instanceof Node && !container.contains(event.target)) {
-        closeMenu()
+        closeMenu();
       }
-    }
+    };
 
-    window.addEventListener("scroll", closeMenu)
-    document.addEventListener("mousedown", onOutsidePointerDown)
-    document.addEventListener("touchstart", onOutsidePointerDown)
+    window.addEventListener('scroll', closeMenu);
+    document.addEventListener('mousedown', onOutsidePointerDown);
+    document.addEventListener('touchstart', onOutsidePointerDown);
 
     return () => {
-      window.removeEventListener("scroll", closeMenu)
-      document.removeEventListener("mousedown", onOutsidePointerDown)
-      document.removeEventListener("touchstart", onOutsidePointerDown)
-    }
-  }, [isOpen])
+      window.removeEventListener('scroll', closeMenu);
+      document.removeEventListener('mousedown', onOutsidePointerDown);
+      document.removeEventListener('touchstart', onOutsidePointerDown);
+    };
+  }, [isOpen]);
 
   React.useEffect(() => {
-    if (!feedback) return
+    if (!feedback) return;
 
     const timer = setTimeout(() => {
-      setFeedback("")
-    }, 2200)
+      setFeedback('');
+    }, 2200);
 
-    return () => clearTimeout(timer)
-  }, [feedback])
+    return () => clearTimeout(timer);
+  }, [feedback]);
 
   const handleNativeShare = async () => {
-    if (!canNativeShare || typeof navigator === "undefined") return
+    if (!canNativeShare || typeof navigator === 'undefined') return;
 
-    const { title, description, url } = getShareData()
+    const { title, description, url } = getShareData();
 
     try {
       await navigator.share({
         title,
         text: description,
         url,
-      })
-      setIsOpen(false)
+      });
+      setIsOpen(false);
     } catch (error) {
-      if (error && (error as Error).name !== "AbortError") {
-        setFeedback("공유 창을 열지 못했습니다.")
+      if (error && (error as Error).name !== 'AbortError') {
+        setFeedback('공유 창을 열지 못했습니다.');
       }
     }
-  }
+  };
 
   const handleCopy = async () => {
-    const { url } = getShareData()
-    let copied = false
+    const { url } = getShareData();
+    let copied = false;
 
     if (
-      typeof navigator !== "undefined" &&
+      typeof navigator !== 'undefined' &&
       navigator.clipboard &&
-      typeof navigator.clipboard.writeText === "function"
+      typeof navigator.clipboard.writeText === 'function'
     ) {
       try {
-        await navigator.clipboard.writeText(url)
-        copied = true
+        await navigator.clipboard.writeText(url);
+        copied = true;
       } catch {
-        copied = false
+        copied = false;
       }
     }
 
     if (!copied) {
-      copied = copyWithExecCommand(url)
+      copied = copyWithExecCommand(url);
     }
 
-    setFeedback(copied ? "링크를 복사했습니다." : "링크 복사에 실패했습니다.")
-    setIsOpen(false)
-  }
+    setFeedback(copied ? '링크를 복사했습니다.' : '링크 복사에 실패했습니다.');
+    setIsOpen(false);
+  };
 
   return (
     <div
       ref={containerRef}
-      className={cn("fixed bottom-24 md:bottom-8 right-4 md:right-8 z-40", className)}
+      className={cn(
+        'fixed bottom-24 md:bottom-8 right-4 md:right-8 z-40',
+        className
+      )}
     >
       {/* Feedback Toast */}
       {feedback && (
@@ -202,7 +215,7 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
               variant="ghost"
               size="default"
               onClick={handleNativeShare}
-              className="bg-card/60 dark:bg-white/10 backdrop-blur-xl border border-border/40 dark:border-white/20 shadow-lg dark:shadow-2xl hover:bg-muted min-w-[140px] justify-start"
+              className="min-w-[140px] justify-start border border-hairline-soft bg-canvas/92 shadow-card backdrop-blur-xl hover:bg-cream-soft dark:bg-card/92"
             >
               <Share2 className="h-5 w-5" aria-hidden="true" />
               공유하기
@@ -215,9 +228,9 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
             variant="ghost"
             size="default"
             onClick={handleCopy}
-            className="bg-card/60 dark:bg-white/10 backdrop-blur-xl border border-border/40 dark:border-white/20 shadow-lg dark:shadow-2xl hover:bg-muted min-w-[140px] justify-start"
+            className="min-w-[140px] justify-start border border-hairline-soft bg-canvas/92 shadow-card backdrop-blur-xl hover:bg-cream-soft dark:bg-card/92"
           >
-            {feedback === "링크를 복사했습니다." ? (
+            {feedback === '링크를 복사했습니다.' ? (
               <Check className="h-5 w-5" aria-hidden="true" />
             ) : (
               <Link2 className="h-5 w-5" aria-hidden="true" />
@@ -234,13 +247,13 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
         size="icon"
         aria-haspopup="menu"
         aria-expanded={isOpen}
-        aria-label={isOpen ? "공유 메뉴 닫기" : "공유 메뉴 열기"}
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="rounded-full h-14 w-14 bg-card/60 dark:bg-white/10 hover:bg-muted backdrop-blur-xl border border-border/40 dark:border-white/20 shadow-lg dark:shadow-2xl shrink-0"
+        aria-label={isOpen ? '공유 메뉴 닫기' : '공유 메뉴 열기'}
+        onClick={() => setIsOpen(prev => !prev)}
+        className="h-14 w-14 shrink-0 rounded-md border border-hairline-soft bg-canvas/92 shadow-card backdrop-blur-xl hover:bg-cream-soft dark:bg-card/92"
       >
         <Share2 className="h-5 w-5 text-foreground" aria-hidden="true" />
         <span className="sr-only">공유</span>
       </Button>
     </div>
-  )
+  );
 }

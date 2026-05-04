@@ -35,16 +35,17 @@ export function BlogHeroSection({
 
         {/* Title */}
         <h1 className="mb-2 text-3xl font-bold tracking-tight sm:text-4xl">
-          바로 써먹을 <span className="text-primary">실전 가이드</span>를 찾아보세요
+          바로 써먹을 <span className="text-primary">실전 가이드</span>를
+          찾아보세요
         </h1>
-        <p className="mb-6 max-w-lg mx-auto text-sm leading-relaxed text-muted-foreground">
+        <p className="mx-auto mb-6 w-full max-w-[32rem] text-sm leading-relaxed text-muted-foreground">
           아이와 가볼 곳, 육아 혜택, 생활비 판단과 연결되는 글을
           <br />
           비교표와 체크리스트 중심으로 정리합니다.
         </p>
 
         {/* Search Bar */}
-        <div className="flex gap-2 max-w-lg mx-auto mb-4">
+        <div className="mx-auto mb-4 flex w-full max-w-[32rem] gap-2">
           <div className="relative flex-1">
             <SearchIcon className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input

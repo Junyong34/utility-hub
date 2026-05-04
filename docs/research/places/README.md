@@ -11,6 +11,7 @@
 - [`seoul-private-kids-cafes.md`](./seoul-private-kids-cafes.md)
 - [`seoul-local-kids-cafes-semi-verified.md`](./seoul-local-kids-cafes-semi-verified.md)
 - [`seoul-baby-cafes.md`](./seoul-baby-cafes.md)
+- [`large-kids-cafes-seoul-incheon-gyeonggi.md`](./large-kids-cafes-seoul-incheon-gyeonggi.md)
 - [`gyeonggi-north-outing-facilities.md`](./gyeonggi-north-outing-facilities.md)
 - [`gyeonggi-north-family-friendly-cafes.md`](./gyeonggi-north-family-friendly-cafes.md)
 - [`gyeonggi-north-private-kids-cafes.md`](./gyeonggi-north-private-kids-cafes.md)

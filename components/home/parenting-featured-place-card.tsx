@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRightIcon, ExternalLinkIcon } from 'lucide-react';
-import type {
-  HomeAccentTone,
-  HomeFeaturedPlaceCardItem,
-} from '@/types/home';
+import type { HomeAccentTone, HomeFeaturedPlaceCardItem } from '@/types/home';
 import { cn } from '@/lib/utils';
 
 const TONE_STYLES: Record<
@@ -18,31 +15,30 @@ const TONE_STYLES: Record<
 > = {
   olive: {
     frame:
-      'border-[#d6dece] bg-[linear-gradient(180deg,rgba(251,252,248,0.98),rgba(245,247,240,0.96))] hover:border-[#95a67f]',
-    panel: 'bg-[#ebf1e1]',
-    badge: 'bg-[#edf2e5] text-[#4c6145]',
-    fallback: 'from-[#d9e6cf] via-[#eef4e7] to-[#d7e0c6]',
+      'border-beige-deep/70 bg-[linear-gradient(180deg,var(--cream-soft),var(--canvas))] hover:border-primary/40',
+    panel: 'bg-cream-soft',
+    badge: 'bg-cream text-slate',
+    fallback: 'from-cream-soft via-cream to-cream-deeper',
   },
   sand: {
     frame:
-      'border-[#e9dcc7] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,241,230,0.96))] hover:border-[#d3bb92]',
-    panel: 'bg-[#f1e3cf]',
-    badge: 'bg-[#f6ead9] text-[#835d37]',
-    fallback: 'from-[#f0dfc4] via-[#f8f0e1] to-[#e8d0a6]',
+      'border-beige-deep bg-[linear-gradient(180deg,var(--canvas),var(--cream-soft))] hover:border-primary/40',
+    panel: 'bg-cream',
+    badge: 'bg-cream-deeper text-foreground',
+    fallback: 'from-cream via-cream-soft to-cream-deeper',
   },
   brick: {
-    frame:
-      'border-[#ead6cf] bg-[linear-gradient(180deg,rgba(252,247,245,0.98),rgba(248,239,236,0.96))] hover:border-[#d4a08d]',
-    panel: 'bg-[#f3ddd5]',
-    badge: 'bg-[#f7e4de] text-[#8f5446]',
-    fallback: 'from-[#f0d6cb] via-[#f8eeea] to-[#e9c2b5]',
+    frame: 'border-primary/25 bg-primary/5 hover:border-primary/50',
+    panel: 'bg-primary/10',
+    badge: 'bg-primary/10 text-primary-deep',
+    fallback: 'from-primary/10 via-sunshine-300/35 to-cream',
   },
   sky: {
     frame:
-      'border-[#d5deea] bg-[linear-gradient(180deg,rgba(248,250,252,0.98),rgba(241,245,249,0.96))] hover:border-[#a2b8d1]',
-    panel: 'bg-[#e4edf5]',
-    badge: 'bg-[#e8eef6] text-[#506982]',
-    fallback: 'from-[#d7e4f0] via-[#edf3f8] to-[#cadced]',
+      'border-sunshine-500/50 bg-[linear-gradient(180deg,var(--canvas),var(--cream))] hover:border-sunshine-700',
+    panel: 'bg-sunshine-300/35',
+    badge: 'bg-yellow-saturated/20 text-sunshine-900',
+    fallback: 'from-sunshine-300/35 via-cream to-yellow-saturated/20',
   },
 };
 
@@ -58,12 +54,12 @@ export function ParentingFeaturedPlaceCard({
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-[28px] border p-3.5 shadow-[0_18px_50px_rgba(59,46,31,0.08)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_26px_58px_rgba(59,46,31,0.12)] sm:rounded-[30px] sm:p-4',
+        'group relative overflow-hidden rounded-lg border p-3.5 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card sm:p-4',
         tone.frame
       )}
     >
       <div className="grid gap-3 sm:gap-4 md:grid-cols-[1.1fr_1fr]">
-        <div className="relative min-h-44 overflow-hidden rounded-[22px] sm:min-h-56 sm:rounded-[24px]">
+        <div className="relative min-h-44 overflow-hidden rounded-lg sm:min-h-56">
           {item.thumbnailImage ? (
             <Image
               src={item.thumbnailImage}
@@ -75,7 +71,7 @@ export function ParentingFeaturedPlaceCard({
           ) : (
             <div
               className={cn(
-                'relative flex h-full min-h-44 flex-col justify-between overflow-hidden rounded-[22px] bg-gradient-to-br p-4 sm:min-h-56 sm:rounded-[24px] sm:p-5',
+                'relative flex h-full min-h-44 flex-col justify-between overflow-hidden rounded-lg bg-gradient-to-br p-4 sm:min-h-56 sm:p-5',
                 tone.fallback
               )}
             >
@@ -108,8 +104,7 @@ export function ParentingFeaturedPlaceCard({
                 <p
                   className="max-w-[16rem] text-[1.35rem] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl"
                   style={{
-                    fontFamily:
-                      '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                    fontFamily: 'var(--font-editorial)',
                   }}
                 >
                   {item.title}
@@ -119,7 +114,7 @@ export function ParentingFeaturedPlaceCard({
           )}
         </div>
 
-        <div className="flex min-w-0 flex-col gap-3 rounded-[22px] bg-white/70 p-4 sm:gap-4 sm:rounded-[24px] sm:p-5">
+        <div className="flex min-w-0 flex-col gap-3 rounded-lg bg-canvas/70 p-4 sm:gap-4 sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
             <span
               className={cn(
@@ -129,7 +124,7 @@ export function ParentingFeaturedPlaceCard({
             >
               {item.regionLabel}
             </span>
-            <span className="inline-flex rounded-full bg-black/5 px-3 py-1 text-[11px] font-semibold text-foreground/60">
+            <span className="inline-flex rounded-full bg-ink/5 px-3 py-1 text-[11px] font-semibold text-foreground/60">
               {item.subRegion}
             </span>
           </div>
@@ -141,8 +136,7 @@ export function ParentingFeaturedPlaceCard({
             <h3
               className="text-[1.2rem] font-semibold leading-tight tracking-tight text-foreground sm:text-[1.4rem]"
               style={{
-                fontFamily:
-                  '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                fontFamily: 'var(--font-editorial)',
               }}
             >
               {item.title}
@@ -153,16 +147,21 @@ export function ParentingFeaturedPlaceCard({
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <span className={cn('rounded-full px-3 py-1 text-xs font-medium', tone.badge)}>
+            <span
+              className={cn(
+                'rounded-full px-3 py-1 text-xs font-medium',
+                tone.badge
+              )}
+            >
               {item.categoryLabel}
             </span>
-            <span className="rounded-full bg-black/5 px-3 py-1 text-xs font-medium text-foreground/65">
+            <span className="rounded-full bg-ink/5 px-3 py-1 text-xs font-medium text-foreground/65">
               {item.ageLabel}
             </span>
             {item.conditions.map(condition => (
               <span
                 key={condition}
-                className="rounded-full bg-black/5 px-3 py-1 text-xs font-medium text-foreground/65"
+                className="rounded-full bg-ink/5 px-3 py-1 text-xs font-medium text-foreground/65"
               >
                 {condition}
               </span>
@@ -173,7 +172,7 @@ export function ParentingFeaturedPlaceCard({
             <Link
               href={item.href}
               className={cn(
-                'inline-flex cursor-pointer items-center gap-1.5 rounded-full px-3.5 py-2 text-[13px] font-semibold text-foreground transition-all sm:px-4 sm:text-sm',
+                'inline-flex cursor-pointer items-center gap-1.5 rounded-md px-3.5 py-2 text-[13px] font-semibold text-foreground transition-all sm:px-4 sm:text-sm',
                 tone.panel
               )}
             >

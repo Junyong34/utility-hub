@@ -37,7 +37,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     ],
     category: 'calculator',
     ogImage: '/og-images/post/loan-calc.webp',
-    color: 'from-emerald-500 to-teal-500',
+    color: 'from-sunshine-700 to-primary',
     icon: 'Calculator',
     homeFeatured: {
       hotRank: 3,
@@ -162,7 +162,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     ],
     category: 'calculator',
     badge: 'NEW',
-    color: 'from-amber-500 to-orange-500',
+    color: 'from-yellow-saturated to-sunshine-700',
     icon: 'Calculator',
     features: [
       '현재 DSR과 스트레스 DSR 동시 계산',
@@ -267,7 +267,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     ],
     category: 'calculator',
     ogImage: '/og-images/post/savings-calc.webp',
-    color: 'from-blue-500 to-indigo-500',
+    color: 'from-sunshine-500 to-primary',
     icon: 'PiggyBank',
     homeFeatured: {
       hotRank: 4,
@@ -424,7 +424,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     category: 'generator',
     ogImage: '/og-images/post/tool-lotto.webp',
     badge: '인기',
-    color: 'from-blue-500 to-purple-500',
+    color: 'from-primary to-sunshine-900',
     icon: 'DicesIcon',
     homeFeatured: {
       hotRank: 1,
@@ -547,7 +547,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     category: 'other',
     ogImage: '/og-images/post/last-digit-game.webp',
     badge: 'NEW',
-    color: 'from-fuchsia-500 to-purple-500',
+    color: 'from-sunshine-800 to-primary-deep',
     icon: 'Timer',
     homeFeatured: {
       hotRank: 2,
@@ -647,7 +647,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     category: 'utility',
     ogImage: '/og-images/post/tool-pomodoro.webp',
     badge: 'NEW',
-    color: 'from-orange-500 to-rose-500',
+    color: 'from-primary to-sunshine-800',
     icon: 'AlarmClock',
     features: [
       'Quick Start 기본 25분 세션 즉시 시작',
@@ -737,7 +737,7 @@ export const TOOL_CONFIGS: Record<string, ToolConfig> = {
     ],
     category: 'calculator',
     badge: '인기',
-    color: 'from-green-500 to-emerald-500',
+    color: 'from-cream-deeper to-sunshine-700',
     icon: 'Home',
     features: [
       '집 살 때 필요한 총비용과 자기자본 즉시 계산',

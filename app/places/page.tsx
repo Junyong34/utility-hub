@@ -28,7 +28,7 @@ export default async function PlacesPage({ searchParams }: PageProps) {
     name: '아이와 가볼 곳',
     path: '/places',
     description:
-      '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 허브입니다.',
+      '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 입니다.',
     breadcrumbs: [{ name: '홈', url: '/' }, { name: '아이와 가볼 곳' }],
   });
 

@@ -21,7 +21,7 @@ export function createPlacesMetadataInput(baseUrl: string): MetadataInput {
   return {
     title: '아이와 가볼 곳',
     description:
-      '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 허브입니다. 출처와 확인 시점을 함께 안내합니다.',
+      '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 입니다. 출처와 확인 시점을 함께 안내합니다.',
     canonical: `${siteUrl}/places`,
     keywords: [
       '아이와 가볼 곳',
@@ -40,7 +40,7 @@ export function createBenefitsMetadataInput(baseUrl: string): MetadataInput {
   return {
     title: '육아 혜택·지원금',
     description:
-      '부모급여, 아동수당, 지역 육아 혜택과 절약 가이드를 공식 출처 기준으로 정리한 육아 혜택 허브입니다.',
+      '부모급여, 아동수당, 지역 육아 혜택과 절약 가이드를 공식 출처 기준으로 정리한 육아 혜택 입니다.',
     canonical: `${siteUrl}/benefits`,
     keywords: [
       '육아 혜택',
@@ -100,7 +100,7 @@ export function createAboutMetadataInput(baseUrl: string): MetadataInput {
     canonical: `${siteUrl}/about`,
     keywords: [
       'Zento 소개',
-      '육아형 허브',
+      '육아형 ',
       '아이와 가볼 곳 서비스',
       '육아 도구',
       '육아 혜택 정보',

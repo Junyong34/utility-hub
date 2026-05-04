@@ -14,31 +14,30 @@ const TONE_STYLES: Record<
 > = {
   olive: {
     frame:
-      'border-[#d8dece] bg-[linear-gradient(180deg,rgba(250,251,246,0.96),rgba(244,246,238,0.96))] hover:border-[#9faf8d]',
-    eyebrow: 'text-[#5d6c54]',
-    accent: 'from-[#edf2e5] to-[#d9e4cf]',
-    badge: 'bg-[#eef3e7] text-[#526049]',
+      'border-beige-deep/70 bg-[linear-gradient(180deg,var(--cream-soft),var(--canvas))] hover:border-primary/40',
+    eyebrow: 'text-slate',
+    accent: 'from-cream-soft to-cream',
+    badge: 'bg-cream text-slate',
   },
   sand: {
     frame:
-      'border-[#e5d8c2] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] hover:border-[#d1b88b]',
-    eyebrow: 'text-[#8b6841]',
-    accent: 'from-[#f3e8d5] to-[#ead7b8]',
-    badge: 'bg-[#f7ecda] text-[#805f36]',
+      'border-beige-deep bg-[linear-gradient(180deg,var(--canvas),var(--cream-soft))] hover:border-primary/40',
+    eyebrow: 'text-sunshine-900',
+    accent: 'from-cream to-cream-deeper',
+    badge: 'bg-cream-deeper text-foreground',
   },
   brick: {
-    frame:
-      'border-[#e7d2ca] bg-[linear-gradient(180deg,rgba(252,247,244,0.98),rgba(247,238,233,0.96))] hover:border-[#d09d8b]',
-    eyebrow: 'text-[#8e5a4c]',
-    accent: 'from-[#f4ddd4] to-[#efc9bc]',
-    badge: 'bg-[#f7e2dc] text-[#8a5446]',
+    frame: 'border-primary/25 bg-primary/5 hover:border-primary/50',
+    eyebrow: 'text-primary-deep',
+    accent: 'from-primary/10 to-sunshine-300/35',
+    badge: 'bg-primary/10 text-primary-deep',
   },
   sky: {
     frame:
-      'border-[#d3dbe6] bg-[linear-gradient(180deg,rgba(248,250,252,0.98),rgba(241,245,249,0.96))] hover:border-[#9fb7d6]',
-    eyebrow: 'text-[#506884]',
-    accent: 'from-[#e3ebf5] to-[#ccdbeb]',
-    badge: 'bg-[#e7eef7] text-[#49627d]',
+      'border-sunshine-500/50 bg-[linear-gradient(180deg,var(--canvas),var(--cream))] hover:border-sunshine-700',
+    eyebrow: 'text-sunshine-900',
+    accent: 'from-sunshine-300/35 to-yellow-saturated/20',
+    badge: 'bg-yellow-saturated/20 text-sunshine-900',
   },
 };
 
@@ -53,14 +52,14 @@ export function ParentingLinkCard({ item }: ParentingLinkCardProps) {
     <Link
       href={item.href}
       className={cn(
-        'group relative cursor-pointer overflow-hidden rounded-[26px] border p-4 shadow-[0_18px_45px_rgba(56,46,33,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(56,46,33,0.1)] sm:rounded-[28px] sm:p-5',
+        'group relative cursor-pointer overflow-hidden rounded-lg border p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card sm:p-5',
         tone.frame
       )}
     >
       <div className="relative flex h-full flex-col gap-3 sm:gap-4">
         <div
           className={cn(
-            'rounded-[20px] bg-gradient-to-b p-3.5 sm:rounded-[22px] sm:p-4',
+            'rounded-lg bg-gradient-to-b p-3.5 sm:p-4',
             tone.accent
           )}
         >

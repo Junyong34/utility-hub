@@ -27,7 +27,7 @@ const notoSansKr = localFont({
       style: 'normal',
     },
   ],
-  variable: '--font-sans',
+  variable: '--font-noto-sans-kr',
   display: 'swap',
 });
 
@@ -58,7 +58,7 @@ export const metadata: Metadata = createMetadata({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#ffffff',
+  themeColor: '#fffdf8',
 };
 
 /**

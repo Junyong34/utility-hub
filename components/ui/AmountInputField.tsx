@@ -106,7 +106,7 @@ function AmountInputField({
                 variant="outline"
                 size="xs"
                 onClick={action.onSelect}
-                className="shrink-0 rounded-full px-3"
+                className="shrink-0 rounded-md px-3"
               >
                 {action.label}
               </Button>

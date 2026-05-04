@@ -1,21 +1,21 @@
-"use client"
+'use client';
 
-import Link from "next/link"
-import { MenuIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Link from 'next/link';
+import { MenuIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { NAV_ITEMS } from "./nav-config"
-import { Logo } from "./logo"
+} from '@/components/ui/dropdown-menu';
+import { NAV_ITEMS } from './nav-config';
+import { Logo } from './logo';
 
 export function DesktopNav() {
   return (
-    <header className="hidden md:block fixed top-4 left-0 right-0 z-50 w-full px-4">
-      <div className="mx-auto max-w-4xl flex h-14 items-center justify-between px-6 rounded-full border border-border/40 dark:border-white/20 bg-card/60 dark:bg-white/10 backdrop-blur-xl shadow-lg dark:shadow-2xl">
+    <header className="hidden md:block fixed top-0 left-0 right-0 z-50 w-full border-b border-hairline-soft bg-canvas/92 backdrop-blur-xl">
+      <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-8">
         {/* 로고 */}
         <Link href="/">
           <Logo size={32} />
@@ -23,11 +23,11 @@ export function DesktopNav() {
 
         {/* 데스크톱 네비게이션 */}
         <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.map(item => (
             <Link
               key={item.name}
               href={item.href}
-              className="transition-colors hover:text-primary text-foreground/60"
+              className="text-sm font-medium text-slate transition-colors hover:text-foreground"
             >
               {item.name}
             </Link>
@@ -45,7 +45,7 @@ export function DesktopNav() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              {NAV_ITEMS.map((item) => (
+              {NAV_ITEMS.map(item => (
                 <DropdownMenuItem key={item.name} asChild>
                   <Link href={item.href}>{item.name}</Link>
                 </DropdownMenuItem>
@@ -55,5 +55,5 @@ export function DesktopNav() {
         </div>
       </div>
     </header>
-  )
+  );
 }

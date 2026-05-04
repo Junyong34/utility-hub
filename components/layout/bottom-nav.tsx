@@ -9,8 +9,8 @@ export function BottomNav() {
   const [activeItem, setActiveItem] = React.useState('/');
   return (
     <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4">
-      {/* 메인 네비게이션 바 (긴 캡슐) */}
-      <div className="flex items-center gap-0 bg-card/60 dark:bg-white/10 backdrop-blur-xl border border-border/40 dark:border-white/20 rounded-full px-2 py-2 shadow-lg dark:shadow-2xl">
+      {/* 메인 네비게이션 바 */}
+      <div className="flex items-center gap-0 rounded-lg border border-hairline-soft bg-canvas/92 px-2 py-2 shadow-card backdrop-blur-xl dark:bg-card/92">
         {NAV_ITEMS.map(item => {
           const Icon = item.icon!;
           const isActive = activeItem === item.href;
@@ -20,7 +20,7 @@ export function BottomNav() {
               key={item.name}
               href={item.href}
               onClick={() => setActiveItem(item.href)}
-              className={`relative flex flex-col items-center justify-center gap-0.5 w-[52px] py-2 rounded-full transition-all duration-300 ${
+              className={`relative flex flex-col items-center justify-center gap-0.5 w-[52px] rounded-md py-2 transition-all duration-300 ${
                 isActive
                   ? 'text-primary shadow-md'
                   : 'text-muted-foreground hover:text-foreground'
@@ -29,7 +29,7 @@ export function BottomNav() {
               {/* 배경 애니메이션 */}
               {isActive && (
                 <span
-                  className="absolute inset-0 bg-primary/10 rounded-full animate-scale-in"
+                  className="absolute inset-0 rounded-md bg-primary/10 animate-scale-in"
                   style={{
                     animation: 'scaleIn 0.3s ease-out forwards',
                   }}
