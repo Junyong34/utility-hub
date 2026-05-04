@@ -22,6 +22,17 @@ function clampText(value: string, maxLength: number): string {
   return value.length > maxLength ? `${value.slice(0, maxLength - 1)}…` : value
 }
 
+function buildPlayCardMascotStyle(hasImage: boolean): React.CSSProperties {
+  return {
+    position: hasImage ? 'absolute' : 'relative',
+    bottom: hasImage ? '-4px' : '0px',
+    ...(hasImage ? { right: '0px' } : {}),
+    width: hasImage ? '180px' : '320px',
+    height: hasImage ? '180px' : '420px',
+    display: 'flex',
+  }
+}
+
 /* ── 공통 데코 요소: 둥근 블롭 ── */
 function DecoBlobs({ accent }: { accent: string }) {
   return (
@@ -266,14 +277,7 @@ export function PlayCardLayout({
             {/* 마스코트: 이미지 없으면 우측 크게, 있으면 우하단 겹침 */}
             {mascotUrl ? (
               <div
-                style={{
-                  position: imageUrl ? 'absolute' : 'relative',
-                  bottom: imageUrl ? '-4px' : '0',
-                  right: imageUrl ? '0' : undefined,
-                  width: imageUrl ? '180px' : '320px',
-                  height: imageUrl ? '180px' : '420px',
-                  display: 'flex',
-                }}
+                style={buildPlayCardMascotStyle(!!imageUrl)}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
