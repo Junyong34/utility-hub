@@ -1,7 +1,16 @@
 'use client';
 
-import { parseAsStringLiteral, parseAsBoolean, useQueryStates } from 'nuqs';
+import { useEffect, useState } from 'react';
+import { SearchIcon } from 'lucide-react';
+import {
+  parseAsString,
+  parseAsStringLiteral,
+  parseAsBoolean,
+  useQueryStates,
+} from 'nuqs';
 import { PlacesFilterRail } from './PlacesFilterRail';
+import { Input } from '@/components/ui/input';
+import { MAX_PLACE_SEARCH_LENGTH } from '@/lib/places/place-list-contract';
 import type { AgeBand, PlaceCategory } from '@/types/place-source';
 
 const AGE_BANDS = ['0-12m', '1-3y', '3-6y', '6-10y'] as const;
@@ -38,6 +47,7 @@ export const CATEGORY_LABELS: Record<PlaceCategory, string> = {
 };
 
 export const placesFilterParsers = {
+  search: parseAsString,
   age: parseAsStringLiteral([...AGE_BANDS, 'all'] as const),
   category: parseAsStringLiteral([...CATEGORIES] as const),
   indoor: parseAsBoolean,
@@ -49,6 +59,7 @@ export const placesFilterParsers = {
 };
 
 export type PlacesFilter = {
+  search: string | null;
   age: AgeBand | 'all' | null;
   category: PlaceCategory | null;
   indoor: boolean | null;
@@ -116,8 +127,15 @@ export function PlacesFilterBar({
     shallow: true,
     history: 'push',
   });
+  const appliedSearch = filters.search ?? '';
+  const [searchDraft, setSearchDraft] = useState(appliedSearch);
+
+  useEffect(() => {
+    setSearchDraft(appliedSearch);
+  }, [appliedSearch]);
 
   const isActive =
+    filters.search ||
     filters.age ||
     filters.category ||
     filters.indoor ||
@@ -145,9 +163,11 @@ export function PlacesFilterBar({
   }
 
   function clearAll() {
+    setSearchDraft('');
     setFilters({
       age: null,
       category: null,
+      search: null,
       indoor: null,
       outdoor: null,
       free: null,
@@ -155,6 +175,12 @@ export function PlacesFilterBar({
       stroller: null,
       rain: null,
     });
+  }
+
+  function applySearch() {
+    const normalized = searchDraft.trim().slice(0, MAX_PLACE_SEARCH_LENGTH);
+    setSearchDraft(normalized);
+    setFilters(prev => ({ ...prev, search: normalized || null }));
   }
 
   return (
@@ -208,6 +234,35 @@ export function PlacesFilterBar({
             </button>
           )}
         </div>
+
+        <form
+          className="flex gap-2"
+          role="search"
+          onSubmit={event => {
+            event.preventDefault();
+            applySearch();
+          }}
+        >
+          <div className="relative min-w-0 flex-1">
+            <SearchIcon className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#897763]" />
+            <Input
+              type="search"
+              aria-label="장소명 검색"
+              value={searchDraft}
+              onChange={event => setSearchDraft(event.target.value)}
+              maxLength={MAX_PLACE_SEARCH_LENGTH}
+              placeholder="장소명으로 검색"
+              className="h-10 rounded-full border-[#e4ddd3] bg-white/85 pr-3 pl-9 text-[13px] text-[#2e2821] shadow-none placeholder:text-[#9a8974] focus-visible:border-[#bda883] focus-visible:ring-[#d4c3a7]/45 sm:h-11 sm:text-sm"
+            />
+          </div>
+          <button
+            type="submit"
+            aria-label="장소명 검색 적용"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#d7c8b3] bg-[#2f2922] text-[#fffaf1] transition-colors hover:bg-[#4a3f34] focus-visible:ring-2 focus-visible:ring-[#d4c3a7]/70 focus-visible:outline-none sm:h-11 sm:w-11"
+          >
+            <SearchIcon className="h-4 w-4" aria-hidden="true" />
+          </button>
+        </form>
 
         <PlacesFilterRail
           label="종류"

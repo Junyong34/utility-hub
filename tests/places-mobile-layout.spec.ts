@@ -14,7 +14,9 @@ const REGION_CARD_LINKS = [
 ] as const;
 
 test.describe('/places mobile layout', () => {
-  test('360px width keeps region cards in a single column', async ({ page }) => {
+  test('360px width keeps region cards in a single column', async ({
+    page,
+  }) => {
     await page.setViewportSize({ width: 360, height: 900 });
     await page.goto('/places', { waitUntil: 'networkidle' });
 
@@ -22,20 +24,23 @@ test.describe('/places mobile layout', () => {
       ([firstHref, secondHref]) =>
         Boolean(
           document.querySelector(`a[href="${firstHref}"]`) &&
-            document.querySelector(`a[href="${secondHref}"]`)
+          document.querySelector(`a[href="${secondHref}"]`)
         ),
       [...REGION_CARD_LINKS]
     );
 
-    const topPositions = await page.evaluate(([firstHref, secondHref]) => {
-      const firstCard = document.querySelector(`a[href="${firstHref}"]`);
-      const secondCard = document.querySelector(`a[href="${secondHref}"]`);
+    const topPositions = await page.evaluate(
+      ([firstHref, secondHref]) => {
+        const firstCard = document.querySelector(`a[href="${firstHref}"]`);
+        const secondCard = document.querySelector(`a[href="${secondHref}"]`);
 
-      return {
-        firstTop: firstCard?.getBoundingClientRect().top ?? null,
-        secondTop: secondCard?.getBoundingClientRect().top ?? null,
-      };
-    }, [REGION_CARD_LINKS[0], REGION_CARD_LINKS[1]]);
+        return {
+          firstTop: firstCard?.getBoundingClientRect().top ?? null,
+          secondTop: secondCard?.getBoundingClientRect().top ?? null,
+        };
+      },
+      [REGION_CARD_LINKS[0], REGION_CARD_LINKS[1]]
+    );
 
     expect(topPositions.firstTop).not.toBeNull();
     expect(topPositions.secondTop).not.toBeNull();
@@ -54,20 +59,23 @@ test.describe('/places mobile layout', () => {
       ([firstHref, secondHref]) =>
         Boolean(
           document.querySelector(`a[href="${firstHref}"]`) &&
-            document.querySelector(`a[href="${secondHref}"]`)
+          document.querySelector(`a[href="${secondHref}"]`)
         ),
       [REGION_CARD_LINKS[0], REGION_CARD_LINKS[1]]
     );
 
-    const topPositions = await page.evaluate(([firstHref, secondHref]) => {
-      const firstCard = document.querySelector(`a[href="${firstHref}"]`);
-      const secondCard = document.querySelector(`a[href="${secondHref}"]`);
+    const topPositions = await page.evaluate(
+      ([firstHref, secondHref]) => {
+        const firstCard = document.querySelector(`a[href="${firstHref}"]`);
+        const secondCard = document.querySelector(`a[href="${secondHref}"]`);
 
-      return {
-        firstTop: firstCard?.getBoundingClientRect().top ?? null,
-        secondTop: secondCard?.getBoundingClientRect().top ?? null,
-      };
-    }, [REGION_CARD_LINKS[0], REGION_CARD_LINKS[1]]);
+        return {
+          firstTop: firstCard?.getBoundingClientRect().top ?? null,
+          secondTop: secondCard?.getBoundingClientRect().top ?? null,
+        };
+      },
+      [REGION_CARD_LINKS[0], REGION_CARD_LINKS[1]]
+    );
 
     expect(topPositions.firstTop).not.toBeNull();
     expect(topPositions.secondTop).not.toBeNull();
@@ -104,7 +112,9 @@ test.describe('/places mobile layout', () => {
     await page.setViewportSize({ width: 390, height: 900 });
     await page.goto('/places?indoor=true&free=true');
 
-    const shareButton = page.getByRole('button', { name: '현재 필터 링크 공유' });
+    const shareButton = page.getByRole('button', {
+      name: '현재 필터 링크 공유',
+    });
 
     await expect(shareButton).toBeVisible();
     await shareButton.click();
@@ -113,7 +123,9 @@ test.describe('/places mobile layout', () => {
 
     const copiedUrl = await page.evaluate(() => window.__sharedUrl);
 
-    expect(copiedUrl).toBe('http://127.0.0.1:3000/places?indoor=true&free=true');
+    expect(copiedUrl).toBe(
+      'http://127.0.0.1:3000/places?indoor=true&free=true'
+    );
   });
 
   test('does not trigger hydration mismatch when native share is available', async ({
@@ -163,7 +175,9 @@ test.describe('/places mobile layout', () => {
       scrollLeft: element.scrollLeft,
     }));
 
-    expect(initialMetrics.scrollWidth).toBeGreaterThan(initialMetrics.clientWidth);
+    expect(initialMetrics.scrollWidth).toBeGreaterThan(
+      initialMetrics.clientWidth
+    );
 
     const box = await categoryTrack.boundingBox();
 
@@ -190,7 +204,9 @@ test.describe('/places mobile layout', () => {
     await page.goto('/places', { waitUntil: 'networkidle' });
 
     const categoryTrack = page.getByTestId('places-filter-track-category');
-    const startEdge = page.getByTestId('places-filter-track-category-edge-start');
+    const startEdge = page.getByTestId(
+      'places-filter-track-category-edge-start'
+    );
     const endEdge = page.getByTestId('places-filter-track-category-edge-end');
 
     await expect(categoryTrack).toBeVisible();
@@ -214,33 +230,51 @@ test.describe('/places mobile layout', () => {
       })),
     });
 
-    await expect
-      .poll(readEdgeState)
-      .toEqual({
-        start: { opacity: '0', visibility: 'hidden' },
-        end: { opacity: '1', visibility: 'visible' },
-      });
+    await expect.poll(readEdgeState).toEqual({
+      start: { opacity: '0', visibility: 'hidden' },
+      end: { opacity: '1', visibility: 'visible' },
+    });
 
     await categoryTrack.evaluate(element => {
       element.scrollLeft = (element.scrollWidth - element.clientWidth) / 2;
     });
 
-    await expect
-      .poll(readEdgeState)
-      .toEqual({
-        start: { opacity: '1', visibility: 'visible' },
-        end: { opacity: '1', visibility: 'visible' },
-      });
+    await expect.poll(readEdgeState).toEqual({
+      start: { opacity: '1', visibility: 'visible' },
+      end: { opacity: '1', visibility: 'visible' },
+    });
 
     await categoryTrack.evaluate(element => {
       element.scrollLeft = element.scrollWidth - element.clientWidth;
     });
 
-    await expect
-      .poll(readEdgeState)
-      .toEqual({
-        start: { opacity: '1', visibility: 'visible' },
-        end: { opacity: '0', visibility: 'hidden' },
-      });
+    await expect.poll(readEdgeState).toEqual({
+      start: { opacity: '1', visibility: 'visible' },
+      end: { opacity: '0', visibility: 'hidden' },
+    });
+  });
+
+  test('360px width keeps title search controls usable inside the filter board', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 360, height: 900 });
+    await page.goto('/places?search=서울', { waitUntil: 'networkidle' });
+
+    const searchInput = page.getByRole('searchbox', { name: '장소명 검색' });
+    const searchButton = page.getByRole('button', {
+      name: '장소명 검색 적용',
+    });
+
+    await expect(searchInput).toBeVisible();
+    await expect(searchInput).toHaveValue('서울');
+    await expect(searchButton).toBeVisible();
+
+    const inputBox = await searchInput.boundingBox();
+    const buttonBox = await searchButton.boundingBox();
+
+    expect(inputBox).not.toBeNull();
+    expect(buttonBox).not.toBeNull();
+    expect(inputBox!.width).toBeGreaterThan(180);
+    expect(inputBox!.x + inputBox!.width).toBeLessThanOrEqual(buttonBox!.x);
   });
 });

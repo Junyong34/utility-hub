@@ -59,7 +59,13 @@ function applyPlaceListFilters(
   places: PlaceSource[],
   filters: PlaceListFilters
 ): PlaceSource[] {
+  const searchQuery = filters.search?.toLowerCase() ?? null;
+
   return places.filter(place => {
+    if (searchQuery && !place.name.toLowerCase().includes(searchQuery)) {
+      return false;
+    }
+
     if (filters.category && place.category !== filters.category) {
       return false;
     }
