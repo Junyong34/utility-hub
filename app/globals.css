@@ -136,8 +136,8 @@
 
 :root {
   --font-ui:
-    Inter, var(--font-noto-sans-kr), ui-sans-serif, system-ui, -apple-system,
-    sans-serif;
+    var(--font-pretendard), var(--font-noto-sans-kr), ui-sans-serif, system-ui,
+    -apple-system, sans-serif;
   --font-editorial: 'PP Editorial Old', 'Times New Roman', Georgia, serif;
   --font-code: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
 

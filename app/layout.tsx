@@ -31,6 +31,13 @@ const notoSansKr = localFont({
   display: 'swap',
 });
 
+const pretendard = localFont({
+  src: '../public/fonts/variable/woff2/PretendardVariable.woff2',
+  variable: '--font-pretendard',
+  weight: '45 920',
+  display: 'swap',
+});
+
 /**
  * 글로벌 메타데이터 설정
  */
@@ -75,7 +82,11 @@ export default function RootLayout({
   const structuredData = [createWebSiteSchema(), createOrganizationSchema()];
 
   return (
-    <html lang="ko" className={notoSansKr.variable} suppressHydrationWarning>
+    <html
+      lang="ko"
+      className={`${pretendard.variable} ${notoSansKr.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Preconnect only for non-font external resources */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
