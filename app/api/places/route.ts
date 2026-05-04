@@ -9,6 +9,7 @@ export async function GET(request: NextRequest) {
       page: searchParams.get('page'),
       limit: searchParams.get('limit'),
       region: searchParams.get('region'),
+      search: searchParams.get('search'),
       age: searchParams.get('age'),
       category: searchParams.get('category'),
       indoor: searchParams.get('indoor'),

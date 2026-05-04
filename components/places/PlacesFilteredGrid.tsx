@@ -216,6 +216,7 @@ function areFiltersEqual(
   right: PlaceListFilters
 ): boolean {
   return (
+    left.search === right.search &&
     left.age === right.age &&
     left.category === right.category &&
     left.indoor === right.indoor &&

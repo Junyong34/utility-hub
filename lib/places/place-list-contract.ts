@@ -7,6 +7,7 @@ import type {
 type RawValue = string | number | boolean | null | undefined | string[];
 
 export const DEFAULT_PLACES_PAGE_SIZE = 18;
+export const MAX_PLACE_SEARCH_LENGTH = 80;
 
 const VALID_AGE_BANDS = new Set<AgeBand | 'all'>([
   '0-12m',
@@ -36,6 +37,7 @@ const VALID_REGIONS = new Set<RegionSlug>([
 ]);
 
 export interface PlaceListFilters {
+  search: string | null;
   age: AgeBand | 'all' | null;
   category: PlaceCategory | null;
   indoor: boolean;
@@ -47,6 +49,7 @@ export interface PlaceListFilters {
 }
 
 export interface PlaceListQueryOptions {
+  search?: RawValue;
   age?: RawValue;
   category?: RawValue;
   indoor?: RawValue;
@@ -76,6 +79,7 @@ export function normalizePlaceListFilters(
   input: Partial<PlaceListQueryOptions> = {}
 ): PlaceListFilters {
   return {
+    search: normalizeSearch(input.search),
     age: normalizeAgeBand(input.age),
     category: normalizeCategory(input.category),
     indoor: normalizeBoolean(input.indoor),
@@ -106,6 +110,10 @@ export function buildPlaceListSearchParams(options: {
 
   if (options.region) {
     params.set('region', options.region);
+  }
+
+  if (filters.search) {
+    params.set('search', filters.search);
   }
 
   if (filters.age) {
@@ -166,6 +174,16 @@ function normalizeBoolean(value: RawValue): boolean {
   return raw === 'true' || raw === '1';
 }
 
+function normalizeSearch(value: RawValue): string | null {
+  const raw = readFirstValue(value);
+  if (raw === undefined) {
+    return null;
+  }
+
+  const normalized = raw.trim().slice(0, MAX_PLACE_SEARCH_LENGTH);
+  return normalized.length > 0 ? normalized : null;
+}
+
 function normalizeAgeBand(value: RawValue): AgeBand | 'all' | null {
   const raw = readFirstValue(value);
   if (!raw || !VALID_AGE_BANDS.has(raw as AgeBand | 'all')) {
@@ -186,7 +204,7 @@ function normalizeCategory(value: RawValue): PlaceCategory | null {
 
 function setBooleanSearchParam(
   params: URLSearchParams,
-  key: keyof Omit<PlaceListFilters, 'age' | 'category'>,
+  key: keyof Omit<PlaceListFilters, 'search' | 'age' | 'category'>,
   enabled: boolean
 ) {
   if (enabled) {
