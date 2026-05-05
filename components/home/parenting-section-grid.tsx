@@ -31,7 +31,7 @@ export function ParentingSectionGrid({
           </p>
           <div className="space-y-2">
             <h2
-              className="font-editorial text-[1.35rem] font-normal tracking-[-0.01em] text-foreground sm:text-[2rem]"
+              className="font-editorial text-[1.35rem] font-normal text-foreground sm:text-[2rem]"
               style={{
                 fontFamily: 'var(--font-editorial)',
               }}

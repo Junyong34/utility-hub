@@ -1,60 +1,44 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRightIcon, ExternalLinkIcon } from 'lucide-react';
-import type { HomeAccentTone, HomeFeaturedPlaceCardItem } from '@/types/home';
+import type { HomeFeaturedPlaceCardItem } from '@/types/home';
 import { cn } from '@/lib/utils';
-
-const TONE_STYLES: Record<
-  HomeAccentTone,
-  {
-    frame: string;
-    panel: string;
-    badge: string;
-    fallback: string;
-  }
-> = {
-  olive: {
-    frame:
-      'border-beige-deep/70 bg-[linear-gradient(180deg,var(--cream-soft),var(--canvas))] hover:border-primary/40',
-    panel: 'bg-cream-soft',
-    badge: 'bg-cream text-slate',
-    fallback: 'from-cream-soft via-cream to-cream-deeper',
-  },
-  sand: {
-    frame:
-      'border-beige-deep bg-[linear-gradient(180deg,var(--canvas),var(--cream-soft))] hover:border-primary/40',
-    panel: 'bg-cream',
-    badge: 'bg-cream-deeper text-foreground',
-    fallback: 'from-cream via-cream-soft to-cream-deeper',
-  },
-  brick: {
-    frame: 'border-primary/25 bg-primary/5 hover:border-primary/50',
-    panel: 'bg-primary/10',
-    badge: 'bg-primary/10 text-primary-deep',
-    fallback: 'from-primary/10 via-sunshine-300/35 to-cream',
-  },
-  sky: {
-    frame:
-      'border-sunshine-500/50 bg-[linear-gradient(180deg,var(--canvas),var(--cream))] hover:border-sunshine-700',
-    panel: 'bg-sunshine-300/35',
-    badge: 'bg-yellow-saturated/20 text-sunshine-900',
-    fallback: 'from-sunshine-300/35 via-cream to-yellow-saturated/20',
-  },
-};
+import {
+  CONDITION_BADGE_STYLES,
+  HOME_TONE_BY_ACCENT,
+  PARENTING_SOFT_GRID_STYLE,
+  PARENTING_TONE_STYLES,
+} from '@/components/parenting-theme';
 
 interface ParentingFeaturedPlaceCardProps {
   item: HomeFeaturedPlaceCardItem;
 }
 
+function getConditionClass(condition: string): string {
+  if (condition.includes('무료')) {
+    return CONDITION_BADGE_STYLES.free;
+  }
+
+  if (condition.includes('실내') || condition.includes('우천')) {
+    return CONDITION_BADGE_STYLES.rain;
+  }
+
+  if (condition.includes('야외') || condition.includes('유모차')) {
+    return CONDITION_BADGE_STYLES.outdoor;
+  }
+
+  return CONDITION_BADGE_STYLES.paid;
+}
+
 export function ParentingFeaturedPlaceCard({
   item,
 }: ParentingFeaturedPlaceCardProps) {
-  const tone = TONE_STYLES[item.tone];
+  const tone = PARENTING_TONE_STYLES[HOME_TONE_BY_ACCENT[item.tone]];
 
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-lg border p-3.5 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card sm:p-4',
+        'group relative overflow-hidden rounded-[24px] border p-3.5 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-mockup sm:rounded-[28px] sm:p-4',
         tone.frame
       )}
     >
@@ -78,15 +62,14 @@ export function ParentingFeaturedPlaceCard({
               <div
                 className="absolute inset-0 opacity-45"
                 style={{
-                  backgroundImage:
-                    'linear-gradient(90deg, rgba(91, 74, 51, 0.08) 1px, transparent 1px), linear-gradient(rgba(91, 74, 51, 0.08) 1px, transparent 1px)',
+                  backgroundImage: PARENTING_SOFT_GRID_STYLE,
                   backgroundSize: '22px 22px',
                 }}
               />
               <div className="relative flex items-center justify-between gap-3">
                 <span
                   className={cn(
-                    'inline-flex rounded-full px-3 py-1 text-[11px] font-semibold',
+                    'inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold',
                     tone.badge
                   )}
                 >
@@ -102,7 +85,7 @@ export function ParentingFeaturedPlaceCard({
                   {item.categoryLabel}
                 </p>
                 <p
-                  className="max-w-[16rem] text-[1.35rem] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl"
+                  className="max-w-[16rem] text-[1.35rem] font-semibold leading-tight text-foreground sm:text-2xl"
                   style={{
                     fontFamily: 'var(--font-editorial)',
                   }}
@@ -118,13 +101,13 @@ export function ParentingFeaturedPlaceCard({
           <div className="flex flex-wrap items-center gap-2">
             <span
               className={cn(
-                'inline-flex rounded-full px-3 py-1 text-[11px] font-semibold',
+                'inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold',
                 tone.badge
               )}
             >
               {item.regionLabel}
             </span>
-            <span className="inline-flex rounded-full bg-ink/5 px-3 py-1 text-[11px] font-semibold text-foreground/60">
+            <span className="inline-flex rounded-full border border-hairline bg-canvas/72 px-3 py-1 text-[11px] font-semibold text-foreground/60">
               {item.subRegion}
             </span>
           </div>
@@ -134,7 +117,7 @@ export function ParentingFeaturedPlaceCard({
               이번 주 인기 장소
             </p>
             <h3
-              className="text-[1.2rem] font-semibold leading-tight tracking-tight text-foreground sm:text-[1.4rem]"
+              className="text-[1.2rem] font-semibold leading-tight text-foreground sm:text-[1.4rem]"
               style={{
                 fontFamily: 'var(--font-editorial)',
               }}
@@ -149,19 +132,27 @@ export function ParentingFeaturedPlaceCard({
           <div className="flex flex-wrap gap-2">
             <span
               className={cn(
-                'rounded-full px-3 py-1 text-xs font-medium',
+                'rounded-full border px-3 py-1 text-xs font-medium',
                 tone.badge
               )}
             >
               {item.categoryLabel}
             </span>
-            <span className="rounded-full bg-ink/5 px-3 py-1 text-xs font-medium text-foreground/65">
+            <span
+              className={cn(
+                'rounded-full border px-3 py-1 text-xs font-medium',
+                CONDITION_BADGE_STYLES.age
+              )}
+            >
               {item.ageLabel}
             </span>
             {item.conditions.map(condition => (
               <span
                 key={condition}
-                className="rounded-full bg-ink/5 px-3 py-1 text-xs font-medium text-foreground/65"
+                className={cn(
+                  'rounded-full border px-3 py-1 text-xs font-medium',
+                  getConditionClass(condition)
+                )}
               >
                 {condition}
               </span>
@@ -173,7 +164,7 @@ export function ParentingFeaturedPlaceCard({
               href={item.href}
               className={cn(
                 'inline-flex cursor-pointer items-center gap-1.5 rounded-md px-3.5 py-2 text-[13px] font-semibold text-foreground transition-all sm:px-4 sm:text-sm',
-                tone.panel
+                tone.softPanel
               )}
             >
               <span>지역에서 더 보기</span>

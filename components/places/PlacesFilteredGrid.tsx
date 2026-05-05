@@ -6,10 +6,12 @@ import { useQueryStates } from 'nuqs';
 import { placesFilterParsers } from './PlacesFilterBar';
 import { PlaceCard } from './PlaceCard';
 import { PlacesFilterBar } from './PlacesFilterBar';
+import { PLACES_MUTED_SURFACE_CLASS } from './place-theme';
 import {
   buildPlaceListSearchParams,
   normalizePlaceListFilters,
 } from '@/lib/places/place-list-contract';
+import { cn } from '@/lib/utils';
 import type {
   PlaceListFilters,
   PlaceListPageResponse,
@@ -145,23 +147,32 @@ export function PlacesFilteredGrid({
       />
 
       {isPending ? (
-        <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
-          <p className="text-sm text-[#6a5d4d]">
+        <div
+          className={cn(
+            'rounded-[28px] px-6 py-12 text-center',
+            PLACES_MUTED_SURFACE_CLASS
+          )}
+        >
+          <p className="text-sm text-muted-foreground">
             조건에 맞는 장소를 불러오는 중입니다...
           </p>
         </div>
       ) : isError ? (
-        <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
+        <div
+          className={cn(
+            'rounded-[28px] px-6 py-12 text-center',
+            PLACES_MUTED_SURFACE_CLASS
+          )}
+        >
           <p
-            className="text-lg font-semibold tracking-tight text-[#2f2922]"
+            className="font-editorial text-lg font-semibold text-foreground"
             style={{
-              fontFamily:
-                '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+              fontFamily: 'var(--font-editorial)',
             }}
           >
             장소 목록을 다시 불러오지 못했습니다
           </p>
-          <p className="mt-2 text-sm text-[#6a5d4d]">
+          <p className="mt-2 text-sm text-muted-foreground">
             잠시 후 다시 시도하거나 필터를 조정해 보세요.
           </p>
         </div>
@@ -178,31 +189,35 @@ export function PlacesFilteredGrid({
             className="flex min-h-16 flex-col items-center justify-center gap-2"
           >
             {isFetchingNextPage ? (
-              <div className="flex items-center gap-2 text-sm text-[#6a5d4d]">
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-[#d7c9b4] border-b-[#8b7352]" />
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="h-5 w-5 animate-spin rounded-full border-2 border-hairline-strong border-b-primary" />
                 <span>다음 장소를 불러오는 중입니다...</span>
               </div>
             ) : null}
 
             {!hasNextPage && allLoadedPlaces.length > 0 ? (
-              <p className="text-sm text-[#6a5d4d]">
+              <p className="text-sm text-muted-foreground">
                 조건에 맞는 장소를 모두 불러왔습니다.
               </p>
             ) : null}
           </div>
         </>
       ) : (
-        <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
+        <div
+          className={cn(
+            'rounded-[28px] px-6 py-12 text-center',
+            PLACES_MUTED_SURFACE_CLASS
+          )}
+        >
           <p
-            className="text-lg font-semibold tracking-tight text-[#2f2922]"
+            className="font-editorial text-lg font-semibold text-foreground"
             style={{
-              fontFamily:
-                '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+              fontFamily: 'var(--font-editorial)',
             }}
           >
             지금 조건에 딱 맞는 장소가 아직 없습니다
           </p>
-          <p className="mt-2 text-sm text-[#6a5d4d]">
+          <p className="mt-2 text-sm text-muted-foreground">
             조건에 맞는 장소가 없습니다. 필터를 조정해보세요.
           </p>
         </div>

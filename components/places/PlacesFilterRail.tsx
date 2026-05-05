@@ -101,7 +101,8 @@ export function PlacesFilterRail({
         suppressClickRef.current = true;
       }
 
-      trackRef.current.scrollLeft = dragStateRef.current.startScrollLeft - deltaX;
+      trackRef.current.scrollLeft =
+        dragStateRef.current.startScrollLeft - deltaX;
     };
 
     const handleMouseUp = () => {
@@ -181,7 +182,7 @@ export function PlacesFilterRail({
     <div
       role="group"
       aria-label={`${label} 필터 그룹`}
-      className="rounded-[22px] border border-[#eadfce] bg-white/48 p-3 shadow-[0_10px_24px_rgba(59,46,31,0.04)] sm:rounded-[24px] sm:p-3.5"
+      className="rounded-[22px] border border-hairline-soft bg-canvas/48 p-3 shadow-subtle sm:rounded-[24px] sm:p-3.5"
     >
       <div className="mb-2 flex items-center justify-between gap-2 sm:mb-2.5">
         <span
@@ -192,7 +193,7 @@ export function PlacesFilterRail({
         >
           {label}
         </span>
-        <span className="text-[10px] font-medium text-[#8b7a66] sm:hidden">
+        <span className="text-[10px] font-medium text-stone sm:hidden">
           좌우로 밀어 보기
         </span>
       </div>

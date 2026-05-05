@@ -10,8 +10,15 @@ import {
 import { RegionCard } from './RegionCard';
 import { PlacesFilteredGrid } from './PlacesFilteredGrid';
 import { PlacesShareButton } from './PlacesShareButton';
+import {
+  PLACES_MUTED_SURFACE_CLASS,
+  PLACES_PANEL_CLASS,
+  PLACES_SOFT_GRID_STYLE,
+  TONE_STYLES,
+} from './place-theme';
 import type { PlaceListPageResponse } from '@/lib/places';
 import type { RegionConfig } from '@/lib/places/region-config';
+import { cn } from '@/lib/utils';
 
 interface PlacesHubProps {
   regions: RegionConfig[];
@@ -28,36 +35,41 @@ export function PlacesHub({
 
   return (
     <div className="space-y-10 sm:space-y-16">
-      <section className="relative overflow-hidden rounded-[30px] border border-[#e8dcc8] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] p-5 shadow-[0_20px_60px_rgba(60,47,31,0.08)] sm:rounded-[34px] sm:p-8">
+      <section
+        className={cn(
+          'relative overflow-hidden rounded-[30px] p-5 sm:rounded-[34px] sm:p-8',
+          PLACES_PANEL_CLASS
+        )}
+      >
         <div
           className="absolute inset-0 opacity-40"
           style={{
-            backgroundImage:
-              'linear-gradient(90deg, rgba(121, 101, 76, 0.05) 1px, transparent 1px), linear-gradient(rgba(121, 101, 76, 0.05) 1px, transparent 1px)',
+            backgroundImage: PLACES_SOFT_GRID_STYLE,
             backgroundSize: '30px 30px',
           }}
         />
 
         <div className="relative grid gap-5 sm:gap-6 xl:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)]">
           <div className="space-y-4 sm:space-y-5">
-            <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-[#cfc1af] bg-[#fffdf9] px-3 py-1.5 text-[11px] font-semibold tracking-[0.03em] text-[#4f4336] shadow-[0_8px_20px_rgba(60,47,31,0.06)] sm:gap-2 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.04em]">
-              <ShieldCheckIcon className="h-3.5 w-3.5 text-[#42624d]" />
+            <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-beige-deep bg-canvas/86 px-3 py-1.5 text-[11px] font-semibold tracking-[0.03em] text-slate shadow-subtle sm:gap-2 sm:px-4 sm:py-2 sm:text-xs sm:tracking-[0.04em]">
+              <ShieldCheckIcon
+                className={cn('h-3.5 w-3.5', TONE_STYLES.mint.icon)}
+              />
               <span>수도권 중심 · 지역·조건별 탐색</span>
             </div>
 
             <div className="space-y-2.5 sm:space-y-3">
               <h1
-                className="text-[clamp(1.75rem,8.6vw,2.65rem)] font-semibold leading-[1.05] tracking-[-0.05em] text-[#27231d] sm:text-[clamp(1.95rem,4.2vw,3.6rem)] sm:leading-[1.08]"
+                className="font-editorial text-[clamp(1.75rem,8.6vw,2.65rem)] font-normal leading-[1.05] text-foreground sm:text-[clamp(1.95rem,4.2vw,3.6rem)] sm:leading-[1.08]"
                 style={{
-                  fontFamily:
-                    '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                  fontFamily: 'var(--font-editorial)',
                 }}
               >
                 아이와 가볼 곳을
                 <br />
                 지역과 조건으로 찾아보세요
               </h1>
-              <p className="max-w-2xl text-[13px] leading-6 text-[#645849] sm:text-[15px] sm:leading-7">
+              <p className="max-w-2xl text-[13px] leading-6 text-slate sm:text-[15px] sm:leading-7">
                 서울·경기·인천에서 아이와 가볼 곳을 한곳에 모았습니다. 먼저
                 지역을 고르고, 연령과 실내 여부 같은 조건으로 원하는 장소만
                 빠르게 좁혀보세요.
@@ -65,67 +77,101 @@ export function PlacesHub({
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
+              <span className="rounded-full border border-beige-deep/70 bg-canvas/80 px-3 py-1 text-[11px] font-medium text-slate sm:px-3.5 sm:py-1.5 sm:text-xs">
                 서울
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
+              <span className="rounded-full border border-beige-deep/70 bg-canvas/80 px-3 py-1 text-[11px] font-medium text-slate sm:px-3.5 sm:py-1.5 sm:text-xs">
                 경기 남부
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
+              <span className="rounded-full border border-beige-deep/70 bg-canvas/80 px-3 py-1 text-[11px] font-medium text-slate sm:px-3.5 sm:py-1.5 sm:text-xs">
                 경기 북부
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
+              <span className="rounded-full border border-beige-deep/70 bg-canvas/80 px-3 py-1 text-[11px] font-medium text-slate sm:px-3.5 sm:py-1.5 sm:text-xs">
                 인천
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
+              <span
+                className={cn(
+                  'rounded-full border px-3 py-1 text-[11px] font-medium sm:px-3.5 sm:py-1.5 sm:text-xs',
+                  TONE_STYLES.sky.badge
+                )}
+              >
                 실내
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
+              <span
+                className={cn(
+                  'rounded-full border px-3 py-1 text-[11px] font-medium sm:px-3.5 sm:py-1.5 sm:text-xs',
+                  TONE_STYLES.mint.badge
+                )}
+              >
                 무료
               </span>
-              <span className="rounded-full border border-[#e1d4c0] bg-white/75 px-3 py-1 text-[11px] font-medium text-[#665848] sm:px-3.5 sm:py-1.5 sm:text-xs">
+              <span
+                className={cn(
+                  'rounded-full border px-3 py-1 text-[11px] font-medium sm:px-3.5 sm:py-1.5 sm:text-xs',
+                  TONE_STYLES.sky.badge
+                )}
+              >
                 비 오는 날
               </span>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 sm:gap-3 xl:grid-cols-1">
-            <div className="col-span-2 rounded-[22px] bg-[#f7f0e4] px-4 py-3 sm:col-span-1 sm:rounded-[24px] sm:px-5 sm:py-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8f7550]">
+            <div className="col-span-2 rounded-[22px] bg-cream px-4 py-3 sm:col-span-1 sm:rounded-[24px] sm:px-5 sm:py-4">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sunshine-900">
                 정리된 장소
               </p>
               <p
-                className="mt-1.5 text-[1.9rem] font-semibold tracking-tight text-[#2d271f] sm:mt-2 sm:text-3xl"
+                className="mt-1.5 text-[1.9rem] font-semibold text-foreground sm:mt-2 sm:text-3xl"
                 style={{
-                  fontFamily:
-                    '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                  fontFamily: 'var(--font-editorial)',
                 }}
               >
                 {totalPlaceCount}곳
               </p>
-              <p className="mt-1 text-[13px] leading-5 text-[#6a5c49] sm:text-sm sm:leading-6">
+              <p className="mt-1 text-[13px] leading-5 text-slate sm:text-sm sm:leading-6">
                 현재 공개된 장소를 기준으로 집계한 수입니다.
               </p>
             </div>
-            <div className="rounded-[22px] bg-[#eef4e8] px-4 py-3 sm:rounded-[24px] sm:px-5 sm:py-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#5d6c54]">
+            <div
+              className={cn(
+                'rounded-[22px] px-4 py-3 sm:rounded-[24px] sm:px-5 sm:py-4',
+                TONE_STYLES.mint.softPanel
+              )}
+            >
+              <p
+                className={cn(
+                  'text-[11px] font-semibold uppercase tracking-[0.18em]',
+                  TONE_STYLES.mint.eyebrow
+                )}
+              >
                 탐색 방식
               </p>
-              <p className="mt-1.5 text-base font-semibold tracking-tight text-[#2d271f] sm:mt-2 sm:text-lg">
+              <p className="mt-1.5 text-base font-semibold text-foreground sm:mt-2 sm:text-lg">
                 지역 먼저, 조건은 그 다음
               </p>
-              <p className="mt-1 text-[13px] leading-5 text-[#6a5c49] sm:text-sm sm:leading-6">
+              <p className="mt-1 text-[13px] leading-5 text-slate sm:text-sm sm:leading-6">
                 먼저 권역을 고른 뒤, 연령과 조건으로 다시 좁혀봅니다.
               </p>
             </div>
-            <div className="rounded-[22px] bg-[#f4e7df] px-4 py-3 sm:rounded-[24px] sm:px-5 sm:py-4">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#8a5b4a]">
+            <div
+              className={cn(
+                'rounded-[22px] px-4 py-3 sm:rounded-[24px] sm:px-5 sm:py-4',
+                TONE_STYLES.peach.softPanel
+              )}
+            >
+              <p
+                className={cn(
+                  'text-[11px] font-semibold uppercase tracking-[0.18em]',
+                  TONE_STYLES.peach.eyebrow
+                )}
+              >
                 신뢰 기준
               </p>
-              <p className="mt-1.5 text-base font-semibold tracking-tight text-[#2d271f] sm:mt-2 sm:text-lg">
+              <p className="mt-1.5 text-base font-semibold text-foreground sm:mt-2 sm:text-lg">
                 공식·준공식 검증 중심
               </p>
-              <p className="mt-1 text-[13px] leading-5 text-[#6a5c49] sm:text-sm sm:leading-6">
+              <p className="mt-1 text-[13px] leading-5 text-slate sm:text-sm sm:leading-6">
                 운영시간과 이용 요금은 자주 바뀔 수 있어, 출처와 확인 시점을
                 함께 안내합니다.
               </p>
@@ -142,10 +188,9 @@ export function PlacesHub({
             </p>
             <div className="space-y-1.5 sm:space-y-2">
               <h2
-                className="text-[1.75rem] font-semibold tracking-tight text-foreground sm:text-[2rem]"
+                className="font-editorial text-[1.75rem] font-normal text-foreground sm:text-[2rem]"
                 style={{
-                  fontFamily:
-                    '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                  fontFamily: 'var(--font-editorial)',
                 }}
               >
                 먼저 권역부터 좁혀보세요
@@ -177,10 +222,9 @@ export function PlacesHub({
             </p>
             <div className="space-y-1.5 sm:space-y-2">
               <h2
-                className="text-[1.75rem] font-semibold tracking-tight text-foreground sm:text-[2rem]"
+                className="font-editorial text-[1.75rem] font-normal text-foreground sm:text-[2rem]"
                 style={{
-                  fontFamily:
-                    '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+                  fontFamily: 'var(--font-editorial)',
                 }}
               >
                 여기서 더 세밀하게 줄이면 됩니다
@@ -192,7 +236,7 @@ export function PlacesHub({
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex h-8 items-center gap-1.5 rounded-full border border-[#e5d9c8] bg-white/75 px-3 text-[11px] font-medium text-[#6e604d] shadow-[0_8px_20px_rgba(59,46,31,0.05)] sm:h-9 sm:gap-2 sm:px-4 sm:text-sm">
+            <div className="inline-flex h-8 items-center gap-1.5 rounded-full border border-beige-deep/60 bg-canvas/80 px-3 text-[11px] font-medium text-slate shadow-subtle sm:h-9 sm:gap-2 sm:px-4 sm:text-sm">
               <SlidersHorizontalIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               <span>필터는 URL과 동기화</span>
             </div>
@@ -202,8 +246,13 @@ export function PlacesHub({
 
         <Suspense
           fallback={
-            <div className="rounded-[28px] border border-[#e7dccf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] px-6 py-12 text-center shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
-              <p className="text-sm text-[#6a5d4d]">
+            <div
+              className={cn(
+                'rounded-[28px] px-6 py-12 text-center',
+                PLACES_MUTED_SURFACE_CLASS
+              )}
+            >
+              <p className="text-sm text-muted-foreground">
                 장소 목록을 불러오는 중입니다...
               </p>
             </div>
@@ -213,16 +262,15 @@ export function PlacesHub({
         </Suspense>
       </section>
 
-      <section className="rounded-[32px] border border-[#e8ddcf] bg-[linear-gradient(180deg,rgba(252,249,244,0.98),rgba(248,242,232,0.96))] p-6 shadow-[0_18px_45px_rgba(59,46,31,0.05)]">
+      <section className={cn('rounded-[32px] p-6', PLACES_MUTED_SURFACE_CLASS)}>
         <div className="mb-4">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#745e3e]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sunshine-900">
             함께 보기
           </p>
           <h2
-            className="mt-2 text-2xl font-semibold tracking-tight text-[#2d271f]"
+            className="font-editorial mt-2 text-2xl font-normal text-foreground"
             style={{
-              fontFamily:
-                '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+              fontFamily: 'var(--font-editorial)',
             }}
           >
             장소를 고른 뒤 바로 이어지는 도구와 혜택
@@ -232,17 +280,31 @@ export function PlacesHub({
         <div className="grid gap-3 sm:grid-cols-2">
           <Link
             href="/tools"
-            className="group cursor-pointer rounded-[24px] border border-[#d3dbe6] bg-[linear-gradient(180deg,rgba(248,250,252,0.98),rgba(241,245,249,0.96))] p-5 transition-all hover:-translate-y-0.5 hover:border-[#9fb7d6]"
+            className={cn(
+              'group cursor-pointer rounded-[24px] border p-5 transition-all hover:-translate-y-0.5',
+              TONE_STYLES.sky.frame
+            )}
           >
             <div className="flex items-start gap-3">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#e7eef7] text-[#49627d]">
+              <div
+                className={cn(
+                  'inline-flex h-11 w-11 items-center justify-center rounded-2xl',
+                  TONE_STYLES.sky.iconWrap,
+                  TONE_STYLES.sky.icon
+                )}
+              >
                 <WrenchIcon className="h-5 w-5" />
               </div>
               <div className="min-w-0 flex-1 space-y-1">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#506884]">
+                <p
+                  className={cn(
+                    'text-[11px] font-semibold uppercase tracking-[0.2em]',
+                    TONE_STYLES.sky.eyebrow
+                  )}
+                >
                   도구
                 </p>
-                <p className="text-lg font-semibold tracking-tight text-foreground">
+                <p className="text-lg font-semibold text-foreground">
                   나들이 예산 계산기
                 </p>
                 <p className="text-sm leading-6 text-muted-foreground">
@@ -259,17 +321,31 @@ export function PlacesHub({
 
           <Link
             href="/benefits"
-            className="group cursor-pointer rounded-[24px] border border-[#e7d2ca] bg-[linear-gradient(180deg,rgba(252,247,245,0.98),rgba(247,238,233,0.96))] p-5 transition-all hover:-translate-y-0.5 hover:border-[#d09d8b]"
+            className={cn(
+              'group cursor-pointer rounded-[24px] border p-5 transition-all hover:-translate-y-0.5',
+              TONE_STYLES.peach.frame
+            )}
           >
             <div className="flex items-start gap-3">
-              <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[#f7e2dc] text-[#8a5446]">
+              <div
+                className={cn(
+                  'inline-flex h-11 w-11 items-center justify-center rounded-2xl',
+                  TONE_STYLES.peach.iconWrap,
+                  TONE_STYLES.peach.icon
+                )}
+              >
                 <GiftIcon className="h-5 w-5" />
               </div>
               <div className="min-w-0 flex-1 space-y-1">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#8e5a4c]">
+                <p
+                  className={cn(
+                    'text-[11px] font-semibold uppercase tracking-[0.2em]',
+                    TONE_STYLES.peach.eyebrow
+                  )}
+                >
                   혜택·지원금
                 </p>
-                <p className="text-lg font-semibold tracking-tight text-foreground">
+                <p className="text-lg font-semibold text-foreground">
                   지역별 육아 혜택 확인
                 </p>
                 <p className="text-sm leading-6 text-muted-foreground">

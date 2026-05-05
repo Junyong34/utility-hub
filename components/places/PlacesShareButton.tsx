@@ -69,10 +69,10 @@ export function PlacesShareButton() {
       size="sm"
       onClick={handleShare}
       aria-label="현재 필터 링크 공유"
-      className="h-8 rounded-full border-[#e5d9c8] bg-white/80 px-3 text-[11px] font-medium text-[#6e604d] shadow-[0_8px_20px_rgba(59,46,31,0.06)] hover:border-[#d6c3aa] hover:bg-white sm:h-9 sm:px-3.5 sm:text-xs"
+      className="h-8 rounded-full border-beige-deep/60 bg-canvas/80 px-3 text-[11px] font-medium text-slate shadow-subtle hover:border-primary/30 hover:bg-canvas sm:h-9 sm:px-3.5 sm:text-xs"
     >
       {copied ? (
-        <CheckIcon className="h-3.5 w-3.5 text-[#03c75a]" />
+        <CheckIcon className="h-3.5 w-3.5 text-[oklch(48%_0.12_155)]" />
       ) : canNativeShare ? (
         <Share2Icon className="h-3.5 w-3.5" />
       ) : (

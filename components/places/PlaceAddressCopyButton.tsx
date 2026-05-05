@@ -37,9 +37,13 @@ export function PlaceAddressCopyButton({
       onClick={handleCopy}
       aria-label={`${placeName} 주소 복사`}
       title={copied ? '복사됨' : '주소 복사'}
-      className="h-6 w-6 rounded-[8px] border border-[#e7dccf] bg-white/80 text-[#6e604d] shadow-[0_4px_12px_rgba(59,46,31,0.05)] hover:border-[#d4c2aa] hover:bg-white"
+      className="h-6 w-6 rounded-[8px] border border-hairline-soft bg-canvas/80 text-slate shadow-subtle hover:border-primary/30 hover:bg-canvas"
     >
-      {copied ? <Check className="size-3.5 text-[#03c75a]" /> : <Copy className="size-3.5" />}
+      {copied ? (
+        <Check className="size-3.5 text-[oklch(48%_0.12_155)]" />
+      ) : (
+        <Copy className="size-3.5" />
+      )}
       <span className="sr-only">{copied ? '복사됨' : '주소 복사'}</span>
     </Button>
   );

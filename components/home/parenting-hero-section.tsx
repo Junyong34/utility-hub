@@ -1,51 +1,36 @@
 import Link from 'next/link';
 import { ArrowRightIcon, MapPinIcon, SearchIcon } from 'lucide-react';
-import type {
-  HomeFilterChip,
-  HomeLinkCardItem,
-  HomeAccentTone,
-} from '@/types/home';
+import type { HomeFilterChip, HomeLinkCardItem } from '@/types/home';
 import { cn } from '@/lib/utils';
-
-const TONE_STYLES: Record<
-  HomeAccentTone,
-  {
-    border: string;
-    bg: string;
-    text: string;
-    badge: string;
-  }
-> = {
-  olive: {
-    border: 'border-beige-deep/70',
-    bg: 'bg-cream-soft',
-    text: 'text-slate',
-    badge: 'bg-cream text-slate',
-  },
-  sand: {
-    border: 'border-beige-deep',
-    bg: 'bg-cream',
-    text: 'text-charcoal',
-    badge: 'bg-cream-deeper text-foreground',
-  },
-  brick: {
-    border: 'border-primary/25',
-    bg: 'bg-primary/8',
-    text: 'text-primary-deep',
-    badge: 'bg-primary/10 text-primary-deep',
-  },
-  sky: {
-    border: 'border-sunshine-500/50',
-    bg: 'bg-sunshine-300/35',
-    text: 'text-sunshine-900',
-    badge: 'bg-yellow-saturated/20 text-sunshine-900',
-  },
-};
+import {
+  CONDITION_BADGE_STYLES,
+  FILTER_CHIP_STYLES,
+  HOME_TONE_BY_ACCENT,
+  PARENTING_PANEL_CLASS,
+  PARENTING_SOFT_GRID_STYLE,
+  PARENTING_TONE_STYLES,
+} from '@/components/parenting-theme';
 
 interface ParentingHeroSectionProps {
   regionLinks: HomeLinkCardItem[];
   scenarioLinks: HomeLinkCardItem[];
   quickFilters: HomeFilterChip[];
+}
+
+function getQuickFilterClass(filter: HomeFilterChip): string {
+  if (filter.href.includes('free=')) {
+    return CONDITION_BADGE_STYLES.free;
+  }
+
+  if (filter.href.includes('indoor=') || filter.href.includes('rain=')) {
+    return CONDITION_BADGE_STYLES.rain;
+  }
+
+  if (filter.href.includes('age=')) {
+    return CONDITION_BADGE_STYLES.age;
+  }
+
+  return FILTER_CHIP_STYLES.inactive;
 }
 
 export function ParentingHeroSection({
@@ -55,17 +40,31 @@ export function ParentingHeroSection({
 }: ParentingHeroSectionProps) {
   return (
     <section className="relative overflow-hidden pt-8 md:pt-24 xl:pt-32">
-      <div className="absolute inset-x-4 top-6 -z-10 h-[31rem] rounded-[36px] border border-hairline-soft bg-[linear-gradient(180deg,var(--cream-soft),var(--surface-cream-soft))] shadow-[0_35px_90px_rgba(72,57,38,0.08)] md:inset-x-6" />
+      <div className="absolute inset-x-4 top-6 -z-10 h-[31rem] rounded-[36px] border border-hairline-soft bg-[linear-gradient(180deg,var(--cream-soft),var(--canvas))] shadow-card md:inset-x-6" />
       <div
-        className="absolute inset-x-10 top-10 -z-10 h-[30rem] rounded-[30px] bg-[linear-gradient(90deg,rgba(120,97,61,0.06)_1px,transparent_1px),linear-gradient(rgba(120,97,61,0.06)_1px,transparent_1px)] opacity-45"
-        style={{ backgroundSize: '28px 28px' }}
+        className="absolute inset-x-10 top-10 -z-10 h-[30rem] rounded-[30px] opacity-45"
+        style={{
+          backgroundImage: PARENTING_SOFT_GRID_STYLE,
+          backgroundSize: '28px 28px',
+        }}
       />
 
       <div className="mx-auto max-w-screen-2xl px-4 pb-12 sm:pb-14">
         <div className="grid gap-5 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:gap-7">
-          <div className="flex flex-col gap-4 rounded-lg border border-hairline-soft bg-canvas/86 p-5 shadow-card sm:gap-5 sm:p-7">
+          <div
+            className={cn(
+              'flex flex-col gap-4 rounded-[30px] p-5 sm:gap-5 sm:p-7',
+              PARENTING_PANEL_CLASS
+            )}
+          >
             <div className="inline-flex w-fit items-center gap-2 rounded-full border border-beige-deep bg-[linear-gradient(135deg,var(--cream),var(--cream-soft))] px-3 py-1.5 text-[11px] font-semibold tracking-[0.04em] text-slate shadow-subtle sm:gap-2.5 sm:py-2 sm:text-xs">
-              <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-subtle sm:h-7 sm:w-7">
+              <span
+                className={cn(
+                  'inline-flex h-6 w-6 items-center justify-center rounded-full shadow-subtle sm:h-7 sm:w-7',
+                  PARENTING_TONE_STYLES.peach.iconWrap,
+                  PARENTING_TONE_STYLES.peach.icon
+                )}
+              >
                 <MapPinIcon className="h-3.5 w-3.5" />
               </span>
               <span>오늘 아이와 어디 갈지 고민될 때</span>
@@ -73,7 +72,7 @@ export function ParentingHeroSection({
 
             <div className="space-y-2.5 sm:space-y-3">
               <h1
-                className="font-editorial max-w-3xl text-[clamp(2.05rem,5vw,4.8rem)] font-normal leading-[1.06] tracking-[-0.02em] text-foreground"
+                className="font-editorial max-w-3xl text-[clamp(2.05rem,5vw,4.8rem)] font-normal leading-[1.06] text-foreground"
                 style={{
                   fontFamily: 'var(--font-editorial)',
                 }}
@@ -116,7 +115,10 @@ export function ParentingHeroSection({
                 <Link
                   key={filter.id}
                   href={filter.href}
-                  className="cursor-pointer rounded-md border border-beige-deep bg-canvas/80 px-3 py-1.5 text-[11px] font-medium text-slate transition-colors hover:border-primary/40 hover:text-foreground sm:px-3.5 sm:text-xs"
+                  className={cn(
+                    'cursor-pointer rounded-md border px-3 py-1.5 text-[11px] font-medium transition-colors hover:border-primary/40 hover:text-foreground sm:px-3.5 sm:text-xs',
+                    getQuickFilterClass(filter)
+                  )}
                 >
                   {filter.label}
                 </Link>
@@ -124,7 +126,7 @@ export function ParentingHeroSection({
             </div>
 
             <div className="grid gap-2.5 border-t border-hairline-soft pt-3.5 text-[13px] text-slate sm:grid-cols-3 sm:gap-3 sm:pt-4 sm:text-sm">
-              <div className="rounded-lg bg-cream-soft px-3.5 py-3 sm:px-4">
+              <div className="rounded-lg bg-cream px-3.5 py-3 sm:px-4">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sunshine-900">
                   지역부터
                 </p>
@@ -132,8 +134,18 @@ export function ParentingHeroSection({
                   가까운 지역부터 고르고, 필요한 조건만 더 좁혀보세요
                 </p>
               </div>
-              <div className="rounded-lg bg-cream px-3.5 py-3 sm:px-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-deep">
+              <div
+                className={cn(
+                  'rounded-lg px-3.5 py-3 sm:px-4',
+                  PARENTING_TONE_STYLES.mint.softPanel
+                )}
+              >
+                <p
+                  className={cn(
+                    'text-[11px] font-semibold uppercase tracking-[0.18em]',
+                    PARENTING_TONE_STYLES.mint.eyebrow
+                  )}
+                >
                   상황별
                 </p>
                 <p className="mt-1 leading-5 sm:leading-6">
@@ -141,8 +153,18 @@ export function ParentingHeroSection({
                   있어요
                 </p>
               </div>
-              <div className="rounded-lg bg-primary/8 px-3.5 py-3 sm:px-4">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-deep">
+              <div
+                className={cn(
+                  'rounded-lg px-3.5 py-3 sm:px-4',
+                  PARENTING_TONE_STYLES.peach.softPanel
+                )}
+              >
+                <p
+                  className={cn(
+                    'text-[11px] font-semibold uppercase tracking-[0.18em]',
+                    PARENTING_TONE_STYLES.peach.eyebrow
+                  )}
+                >
                   빠른 결정
                 </p>
                 <p className="mt-1 leading-5 sm:leading-6">
@@ -153,14 +175,16 @@ export function ParentingHeroSection({
           </div>
 
           <div className="grid gap-4">
-            <div className="rounded-lg border border-hairline-soft bg-canvas/90 p-4 shadow-card sm:p-5">
+            <div
+              className={cn('rounded-[30px] p-4 sm:p-5', PARENTING_PANEL_CLASS)}
+            >
               <div className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sunshine-900">
                     지역별 바로가기
                   </p>
                   <h2
-                    className="font-editorial mt-1.5 text-[1.35rem] font-normal tracking-[-0.01em] text-foreground sm:mt-2 sm:text-2xl"
+                    className="font-editorial mt-1.5 text-[1.35rem] font-normal text-foreground sm:mt-2 sm:text-2xl"
                     style={{
                       fontFamily: 'var(--font-editorial)',
                     }}
@@ -168,22 +192,28 @@ export function ParentingHeroSection({
                     가까운 지역부터 고르기
                   </h2>
                 </div>
-                <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cream text-primary-deep sm:h-11 sm:w-11">
+                <div
+                  className={cn(
+                    'inline-flex h-10 w-10 items-center justify-center rounded-lg sm:h-11 sm:w-11',
+                    PARENTING_TONE_STYLES.sand.iconWrap,
+                    PARENTING_TONE_STYLES.sand.icon
+                  )}
+                >
                   <MapPinIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                 {regionLinks.map(region => {
-                  const tone = TONE_STYLES[region.tone];
+                  const tone =
+                    PARENTING_TONE_STYLES[HOME_TONE_BY_ACCENT[region.tone]];
                   return (
                     <Link
                       key={region.id}
                       href={region.href}
                       className={cn(
                         'group cursor-pointer rounded-lg border p-3.5 transition-all hover:-translate-y-0.5 sm:p-4',
-                        tone.border,
-                        tone.bg
+                        tone.frame
                       )}
                     >
                       <div className="flex items-start justify-between gap-3">
@@ -191,18 +221,18 @@ export function ParentingHeroSection({
                           <p
                             className={cn(
                               'text-[11px] font-semibold uppercase tracking-[0.2em]',
-                              tone.text
+                              tone.eyebrow
                             )}
                           >
                             {region.eyebrow}
                           </p>
-                          <p className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
+                          <p className="text-base font-semibold text-foreground sm:text-lg">
                             {region.title}
                           </p>
                         </div>
                         <span
                           className={cn(
-                            'rounded-full px-2.5 py-1 text-[11px] font-semibold sm:px-3',
+                            'rounded-full border px-2.5 py-1 text-[11px] font-semibold sm:px-3',
                             tone.badge
                           )}
                         >
@@ -222,13 +252,15 @@ export function ParentingHeroSection({
               </div>
             </div>
 
-            <div className="rounded-lg border border-hairline-soft bg-canvas/88 p-4 shadow-card sm:p-5">
+            <div
+              className={cn('rounded-[30px] p-4 sm:p-5', PARENTING_PANEL_CLASS)}
+            >
               <div className="mb-3 sm:mb-4">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate">
                   상황별 바로가기
                 </p>
                 <h2
-                  className="font-editorial mt-1.5 text-[1.35rem] font-normal tracking-[-0.01em] text-foreground sm:mt-2 sm:text-2xl"
+                  className="font-editorial mt-1.5 text-[1.35rem] font-normal text-foreground sm:mt-2 sm:text-2xl"
                   style={{
                     fontFamily: 'var(--font-editorial)',
                   }}
@@ -239,27 +271,27 @@ export function ParentingHeroSection({
 
               <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                 {scenarioLinks.map(scenario => {
-                  const tone = TONE_STYLES[scenario.tone];
+                  const tone =
+                    PARENTING_TONE_STYLES[HOME_TONE_BY_ACCENT[scenario.tone]];
                   return (
                     <Link
                       key={scenario.id}
                       href={scenario.href}
                       className={cn(
                         'group cursor-pointer flex min-h-24 flex-col justify-between rounded-lg border p-3.5 transition-all hover:-translate-y-0.5 sm:min-h-28 sm:p-4',
-                        tone.border,
-                        tone.bg
+                        tone.frame
                       )}
                     >
                       <div className="space-y-1.5 sm:space-y-2">
                         <p
                           className={cn(
                             'text-[11px] font-semibold uppercase tracking-[0.2em]',
-                            tone.text
+                            tone.eyebrow
                           )}
                         >
                           {scenario.eyebrow}
                         </p>
-                        <p className="text-[15px] font-semibold tracking-tight text-foreground sm:text-base">
+                        <p className="text-[15px] font-semibold text-foreground sm:text-base">
                           {scenario.title}
                         </p>
                       </div>

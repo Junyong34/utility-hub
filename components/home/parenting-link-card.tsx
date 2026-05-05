@@ -1,65 +1,31 @@
 import Link from 'next/link';
 import { ArrowRightIcon } from 'lucide-react';
-import type { HomeLinkCardItem, HomeAccentTone } from '@/types/home';
+import type { HomeLinkCardItem } from '@/types/home';
 import { cn } from '@/lib/utils';
-
-const TONE_STYLES: Record<
-  HomeAccentTone,
-  {
-    frame: string;
-    eyebrow: string;
-    accent: string;
-    badge: string;
-  }
-> = {
-  olive: {
-    frame:
-      'border-beige-deep/70 bg-[linear-gradient(180deg,var(--cream-soft),var(--canvas))] hover:border-primary/40',
-    eyebrow: 'text-slate',
-    accent: 'from-cream-soft to-cream',
-    badge: 'bg-cream text-slate',
-  },
-  sand: {
-    frame:
-      'border-beige-deep bg-[linear-gradient(180deg,var(--canvas),var(--cream-soft))] hover:border-primary/40',
-    eyebrow: 'text-sunshine-900',
-    accent: 'from-cream to-cream-deeper',
-    badge: 'bg-cream-deeper text-foreground',
-  },
-  brick: {
-    frame: 'border-primary/25 bg-primary/5 hover:border-primary/50',
-    eyebrow: 'text-primary-deep',
-    accent: 'from-primary/10 to-sunshine-300/35',
-    badge: 'bg-primary/10 text-primary-deep',
-  },
-  sky: {
-    frame:
-      'border-sunshine-500/50 bg-[linear-gradient(180deg,var(--canvas),var(--cream))] hover:border-sunshine-700',
-    eyebrow: 'text-sunshine-900',
-    accent: 'from-sunshine-300/35 to-yellow-saturated/20',
-    badge: 'bg-yellow-saturated/20 text-sunshine-900',
-  },
-};
+import {
+  HOME_TONE_BY_ACCENT,
+  PARENTING_TONE_STYLES,
+} from '@/components/parenting-theme';
 
 interface ParentingLinkCardProps {
   item: HomeLinkCardItem;
 }
 
 export function ParentingLinkCard({ item }: ParentingLinkCardProps) {
-  const tone = TONE_STYLES[item.tone];
+  const tone = PARENTING_TONE_STYLES[HOME_TONE_BY_ACCENT[item.tone]];
 
   return (
     <Link
       href={item.href}
       className={cn(
-        'group relative cursor-pointer overflow-hidden rounded-lg border p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card sm:p-5',
+        'group relative cursor-pointer overflow-hidden rounded-[24px] border p-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-mockup sm:rounded-[28px] sm:p-5',
         tone.frame
       )}
     >
       <div className="relative flex h-full flex-col gap-3 sm:gap-4">
         <div
           className={cn(
-            'rounded-lg bg-gradient-to-b p-3.5 sm:p-4',
+            'rounded-[18px] bg-gradient-to-b p-3.5 sm:rounded-[22px] sm:p-4',
             tone.accent
           )}
         >
@@ -73,7 +39,7 @@ export function ParentingLinkCard({ item }: ParentingLinkCardProps) {
               >
                 {item.eyebrow}
               </p>
-              <h3 className="text-base font-semibold tracking-tight text-foreground sm:text-lg">
+              <h3 className="text-base font-semibold text-foreground sm:text-lg">
                 {item.title}
               </h3>
             </div>
@@ -81,7 +47,7 @@ export function ParentingLinkCard({ item }: ParentingLinkCardProps) {
             {item.countLabel ? (
               <span
                 className={cn(
-                  'inline-flex rounded-full px-2.5 py-1 text-[11px] font-semibold sm:px-3',
+                  'inline-flex rounded-full border px-2.5 py-1 text-[11px] font-semibold sm:px-3',
                   tone.badge
                 )}
               >
