@@ -19,6 +19,7 @@ const CATEGORY_NAMES: Record<string, string> = {
   'ai-image-creator': 'AI',
   investment: '투자',
   lotto: '로또',
+  benefits: '혜택·지원금',
   uncategorized: '미분류',
 };
 

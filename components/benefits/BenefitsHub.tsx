@@ -21,6 +21,9 @@ const CATEGORY_ICONS: Record<string, ElementType> = {
   'piggy-bank': PiggyBankIcon,
 };
 
+const GOVERNMENT_BENEFITS_POST_PATH =
+  '/blog/benefits/2026-parenting-benefits-guide';
+
 const CATEGORY_STYLES: Record<
   string,
   {
@@ -180,11 +183,15 @@ export function BenefitsHub() {
           {BENEFIT_CATEGORIES.map(category => {
             const Icon = CATEGORY_ICONS[category.icon] ?? BuildingIcon;
             const tone = CATEGORY_STYLES[category.id];
+            const href =
+              category.id === 'government'
+                ? GOVERNMENT_BENEFITS_POST_PATH
+                : `/blog?tag=${category.id}`;
 
             return (
               <Link
                 key={category.id}
-                href={`/blog?tag=${category.id}`}
+                href={href}
                 className={cn(
                   'group relative overflow-hidden rounded-[28px] border p-5 shadow-[0_18px_45px_rgba(56,46,33,0.06)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_55px_rgba(56,46,33,0.1)]',
                   tone.frame
