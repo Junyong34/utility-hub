@@ -6,6 +6,7 @@ import {
   getNaverMapTestPlaces,
   getSourceUrlTestPlaces,
 } from './link-verification.ts';
+import { getPlaceNaverMapUrl } from '../../lib/places/place-map-links.ts';
 import { PUBLISHABLE_STATUSES } from '../../types/place-source.ts';
 
 test('publishable places expose an https sourceUrl', () => {
@@ -18,12 +19,23 @@ test('publishable places expose an https sourceUrl', () => {
   }
 });
 
-test('publishable places with naverMapUrl use the Naver place entry format', () => {
+test('publishable places with naverMapUrl resolve to place entries or address-only search links', () => {
   for (const place of getNaverMapTestPlaces(ALL_PLACES)) {
+    const naverMapUrl = getPlaceNaverMapUrl(place);
+
     assert.match(
-      place.naverMapUrl,
-      /^https:\/\/map\.naver\.com\/p\/entry\/place\/\d+/,
-      `${place.id} naverMapUrl must use the /p/entry/place/{id} format: ${place.naverMapUrl}`
+      naverMapUrl,
+      /^https:\/\/map\.naver\.com\/p\/(?:entry\/place\/\d+|search\/.+)/,
+      `${place.id} naverMapUrl must resolve to a Naver place entry or search link: ${naverMapUrl}`
+    );
+
+    if (!naverMapUrl?.startsWith('https://map.naver.com/p/search/')) continue;
+    if (!place.address) continue;
+
+    assert.equal(
+      decodeURIComponent(naverMapUrl.replace('https://map.naver.com/p/search/', '')),
+      place.address,
+      `${place.id} naverMapUrl search must use address only`
     );
   }
 });
