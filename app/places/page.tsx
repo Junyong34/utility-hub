@@ -35,8 +35,12 @@ export default async function PlacesPage({ searchParams }: PageProps) {
   return (
     <>
       <JsonLdMultiple data={[webPage, breadcrumb]} />
-      <PaperPageShell>
-        <div className="mx-auto max-w-screen-xl px-4 pt-10 pb-16 md:pt-24 xl:pt-32 sm:pb-24">
+      <PaperPageShell
+        glowClassName="h-[22rem] bg-[radial-gradient(circle_at_top_left,color-mix(in_srgb,var(--sunshine-500)_24%,transparent),transparent_30%),radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--primary)_12%,transparent),transparent_26%)]"
+        gridClassName="inset-x-8 top-72 h-[42rem] rounded-[42px] opacity-45"
+        gridStyle={{ backgroundSize: '34px 34px' }}
+      >
+        <div className="mx-auto max-w-screen-2xl px-4 pt-10 pb-20 md:pt-20 sm:pb-28">
           <PlacesHub
             regions={regions}
             placeCountByRegion={placeCountByRegion}

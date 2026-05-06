@@ -23,22 +23,17 @@ export function ParentingSectionGrid({
   gridClassName,
 }: ParentingSectionGridProps) {
   return (
-    <section className="space-y-4 sm:space-y-5">
+    <section className="space-y-6 sm:space-y-8">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div className="max-w-2xl space-y-2">
+        <div className="max-w-3xl space-y-3">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
             {eyebrow}
           </p>
-          <div className="space-y-2">
-            <h2
-              className="font-editorial text-[1.35rem] font-normal text-foreground sm:text-[2rem]"
-              style={{
-                fontFamily: 'var(--font-editorial)',
-              }}
-            >
+          <div className="space-y-3">
+            <h2 className="text-[1.7rem] font-semibold leading-tight tracking-tight text-foreground sm:text-[2.25rem]">
               {title}
             </h2>
-            <p className="text-[13px] leading-5 text-muted-foreground sm:text-[15px] sm:leading-6">
+            <p className="max-w-2xl text-[14px] leading-6 text-muted-foreground sm:text-[15px] sm:leading-7">
               {description}
             </p>
           </div>
@@ -57,7 +52,7 @@ export function ParentingSectionGrid({
 
       <div
         className={cn(
-          'grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-2 xl:grid-cols-4',
+          'grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-[1.12fr_0.88fr_0.88fr_1.12fr]',
           gridClassName
         )}
       >

@@ -38,24 +38,24 @@ export function ParentingFeaturedPlaceCard({
   return (
     <article
       className={cn(
-        'group relative overflow-hidden rounded-[24px] border p-3.5 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-mockup sm:rounded-[28px] sm:p-4',
+        'group relative overflow-hidden rounded-[30px] border p-3 shadow-[0_22px_70px_-54px_rgba(61,48,39,0.6)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_30px_78px_-48px_rgba(61,48,39,0.62)] sm:p-4',
         tone.frame
       )}
     >
-      <div className="grid gap-3 sm:gap-4 md:grid-cols-[1.1fr_1fr]">
-        <div className="relative min-h-44 overflow-hidden rounded-lg sm:min-h-56">
+      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1.06fr_0.94fr]">
+        <div className="relative min-h-64 overflow-hidden rounded-[24px] sm:min-h-80">
           {item.thumbnailImage ? (
             <Image
               src={item.thumbnailImage}
               alt={item.title}
               fill
               sizes="(max-width: 768px) 100vw, 40vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.025]"
             />
           ) : (
             <div
               className={cn(
-                'relative flex h-full min-h-44 flex-col justify-between overflow-hidden rounded-lg bg-gradient-to-br p-4 sm:min-h-56 sm:p-5',
+                'relative flex h-full min-h-64 flex-col justify-between overflow-hidden rounded-[24px] bg-gradient-to-br p-4 sm:min-h-80 sm:p-5',
                 tone.fallback
               )}
             >
@@ -84,20 +84,29 @@ export function ParentingFeaturedPlaceCard({
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground/45">
                   {item.categoryLabel}
                 </p>
-                <p
-                  className="max-w-[16rem] text-[1.35rem] font-semibold leading-tight text-foreground sm:text-2xl"
-                  style={{
-                    fontFamily: 'var(--font-editorial)',
-                  }}
-                >
+                <p className="max-w-[16rem] text-[1.35rem] font-semibold leading-tight tracking-tight text-foreground sm:text-2xl">
                   {item.title}
                 </p>
               </div>
             </div>
           )}
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,transparent,rgba(33,23,18,0.42))]" />
+          <div className="absolute right-3 bottom-3 left-3 flex flex-wrap items-center gap-2">
+            <span
+              className={cn(
+                'inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold backdrop-blur',
+                tone.badge
+              )}
+            >
+              {item.regionLabel}
+            </span>
+            <span className="inline-flex rounded-full border border-white/30 bg-[rgba(255,250,240,0.78)] px-3 py-1 text-[11px] font-semibold text-foreground/70 backdrop-blur">
+              {item.subRegion}
+            </span>
+          </div>
         </div>
 
-        <div className="flex min-w-0 flex-col gap-3 rounded-lg bg-canvas/70 p-4 sm:gap-4 sm:p-5">
+        <div className="flex min-w-0 flex-col gap-4 rounded-[24px] bg-canvas/72 p-4 ring-1 ring-hairline-soft sm:p-5">
           <div className="flex flex-wrap items-center gap-2">
             <span
               className={cn(
@@ -116,12 +125,7 @@ export function ParentingFeaturedPlaceCard({
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/45">
               이번 주 인기 장소
             </p>
-            <h3
-              className="text-[1.2rem] font-semibold leading-tight text-foreground sm:text-[1.4rem]"
-              style={{
-                fontFamily: 'var(--font-editorial)',
-              }}
-            >
+            <h3 className="text-[1.25rem] font-semibold leading-tight tracking-tight text-foreground sm:text-[1.55rem]">
               {item.title}
             </h3>
             <p className="text-[13px] leading-5 text-muted-foreground sm:text-sm sm:leading-6">

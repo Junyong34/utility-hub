@@ -178,7 +178,7 @@ export function PlacesFilteredGrid({
         </div>
       ) : matchedTotalCount > 0 ? (
         <>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-[1.06fr_0.94fr_1fr]">
             {allLoadedPlaces.map(place => (
               <PlaceCard key={place.id} place={place} />
             ))}

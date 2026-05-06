@@ -334,6 +334,30 @@
 
 /*---break---*/
 
+@keyframes parenting-breathe {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0) scale(1.012);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parenting-breathe {
+    animation: none !important;
+  }
+}
+
+.parenting-breathe {
+  animation: parenting-breathe 9s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/*---break---*/
+
 /* Prose (Typography) 스타일 */
 @layer components {
   .font-editorial {
