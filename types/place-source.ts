@@ -5,45 +5,57 @@
  */
 
 /** 수도권 지역 슬러그 */
-export type RegionSlug = 'seoul' | 'gyeonggi-south' | 'gyeonggi-north' | 'incheon';
+export type RegionSlug =
+  | 'seoul'
+  | 'gyeonggi-south'
+  | 'gyeonggi-north'
+  | 'incheon';
 
 /** 시설 카테고리 */
 export type PlaceCategory =
-  | 'baby-kids-cafe'  // 베이비키즈카페 (영아 전용, 0~36개월 특화)
-  | 'kids-cafe'       // 키즈카페
-  | 'public-play'     // 공공 놀이시설
-  | 'museum'          // 박물관/과학관
-  | 'experience'      // 체험관/체험시설
-  | 'park'            // 공원/야외시설
-  | 'library'         // 도서관/장난감도서관
-  | 'culture'         // 문화센터/공연시설
-  | 'sports';         // 체육시설/수영장
+  | 'baby-kids-cafe' // 베이비키즈카페 (영아 전용, 0~36개월 특화)
+  | 'kids-cafe' // 키즈카페
+  | 'public-play' // 공공 놀이시설
+  | 'museum' // 박물관/과학관
+  | 'experience' // 체험관/체험시설
+  | 'park' // 공원/야외시설
+  | 'library' // 도서관/장난감도서관
+  | 'culture' // 문화센터/공연시설
+  | 'sports'; // 체육시설/수영장
 
 /** 연령대 구분 */
 export type AgeBand =
-  | '0-12m'   // 0~12개월
-  | '1-3y'    // 1~3세
-  | '3-6y'    // 3~6세
-  | '6-10y'   // 6~10세
-  | 'all';    // 전 연령
+  | '0-12m' // 0~12개월
+  | '1-3y' // 1~3세
+  | '3-6y' // 3~6세
+  | '6-10y' // 6~10세
+  | 'all'; // 전 연령
 
 /** 실내/외 구분 */
 export type IndoorOutdoor = 'indoor' | 'outdoor' | 'both';
+
+/** 추천 계절 구분 */
+export type PlaceSeason =
+  | 'spring' // 봄
+  | 'summer' // 여름
+  | 'fall' // 가을
+  | 'winter' // 겨울
+  | 'all-season'; // 4계절
 
 /** 가격 유형 */
 export type PriceType = 'free' | 'paid' | 'partial-free';
 
 /** 운영 주체 유형 */
 export type OperatorType =
-  | 'public'      // 지자체, 공공기관, 시립/구립 시설 등 공공 운영
-  | 'commercial'  // 민간 사업자, 프랜차이즈, 유료 사설 시설 등 영리 운영
+  | 'public' // 지자체, 공공기관, 시립/구립 시설 등 공공 운영
+  | 'commercial' // 민간 사업자, 프랜차이즈, 유료 사설 시설 등 영리 운영
   | 'non-profit'; // 재단, 협회, 사회복지법인 등 비영리 운영
 
 /** 소스 레벨 (신뢰도 수준) */
 export type SourceType =
-  | 'official'      // Level 1: 공식 1차 소스
+  | 'official' // Level 1: 공식 1차 소스
   | 'semi-official' // Level 2: 공식/준공식 2차 소스
-  | 'discovery';    // Level 3: 민간 발견 소스
+  | 'discovery'; // Level 3: 민간 발견 소스
 
 /**
  * 검증 상태 enum
@@ -52,9 +64,9 @@ export type SourceType =
  */
 export type VerificationStatus =
   | 'official_verified' // 공식 소스로 검증 완료
-  | 'semi_verified'     // 준공식 소스로 검증 완료
-  | 'needs_refresh'     // 재검수 필요
-  | 'discovery_only';   // 발견만 됨, 미검증
+  | 'semi_verified' // 준공식 소스로 검증 완료
+  | 'needs_refresh' // 재검수 필요
+  | 'discovery_only'; // 발견만 됨, 미검증
 
 /** 발행 가능 상태 집합 */
 export const PUBLISHABLE_STATUSES: VerificationStatus[] = [
@@ -80,6 +92,8 @@ export interface PlaceCardFields {
   ageBands: AgeBand[];
   /** 실내/외 구분 */
   indoorOutdoor: IndoorOutdoor;
+  /** 추천 계절 (복수 선택 가능) */
+  seasons: PlaceSeason[];
   /** 가격 유형 */
   priceType: PriceType;
   /** 사전 예약 필요 여부 */
@@ -140,7 +154,8 @@ export interface PlaceOptionalFields {
  * 완전한 장소 데이터 타입
  * PlaceCardFields + PlaceVerificationMeta + PlaceOptionalFields
  */
-export interface PlaceSource extends PlaceCardFields, PlaceVerificationMeta, PlaceOptionalFields {}
+export interface PlaceSource
+  extends PlaceCardFields, PlaceVerificationMeta, PlaceOptionalFields {}
 
 /**
  * 블로그 포스트에서 장소를 참조하는 연결 필드

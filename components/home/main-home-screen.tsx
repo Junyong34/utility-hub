@@ -5,9 +5,12 @@ import {
   ArrowRightIcon,
   BabyIcon,
   Building2Icon,
+  CakeIcon,
   CloudSunIcon,
   MapPinIcon,
   MilkIcon,
+  PartyPopperIcon,
+  SchoolIcon,
   WalletCardsIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -279,37 +282,70 @@ function RegionVisual() {
 
 function IndoorVisual() {
   return (
-    <div className="relative h-full min-h-32 overflow-hidden rounded-md bg-surface-code">
+    <div className="relative h-full min-h-32 overflow-hidden rounded-md bg-cream-soft">
       <Image
-        src="/images/home/main-hero-family.webp"
-        alt="실내 체험 공간"
+        src="/images/places/showcase/indoor-playground.webp"
+        alt="비 오는 날 가기 좋은 실내 놀이공간"
         fill
         sizes="9rem"
-        className="object-cover object-[62%_center]"
+        className="object-cover object-[54%_center]"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(33,23,18,0),rgba(33,23,18,0.18))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,253,248,0.02),rgba(33,23,18,0.12))]" />
     </div>
   );
 }
 
 function AgeVisual() {
-  const ages = [
-    ['0~2세', 'bg-[#edf5ff]'],
-    ['3~5세', 'bg-[#fff2d8]'],
-    ['6~9세', 'bg-[#fff0e7]'],
-    ['10세~', 'bg-[#f3eee3]'],
+  const ages: Array<{
+    label: string;
+    className: string;
+    iconClassName: string;
+    icon: LucideIcon;
+  }> = [
+    {
+      label: '0~2세',
+      className: 'bg-[#edf5ff]',
+      iconClassName: 'bg-[#dbeeff] text-[#345a7b]',
+      icon: BabyIcon,
+    },
+    {
+      label: '3~5세',
+      className: 'bg-[#fff2d8]',
+      iconClassName: 'bg-[#ffe4ad] text-[#b6490b]',
+      icon: PartyPopperIcon,
+    },
+    {
+      label: '6~9세',
+      className: 'bg-[#fff0e7]',
+      iconClassName: 'bg-[#ffdccc] text-[#a84722]',
+      icon: CakeIcon,
+    },
+    {
+      label: '10세~',
+      className: 'bg-[#f3eee3]',
+      iconClassName: 'bg-[#e7dcc8] text-[#725936]',
+      icon: SchoolIcon,
+    },
   ];
 
   return (
-    <div className="flex h-full min-h-32 flex-col justify-center gap-2 rounded-md bg-canvas/70 px-2">
-      {ages.map(([label, className]) => (
+    <div className="flex h-full min-h-32 flex-col justify-center gap-2 rounded-md bg-canvas/72 px-2.5">
+      {ages.map(({ label, className, iconClassName, icon: Icon }) => (
         <span
           key={label}
           className={cn(
-            'inline-flex items-center justify-center rounded-full border border-beige-deep/50 px-3 py-1.5 text-xs font-semibold text-slate shadow-subtle',
+            'inline-flex items-center justify-between gap-2 rounded-full border border-beige-deep/50 py-1.5 pr-3 pl-1.5 text-xs font-semibold text-slate shadow-subtle',
             className
           )}
         >
+          <span
+            className={cn(
+              'inline-flex size-6 items-center justify-center rounded-full',
+              iconClassName
+            )}
+          >
+            <Icon className="size-3.5" />
+          </span>
           {label}
         </span>
       ))}

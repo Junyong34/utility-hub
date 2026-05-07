@@ -22,11 +22,11 @@ test('places index aggregates current region seeds', async () => {
     SEOUL_PLACES,
   } = await import('./index.ts');
 
-  assert.equal(SEOUL_PLACES.length, 23);
-  assert.equal(GYEONGGI_SOUTH_PLACES.length, 21);
-  assert.equal(GYEONGGI_NORTH_PLACES.length, 14);
-  assert.equal(INCHEON_PLACES.length, 21);
-  assert.equal(ALL_PLACES.length, 79);
+  assert.equal(SEOUL_PLACES.length, 50);
+  assert.equal(GYEONGGI_SOUTH_PLACES.length, 58);
+  assert.equal(GYEONGGI_NORTH_PLACES.length, 35);
+  assert.equal(INCHEON_PLACES.length, 33);
+  assert.equal(ALL_PLACES.length, 176);
 });
 
 test('places index preserves important ids and verification state', async () => {
@@ -70,12 +70,28 @@ test('places index preserves important ids and verification state', async () => 
   );
   assert.equal(placeIds.has('national-incheon-marine-museum'), true);
   assert.equal(placeIds.has('geomdan-prehistory-museum'), true);
+  assert.equal(placeIds.has('national-aviation-museum'), true);
+  assert.equal(placeIds.has('bucheon-robopark'), true);
+  assert.equal(placeIds.has('namyangju-childrens-vision-center'), true);
+  assert.equal(placeIds.has('incheon-butterfly-park'), true);
 
   const siheungKidsCafe = ALL_PLACES.find(
     place => place.id === 'siheung-kids-cafe-sample'
   );
 
   assert.equal(siheungKidsCafe?.verificationStatus, 'needs_refresh');
+});
+
+test('places index assigns at least one recommended season to every place', async () => {
+  const { ALL_PLACES } = await import('./index.ts');
+
+  for (const place of ALL_PLACES) {
+    assert.equal(
+      Array.isArray(place.seasons) && place.seasons.length > 0,
+      true,
+      `${place.id} should define one or more seasons`
+    );
+  }
 });
 
 test('merged parent museum entries keep child-focused reservation guidance', async () => {

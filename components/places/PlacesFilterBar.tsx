@@ -19,7 +19,7 @@ import {
 import { PlacesFilterRail } from './PlacesFilterRail';
 import { Input } from '@/components/ui/input';
 import { MAX_PLACE_SEARCH_LENGTH } from '@/lib/places/place-list-contract';
-import type { AgeBand, PlaceCategory } from '@/types/place-source';
+import type { AgeBand, PlaceCategory, PlaceSeason } from '@/types/place-source';
 import {
   FILTER_CHIP_STYLES,
   PLACES_MUTED_SURFACE_CLASS,
@@ -34,6 +34,16 @@ export const AGE_BAND_LABELS: Record<string, string> = {
   '1-3y': '1~3세',
   '3-6y': '3~6세',
   '6-10y': '6~10세',
+};
+
+const SEASONS = ['spring', 'summer', 'fall', 'winter', 'all-season'] as const;
+
+export const SEASON_LABELS: Record<PlaceSeason, string> = {
+  spring: '봄',
+  summer: '여름',
+  fall: '가을',
+  winter: '겨울',
+  'all-season': '4계절',
 };
 
 const CATEGORIES = [
@@ -64,6 +74,7 @@ export const placesFilterParsers = {
   search: parseAsString,
   age: parseAsStringLiteral([...AGE_BANDS, 'all'] as const),
   category: parseAsStringLiteral([...CATEGORIES] as const),
+  season: parseAsStringLiteral([...SEASONS] as const),
   indoor: parseAsBoolean,
   outdoor: parseAsBoolean,
   free: parseAsBoolean,
@@ -76,6 +87,7 @@ export type PlacesFilter = {
   search: string | null;
   age: AgeBand | 'all' | null;
   category: PlaceCategory | null;
+  season: PlaceSeason | null;
   indoor: boolean | null;
   outdoor: boolean | null;
   free: boolean | null;
@@ -146,6 +158,13 @@ export function PlacesFilterBar({
     }));
   }
 
+  function toggleSeason(season: (typeof SEASONS)[number]) {
+    setFilters(prev => ({
+      ...prev,
+      season: prev.season === season ? null : season,
+    }));
+  }
+
   function toggleBoolean(key: BooleanFilterKey) {
     setFilters(prev => ({ ...prev, [key]: prev[key] ? null : true }));
   }
@@ -163,6 +182,7 @@ export function PlacesFilterBar({
     setFilters({
       age: null,
       category: null,
+      season: null,
       search: null,
       indoor: null,
       outdoor: null,
@@ -309,6 +329,23 @@ export function PlacesFilterBar({
       </div>
 
       <PlacesFilterRail
+        label="계절"
+        labelClassName={cn('border', TONE_STYLES.peach.badge)}
+        trackTestId="places-filter-track-season"
+      >
+        {SEASONS.map(season => (
+          <button
+            key={season}
+            type="button"
+            onClick={() => toggleSeason(season)}
+            className={filterChipClass(filters.season === season, 'season')}
+          >
+            {SEASON_LABELS[season]}
+          </button>
+        ))}
+      </PlacesFilterRail>
+
+      <PlacesFilterRail
         label="조건"
         labelClassName={cn('border', TONE_STYLES.mint.badge)}
         trackTestId="places-filter-track-condition"
@@ -379,6 +416,7 @@ export function PlacesSelectedFiltersPanel() {
     setFilters({
       age: null,
       category: null,
+      season: null,
       search: null,
       indoor: null,
       outdoor: null,
@@ -497,6 +535,14 @@ function useActiveFilterItems(filters: Partial<PlacesFilter>) {
         key: 'age',
         label: AGE_BAND_LABELS[filters.age] ?? filters.age,
         tone: 'age',
+      });
+    }
+
+    if (filters.season) {
+      items.push({
+        key: 'season',
+        label: SEASON_LABELS[filters.season],
+        tone: 'season',
       });
     }
 

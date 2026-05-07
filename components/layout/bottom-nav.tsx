@@ -1,25 +1,26 @@
 'use client';
 
-import * as React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from './nav-config';
 import { FloatingShareButton } from '@/components/ui/floating-share-button';
 
 export function BottomNav() {
-  const [activeItem, setActiveItem] = React.useState('/');
+  const pathname = usePathname();
+
   return (
     <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4">
       {/* 메인 네비게이션 바 */}
       <div className="flex items-center gap-0 rounded-lg border border-hairline-soft bg-canvas/92 px-2 py-2 shadow-card backdrop-blur-xl dark:bg-card/92">
         {NAV_ITEMS.map(item => {
           const Icon = item.icon!;
-          const isActive = activeItem === item.href;
+          const isActive =
+            pathname === item.href || pathname.startsWith(`${item.href}/`);
 
           return (
             <Link
               key={item.name}
               href={item.href}
-              onClick={() => setActiveItem(item.href)}
               className={`relative flex flex-col items-center justify-center gap-0.5 w-[52px] rounded-md py-2 transition-all duration-300 ${
                 isActive
                   ? 'text-primary shadow-md'

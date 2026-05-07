@@ -122,6 +122,7 @@ export const CONDITION_BADGE_STYLES = {
   paid: PARENTING_TONE_STYLES.sand.badge,
   feeding: PARENTING_TONE_STYLES.peach.badge,
   stroller: PARENTING_TONE_STYLES.sand.badge,
+  season: PARENTING_TONE_STYLES.butter.badge,
 } as const;
 
 export const FILTER_CHIP_STYLES = {
@@ -136,5 +137,6 @@ export const FILTER_CHIP_STYLES = {
     feeding: PARENTING_TONE_STYLES.peach.badge,
     stroller: PARENTING_TONE_STYLES.sand.badge,
     rain: PARENTING_TONE_STYLES.sky.badge,
+    season: PARENTING_TONE_STYLES.butter.badge,
   },
 } as const;

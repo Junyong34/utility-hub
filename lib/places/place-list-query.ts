@@ -78,6 +78,10 @@ function applyPlaceListFilters(
       }
     }
 
+    if (filters.season && !place.seasons.includes(filters.season)) {
+      return false;
+    }
+
     if (filters.indoor) {
       if (place.indoorOutdoor !== 'indoor' && place.indoorOutdoor !== 'both') {
         return false;

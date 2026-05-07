@@ -12,7 +12,7 @@ export const SITE_CONFIG = {
   description:
     '서울·경기 중심으로 아이와 가볼 곳을 지역, 연령, 날씨, 예산 기준으로 빠르게 정리합니다. 나들이 예산 계산, 육아 혜택·지원금 정보까지 한 번에.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.zento.kr',
-  ogImage: '/og-images/main-og-image.webp',
+  ogImage: '/og-images/home-og-image.webp',
   locale: 'ko_KR',
   author: 'Zento',
   social: {

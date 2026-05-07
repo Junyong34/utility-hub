@@ -30,7 +30,7 @@ export function BlogHeroSection({
         {/* Eyebrow */}
         <span className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/80 px-3 py-1 text-xs text-muted-foreground">
           <PenLineIcon className="h-3 w-3 text-primary" />
-          Zento Blog · 아이와 가볼 곳과 생활 판단을 돕는 실전 가이드
+          Zento Blog · 생활가이드 및 팁 정보
         </span>
 
         {/* Title */}
@@ -39,7 +39,7 @@ export function BlogHeroSection({
           찾아보세요
         </h1>
         <p className="mx-auto mb-6 w-full max-w-[32rem] text-sm leading-relaxed text-muted-foreground">
-          아이와 가볼 곳, 육아 혜택, 생활비 판단과 연결되는 글을
+          생활 속 선택과 비용 판단에 필요한 글을
           <br />
           비교표와 체크리스트 중심으로 정리합니다.
         </p>
@@ -53,7 +53,7 @@ export function BlogHeroSection({
               value={searchQuery}
               onChange={e => onSearchChange(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && onSearchSubmit()}
-              placeholder="아이와 가볼 곳, 혜택, 계산, 비교 가이드 검색..."
+              placeholder="생활가이드, 팁, 계산, 비교 정보 검색..."
               className="h-9 bg-background pl-8"
             />
           </div>

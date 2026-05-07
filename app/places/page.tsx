@@ -40,7 +40,7 @@ export default async function PlacesPage({ searchParams }: PageProps) {
         gridClassName="inset-x-8 top-72 h-[42rem] rounded-[42px] opacity-45"
         gridStyle={{ backgroundSize: '34px 34px' }}
       >
-        <div className="mx-auto max-w-screen-2xl px-4 pt-10 pb-20 md:pt-20 sm:pb-28">
+        <div className="mx-auto max-w-screen-2xl px-4 pt-10 pb-20 sm:pb-28 md:pt-[5.5rem]">
           <PlacesHub
             regions={regions}
             placeCountByRegion={placeCountByRegion}

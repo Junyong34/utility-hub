@@ -3,6 +3,7 @@ export interface MetadataInput {
   description: string;
   canonical: string;
   keywords?: string[];
+  ogImage?: string;
 }
 
 interface RegionMetadataSource {
@@ -13,6 +14,34 @@ interface RegionMetadataSource {
 
 function normalizeBaseUrl(baseUrl: string): string {
   return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+}
+
+const SECTION_OG_IMAGES = {
+  home: '/og-images/home-og-image.webp',
+  places: '/og-images/places-og-image.webp',
+  tools: '/og-images/tools-og-image.webp',
+  benefits: '/og-images/benefits-og-image.webp',
+  blog: '/og-images/blog-og-image.webp',
+} as const;
+
+export function createHomeMetadataInput(baseUrl: string): MetadataInput {
+  const siteUrl = normalizeBaseUrl(baseUrl);
+
+  return {
+    title: '아이와 갈 곳, 조건별로 빠르게 찾으세요',
+    description:
+      '서울·경기·인천에서 아이와 갈 곳을 지역, 연령, 날씨, 예산 기준으로 바로 찾는 실용형 육아 홈입니다. 장소 탐색, 도구, 혜택·지원금을 한 화면에서 정리합니다.',
+    canonical: siteUrl,
+    keywords: [
+      '아이와 갈 곳',
+      '아이와 가볼 곳',
+      '서울 아이와 갈 곳',
+      '경기 아이와 갈 곳',
+      '인천 아이와 갈 곳',
+      '수도권 육아 나들이',
+    ],
+    ogImage: SECTION_OG_IMAGES.home,
+  };
 }
 
 export function createPlacesMetadataInput(baseUrl: string): MetadataInput {
@@ -31,6 +60,7 @@ export function createPlacesMetadataInput(baseUrl: string): MetadataInput {
       '실내 키즈 장소',
       '비 오는 날 아이와 갈 곳',
     ],
+    ogImage: SECTION_OG_IMAGES.places,
   };
 }
 
@@ -50,6 +80,7 @@ export function createBenefitsMetadataInput(baseUrl: string): MetadataInput {
       '서울 육아 지원',
       '경기 육아 혜택',
     ],
+    ogImage: SECTION_OG_IMAGES.benefits,
   };
 }
 
@@ -78,15 +109,16 @@ export function createBlogIndexMetadataInput(baseUrl: string): MetadataInput {
   return {
     title: '블로그',
     description:
-      '아이와 가볼 곳, 육아 혜택, 생활 판단에 바로 쓰는 실전 가이드를 모았습니다. 비교표와 체크리스트 중심으로 빠르게 확인할 수 있게 정리합니다.',
+      '생활가이드 및 팁 정보를 모았습니다. 생활 속 선택과 비용 판단에 필요한 내용을 비교표와 체크리스트 중심으로 빠르게 확인할 수 있게 정리합니다.',
     canonical: `${siteUrl}/blog`,
     keywords: [
-      '육아 가이드',
-      '아이와 가볼 곳 가이드',
-      '육아 혜택 정리',
+      '생활가이드',
+      '생활 팁',
+      '생활 정보',
       '생활 판단 체크리스트',
-      '비교 가이드',
+      '비교 정보',
     ],
+    ogImage: SECTION_OG_IMAGES.blog,
   };
 }
 
@@ -142,5 +174,6 @@ export function createToolsMainMetadataInput(baseUrl: string): MetadataInput {
       '대출 계산기',
       'DSR 계산기',
     ],
+    ogImage: SECTION_OG_IMAGES.tools,
   };
 }

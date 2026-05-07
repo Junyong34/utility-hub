@@ -14,10 +14,10 @@ export interface NavItem {
 
 /**
  * 주 네비게이션 — Header & BottomNav
- * 순서: 나들이 → 도구 → 혜택 → 블로그
+ * 순서: 갈 곳 → 도구 → 혜택 → 블로그
  */
 export const NAV_ITEMS: NavItem[] = [
-  { name: "나들이", href: "/places", icon: MapPinIcon },
+  { name: "갈 곳", href: "/places", icon: MapPinIcon },
   { name: "도구", href: "/tools", icon: WrenchIcon },
   { name: "혜택", href: "/benefits", icon: GiftIcon },
   { name: "블로그", href: "/blog", icon: BookOpenIcon },

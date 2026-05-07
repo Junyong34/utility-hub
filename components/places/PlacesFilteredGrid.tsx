@@ -283,6 +283,7 @@ function areFiltersEqual(
     left.search === right.search &&
     left.age === right.age &&
     left.category === right.category &&
+    left.season === right.season &&
     left.indoor === right.indoor &&
     left.outdoor === right.outdoor &&
     left.free === right.free &&

@@ -1,6 +1,7 @@
 import type {
   AgeBand,
   PlaceCategory,
+  PlaceSeason,
   RegionSlug,
 } from '../../types/place-source.ts';
 
@@ -29,6 +30,14 @@ const VALID_CATEGORIES = new Set<PlaceCategory>([
   'sports',
 ]);
 
+const VALID_SEASONS = new Set<PlaceSeason>([
+  'spring',
+  'summer',
+  'fall',
+  'winter',
+  'all-season',
+]);
+
 const VALID_REGIONS = new Set<RegionSlug>([
   'seoul',
   'gyeonggi-south',
@@ -40,6 +49,7 @@ export interface PlaceListFilters {
   search: string | null;
   age: AgeBand | 'all' | null;
   category: PlaceCategory | null;
+  season: PlaceSeason | null;
   indoor: boolean;
   outdoor: boolean;
   free: boolean;
@@ -52,6 +62,7 @@ export interface PlaceListQueryOptions {
   search?: RawValue;
   age?: RawValue;
   category?: RawValue;
+  season?: RawValue;
   indoor?: RawValue;
   outdoor?: RawValue;
   free?: RawValue;
@@ -82,6 +93,7 @@ export function normalizePlaceListFilters(
     search: normalizeSearch(input.search),
     age: normalizeAgeBand(input.age),
     category: normalizeCategory(input.category),
+    season: normalizeSeason(input.season),
     indoor: normalizeBoolean(input.indoor),
     outdoor: normalizeBoolean(input.outdoor),
     free: normalizeBoolean(input.free),
@@ -122,6 +134,10 @@ export function buildPlaceListSearchParams(options: {
 
   if (filters.category) {
     params.set('category', filters.category);
+  }
+
+  if (filters.season) {
+    params.set('season', filters.season);
   }
 
   setBooleanSearchParam(params, 'indoor', filters.indoor);
@@ -202,9 +218,18 @@ function normalizeCategory(value: RawValue): PlaceCategory | null {
   return raw as PlaceCategory;
 }
 
+function normalizeSeason(value: RawValue): PlaceSeason | null {
+  const raw = readFirstValue(value);
+  if (!raw || !VALID_SEASONS.has(raw as PlaceSeason)) {
+    return null;
+  }
+
+  return raw as PlaceSeason;
+}
+
 function setBooleanSearchParam(
   params: URLSearchParams,
-  key: keyof Omit<PlaceListFilters, 'search' | 'age' | 'category'>,
+  key: keyof Omit<PlaceListFilters, 'search' | 'age' | 'category' | 'season'>,
   enabled: boolean
 ) {
   if (enabled) {

@@ -13,7 +13,11 @@ import { getPlaceNaverMapUrl } from '@/lib/places/place-map-links';
 import { cn } from '@/lib/utils';
 import type { PlaceSource } from '@/types/place-source';
 import { PlaceAddressCopyButton } from './PlaceAddressCopyButton';
-import { AGE_BAND_LABELS, CATEGORY_LABELS } from './PlacesFilterBar';
+import {
+  AGE_BAND_LABELS,
+  CATEGORY_LABELS,
+  SEASON_LABELS,
+} from './PlacesFilterBar';
 import {
   CATEGORY_TONE_BY_CATEGORY,
   CONDITION_BADGE_STYLES,
@@ -33,6 +37,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
   const naverMapUrl = getPlaceNaverMapUrl(place);
   const placeAddress = place.address ?? place.subRegion;
   const primaryCondition = getPrimaryConditionLabel(place);
+  const seasonSummary = getSeasonSummary(place);
 
   return (
     <Card
@@ -139,6 +144,11 @@ export function PlaceCard({ place }: PlaceCardProps) {
               우천 가능
             </Badge>
           ) : null}
+          {seasonSummary ? (
+            <Badge variant="outline" className={CONDITION_BADGE_STYLES.season}>
+              {seasonSummary}
+            </Badge>
+          ) : null}
         </div>
 
         <div className="mt-auto space-y-2 rounded-[16px] border border-hairline-soft bg-cream-soft/48 p-3">
@@ -209,6 +219,18 @@ export function PlaceCard({ place }: PlaceCardProps) {
       </CardContent>
     </Card>
   );
+}
+
+function getSeasonSummary(place: PlaceSource): string | null {
+  if (place.seasons.includes('all-season')) {
+    return SEASON_LABELS['all-season'];
+  }
+
+  const labels = place.seasons
+    .map(season => SEASON_LABELS[season])
+    .filter(Boolean);
+
+  return labels.length > 0 ? labels.join('·') : null;
 }
 
 function getPrimaryConditionLabel(place: PlaceSource): string {

@@ -2,9 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
+  createBlogIndexMetadataInput,
   createBenefitsMetadataInput,
+  createHomeMetadataInput,
   createPlaceRegionMetadataInput,
   createPlacesMetadataInput,
+  createToolsMainMetadataInput,
 } from './site-section-seo.ts';
 
 test('createPlacesMetadataInput은 places  canonical과 제목을 반환한다', () => {
@@ -30,4 +33,35 @@ test('createPlaceRegionMetadataInput은 지역  canonical과 제목을 반환한
 
   assert.equal(result.title, '서울 아이와 가볼 곳');
   assert.equal(result.canonical, 'https://www.zento.kr/places/seoul');
+});
+
+test('주요 네비게이션 페이지는 서로 다른 정적 OG 이미지를 반환한다', () => {
+  const baseUrl = 'https://www.zento.kr';
+  const metadataByPath = {
+    '/': createHomeMetadataInput(baseUrl),
+    '/places': createPlacesMetadataInput(baseUrl),
+    '/tools': createToolsMainMetadataInput(baseUrl),
+    '/benefits': createBenefitsMetadataInput(baseUrl),
+    '/blog': createBlogIndexMetadataInput(baseUrl),
+  };
+
+  const ogImagesByPath = Object.fromEntries(
+    Object.entries(metadataByPath).map(([path, metadata]) => [
+      path,
+      metadata.ogImage,
+    ])
+  );
+
+  assert.equal(
+    new Set(Object.values(metadataByPath).map(metadata => metadata.ogImage))
+      .size,
+    5
+  );
+  assert.deepEqual(ogImagesByPath, {
+    '/': '/og-images/home-og-image.webp',
+    '/places': '/og-images/places-og-image.webp',
+    '/tools': '/og-images/tools-og-image.webp',
+    '/benefits': '/og-images/benefits-og-image.webp',
+    '/blog': '/og-images/blog-og-image.webp',
+  });
 });
