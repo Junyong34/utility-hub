@@ -1,9 +1,5 @@
 import type { Metadata } from 'next';
-import { ParentingFeaturedPlaceCard } from '@/components/home/parenting-featured-place-card';
-import { ParentingHeroSection } from '@/components/home/parenting-hero-section';
-import { ParentingLinkCard } from '@/components/home/parenting-link-card';
-import { ParentingSectionGrid } from '@/components/home/parenting-section-grid';
-import { PaperPageShell } from '@/components/ui/paper-page-shell';
+import { MainHomeScreen } from '@/components/home/main-home-screen';
 import { getParentingHomeContent } from '@/lib/home/parenting-home-content';
 
 export const metadata: Metadata = {
@@ -20,105 +16,5 @@ export const metadata: Metadata = {
 export default function Page() {
   const homeContent = getParentingHomeContent();
 
-  return (
-    <PaperPageShell
-      glowClassName="h-80 bg-[radial-gradient(circle_at_top_left,color-mix(in_srgb,var(--sunshine-500)_24%,transparent),transparent_30%),radial-gradient(circle_at_top_right,color-mix(in_srgb,var(--primary)_14%,transparent),transparent_24%)]"
-      gridClassName="inset-x-8 top-64 h-[42rem] rounded-[40px] opacity-50"
-      gridStyle={{ backgroundSize: '34px 34px' }}
-    >
-      <ParentingHeroSection
-        regionLinks={homeContent.regionLinks}
-        scenarioLinks={homeContent.scenarioLinks}
-        quickFilters={homeContent.heroQuickFilters}
-      />
-
-      <div className="mx-auto max-w-screen-2xl space-y-20 px-4 pb-20 sm:space-y-28 sm:pb-28">
-        <section className="space-y-6 sm:space-y-8">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-3xl space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
-                이번 주 인기 장소
-              </p>
-              <h2 className="text-[1.85rem] font-semibold leading-tight tracking-tight text-foreground sm:text-[2.45rem]">
-                오늘 동선에 넣기 좋은 장소를 먼저 펼쳐봤어요
-              </h2>
-              <p className="max-w-2xl text-[15px] leading-7 text-muted-foreground">
-                사진과 조건을 함께 보면서 아이 컨디션에 맞는 후보를 천천히
-                비교할 수 있게 구성했습니다.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid gap-5 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-            {homeContent.featuredPlaces.map(place => (
-              <ParentingFeaturedPlaceCard key={place.id} item={place} />
-            ))}
-          </div>
-        </section>
-
-        <ParentingSectionGrid
-          eyebrow="지역별 바로가기"
-          title="지역 단위로 다시 한 번 좁혀보기"
-          description="어느 지역부터 볼지 고민 중이라면, 권역별로 모아둔 장소를 먼저 살펴보세요."
-          href="/places"
-          hrefLabel="전체 장소 보기"
-        >
-          {homeContent.regionLinks.map(region => (
-            <ParentingLinkCard key={region.id} item={region} />
-          ))}
-        </ParentingSectionGrid>
-
-        <ParentingSectionGrid
-          eyebrow="상황별 바로가기"
-          title="비, 예산, 연령 같은 현실 조건으로 바로 줄이기"
-          description="지역을 고르기 어렵다면, 오늘 상황에 맞는 조건으로 바로 시작해보세요."
-          href="/places"
-          hrefLabel="조건별 전체 보기"
-        >
-          {homeContent.scenarioLinks.map(scenario => (
-            <ParentingLinkCard key={scenario.id} item={scenario} />
-          ))}
-        </ParentingSectionGrid>
-
-        <ParentingSectionGrid
-          eyebrow="도구"
-          title="장소를 정한 뒤 바로 이어서 쓰는 생활 도구"
-          description="나들이 계획을 세웠다면, 예산과 가계 흐름도 함께 점검해보세요."
-          href="/tools"
-          hrefLabel="모든 도구 보기"
-          gridClassName="xl:grid-cols-[1.14fr_0.9fr_1fr]"
-        >
-          {homeContent.toolLinks.map(tool => (
-            <ParentingLinkCard key={tool.id} item={tool} />
-          ))}
-        </ParentingSectionGrid>
-
-        <ParentingSectionGrid
-          eyebrow="혜택·지원금"
-          title="지원과 절약 정보를 공식 출처 흐름으로 보기"
-          description="놓치기 쉬운 정부 지원금과 지역 육아 혜택을 공식 출처 기준으로 모았습니다."
-          href="/benefits"
-          hrefLabel="혜택 보기"
-          gridClassName="xl:grid-cols-[1.12fr_0.94fr_1fr]"
-        >
-          {homeContent.benefitLinks.map(benefit => (
-            <ParentingLinkCard key={benefit.id} item={benefit} />
-          ))}
-        </ParentingSectionGrid>
-
-        <ParentingSectionGrid
-          eyebrow="최신 가이드"
-          title="블로그 자산은 아래에서 차분히 이어받기"
-          description="장소 탐색에 도움이 되는 육아 생활 가이드를 함께 확인해보세요."
-          href="/blog"
-          hrefLabel="블로그 전체 보기"
-          gridClassName="xl:grid-cols-[1.08fr_0.92fr_1fr]"
-        >
-          {homeContent.latestGuides.map(guide => (
-            <ParentingLinkCard key={guide.id} item={guide} />
-          ))}
-        </ParentingSectionGrid>
-      </div>
-    </PaperPageShell>
-  );
+  return <MainHomeScreen featuredPlaces={homeContent.featuredPlaces} />;
 }

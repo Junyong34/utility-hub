@@ -182,7 +182,7 @@ export function PlacesFilterRail({
     <div
       role="group"
       aria-label={`${label} 필터 그룹`}
-      className="rounded-[22px] border border-hairline-soft bg-canvas/48 p-3 shadow-subtle sm:rounded-[24px] sm:p-3.5"
+      className="min-w-0 rounded-[22px] border border-hairline-soft bg-canvas/48 p-3 shadow-subtle sm:rounded-[24px] sm:p-3.5"
     >
       <div className="mb-2 flex items-center justify-between gap-2 sm:mb-2.5">
         <span
@@ -203,7 +203,7 @@ export function PlacesFilterRail({
         data-testid={trackTestId}
         style={{ containerType: 'scroll-state' }}
         className={cn(
-          'places-filter-rail-track flex overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [touch-action:pan-x]',
+          'places-filter-rail-track flex w-full min-w-0 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [touch-action:pan-x]',
           isDragging ? 'cursor-grabbing' : 'cursor-grab'
         )}
         onMouseDown={handleMouseDown}

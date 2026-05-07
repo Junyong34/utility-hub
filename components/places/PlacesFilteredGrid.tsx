@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useQueryStates } from 'nuqs';
-import { placesFilterParsers } from './PlacesFilterBar';
+import {
+  PlacesFilterBar,
+  PlacesSelectedFiltersPanel,
+  placesFilterParsers,
+} from './PlacesFilterBar';
 import { PlaceCard } from './PlaceCard';
-import { PlacesFilterBar } from './PlacesFilterBar';
 import { PLACES_MUTED_SURFACE_CLASS } from './place-theme';
 import {
   buildPlaceListSearchParams,
@@ -28,6 +31,8 @@ interface ObserverState {
   isFetchingNextPage: boolean;
   fetchNextPage: (() => Promise<unknown>) | null;
 }
+
+const PLACE_LIST_PREFETCH_MARGIN_PX = 3600;
 
 export function PlacesFilteredGrid({
   initialPage,
@@ -91,6 +96,24 @@ export function PlacesFilteredGrid({
       : undefined,
   });
 
+  const allLoadedPlaces = data?.pages.flatMap(page => page.places) ?? [];
+  const matchedTotalCount = data?.pages[0]?.total ?? initialPage.total;
+  const scopeTotalCount = data?.pages[0]?.scopeTotal ?? initialPage.scopeTotal;
+
+  const loadNextPageIfReady = useCallback(() => {
+    const {
+      hasNextPage: canLoadMore,
+      isFetchingNextPage: isLoadingMore,
+      fetchNextPage: fetchNext,
+    } = observerStateRef.current;
+
+    if (!canLoadMore || isLoadingMore || !fetchNext) {
+      return;
+    }
+
+    fetchNext();
+  }, []);
+
   useEffect(() => {
     observerStateRef.current = {
       hasNextPage: Boolean(hasNextPage),
@@ -101,6 +124,27 @@ export function PlacesFilteredGrid({
 
   useEffect(() => {
     const element = observerTarget.current;
+
+    if (!element || !hasNextPage || isFetchingNextPage) {
+      return;
+    }
+
+    const viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    const targetTop = element.getBoundingClientRect().top;
+
+    if (targetTop < viewportHeight + PLACE_LIST_PREFETCH_MARGIN_PX) {
+      loadNextPageIfReady();
+    }
+  }, [
+    allLoadedPlaces.length,
+    hasNextPage,
+    isFetchingNextPage,
+    loadNextPageIfReady,
+  ]);
+
+  useEffect(() => {
+    const element = observerTarget.current;
     if (!element) {
       return;
     }
@@ -108,36 +152,20 @@ export function PlacesFilteredGrid({
     const observer = new IntersectionObserver(
       entries => {
         const [target] = entries;
-        if (!target?.isIntersecting) {
-          return;
+        if (target?.isIntersecting) {
+          loadNextPageIfReady();
         }
-
-        const {
-          hasNextPage: canLoadMore,
-          isFetchingNextPage: isLoadingMore,
-          fetchNextPage: fetchNext,
-        } = observerStateRef.current;
-
-        if (!canLoadMore || isLoadingMore || !fetchNext) {
-          return;
-        }
-
-        fetchNext();
       },
       {
-        threshold: 0.4,
-        rootMargin: '200px 0px',
+        threshold: 0.05,
+        rootMargin: `${PLACE_LIST_PREFETCH_MARGIN_PX}px 0px`,
       }
     );
 
     observer.observe(element);
 
     return () => observer.disconnect();
-  }, []);
-
-  const allLoadedPlaces = data?.pages.flatMap(page => page.places) ?? [];
-  const matchedTotalCount = data?.pages[0]?.total ?? initialPage.total;
-  const scopeTotalCount = data?.pages[0]?.scopeTotal ?? initialPage.scopeTotal;
+  }, [loadNextPageIfReady]);
 
   return (
     <div className="space-y-5 sm:space-y-6">
@@ -146,82 +174,103 @@ export function PlacesFilteredGrid({
         matchedTotalCount={matchedTotalCount}
       />
 
-      {isPending ? (
-        <div
+      <div className="grid min-w-0 gap-5 lg:grid-cols-[17rem_minmax(0,1fr)]">
+        <PlacesSelectedFiltersPanel />
+
+        <section
           className={cn(
-            'rounded-[28px] px-6 py-12 text-center',
+            'min-w-0 rounded-[26px] p-3 sm:p-4',
             PLACES_MUTED_SURFACE_CLASS
           )}
         >
-          <p className="text-sm text-muted-foreground">
-            조건에 맞는 장소를 불러오는 중입니다...
-          </p>
-        </div>
-      ) : isError ? (
-        <div
-          className={cn(
-            'rounded-[28px] px-6 py-12 text-center',
-            PLACES_MUTED_SURFACE_CLASS
-          )}
-        >
-          <p
-            className="font-editorial text-lg font-semibold text-foreground"
-            style={{
-              fontFamily: 'var(--font-editorial)',
-            }}
-          >
-            장소 목록을 다시 불러오지 못했습니다
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            잠시 후 다시 시도하거나 필터를 조정해 보세요.
-          </p>
-        </div>
-      ) : matchedTotalCount > 0 ? (
-        <>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-[1.06fr_0.94fr_1fr]">
-            {allLoadedPlaces.map(place => (
-              <PlaceCard key={place.id} place={place} />
-            ))}
-          </div>
-
-          <div
-            ref={observerTarget}
-            className="flex min-h-16 flex-col items-center justify-center gap-2"
-          >
-            {isFetchingNextPage ? (
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-hairline-strong border-b-primary" />
-                <span>다음 장소를 불러오는 중입니다...</span>
-              </div>
-            ) : null}
-
-            {!hasNextPage && allLoadedPlaces.length > 0 ? (
-              <p className="text-sm text-muted-foreground">
-                조건에 맞는 장소를 모두 불러왔습니다.
+          <div className="mb-4 flex flex-col gap-2 px-1 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-foreground">
+                총 {matchedTotalCount}개 장소
               </p>
-            ) : null}
+              <p className="mt-1 text-[12px] leading-5 text-muted-foreground">
+                공식·준공식 검증 상태인 장소만 보여줍니다.
+              </p>
+            </div>
+            <p className="text-[12px] font-medium text-stone">
+              스크롤하면 자동으로 더 불러옵니다.
+            </p>
           </div>
-        </>
-      ) : (
-        <div
-          className={cn(
-            'rounded-[28px] px-6 py-12 text-center',
-            PLACES_MUTED_SURFACE_CLASS
+
+          {isPending ? (
+            <div className="rounded-[22px] border border-hairline-soft bg-canvas/70 px-6 py-12 text-center">
+              <p className="text-sm text-muted-foreground">
+                조건에 맞는 장소를 불러오는 중입니다...
+              </p>
+            </div>
+          ) : isError ? (
+            <div className="rounded-[22px] border border-hairline-soft bg-canvas/70 px-6 py-12 text-center">
+              <p
+                className="font-editorial text-lg font-semibold text-foreground"
+                style={{
+                  fontFamily: 'var(--font-editorial)',
+                }}
+              >
+                장소 목록을 다시 불러오지 못했습니다
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                잠시 후 다시 시도하거나 필터를 조정해 보세요.
+              </p>
+            </div>
+          ) : matchedTotalCount > 0 ? (
+            <>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {allLoadedPlaces.map(place => (
+                  <PlaceCard key={place.id} place={place} />
+                ))}
+              </div>
+
+              <div
+                ref={observerTarget}
+                data-testid="places-infinite-scroll-sentinel"
+                className="flex min-h-16 flex-col items-center justify-center gap-2"
+              >
+                {isFetchingNextPage ? (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-hairline-strong border-b-primary" />
+                    <span>다음 장소를 불러오는 중입니다...</span>
+                  </div>
+                ) : null}
+
+                {!hasNextPage && allLoadedPlaces.length > 0 ? (
+                  <p className="text-sm text-muted-foreground">
+                    조건에 맞는 장소를 모두 불러왔습니다.
+                  </p>
+                ) : null}
+
+                {hasNextPage && !isFetchingNextPage ? (
+                  <button
+                    type="button"
+                    onClick={loadNextPageIfReady}
+                    className="inline-flex h-10 items-center justify-center rounded-[14px] border border-hairline-strong bg-canvas px-4 text-sm font-semibold text-slate transition-colors hover:border-primary/35 hover:text-foreground"
+                  >
+                    더 불러오기
+                  </button>
+                ) : null}
+              </div>
+            </>
+          ) : (
+            <div className="rounded-[22px] border border-hairline-soft bg-canvas/70 px-6 py-12 text-center">
+              <p
+                className="font-editorial text-lg font-semibold text-foreground"
+                style={{
+                  fontFamily: 'var(--font-editorial)',
+                }}
+              >
+                지금 조건에 딱 맞는 장소가 아직 없습니다
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                조건에 맞는 장소가 없습니다. 필터를 조정해보세요.
+              </p>
+            </div>
           )}
-        >
-          <p
-            className="font-editorial text-lg font-semibold text-foreground"
-            style={{
-              fontFamily: 'var(--font-editorial)',
-            }}
-          >
-            지금 조건에 딱 맞는 장소가 아직 없습니다
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            조건에 맞는 장소가 없습니다. 필터를 조정해보세요.
-          </p>
-        </div>
-      )}
+        </section>
+      </div>
     </div>
   );
 }

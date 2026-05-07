@@ -1,58 +1,58 @@
 'use client';
 
 import Link from 'next/link';
-import { MenuIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { NAV_ITEMS } from './nav-config';
-import { Logo } from './logo';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+
+const DESKTOP_NAV_ITEMS = [
+  { name: '홈', href: '/' },
+  { name: '아이와 갈 곳', href: '/places' },
+  { name: '도구', href: '/tools' },
+  { name: '블로그', href: '/blog' },
+  { name: '혜택', href: '/benefits' },
+] as const;
 
 export function DesktopNav() {
+  const pathname = usePathname();
+
   return (
-    <header className="hidden md:block fixed top-0 left-0 right-0 z-50 w-full border-b border-hairline-soft bg-canvas/92 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-8">
-        {/* 로고 */}
-        <Link href="/">
-          <Logo size={32} />
+    <header className="fixed inset-x-0 top-4 z-50 hidden px-4 md:block">
+      <div className="mx-auto flex h-16 max-w-[67rem] items-center justify-between rounded-full border border-beige-deep/55 bg-canvas/84 px-8 shadow-[0_18px_42px_-30px_rgba(61,48,39,0.72)] backdrop-blur-xl">
+        <Link
+          href="/"
+          aria-label="Zento 홈"
+          className="text-2xl font-extrabold tracking-normal text-primary"
+        >
+          Zento
         </Link>
 
-        {/* 데스크톱 네비게이션 */}
-        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-          {NAV_ITEMS.map(item => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="text-sm font-medium text-slate transition-colors hover:text-foreground"
-            >
-              {item.name}
-            </Link>
-          ))}
+        <nav className="flex items-center gap-8 text-sm font-medium">
+          {DESKTOP_NAV_ITEMS.map(item => {
+            const isActive =
+              item.href === '/'
+                ? pathname === '/'
+                : pathname === item.href ||
+                  pathname.startsWith(`${item.href}/`);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'relative flex h-16 items-center text-slate transition-colors hover:text-foreground',
+                  isActive && 'font-semibold text-foreground'
+                )}
+              >
+                {item.name}
+                {isActive ? (
+                  <span className="absolute right-0 bottom-3 left-0 h-0.5 rounded-full bg-primary" />
+                ) : null}
+              </Link>
+            );
+          })}
         </nav>
 
-        {/* 우측 정보 영역 */}
-        <div className="flex items-center space-x-2">
-          {/* 모바일 메뉴 */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <MenuIcon className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              {NAV_ITEMS.map(item => (
-                <DropdownMenuItem key={item.name} asChild>
-                  <Link href={item.href}>{item.name}</Link>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+        <span className="w-[92px]" aria-hidden="true" />
       </div>
     </header>
   );

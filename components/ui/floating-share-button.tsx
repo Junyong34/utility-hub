@@ -182,6 +182,10 @@ export function FloatingShareButton({ className }: FloatingShareButtonProps) {
     setIsOpen(false);
   };
 
+  if (pathname === '/') {
+    return null;
+  }
+
   return (
     <div
       ref={containerRef}

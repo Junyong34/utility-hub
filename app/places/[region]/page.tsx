@@ -4,10 +4,11 @@ import { JsonLdMultiple } from '@/components/seo';
 import { RegionHub } from '@/components/places/RegionHub';
 import { PaperPageShell } from '@/components/ui/paper-page-shell';
 import {
+  getPhaseARegions,
   getRegionBySlug,
   PHASE_A_REGION_SLUGS,
 } from '@/lib/places/region-config';
-import { queryPlaceList } from '@/lib/places';
+import { getPlaceCountByRegion, queryPlaceList } from '@/lib/places';
 import type { RegionSlug } from '@/types/place-source';
 import {
   SITE_CONFIG,
@@ -50,6 +51,8 @@ export default async function RegionPage({ params, searchParams }: PageProps) {
     ...resolvedSearchParams,
     region: regionSlug as RegionSlug,
   });
+  const regions = getPhaseARegions();
+  const placeCountByRegion = getPlaceCountByRegion();
   const { webPage, breadcrumb } = createPageStructuredData({
     name: `${region.name} 아이와 가볼 곳`,
     path: `/places/${region.slug}`,
@@ -69,7 +72,12 @@ export default async function RegionPage({ params, searchParams }: PageProps) {
         gridClassName="h-[34rem] opacity-35"
       >
         <div className="mx-auto max-w-screen-xl px-4 pt-10 pb-16 md:pt-24 xl:pt-32 sm:pb-24">
-          <RegionHub region={region} initialPage={initialPage} />
+          <RegionHub
+            region={region}
+            regions={regions}
+            placeCountByRegion={placeCountByRegion}
+            initialPage={initialPage}
+          />
         </div>
       </PaperPageShell>
     </>

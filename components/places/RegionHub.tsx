@@ -20,12 +20,20 @@ import { cn } from '@/lib/utils';
 
 interface RegionHubProps {
   region: RegionConfig;
+  regions: RegionConfig[];
+  placeCountByRegion: Record<string, number>;
   initialPage: PlaceListPageResponse;
 }
 
-export function RegionHub({ region, initialPage }: RegionHubProps) {
+export function RegionHub({
+  region,
+  regions,
+  placeCountByRegion,
+  initialPage,
+}: RegionHubProps) {
   const tone = TONE_STYLES[REGION_TONE_BY_SLUG[region.slug]];
   const placeCount = initialPage.scopeTotal;
+  const otherRegions = regions.filter(item => item.slug !== region.slug);
 
   return (
     <div className="space-y-10 sm:space-y-12">
@@ -65,53 +73,130 @@ export function RegionHub({ region, initialPage }: RegionHubProps) {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-            <div className="rounded-[24px] bg-canvas/72 px-5 py-4">
-              <p
-                className={cn(
-                  'text-[11px] font-semibold uppercase tracking-[0.18em]',
-                  tone.eyebrow
-                )}
-              >
-                현재 정리 수
+            <div className="rounded-[24px] border border-beige-deep/60 bg-canvas/82 px-5 py-4 text-foreground shadow-card backdrop-blur">
+              <p className="text-[11px] font-semibold tracking-[0.16em] text-sunshine-900">
+                정리된 장소
               </p>
               <p
-                className="mt-2 text-3xl font-semibold text-foreground"
+                className="mt-2 text-3xl font-bold text-foreground"
                 style={{
                   fontFamily: 'var(--font-editorial)',
                 }}
               >
                 {placeCount}곳
               </p>
+              <p className="mt-1 text-xs leading-5 text-slate">
+                현재 권역에서 바로 볼 수 있는 장소입니다.
+              </p>
             </div>
-            <div className="rounded-[24px] bg-canvas/72 px-5 py-4">
+            <div className="rounded-[24px] border border-sunshine-500/35 bg-[linear-gradient(180deg,var(--cream-soft),var(--cream))] px-5 py-4 text-foreground shadow-card">
+              <p className="text-[11px] font-semibold tracking-[0.16em] text-sunshine-900">
+                찾는 순서
+              </p>
+              <p className="mt-2 text-lg font-bold text-foreground">
+                {region.name} 안에서 조건 좁히기
+              </p>
+              <p className="mt-1 text-xs leading-5 text-slate">
+                연령, 실내·야외, 무료 조건을 아래에서 조정하세요.
+              </p>
+            </div>
+            <div
+              className={cn(
+                'rounded-[24px] border px-5 py-4 shadow-card',
+                tone.frame
+              )}
+            >
               <p
                 className={cn(
-                  'text-[11px] font-semibold uppercase tracking-[0.18em]',
+                  'text-[11px] font-semibold tracking-[0.16em]',
                   tone.eyebrow
                 )}
               >
-                추천 방식
+                방문 전 확인
               </p>
-              <p className="mt-2 text-lg font-semibold text-foreground">
-                지역 먼저, 조건은 아래에서
+              <p className="mt-2 text-lg font-bold text-foreground">
+                공식 링크로 운영정보 재확인
               </p>
-            </div>
-            <div className="rounded-[24px] bg-canvas/72 px-5 py-4">
-              <p
-                className={cn(
-                  'text-[11px] font-semibold uppercase tracking-[0.18em]',
-                  tone.eyebrow
-                )}
-              >
-                확인 포인트
-              </p>
-              <p className="mt-2 text-lg font-semibold text-foreground">
-                가격과 운영시간은 출처 링크로 재확인
+              <p className="mt-1 text-xs leading-5 text-slate">
+                요금, 휴무, 예약 여부는 방문 전 한 번 더 확인하세요.
               </p>
             </div>
           </div>
         </div>
       </section>
+
+      {otherRegions.length > 0 ? (
+        <section className="space-y-4">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground/45">
+                다른 권역 보기
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+                주변 지역 장소도 바로 이동하세요
+              </h2>
+            </div>
+            <Link
+              href="/places"
+              className="inline-flex w-fit items-center gap-1.5 rounded-full border border-hairline-strong bg-canvas/78 px-4 py-2 text-sm font-semibold text-slate transition-colors hover:text-foreground"
+            >
+              <span>전체 지역 보기</span>
+              <ArrowRightIcon className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-3">
+            {otherRegions.map(otherRegion => {
+              const otherTone =
+                TONE_STYLES[REGION_TONE_BY_SLUG[otherRegion.slug]];
+              const otherCount = placeCountByRegion[otherRegion.slug] ?? 0;
+
+              return (
+                <Link
+                  key={otherRegion.slug}
+                  href={`/places/${otherRegion.slug}`}
+                  className={cn(
+                    'group rounded-[22px] border p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-mockup',
+                    otherTone.frame
+                  )}
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p
+                        className={cn(
+                          'text-[11px] font-semibold tracking-[0.16em]',
+                          otherTone.eyebrow
+                        )}
+                      >
+                        {otherCount > 0 ? `${otherCount}곳` : '준비 중'}
+                      </p>
+                      <h3 className="mt-2 text-lg font-bold text-foreground">
+                        {otherRegion.name}
+                      </h3>
+                    </div>
+                    <div
+                      className={cn(
+                        'inline-flex h-9 w-9 items-center justify-center rounded-[14px]',
+                        otherTone.iconWrap,
+                        otherTone.icon
+                      )}
+                    >
+                      <MapPinIcon className="h-4 w-4" />
+                    </div>
+                  </div>
+                  <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted-foreground">
+                    {otherRegion.description}
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-foreground/70 transition-colors group-hover:text-foreground">
+                    <span>{otherRegion.name} 장소 보기</span>
+                    <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      ) : null}
 
       {placeCount > 0 ? (
         <section className="space-y-5">
