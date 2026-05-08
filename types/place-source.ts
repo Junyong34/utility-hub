@@ -146,8 +146,36 @@ export interface PlaceOptionalFields {
   editorNote?: string;
   /** 연결된 블로그 포스트 슬러그 목록 */
   linkedPostSlugs?: string[];
+  /** 카드 안에서 강조할 블로그 후기 요약 */
+  blogReviewHighlights?: PlaceBlogReviewHighlight[];
+  /** 외부 블로그 후기 링크 */
+  externalBlogLinks?: PlaceExternalBlogLink[];
   /** 대표 이미지 경로 (public 기준) */
   thumbnailImage?: string;
+}
+
+/**
+ * 카드 내부 후기 하이라이트
+ * 방문자의 주관적 후기이므로 운영 사실 데이터와 분리해 표시한다.
+ */
+export interface PlaceBlogReviewHighlight {
+  title: string;
+  description: string;
+  thumbnailImage: string;
+  href?: string;
+  sourceLabel?: string;
+}
+
+/** 외부 블로그 후기 링크 */
+export interface PlaceExternalBlogLink {
+  title: string;
+  href: string;
+  sourceLabel?: string;
+  description?: string;
+  /** 원문/검색 메타데이터. 외부 이미지 URL은 참고용으로만 보관하고 썸네일로 사용하지 않는다. */
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
 }
 
 /**

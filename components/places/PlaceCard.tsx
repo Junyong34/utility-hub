@@ -13,6 +13,7 @@ import { getPlaceNaverMapUrl } from '@/lib/places/place-map-links';
 import { cn } from '@/lib/utils';
 import type { PlaceSource } from '@/types/place-source';
 import { PlaceAddressCopyButton } from './PlaceAddressCopyButton';
+import { PlaceBlogReviewSection } from './PlaceBlogReviewSection';
 import {
   AGE_BAND_LABELS,
   CATEGORY_LABELS,
@@ -199,6 +200,11 @@ export function PlaceCard({ place }: PlaceCardProps) {
             ) : null}
           </div>
         </div>
+
+        <PlaceBlogReviewSection
+          reviews={place.blogReviewHighlights}
+          externalLinks={place.externalBlogLinks}
+        />
 
         {place.sourceUrl ? (
           <Link

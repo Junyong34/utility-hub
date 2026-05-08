@@ -219,9 +219,14 @@ export function PlacesFilteredGrid({
             </div>
           ) : matchedTotalCount > 0 ? (
             <>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="columns-1 gap-4 md:columns-2">
                 {allLoadedPlaces.map(place => (
-                  <PlaceCard key={place.id} place={place} />
+                  <div
+                    key={place.id}
+                    className="mb-4 inline-block w-full align-top [break-inside:avoid]"
+                  >
+                    <PlaceCard place={place} />
+                  </div>
                 ))}
               </div>
 

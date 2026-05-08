@@ -536,7 +536,7 @@ export const INCHEON_PLACES = [
     naverMapUrl: 'https://map.naver.com/p/entry/place/12090933',
     verifiedAt: '2026-04-08',
     lastObservedAt: '2026-04-08',
-    verificationStatus: 'official_verified',
+    verificationStatus: 'needs_refresh',
     description:
       '우주과학 테마 전시와 야외 체험 동선을 함께 묶은 강화 대표 가족형 시설. 하루 일정으로 넉넉하게 잡는 편이 잘 맞는다.',
     address: '인천광역시 강화군 불은면 강화동로 403',
@@ -547,7 +547,7 @@ export const INCHEON_PLACES = [
     stayMinutes: 240,
     operatorType: 'commercial',
     editorNote:
-      '24개월 미만은 무료지만 일부 시설 이용 제한이 있을 수 있다. 야외 체험 비중이 있어 날씨 영향을 고려하는 편이 좋다.',
+      '24개월 미만은 무료지만 일부 시설 이용 제한이 있을 수 있다. 야외 체험 비중이 있어 날씨 영향을 고려하는 편이 좋다. 기존 incheon-oktokki-space-center와 동일 장소라 중복 발행 방지를 위해 재검수 대상으로 둔다.',
   },
   {
     id: 'ganghwa-history-museum',

@@ -53,6 +53,48 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 60,
     operatorType: 'public',
+    externalBlogLinks: [
+      {
+        title:
+          '와글아이 의정부점 I 민락동 대형키즈카페 21개월아기와 다녀온 후기',
+        href: 'https://blog.naver.com/lj2115/224059941276',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '와글아이 의정부점 I 민락동 대형키즈카페 21개월아기와 다녀온 후기',
+        ogDescription:
+          '카트,튜브썰매등 즐길거리가많은 대형키즈카페! 실내 놀이터로 추천 와글아이 의정부점 내돈내산 방문후기...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMTlfMTIz%2FMDAxNzYwODcxNTU2NDUw.WSCe9QPoovH_ecBDeEgUqH7oS7zAeGuFTW_IzVXOqx0g.gEOpkHa6D9No_tD7rzPNMtuFgK88vspfqoSgEMWjH5Eg.JPEG%2F900%25A3%25DF20250713%25A3%25DF100832.jpg%23900x900&type=ff192_192',
+      },
+      {
+        title:
+          "고산동 키즈카페 '아이스토리' 내돈내산 솔직 후기 (주차, 메뉴, 시설 등) 의정부 아이랑 갈만한 곳",
+        href: 'https://blog.naver.com/ji_hoo_mom/223968368796',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          "고산동 키즈카페 '아이스토리' 내돈내산 솔직 후기 (주차, 메뉴, 시설 등) 의정부 아이랑 갈만한 곳",
+        ogDescription:
+          '오늘 하원 후, 아이가 키즈카페에 가고 싶다고 해서 새로운 곳을 찾아보다가 얼마 전 지인분이 추천해 주신...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA4MTJfNjUg%2FMDAxNzU1MDAwNTQ3Mzkx.qQR9WGTc9in3XKj-n9l8FrCyyRxSwIUFwqac_E1C4KUg.qYfs0i-1eWnfxlejXCWtk36GZ3ypYV6N_14cj1qRP0gg.JPEG%2FIMG%25A3%25DF2566.JPG%23900x900&type=ff192_192',
+      },
+      {
+        title: "의정부 키즈카페 추천 | '아이스토리' 29개월 방문후기",
+        href: 'https://blog.naver.com/sseungvibe/223953331038',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle: "의정부 키즈카페 추천 | '아이스토리' 29개월 방문후기",
+        ogDescription:
+          '오늘은 의정부키즈카페를 소개드리려고 해요 우리 룰루는 여름 야외활동을 매우 힘들어해여 찐 외향형 엄빠...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MzFfMjg1%2FMDAxNzUzOTE4ODQ3NTQx.5D36XrKPQAGCEgs6SeMsxw6ENA690dD3iYQZR42KBeog.3H6gjcmQ_mqyVFLCL3uzlYlOHTToSPHMmtnKraM7Rasg.PNG%2F%25C8%25F2%25BB%25F6%25B0%25FA_%25B0%25CB%25C1%25A4%25BB%25F6_%25B1%25F2%25B2%25FB%25C7%25D1_%25BB%25E7%25C1%25F8%25B9%25E8%25B0%25E6_SNS_%25BA%25ED%25B7%25CE%25B1%25D7_%25C4%25AB%25B5%25E5%25B4%25BA%25BD%25BA_%25C5%25B8%25C0%25CC%25C6%25B2_%25C6%25F7%25BD%25BA%25C6%25AE_%25BD%25E6%25B3%25D7%25C0%25CF_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25B0%25D4%25BD%25C3%25B9%25B0.png%23900x900&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'gyeonggi-north-toy-library-okjeong',
@@ -105,6 +147,48 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: false,
     stayMinutes: 180,
     operatorType: 'commercial',
+    externalBlogLinks: [
+      {
+        title: '파주 퍼스트가든 후기(5,6세 아이랑)(주차,가격,소요시간)',
+        href: 'https://blog.naver.com/daily_js_/224262073064',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle: '파주 퍼스트가든 후기(5,6세 아이랑)(주차,가격,소요시간)',
+        ogDescription:
+          '이번 주말에는 뭐하지...? 늘 고민입니다. 벚꽃이 다 떨어져 가는데 째깐&쪼매는 꽃구경 가자니깐 보는...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MjJfMjAx%2FMDAxNzc2ODQzODYwMjk4.uEJy10XR3cYZWfBwW3gy2dvYjOf5V6pJnmL4sAfZ7RMg.tueySWCK6S6hSH6bqVlsGN4VjXxqeG1NC0858W9HoPkg.JPEG%2F1775651587278.jpg%234000x3000&type=ff192_192',
+      },
+      {
+        title:
+          '퍼스트가든고기집 파주일산돼지갈비 맛집 숯불구이 전문점 설문동본갈비 직영점 방문 후기 국내산뼈갈비 숯불명란구이 뚝배기우렁된장밥',
+        href: 'https://blog.naver.com/bejooppy/224216632556',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 머문 동선과 현장 분위기를 참고하기 좋은 후기입니다.',
+        ogTitle:
+          '퍼스트가든고기집 파주일산돼지갈비 맛집 숯불구이 전문점 설문동본갈비 직영점 방문 후기 국내산뼈갈비 숯불명란구이 뚝배기우렁된장밥',
+        ogDescription:
+          '고양시와 파주시 사이에 위치한 설문동 갈비 맛집이 있어 다녀왔어요 파주일산돼지갈비 맛집으로 유명한 설...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMTRfMTUy%2FMDAxNzczNDQxMzI1NzE3.-xWHJfCQ1OQBCQ_b2fcxznsNQj9Ic-jKde5buG1gNF4g.liOmNZ86f7JMrjxJwn93VUP-pTj-GqMUTgg8rAqz8eYg.JPEG%2Foutput%25A3%25DF3879652146.jpg%23681x574&type=ff192_192',
+      },
+      {
+        title:
+          '퍼스트가든고기집 설문동본갈비 아이랑 방문하기 너무좋은 가족외식 맛집 솔직후기',
+        href: 'https://blog.naver.com/k-minvely/224231813449',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 머문 동선과 현장 분위기를 참고하기 좋은 후기입니다.',
+        ogTitle:
+          '퍼스트가든고기집 설문동본갈비 아이랑 방문하기 너무좋은 가족외식 맛집 솔직후기',
+        ogDescription:
+          '안녕하세요, 민블리에요 주말에는 아이랑 파주 퍼스트가든 다녀왔어요 날씨가 너무 좋아서 아주 신나게 놀...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjVfMTkx%2FMDAxNzc0NDUwNzk4NDIw.Z21ALfeE4-2ELo8tZeur48OnCZJLCZZwer_jBoteD0Ig.snI9dTDnrNke5g-BIjyTpwZh6MEHpqyCM2-rrpEUtTMg.PNG%2F%25B4%25D9%25C5%25A9%25BA%25ED%25B7%25E7_%25C8%25AD%25C0%25CC%25C6%25AE_%25BD%25C9%25C7%25C3%25C7%25D1_%25C7%25D1%25B1%25B9_%25BF%25A9%25C7%25E0_%25C1%25A4%25BA%25B8_%25B0%25E6%25BA%25B9%25B1%25C3_%25BE%25C8%25B3%25BB_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25C6%25F7%25BD%25BA%25C6%25AE.png%23900x900&type=f250_208',
+      },
+    ],
   },
   {
     id: 'gyeonggi-north-hyundai-motorstudio-goyang',
@@ -131,6 +215,48 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 120,
     operatorType: 'commercial',
+    externalBlogLinks: [
+      {
+        title:
+          '고양 아기랑 갈만한 곳 | 현대모터스튜디오 고양 방문 후기-자동차 체험전시 추천',
+        href: 'https://blog.naver.com/hanieuni-/224218981738',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle:
+          '고양 아기랑 갈만한 곳 | 현대모터스튜디오 고양 방문 후기-자동차 체험전시 추천',
+        ogDescription:
+          '아이들과 함께 갈 만한 실내 체험 공간을 찾다가 지난 주말에 현대모터스튜디오 고양을 방문하게 되었어요....',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMTdfMjM4%2FMDAxNzczNjc1MzAyMTA3.15WmMnB6iaXhiKognnM79JOQvuMqr6Yu_EtmJJWroh8g.n0JGUIXZCrcYgw7Kgay9hE1sWVjVYCjA_y6DtOugsPog.PNG%2F%25C1%25A6%25B8%25F1%25C0%25BB-%25C0%25D4%25B7%25C2%25C7%25D8%25C1%25D6%25BC%25BC%25BF%25E4_-004.png%23960x960&type=ff192_192',
+      },
+      {
+        title:
+          '현대 모터스튜디오 고양 실내데이트 자동차체험 남자아이랑 갈만한곳 후기',
+        href: 'https://blog.naver.com/healsoyoung/224238311392',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle:
+          '현대 모터스튜디오 고양 실내데이트 자동차체험 남자아이랑 갈만한곳 후기',
+        ogDescription:
+          '안녕하세요. 여행하는 일상기록입니다 :) 오늘 소개할곳은 남자 아이라면 그냥 지나칠수 없을. 자동차체험...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MDFfNjMg%2FMDAxNzc1MDI1Njg0NTMz.MlSBKpbvhmtWR7SCk_oLo4k01cTLMEtIBCH-y4XmohEg._fbhXFKlvDnh8x40cNI5jS2QgZtmaDYgMZnWH3CVcvMg.JPEG%2F%25C1%25A6%25B8%25F1%25C0%25BB%25A3%25DF%25C0%25D4%25B7%25C2%25C7%25D8%25C1%25D6%25BC%25BC%25BF%25E4.%25A3%25A812%25A3%25A9.jpg%23900x900&type=ff192_192',
+      },
+      {
+        title: '고양 현대모터스튜디오 아이랑 주말에 예약하고 다녀온 후기',
+        href: 'https://blog.naver.com/22jiyeon17/224231388093',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle: '고양 현대모터스튜디오 아이랑 주말에 예약하고 다녀온 후기',
+        ogDescription:
+          '안녕하세요 단미입니다 🧡 주말에 아이와 함께 고양 현대모터스튜디오에 다녀왔어요. 요즘 바다의 최애는...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjdfMTgy%2FMDAxNzc0NTc2MTE3Nzgz.jp-t2v3aIj2-A5eoB_TChul05VoOGGXehQZpCh09j5kg.zRS0_V6uTIg-x896a2mIu_SqOKC9PxLpWkCaT_rjaPUg.PNG%2F900%25A3%25DF%25BA%25A3%25C0%25CC%25C1%25F6%25BB%25F6_%25BD%25C9%25C7%25C3%25C7%25D1_%25C0%25B0%25BE%25C6_%25B0%25D4%25BD%25C3%25B9%25B0_%25BB%25E7%25C1%25F8_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25C6%25F7%25BD%25BA%25C6%25AE%25A3%25DF20260327%25A3%25DF104823%25A3%25DF0000.png%23900x900&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'gyeonggi-north-toykingdom-play-goyang',
@@ -240,6 +366,48 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 120,
     operatorType: 'commercial',
+    externalBlogLinks: [
+      {
+        title:
+          '<으노아빠 육아일기 84>고양 화정 대관 키즈룸 잼잼키즈룸 화정점 주차 영업시간 가격 예약정보 4가족 후기',
+        href: 'https://blog.naver.com/kys_eok/224178919168',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차와 예약 흐름을 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '<으노아빠 육아일기 84>고양 화정 대관 키즈룸 잼잼키즈룸 화정점 주차 영업시간 가격 예약정보 4가족 후기',
+        ogDescription:
+          '주말 일요일에 조리원 동기 가족들이랑 대관 키즈룸에서 놀게되었다. 만났을 때 부담감 없는 가족들이라 종...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMTBfMTc3%2FMDAxNzcwNzA5NzIxMTk5.dH6YnwyuJpwnHYcXFNr3HI-dfcply5qWkp8C9DFbPWsg.8hQ-7g0dy1Zk7aaSjnO-6n8qcWNd3MUjyB_syPpGIP4g.JPEG%2F900%25A3%25DF1770709361972.jpg%23900x675&type=ff192_192',
+      },
+      {
+        title:
+          '화정 키즈카페 잼잼키즈룸 화정점 날씨 걱정없는 프라이빗 실내 놀이터',
+        href: 'https://blog.naver.com/j11995/224277553460',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '화정 키즈카페 잼잼키즈룸 화정점 날씨 걱정없는 프라이빗 실내 놀이터',
+        ogDescription:
+          '날씨가 애매하면, 아이 둘 데리고 어디가야 하나 고민될 때가 많죠. 결국 그 고민 끝엔, 언제나 "편하...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA1MDdfMjc3%2FMDAxNzc4MTIyOTYzMDI3.vEe4G6sqKZI70bewZ1blhs3-5rZ_SN88bKds89p6muQg.46VZjbUVZF1l166aP1gePDM3Nn0BA9W8LMaIwHk4FoMg.GIF%2F1778116431595_846%25281%2529.gif%23654x368&type=ff192_192',
+      },
+      {
+        title: '덕양구수제버거 화정버거맛집인 팻보이버거화정점 리얼후기',
+        href: 'https://blog.naver.com/yuns8611/224238699273',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle: '덕양구수제버거 화정버거맛집인 팻보이버거화정점 리얼후기',
+        ogDescription:
+          '팻보이 버거 화정점 #덕양구수제버거 #화정버거맛집 #화정역맛집 ✅경기 고양시 덕양구 화중로 54 1층 ✅07...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MDJfMjAw%2FMDAxNzc1MTI5MDk1Nzkz.UGYIgq4T6azOmt6mvEdsRvEObp2tCzvr0E15UIF-kJkg.xSrb1bXFhFYVL1SuG6XZJkTYTm1h3oYwJOzU6txtEaYg.JPEG%2F%25A4%25A1%25A4%25B8%25A4%25A7%25A4%25A1%25A4%25B8%25A4%25A1%25A4%25B8.jpg%23900x900&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'gyeonggi-north-webounce-yangju',
@@ -376,6 +544,49 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 180,
     operatorType: 'commercial',
+    externalBlogLinks: [
+      {
+        title:
+          '잭슨나인스 일산점_:) 대형 키즈카페 비오는 날 아이와 7시간 놀다 온 후기!! 주말 연휴 아이랑 뭐하지? 볼거리 놀거리 다양한 일산 대형 키즈카페',
+        href: 'https://blog.naver.com/noonnu/224031247936',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '잭슨나인스 일산점_:) 대형 키즈카페 비오는 날 아이와 7시간 놀다 온 후기!! 주말 연휴 아이랑 뭐하지? 볼거리 놀거리 다양한 일산 대형 키즈카페',
+        ogDescription:
+          '잭슨나인스 일산점 🕚영업시간 평일 11:00 - 20:00 (*주말 및 공휴일 10:00 - 21:00) 📞전화 031-912-2...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMDRfMjU5%2FMDAxNzU5NTA3OTA1MDYy.eKC563tOYYVz6A-ISSr7EbuH6m3GvodKf8KjJ5NPNDkg.qJyiK15px1SMvyzQFXTFTFLmkQFi3-ZAP6b5utQt_9Mg.GIF%2FIMG%25A3%25DF2106.GIF%23435x671&type=ff192_192',
+      },
+      {
+        title: '놀거리 가득한 일산 대형 키즈카페, 잭슨나인스 일산점 솔직 후기',
+        href: 'https://blog.naver.com/1256783/224117279485',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '놀거리 가득한 일산 대형 키즈카페, 잭슨나인스 일산점 솔직 후기',
+        ogDescription:
+          '안녕하세요. 간다룽입니다:) 오늘은 곧 다가오는 겨울방학을 앞두고 아이와 함께 다녀오기 좋은 곳을 추천...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMTVfMTY3%2FMDAxNzY1Nzg3MjE4NDAx.mkQCfhnKYgPoSb2aoBNf9PPL5rPG_8yGYeOMG5D2kPYg.8IXDnyJ5O3yoFBWBdyh6wBszsjg-SH8fcrckr-mONEAg.JPEG%2FIMG%25A3%25DF4850.jpg%23900x1200&type=ff192_192',
+      },
+      {
+        title:
+          '하루 종일 놀다 온 진짜 찐 후기! 일산 초대형 키즈카페 "잭슨나인스 일산점" 이용꿀팁, 할인구매방법 총정리',
+        href: 'https://blog.naver.com/junjun_mom/224008418732',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '하루 종일 놀다 온 진짜 찐 후기! 일산 초대형 키즈카페 "잭슨나인스 일산점" 이용꿀팁, 할인구매방법 총정리',
+        ogDescription:
+          '안녕하세요 준준맘이에요 :) 아이 키우시는 분들이라면 다들 공감하시겠지만, 주말만 되면 "이번엔 어...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MTVfMTIw%2FMDAxNzU3ODk5Njk5NTk5.Dxa10fkAwQjbhxmiJVRD9tG6ZnjhWWUqhFTZpFKdei8g.rCc7pkw_Yu8ny9RhbNBIbUV9KlyYVfg9HYh0DjfAp0gg.JPEG%2F1757855214425.jpg%231080x1080&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'gyeonggi-north-pororo-park-ilsan-kintex',
@@ -405,6 +616,48 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '공식 이용시간 페이지와 리서치 문서에서 지점 운영 신호를 확인했다. 요금과 주차 지원은 발행 전 재확인 필요.',
+    externalBlogLinks: [
+      {
+        title: '뽀로로파크 일산킨텍스점 입장료 할인, 공연 시간, 주차',
+        href: 'https://blog.naver.com/nhj43226/224161315688',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle: '뽀로로파크 일산킨텍스점 입장료 할인, 공연 시간, 주차',
+        ogDescription:
+          '안녕하세요 히포맘입니다~ 추운 겨울 아이와 함께 갈 만한 곳을 찾다 보면 실내형 키즈카페를 많이 찾으시...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAxMjdfMTA5%2FMDAxNzY5NDgxNzUyMzEx.fs_3X5Jz6cxciXiV4Jfi-UB08kMJEfxtOO5gglqy29Mg.NJJLIiTsTHyn4jI7IY2z1Qzajpmz8W5ZavwuVGy-caAg.JPEG%2FKakaoTalk_20260127_113610426_04.jpg%234000x3000&type=ff192_192',
+      },
+      {
+        title:
+          '6살 아들 체력 방전! 뽀로로테마파크 일산킨텍스점 주차 할인 공연 꿀팁',
+        href: 'https://blog.naver.com/landmark-blog/224257154848',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '6살 아들 체력 방전! 뽀로로테마파크 일산킨텍스점 주차 할인 공연 꿀팁',
+        ogDescription:
+          '안녕하세요! 오늘도 육아 전선에서 고군분투 중인 애줌마 리블리입니다. 다가오는 어린이날을 맞아 어디를 ...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MThfMTIz%2FMDAxNzc2NTIyMjA3NTQ1.gTDRkmjRN7TZ4mvE_dYKEv62dutOkh2kkR6rv1Jt7Ysg.M_zgb4wQiXgzt1W2j85k5iBFYooSMwzP3RvX5OFiG4Qg.JPEG%2F_DSC8640.JPG%231689x3000&type=ff192_192',
+      },
+      {
+        title:
+          '뽀로로파크 일산킨텍스점 만원의행복 입장료 만원데 다녀온 내돈내산 후기',
+        href: 'https://blog.naver.com/somi_92-/224188079153',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '뽀로로파크 일산킨텍스점 만원의행복 입장료 만원데 다녀온 내돈내산 후기',
+        ogDescription:
+          '안녕하세요. BeBe맘 입니다. 루다가 이제 조금씩 걷기 시작해서 주말에 아이랑 가볼만한곳을 검색하다 뽀...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMTlfMTU4%2FMDAxNzcxNDc0MTg4MDM4.0n-SvRaGIzSaR9JVcYagsthHSda75w5_MWV4-vqdP7sg.uJm3sD2BOX8kD4HXTerHPb6kTxfo5jJWI85g5_IUnekg.PNG%2F%25B1%25D7%25B8%25B25.png%231856x2145&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'gyeonggi-north-champion-black-belt-homeplus-uijeongbu',
@@ -435,6 +688,50 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '전국 플레이타임 직영점 매장 위치 안내 PDF에서 지점명을 확인했다. 홈플러스 개별 임대매장 안내와 요금은 방문 전 재확인 필요.',
+    externalBlogLinks: [
+      {
+        title:
+          '[좋은장소 - 챔피언더블랙벨트 홈플러스 의정부점] 의정부 대형 키즈카페 / 아이와 뛰놀기 좋은 곳 / 다양한 시설',
+        href: 'https://blog.naver.com/metalzone299/224228094645',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '[좋은장소 - 챔피언더블랙벨트 홈플러스 의정부점] 의정부 대형 키즈카페 / 아이와 뛰놀기 좋은 곳 / 다양한 시설',
+        ogDescription:
+          '방문일: 2026.2.16. 운영 시간: 매일 10:00 ~ 21:00 매달 2,4번째 수요일 휴무(홈플러스 휴무일) 주차 가능...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjRfMTUw%2FMDAxNzc0MzQyMjM4ODUx.pscv9NIIjAwXg9NkN8ozPXraop0FZYlE1XB-YgVhcXcg.VBTK0e_rNGHpyjQJkbxvJWSl12T3tHRqxlsZdENYHHMg.JPEG%2F1774342233667.jpg%23900x1200&type=ff192_192',
+      },
+      {
+        title:
+          '[의정부] 챔피언더블랙벨트 : 주말 아이 에너지 발산 끝판왕 (가격, 주차, 할인 팁)',
+        href: 'https://blog.naver.com/dbaltmf12/224177152262',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '[의정부] 챔피언더블랙벨트 : 주말 아이 에너지 발산 끝판왕 (가격, 주차, 할인 팁)',
+        ogDescription:
+          '추운 겨울 5세 아이와 챔피언더블랙벨트에서 📍장소 : 경기 의정부시 청사로38 홈플러스 의정부점 4층 (...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMDlfMTc0%2FMDAxNzcwNjA2NzM1NTYx.4vEcU3vCjaUNLM6UCgLIsSkjx5i_lDpWoZi7FUqakYkg.ayHD7L6AKvt4D5Xh9FUfXnS2RwVcyyb431LPv_ot2VQg.JPEG%2F%25BA%25ED%25B7%25CE%25B1%25D7-%25BD%25E6%25B3%25D7%25C0%25CF.jpg%23720x720&type=f250_208',
+      },
+      {
+        title:
+          '의정부 챔피언더블랙벨트 홈플러스 의정부점 키즈카페 솔직 방문 후기',
+        href: 'https://blog.naver.com/kahi_ui/223923149103',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '의정부 챔피언더블랙벨트 홈플러스 의정부점 키즈카페 솔직 방문 후기',
+        ogDescription:
+          '의정부 챔피언더블랙벨트 홈플러스 의정부점 키즈카페 솔직 방문 후기 안녕하세요! 오늘은 아이들과 함께 ...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MDVfMjU2%2FMDAxNzUxNzIxODQ5ODU3.sTZkiWsQq_utBYwoqGGUnwpVJl7zr_6huiEVdoBbK_Qg.HbwsT1PhMpyrFBg01hKErXgP0XbdQFO6hbGxmvwGchMg.JPEG%2FKakaoTalk_20250705_221435569_12.jpg%231206x1698&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'gyeonggi-north-champion-black-belt-traders-gimpo',
@@ -494,6 +791,50 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '교육 프로그램은 별도 예약이 있을 수 있어 방문 전 공식 일정을 확인하는 편이 안전하다.',
     thumbnailImage: '/images/places/jeongok-prehistory-museum.webp',
+    externalBlogLinks: [
+      {
+        title:
+          '연천전곡선사박물관 구석기축제근처 놀거리, 방문 후기 (무료, 예약x)',
+        href: 'https://blog.naver.com/lullu-ilsang/224271316298',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차와 예약 흐름을 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '연천전곡선사박물관 구석기축제근처 놀거리, 방문 후기 (무료, 예약x)',
+        ogDescription:
+          '연천전곡선사박물관 ©글, 사진 / 담다 5월2일부터 연천에서 구석기축제가 있죠!! 연천구석기축제 근처에서 ...',
+        ogImage:
+          'https://phinf.pstatic.net/image.nmv/blog_2026_05_01_1496/iTXHm7L4Hk_03.jpg?type=w2',
+      },
+      {
+        title:
+          '경기도 연천 :: 전곡선사박물관 주말 아이와 함께 가기 좋은 역사 체험 공간',
+        href: 'https://blog.naver.com/dosifamily/224234239340',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle:
+          '경기도 연천 :: 전곡선사박물관 주말 아이와 함께 가기 좋은 역사 체험 공간',
+        ogDescription:
+          '경기도 연천에 위치한 전곡선사박물관 다녀왔습니다! 서울에서 차로 1시간 30분 정도 거리라 주말 나들이 ...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMzBfODQg%2FMDAxNzc0ODQyMzM0NzY2.yDP-Skja4sN8LJh5pULQitX140b4aP-yfoq2-n_GteYg._HptfZIMLBIuxmrAMUuuW_wTBCCts2KLZWwgJ69psu8g.JPEG%2FIMG%25A3%25DF1023.jpg%23900x592&type=ff192_192',
+      },
+      {
+        title:
+          '[꾸름이] 경기 북부 연천 여행 코스 아이랑 가볼만한 곳_전곡선사박물관, 입장료, 주차 후기 🚙',
+        href: 'https://blog.naver.com/shfkwnfk0613/224227639591',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '[꾸름이] 경기 북부 연천 여행 코스 아이랑 가볼만한 곳_전곡선사박물관, 입장료, 주차 후기 🚙',
+        ogDescription:
+          '전곡선사박물관 기본 정보 🏷️ · 도로명 주소 : 경기 연천군 전곡읍 평화로 443번길 2 지번 주소 : 경기...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjVfMTI0%2FMDAxNzc0NDA3MjQ3OTYw.QcXCXWaNNqWL5b5mfCvl0n32fqQJLCiXbXzDUEBEXO0g.rTxX1yZIHI4SAJdzNv9q0vL3dWNdAa6JTsMRJkHZxKwg.JPEG%2FIMG%25A3%25DF5398.jpg%23900x676&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'silhak-museum',
@@ -523,6 +864,48 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '무료 관람이지만 휴관일과 교육 프로그램 일정은 공식 홈페이지에서 다시 확인하는 편이 좋다.',
     thumbnailImage: '/images/places/silhak-museum.webp',
+    externalBlogLinks: [
+      {
+        title:
+          '[남양주] 정약용 유적지 + 실학박물관 아이와 역사체험 코스 총정리',
+        href: 'https://blog.naver.com/luckyfollowsu/224249605272',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle:
+          '[남양주] 정약용 유적지 + 실학박물관 아이와 역사체험 코스 총정리',
+        ogDescription:
+          '안녕하세요. Zero입니다. 오늘은 남양주 다녀왔어요! 남양주 가볼만한 곳🤞 정약용 유적지 경기도 남양...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MTNfMSAg%2FMDAxNzc2MDQ0Njg3Njk1.iaF-87s9CTfiN6VJrKo9DOM2LqxzklDRHG5pkGBpVvAg.kN3QAthmc9b_EwNgG5AwTRqK104B1Ew9AmfH_3uw54og.JPEG%2FIMG%25A3%25DF2045.jpg%23900x1200&type=ff192_192',
+      },
+      {
+        title: '남양주 아이와 가볼만한곳 정약용생가 실학박물관 주차꿀팁',
+        href: 'https://blog.naver.com/vorms_/224212293333',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle: '남양주 아이와 가볼만한곳 정약용생가 실학박물관 주차꿀팁',
+        ogDescription:
+          '무료입장에 이런퀄리티라니.. 안녕하세요 바라누스입니다. 오늘은 주말 남양주 봄나들이 후기입니다. 봄 아...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMTBfMTQ5%2FMDAxNzczMTQ5NzUxMzcw.Ap62dZabJT3qUwIJ8YP4OoUkU_KqLyPAHe3t2Z0pL7cg.NcOY_DzYkMoq7kxj8QlL-vXnGho01aoiBf9n4V9PmWUg.GIF%2F1080059959.gif%23375x500&type=ff192_192',
+      },
+      {
+        title:
+          '다산정약용유적지 실학박물관 후기ㅣ아이와 가볼만한 곳 체험·영상까지 완벽한 초등역사체험',
+        href: 'https://blog.naver.com/skycis4/224246307382',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle:
+          '다산정약용유적지 실학박물관 후기ㅣ아이와 가볼만한 곳 체험·영상까지 완벽한 초등역사체험',
+        ogDescription:
+          '안녕하세요. 또이엄마 입니다. 주말에 아이들과 함께 다산정약용유적지 실학박물관에 다녀왔습니다. 요즘 ...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MDlfMjQ1%2FMDAxNzc1NzAyNjQ5MzM2.fACCNZXsqUhYn9X8hZu-qSx1GEsq0knGk4yt-zWC7Gkg.RjZZTw-_1eT4MEQ71ZddDyKeMz7nMzfKCVC8d3bTyywg.JPEG%2FKakaoTalk_20260409_113628648.jpg%232250x3000&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'champion-1250x-goyang',
@@ -553,6 +936,50 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '스타필드 고양 내 위치. 키즈 체험형 실내놀이터 성격이 강해 활동량이 많은 아이에게 잘 맞는다.',
     thumbnailImage: '/images/places/champion-1250x-goyang.webp',
+    externalBlogLinks: [
+      {
+        title:
+          '경기도 덕양구 챔피언1250X 스타필드 고양점, 영업시간, 후기, 가격',
+        href: 'https://blog.naver.com/kevin12yr/223822635420',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '경기도 덕양구 챔피언1250X 스타필드 고양점, 영업시간, 후기, 가격',
+        ogDescription:
+          '업체명 챔피언1250X 스타필드 고양점 주소 경기 고양시 덕양구 고양대로 1955 스타필드 고양점 4층 찾아가...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA0MDVfMTQ5%2FMDAxNzQzNzg0ODY4NTg4.ffCh180cKLz6Lj3X74hLqGJUXacmdCgcvsUdJJ2bh8kg.WmfJ6pQ9uyiP5G5MiEpE2MCble2rq1mF4Ldxzq3fdKYg.JPEG%2Fimage_1.jpg%23600x600&type=ff192_192',
+      },
+      {
+        title:
+          '일산 아이와 가볼만한곳 - 챔피언1250x 스타필드 고양점 키즈카페 솔직후기',
+        href: 'https://blog.naver.com/aroma5503/224066577847',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '일산 아이와 가볼만한곳 - 챔피언1250x 스타필드 고양점 키즈카페 솔직후기',
+        ogDescription:
+          '날씨가 추워지면 야외활동도 힘들어지고 아이는 뛰어줘야하고 해서 주말에 쇼핑하러 간김에 아이와 고양스...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTExMDZfMTk2%2FMDAxNzYyMzk1NzEyNzMx.yNx4hjz4mL-l6guo1BbDncPrvZPyqcIscacUfF_iq3kg.oseF6hYYsb9CjxicUIDTk_9xX7cEsSCpMw179AUvPjQg.JPEG%2F900%25A3%25DF20251009%25A3%25DF193402.jpg%23900x788&type=f250_208',
+      },
+      {
+        title:
+          '미세먼지 많은날 고양 실내놀이터 | 초등학생이랑 챔피언1250X 스타필드 고양 솔직 후기',
+        href: 'https://blog.naver.com/by_mac/224237040799',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '미세먼지 많은날 고양 실내놀이터 | 초등학생이랑 챔피언1250X 스타필드 고양 솔직 후기',
+        ogDescription:
+          '엄마도 아이도 편한 육아를 위한 정보 요정 미스맥 짜잔!!! 챔피언 1250X 스타필드 고양 요즘 미세먼지 무...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MDFfNDYg%2FMDAxNzc1MDIzNjg2MjE3.jGZ96SMr_fqQUxWqq30_3K3fudZkS01xl8jfsCG9uPsg.XT_TrmuKl9ayjZ5i2q1xa1iP6S9VDMMLVqJllBDZazQg.JPEG%2FIMG_7739.JPG%233000x3000&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'wonder-village-goyang',
@@ -642,6 +1069,45 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '구리시육아종합지원센터 안내 페이지와 네이버 지도에서 위치를 교차 확인했다.',
+    externalBlogLinks: [
+      {
+        title: '구리 아이러브맘카페 인창점 후기｜돌아기 무료 키즈카페',
+        href: 'https://blog.naver.com/inmini0722/224175917410',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle: '구리 아이러브맘카페 인창점 후기｜돌아기 무료 키즈카페',
+        ogDescription:
+          '돌아기가 집에만 있기 답답해서 구리에서 무료로 이용할 수 있는 키즈카페를 찾다가 구리시 육아지원센터에...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMDdfMjYg%2FMDAxNzcwNDU1MDI4NDI4.DHgZ9M-mTPA_GLV8sDxjDqkd_gV7KqEZIhPIOVRlpOIg._KdRzSSF2WSs6Ij-ok6oyifb3c4J6X-NnioS4BJUNsEg.JPEG%2FIMG%25A3%25DF2284.jpg%23900x1200&type=ff192_192',
+      },
+      {
+        title:
+          '구리육아종합지원센터 인창점 영어쿠킹클래스 아이와 잉글리키즈쿠킹',
+        href: 'https://blog.naver.com/leekyongme91/224234224438',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '구리육아종합지원센터 인창점 영어쿠킹클래스 아이와 잉글리키즈쿠킹',
+        ogDescription:
+          '구리육아종합지원센터 인창접 아이러브맘카페 영어쿠킹클래스 구리 아이와 잉글리키즈쿠킹 구리육아종합지...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjhfMTk5%2FMDAxNzc0Njc3MTkwNTc1.o1StKyoxtZ5nhYDMJ-k__wO2wKqFffXVdu7ZKS3SEK0g.Su6P_gpWyHQdHHngO8_72sU_YFUPDCqfCNEZ0riaDFkg.JPEG%2F900%25A3%25DF20260328%25A3%25DF135459.jpg%23900x1200&type=ff192_192',
+      },
+      {
+        title: '[부모-자녀 체험프로그램] 인창 아이러브맘카페의 8월 이야기',
+        href: 'https://blog.naver.com/guricenter1/223992701236',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle: '[부모-자녀 체험프로그램] 인창 아이러브맘카페의 8월 이야기',
+        ogDescription:
+          '인창 아이러브맘카페에서 이루어진 8월 부모-자녀 체험프로그램을 소개합니다💕 [구리시육아종합지원센터...',
+        ogImage: 'https://ssl.pstatic.net/static/blog/icon/og_270x270.png',
+      },
+    ],
   },
   {
     id: 'guri-isarang-playground-galmae',
@@ -699,6 +1165,48 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '네이버 지도에는 파주시육아종합지원센터 아이러브맘카페로 노출된다.',
+    externalBlogLinks: [
+      {
+        title:
+          '파주 금촌 어울림센터 아이사랑놀이터 키즈카페 예약 방문 후기, 주차',
+        href: 'https://blog.naver.com/lazyhappybear/224109725584',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차와 예약 흐름을 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '파주 금촌 어울림센터 아이사랑놀이터 키즈카페 예약 방문 후기, 주차',
+        ogDescription:
+          '추워진 날씨에 아이들과 야외활동이 힘들어졌어요. 그래서 실내위주로 놀이시설을 찾아보다 보니 파주 금촌...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMTRfMjY1%2FMDAxNzY1NjM5NDQ3Nzk2.6UKtO9vldKVQ_1foS1IGEJKiW6uvQwi9e4kg2oQ--nog.k5_rydEvwkDIOIPcndZHyCsxeyd2t6GmB-4sblbgItgg.JPEG%2FIMG%25A3%25DF5150.jpg%23900x1200&type=ff192_192',
+      },
+      {
+        title: '[파주 문산 아이사랑놀이터] 직접 다녀온 찐 후기',
+        href: 'https://blog.naver.com/hearty502/223910477403',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle: '[파주 문산 아이사랑놀이터] 직접 다녀온 찐 후기',
+        ogDescription:
+          '요즘 같은 날씨엔 무조건 실내 놀이터! 10개월 아기랑 함께 문산 아이사랑놀이터에 다녀왔어요 🐣 엄마 ...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA2MjRfMjE0%2FMDAxNzUwNzcxMzMwNzIz.wy6yEkKKH4qBH3YRTmwYLkDnw9F_PWVqqD0-0XQQsSAg.UQCJktBQE6oUsfZ2RNxape8LL-AZBUT6kWYWc2y47PQg.JPEG%2FKakaoTalk_Photo_2025-06-24-21-09-17_001.jpeg%234032x3024&type=ff192_192',
+      },
+      {
+        title:
+          '파주 아이랑 가기좋은 헤이리마을 아지동 키즈카페 종일권 솔직후기',
+        href: 'https://blog.naver.com/wings_travel/223964954734',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 함께 이용한 현장 분위기를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '파주 아이랑 가기좋은 헤이리마을 아지동 키즈카페 종일권 솔직후기',
+        ogDescription:
+          '파주 아이랑 갈만한곳 헤이리마을 아지동 키즈카페 제가 찐 애정하는 키즈카페 종종 오는데 오랜만에 친구...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA4MDlfMTk4%2FMDAxNzU0NzQxMjA5OTg2.b0xDiFz7FuhT5clHSopWHgzla_2FFRRUrNw5cIJ8_5Ug.T5dWdHJAMAVslYAXPIvi52hidjAnqavGRvaNChRSiH8g.PNG%2F%25BA%25A3%25C0%25CC%25C1%25F6%25BB%25F6_%25B1%25CD%25BF%25A9%25BF%25EE_ui_%25B0%25D4%25BD%25C3%25B9%25B0_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25C6%25F7%25BD%25BA%25C6%25AE%25A3%25DF20250809%25A3%25DF205720%25A3%25DF0000.png%231080x1080&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'gyeonggi-northern-childrens-museum',
@@ -730,6 +1238,50 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '100% 온라인 사전예약제로 운영된다. 영아 놀이터와 유모차 대여 등 저연령 편의시설이 함께 확인됐다.',
+    externalBlogLinks: [
+      {
+        title:
+          '[동두천] 경기북부어린이박물관 솔직후기｜가격, 예약, 체험 총정리 (아이랑 강추)',
+        href: 'https://blog.naver.com/my_joyland/224227181980',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle:
+          '[동두천] 경기북부어린이박물관 솔직후기｜가격, 예약, 체험 총정리 (아이랑 강추)',
+        ogDescription:
+          '안녕하세요! 조이랜드 조이맘입니다. 경기북부어린이박물관은 요새 아이랑 가볼만한 곳으로 많이 추천되는 ...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjRfOSAg%2FMDAxNzc0MzE5MzkwMTMz.uJPjehvsm7xKFx45YEZ-2VgODNZjw_barG02zS1QVrMg.8Kw3oMqQ_EndCMDO5ys9lHvyax_MpG6AUULsXQm9oOMg.PNG%2F900%25A3%25DF%25BF%25A9%25C1%25D6_%25B7%25E7%25B5%25A7%25BD%25C3%25BE%25C6_%25C5%25D7%25B8%25B6%25C6%25C4%25C5%25A9%25A3%25DF20260324%25A3%25DF112932%25A3%25DF0000.png%23900x900&type=ff192_192',
+      },
+      {
+        title:
+          '경기북부어린이박물관 아이랑 가볼만한곳 실내체험 최고 후기(주차 꿀팁 포함)',
+        href: 'https://blog.naver.com/oenomel89/224263461651',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '경기북부어린이박물관 아이랑 가볼만한곳 실내체험 최고 후기(주차 꿀팁 포함)',
+        ogDescription:
+          '📍 경기북부어린이박물관 다녀온 후기 (아이랑 강력추천) 경기북부에서 아이랑 어디 갈지 고민될 때 많으...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MjRfMTU5%2FMDAxNzc2OTk1MTc5NDgx.Dzh6bG8wcy8zY-6XACf2En8cwuxZbcgd8F68fdvl5F8g.EmCrXgFI06XU85sGAdSZWR82oFRZx_n5XA3A7_Rk_SAg.JPEG%2FKakaoTalk_20260423_152920018.jpg%23960x720&type=ff192_192',
+      },
+      {
+        title:
+          '추석연휴 경기도박물관 아이랑실내 경기북부어린이박물관 꿀팁 정보 동두천 가볼만한 곳 추천',
+        href: 'https://blog.naver.com/swsy181111/224033632545',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle:
+          '추석연휴 경기도박물관 아이랑실내 경기북부어린이박물관 꿀팁 정보 동두천 가볼만한 곳 추천',
+        ogDescription:
+          '경기북부어린이박물관 🏛주소 : 경기 동두천시 평화로2910번길 46 ⏰️운영시간 : 10시 - 17시 30분 설날...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMDZfMjI1%2FMDAxNzU5NzYwNTMyNzc4.4D39hg1Nd_hJeR3C4VzOB6S3PPOPF0pGiCtbSiq5nQYg.8VnUzrgKGngNLOL1N_LaILMDFTGp76RwOpryMQbqkJ8g.JPEG%2F900%25A3%25DF20251004%25A3%25DF104908.jpg%23900x1599&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'goyang-children-museum',
@@ -761,6 +1313,47 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '100% 온라인 사전예약제다. 주차장 협소 안내가 있어 주말에는 시간 여유를 두는 편이 좋다.',
+    externalBlogLinks: [
+      {
+        title:
+          '[경기]고양어린이박물관 5세 아이랑 다녀온 솔직 후기 (+주차/꿀팁)',
+        href: 'https://blog.naver.com/kdy6827/224260105712',
+        sourceLabel: 'Naver Blog',
+        description:
+          '이용 요금과 주차 정보를 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle:
+          '[경기]고양어린이박물관 5세 아이랑 다녀온 솔직 후기 (+주차/꿀팁)',
+        ogDescription:
+          '지난주에 벚꽃 봤는데... 이번주 일요일은 30도를 육박한다는 예보를 보고 아이랑 어디 갈지 고민하다가 고...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MjFfMTU2%2FMDAxNzc2NzUyNDk5MTA4.xSNV8QSewhXHykRc5w1-KMZQ3T0rkgySzUVeMyFWfE4g.1kzV04L1eC_oVCbG8PysVTRJuOKtjVVqCAab8ev8LJwg.JPEG%2F3472595967539784024%253A15967488.jpg%23960x1280&type=ff192_192',
+      },
+      {
+        title: '16개월 아기랑 고양어린이박물관 방문 후기 | 아이랑 실내 놀거리',
+        href: 'https://blog.naver.com/triple10dm/224217511514',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 흐름과 아이 동반 관람 분위기를 가늠하기 좋은 후기입니다.',
+        ogTitle:
+          '16개월 아기랑 고양어린이박물관 방문 후기 | 아이랑 실내 놀거리',
+        ogDescription:
+          '한동안 내 인스타 쇼츠에 자주 떠서 꼭 가봐야겠다며 저장해놓은 곳! 고양어린이박물관 다민이랑 둘이서 다...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMTNfMTcg%2FMDAxNzczMzMxOTE1Nzg1.Of6VKLbROAylZWAC-YlynZUmNwAdebkfmqrKQ33HPNIg.llqk6tzmkr9szMp5N33QPwAJvtfyFdy8Y2DRSF4pqzIg.JPEG%2FIMG%25A3%25DF0429.JPG%23900x1200&type=ff192_192',
+      },
+      {
+        title: '고양어린이박물관 21개월 아기랑 방문 후기',
+        href: 'https://blog.naver.com/syoung32/224037600713',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차와 예약 흐름을 방문자 관점에서 확인할 수 있는 후기입니다.',
+        ogTitle: '고양어린이박물관 21개월 아기랑 방문 후기',
+        ogDescription:
+          '고양어린이박물관 21개월 아기랑 방문 후기 얼마 전 주말에 아이랑 고양 어린이박물관에 다녀왔는데 생각보...',
+        ogImage:
+          'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMTFfMTg5%2FMDAxNzYwMTU4MDA0NDQ0.ZnS7JV1j06XNPUAlM9hBRrBrinrUJ0Mrc_s4bmUkaaIg.5QiNZWP3NAawV_GPF1iMI9IgMpMUM0Y2NW6enF3ZvNkg.JPEG%2FIMG%25A3%25DF2695.JPG%23900x900&type=ff192_192',
+      },
+    ],
   },
   {
     id: 'uijeongbu-public-playground-2',
@@ -835,7 +1428,7 @@ export const GYEONGGI_NORTH_PLACES = [
     naverMapUrl: 'https://map.naver.com/p/entry/place/1910743938',
     verifiedAt: '2026-04-06',
     lastObservedAt: '2026-04-06',
-    verificationStatus: 'official_verified',
+    verificationStatus: 'needs_refresh',
     description:
       '장난감 대여 중심으로 운영하는 공공 육아 지원 거점. 옥정 생활권에서 실내 육아 보조 동선으로 쓰기 좋다.',
     address: '경기도 양주시 옥정로 397-7 옥정1동행정복지센터 2층',
@@ -844,7 +1437,7 @@ export const GYEONGGI_NORTH_PLACES = [
     stayMinutes: 30,
     operatorType: 'public',
     editorNote:
-      '양주시육아종합지원센터 공식 메인에 옥정점 주소와 이용시간이 노출된다.',
+      '양주시육아종합지원센터 공식 메인에 옥정점 주소와 이용시간이 노출된다. 기존 gyeonggi-north-toy-library-okjeong와 동일 장소라 중복 발행 방지를 위해 재검수 대상으로 둔다.',
   },
   {
     id: 'first-garden',
@@ -863,7 +1456,7 @@ export const GYEONGGI_NORTH_PLACES = [
     naverMapUrl: 'https://map.naver.com/p/entry/place/194606488',
     verifiedAt: '2026-04-08',
     lastObservedAt: '2026-04-08',
-    verificationStatus: 'official_verified',
+    verificationStatus: 'needs_refresh',
     description:
       '정원 산책과 야간 조명을 함께 즐길 수 있는 대형 정원형 테마파크. 계절별 야외 나들이 코스로 묶기 좋다.',
     address: '경기도 고양시 일산동구 탑삭골길 260',
@@ -873,7 +1466,7 @@ export const GYEONGGI_NORTH_PLACES = [
     stayMinutes: 180,
     operatorType: 'commercial',
     editorNote:
-      '공식 이용요금 페이지에 36개월 미만 무료, 유모차 대여, 주차장 안내가 함께 노출된다. 운영시간은 계절과 행사에 따라 변동 가능하다.',
+      '공식 이용요금 페이지에 36개월 미만 무료, 유모차 대여, 주차장 안내가 함께 노출된다. 운영시간은 계절과 행사에 따라 변동 가능하다. 기존 gyeonggi-north-first-garden와 동일 장소라 중복 발행 방지를 위해 재검수 대상으로 둔다.',
   },
   {
     id: 'namyangju-childrens-vision-center',
