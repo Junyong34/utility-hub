@@ -18,6 +18,14 @@ import type { HomeFeaturedPlaceCardItem } from '@/types/home';
 
 type FeatureVisual = 'region' | 'indoor' | 'age' | 'tool' | 'guide';
 
+interface PriorityLink {
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+  tone: ConditionLink['tone'];
+}
+
 interface FeatureCard {
   number: string;
   title: string;
@@ -127,6 +135,51 @@ const TONE_CLASS: Record<ConditionLink['tone'], string> = {
   ink: 'bg-[#f0ede8] text-[#211712]',
 };
 
+const PRIORITY_LINKS: PriorityLink[] = [
+  {
+    label: '혜택',
+    title: '2026 육아 혜택·지원금',
+    description: '부모급여, 아동수당, 보육 지원을 한 번에 확인합니다.',
+    href: '/benefits',
+    tone: 'sky',
+  },
+  {
+    label: '도구',
+    title: '주택 구입 비용 계산기',
+    description: '취득세, 중개보수, 필요 자기자본을 같이 계산합니다.',
+    href: '/tools/home-buying-funds-calculator',
+    tone: 'sand',
+  },
+  {
+    label: '도구',
+    title: 'DSR 계산기',
+    description: '연소득과 보유 대출 기준으로 대출 여력을 점검합니다.',
+    href: '/tools/dsr-calculator',
+    tone: 'mint',
+  },
+  {
+    label: '집중',
+    title: '뽀모도로 타이머',
+    description: '짧은 집중 세션과 작업 단위 관리를 바로 시작합니다.',
+    href: '/tools/pomodoro',
+    tone: 'sun',
+  },
+  {
+    label: '놀이',
+    title: '랜덤 스톱워치 게임',
+    description: '여러 명이 함께 쓰는 초 끝자리 점수 게임입니다.',
+    href: '/tools/last-digit-game',
+    tone: 'peach',
+  },
+  {
+    label: '가이드',
+    title: '부모급여·아동수당 가이드',
+    description: '아이 나이와 양육 방식별 지원 조합을 비교합니다.',
+    href: '/blog/benefits/2026-parenting-benefits-guide',
+    tone: 'ink',
+  },
+];
+
 interface MainHomeScreenProps {
   featuredPlaces: HomeFeaturedPlaceCardItem[];
 }
@@ -147,6 +200,7 @@ export function MainHomeScreen({ featuredPlaces }: MainHomeScreenProps) {
         <FeatureCardGrid />
         <ConditionPanel />
         <PopularPlacesSection places={featuredPlaces} />
+        <PriorityLinksSection />
         <WeekendCta />
       </main>
     </div>
@@ -216,6 +270,7 @@ function FeatureCardItem({ card }: { card: FeatureCard }) {
   return (
     <Link
       href={card.href}
+      rel={card.href.includes('?') ? 'nofollow' : undefined}
       className={cn(
         'group grid min-h-[13.5rem] overflow-hidden rounded-lg border border-beige-deep/55 bg-[linear-gradient(180deg,var(--canvas),var(--cream-soft))] p-4 shadow-[0_12px_34px_-28px_rgba(61,48,39,0.58)] transition hover:-translate-y-0.5 hover:border-primary/45 hover:shadow-[0_18px_44px_-30px_rgba(61,48,39,0.68)] sm:p-5 xl:min-h-[14.5rem] xl:p-6',
         FEATURE_CARD_LAYOUT[card.number]
@@ -559,6 +614,7 @@ function ConditionCard({ condition }: { condition: ConditionLink }) {
   return (
     <Link
       href={condition.href}
+      rel={condition.href.includes('?') ? 'nofollow' : undefined}
       className="group flex min-h-[5.25rem] items-center justify-between gap-4 rounded-lg border border-hairline-soft bg-canvas/92 px-4 shadow-[0_14px_34px_-28px_rgba(61,48,39,0.62)] transition hover:-translate-y-0.5 hover:border-primary/35"
     >
       <div className="flex items-center gap-3">
@@ -581,6 +637,63 @@ function ConditionCard({ condition }: { condition: ConditionLink }) {
       </div>
       <ArrowRightIcon className="size-4 shrink-0 text-foreground transition-transform group-hover:translate-x-0.5" />
     </Link>
+  );
+}
+
+function PriorityLinksSection() {
+  return (
+    <section className="rounded-lg border border-beige-deep/60 bg-canvas px-4 py-6 shadow-[0_18px_54px_-42px_rgba(61,48,39,0.5)] sm:px-6 sm:py-7 lg:px-8">
+      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div className="max-w-3xl">
+          <p className="text-xs font-semibold text-primary">가이드와 도구</p>
+          <h2 className="mt-3 text-[1.85rem] leading-tight font-semibold tracking-normal text-foreground [word-break:keep-all] sm:text-[2.35rem]">
+            자주 쓰는 계산과 확인할 글
+          </h2>
+          <p className="mt-3 max-w-2xl text-[14px] leading-6 text-slate sm:text-[15px]">
+            장소를 고른 뒤 비용, 대출, 지원금, 집중 시간을 바로 이어서
+            점검하세요.
+          </p>
+        </div>
+        <Link
+          href="/tools"
+          className="inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-lg border border-beige-deep/70 bg-cream-soft px-5 text-sm font-semibold text-foreground transition hover:border-primary/45 hover:text-primary"
+        >
+          도구 전체 보기
+          <ArrowRightIcon className="size-4" />
+        </Link>
+      </div>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {PRIORITY_LINKS.map(item => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="group flex min-h-[8.75rem] flex-col justify-between rounded-lg border border-hairline-soft bg-[linear-gradient(180deg,var(--canvas),var(--cream-soft))] p-4 transition hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-[0_18px_40px_-30px_rgba(61,48,39,0.62)]"
+          >
+            <div>
+              <span
+                className={cn(
+                  'inline-flex rounded-full px-3 py-1 text-[11px] font-bold',
+                  TONE_CLASS[item.tone]
+                )}
+              >
+                {item.label}
+              </span>
+              <h3 className="mt-3 text-lg font-semibold leading-tight text-foreground [word-break:keep-all] transition-colors group-hover:text-primary">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-slate [word-break:keep-all]">
+                {item.description}
+              </p>
+            </div>
+            <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+              바로가기
+              <ArrowRightIcon className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
   );
 }
 

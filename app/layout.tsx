@@ -185,8 +185,8 @@ export default function RootLayout({
             </div>
             {/*
               크롤러용 상시 노출 네비게이션 앵커
-              BottomNav(md:hidden), DesktopNav(hidden md:block)가 뷰포트에 따라 숨겨지면
-              크롤러가 해당 링크를 zero-dimensions로 인식하는 문제를 방지.
+              시각적 내비게이션이 뷰포트별로 일부 링크를 숨기더라도
+              크롤러가 주요 링크를 zero-dimensions로 인식하는 문제를 방지.
               sr-only는 display:none 대신 1px 크기로 렌더링되어 크롤러가 정상 인식함.
             */}
             <nav aria-label="사이트 내비게이션 링크" className="sr-only">

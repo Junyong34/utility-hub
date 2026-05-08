@@ -129,6 +129,7 @@ export function ParentingHeroSection({
               <Link
                 key={filter.id}
                 href={filter.href}
+                rel={filter.href.includes('?') ? 'nofollow' : undefined}
                 className={cn(
                   'cursor-pointer rounded-full border px-4 py-2 text-xs font-semibold transition-all duration-200 hover:-translate-y-px hover:border-primary/40 hover:text-foreground active:translate-y-0',
                   getQuickFilterClass(filter)
@@ -228,6 +229,7 @@ export function ParentingHeroSection({
                   <Link
                     key={scenario.id}
                     href={scenario.href}
+                    rel={scenario.href.includes('?') ? 'nofollow' : undefined}
                     className={cn(
                       'group rounded-[18px] border px-3 py-2.5 transition-all duration-200 hover:-translate-y-px',
                       tone.frame

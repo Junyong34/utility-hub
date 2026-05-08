@@ -430,7 +430,7 @@ export function PlacesSelectedFiltersPanel() {
   return (
     <aside
       className={cn(
-        'rounded-[24px] p-4 lg:sticky lg:top-24 lg:self-start',
+        'rounded-[24px] p-4 lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto',
         PLACES_MUTED_SURFACE_CLASS
       )}
     >

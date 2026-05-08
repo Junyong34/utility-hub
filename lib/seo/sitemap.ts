@@ -19,7 +19,10 @@ function getLatestToolDate(): string | undefined {
 
 function getLatestPlaceDate(): string | undefined {
   return pickLatestDate(
-    getPublishablePlaces().flatMap(place => [place.lastObservedAt, place.verifiedAt])
+    getPublishablePlaces().flatMap(place => [
+      place.lastObservedAt,
+      place.verifiedAt,
+    ])
   );
 }
 
@@ -85,7 +88,7 @@ export function collectStaticPageEntries(): SitemapEntry[] {
 export function collectBlogPostEntries(): SitemapEntry[] {
   const posts = getAllPosts();
 
-  return posts.map((post) => ({
+  return posts.map(post => ({
     url: `${SITE_CONFIG.url}/blog/${post.categorySlug}/${post.slug}`,
     lastModified: post.date,
     changeFrequency: 'monthly' as const,
@@ -100,7 +103,7 @@ export function collectBlogCategoryEntries(): SitemapEntry[] {
   const categories = getAllCategories();
   const posts = getAllPosts();
 
-  return categories.map((category) => ({
+  return categories.map(category => ({
     url: `${SITE_CONFIG.url}/blog/${category.slug}`,
     lastModified:
       pickLatestDate(
@@ -128,14 +131,14 @@ export function collectBlogTagEntries(): SitemapEntry[] {
  */
 export function collectToolEntries(): SitemapEntry[] {
   const tools = getAllToolConfigs();
-  const toolPages = tools.map((tool) => ({
+  const toolPages = tools.map(tool => ({
     url: `${SITE_CONFIG.url}/tools/${tool.id}`,
     lastModified: tool.publishedAt ?? new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));
 
-  const hasLottoTool = tools.some((tool) => tool.id === 'lotto');
+  const hasLottoTool = tools.some(tool => tool.id === 'lotto');
   if (!hasLottoTool) {
     return toolPages;
   }
@@ -149,17 +152,14 @@ export function collectToolEntries(): SitemapEntry[] {
     },
   ];
 
-  return [
-    ...toolPages,
-    ...lottoSubPages,
-  ];
+  return [...toolPages, ...lottoSubPages];
 }
 
 /**
- * 장소  페이지 사이트맵 엔트리 생성
+ * 장소 페이지 사이트맵 엔트리 생성
  */
 export function collectPlaceEntries(): SitemapEntry[] {
-  return PHASE_A_REGION_SLUGS.map(slug => {
+  const regionEntries = PHASE_A_REGION_SLUGS.map(slug => {
     const latestRegionDate = pickLatestDate(
       getPublishablePlacesByRegion(slug).flatMap(place => [
         place.lastObservedAt,
@@ -174,6 +174,16 @@ export function collectPlaceEntries(): SitemapEntry[] {
       priority: 0.8,
     };
   });
+
+  const detailEntries = getPublishablePlaces().map(place => ({
+    url: `${SITE_CONFIG.url}/places/${place.region}/${place.id}`,
+    lastModified:
+      pickLatestDate([place.lastObservedAt, place.verifiedAt]) ?? new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.72,
+  }));
+
+  return [...regionEntries, ...detailEntries];
 }
 
 /**
@@ -182,7 +192,7 @@ export function collectPlaceEntries(): SitemapEntry[] {
 export function collectSitemapEntries(): SitemapEntry[] {
   return [
     ...collectStaticPageEntries(),
-    ...collectPlaceEntries(), // Places 지역 
+    ...collectPlaceEntries(), // Places 지역
     ...collectBlogCategoryEntries(), // Blog 카테고리
     ...collectBlogPostEntries(), // Blog 포스트
     ...collectBlogTagEntries(), // Blog 태그(구현 전까지 비활성화)
@@ -209,7 +219,7 @@ export function generateSitemapXml(entries: SitemapEntry[]): string {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${entries
-  .map((entry) => {
+  .map(entry => {
     const lastmod = entry.lastModified
       ? new Date(entry.lastModified).toISOString()
       : new Date().toISOString();
@@ -250,7 +260,7 @@ export function generateImageSitemapXml(): string {
  * XML 특수문자 이스케이프
  */
 function escapeXml(unsafe: string): string {
-  return unsafe.replace(/[<>&'"]/g, (c) => {
+  return unsafe.replace(/[<>&'"]/g, c => {
     switch (c) {
       case '<':
         return '&lt;';
@@ -275,7 +285,7 @@ export function generateSitemapIndexXml(sitemaps: string[]): string {
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${sitemaps
-  .map((sitemap) => {
+  .map(sitemap => {
     return `  <sitemap>
     <loc>${escapeXml(sitemap)}</loc>
     <lastmod>${new Date().toISOString()}</lastmod>

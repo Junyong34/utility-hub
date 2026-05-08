@@ -139,6 +139,7 @@ export function PlacesHub({
                   <Link
                     key={item.href}
                     href={item.href}
+                    rel="nofollow"
                     className={cn(
                       'inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-semibold transition-transform hover:-translate-y-px',
                       item.tone

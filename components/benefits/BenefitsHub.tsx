@@ -23,6 +23,15 @@ const CATEGORY_ICONS: Record<string, ElementType> = {
 
 const GOVERNMENT_BENEFITS_POST_PATH =
   '/blog/benefits/2026-parenting-benefits-guide';
+const BENEFITS_CATEGORY_PATH = '/blog/benefits';
+
+function getBenefitCategoryHref(categoryId: string): string {
+  if (categoryId === 'government') {
+    return GOVERNMENT_BENEFITS_POST_PATH;
+  }
+
+  return BENEFITS_CATEGORY_PATH;
+}
 
 const CATEGORY_STYLES: Record<
   string,
@@ -183,10 +192,7 @@ export function BenefitsHub() {
           {BENEFIT_CATEGORIES.map(category => {
             const Icon = CATEGORY_ICONS[category.icon] ?? BuildingIcon;
             const tone = CATEGORY_STYLES[category.id];
-            const href =
-              category.id === 'government'
-                ? GOVERNMENT_BENEFITS_POST_PATH
-                : `/blog?tag=${category.id}`;
+            const href = getBenefitCategoryHref(category.id);
 
             return (
               <Link

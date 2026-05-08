@@ -12,7 +12,6 @@ tags:
   ]
 category: '주차'
 categorySlug: 'parking'
-ogImage: '/og-images/post/airport-parking.webp'
 homeFeatured:
   hotRank: 2
   badge: 'GUIDE'
@@ -26,6 +25,8 @@ homeFeatured:
 결론적으로, 공항 바로 옆 편의성은 공식 주차장, 총비용 절감은 르웨스트시티/개화역이 유리합니다.
 
 ---
+
+![김포공항 주차요금과 혼잡 시간 안내](/images/blog/gimpo-airport-nearby-parking-guide/01-fee-congestion.webp)
 
 ## 본문
 
@@ -41,6 +42,8 @@ homeFeatured:
 | ---- | -------------- | --------------- | ------------------------------------ |
 | 소형 | 20,000원 (1일) | 30,000원 (1일)  | 기본 30분 1,000원, 이후 15분당 500원 |
 | 대형 | 40,000원 (1일) | 40,000원 (1일)  | 기본 30분 1,200원, 이후 10분당 400원 |
+
+![김포공항 주차장 위치 약도](/images/blog/gimpo-airport-nearby-parking-guide/02-location-map.webp)
 
 참고: 발렛파킹(주차대행) 이용 시 서비스 요금 20,000원이 별도로 추가됩니다.
 
@@ -70,6 +73,8 @@ homeFeatured:
 | 김포공항 이동  | 마곡나루역 → 공항철도 1정거장(약 3분)                          | 개화역(9호선) → 김포공항역 1정거장(약 3분)                           |
 | 주의사항       | 할인권은 반드시 입차 전에 앱에서 구매해야 적용                 | 환승 할인은 대중교통 이용 카드와 동일 카드 결제 조건 확인 필요       |
 
+![김포공항 주차장 대표 장면 시각화](/images/blog/gimpo-airport-nearby-parking-guide/03-representative-view.webp)
+
 ### 상황별 추천
 
 | 상황                  | 추천 주차장                     | 이유                                            |
@@ -84,6 +89,8 @@ homeFeatured:
 - 르웨스트시티 이용 시: 주차 후 마곡나루역으로 이동 → 공항철도 1정거장 → 김포공항역 하차
 - 개화역 환승주차장 이용 시: 주차장 3층 연결 동선으로 개화역 진입 → 9호선 1정거장 → 김포공항역 하차
 - 실전에서는 주차/개찰구 이동 시간을 포함해 공항 도착 여유 시간을 15~20분 추가로 잡는 편이 안전합니다.
+
+![김포공항 주차장 이용 순서 시각화](/images/blog/gimpo-airport-nearby-parking-guide/04-use-flow.webp)
 
 ### 이용 전 체크포인트
 

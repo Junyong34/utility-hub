@@ -22,6 +22,8 @@ homeFeatured:
 공항 주차는 장기 주차와 예약 여부가 중요하고, 역 주차는 당일치기인지 1박 이상인지가 중요합니다.  
 이 글은 이미 발행한 주차 가이드를 한 주제로 묶어, 상황에 맞는 글부터 바로 찾을 수 있게 정리한 허브 페이지입니다.
 
+![주차비 절약 상황별 비교 도식](/images/blog/parking-cost-saving-guide/01-parking-guide-map.webp)
+
 ## 이 허브 글은 어떻게 쓰면 좋을까
 
 주차 관련 글은 각각 도움이 되지만, 사용자는 보통 `내 상황에 맞는 글이 무엇인지`부터 헷갈립니다.  
@@ -58,27 +60,33 @@ homeFeatured:
 - [대구 신세계백화점 주차 무료 3시간 가이드](/blog/parking/daegu-shinsegae-parking)
   신세계 앱 쿠폰, 구매금액, 영화관·식당가 이용 혜택까지 함께 봐야 하는 사람에게 맞는 글입니다.
 
+![공항 역 백화점 주차 대표 장면 시각화](/images/blog/parking-cost-saving-guide/03-representative-view.webp)
+
 ## 한눈에 보는 주차 가이드 맵
 
-| 상황 | 먼저 볼 글 | 핵심 질문 |
-| --- | --- | --- |
-| 인천공항 장기 주차 | [인천공항 장기주차장 vs 예약주차장](/blog/parking/incheon-airport-parking-guide) | 자리 확보가 먼저인가, 할인 적용이 먼저인가 |
-| 김포공항 출발 | [김포공항에서 비행기 타기 전 주차](/blog/parking/gimpo-airport-nearby-parking-guide) | 공식 주차장과 외곽 대안 중 무엇이 유리한가 |
-| KTX 광명역 이용 | [KTX 광명역 주차요금과 일주차 할인](/blog/parking/ktx-gwangmyeong-parking) | A주차장 할인과 역사 접근성 중 무엇이 중요한가 |
-| 동탄역 SRT 이용 | [동탄역 주차장 요금 비교](/blog/parking/dongtan-srt-parking) | 지하 주차 편의와 공영주차장 비용 중 무엇을 우선할까 |
-| 대구 신세계백화점 방문 | [대구 신세계백화점 주차 무료 3시간 가이드](/blog/parking/daegu-shinsegae-parking) | 앱 쿠폰, 구매금액, 영화관 혜택을 어떻게 조합할까 |
+| 상황                   | 먼저 볼 글                                                                           | 핵심 질문                                           |
+| ---------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------- |
+| 인천공항 장기 주차     | [인천공항 장기주차장 vs 예약주차장](/blog/parking/incheon-airport-parking-guide)     | 자리 확보가 먼저인가, 할인 적용이 먼저인가          |
+| 김포공항 출발          | [김포공항에서 비행기 타기 전 주차](/blog/parking/gimpo-airport-nearby-parking-guide) | 공식 주차장과 외곽 대안 중 무엇이 유리한가          |
+| KTX 광명역 이용        | [KTX 광명역 주차요금과 일주차 할인](/blog/parking/ktx-gwangmyeong-parking)           | A주차장 할인과 역사 접근성 중 무엇이 중요한가       |
+| 동탄역 SRT 이용        | [동탄역 주차장 요금 비교](/blog/parking/dongtan-srt-parking)                         | 지하 주차 편의와 공영주차장 비용 중 무엇을 우선할까 |
+| 대구 신세계백화점 방문 | [대구 신세계백화점 주차 무료 3시간 가이드](/blog/parking/daegu-shinsegae-parking)    | 앱 쿠폰, 구매금액, 영화관 혜택을 어떻게 조합할까    |
+
+![주차비 절약 요금과 혼잡 체크 도식](/images/blog/parking-cost-saving-guide/02-fee-congestion.webp)
 
 ## 주차비 절약에서 공통으로 먼저 체크할 것
 
 모든 주차 글에 공통으로 들어가는 질문은 아래 다섯 가지입니다.
 
-1. 당일치기인가, 1박 이상인가  
-2. 할인 대상 차량인가  
-3. 주차 후 실제 이동 시간이 얼마나 드는가  
-4. 만차나 혼잡 리스크가 큰 날인가  
+1. 당일치기인가, 1박 이상인가
+2. 할인 대상 차량인가
+3. 주차 후 실제 이동 시간이 얼마나 드는가
+4. 만차나 혼잡 리스크가 큰 날인가
 5. 현장 결제 전에 미리 등록하거나 예약해야 하는 조건이 있는가
 
 이 다섯 가지를 먼저 보면, 글이 달라도 읽는 순서가 훨씬 쉬워집니다.
+
+![주차비 절약 이용 순서 시각화](/images/blog/parking-cost-saving-guide/04-use-flow.webp)
 
 ## 관련 링크
 

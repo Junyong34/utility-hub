@@ -174,8 +174,10 @@ export function PlacesFilteredGrid({
         matchedTotalCount={matchedTotalCount}
       />
 
-      <div className="grid min-w-0 gap-5 lg:grid-cols-[17rem_minmax(0,1fr)]">
-        <PlacesSelectedFiltersPanel />
+      <div className="grid min-w-0 gap-5 lg:grid-cols-[17rem_minmax(0,1fr)] lg:items-start">
+        <div className="min-w-0 lg:sticky lg:top-28 lg:self-start">
+          <PlacesSelectedFiltersPanel />
+        </div>
 
         <section
           className={cn(

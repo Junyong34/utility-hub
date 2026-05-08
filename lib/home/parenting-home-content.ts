@@ -117,6 +117,9 @@ const BENEFIT_TONE_BY_ID: Record<string, HomeAccentTone> = {
   regional: 'olive',
   savings: 'brick',
 };
+const GOVERNMENT_BENEFITS_POST_PATH =
+  '/blog/benefits/2026-parenting-benefits-guide';
+const BENEFITS_CATEGORY_PATH = '/blog/benefits';
 
 const CATEGORY_LABELS: Record<PlaceCategory, string> = {
   'baby-kids-cafe': '베이비키즈카페',
@@ -294,7 +297,10 @@ function buildBenefitLinks(): HomeLinkCardItem[] {
     eyebrow: '혜택·지원금',
     title: category.name,
     description: category.description,
-    href: `/blog?tag=${category.id}`,
+    href:
+      category.id === 'government'
+        ? GOVERNMENT_BENEFITS_POST_PATH
+        : BENEFITS_CATEGORY_PATH,
     ctaLabel: '관련 글 보기',
     tone: BENEFIT_TONE_BY_ID[category.id] ?? 'sand',
     meta: '공식 출처 기준',

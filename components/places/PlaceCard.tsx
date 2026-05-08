@@ -36,6 +36,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
 
   const visualStyles = TONE_STYLES[CATEGORY_TONE_BY_CATEGORY[place.category]];
   const naverMapUrl = getPlaceNaverMapUrl(place);
+  const detailHref = `/places/${place.region}/${place.id}`;
   const placeAddress = place.address ?? place.subRegion;
   const primaryCondition = getPrimaryConditionLabel(place);
   const seasonSummary = getSeasonSummary(place);
@@ -43,8 +44,16 @@ export function PlaceCard({ place }: PlaceCardProps) {
   return (
     <Card
       data-testid="place-card"
-      className="group h-full gap-0 overflow-hidden rounded-[22px] border-hairline-soft bg-canvas py-0 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-mockup"
+      className="group relative h-full gap-0 overflow-hidden rounded-[22px] border-hairline-soft bg-canvas py-0 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:shadow-mockup"
     >
+      <Link
+        href={detailHref}
+        aria-label={`${place.name} 상세 페이지 보기`}
+        className="absolute inset-0 z-10 rounded-[22px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2"
+      >
+        <span className="sr-only">{place.name} 상세 페이지 보기</span>
+      </Link>
+
       {place.thumbnailImage ? (
         <div className="relative aspect-[16/10] overflow-hidden bg-cream-soft">
           <Image
@@ -164,7 +173,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${place.name} 네이버지도`}
-                className="inline-flex size-6 items-center justify-center rounded-[8px] bg-canvas/80 shadow-subtle ring-1 ring-ink/6 transition-all duration-200 hover:-translate-y-px hover:bg-canvas hover:shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35"
+                className="relative z-20 inline-flex size-6 items-center justify-center rounded-[8px] bg-canvas/80 shadow-subtle ring-1 ring-ink/6 transition-all duration-200 hover:-translate-y-px hover:bg-canvas hover:shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35"
               >
                 <span
                   aria-hidden="true"
@@ -177,10 +186,12 @@ export function PlaceCard({ place }: PlaceCardProps) {
               </Link>
             ) : null}
             {place.address ? (
-              <PlaceAddressCopyButton
-                address={place.address}
-                placeName={place.name}
-              />
+              <span className="relative z-20 inline-flex">
+                <PlaceAddressCopyButton
+                  address={place.address}
+                  placeName={place.name}
+                />
+              </span>
             ) : null}
           </div>
 
@@ -204,6 +215,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
         <PlaceBlogReviewSection
           reviews={place.blogReviewHighlights}
           externalLinks={place.externalBlogLinks}
+          className="relative z-20"
         />
 
         {place.sourceUrl ? (
@@ -211,7 +223,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
             href={place.sourceUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-[14px] bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35"
+            className="relative z-20 inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-[14px] bg-primary px-4 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35"
           >
             <span>공식 정보 보기</span>
             <ExternalLinkIcon className="h-3.5 w-3.5" />
