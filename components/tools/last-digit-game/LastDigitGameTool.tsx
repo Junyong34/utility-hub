@@ -552,30 +552,25 @@ export function LastDigitGameTool() {
   const isResetDisabled = gameState.isRunning;
   const isSetupDisabled = gameState.isRunning;
   const previousRanksRef = useRef<Map<number, number>>(new Map());
-
-  const rankMovementMap = useMemo(() => {
-    const map = new Map<number, number>();
-    const hasHistory = previousRanksRef.current.size > 0;
-
-    if (!hasHistory) {
-      return map;
-    }
-
-    rankedUsers.forEach((user, index) => {
-      const previousRank = previousRanksRef.current.get(user.id);
-      if (previousRank === undefined) {
-        return;
-      }
-
-      map.set(user.id, previousRank - (index + 1));
-    });
-
-    return map;
-  }, [rankedUsers]);
+  const [rankMovementMap, setRankMovementMap] = useState<Map<number, number>>(
+    new Map()
+  );
 
   useLayoutEffect(() => {
     const previous = new Map(previousRankingPositions.current);
     const nextPositions = new Map<number, number>();
+    const nextRankMovementMap = new Map<number, number>();
+
+    if (previousRanksRef.current.size > 0) {
+      rankedUsers.forEach((user, index) => {
+        const previousRank = previousRanksRef.current.get(user.id);
+        if (previousRank === undefined) {
+          return;
+        }
+
+        nextRankMovementMap.set(user.id, previousRank - (index + 1));
+      });
+    }
 
     rankedUsers.forEach(user => {
       const element = rankingRefs.current.get(user.id);
@@ -618,6 +613,8 @@ export function LastDigitGameTool() {
     previousRanksRef.current = new Map(
       rankedUsers.map((user, index) => [user.id, index + 1])
     );
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- movement badges depend on previous layout measurements.
+    setRankMovementMap(nextRankMovementMap);
   }, [rankedUsers]);
 
   return (
@@ -815,7 +812,7 @@ export function LastDigitGameTool() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
-            {rankedUsers.map((user, index) => {
+            {rankedUsers.map(user => {
               const rankLabel = getPlacementLabel(
                 user.rank,
                 rankedUsers.length

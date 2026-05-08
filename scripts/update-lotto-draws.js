@@ -199,7 +199,7 @@ async function detectLatestRound() {
       await fetchLottoData(round);
       console.log(`✓ Latest round detected: ${round}`);
       return round;
-    } catch (error) {
+    } catch {
       continue;
     }
   }

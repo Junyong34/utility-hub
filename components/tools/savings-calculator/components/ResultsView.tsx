@@ -27,7 +27,6 @@ interface ResultsViewProps {
 
 export function ResultsView({
   result,
-  title,
   type,
   amount,
   monthly,

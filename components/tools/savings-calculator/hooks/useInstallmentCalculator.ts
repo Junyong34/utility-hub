@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { useQueryStates } from 'nuqs';
 import {
   calculateInstallment,
@@ -12,14 +12,13 @@ import {
 import { INSTALLMENT_QUERY_PARSERS } from './parsers';
 
 export function useInstallmentCalculator() {
-  const [queryState, setQueryState] = useQueryStates(INSTALLMENT_QUERY_PARSERS, {
-    shallow: true,
-    history: 'push',
-  });
-
-  const [showResults, setShowResults] = useState(false);
-  const [hasCalculated, setHasCalculated] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [queryState, setQueryState] = useQueryStates(
+    INSTALLMENT_QUERY_PARSERS,
+    {
+      shallow: true,
+      history: 'push',
+    }
+  );
 
   const monthly = (queryState.monthly ?? 0).toString();
   const monthlyDisplay = useMemo(
@@ -60,7 +59,19 @@ export function useInstallmentCalculator() {
       true,
       customTaxRateValue
     );
-  }, [canCalculate, monthlyValue, rateValue, periodValue, periodMode, interestType, taxType, customTaxRateValue]);
+  }, [
+    canCalculate,
+    monthlyValue,
+    rateValue,
+    periodValue,
+    periodMode,
+    interestType,
+    taxType,
+    customTaxRateValue,
+  ]);
+
+  const [showResults, setShowResults] = useState(false);
+  const [hasCalculated, setHasCalculated] = useState(() => Boolean(result));
 
   const handlePeriodModeChange = (newMode: 'year' | 'month') => {
     if (newMode === periodMode) return;
@@ -133,15 +144,6 @@ export function useInstallmentCalculator() {
     }
   };
 
-  useEffect(() => {
-    if (!isInitialized) {
-      setIsInitialized(true);
-      if (canCalculate && result) {
-        setHasCalculated(true);
-      }
-    }
-  }, [canCalculate, result, isInitialized]);
-
   return {
     monthly,
     monthlyDisplay,
@@ -157,9 +159,11 @@ export function useInstallmentCalculator() {
     result,
     setRate: (value: string) => setQueryState({ rate: Number(value) || 0 }),
     setPeriod: (value: string) => setQueryState({ period: Number(value) || 0 }),
-    setInterestType: (value: InterestType) => setQueryState({ interestType: value }),
+    setInterestType: (value: InterestType) =>
+      setQueryState({ interestType: value }),
     setTaxType: (value: TaxType) => setQueryState({ taxType: value }),
-    setCustomTaxRate: (value: string) => setQueryState({ customTaxRate: Number(value) || 0 }),
+    setCustomTaxRate: (value: string) =>
+      setQueryState({ customTaxRate: Number(value) || 0 }),
     setShowResults,
     handlePeriodModeChange,
     handleReset,

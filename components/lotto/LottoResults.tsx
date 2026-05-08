@@ -25,22 +25,24 @@ export const LottoResults = memo(function LottoResults({
   const copyFeedbackTimersRef = useRef<Record<string, number>>({});
 
   useEffect(() => {
+    const timers = copyFeedbackTimersRef.current;
+
     return () => {
-      Object.values(copyFeedbackTimersRef.current).forEach((timer) => {
+      Object.values(timers).forEach(timer => {
         clearTimeout(timer);
       });
     };
   }, []);
 
   const setFeedbackVisible = (key: string) => {
-    setCopyFeedback((prev) => ({ ...prev, [key]: true }));
+    setCopyFeedback(prev => ({ ...prev, [key]: true }));
 
     if (copyFeedbackTimersRef.current[key]) {
       clearTimeout(copyFeedbackTimersRef.current[key]);
     }
 
     copyFeedbackTimersRef.current[key] = window.setTimeout(() => {
-      setCopyFeedback((prev) => ({ ...prev, [key]: false }));
+      setCopyFeedback(prev => ({ ...prev, [key]: false }));
       delete copyFeedbackTimersRef.current[key];
     }, 1200);
   };

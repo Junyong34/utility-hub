@@ -1,9 +1,9 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const nextConfig: NextConfig = {
+  turbopack: {},
   experimental: {
-    turbopackUseSystemTlsCerts: true,
     // Optimize package imports for better tree shaking
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
   },
@@ -76,7 +76,7 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
 
   // 파워풀한 빌드 분석 (프로덕션 빌드 시 번들 크기 분석)
-  // ANALYZE=true pnpm build 로 실행 시 활성화
+  // ANALYZE=true pnpm build -- --webpack 로 실행 시 활성화
   webpack: (config, { isServer }) => {
     if (process.env.ANALYZE === 'true') {
       config.plugins.push(

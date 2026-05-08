@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { useQueryStates } from 'nuqs';
 import {
   calculateLoan,
@@ -8,7 +8,6 @@ import {
   formatNumberWithCommas,
   parseFormattedNumber,
 } from '@/lib/tools/formatting';
-import { getNumberInput } from '../utils';
 import { LOAN_QUERY_PARSERS } from './parsers';
 
 export function useLoanCalculator() {
@@ -17,11 +16,6 @@ export function useLoanCalculator() {
     shallow: true,
     history: 'push',
   });
-
-  // 로컬 UI 상태 (URL에 저장하지 않음)
-  const [showResults, setShowResults] = useState(false);
-  const [hasCalculated, setHasCalculated] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   // URL 상태에서 파생된 값
   const principal = (queryState.principal ?? 0).toString();
@@ -66,6 +60,10 @@ export function useLoanCalculator() {
 
     return calculateLoan(principalValue, rateValue, months, method, true);
   }, [canCalculate, principalValue, rateValue, termNumValue, termMode, method]);
+
+  // 로컬 UI 상태 (URL에 저장하지 않음)
+  const [showResults, setShowResults] = useState(false);
+  const [hasCalculated, setHasCalculated] = useState(() => Boolean(result));
 
   const handleTermModeChange = (newMode: 'year' | 'month') => {
     if (newMode === termMode) return;
@@ -137,19 +135,6 @@ export function useLoanCalculator() {
       setQueryState({ term: newValue });
     }
   };
-
-  // URL에서 값이 로드되었을 때 자동으로 계산 실행
-  useEffect(() => {
-    // 첫 렌더링 시에만 실행
-    if (!isInitialized) {
-      setIsInitialized(true);
-
-      // URL에 유효한 계산 파라미터가 있으면 자동으로 계산
-      if (canCalculate && result) {
-        setHasCalculated(true);
-      }
-    }
-  }, [canCalculate, result, isInitialized]);
 
   return {
     // State
