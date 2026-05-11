@@ -32,6 +32,7 @@ export const INCHEON_PLACES = [
     rainFriendly: true,
     stayMinutes: 180,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/incheon-oktokki-space-center.webp',
   },
   {
     id: 'incheon-naughty-child-cheongna',
@@ -59,6 +60,7 @@ export const INCHEON_PLACES = [
     rainFriendly: true,
     stayMinutes: 150,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/incheon-naughty-child-cheongna.webp',
   },
   {
     id: 'incheon-champion-black-belt-homeplus-songdo',
@@ -88,6 +90,8 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '홈플러스 공식 점포 페이지와 전국 플레이타임 직영점 매장 위치 안내 PDF에서 지점 신호를 확인했다.',
+    thumbnailImage:
+      '/images/places/incheon-champion-black-belt-homeplus-songdo.webp',
   },
   {
     id: 'incheon-baby-angels-homeplus-songdo',
@@ -117,6 +121,7 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '홈플러스 공식 점포 페이지에서 임대매장명을 확인했다. 수영·놀이 세부 운영 방식은 방문 전 재확인 필요.',
+    thumbnailImage: '/images/places/incheon-baby-angels-homeplus-songdo.webp',
   },
   {
     id: 'incheon-champion-1250-guwol-traders',
@@ -146,6 +151,7 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '전국 플레이타임 직영점 매장 위치 안내 PDF와 오픈 보도자료를 함께 확인했다. 세부 요금과 휴무는 방문 전 재확인 필요.',
+    thumbnailImage: '/images/places/incheon-champion-1250-guwol-traders.webp',
   },
   {
     id: 'incheon-monster-park-guwol',
@@ -174,6 +180,7 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '홈플러스 공식 점포 페이지에서 임대매장명을 확인했다. 세부 요금과 휴무는 방문 전 재확인 필요.',
+    thumbnailImage: '/images/places/incheon-monster-park-guwol.webp',
   },
   {
     id: 'incheon-dinosaur-world',
@@ -203,6 +210,7 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       'NOL 인터파크 판매 페이지로 운영 신호를 확인했다. 상세 주소, 주차, 공연 회차는 발행 전 재확인 필요.',
+    thumbnailImage: '/images/places/incheon-dinosaur-world.webp',
   },
   {
     id: 'incheon-zoorarium-cheongna',
@@ -231,6 +239,7 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '공식 청라점 페이지를 기준으로 넣었다. 동물 체험 운영, 요금, 휴무는 방문 전 공식 안내를 재확인해야 한다.',
+    thumbnailImage: '/images/places/incheon-zoorarium-cheongna.webp',
   },
   {
     id: 'incheon-aisarang-dream-center-jung-gu-1',
@@ -259,6 +268,8 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '공식 포털에 운서동 지점명과 전화가 노출된다. 회차와 프로그램 대상은 방문 전 다시 확인하는 편이 안전하다.',
+    thumbnailImage:
+      '/images/places/incheon-aisarang-dream-center-jung-gu-1.webp',
   },
   {
     id: 'incheon-aisarang-dream-center-dong-gu-1',
@@ -287,6 +298,8 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '주민행복센터 연계형 지점이다. 세부 운영 시간보다는 프로그램 공지 중심으로 확인하는 편이 좋다.',
+    thumbnailImage:
+      '/images/places/incheon-aisarang-dream-center-dong-gu-1.webp',
   },
   {
     id: 'incheon-aisarang-dream-center-michuhol-gu-1',
@@ -316,6 +329,8 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '도화권 공동주택 상가형 지점이다. 외부 방문자 주차 여부는 이번 차수에서 확인하지 못했다.',
+    thumbnailImage:
+      '/images/places/incheon-aisarang-dream-center-michuhol-gu-1.webp',
   },
   {
     id: 'incheon-aisarang-dream-center-yeonsu-gu-2',
@@ -344,6 +359,8 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '송도 공동주택형 지점이다. 프로그램별 연령 기준이 달라 신청 전 대상 확인이 필요하다.',
+    thumbnailImage:
+      '/images/places/incheon-aisarang-dream-center-yeonsu-gu-2.webp',
   },
   {
     id: 'incheon-aisarang-dream-center-namdong-gu-4',
@@ -373,6 +390,8 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '공동주택 단지형 지점이라 외부 주차 가능 여부보다 프로그램 접근성을 우선 확인하는 편이 좋다.',
+    thumbnailImage:
+      '/images/places/incheon-aisarang-dream-center-namdong-gu-4.webp',
   },
   {
     id: 'incheon-aisarang-dream-center-gyeyang-gu-4',
@@ -401,6 +420,8 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '생활문화센터형 지점이다. 층수 이동이 있어 유모차 동선은 현장 여건을 다시 보는 편이 안전하다.',
+    thumbnailImage:
+      '/images/places/incheon-aisarang-dream-center-gyeyang-gu-4.webp',
   },
   {
     id: 'incheon-aisarang-dream-center-seo-gu-1',
@@ -429,6 +450,8 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '루원시티 공동주택형 지점이다. 공식 포털에는 신현동 표기가 함께 노출된다.',
+    thumbnailImage:
+      '/images/places/incheon-aisarang-dream-center-seo-gu-1.webp',
   },
   {
     id: 'incheon-aisarang-dream-center-seo-gu-4',
@@ -457,6 +480,8 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '청라 공동주택형 지점이다. 프로그램 운영일과 신청 방식은 공식 공지를 다시 확인해야 한다.',
+    thumbnailImage:
+      '/images/places/incheon-aisarang-dream-center-seo-gu-4.webp',
   },
   {
     id: 'incheon-children-science-museum',
@@ -488,6 +513,7 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '공식 사이트에 예약, 편의시설, 주차장안내 메뉴가 함께 노출된다. 상설전시관은 회차별 사전예약제로 운영된다.',
+    thumbnailImage: '/images/places/incheon-children-science-museum.webp',
   },
   {
     id: 'incheon-student-science-museum',
@@ -518,6 +544,7 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '개별 관람은 현장 접수, 단체 관람은 사전 예약 승인 후 이용한다. 천체투영실은 6세 이상 중심이다.',
+    thumbnailImage: '/images/places/incheon-student-science-museum.webp',
   },
   {
     id: 'oktokki-space-center',
@@ -577,6 +604,7 @@ export const INCHEON_PLACES = [
     stayMinutes: 90,
     operatorType: 'public',
     editorNote: '강화권 공공 박물관 동선으로 자연사박물관과 함께 묶기 좋다.',
+    thumbnailImage: '/images/places/ganghwa-history-museum.webp',
   },
   {
     id: 'ganghwa-natural-history-museum',
@@ -605,6 +633,7 @@ export const INCHEON_PLACES = [
     stayMinutes: 90,
     operatorType: 'public',
     editorNote: '역사박물관과 가까워 강화권 실내 코스로 연계하기 쉽다.',
+    thumbnailImage: '/images/places/ganghwa-natural-history-museum.webp',
   },
   {
     id: 'gyeyang-fortress-museum',
@@ -634,6 +663,7 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '전시 관람 뒤 계양산성 주변 산책 코스와 함께 묶는 동선이 자연스럽다.',
+    thumbnailImage: '/images/places/gyeyang-fortress-museum.webp',
   },
   {
     id: 'national-institute-of-biological-resources',
@@ -663,6 +693,8 @@ export const INCHEON_PLACES = [
     stayMinutes: 120,
     operatorType: 'public',
     editorNote: '전시 규모가 커서 초등 저학년까지 폭넓게 묶기 좋다.',
+    thumbnailImage:
+      '/images/places/national-institute-of-biological-resources.webp',
   },
   {
     id: 'incheon-safety-experience-center',
@@ -691,6 +723,7 @@ export const INCHEON_PLACES = [
     stayMinutes: 120,
     operatorType: 'public',
     editorNote: '예약제 운영이라 회차를 먼저 잡고 움직이는 편이 안전하다.',
+    thumbnailImage: '/images/places/incheon-safety-experience-center.webp',
   },
   {
     id: 'national-museum-of-world-writing',
@@ -720,6 +753,7 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '상설 전시 중심으로 가볍게 보기 좋고, 송도권 다른 실내 시설과 연계하기 쉽다.',
+    thumbnailImage: '/images/places/national-museum-of-world-writing.webp',
   },
   {
     id: 'incheon-metropolitan-city-museum',
@@ -747,6 +781,7 @@ export const INCHEON_PLACES = [
     stayMinutes: 90,
     operatorType: 'public',
     editorNote: '연수구 문화벨트 박물관 동선의 중심으로 묶기 좋다.',
+    thumbnailImage: '/images/places/incheon-metropolitan-city-museum.webp',
   },
   {
     id: 'incheon-urban-history-museum',
@@ -775,6 +810,7 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '송도권 실내 문화시설을 묶는 코스에서 박물관 입문용으로 쓰기 좋다.',
+    thumbnailImage: '/images/places/incheon-urban-history-museum.webp',
   },
   {
     id: 'national-incheon-marine-museum',
@@ -805,6 +841,7 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '예약제 안내가 있는 시기가 있어 방문 전 관람 방식과 회차를 확인하는 편이 안전하다.',
+    thumbnailImage: '/images/places/national-incheon-marine-museum.webp',
   },
   {
     id: 'geomdan-prehistory-museum',
@@ -833,6 +870,7 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '상설 전시 외에도 어린이 특별체험전과 가족교육 공지가 자주 올라온다.',
+    thumbnailImage: '/images/places/geomdan-prehistory-museum.webp',
   },
   {
     id: 'incheon-butterfly-park',
@@ -863,7 +901,7 @@ export const INCHEON_PLACES = [
     editorNote:
       '나비 관찰과 야외 생태 동선은 계절 영향을 받으므로 봄·가을 추천 태그를 함께 둔다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/incheon-butterfly-park.webp',
   },
   {
     id: 'incheon-grand-park-wood-culture-center',
@@ -894,7 +932,8 @@ export const INCHEON_PLACES = [
     editorNote:
       '체험 프로그램은 예약·재료비 조건이 달라 방문 전 인천대공원 공지 확인이 필요하다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage:
+      '/images/places/incheon-grand-park-wood-culture-center.webp',
   },
   {
     id: 'sudoguksan-museum-childrens-exhibition',
@@ -925,7 +964,8 @@ export const INCHEON_PLACES = [
     editorNote:
       '어린이 체험실 또는 교육 프로그램은 회차·예약 여부가 바뀔 수 있어 박물관 공지를 확인해야 한다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage:
+      '/images/places/sudoguksan-museum-childrens-exhibition.webp',
   },
   {
     id: 'incheon-childrens-museum',
@@ -956,6 +996,6 @@ export const INCHEON_PLACES = [
     editorNote:
       '민간 시설이라 운영시간·휴관·가격 재확인이 필요하다. 맘맘 발견 후 지자체 문화관광 정보를 보조 출처로 확인했다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/incheon-childrens-museum.webp',
   },
 ] satisfies PlaceSource[];
