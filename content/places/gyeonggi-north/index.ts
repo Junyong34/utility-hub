@@ -27,6 +27,7 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 60,
     operatorType: 'public',
+    thumbnailImage: '/images/places/gyeonggi-north-ilovemom-tanhyeon.webp',
   },
   {
     id: 'gyeonggi-north-uijeongbu-ilovemom-cafe',
@@ -95,6 +96,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MzFfMjg1%2FMDAxNzUzOTE4ODQ3NTQx.5D36XrKPQAGCEgs6SeMsxw6ENA690dD3iYQZR42KBeog.3H6gjcmQ_mqyVFLCL3uzlYlOHTToSPHMmtnKraM7Rasg.PNG%2F%25C8%25F2%25BB%25F6%25B0%25FA_%25B0%25CB%25C1%25A4%25BB%25F6_%25B1%25F2%25B2%25FB%25C7%25D1_%25BB%25E7%25C1%25F8%25B9%25E8%25B0%25E6_SNS_%25BA%25ED%25B7%25CE%25B1%25D7_%25C4%25AB%25B5%25E5%25B4%25BA%25BD%25BA_%25C5%25B8%25C0%25CC%25C6%25B2_%25C6%25F7%25BD%25BA%25C6%25AE_%25BD%25E6%25B3%25D7%25C0%25CF_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25B0%25D4%25BD%25C3%25B9%25B0.png%23900x900&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-north-uijeongbu-ilovemom-cafe.webp',
   },
   {
     id: 'gyeonggi-north-toy-library-okjeong',
@@ -121,6 +123,7 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 30,
     operatorType: 'public',
+    thumbnailImage: '/images/places/gyeonggi-north-toy-library-okjeong.webp',
   },
   {
     id: 'gyeonggi-north-first-garden',
@@ -189,6 +192,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjVfMTkx%2FMDAxNzc0NDUwNzk4NDIw.Z21ALfeE4-2ELo8tZeur48OnCZJLCZZwer_jBoteD0Ig.snI9dTDnrNke5g-BIjyTpwZh6MEHpqyCM2-rrpEUtTMg.PNG%2F%25B4%25D9%25C5%25A9%25BA%25ED%25B7%25E7_%25C8%25AD%25C0%25CC%25C6%25AE_%25BD%25C9%25C7%25C3%25C7%25D1_%25C7%25D1%25B1%25B9_%25BF%25A9%25C7%25E0_%25C1%25A4%25BA%25B8_%25B0%25E6%25BA%25B9%25B1%25C3_%25BE%25C8%25B3%25BB_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25C6%25F7%25BD%25BA%25C6%25AE.png%23900x900&type=f250_208',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-north-first-garden.webp',
   },
   {
     id: 'gyeonggi-north-hyundai-motorstudio-goyang',
@@ -257,6 +261,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjdfMTgy%2FMDAxNzc0NTc2MTE3Nzgz.jp-t2v3aIj2-A5eoB_TChul05VoOGGXehQZpCh09j5kg.zRS0_V6uTIg-x896a2mIu_SqOKC9PxLpWkCaT_rjaPUg.PNG%2F900%25A3%25DF%25BA%25A3%25C0%25CC%25C1%25F6%25BB%25F6_%25BD%25C9%25C7%25C3%25C7%25D1_%25C0%25B0%25BE%25C6_%25B0%25D4%25BD%25C3%25B9%25B0_%25BB%25E7%25C1%25F8_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25C6%25F7%25BD%25BA%25C6%25AE%25A3%25DF20260327%25A3%25DF104823%25A3%25DF0000.png%23900x900&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-north-hyundai-motorstudio-goyang.webp',
   },
   {
     id: 'gyeonggi-north-toykingdom-play-goyang',
@@ -285,6 +290,7 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 120,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/gyeonggi-north-toykingdom-play-goyang.webp',
   },
   {
     id: 'gyeonggi-north-bricklive-goyang',
@@ -312,6 +318,7 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 90,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/gyeonggi-north-bricklive-goyang.webp',
   },
   {
     id: 'gyeonggi-north-ikea-goyang-smaland',
@@ -339,6 +346,7 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 60,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/gyeonggi-north-ikea-goyang-smaland.webp',
   },
   {
     id: 'gyeonggi-north-jamjam-kidsroom-hwajeong',
@@ -408,6 +416,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MDJfMjAw%2FMDAxNzc1MTI5MDk1Nzkz.UGYIgq4T6azOmt6mvEdsRvEObp2tCzvr0E15UIF-kJkg.xSrb1bXFhFYVL1SuG6XZJkTYTm1h3oYwJOzU6txtEaYg.JPEG%2F%25A4%25A1%25A4%25B8%25A4%25A7%25A4%25A1%25A4%25B8%25A4%25A1%25A4%25B8.jpg%23900x900&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-north-jamjam-kidsroom-hwajeong.webp',
   },
   {
     id: 'gyeonggi-north-webounce-yangju',
@@ -435,6 +444,7 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 120,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/gyeonggi-north-webounce-yangju.webp',
   },
   {
     id: 'gyeonggi-north-kikikidspool',
@@ -462,6 +472,7 @@ export const GYEONGGI_NORTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 120,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/gyeonggi-north-kikikidspool.webp',
   },
   {
     id: 'gyeonggi-north-in-the-pool',
@@ -490,6 +501,7 @@ export const GYEONGGI_NORTH_PLACES = [
     stayMinutes: 120,
     operatorType: 'commercial',
     editorNote: '상세 도로명주소는 발행 전 재확인이 필요하다.',
+    thumbnailImage: '/images/places/gyeonggi-north-in-the-pool.webp',
   },
   {
     id: 'gyeonggi-north-sangsang-kidsroom-paju',
@@ -518,6 +530,7 @@ export const GYEONGGI_NORTH_PLACES = [
     stayMinutes: 120,
     operatorType: 'commercial',
     editorNote: '상세 주소와 예약 링크는 발행 전 재확인이 필요하다.',
+    thumbnailImage: '/images/places/gyeonggi-north-sangsang-kidsroom-paju.webp',
   },
   {
     id: 'gyeonggi-north-jackson-nines-ilsan',
@@ -587,6 +600,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MTVfMTIw%2FMDAxNzU3ODk5Njk5NTk5.Dxa10fkAwQjbhxmiJVRD9tG6ZnjhWWUqhFTZpFKdei8g.rCc7pkw_Yu8ny9RhbNBIbUV9KlyYVfg9HYh0DjfAp0gg.JPEG%2F1757855214425.jpg%231080x1080&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-north-jackson-nines-ilsan.webp',
   },
   {
     id: 'gyeonggi-north-pororo-park-ilsan-kintex',
@@ -658,6 +672,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMTlfMTU4%2FMDAxNzcxNDc0MTg4MDM4.0n-SvRaGIzSaR9JVcYagsthHSda75w5_MWV4-vqdP7sg.uJm3sD2BOX8kD4HXTerHPb6kTxfo5jJWI85g5_IUnekg.PNG%2F%25B1%25D7%25B8%25B25.png%231856x2145&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-north-pororo-park-ilsan-kintex.webp',
   },
   {
     id: 'gyeonggi-north-champion-black-belt-homeplus-uijeongbu',
@@ -732,6 +747,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MDVfMjU2%2FMDAxNzUxNzIxODQ5ODU3.sTZkiWsQq_utBYwoqGGUnwpVJl7zr_6huiEVdoBbK_Qg.HbwsT1PhMpyrFBg01hKErXgP0XbdQFO6hbGxmvwGchMg.JPEG%2FKakaoTalk_20250705_221435569_12.jpg%231206x1698&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-north-champion-black-belt-homeplus-uijeongbu.webp',
   },
   {
     id: 'gyeonggi-north-champion-black-belt-traders-gimpo',
@@ -762,6 +778,7 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '김포는 기존 README 예시에 명시되지 않았지만 경기 서북권 생활권으로 경기북부에 배치했다. 권역 정책이 바뀌면 이동 가능하다.',
+    thumbnailImage: '/images/places/gyeonggi-north-champion-black-belt-traders-gimpo.webp',
   },
   {
     id: 'jeongok-prehistory-museum',
@@ -1041,6 +1058,7 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '네이버 지도는 센터 대표 장소를 연결했다. 상세 층수와 회차 운영은 방문 전 공식 안내를 다시 확인하는 편이 안전하다.',
+    thumbnailImage: '/images/places/goyang-ilovemom-cafe-hwajeong.webp',
   },
   {
     id: 'guri-ilovemom-cafe-inchang',
@@ -1108,6 +1126,7 @@ export const GYEONGGI_NORTH_PLACES = [
         ogImage: 'https://ssl.pstatic.net/static/blog/icon/og_270x270.png',
       },
     ],
+    thumbnailImage: '/images/places/guri-ilovemom-cafe-inchang.webp',
   },
   {
     id: 'guri-isarang-playground-galmae',
@@ -1136,6 +1155,7 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '공식 안내와 네이버 지도 모두 갈매아이사랑놀이터 표기를 사용한다.',
+    thumbnailImage: '/images/places/guri-isarang-playground-galmae.webp',
   },
   {
     id: 'paju-ilovemom-cafe',
@@ -1207,6 +1227,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA4MDlfMTk4%2FMDAxNzU0NzQxMjA5OTg2.b0xDiFz7FuhT5clHSopWHgzla_2FFRRUrNw5cIJ8_5Ug.T5dWdHJAMAVslYAXPIvi52hidjAnqavGRvaNChRSiH8g.PNG%2F%25BA%25A3%25C0%25CC%25C1%25F6%25BB%25F6_%25B1%25CD%25BF%25A9%25BF%25EE_ui_%25B0%25D4%25BD%25C3%25B9%25B0_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25C6%25F7%25BD%25BA%25C6%25AE%25A3%25DF20250809%25A3%25DF205720%25A3%25DF0000.png%231080x1080&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/paju-ilovemom-cafe.webp',
   },
   {
     id: 'gyeonggi-northern-childrens-museum',
@@ -1282,6 +1303,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMDZfMjI1%2FMDAxNzU5NzYwNTMyNzc4.4D39hg1Nd_hJeR3C4VzOB6S3PPOPF0pGiCtbSiq5nQYg.8VnUzrgKGngNLOL1N_LaILMDFTGp76RwOpryMQbqkJ8g.JPEG%2F900%25A3%25DF20251004%25A3%25DF104908.jpg%23900x1599&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-northern-childrens-museum.webp',
   },
   {
     id: 'goyang-children-museum',
@@ -1354,6 +1376,7 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMTFfMTg5%2FMDAxNzYwMTU4MDA0NDQ0.ZnS7JV1j06XNPUAlM9hBRrBrinrUJ0Mrc_s4bmUkaaIg.5QiNZWP3NAawV_GPF1iMI9IgMpMUM0Y2NW6enF3ZvNkg.JPEG%2FIMG%25A3%25DF2695.JPG%23900x900&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/goyang-children-museum.webp',
   },
   {
     id: 'uijeongbu-public-playground-2',
@@ -1382,6 +1405,7 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '공식 이용안내에 이용대상과 회원 기준이 노출된다. 세부 요금과 회차는 방문 전 다시 확인하는 편이 안전하다.',
+    thumbnailImage: '/images/places/uijeongbu-public-playground-2.webp',
   },
   {
     id: 'uijeongbu-public-playground-3',
@@ -1410,6 +1434,7 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '센터 공식 오시는 길 페이지에서 지점 주소를 확인했다. 세부 이용 기준은 방문 전 지점 안내를 다시 보는 편이 좋다.',
+    thumbnailImage: '/images/places/uijeongbu-public-playground-3.webp',
   },
   {
     id: 'okjeong-toy-library',
@@ -1496,7 +1521,7 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '실내 체험은 4계절, 야외·부대시설 동선은 봄·가을 추천으로 관리한다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/namyangju-childrens-vision-center.webp',
   },
   {
     id: 'korea-national-arboretum-forest-museum',
@@ -1526,7 +1551,7 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '국립수목원은 예약·입장 정책이 있는 시설이라 방문 전 공식 예약 가능 여부 확인이 필요하다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/korea-national-arboretum-forest-museum.webp',
   },
   {
     id: 'paju-playcloud',
@@ -1556,7 +1581,7 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '공식 사이트 접근성이 불안정해 한국관광공사·지역 관광 안내를 보조 출처로 두고 재검수 대상에 가깝게 관리한다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/paju-playcloud.webp',
   },
   {
     id: 'pocheon-art-valley-astronomy-science-museum',
@@ -1586,6 +1611,6 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '천문과학관은 실내형이지만 아트밸리 야외 동선 비중이 커 계절 태그를 함께 둔다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/pocheon-art-valley-astronomy-science-museum.webp',
   },
 ] satisfies PlaceSource[];
