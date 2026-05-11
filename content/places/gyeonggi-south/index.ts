@@ -26,6 +26,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 60,
     operatorType: 'public',
+    thumbnailImage: '/images/places/gyeonggi-south-isarang-cityhall.webp',
   },
   {
     id: 'gyeonggi-south-ansan-ilovemom-cafe',
@@ -96,6 +97,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMDNfNjQg%2FMDAxNzY0NzQ0OTc2MTM0.Ip-aJdMHmpmj72WimPy8cA65VTsrxX6KnRFqqLZi4Z8g.F5O579uhobKXkfjjmIES2I5OioByhH8O5j88xbWUA_8g.JPEG%2FKakaoTalk_20251130_121622626_08.jpg%235712x4284&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-ansan-ilovemom-cafe.webp',
   },
   {
     id: 'gyeonggi-south-hwaseong-ilovemom-hyangnam1',
@@ -123,6 +125,8 @@ export const GYEONGGI_SOUTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 60,
     operatorType: 'public',
+    thumbnailImage:
+      '/images/places/gyeonggi-south-hwaseong-ilovemom-hyangnam1.webp',
   },
   {
     id: 'gyeonggi-south-hwaseong-ilovemom-bansong',
@@ -149,6 +153,8 @@ export const GYEONGGI_SOUTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 60,
     operatorType: 'public',
+    thumbnailImage:
+      '/images/places/gyeonggi-south-hwaseong-ilovemom-bansong.webp',
   },
   {
     id: 'gyeonggi-south-anyang-ilovemom-cafe',
@@ -215,6 +221,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMjNfMjY0%2FMDAxNzYxMjEzNzg0Nzcy.nciGtAXMyOpdb4K-whs6VkSwFnIKDQOVd72vlmeHg4Qg.xqQe_3d0AubT7Hk8FL2m1UTATIpP7Cutt49MohXmgEgg.JPEG%2FIMG%25A3%25DF4548.jpg%23900x1045&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-anyang-ilovemom-cafe.webp',
   },
   {
     id: 'gyeonggi-south-thegreem-yangpyeong',
@@ -283,6 +290,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MTJfNzQg%2FMDAxNzc2MDAzNTY2MDgy.nSLypdWRbg_AVB-xQnC87muoZk2CYDmohva_pYreYkQg.dMw6Qpv1R3jpUnF-Z3-e6wK1ht6_4JO6gUsqnHcPsZYg.PNG%2F900%25A3%25DF%25B3%25BB%25B2%25A8%25C0%25C7_%25BB%25E7%25BA%25BB%25A3%25DF20260412%25A3%25DF002912%25A3%25DF0000.png%23900x900&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-thegreem-yangpyeong.webp',
   },
   {
     id: 'gyeonggi-south-muisup-yeoju',
@@ -351,6 +359,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMDNfMjM4%2FMDAxNzcyNDY3MDc3Mjkw.i2Il-PtvFSblyeuSMaql7fejulNE6czVbWKpCKMHji0g.LvL897vRFJ76pI8EFq11cR0jEe7RRswbBXXUBxS_F0cg.PNG%2Fimage.png%23245x372&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-muisup-yeoju.webp',
   },
   {
     id: 'gyeonggi-south-ikea-gwangmyeong-swedish-cafe',
@@ -420,6 +429,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjFfMjkx%2FMDAxNzc0MDg5MzUzMzMy.rdWTJMgXkXId2ulhIMmnf72J-rSHBBktVhg9vWWMxJYg._lsp1FFeOAHlgJjZI5eklFZ1IEG3bNCDO-YhcGer8pAg.JPEG%2FIMG%25A3%25DF2216.JPG%23818x1090&type=f250_208',
       },
     ],
+    thumbnailImage:
+      '/images/places/gyeonggi-south-ikea-gwangmyeong-swedish-cafe.webp',
   },
   {
     id: 'gyeonggi-south-ikea-giheung-swedish-cafe',
@@ -485,6 +496,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMjVfNzUg%2FMDAxNzYxMzYyMjg2MzI4.DaoTMGGb_eH6_8_W1wP4nprt4ZFhvexRmakT2HoZkXMg.vSb5HJEGgHt-wpkrW5xlE57GTxfKUA7-oUmXOhlLLBUg.PNG%2F%25BA%25ED%25B7%25CE%25B1%25D7_%25BD%25E6%25B3%25D7%25C0%25CF_%25281%2529.png%231080x1080&type=ff192_192',
       },
     ],
+    thumbnailImage:
+      '/images/places/gyeonggi-south-ikea-giheung-swedish-cafe.webp',
   },
   {
     id: 'gyeonggi-south-aquafield-anseong-cafe-de-aqua',
@@ -511,6 +524,8 @@ export const GYEONGGI_SOUTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 90,
     operatorType: 'commercial',
+    thumbnailImage:
+      '/images/places/gyeonggi-south-aquafield-anseong-cafe-de-aqua.webp',
   },
   {
     id: 'gyeonggi-south-ikea-gwangmyeong-smaland',
@@ -581,6 +596,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA4MjBfMjE2%2FMDAxNzU1Njc2NzYwNjAz.rTC8ceOR6ZybgI7QwKTD9Fzte7p-XRll5pl2exAxm2gg.WPssOGi5UNom2ueXnujuYubao-cN4Z8xq5WOlykmbGkg.PNG%2F%25C1%25A6%25B8%25F1%25C0%25BB-%25C0%25D4%25B7%25C2%25C7%25D8%25C1%25D6%25BC%25BC%25BF%25E4_-001_-_2025-08-20T165910.090.png%23960x960&type=ff192_192',
       },
     ],
+    thumbnailImage:
+      '/images/places/gyeonggi-south-ikea-gwangmyeong-smaland.webp',
   },
   {
     id: 'gyeonggi-south-ikea-giheung-smaland',
@@ -653,6 +670,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MjNfMjg5%2FMDAxNzc2OTM2ODIwMzEw.BjQB-B_w9lsUHbTb30lM_FDLugVx2qZOPcG57M7N-qcg.dvAtK0hVg4nj9vVjyHwYXw1B0QokAQ2Tk4vArAPuty4g.JPEG%2FIMG%25A3%25DF7403.jpg%23900x676&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-ikea-giheung-smaland.webp',
   },
   {
     id: 'gyeonggi-south-starfied-bucheon-byeolmadang-kids',
@@ -720,6 +738,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA1MTVfMjQ4%2FMDAxNzQ3Mjc1NDI3NzI2.I0mq7giyVY3zQF0R0wOILmX_hQb4Qo8In-Ir04If5Z8g.T8UNHwaFTYjETozKJcz-Qf04VDm--7zz1_5eP-yfNZcg.JPEG%2F900%25A3%25DF1747275426742.jpg%23900x675&type=ff192_192',
       },
     ],
+    thumbnailImage:
+      '/images/places/gyeonggi-south-starfied-bucheon-byeolmadang-kids.webp',
   },
   {
     id: 'gyeonggi-south-monello-siheung-neunggok',
@@ -791,6 +811,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MDJfMTA5%2FMDAxNzUxNDY2NTkxNzg5.cZElFdUm4qd7AZWGq1dTnxnkEgfhCBGRj2zuwh4IDYIg.W46HqWAVpE2TyM0KGxDGUFW7sqBxx4NNZb4sXYN0YLUg.PNG%2Fj%25A3%25DFlace.png%23900x900&type=ff192_192',
       },
     ],
+    thumbnailImage:
+      '/images/places/gyeonggi-south-monello-siheung-neunggok.webp',
   },
   {
     id: 'gyeonggi-south-gguljam-kidsroom-ansan',
@@ -818,6 +840,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 120,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/gyeonggi-south-gguljam-kidsroom-ansan.webp',
   },
   {
     id: 'gyeonggi-south-little-pongdang-yongin',
@@ -845,6 +868,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 120,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/gyeonggi-south-little-pongdang-yongin.webp',
   },
   {
     id: 'gyeonggi-south-bundle-of-joy-gwangmyeong',
@@ -872,6 +896,8 @@ export const GYEONGGI_SOUTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 90,
     operatorType: 'commercial',
+    thumbnailImage:
+      '/images/places/gyeonggi-south-bundle-of-joy-gwangmyeong.webp',
   },
   {
     id: 'gyeonggi-south-funplry-uiwang',
@@ -899,6 +925,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     rainFriendly: true,
     stayMinutes: 120,
     operatorType: 'commercial',
+    thumbnailImage: '/images/places/gyeonggi-south-funplry-uiwang.webp',
   },
   {
     id: 'gyeonggi-south-byeolsup-kidsroom-gunpo',
@@ -964,6 +991,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA1MTBfMTcz%2FMDAxNzQ2ODE4MjA5OTYz._oiZo2BmntCdqOnYKt7C3GtXKVWRqkZXN4bO7e86Dawg.-2Eih4vmQ0RhXimV4U3B2Huu5GIALdQ1ICzaOpPbJNgg.JPEG%2FIMG_9853.JPG%23900x1200&type=ff192_192',
       },
     ],
+    thumbnailImage:
+      '/images/places/gyeonggi-south-byeolsup-kidsroom-gunpo.webp',
   },
   {
     id: 'gyeonggi-south-superwings-lotte-mart-suwon-yeongtong',
@@ -994,6 +1023,8 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '슈퍼윙스 공식 지점 페이지에서 롯데마트 수원영통점 운영 신호를 확인했다.',
+    thumbnailImage:
+      '/images/places/gyeonggi-south-superwings-lotte-mart-suwon-yeongtong.webp',
   },
   {
     id: 'gyeonggi-south-champion-homeplus-osan',
@@ -1061,6 +1092,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEyMjFfNTEg%2FMDAxNzY2MzIxODExMTI2.uH3svpNxLOSXJPFdy6cCC2EvXnKIoHlo1OQ4nnmRT0kg.cXDBMlASLzlNBaLjlYo0V3fWW2LHDF2nu4vYLKXS_7og.JPEG%2F900%25A3%25DF20251219%25A3%25DF143425.jpg%23900x675&type=f250_208',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-champion-homeplus-osan.webp',
   },
   {
     id: 'gyeonggi-south-little-chief-homeplus-sihwa',
@@ -1090,6 +1122,8 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '홈플러스 공식 시화점 층별 안내에서 2F 리틀치프_키즈카페를 확인했다. 세부 요금, 회차, 휴무는 방문 전 재확인 필요.',
+    thumbnailImage:
+      '/images/places/gyeonggi-south-little-chief-homeplus-sihwa.webp',
   },
   {
     id: 'gyeonggi-south-ballbearpark-bucheon',
@@ -1160,6 +1194,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMjZfNjkg%2FMDAxNzcyMDg1MTE1MzI4.8XoVQj2YSaGyp9tMXzG_RGxjsMB8kfRttS-BJsaCooIg.cLhEyWaNOtVn8WIVUxU9OaheF3mRmVEwx0UhIHGK7QAg.PNG%2F%25BA%25ED%25B7%25CE%25B1%25D7_2%25C2%25F7_%25B4%25EB%25C7%25A5%25C0%25CC%25B9%25CC%25C1%25F6_%25282%2529.png%232000x2000&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-ballbearpark-bucheon.webp',
   },
   {
     id: 'gyeonggi-south-jumping-park-jeongja',
@@ -1227,6 +1262,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MDRfMTA0%2FMDAxNzc1MjcxNTEwNzQz.KZgaOVaDjXdHY3WDeY36Aq976k1dk-tG2hrox4oCylwg.tCtDan-ISWIHnQyV8MuCgGoabcy5xsRw1dY7NQPn64Eg.PNG%2F%25C1%25A6%25B8%25F1%25C0%25BB_%25C0%25D4%25B7%25C2%25C7%25D8%25C1%25D6%25BC%25BC%25BF%25E4_-001_%252865%2529.png%231080x1080&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-jumping-park-jeongja.webp',
   },
   {
     id: 'gyeonggi-south-ground-planet-seoul-grand-park',
@@ -1300,6 +1336,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMzFfMjQ1%2FMDAxNzc0OTQwNDIyMzIw.WI4WRNPgOeVSRYGU-R2C7aGE_4gzGKQhdUlPVEXCxG4g.7mCgaJw4Tk5lC_2QlLJUs4rjsojUt3s4yaEM3gqit0Ag.JPEG%2FIMG%25A3%25DF7673.JPG%23900x1200&type=ff192_192',
       },
     ],
+    thumbnailImage:
+      '/images/places/gyeonggi-south-ground-planet-seoul-grand-park.webp',
   },
   {
     id: 'gyeonggi-south-dinosaur-world-siheung',
@@ -1328,6 +1366,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       'WAUG 판매 페이지로 운영 신호를 확인했다. 주소, 주차, 회차, 공연시간은 발행 전 공식 예약·전화로 재확인 필요.',
+    thumbnailImage: '/images/places/gyeonggi-south-dinosaur-world-siheung.webp',
   },
   {
     id: 'gyeonggi-south-dinosaur-world-yongin',
@@ -1357,6 +1396,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       'NOL 인터파크 판매 페이지로 운영 신호를 확인했다. 상세 주소와 주차 지원은 발행 전 재확인 필요.',
+    thumbnailImage: '/images/places/gyeonggi-south-dinosaur-world-yongin.webp',
   },
   {
     id: 'gyeonggi-south-dinosaur-world-dongtan',
@@ -1385,6 +1425,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       'WAUG 판매 페이지로 운영 신호를 확인했다. 신규·이벤트성 운영 가능성이 있어 발행 전 최신 운영 공지를 확인해야 한다.',
+    thumbnailImage: '/images/places/gyeonggi-south-dinosaur-world-dongtan.webp',
   },
   {
     id: 'gyeonggi-south-zoolungzoolung-hanam',
@@ -1455,6 +1496,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA1MDNfMjA1%2FMDAxNzc3ODEwMDIyOTQw.O3nlmmD0YtjMUCfL-nojMLsD1rUOZHjYx0c64ovMljAg.gKQYuL4PzCCmCMx10F4FPIWjwvfLvyqkOJp2sZtst_4g.JPEG%2FIMG%25A3%25DF4419.jpg%23900x1200&type=f250_208',
       },
     ],
+    thumbnailImage: '/images/places/gyeonggi-south-zoolungzoolung-hanam.webp',
   },
   {
     id: 'gyeonggi-south-pororo-theme-park-dasan',
@@ -1524,6 +1566,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMDdfMTQ5%2FMDAxNzcyODQzMzYwNDk3.uPTcA7ASBBSuKps-h_oTqz1_Bc11vr1kzeyPM4Mhq7Yg.Fh1duINBOjfWAfvYQpMdiI5yMnEsD21LyAAqtmo0cCMg.JPEG%2F900%25A3%25DF1772843141812.jpg%23900x1200&type=ff192_192',
       },
     ],
+    thumbnailImage:
+      '/images/places/gyeonggi-south-pororo-theme-park-dasan.webp',
   },
   {
     id: 'gyeonggi-south-pororo-park-ansan',
@@ -1552,6 +1596,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '공식 이용시간 페이지에서 지점 운영 여부를 확인했다. 주소, 주차, 요금은 발행 전 최신 예매 화면으로 재확인 필요.',
+    thumbnailImage: '/images/places/gyeonggi-south-pororo-park-ansan.webp',
   },
   {
     id: 'ansan-astro-camp',
@@ -1582,6 +1627,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     stayMinutes: 90,
     operatorType: 'public',
     editorNote: '야간 관측 프로그램은 초등학생 이상 적합',
+    thumbnailImage: '/images/places/ansan-astro-camp.webp',
   },
   {
     id: 'everland',
@@ -1946,6 +1992,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMDRfMTM2%2FMDAxNzcyNjI4MTcxMjM3.3neOIZJRRmT-1Faer-4feV8oFuW1onH3n6xK6nthuA8g.GabSuyod4DNM_dhdwVr5NvejGR0zBmSn9rfQp8XMcxsg.JPEG%2F900%25A3%25DF20260304%25A3%25DF144004.jpg%23900x675&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/seongnam-isarang-playground-sunae.webp',
   },
   {
     id: 'bucheon-ilovemom-cafe-bambak',
@@ -2018,6 +2065,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA5MDZfMTU5%2FMDAxNzU3MDg4MzAyMzc3.M-840JIN_EVQJr_jpHwGMVSUnRxhuzM-Y2nzx8ryHM0g.IoTJ-wwefKfcdLO6o06Wmo9uecArPAY9Y14kIQ24nqEg.JPEG%2FKakaoTalk_20250905_013153807_02.jpg%232556x1689&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/bucheon-ilovemom-cafe-bambak.webp',
   },
   {
     id: 'bucheon-ilovemom-cafe-simgokbon',
@@ -2046,6 +2094,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '네이버 지도는 행정복지센터 3층 아이러브맘카페 표기를 사용한다.',
+    thumbnailImage: '/images/places/bucheon-ilovemom-cafe-simgokbon.webp',
   },
   {
     id: 'bucheon-ilovemom-cafe-gogangbon',
@@ -2073,6 +2122,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     stayMinutes: 60,
     operatorType: 'public',
     editorNote: '네이버 지도와 리서치 문서 모두 고강본동 지점 표기를 사용한다.',
+    thumbnailImage: '/images/places/bucheon-ilovemom-cafe-gogangbon.webp',
   },
   {
     id: 'suwon-hwaseong-fortress',
@@ -2602,6 +2652,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MjNfMTUx%2FMDAxNzc2OTM2MjMwNDQ4.1Fesba0L7kOPByaihvyqicc-vLCV_kAtwtzXCXV0CcYg.S7X2rbYRsxaqdUusYqnShGYVaeU3BW9v_Qa0lUdAV_og.JPEG%2F900_1776936228494.jpg%23900x1200&type=f250_208',
       },
     ],
+    thumbnailImage: '/images/places/yongin-children-imagination-forest.webp',
   },
   {
     id: 'korea-job-world-children-experience-center',
@@ -2670,6 +2721,8 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMjBfOTkg%2FMDAxNzcxNTkzNzQyNDAz.CLfmTNSd3gi48nG6YlSRQjRk5Nc12NORhZD3uTSmBiMg.11DXvCZHw6WlenGgGlDi431y4iS7o4uaoUrA9ldnDhwg.JPEG%2F900%25A3%25DF1771593741630.jpg%23899x348&type=ff192_192',
       },
     ],
+    thumbnailImage:
+      '/images/places/korea-job-world-children-experience-center.webp',
   },
   {
     id: 'aquaplanet-gwanggyo',
@@ -2739,6 +2792,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjFfMTAx%2FMDAxNzc0MTAwMzAyODgw.XZXkjIC6ll08sh3lEa23vrPv-OPC79v-bajok5qQujMg.v20ed8Afwphg9_JRGORjI819fACdJ7u93CFi2mn5Sncg.JPEG%2FIMG%25A3%25DF0304.JPG%23900x1200&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/aquaplanet-gwanggyo.webp',
   },
   {
     id: 'railroad-museum',
@@ -2811,6 +2865,7 @@ export const GYEONGGI_SOUTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MThfMjEw%2FMDAxNzc2NDkyODI1Mjc0.FOPYI63te-V9u8XqsD49jDEOj2LlIHuG_wxV95B6PtUg.N2N4yhYfGxR6_h0CuUNEB_B3FABDZuy2XjkVg5Q5zJog.JPEG%2F900_20260418151337.jpg%23900x900&type=ff192_192',
       },
     ],
+    thumbnailImage: '/images/places/railroad-museum.webp',
   },
   {
     id: 'bucheon-robopark',
@@ -2840,7 +2895,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     editorNote:
       '회차 운영과 요금 정책이 바뀔 수 있어 공식 이용안내 확인 후 방문하는 편이 안전하다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/bucheon-robopark.webp',
     externalBlogLinks: [
       {
         title: '경기도 부천시 주말 8세 아이와 함께 가기 좋은 부천로보파크 후기',
@@ -2911,7 +2966,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     editorNote:
       '상설전시 외에 어린이 공연·체험이 열릴 수 있어 방문 전 전시/행사 공지를 확인하면 좋다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/korea-comics-museum.webp',
     externalBlogLinks: [
       {
         title: '부천 아이랑 가볼만한곳 한국만화박물관 입장료 관람 후기',
@@ -2981,7 +3036,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     editorNote:
       '프로그램별 연령 제한과 사전 예약 조건이 있으므로 예약 가능 회차 확인이 필요하다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/gyeonggi-safety-experience-center.webp',
     externalBlogLinks: [
       {
         title: '오산 아이랑 가볼만한 곳 경기도국민안전체험관예약방법',
@@ -3049,7 +3104,8 @@ export const GYEONGGI_SOUTH_PLACES = [
     editorNote:
       '물놀이 시설은 아니지만 해양 안전 체험 특성이 강해 여름 필터에도 노출한다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage:
+      '/images/places/gyeonggi-maritime-safety-experience-center.webp',
     externalBlogLinks: [
       {
         title:
@@ -3121,7 +3177,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     editorNote:
       '실내 전시는 4계절 이용 가능하지만 왕송호수 산책 동선은 봄·가을 추천으로 둔다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/uiwang-bird-eco-science-museum.webp',
     externalBlogLinks: [
       {
         title: '경기도 아이랑 가볼만한곳 의왕조류생태과학관 후기',
@@ -3193,7 +3249,7 @@ export const GYEONGGI_SOUTH_PLACES = [
     editorNote:
       '신규 시설 성격이 강해 상세 운영시간과 예약 방식은 시흥시 공지 또는 시설 안내 재확인이 필요하다.',
     linkedPostSlugs: [],
-    thumbnailImage: '',
+    thumbnailImage: '/images/places/siheung-marine-eco-science-museum.webp',
     externalBlogLinks: [
       {
         title: '시흥 아이와 가볼만한 곳｜시흥해양생태과학관 솔직 후기 + 꿀팁',
