@@ -13,6 +13,9 @@ import {
   BENEFIT_CATEGORIES,
   OFFICIAL_BENEFIT_SOURCES,
 } from '@/lib/benefits/config';
+import { ALL_BENEFITS } from '@/content/benefits';
+import { getFeaturedBenefitsFrom } from '@/lib/benefits/benefit-queries';
+import { BenefitCard } from '@/components/benefits/BenefitCard';
 import { cn } from '@/lib/utils';
 
 const CATEGORY_ICONS: Record<string, ElementType> = {
@@ -74,6 +77,8 @@ const CATEGORY_STYLES: Record<
 };
 
 export function BenefitsHub() {
+  const featuredBenefits = getFeaturedBenefitsFrom(ALL_BENEFITS, 6);
+
   return (
     <div className="space-y-12 sm:space-y-16">
       <section className="relative overflow-hidden rounded-[34px] border border-[#e8dcc8] bg-[linear-gradient(180deg,rgba(252,249,243,0.98),rgba(248,241,230,0.96))] p-6 shadow-[0_20px_60px_rgba(60,47,31,0.08)] sm:p-8">
@@ -255,6 +260,33 @@ export function BenefitsHub() {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      <section className="space-y-5">
+        <div className="max-w-2xl space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-foreground/45">
+            먼저 볼 혜택
+          </p>
+          <h2
+            className="text-2xl font-semibold tracking-tight text-foreground sm:text-[2rem]"
+            style={{
+              fontFamily:
+                '"Iowan Old Style", "Apple SD Gothic Neo", "Noto Serif KR", serif',
+            }}
+          >
+            아이 나이와 지역에 맞춰 바로 확인하기
+          </h2>
+          <p className="text-sm leading-6 text-muted-foreground">
+            공식 출처가 확인된 혜택부터 카드로 모았습니다. 신청 전에는 각 공식
+            페이지의 최신 기준을 다시 확인하세요.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {featuredBenefits.map(benefit => (
+            <BenefitCard key={benefit.id} benefit={benefit} />
+          ))}
         </div>
       </section>
 
