@@ -60,7 +60,8 @@ Phase A에서 새로 만드는 기능은 “검색 가능한 전체 혜택 DB”
 Phase A 공식 출처 후보:
 
 - 정부24 행복출산 원스톱서비스: `https://www.gov.kr/portal/onestopSvc/happyBirth`
-- 첫만남이용권: `https://www.voucher.go.kr/voucher/firstEncounter.do`
+- 첫만남이용권 지원 안내: `http://www.voucher.go.kr/voucher/firstEncounter.do`
+- 첫만남이용권 사용처·제외 업종: `http://www.voucher.go.kr/store/firstEncounter.do`
 - 복지로 기저귀·조제분유 지원: `https://www.bokjiro.go.kr/ssis-tbu/twataa/wlfareInfo/moveTWAT52011M.do?wlfareInfoId=WLF00000092`
 - 서울형 키즈카페: `https://umppa.seoul.go.kr/hmpg/sprt/bzin/bzmgComtDetail.do?biz_mng_no=6DD24707FB4941C09D10B50AF4917997`
 - 서울형키즈카페머니: `https://umppa.seoul.go.kr/icare/dolbomMENU5/dolbomMENU5_3.jsp`
@@ -377,10 +378,10 @@ export const ALL_BENEFITS: BenefitSource[] = [
     ageBands: ['pregnancy-birth', '0-23m'],
     benefitForms: ['voucher'],
     applicationMethod: 'mixed',
-    primaryActionLabel: '첫만남이용권 보기',
-    primaryActionHref: 'https://www.voucher.go.kr/voucher/firstEncounter.do',
+    primaryActionLabel: '사용처 확인하기',
+    primaryActionHref: 'http://www.voucher.go.kr/store/firstEncounter.do',
     officialSourceName: '국민행복카드',
-    officialSourceUrl: 'https://www.voucher.go.kr/voucher/firstEncounter.do',
+    officialSourceUrl: 'http://www.voucher.go.kr/store/firstEncounter.do',
     verifiedAt: '2026-05-26',
     lastObservedAt: '2026-05-26',
     verificationStatus: 'official_verified',

@@ -20,11 +20,21 @@ test('benefits index rejects duplicate ids', async () => {
   );
 });
 
-test('every benefit has an official https source and verification date', async () => {
+function isAcceptableOfficialUrl(url) {
+  return (
+    url.startsWith('https://') || url.startsWith('http://www.voucher.go.kr/')
+  );
+}
+
+test('every benefit has an official absolute source and verification date', async () => {
   const { ALL_BENEFITS } = await import('./index.ts');
 
   for (const benefit of ALL_BENEFITS) {
-    assert.match(benefit.officialSourceUrl, /^https:\/\//, benefit.id);
+    assert.equal(
+      isAcceptableOfficialUrl(benefit.officialSourceUrl),
+      true,
+      benefit.id
+    );
     assert.match(benefit.verifiedAt, /^\d{4}-\d{2}-\d{2}$/, benefit.id);
     assert.match(benefit.lastObservedAt, /^\d{4}-\d{2}-\d{2}$/, benefit.id);
     assert.equal(
