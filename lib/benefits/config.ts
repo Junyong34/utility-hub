@@ -49,4 +49,7 @@ export const OFFICIAL_BENEFIT_SOURCES = [
   { name: '복지로', url: 'https://www.bokjiro.go.kr/' },
   { name: '고용노동부', url: 'https://www.moel.go.kr/' },
   { name: '보건복지부', url: 'https://www.mohw.go.kr/' },
+  { name: '서울시 몽땅정보 만능키', url: 'https://umppa.seoul.go.kr/' },
+  { name: '경기도', url: 'https://www.gg.go.kr/' },
+  { name: '인천광역시', url: 'https://www.incheon.go.kr/' },
 ];
