@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import type { SEOMetadata, OpenGraphImage } from '@/types/seo';
-import { buildCustomOgImagePath } from '@/lib/seo/og';
-import { resolveBlogPostOgImage } from '@/lib/seo/og-policy';
+import type { SEOMetadata, OpenGraphImage } from '../../types/seo.ts';
+import { buildCustomOgImagePath } from './og.ts';
+import { resolveBlogPostOgImage } from './og-policy.ts';
 
 /**
  * 사이트 기본 설정
