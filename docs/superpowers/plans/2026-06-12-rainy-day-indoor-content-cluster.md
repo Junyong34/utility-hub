@@ -67,11 +67,17 @@ Every article body must include these headings:
 
 ```markdown
 ## 기준일과 읽는 법
+
 ## 한눈에 보는 추천 장소
+
 ## 장소별로 고르는 기준
+
 ## 방문 전 확인 체크리스트
+
 ## 같이 보면 좋은 글과 페이지
+
 ## FAQ
+
 ## 마무리
 ```
 
@@ -81,9 +87,9 @@ Every article must include this exact trust sentence near the top:
 이 글은 **기준일: 2026년 6월**에 확인한 장소 seed와 공식·준공식 출처를 바탕으로 정리했습니다. 운영시간, 요금, 예약 가능 여부는 바뀔 수 있으니 방문 전 공식 페이지를 다시 확인하세요.
 ```
 
-Every article must include a summary table with these columns:
+Every article must include a summary table with these exact columns:
 
-```markdown
+```text
 | 장소 | 지역 | 권장 연령 | 비용 | 예약 | 주차 | 이럴 때 추천 |
 | --- | --- | --- | --- | --- | --- | --- |
 ```
@@ -92,16 +98,16 @@ Use `placeIds` from `content/places` only. Representative recommendations must b
 
 ## Article Inventory
 
-| File | Title | Primary Role |
-| --- | --- | --- |
-| `capital-area-rainy-day-indoor-places.md` | `수도권 비 오는 날 아이와 갈 만한 실내 장소` | 클러스터 허브 |
-| `seoul-rainy-day-indoor-places.md` | `서울 비 오는 날 아이랑 갈 만한 실내 장소` | 서울 지역 지원 글 |
-| `rainy-day-free-low-cost-indoor-places.md` | `비 오는 날 무료·저렴한 실내 나들이` | 비용 기준 지원 글 |
-| `same-day-indoor-places-without-reservation.md` | `예약 없이 갈 수 있는 실내 아이 나들이` | 당일 선택 지원 글 |
-| `incheon-rainy-day-indoor-places.md` | `인천 비 오는 날 아이랑 갈 만한 실내 장소` | 인천 지역 지원 글 |
-| `gyeonggi-south-rainy-day-indoor-places.md` | `경기 남부 비 오는 날 아이랑 갈 만한 실내 장소` | 경기 남부 지역 지원 글 |
-| `toddlers-rainy-day-indoor-places.md` | `1~3세 아이와 비 오는 날 갈 만한 실내 장소` | 영유아 연령 지원 글 |
-| `preschoolers-rainy-day-indoor-places.md` | `3~6세 아이와 비 오는 날 갈 만한 실내 장소` | 유아 연령 지원 글 |
+| File                                            | Title                                           | Primary Role           |
+| ----------------------------------------------- | ----------------------------------------------- | ---------------------- |
+| `capital-area-rainy-day-indoor-places.md`       | `수도권 비 오는 날 아이와 갈 만한 실내 장소`    | 클러스터 허브          |
+| `seoul-rainy-day-indoor-places.md`              | `서울 비 오는 날 아이랑 갈 만한 실내 장소`      | 서울 지역 지원 글      |
+| `rainy-day-free-low-cost-indoor-places.md`      | `비 오는 날 무료·저렴한 실내 나들이`            | 비용 기준 지원 글      |
+| `same-day-indoor-places-without-reservation.md` | `예약 없이 갈 수 있는 실내 아이 나들이`         | 당일 선택 지원 글      |
+| `incheon-rainy-day-indoor-places.md`            | `인천 비 오는 날 아이랑 갈 만한 실내 장소`      | 인천 지역 지원 글      |
+| `gyeonggi-south-rainy-day-indoor-places.md`     | `경기 남부 비 오는 날 아이랑 갈 만한 실내 장소` | 경기 남부 지역 지원 글 |
+| `toddlers-rainy-day-indoor-places.md`           | `1~3세 아이와 비 오는 날 갈 만한 실내 장소`     | 영유아 연령 지원 글    |
+| `preschoolers-rainy-day-indoor-places.md`       | `3~6세 아이와 비 오는 날 갈 만한 실내 장소`     | 유아 연령 지원 글      |
 
 ## Place ID Sets
 
@@ -308,14 +314,14 @@ indoorOutdoor: 'indoor'
 Create `lib/blog/posts.test.mjs`:
 
 ```js
-import test from 'node:test'
-import assert from 'node:assert/strict'
+import test from 'node:test';
+import assert from 'node:assert/strict';
 
 test('places category is labeled for parenting place guides', async () => {
-  const { getCategoryName } = await import('./posts.ts')
+  const { getCategoryName } = await import('./posts.ts');
 
-  assert.equal(getCategoryName('places'), '아이와 갈 곳')
-})
+  assert.equal(getCategoryName('places'), '아이와 갈 곳');
+});
 ```
 
 - [ ] **Step 2: Run the test to verify it fails**
@@ -384,13 +390,13 @@ mkdir -p content/posts/places
 Create `content/posts/places/rainy-day-indoor-cluster.test.mjs`:
 
 ```js
-import test from 'node:test'
-import assert from 'node:assert/strict'
-import fs from 'node:fs'
-import path from 'node:path'
-import matter from 'gray-matter'
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import matter from 'gray-matter';
 
-const POSTS_DIR = path.join(process.cwd(), 'content/posts/places')
+const POSTS_DIR = path.join(process.cwd(), 'content/posts/places');
 
 const EXPECTED_POSTS = [
   {
@@ -462,7 +468,7 @@ const EXPECTED_POSTS = [
       '/places?age=3-6y',
     ],
   },
-]
+];
 
 const REQUIRED_HEADINGS = [
   '## 기준일과 읽는 법',
@@ -472,7 +478,7 @@ const REQUIRED_HEADINGS = [
   '## 같이 보면 좋은 글과 페이지',
   '## FAQ',
   '## 마무리',
-]
+];
 
 const DISALLOWED_PATTERNS = [
   new RegExp('T' + 'BD', 'i'),
@@ -481,12 +487,12 @@ const DISALLOWED_PATTERNS = [
   new RegExp('작성 ' + '예정'),
   new RegExp('추후 ' + '작성'),
   new RegExp('place' + 'holder', 'i'),
-]
+];
 
 function readPost(slug) {
-  const filePath = path.join(POSTS_DIR, `${slug}.md`)
-  const fileContents = fs.readFileSync(filePath, 'utf8')
-  return matter(fileContents)
+  const filePath = path.join(POSTS_DIR, `${slug}.md`);
+  const fileContents = fs.readFileSync(filePath, 'utf8');
+  return matter(fileContents);
 }
 
 test('rainy day indoor cluster has all planned posts', () => {
@@ -495,72 +501,80 @@ test('rainy day indoor cluster has all planned posts', () => {
       fs.existsSync(path.join(POSTS_DIR, `${post.slug}.md`)),
       true,
       post.slug
-    )
+    );
   }
-})
+});
 
 test('rainy day indoor posts use the places category and trusted metadata', () => {
   for (const post of EXPECTED_POSTS) {
-    const { data, content } = readPost(post.slug)
+    const { data, content } = readPost(post.slug);
 
-    assert.equal(data.title, post.title, post.slug)
-    assert.equal(data.date, '2026-06-12', post.slug)
-    assert.equal(data.author, 'Zento 편집실', post.slug)
-    assert.equal(data.category, '아이와 갈 곳', post.slug)
-    assert.equal(data.categorySlug, 'places', post.slug)
-    assert.equal(data.indoorOutdoor, 'indoor', post.slug)
-    assert.equal(Array.isArray(data.placeIds), true, post.slug)
-    assert.equal(data.placeIds.length >= 8, true, post.slug)
-    assert.equal(new Set(data.placeIds).size, data.placeIds.length, post.slug)
-    assert.equal(Array.isArray(data.regions), true, post.slug)
-    assert.equal(data.regions.length >= 1, true, post.slug)
-    assert.equal(Array.isArray(data.ageBands), true, post.slug)
-    assert.equal(data.ageBands.length >= 1, true, post.slug)
-    assert.equal(data.tags.includes('비 오는 날'), true, post.slug)
-    assert.equal(data.tags.includes('아이와 실내'), true, post.slug)
-    assert.match(data.excerpt, /아이|실내|비/, post.slug)
-    assert.match(content, /기준일: 2026년 6월/, post.slug)
-    assert.match(content, /방문 전 공식 페이지/, post.slug)
+    assert.equal(data.title, post.title, post.slug);
+    assert.equal(data.date, '2026-06-12', post.slug);
+    assert.equal(data.author, 'Zento 편집실', post.slug);
+    assert.equal(data.category, '아이와 갈 곳', post.slug);
+    assert.equal(data.categorySlug, 'places', post.slug);
+    assert.equal(data.indoorOutdoor, 'indoor', post.slug);
+    assert.equal(Array.isArray(data.placeIds), true, post.slug);
+    assert.equal(data.placeIds.length >= 8, true, post.slug);
+    assert.equal(new Set(data.placeIds).size, data.placeIds.length, post.slug);
+    assert.equal(Array.isArray(data.regions), true, post.slug);
+    assert.equal(data.regions.length >= 1, true, post.slug);
+    assert.equal(Array.isArray(data.ageBands), true, post.slug);
+    assert.equal(data.ageBands.length >= 1, true, post.slug);
+    assert.equal(data.tags.includes('비 오는 날'), true, post.slug);
+    assert.equal(data.tags.includes('아이와 실내'), true, post.slug);
+    assert.match(data.excerpt, /아이|실내|비/, post.slug);
+    assert.match(content, /기준일: 2026년 6월/, post.slug);
+    assert.match(content, /방문 전 공식 페이지/, post.slug);
   }
-})
+});
 
 test('rainy day indoor posts have the required editorial structure and links', () => {
   for (const post of EXPECTED_POSTS) {
-    const { content } = readPost(post.slug)
+    const { content } = readPost(post.slug);
 
     for (const heading of REQUIRED_HEADINGS) {
-      assert.match(content, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${post.slug} ${heading}`)
+      assert.match(
+        content,
+        new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
+        `${post.slug} ${heading}`
+      );
     }
 
     for (const link of post.requiredLinks) {
-      assert.match(content, new RegExp(link.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${post.slug} ${link}`)
+      assert.match(
+        content,
+        new RegExp(link.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
+        `${post.slug} ${link}`
+      );
     }
 
     for (const pattern of DISALLOWED_PATTERNS) {
-      assert.equal(pattern.test(content), false, `${post.slug} ${pattern}`)
+      assert.equal(pattern.test(content), false, `${post.slug} ${pattern}`);
     }
   }
-})
+});
 
 test('rainy day indoor posts reference only publishable place ids', async () => {
-  const { ALL_PLACES } = await import('../../places/index.ts')
-  const placeById = new Map(ALL_PLACES.map(place => [place.id, place]))
-  const publishableStatuses = new Set(['official_verified', 'semi_verified'])
+  const { ALL_PLACES } = await import('../../places/index.ts');
+  const placeById = new Map(ALL_PLACES.map(place => [place.id, place]));
+  const publishableStatuses = new Set(['official_verified', 'semi_verified']);
 
   for (const post of EXPECTED_POSTS) {
-    const { data } = readPost(post.slug)
+    const { data } = readPost(post.slug);
 
     for (const placeId of data.placeIds) {
-      const place = placeById.get(placeId)
-      assert.ok(place, `${post.slug} references missing place ${placeId}`)
+      const place = placeById.get(placeId);
+      assert.ok(place, `${post.slug} references missing place ${placeId}`);
       assert.equal(
         publishableStatuses.has(place.verificationStatus),
         true,
         `${post.slug} references non-publishable place ${placeId}`
-      )
+      );
     }
   }
-})
+});
 ```
 
 - [ ] **Step 3: Run the test to verify it fails**
@@ -748,40 +762,37 @@ Append this test to `lib/blog/posts.test.mjs`:
 
 ```js
 test('rainy day hub exposes place metadata through the blog loader', async () => {
-  const { getPostBySlug, getAllPosts } = await import('./posts.ts')
+  const { getPostBySlug, getAllPosts } = await import('./posts.ts');
 
-  const post = getPostBySlug(
-    'capital-area-rainy-day-indoor-places',
-    'places'
-  )
+  const post = getPostBySlug('capital-area-rainy-day-indoor-places', 'places');
 
-  assert.ok(post)
+  assert.ok(post);
   assert.deepEqual(post.regions, [
     'seoul',
     'gyeonggi-south',
     'gyeonggi-north',
     'incheon',
-  ])
-  assert.deepEqual(post.ageBands, ['1-3y', '3-6y'])
-  assert.equal(post.indoorOutdoor, 'indoor')
-  assert.equal(post.placeIds.length >= 8, true)
-  assert.equal(post.placeIds.includes('national-children-museum'), true)
+  ]);
+  assert.deepEqual(post.ageBands, ['1-3y', '3-6y']);
+  assert.equal(post.indoorOutdoor, 'indoor');
+  assert.equal(post.placeIds.length >= 8, true);
+  assert.equal(post.placeIds.includes('national-children-museum'), true);
 
   const summary = getAllPosts().find(
     item =>
       item.categorySlug === 'places' &&
       item.slug === 'capital-area-rainy-day-indoor-places'
-  )
+  );
 
-  assert.ok(summary)
-  assert.equal(summary.placeIds.includes('national-children-museum'), true)
+  assert.ok(summary);
+  assert.equal(summary.placeIds.includes('national-children-museum'), true);
   assert.deepEqual(summary.regions, [
     'seoul',
     'gyeonggi-south',
     'gyeonggi-north',
     'incheon',
-  ])
-})
+  ]);
+});
 ```
 
 - [ ] **Step 2: Run the test to verify it fails**
@@ -799,22 +810,22 @@ Expected: FAIL because `placeIds`, `regions`, `ageBands`, and `indoorOutdoor` ar
 In `lib/blog/posts.ts`, update the object returned inside `getAllPosts()`:
 
 ```ts
-    return {
-      slug: fileName,
-      title: data.title,
-      date: data.date,
-      author: data.author,
-      excerpt: data.excerpt,
-      tags: data.tags || [],
-      category,
-      categorySlug,
-      ogImage: data.ogImage,
-      homeFeatured: data.homeFeatured,
-      placeIds: data.placeIds || [],
-      regions: data.regions || [],
-      ageBands: data.ageBands || [],
-      indoorOutdoor: data.indoorOutdoor,
-    };
+return {
+  slug: fileName,
+  title: data.title,
+  date: data.date,
+  author: data.author,
+  excerpt: data.excerpt,
+  tags: data.tags || [],
+  category,
+  categorySlug,
+  ogImage: data.ogImage,
+  homeFeatured: data.homeFeatured,
+  placeIds: data.placeIds || [],
+  regions: data.regions || [],
+  ageBands: data.ageBands || [],
+  indoorOutdoor: data.indoorOutdoor,
+};
 ```
 
 - [ ] **Step 4: Add metadata passthrough to `getPostBySlug()`**
@@ -822,23 +833,23 @@ In `lib/blog/posts.ts`, update the object returned inside `getAllPosts()`:
 In `lib/blog/posts.ts`, update the object returned inside `getPostBySlug()`:
 
 ```ts
-    return {
-      slug,
-      title: data.title,
-      date: data.date,
-      author: data.author,
-      excerpt: data.excerpt,
-      tags: data.tags || [],
-      category,
-      categorySlug: finalCategorySlug,
-      ogImage: data.ogImage,
-      homeFeatured: data.homeFeatured,
-      placeIds: data.placeIds || [],
-      regions: data.regions || [],
-      ageBands: data.ageBands || [],
-      indoorOutdoor: data.indoorOutdoor,
-      content,
-    };
+return {
+  slug,
+  title: data.title,
+  date: data.date,
+  author: data.author,
+  excerpt: data.excerpt,
+  tags: data.tags || [],
+  category,
+  categorySlug: finalCategorySlug,
+  ogImage: data.ogImage,
+  homeFeatured: data.homeFeatured,
+  placeIds: data.placeIds || [],
+  regions: data.regions || [],
+  ageBands: data.ageBands || [],
+  indoorOutdoor: data.indoorOutdoor,
+  content,
+};
 ```
 
 - [ ] **Step 5: Run the blog loader test**
@@ -871,28 +882,27 @@ git commit -m "[main][feat]: 블로그 장소 메타데이터 로딩 지원"
 Create `lib/seo/sitemap.test.mjs`:
 
 ```js
-import test from 'node:test'
-import assert from 'node:assert/strict'
+import test from 'node:test';
+import assert from 'node:assert/strict';
 
 test('sitemap includes rainy day places category and hub post', async () => {
-  const { collectBlogCategoryEntries, collectBlogPostEntries } = await import(
-    './sitemap.ts'
-  )
+  const { collectBlogCategoryEntries, collectBlogPostEntries } =
+    await import('./sitemap.ts');
 
-  const categoryUrls = collectBlogCategoryEntries().map(entry => entry.url)
-  const postUrls = collectBlogPostEntries().map(entry => entry.url)
+  const categoryUrls = collectBlogCategoryEntries().map(entry => entry.url);
+  const postUrls = collectBlogPostEntries().map(entry => entry.url);
 
   assert.equal(
     categoryUrls.some(url => url.endsWith('/blog/places')),
     true
-  )
+  );
   assert.equal(
     postUrls.some(url =>
       url.endsWith('/blog/places/capital-area-rainy-day-indoor-places')
     ),
     true
-  )
-})
+  );
+});
 ```
 
 - [ ] **Step 2: Run the sitemap test**
