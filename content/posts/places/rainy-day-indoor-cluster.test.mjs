@@ -22,6 +22,8 @@ const EXPECTED_POSTS = [
       'bucheon-robopark',
       'national-aviation-museum',
     ],
+    regions: ['seoul', 'gyeonggi-south', 'gyeonggi-north', 'incheon'],
+    ageBands: ['1-3y', '3-6y'],
     requiredLinks: [
       '/places',
       '/places/seoul',
@@ -56,6 +58,8 @@ const EXPECTED_POSTS = [
       'seoul-baekje-childrens-museum',
       'national-children-science-center',
     ],
+    regions: ['seoul'],
+    ageBands: ['1-3y', '3-6y'],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
       '/blog/places/rainy-day-free-low-cost-indoor-places',
@@ -84,6 +88,8 @@ const EXPECTED_POSTS = [
       'gyeonggi-south-ansan-ilovemom-cafe',
       'bucheon-ilovemom-cafe-bambak',
     ],
+    regions: ['seoul', 'gyeonggi-south', 'incheon'],
+    ageBands: ['0-12m', '1-3y', '3-6y'],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
       '/blog/benefits/seoul-public-kids-cafe-guide',
@@ -107,6 +113,8 @@ const EXPECTED_POSTS = [
       'korea-comics-museum',
       'railroad-museum',
     ],
+    regions: ['seoul', 'gyeonggi-south', 'incheon'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
       '/blog/places/seoul-rainy-day-indoor-places',
@@ -132,6 +140,8 @@ const EXPECTED_POSTS = [
       'incheon-naughty-child-cheongna',
       'incheon-oktokki-space-center',
     ],
+    regions: ['incheon'],
+    ageBands: ['1-3y', '3-6y'],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
       '/blog/places/rainy-day-free-low-cost-indoor-places',
@@ -157,6 +167,8 @@ const EXPECTED_POSTS = [
       'gyeonggi-south-anyang-ilovemom-cafe',
       'bucheon-ilovemom-cafe-bambak',
     ],
+    regions: ['gyeonggi-south'],
+    ageBands: ['1-3y', '3-6y'],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
       '/blog/places/preschoolers-rainy-day-indoor-places',
@@ -183,6 +195,8 @@ const EXPECTED_POSTS = [
       'incheon-aisarang-dream-center-jung-gu-1',
       'incheon-baby-angels-homeplus-songdo',
     ],
+    regions: ['seoul', 'gyeonggi-south', 'incheon'],
+    ageBands: ['0-12m', '1-3y'],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
       '/blog/places/rainy-day-free-low-cost-indoor-places',
@@ -206,6 +220,8 @@ const EXPECTED_POSTS = [
       'national-museum-of-world-writing',
       'incheon-naughty-child-cheongna',
     ],
+    regions: ['seoul', 'gyeonggi-south', 'incheon'],
+    ageBands: ['3-6y'],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
       '/blog/places/gyeonggi-south-rainy-day-indoor-places',
@@ -275,9 +291,9 @@ test('rainy day indoor posts use the places category and trusted metadata', () =
     assert.equal(data.placeIds.length >= 8, true, post.slug);
     assert.equal(new Set(data.placeIds).size, data.placeIds.length, post.slug);
     assert.equal(Array.isArray(data.regions), true, post.slug);
-    assert.equal(data.regions.length >= 1, true, post.slug);
+    assert.deepEqual(data.regions, post.regions, post.slug);
     assert.equal(Array.isArray(data.ageBands), true, post.slug);
-    assert.equal(data.ageBands.length >= 1, true, post.slug);
+    assert.deepEqual(data.ageBands, post.ageBands, post.slug);
     assert.equal(data.tags.includes('비 오는 날'), true, post.slug);
     assert.equal(data.tags.includes('아이와 실내'), true, post.slug);
     assert.equal(
