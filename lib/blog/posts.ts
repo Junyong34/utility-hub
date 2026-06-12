@@ -1,11 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type {
-  BlogCategory,
-  BlogPost,
-  BlogPostSummary,
-} from '@/lib/blog/types';
+import type { BlogCategory, BlogPost, BlogPostSummary } from '@/lib/blog/types';
 
 const postsDirectory = path.join(process.cwd(), 'content/posts');
 
@@ -19,6 +15,7 @@ const CATEGORY_NAMES: Record<string, string> = {
   'ai-image-creator': 'AI',
   investment: '투자',
   lotto: '로또',
+  places: '아이와 갈 곳',
   benefits: '혜택·지원금',
   uncategorized: '미분류',
 };
@@ -110,6 +107,10 @@ export function getAllPosts(): BlogPostSummary[] {
       categorySlug,
       ogImage: data.ogImage,
       homeFeatured: data.homeFeatured,
+      placeIds: data.placeIds || [],
+      regions: data.regions || [],
+      ageBands: data.ageBands || [],
+      indoorOutdoor: data.indoorOutdoor,
     };
   });
 
@@ -163,6 +164,10 @@ export function getPostBySlug(
       categorySlug: finalCategorySlug,
       ogImage: data.ogImage,
       homeFeatured: data.homeFeatured,
+      placeIds: data.placeIds || [],
+      regions: data.regions || [],
+      ageBands: data.ageBands || [],
+      indoorOutdoor: data.indoorOutdoor,
       content,
     };
   } catch (error) {
@@ -248,9 +253,7 @@ export function getAllCategories(): BlogCategory[] {
 /**
  * 특정 카테고리의 포스트들을 가져옵니다
  */
-export function getPostsByCategory(
-  categorySlug: string
-): BlogPostSummary[] {
+export function getPostsByCategory(categorySlug: string): BlogPostSummary[] {
   const allPosts = getAllPosts();
   return allPosts.filter(post => post.categorySlug === categorySlug);
 }

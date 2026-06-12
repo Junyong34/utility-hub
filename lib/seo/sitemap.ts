@@ -1,13 +1,13 @@
-import type { SitemapEntry } from '@/types/seo';
-import { getAllPosts, getAllCategories } from '@/lib/blog/posts';
+import type { SitemapEntry } from '../../types/seo.ts';
+import { getAllPosts, getAllCategories } from '../blog/posts.ts';
 import {
   getPublishablePlaces,
   getPublishablePlacesByRegion,
-} from '@/lib/places/place-content';
-import { SITE_CONFIG } from './metadata';
-import { getAllToolConfigs } from '@/lib/tools/tool-config';
-import { PHASE_A_REGION_SLUGS } from '@/lib/places/region-config';
-import { pickLatestDate } from './date-utils';
+} from '../places/place-content.ts';
+import { SITE_CONFIG } from './metadata.ts';
+import { getAllToolConfigs } from '../tools/tool-config.ts';
+import { PHASE_A_REGION_SLUGS } from '../places/region-config.ts';
+import { pickLatestDate } from './date-utils.ts';
 
 function getLatestPostDate(): string | undefined {
   return pickLatestDate(getAllPosts().map(post => post.date));
