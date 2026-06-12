@@ -107,6 +107,10 @@ export function getAllPosts(): BlogPostSummary[] {
       categorySlug,
       ogImage: data.ogImage,
       homeFeatured: data.homeFeatured,
+      placeIds: data.placeIds || [],
+      regions: data.regions || [],
+      ageBands: data.ageBands || [],
+      indoorOutdoor: data.indoorOutdoor,
     };
   });
 
@@ -160,6 +164,10 @@ export function getPostBySlug(
       categorySlug: finalCategorySlug,
       ogImage: data.ogImage,
       homeFeatured: data.homeFeatured,
+      placeIds: data.placeIds || [],
+      regions: data.regions || [],
+      ageBands: data.ageBands || [],
+      indoorOutdoor: data.indoorOutdoor,
       content,
     };
   } catch (error) {
