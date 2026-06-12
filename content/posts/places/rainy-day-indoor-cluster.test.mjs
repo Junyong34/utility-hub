@@ -10,7 +10,24 @@ const EXPECTED_POSTS = [
   {
     slug: 'capital-area-rainy-day-indoor-places',
     title: '수도권 비 오는 날 아이와 갈 만한 실내 장소',
+    placeIds: [
+      'national-children-museum',
+      'seoul-national-museum-of-korea',
+      'seoul-sangsangnara',
+      'songpa-book-museum-bookium',
+      'gyeonggi-children-museum',
+      'goyang-children-museum',
+      'incheon-children-science-museum',
+      'national-museum-of-world-writing',
+      'bucheon-robopark',
+      'national-aviation-museum',
+    ],
     requiredLinks: [
+      '/places',
+      '/places/seoul',
+      '/places/incheon',
+      '/places/gyeonggi-south',
+      '/places/gyeonggi-north',
       '/blog/places/seoul-rainy-day-indoor-places',
       '/blog/places/rainy-day-free-low-cost-indoor-places',
       '/blog/places/same-day-indoor-places-without-reservation',
@@ -18,62 +35,182 @@ const EXPECTED_POSTS = [
       '/blog/places/gyeonggi-south-rainy-day-indoor-places',
       '/blog/places/toddlers-rainy-day-indoor-places',
       '/blog/places/preschoolers-rainy-day-indoor-places',
+      '/blog/parking/songpa-book-museum-bookium-parking',
+      '/blog/parking/national-aviation-museum-parking',
+      '/blog/parking/gyeonggi-children-museum-parking',
+      '/blog/parking/incheon-children-science-museum-parking',
     ],
   },
   {
     slug: 'seoul-rainy-day-indoor-places',
     title: '서울 비 오는 날 아이랑 갈 만한 실내 장소',
+    placeIds: [
+      'national-children-museum',
+      'seoul-sangsangnara',
+      'songpa-book-museum-bookium',
+      'national-aviation-museum',
+      'seoul-life-museum-ompang',
+      'seoul-public-kids-cafe-hwagok3',
+      'seoul-public-kids-cafe-omok',
+      'dooly-museum',
+      'seoul-baekje-childrens-museum',
+      'national-children-science-center',
+    ],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
+      '/blog/places/rainy-day-free-low-cost-indoor-places',
+      '/blog/places/toddlers-rainy-day-indoor-places',
       '/places/seoul',
+      '/places?rain=true',
+      '/blog/parking/songpa-book-museum-bookium-parking',
+      '/blog/parking/seoul-sangsangnara-parking',
+      '/blog/parking/national-children-museum-parking',
+      '/blog/parking/seoul-baekje-childrens-museum-parking',
     ],
   },
   {
     slug: 'rainy-day-free-low-cost-indoor-places',
     title: '비 오는 날 무료·저렴한 실내 나들이',
+    placeIds: [
+      'seoul-life-museum-ompang',
+      'songpa-book-museum-bookium',
+      'national-children-museum',
+      'incheon-student-science-museum',
+      'ganghwa-history-museum',
+      'ganghwa-natural-history-museum',
+      'gyeyang-fortress-museum',
+      'national-institute-of-biological-resources',
+      'gyeonggi-south-isarang-cityhall',
+      'gyeonggi-south-ansan-ilovemom-cafe',
+      'bucheon-ilovemom-cafe-bambak',
+    ],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
+      '/blog/benefits/seoul-public-kids-cafe-guide',
+      '/blog/benefits/2026-parenting-benefits-guide',
       '/benefits',
+      '/places?free=true',
     ],
   },
   {
     slug: 'same-day-indoor-places-without-reservation',
     title: '예약 없이 갈 수 있는 실내 아이 나들이',
+    placeIds: [
+      'seoul-sangsangnara',
+      'seoul-national-museum-of-korea',
+      'national-aviation-museum',
+      'incheon-oktokki-space-center',
+      'incheon-naughty-child-cheongna',
+      'incheon-children-science-museum',
+      'gyeonggi-children-museum',
+      'bucheon-robopark',
+      'korea-comics-museum',
+      'railroad-museum',
+    ],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
+      '/blog/places/seoul-rainy-day-indoor-places',
       '/places?indoor=true',
+      '/places?rain=true',
+    ],
+    requiredText: [
+      '예약 없이 갈 수 있는 곳이라도 주말, 방학, 우천일에는 현장 대기나 회차 마감이 생길 수 있습니다.',
     ],
   },
   {
     slug: 'incheon-rainy-day-indoor-places',
     title: '인천 비 오는 날 아이랑 갈 만한 실내 장소',
+    placeIds: [
+      'incheon-children-science-museum',
+      'national-museum-of-world-writing',
+      'incheon-metropolitan-city-museum',
+      'incheon-urban-history-museum',
+      'national-incheon-marine-museum',
+      'geomdan-prehistory-museum',
+      'incheon-student-science-museum',
+      'gyeyang-fortress-museum',
+      'incheon-naughty-child-cheongna',
+      'incheon-oktokki-space-center',
+    ],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
+      '/blog/places/rainy-day-free-low-cost-indoor-places',
       '/places/incheon',
+      '/places?rain=true',
+      '/blog/parking/incheon-children-science-museum-parking',
+      '/blog/parking/national-museum-of-world-writing-parking',
+      '/blog/parking/national-incheon-marine-museum-parking',
     ],
   },
   {
     slug: 'gyeonggi-south-rainy-day-indoor-places',
     title: '경기 남부 비 오는 날 아이랑 갈 만한 실내 장소',
+    placeIds: [
+      'gyeonggi-children-museum',
+      'bucheon-robopark',
+      'korea-comics-museum',
+      'railroad-museum',
+      'korea-job-world-children-experience-center',
+      'yongin-children-imagination-forest',
+      'byeolmadang-kids-suwon',
+      'gyeonggi-south-isarang-cityhall',
+      'gyeonggi-south-anyang-ilovemom-cafe',
+      'bucheon-ilovemom-cafe-bambak',
+    ],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
+      '/blog/places/preschoolers-rainy-day-indoor-places',
       '/places/gyeonggi-south',
+      '/places?rain=true',
+      '/blog/parking/gyeonggi-children-museum-parking',
+      '/blog/parking/bucheon-robopark-parking',
+      '/blog/parking/korea-comics-museum-parking',
+      '/blog/parking/railroad-museum-parking',
     ],
   },
   {
     slug: 'toddlers-rainy-day-indoor-places',
     title: '1~3세 아이와 비 오는 날 갈 만한 실내 장소',
+    placeIds: [
+      'seoul-public-kids-cafe-jegi',
+      'seoul-public-kids-cafe-jangan1',
+      'seoul-public-kids-cafe-guro4',
+      'seoul-public-kids-cafe-omok',
+      'seoul-public-kids-cafe-beon3',
+      'gyeonggi-south-isarang-cityhall',
+      'gyeonggi-south-ansan-ilovemom-cafe',
+      'gyeonggi-south-hwaseong-ilovemom-bansong',
+      'incheon-aisarang-dream-center-jung-gu-1',
+      'incheon-baby-angels-homeplus-songdo',
+    ],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
+      '/blog/places/rainy-day-free-low-cost-indoor-places',
       '/places?age=1-3y',
+      '/places?indoor=true',
+      '/blog/benefits/seoul-public-kids-cafe-guide',
     ],
   },
   {
     slug: 'preschoolers-rainy-day-indoor-places',
     title: '3~6세 아이와 비 오는 날 갈 만한 실내 장소',
+    placeIds: [
+      'seoul-sangsangnara',
+      'national-children-museum',
+      'seoul-baekje-childrens-museum',
+      'national-aviation-museum',
+      'gyeonggi-children-museum',
+      'bucheon-robopark',
+      'korea-comics-museum',
+      'incheon-children-science-museum',
+      'national-museum-of-world-writing',
+      'incheon-naughty-child-cheongna',
+    ],
     requiredLinks: [
       '/blog/places/capital-area-rainy-day-indoor-places',
+      '/blog/places/gyeonggi-south-rainy-day-indoor-places',
       '/places?age=3-6y',
+      '/places?indoor=true',
     ],
   },
 ];
@@ -96,6 +233,12 @@ const DISALLOWED_PATTERNS = [
   new RegExp('추후 ' + '작성'),
   new RegExp('place' + 'holder', 'i'),
 ];
+
+const SUMMARY_TABLE_HEADER =
+  '| 장소 | 지역 | 권장 연령 | 비용 | 예약 | 주차 | 이럴 때 추천 |';
+const SUMMARY_TABLE_SEPARATOR = '| --- | --- | --- | --- | --- | --- | --- |';
+const TRUST_SENTENCE =
+  '이 글은 **기준일: 2026년 6월**에 확인한 장소 seed와 공식·준공식 출처를 바탕으로 정리했습니다. 운영시간, 요금, 예약 가능 여부는 바뀔 수 있으니 방문 전 공식 페이지를 다시 확인하세요.';
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -128,6 +271,7 @@ test('rainy day indoor posts use the places category and trusted metadata', () =
     assert.equal(data.categorySlug, 'places', post.slug);
     assert.equal(data.indoorOutdoor, 'indoor', post.slug);
     assert.equal(Array.isArray(data.placeIds), true, post.slug);
+    assert.deepEqual(data.placeIds, post.placeIds, post.slug);
     assert.equal(data.placeIds.length >= 8, true, post.slug);
     assert.equal(new Set(data.placeIds).size, data.placeIds.length, post.slug);
     assert.equal(Array.isArray(data.regions), true, post.slug);
@@ -136,9 +280,13 @@ test('rainy day indoor posts use the places category and trusted metadata', () =
     assert.equal(data.ageBands.length >= 1, true, post.slug);
     assert.equal(data.tags.includes('비 오는 날'), true, post.slug);
     assert.equal(data.tags.includes('아이와 실내'), true, post.slug);
+    assert.equal(
+      data.excerpt.length >= 80 && data.excerpt.length <= 120,
+      true,
+      `${post.slug} excerpt length`
+    );
     assert.match(data.excerpt, /아이|실내|비/, post.slug);
-    assert.match(content, /기준일: 2026년 6월/, post.slug);
-    assert.match(content, /방문 전 공식 페이지/, post.slug);
+    assert.match(content, new RegExp(escapeRegExp(TRUST_SENTENCE)), post.slug);
   }
 });
 
@@ -161,6 +309,25 @@ test('rainy day indoor posts have the required editorial structure and links', (
         `${post.slug} ${link}`
       );
     }
+
+    for (const requiredText of post.requiredText ?? []) {
+      assert.match(
+        content,
+        new RegExp(escapeRegExp(requiredText)),
+        `${post.slug} ${requiredText}`
+      );
+    }
+
+    assert.match(
+      content,
+      new RegExp(escapeRegExp(SUMMARY_TABLE_HEADER)),
+      `${post.slug} summary table header`
+    );
+    assert.match(
+      content,
+      new RegExp(escapeRegExp(SUMMARY_TABLE_SEPARATOR)),
+      `${post.slug} summary table separator`
+    );
 
     for (const pattern of DISALLOWED_PATTERNS) {
       assert.equal(pattern.test(content), false, `${post.slug} ${pattern}`);
