@@ -107,7 +107,7 @@ export function buildPlaceListSearchParams(options: {
   page?: number;
   limit?: number;
   region?: RegionSlug | null;
-  filters?: Partial<PlaceListFilters>;
+  filters?: Partial<PlaceListQueryOptions>;
 }): URLSearchParams {
   const params = new URLSearchParams();
   const filters = normalizePlaceListFilters(options.filters ?? {});

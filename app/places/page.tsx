@@ -15,9 +15,20 @@ interface PageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export const metadata: Metadata = createMetadata(
-  createPlacesMetadataInput(SITE_CONFIG.url)
-);
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const resolvedSearchParams = await searchParams;
+  const page = queryPlaceList(resolvedSearchParams);
+
+  return createMetadata(
+    createPlacesMetadataInput(SITE_CONFIG.url, {
+      ...resolvedSearchParams,
+      page: page.currentPage,
+      totalPages: page.totalPages,
+    })
+  );
+}
 
 export default async function PlacesPage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;

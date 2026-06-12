@@ -1,3 +1,13 @@
+import {
+  buildAbsolutePlaceCanonicalUrl,
+  hasActivePlaceListFilters,
+} from '../places/place-pagination.ts';
+import {
+  normalizePositiveInteger,
+  type PlaceListQueryOptions,
+} from '../places/place-list-contract.ts';
+import type { RegionSlug } from '../../types/place-source.ts';
+
 export interface MetadataInput {
   title: string;
   description: string;
@@ -11,6 +21,10 @@ interface RegionMetadataSource {
   name: string;
   description: string;
 }
+
+type PlaceListMetadataOptions = Partial<PlaceListQueryOptions> & {
+  totalPages?: number;
+};
 
 function normalizeBaseUrl(baseUrl: string): string {
   return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
@@ -44,14 +58,24 @@ export function createHomeMetadataInput(baseUrl: string): MetadataInput {
   };
 }
 
-export function createPlacesMetadataInput(baseUrl: string): MetadataInput {
+export function createPlacesMetadataInput(
+  baseUrl: string,
+  options: PlaceListMetadataOptions = {}
+): MetadataInput {
   const siteUrl = normalizeBaseUrl(baseUrl);
+  const page = normalizeMetadataPage(options);
+  const hasFilters = hasActivePlaceListFilters(options);
+  const pageSuffix = !hasFilters && page > 1 ? ` - 페이지 ${page}` : '';
 
   return {
-    title: '아이와 가볼 곳',
+    title: `아이와 가볼 곳${pageSuffix}`,
     description:
       '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 입니다. 출처와 확인 시점을 함께 안내합니다.',
-    canonical: `${siteUrl}/places`,
+    canonical: buildAbsolutePlaceCanonicalUrl(siteUrl, {
+      page,
+      totalPages: options.totalPages,
+      filters: options,
+    }),
     keywords: [
       '아이와 가볼 곳',
       '서울 아이와 가볼 곳',
@@ -86,14 +110,23 @@ export function createBenefitsMetadataInput(baseUrl: string): MetadataInput {
 
 export function createPlaceRegionMetadataInput(
   baseUrl: string,
-  region: RegionMetadataSource
+  region: RegionMetadataSource,
+  options: PlaceListMetadataOptions = {}
 ): MetadataInput {
   const siteUrl = normalizeBaseUrl(baseUrl);
+  const page = normalizeMetadataPage(options);
+  const hasFilters = hasActivePlaceListFilters(options);
+  const pageSuffix = !hasFilters && page > 1 ? ` - 페이지 ${page}` : '';
 
   return {
-    title: `${region.name} 아이와 가볼 곳`,
+    title: `${region.name} 아이와 가볼 곳${pageSuffix}`,
     description: region.description,
-    canonical: `${siteUrl}/places/${region.slug}`,
+    canonical: buildAbsolutePlaceCanonicalUrl(siteUrl, {
+      region: region.slug as RegionSlug,
+      page,
+      totalPages: options.totalPages,
+      filters: options,
+    }),
     keywords: [
       `${region.name} 아이와 가볼 곳`,
       `${region.name} 키즈카페`,
@@ -101,6 +134,16 @@ export function createPlaceRegionMetadataInput(
       `${region.name} 실내 놀거리`,
     ],
   };
+}
+
+function normalizeMetadataPage(options: PlaceListMetadataOptions): number {
+  const page = normalizePositiveInteger(options.page, 1);
+
+  if (!options.totalPages) {
+    return page;
+  }
+
+  return Math.min(page, normalizePositiveInteger(options.totalPages, 1));
 }
 
 export function createBlogIndexMetadataInput(baseUrl: string): MetadataInput {

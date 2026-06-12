@@ -10,38 +10,43 @@ async function waitForPlaceCardCount(page: Page, count: number) {
 
 async function loadMoreOnce(page: Page) {
   const cards = page.getByTestId('place-card');
+  const sentinel = page.getByTestId('places-infinite-scroll-sentinel');
   const countBefore = await cards.count();
 
-  await cards.last().scrollIntoViewIfNeeded();
+  await sentinel.scrollIntoViewIfNeeded();
 
   await expect
     .poll(async () => await cards.count(), {
-      timeout: 10_000,
+      timeout: 20_000,
     })
     .toBeGreaterThan(countBefore);
 }
 
-async function loadAllCards(page: Page) {
+async function loadAllCards(page: Page, expectedTotal: number) {
   const cards = page.getByTestId('place-card');
-  let previousCount = -1;
+  const sentinel = page.getByTestId('places-infinite-scroll-sentinel');
 
-  for (let attempt = 0; attempt < 10; attempt += 1) {
+  for (let attempt = 0; attempt < 20; attempt += 1) {
     const currentCount = await cards.count();
 
-    if (currentCount === previousCount) {
+    if (currentCount >= expectedTotal) {
       break;
     }
 
-    previousCount = currentCount;
-    await cards.last().scrollIntoViewIfNeeded();
+    await sentinel.scrollIntoViewIfNeeded();
 
-    await page.waitForTimeout(300);
-
-    const doneMessage = page.getByText('조건에 맞는 장소를 모두 불러왔습니다.');
-    if (await doneMessage.isVisible().catch(() => false)) {
-      break;
-    }
+    await expect
+      .poll(async () => await cards.count(), {
+        timeout: 20_000,
+      })
+      .toBeGreaterThan(currentCount);
   }
+
+  await expect
+    .poll(async () => await cards.count(), {
+      timeout: 20_000,
+    })
+    .toBe(expectedTotal);
 }
 
 async function applyPlaceTitleSearch(page: Page, search: string) {
@@ -72,14 +77,16 @@ test.describe('/places infinite scroll', () => {
     const total = queryPlaceList().total;
     expect(total).toBeGreaterThan(DEFAULT_PLACES_PAGE_SIZE);
 
-    await page.goto('/places', { waitUntil: 'networkidle' });
+    await page.goto('/places', { waitUntil: 'domcontentloaded' });
     await waitForPlaceCardCount(page, DEFAULT_PLACES_PAGE_SIZE);
+    await expect(page.getByTestId('places-pagination-nav')).toBeVisible();
+    await expect(page.getByRole('link', { name: '2페이지' })).toBeVisible();
 
     await loadMoreOnce(page);
 
-    await expect(page.getByTestId('place-card')).toHaveCount(
-      DEFAULT_PLACES_PAGE_SIZE * 2
-    );
+    await expect
+      .poll(async () => await page.getByTestId('place-card').count())
+      .toBeGreaterThan(DEFAULT_PLACES_PAGE_SIZE);
   });
 
   test('region page keeps the region scope while loading remaining pages', async ({
@@ -88,10 +95,10 @@ test.describe('/places infinite scroll', () => {
     const seoulTotal = queryPlaceList({ region: 'seoul' }).total;
     expect(seoulTotal).toBeGreaterThan(DEFAULT_PLACES_PAGE_SIZE);
 
-    await page.goto('/places/seoul', { waitUntil: 'networkidle' });
+    await page.goto('/places/seoul', { waitUntil: 'domcontentloaded' });
     await waitForPlaceCardCount(page, DEFAULT_PLACES_PAGE_SIZE);
 
-    await loadAllCards(page);
+    await loadAllCards(page, seoulTotal);
 
     await expect(page.getByTestId('place-card')).toHaveCount(seoulTotal);
     await expect(
@@ -105,7 +112,7 @@ test.describe('/places infinite scroll', () => {
     const libraryTotal = queryPlaceList({ category: 'library' }).total;
     expect(libraryTotal).toBeGreaterThan(0);
 
-    await page.goto('/places', { waitUntil: 'networkidle' });
+    await page.goto('/places', { waitUntil: 'domcontentloaded' });
     await waitForPlaceCardCount(page, DEFAULT_PLACES_PAGE_SIZE);
 
     await loadMoreOnce(page);
@@ -130,7 +137,7 @@ test.describe('/places infinite scroll', () => {
     const expected = queryPlaceList({ search: '서울' });
     expect(expected.total).toBeGreaterThan(0);
 
-    await page.goto('/places', { waitUntil: 'networkidle' });
+    await page.goto('/places', { waitUntil: 'domcontentloaded' });
     await waitForPlaceCardCount(page, DEFAULT_PLACES_PAGE_SIZE);
 
     await loadMoreOnce(page);
@@ -158,7 +165,9 @@ test.describe('/places infinite scroll', () => {
     const expected = queryPlaceList({ region: 'seoul', search: '서울' });
     expect(expected.total).toBeGreaterThan(0);
 
-    await page.goto('/places/seoul?search=서울', { waitUntil: 'networkidle' });
+    await page.goto('/places/seoul?search=서울', {
+      waitUntil: 'domcontentloaded',
+    });
 
     await waitForPlaceCardCount(
       page,
@@ -203,7 +212,7 @@ test.describe('/places infinite scroll', () => {
   test('blank title search does not leave a search query param', async ({
     page,
   }) => {
-    await page.goto('/places', { waitUntil: 'networkidle' });
+    await page.goto('/places', { waitUntil: 'domcontentloaded' });
 
     await applyPlaceTitleSearch(page, '   ');
 

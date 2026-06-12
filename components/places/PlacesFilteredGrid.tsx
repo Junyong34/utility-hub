@@ -9,6 +9,7 @@ import {
   placesFilterParsers,
 } from './PlacesFilterBar';
 import { PlaceCard } from './PlaceCard';
+import { PlacesPaginationNav } from './PlacesPaginationNav';
 import { PLACES_MUTED_SURFACE_CLASS } from './place-theme';
 import {
   buildPlaceListSearchParams,
@@ -52,8 +53,14 @@ export function PlacesFilteredGrid({
   );
 
   const queryKey = useMemo(
-    () => ['places', regionSlug ?? 'all', filters] as const,
-    [filters, regionSlug]
+    () =>
+      [
+        'places',
+        regionSlug ?? 'all',
+        initialPage.currentPage,
+        filters,
+      ] as const,
+    [filters, initialPage.currentPage, regionSlug]
   );
 
   const isInitialQuery = useMemo(
@@ -99,6 +106,8 @@ export function PlacesFilteredGrid({
   const allLoadedPlaces = data?.pages.flatMap(page => page.places) ?? [];
   const matchedTotalCount = data?.pages[0]?.total ?? initialPage.total;
   const scopeTotalCount = data?.pages[0]?.scopeTotal ?? initialPage.scopeTotal;
+  const currentPage = data?.pages[0]?.currentPage ?? initialPage.currentPage;
+  const totalPages = data?.pages[0]?.totalPages ?? initialPage.totalPages;
 
   const loadNextPageIfReady = useCallback(() => {
     const {
@@ -260,6 +269,13 @@ export function PlacesFilteredGrid({
                   </button>
                 ) : null}
               </div>
+
+              <PlacesPaginationNav
+                currentPage={currentPage}
+                totalPages={totalPages}
+                filters={filters}
+                regionSlug={regionSlug}
+              />
             </>
           ) : (
             <div className="rounded-[22px] border border-hairline-soft bg-canvas/70 px-6 py-12 text-center">
