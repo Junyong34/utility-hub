@@ -17,6 +17,35 @@ test('createPlacesMetadataInput은 places  canonical과 제목을 반환한다',
   assert.equal(result.canonical, 'https://www.zento.kr/places');
 });
 
+test('createPlacesMetadataInput은 unfiltered 페이지네이션 canonical을 자기 URL로 반환한다', () => {
+  const result = createPlacesMetadataInput('https://www.zento.kr', {
+    page: '2',
+  });
+
+  assert.equal(result.title, '아이와 가볼 곳 - 페이지 2');
+  assert.equal(result.canonical, 'https://www.zento.kr/places?page=2');
+});
+
+test('createPlacesMetadataInput은 과한 페이지 canonical을 마지막 페이지로 보정한다', () => {
+  const result = createPlacesMetadataInput('https://www.zento.kr', {
+    page: '999',
+    totalPages: 13,
+  });
+
+  assert.equal(result.title, '아이와 가볼 곳 - 페이지 13');
+  assert.equal(result.canonical, 'https://www.zento.kr/places?page=13');
+});
+
+test('createPlacesMetadataInput은 필터 URL을 places 대표 URL로 canonical 처리한다', () => {
+  const result = createPlacesMetadataInput('https://www.zento.kr', {
+    page: '2',
+    free: 'true',
+  });
+
+  assert.equal(result.title, '아이와 가볼 곳');
+  assert.equal(result.canonical, 'https://www.zento.kr/places');
+});
+
 test('createBenefitsMetadataInput은 benefits  canonical과 제목을 반환한다', () => {
   const result = createBenefitsMetadataInput('https://www.zento.kr');
 
@@ -30,6 +59,51 @@ test('createPlaceRegionMetadataInput은 지역  canonical과 제목을 반환한
     name: '서울',
     description: '공공 놀이시설과 박물관 중심의 서울 아이 가볼 곳',
   });
+
+  assert.equal(result.title, '서울 아이와 가볼 곳');
+  assert.equal(result.canonical, 'https://www.zento.kr/places/seoul');
+});
+
+test('createPlaceRegionMetadataInput은 지역 페이지네이션 canonical을 자기 URL로 반환한다', () => {
+  const result = createPlaceRegionMetadataInput(
+    'https://www.zento.kr',
+    {
+      slug: 'seoul',
+      name: '서울',
+      description: '공공 놀이시설과 박물관 중심의 서울 아이 가볼 곳',
+    },
+    { page: '2' }
+  );
+
+  assert.equal(result.title, '서울 아이와 가볼 곳 - 페이지 2');
+  assert.equal(result.canonical, 'https://www.zento.kr/places/seoul?page=2');
+});
+
+test('createPlaceRegionMetadataInput은 과한 지역 페이지 canonical을 마지막 페이지로 보정한다', () => {
+  const result = createPlaceRegionMetadataInput(
+    'https://www.zento.kr',
+    {
+      slug: 'seoul',
+      name: '서울',
+      description: '공공 놀이시설과 박물관 중심의 서울 아이 가볼 곳',
+    },
+    { page: '999', totalPages: 6 }
+  );
+
+  assert.equal(result.title, '서울 아이와 가볼 곳 - 페이지 6');
+  assert.equal(result.canonical, 'https://www.zento.kr/places/seoul?page=6');
+});
+
+test('createPlaceRegionMetadataInput은 지역 필터 URL을 지역 대표 URL로 canonical 처리한다', () => {
+  const result = createPlaceRegionMetadataInput(
+    'https://www.zento.kr',
+    {
+      slug: 'seoul',
+      name: '서울',
+      description: '공공 놀이시설과 박물관 중심의 서울 아이 가볼 곳',
+    },
+    { page: '2', free: 'true' }
+  );
 
   assert.equal(result.title, '서울 아이와 가볼 곳');
   assert.equal(result.canonical, 'https://www.zento.kr/places/seoul');

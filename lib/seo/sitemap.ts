@@ -4,10 +4,13 @@ import {
   getPublishablePlaces,
   getPublishablePlacesByRegion,
 } from '../places/place-content.ts';
+import { queryPlaceList } from '../places/place-list-query.ts';
+import { buildPlacePaginationHref } from '../places/place-pagination.ts';
 import { SITE_CONFIG } from './metadata.ts';
 import { getAllToolConfigs } from '../tools/tool-config.ts';
 import { PHASE_A_REGION_SLUGS } from '../places/region-config.ts';
 import { pickLatestDate } from './date-utils.ts';
+import type { RegionSlug } from '../../types/place-source.ts';
 
 function getLatestPostDate(): string | undefined {
   return pickLatestDate(getAllPosts().map(post => post.date));
@@ -183,7 +186,66 @@ export function collectPlaceEntries(): SitemapEntry[] {
     priority: 0.72,
   }));
 
-  return [...regionEntries, ...detailEntries];
+  return [
+    ...regionEntries,
+    ...collectPlacePaginationEntries(),
+    ...detailEntries,
+  ];
+}
+
+function collectPlacePaginationEntries(): SitemapEntry[] {
+  const latestPlaceDate = getLatestPlaceDate() ?? new Date();
+  const globalEntries = buildPlacePaginationEntries({
+    totalPages: queryPlaceList().totalPages,
+    lastModified: latestPlaceDate,
+    priority: 0.68,
+  });
+
+  const regionPaginationEntries = PHASE_A_REGION_SLUGS.flatMap(region => {
+    const latestRegionDate =
+      pickLatestDate(
+        getPublishablePlacesByRegion(region).flatMap(place => [
+          place.lastObservedAt,
+          place.verifiedAt,
+        ])
+      ) ?? latestPlaceDate;
+
+    return buildPlacePaginationEntries({
+      region,
+      totalPages: queryPlaceList({ region }).totalPages,
+      lastModified: latestRegionDate,
+      priority: 0.7,
+    });
+  });
+
+  return [...globalEntries, ...regionPaginationEntries];
+}
+
+function buildPlacePaginationEntries({
+  region,
+  totalPages,
+  lastModified,
+  priority,
+}: {
+  region?: RegionSlug;
+  totalPages: number;
+  lastModified: Date | string;
+  priority: number;
+}): SitemapEntry[] {
+  if (totalPages <= 1) {
+    return [];
+  }
+
+  return Array.from({ length: totalPages - 1 }, (_, index) => {
+    const page = index + 2;
+
+    return {
+      url: `${SITE_CONFIG.url}${buildPlacePaginationHref({ region, page, totalPages })}`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority,
+    };
+  });
 }
 
 /**

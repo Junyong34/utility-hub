@@ -28,13 +28,24 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: PageProps): Promise<Metadata> {
   const { region: regionSlug } = await params;
+  const resolvedSearchParams = await searchParams;
   const region = getRegionBySlug(regionSlug);
   if (!region) return {};
 
+  const page = queryPlaceList({
+    ...resolvedSearchParams,
+    region: regionSlug as RegionSlug,
+  });
+
   return createMetadata(
-    createPlaceRegionMetadataInput(SITE_CONFIG.url, region)
+    createPlaceRegionMetadataInput(SITE_CONFIG.url, region, {
+      ...resolvedSearchParams,
+      page: page.currentPage,
+      totalPages: page.totalPages,
+    })
   );
 }
 
