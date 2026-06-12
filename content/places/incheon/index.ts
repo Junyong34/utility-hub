@@ -60,6 +60,39 @@ export const INCHEON_PLACES = [
     rainFriendly: true,
     stayMinutes: 150,
     operatorType: 'commercial',
+    externalBlogLinks: [
+      {
+        title: '32개월 쌍둥이 너무 만족했던 너티차일드 청라 키즈카페',
+        href: 'https://blog.naver.com/soyoung7714/224208199734',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차, 네이버 예약, 가격과 영유아 이용 흐름을 방문자 관점에서 확인할 수 있는 후기입니다.',
+        publishedAt: '2026-03-07',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'reservation', 'price', 'photos'],
+      },
+      {
+        title: '너티차일드 청라점 | 인천 청라 키즈카페 | 실내놀이터',
+        href: 'https://blog.naver.com/dfkj0809/223928400346',
+        sourceLabel: 'Naver Blog',
+        description:
+          '재방문 맥락과 주차, 이용요금, 실내 놀이 구성을 함께 볼 수 있는 후기입니다.',
+        publishedAt: '2025-07-10',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'price', 'photos'],
+      },
+      {
+        title:
+          '청라 너티차일드 인천 키즈카페 7살 아이랑 갈만한 곳 슬라이드 카트까지~',
+        href: 'https://blog.naver.com/alswldi57/223814034099',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차 무료 시간, 요금, 7세 아이 이용 포인트를 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-03-29',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'price', 'photos'],
+      },
+    ],
     thumbnailImage: '/images/places/incheon-naughty-child-cheongna.webp',
   },
   {
@@ -90,6 +123,39 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '홈플러스 공식 점포 페이지와 전국 플레이타임 직영점 매장 위치 안내 PDF에서 지점 신호를 확인했다.',
+    externalBlogLinks: [
+      {
+        title: '인천송도 챔피언더블랙벨트 아이랑갈만한곳 추천',
+        href: 'https://blog.naver.com/woo7-4/223933959779',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차 등록, 이용요금, 재방문 맥락을 방문자 관점에서 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-07-15',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'price', 'photos'],
+      },
+      {
+        title:
+          '인천 송도 대형카페 부모가 편한 키즈카페 챔피언더블랙벨트 홈플러스 송도점 비싸도 가는 이유',
+        href: 'https://blog.naver.com/dalrichrich/224108475721',
+        sourceLabel: 'Naver Blog',
+        description:
+          '비 오는 날 방문 맥락과 무료 주차권, 부모 대기 관점을 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-12-13',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'congestion', 'photos'],
+      },
+      {
+        title: '챔피언더블랙벨트 홈플러스 송도점',
+        href: 'https://blog.naver.com/ccr9051/223897446370',
+        sourceLabel: 'Naver Blog',
+        description:
+          '큰 아이에게 맞는 스포츠형 키즈카페인지 판단할 수 있는 방문 후기입니다.',
+        publishedAt: '2025-06-12',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['age-fit', 'photos'],
+      },
+    ],
     thumbnailImage:
       '/images/places/incheon-champion-black-belt-homeplus-songdo.webp',
   },
@@ -121,6 +187,39 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '홈플러스 공식 점포 페이지에서 임대매장명을 확인했다. 수영·놀이 세부 운영 방식은 방문 전 재확인 필요.',
+    externalBlogLinks: [
+      {
+        title:
+          '인천 송도 아기수영장 / 베이비엔젤스 홈플러스 인천송도점 / 3개월 아기 수영하러 다녀왔어요',
+        href: 'https://blog.naver.com/ohhappy__/224309944941',
+        sourceLabel: 'Naver Blog',
+        description:
+          '3개월 아기 방문 맥락과 주차, 홈플러스 동선을 확인할 수 있는 최신 후기입니다.',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'recent-visit', 'photos'],
+      },
+      {
+        title:
+          '[내돈내산] 인천 8개월 아기랑 여름에 갈만한 곳 실내 수영장 베이비엔젤스 송도점 후기',
+        href: 'https://blog.naver.com/suji099/224294238265',
+        sourceLabel: 'Naver Blog',
+        description:
+          '8개월 아기 방문 준비물, 주차, 실내 수영장 이용 흐름을 확인할 수 있는 후기입니다.',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'recent-visit', 'photos'],
+      },
+      {
+        title:
+          '50일 아기부터 놀 수 있는 수영장 베이비엔젤스 인천 송도점 방문 후기',
+        href: 'https://blog.naver.com/lenm114/224218084954',
+        sourceLabel: 'Naver Blog',
+        description:
+          '영아 동반 가능성과 무료 주차, 수영장 이용 흐름을 볼 수 있는 후기입니다.',
+        publishedAt: '2026-03-16',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'photos'],
+      },
+    ],
     thumbnailImage: '/images/places/incheon-baby-angels-homeplus-songdo.webp',
   },
   {
@@ -151,6 +250,39 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '전국 플레이타임 직영점 매장 위치 안내 PDF와 오픈 보도자료를 함께 확인했다. 세부 요금과 휴무는 방문 전 재확인 필요.',
+    externalBlogLinks: [
+      {
+        title:
+          '인천 구월동 키즈카페 챔피언1250 트레이더스 구월점 만원대 입장 할인 꿀팁',
+        href: 'https://blog.naver.com/binijoa7/224224385056',
+        sourceLabel: 'Naver Blog',
+        description:
+          '입장 할인과 실내 활동성을 함께 확인할 수 있는 2026년 방문 후기입니다.',
+        publishedAt: '2026-03-21',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['price', 'photos'],
+      },
+      {
+        title: '인천 구월동 키즈카페 추천 챔피언 1250 구월 트레이더스 아이랑',
+        href: 'https://blog.naver.com/gftravel/224018461577',
+        sourceLabel: 'Naver Blog',
+        description:
+          '트레이더스 주차장 동선과 아이 연령별 이용 포인트를 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-09-23',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'photos'],
+      },
+      {
+        title: '인천 구월동 키즈카페 챔피언 1250 트레이더스 구월점',
+        href: 'https://blog.naver.com/17_3_31/224019331089',
+        sourceLabel: 'Naver Blog',
+        description:
+          '오픈 초기 방문 맥락과 주차 지원, 시설 구성을 볼 수 있는 후기입니다.',
+        publishedAt: '2025-09-23',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'recent-visit', 'photos'],
+      },
+    ],
     thumbnailImage: '/images/places/incheon-champion-1250-guwol-traders.webp',
   },
   {
@@ -180,6 +312,44 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '홈플러스 공식 점포 페이지에서 임대매장명을 확인했다. 세부 요금과 휴무는 방문 전 재확인 필요.',
+    externalBlogLinks: [
+      {
+        title: '구월동 키즈카페 몬스터파크 6살 2살 주말 종일권 후기',
+        href: 'https://blog.naver.com/khn9312/224313607975',
+        sourceLabel: 'Naver Blog',
+        description:
+          '6살·2살 형제 방문, 주말 종일권, 주차 지원을 확인할 수 있는 최신 후기입니다.',
+        checkedAt: '2026-06-12',
+        selectionReasons: [
+          'parking',
+          'age-fit',
+          'congestion',
+          'recent-visit',
+          'photos',
+        ],
+      },
+      {
+        title:
+          '[인천 구월동] 29개월 아기와 함께 재방문한 대형 키즈카페 "몬스터파크 구월점"',
+        href: 'https://blog.naver.com/da40208/224293921589',
+        sourceLabel: 'Naver Blog',
+        description:
+          '29개월 아기 재방문 맥락과 주차, 시설 구성을 함께 볼 수 있는 후기입니다.',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'recent-visit', 'photos'],
+      },
+      {
+        title:
+          '인천 구월동 아이와 가볼만한 곳, 대형 키즈카페 몬스터파크 구월점',
+        href: 'https://blog.naver.com/findsomething/224164966022',
+        sourceLabel: 'Naver Blog',
+        description:
+          '평일 하원 후 방문, 비용, 주차장 위치를 확인할 수 있는 후기입니다.',
+        publishedAt: '2026-01-30',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'price', 'age-fit'],
+      },
+    ],
     thumbnailImage: '/images/places/incheon-monster-park-guwol.webp',
   },
   {
@@ -210,6 +380,39 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       'NOL 인터파크 판매 페이지로 운영 신호를 확인했다. 상세 주소, 주차, 공연 회차는 발행 전 재확인 필요.',
+    externalBlogLinks: [
+      {
+        title:
+          '송도 인천공룡월드 후기｜공룡쇼부터 공룡라이더까지 하루종일 놀기',
+        href: 'https://blog.naver.com/929424/224306466902',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차, 아기 동반 편의, 공연과 놀이 구성을 확인할 수 있는 최신 후기입니다.',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'recent-visit', 'photos'],
+      },
+      {
+        title:
+          '인천 송도 공룡월드 공연 시간 및 키즈카페 입장료, 주차 정보 총정리',
+        href: 'https://blog.naver.com/gtedhsdo/224221446703',
+        sourceLabel: 'Naver Blog',
+        description:
+          '주차, 입장료, 공연 시간과 39개월·13개월 아이 방문 맥락을 확인할 수 있는 후기입니다.',
+        publishedAt: '2026-03-18',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'price', 'age-fit', 'photos'],
+      },
+      {
+        title: '인천 공룡월드 키즈카페 공연 주차 이용요금 총정리',
+        href: 'https://blog.naver.com/gpffhgn12/224263503448',
+        sourceLabel: 'Naver Blog',
+        description:
+          '공연, 주차, 이용요금 정보를 방문자 관점에서 정리한 후기입니다.',
+        publishedAt: '2026-04-24',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'price', 'photos'],
+      },
+    ],
     thumbnailImage: '/images/places/incheon-dinosaur-world.webp',
   },
   {

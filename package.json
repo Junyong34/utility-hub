@@ -16,6 +16,7 @@
     "type-check": "tsc --noEmit",
     "test:e2e": "playwright test",
     "test:places:contracts": "node --experimental-strip-types --test content/places/link-contract.test.mjs",
+    "test:places:external-blog-links": "node --experimental-strip-types --test content/places/external-blog-link-contract.test.mjs",
     "test:places:links": "playwright test -c playwright.places-links.config.ts",
     "test:places:links:source": "playwright test -c playwright.places-links.config.ts --grep sourceUrl",
     "test:places:links:naver": "playwright test -c playwright.places-links.config.ts --grep naverMapUrl",

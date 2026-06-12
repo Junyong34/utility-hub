@@ -39,6 +39,7 @@ export function PlaceCard({ place }: PlaceCardProps) {
   const placeAddress = place.address ?? place.subRegion;
   const primaryCondition = getPrimaryConditionLabel(place);
   const seasonSummary = getSeasonSummary(place);
+  const externalReviewCount = place.externalBlogLinks?.length ?? 0;
 
   return (
     <Card
@@ -156,6 +157,14 @@ export function PlaceCard({ place }: PlaceCardProps) {
           {seasonSummary ? (
             <Badge variant="outline" className={CONDITION_BADGE_STYLES.season}>
               {seasonSummary}
+            </Badge>
+          ) : null}
+          {externalReviewCount > 0 ? (
+            <Badge
+              variant="outline"
+              className="border-primary/20 bg-primary/7 text-primary-deep"
+            >
+              후기 {Math.min(externalReviewCount, 3)}개
             </Badge>
           ) : null}
         </div>

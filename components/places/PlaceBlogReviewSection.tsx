@@ -1,6 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ExternalLinkIcon } from 'lucide-react';
+import {
+  EXTERNAL_BLOG_LINK_REL,
+  getExternalBlogSourceLabel,
+  isDisplayableExternalBlogLink,
+} from '@/lib/places/place-external-blog-links';
 import { cn } from '@/lib/utils';
 import type {
   PlaceBlogReviewHighlight,
@@ -19,7 +24,9 @@ export function PlaceBlogReviewSection({
   className,
 }: PlaceBlogReviewSectionProps) {
   const visibleReviews = reviews.filter(isValidReview).slice(0, 3);
-  const visibleExternalLinks = externalLinks.filter(isValidLink).slice(0, 3);
+  const visibleExternalLinks = externalLinks
+    .filter(isDisplayableExternalBlogLink)
+    .slice(0, 3);
 
   if (visibleReviews.length === 0 && visibleExternalLinks.length === 0) {
     return null;
@@ -91,7 +98,7 @@ export function PlaceBlogReviewSection({
                 key={link.href}
                 href={link.href}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={EXTERNAL_BLOG_LINK_REL}
                 className="group/link flex w-full min-w-0 items-start justify-between gap-3 overflow-hidden rounded-[13px] border border-primary/15 bg-canvas/88 px-3 py-2.5 text-left text-[13px] font-semibold text-foreground/84 shadow-subtle transition-all duration-200 hover:-translate-y-px hover:border-primary/30 hover:bg-canvas active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35"
               >
                 <span className="min-w-0 flex-1 overflow-hidden">
@@ -104,7 +111,7 @@ export function PlaceBlogReviewSection({
                     </span>
                   ) : null}
                   <span className="mt-0.5 block truncate text-[11px] font-medium text-muted-foreground">
-                    {getExternalSourceLabel(link)}
+                    {getExternalBlogSourceLabel(link)}
                   </span>
                 </span>
                 <ExternalLinkIcon className="mt-1 h-3.5 w-3.5 shrink-0 text-primary-deep/70 transition-transform duration-200 group-hover/link:translate-x-0.5" />
@@ -193,22 +200,6 @@ function isValidReview(review: PlaceBlogReviewHighlight): boolean {
   );
 }
 
-function isValidLink(link: PlaceExternalBlogLink): boolean {
-  return Boolean(link.title.trim() && link.href.trim());
-}
-
 function isExternalHref(href: string): boolean {
   return /^https?:\/\//.test(href);
-}
-
-function getExternalSourceLabel(link: PlaceExternalBlogLink): string {
-  if (link.sourceLabel?.trim()) {
-    return link.sourceLabel;
-  }
-
-  try {
-    return new URL(link.href).hostname.replace(/^www\./, '');
-  } catch {
-    return '외부 블로그';
-  }
 }

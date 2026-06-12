@@ -1425,6 +1425,44 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       'WAUG 판매 페이지로 운영 신호를 확인했다. 신규·이벤트성 운영 가능성이 있어 발행 전 최신 운영 공지를 확인해야 한다.',
+    externalBlogLinks: [
+      {
+        title:
+          '동탄 공룡월드 6세아이 취향 저격 화성 실내 대형키즈카페 주차 할인 후기',
+        href: 'https://blog.naver.com/slphw/224306922398',
+        sourceLabel: 'Naver Blog',
+        description:
+          '6세 아이 방문, 주차, 할인과 실내 대형 키즈카페 체감을 확인할 수 있는 최신 후기입니다.',
+        checkedAt: '2026-06-12',
+        selectionReasons: [
+          'parking',
+          'age-fit',
+          'price',
+          'recent-visit',
+          'photos',
+        ],
+      },
+      {
+        title:
+          '30개월 아기랑 동탄 공룡월드 주말 방문 후기(주차, 입장료, 공연, 식당)',
+        href: 'https://blog.naver.com/jyj05050/224259670706',
+        sourceLabel: 'Naver Blog',
+        description:
+          '30개월 아이 기준 주말 방문, 주차, 입장료, 공연과 식당 흐름을 볼 수 있는 후기입니다.',
+        publishedAt: '2026-04-21',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'price', 'age-fit', 'photos'],
+      },
+      {
+        title: '동탄공룡월드 키즈카페 화성아이와가볼만한곳 추천',
+        href: 'https://blog.naver.com/asw1352/224287818150',
+        sourceLabel: 'Naver Blog',
+        description:
+          '건물 주차와 4시간 무료 주차, 아이 반응을 확인할 수 있는 최근 후기입니다.',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'recent-visit', 'photos'],
+      },
+    ],
     thumbnailImage: '/images/places/gyeonggi-south-dinosaur-world-dongtan.webp',
   },
   {
@@ -1596,6 +1634,39 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '공식 이용시간 페이지에서 지점 운영 여부를 확인했다. 주소, 주차, 요금은 발행 전 최신 예매 화면으로 재확인 필요.',
+    externalBlogLinks: [
+      {
+        title: '15개월 아기 키즈카페 안산 뽀로로파크 가격 시설',
+        href: 'https://blog.naver.com/e_jblog/223977121045',
+        sourceLabel: 'Naver Blog',
+        description:
+          '15개월 아기 기준 가격, 시설, 백화점 주차 편의성을 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-08-20',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'price', 'age-fit'],
+      },
+      {
+        title:
+          '안산 키즈카페 추천 롯데백화점 뽀로로맘앤키즈 가격 및 유아휴게실 후기',
+        href: 'https://blog.naver.com/superego_1/223971691605',
+        sourceLabel: 'Naver Blog',
+        description:
+          '롯데백화점 식사·이동 동선과 유아휴게실, 가격 맥락을 함께 볼 수 있는 후기입니다.',
+        publishedAt: '2025-08-15',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['price', 'age-fit', 'photos'],
+      },
+      {
+        title: '뽀로로맘앤키즈카페 안산 롯데백화점점 솔직 방문 후기',
+        href: 'https://blog.naver.com/felixnco/223971672862',
+        sourceLabel: 'Naver Blog',
+        description:
+          '안산점 현장 분위기와 영유아 실내 나들이 맥락을 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-08-15',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['age-fit', 'photos'],
+      },
+    ],
     thumbnailImage: '/images/places/gyeonggi-south-pororo-park-ansan.webp',
   },
   {
@@ -2303,6 +2374,41 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '키 150cm 이하 어린이 기준. 쇼핑몰 내부 동선과 함께 묶어 방문하기 좋다.',
+    externalBlogLinks: [
+      {
+        title:
+          '☔ 비 오는 추석연휴, 아이 셋 데리고 부천 스타필드 챔피언 블랙벨트 다녀왔어요!',
+        href: 'https://blog.naver.com/sky66love/224041669521',
+        sourceLabel: 'Naver Blog',
+        description:
+          '비 오는 날 아이 셋 방문, 규모와 2시간 이용감을 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-10-15',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['congestion', 'age-fit', 'photos'],
+      },
+      {
+        title:
+          '부천 스타필드시티 키즈카페 챔피언더블랙벨트 솔직후기! 아이들 놀고 먹기 좋은 곳',
+        href: 'https://blog.naver.com/rotc462/223912956299',
+        sourceLabel: 'Naver Blog',
+        description:
+          '스타필드시티 주차, 평일·주말 혼잡감, 아이 놀이 동선을 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-06-26',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'congestion', 'age-fit', 'photos'],
+      },
+      {
+        title:
+          '부천 스타필드 아이랑 다녀온 후기｜키즈존 쇼핑 먹거리 무료주차 총정리',
+        href: 'https://blog.naver.com/eldh011/224185319017',
+        sourceLabel: 'Naver Blog',
+        description:
+          '스타필드 무료주차와 키즈존 전체 동선을 함께 확인할 수 있는 후기입니다.',
+        publishedAt: '2026-02-16',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'recent-visit', 'age-fit'],
+      },
+    ],
     thumbnailImage: '/images/places/champion-black-belt-bucheon.webp',
   },
   {
@@ -2548,6 +2654,29 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '공식 페이지에 어린이 체험 시설 설명이 있으며 별도 이용요금 표기는 없다.',
+    externalBlogLinks: [
+      {
+        title: '수원 스타필드 아이랑 놀거리 토이킹덤',
+        href: 'https://blog.naver.com/rhalsdk91/224041968214',
+        sourceLabel: 'Naver Blog',
+        description:
+          '스타필드 수원 토이킹덤 위치, 주차장, 아이 장난감 체험 동선을 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-10-15',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit', 'photos'],
+      },
+      {
+        title:
+          '수원 스타필드 장난감 매장 토이킹덤 레고 티니핑 건담 등 아이랑 갈만한곳',
+        href: 'https://blog.naver.com/moa_samme/224033847659',
+        sourceLabel: 'Naver Blog',
+        description:
+          '스타필드 수원 내 토이킹덤과 아이 동반 쇼핑 동선을 확인할 수 있는 후기입니다.',
+        publishedAt: '2025-10-07',
+        checkedAt: '2026-06-12',
+        selectionReasons: ['parking', 'age-fit'],
+      },
+    ],
     thumbnailImage: '/images/places/toy-kingdom-suwon.webp',
   },
   {

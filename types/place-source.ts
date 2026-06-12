@@ -166,12 +166,27 @@ export interface PlaceBlogReviewHighlight {
   sourceLabel?: string;
 }
 
+export type PlaceExternalBlogLinkReason =
+  | 'parking'
+  | 'photos'
+  | 'reservation'
+  | 'age-fit'
+  | 'price'
+  | 'congestion'
+  | 'recent-visit';
+
 /** 외부 블로그 후기 링크 */
 export interface PlaceExternalBlogLink {
   title: string;
   href: string;
   sourceLabel?: string;
   description?: string;
+  /** 원문 발행일. 확인 불가 시 생략한다. */
+  publishedAt?: string;
+  /** 큐레이션 확인일. 새로 추가하는 링크는 반드시 입력한다. */
+  checkedAt?: string;
+  /** 이 링크를 선택한 이유. 새로 추가하는 링크는 1개 이상 입력한다. */
+  selectionReasons?: PlaceExternalBlogLinkReason[];
   /** 원문/검색 메타데이터. 외부 이미지 URL은 참고용으로만 보관하고 썸네일로 사용하지 않는다. */
   ogTitle?: string;
   ogDescription?: string;
