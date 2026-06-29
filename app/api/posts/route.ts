@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getAllPosts } from '@/lib/blog/posts';
 import { PostsPageResponse } from '@/lib/blog/types';
+import { queryBlogPostsPage } from '@/lib/blog/pagination';
 
 /**
  * 블로그 포스트 페이지네이션 API
@@ -18,31 +19,22 @@ export async function GET(request: NextRequest) {
     const allPosts = getAllPosts();
 
     // 카테고리 + 검색어 필터링
-    const filteredPosts = allPosts.filter((post) => {
+    const filteredPosts = allPosts.filter(post => {
       const matchesCategory = category ? post.categorySlug === category : true;
       const matchesSearch = search
         ? post.title.toLowerCase().includes(search.toLowerCase()) ||
           post.excerpt?.toLowerCase().includes(search.toLowerCase()) ||
-          post.tags.some((tag) =>
+          post.tags.some(tag =>
             tag.toLowerCase().includes(search.toLowerCase())
           )
         : true;
       return matchesCategory && matchesSearch;
     });
 
-    // 페이지네이션
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
-    const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
-    const hasMore = endIndex < filteredPosts.length;
-
-    const payload: PostsPageResponse = {
-      posts: paginatedPosts,
-      hasMore,
-      total: filteredPosts.length,
-      currentPage: page,
-      totalPages: Math.ceil(filteredPosts.length / limit),
-    };
+    const payload: PostsPageResponse = queryBlogPostsPage(filteredPosts, {
+      page,
+      limit,
+    });
 
     return NextResponse.json(payload);
   } catch (error) {

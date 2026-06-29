@@ -2,6 +2,7 @@ import {
   buildAbsolutePlaceCanonicalUrl,
   hasActivePlaceListFilters,
 } from '../places/place-pagination.ts';
+import { buildBlogPaginationHref } from '../blog/pagination.ts';
 import {
   normalizePositiveInteger,
   type PlaceListQueryOptions,
@@ -25,6 +26,13 @@ interface RegionMetadataSource {
 type PlaceListMetadataOptions = Partial<PlaceListQueryOptions> & {
   totalPages?: number;
 };
+
+type PaginationMetadataOptions = {
+  page?: string | number | boolean | null | undefined | string[];
+  totalPages?: number;
+};
+
+type BlogListMetadataOptions = PaginationMetadataOptions;
 
 function normalizeBaseUrl(baseUrl: string): string {
   return baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
@@ -136,7 +144,7 @@ export function createPlaceRegionMetadataInput(
   };
 }
 
-function normalizeMetadataPage(options: PlaceListMetadataOptions): number {
+function normalizeMetadataPage(options: PaginationMetadataOptions): number {
   const page = normalizePositiveInteger(options.page, 1);
 
   if (!options.totalPages) {
@@ -146,14 +154,22 @@ function normalizeMetadataPage(options: PlaceListMetadataOptions): number {
   return Math.min(page, normalizePositiveInteger(options.totalPages, 1));
 }
 
-export function createBlogIndexMetadataInput(baseUrl: string): MetadataInput {
+export function createBlogIndexMetadataInput(
+  baseUrl: string,
+  options: BlogListMetadataOptions = {}
+): MetadataInput {
   const siteUrl = normalizeBaseUrl(baseUrl);
+  const page = normalizeMetadataPage(options);
+  const pageSuffix = page > 1 ? ` - 페이지 ${page}` : '';
 
   return {
-    title: '블로그',
+    title: `블로그${pageSuffix}`,
     description:
       '생활가이드 및 팁 정보를 모았습니다. 생활 속 선택과 비용 판단에 필요한 내용을 비교표와 체크리스트 중심으로 빠르게 확인할 수 있게 정리합니다.',
-    canonical: `${siteUrl}/blog`,
+    canonical: `${siteUrl}${buildBlogPaginationHref({
+      page,
+      totalPages: options.totalPages,
+    })}`,
     keywords: [
       '생활가이드',
       '생활 팁',

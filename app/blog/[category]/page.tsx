@@ -2,16 +2,24 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllCategories, getPostsByCategory } from '@/lib/blog/posts';
 import { Button } from '@/components/ui/button';
-import { generateMetadata as createMetadata } from '@/lib/seo';
+import { SITE_CONFIG, generateMetadata as createMetadata } from '@/lib/seo';
 import { createPageStructuredData } from '@/lib/seo';
 import { Breadcrumb } from '@/components/seo';
 import { JsonLdMultiple } from '@/components/seo';
 import { BlogContent } from '@/components/blog/BlogContent';
 import { notFound } from 'next/navigation';
-import { getBlogCategoryBreadcrumbItems, getBlogStructuredDataBreadcrumbs } from '@/lib/blog/breadcrumb';
+import {
+  getBlogCategoryBreadcrumbItems,
+  getBlogStructuredDataBreadcrumbs,
+} from '@/lib/blog/breadcrumb';
+import {
+  buildBlogPaginationHref,
+  queryBlogPostsPage,
+} from '@/lib/blog/pagination';
 
 interface PageProps {
   params: Promise<{ category: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 /**
@@ -20,7 +28,7 @@ interface PageProps {
 export async function generateStaticParams() {
   const categories = getAllCategories();
 
-  return categories.map((category) => ({
+  return categories.map(category => ({
     category: category.slug,
   }));
 }
@@ -28,10 +36,14 @@ export async function generateStaticParams() {
 /**
  * 카테고리 페이지 메타데이터
  */
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: PageProps): Promise<Metadata> {
   const { category } = await params;
+  const resolvedSearchParams = await searchParams;
   const categories = getAllCategories();
-  const categoryInfo = categories.find((cat) => cat.slug === category);
+  const categoryInfo = categories.find(cat => cat.slug === category);
 
   if (!categoryInfo) {
     return {
@@ -39,28 +51,46 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const page = queryBlogPostsPage(getPostsByCategory(category), {
+    page: resolvedSearchParams.page,
+  });
+  const pageSuffix =
+    page.currentPage > 1 ? ` - 페이지 ${page.currentPage}` : '';
+
   return createMetadata({
-    title: `${categoryInfo.name} 카테고리`,
+    title: `${categoryInfo.name} 카테고리${pageSuffix}`,
     description: `${categoryInfo.name} 관련 실전 가이드와 참고 글을 모았습니다. 총 ${categoryInfo.count}개의 글이 있습니다.`,
-    canonical: `https://www.zento.kr/blog/${category}`,
+    canonical: `${SITE_CONFIG.url}${buildBlogPaginationHref({
+      categorySlug: category,
+      page: page.currentPage,
+      totalPages: page.totalPages,
+    })}`,
     keywords: [categoryInfo.name, '실전 가이드', '비교', '체크리스트'],
   });
 }
 
 /**
- * 카테고리별 블로그 목록 페이지 (SSG)
+ * 카테고리별 블로그 목록 페이지
+ * page 쿼리 기준으로 서버에서 현재 포스트 묶음을 렌더링합니다.
  */
-export default async function CategoryPage({ params }: PageProps) {
+export default async function CategoryPage({
+  params,
+  searchParams,
+}: PageProps) {
   const { category } = await params;
+  const resolvedSearchParams = await searchParams;
   const posts = getPostsByCategory(category);
   const categories = getAllCategories();
-  const categoryInfo = categories.find((cat) => cat.slug === category);
+  const categoryInfo = categories.find(cat => cat.slug === category);
 
   // 카테고리를 찾지 못한 경우 404 페이지 표시
   if (!categoryInfo) {
     notFound();
   }
 
+  const initialPage = queryBlogPostsPage(posts, {
+    page: resolvedSearchParams.page,
+  });
   const { webPage, breadcrumb } = createPageStructuredData({
     name: `${categoryInfo.name} 카테고리`,
     path: `/blog/${category}`,
@@ -98,7 +128,11 @@ export default async function CategoryPage({ params }: PageProps) {
         </header>
 
         {/* 메인 콘텐츠 */}
-        <BlogContent posts={posts} fixedCategorySlug={category} />
+        <BlogContent
+          posts={posts}
+          fixedCategorySlug={category}
+          initialPage={initialPage}
+        />
 
         {/* 푸터 */}
         <footer className="mt-16 border-t bg-card">

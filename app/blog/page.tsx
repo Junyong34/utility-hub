@@ -7,22 +7,43 @@ import { JsonLdMultiple } from '@/components/seo';
 import { BlogContent } from '@/components/blog/BlogContent';
 import { getBlogStructuredDataBreadcrumbs } from '@/lib/blog/breadcrumb';
 import { createBlogIndexMetadataInput } from '@/lib/seo/site-section-seo';
+import { queryBlogPostsPage } from '@/lib/blog/pagination';
+
+interface PageProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
 
 /**
  * 블로그 메인 페이지 메타데이터
  * - 키워드, OG, Twitter Card 최적화
  */
-export const metadata: Metadata = createMetadata(
-  createBlogIndexMetadataInput(SITE_CONFIG.url)
-);
+export async function generateMetadata({
+  searchParams,
+}: PageProps): Promise<Metadata> {
+  const resolvedSearchParams = await searchParams;
+  const page = queryBlogPostsPage(getAllPosts(), {
+    page: resolvedSearchParams.page,
+  });
+
+  return createMetadata(
+    createBlogIndexMetadataInput(SITE_CONFIG.url, {
+      page: page.currentPage,
+      totalPages: page.totalPages,
+    })
+  );
+}
 
 /**
- * 블로그 목록 페이지 (SSG)
- * 빌드 타임에 모든 포스트를 정적으로 생성합니다
+ * 블로그 목록 페이지
+ * page 쿼리 기준으로 서버에서 현재 포스트 묶음을 렌더링합니다.
  */
-export default function BlogPage() {
+export default async function BlogPage({ searchParams }: PageProps) {
+  const resolvedSearchParams = await searchParams;
   const posts = getAllPosts();
   const categories = getAllCategories();
+  const initialPage = queryBlogPostsPage(posts, {
+    page: resolvedSearchParams.page,
+  });
   const { webPage, breadcrumb } = createPageStructuredData({
     name: '블로그',
     path: '/blog',
@@ -30,15 +51,20 @@ export default function BlogPage() {
     breadcrumbs: getBlogStructuredDataBreadcrumbs(),
   });
 
-  // ItemList Schema: 봇이 무한스크롤 목록을 인식할 수 있도록
-  const itemList = createItemListSchema(posts);
+  // ItemList Schema: 현재 페이지에 실제 렌더링되는 목록 기준
+  const itemList = createItemListSchema(initialPage.posts);
 
   return (
     <>
       <JsonLdMultiple data={[webPage, breadcrumb, itemList]} />
       <div className="relative min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         {/* 메인 콘텐츠 (Hero 포함) */}
-        <BlogContent posts={posts} categories={categories} showHero />
+        <BlogContent
+          posts={posts}
+          categories={categories}
+          initialPage={initialPage}
+          showHero
+        />
 
         {/* 봇을 위한 모든 포스트 링크 (숨김 처리) */}
         <noscript>

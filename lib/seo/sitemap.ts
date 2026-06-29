@@ -1,6 +1,10 @@
 import type { SitemapEntry } from '../../types/seo.ts';
 import { getAllPosts, getAllCategories } from '../blog/posts.ts';
 import {
+  buildBlogPaginationHref,
+  queryBlogPostsPage,
+} from '../blog/pagination.ts';
+import {
   getPublishablePlaces,
   getPublishablePlacesByRegion,
 } from '../places/place-content.ts';
@@ -117,6 +121,67 @@ export function collectBlogCategoryEntries(): SitemapEntry[] {
     changeFrequency: 'weekly' as const,
     priority: 0.75,
   }));
+}
+
+/**
+ * 블로그 목록 페이지네이션 사이트맵 엔트리 생성
+ */
+export function collectBlogPaginationEntries(): SitemapEntry[] {
+  const posts = getAllPosts();
+  const latestPostDate = getLatestPostDate() ?? new Date();
+  const globalEntries = buildBlogPaginationEntries({
+    totalPages: queryBlogPostsPage(posts).totalPages,
+    lastModified: latestPostDate,
+    priority: 0.72,
+  });
+
+  const categoryEntries = getAllCategories().flatMap(category => {
+    const categoryPosts = posts.filter(
+      post => post.categorySlug === category.slug
+    );
+    const latestCategoryDate =
+      pickLatestDate(categoryPosts.map(post => post.date)) ?? latestPostDate;
+
+    return buildBlogPaginationEntries({
+      categorySlug: category.slug,
+      totalPages: queryBlogPostsPage(categoryPosts).totalPages,
+      lastModified: latestCategoryDate,
+      priority: 0.68,
+    });
+  });
+
+  return [...globalEntries, ...categoryEntries];
+}
+
+function buildBlogPaginationEntries({
+  categorySlug,
+  totalPages,
+  lastModified,
+  priority,
+}: {
+  categorySlug?: string;
+  totalPages: number;
+  lastModified: Date | string;
+  priority: number;
+}): SitemapEntry[] {
+  if (totalPages <= 1) {
+    return [];
+  }
+
+  return Array.from({ length: totalPages - 1 }, (_, index) => {
+    const page = index + 2;
+
+    return {
+      url: `${SITE_CONFIG.url}${buildBlogPaginationHref({
+        categorySlug,
+        page,
+        totalPages,
+      })}`,
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority,
+    };
+  });
 }
 
 /**
@@ -256,6 +321,7 @@ export function collectSitemapEntries(): SitemapEntry[] {
     ...collectStaticPageEntries(),
     ...collectPlaceEntries(), // Places 지역
     ...collectBlogCategoryEntries(), // Blog 카테고리
+    ...collectBlogPaginationEntries(), // Blog 목록 페이지네이션
     ...collectBlogPostEntries(), // Blog 포스트
     ...collectBlogTagEntries(), // Blog 태그(구현 전까지 비활성화)
     ...collectToolEntries(), // Tools (자동 추가)

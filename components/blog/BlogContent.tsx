@@ -5,6 +5,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { PostList } from './PostList';
 import { CategoryFilter } from './CategoryFilter';
 import { BlogHeroSection } from './BlogHeroSection';
+import { BlogPaginationNav } from './BlogPaginationNav';
 import type {
   BlogCategory,
   BlogPostSummary,
@@ -12,11 +13,13 @@ import type {
 } from '@/lib/blog/types';
 import { Breadcrumb } from '@/components/seo';
 import { getBlogMainBreadcrumbItems } from '@/lib/blog/breadcrumb';
+import { BLOG_POSTS_PER_PAGE, queryBlogPostsPage } from '@/lib/blog/pagination';
 
 interface BlogContentProps {
   posts: BlogPostSummary[];
   categories?: BlogCategory[];
   fixedCategorySlug?: string | null;
+  initialPage?: PostsPageResponse;
   /** Hero 섹션 표시 여부 (메인 블로그 페이지에서만 true) */
   showHero?: boolean;
 }
@@ -28,7 +31,6 @@ interface ObserverState {
 }
 
 const EMPTY_CATEGORIES: BlogCategory[] = [];
-const POSTS_PER_PAGE = 20;
 
 /**
  * 블로그 콘텐츠 컴포넌트
@@ -38,6 +40,7 @@ export function BlogContent({
   posts,
   categories = EMPTY_CATEGORIES,
   fixedCategorySlug,
+  initialPage,
   showHero = false,
 }: BlogContentProps) {
   // 사용자 탭 선택 상태(메인 블로그 페이지에서만 사용)
@@ -66,7 +69,7 @@ export function BlogContent({
 
   // 카테고리명 조회를 O(1)로 처리하기 위한 인덱스
   const categoryNameBySlug = useMemo(
-    () => new Map(categories.map((category) => [category.slug, category.name])),
+    () => new Map(categories.map(category => [category.slug, category.name])),
     [categories]
   );
   const selectedCategoryName = selectedCategory
@@ -76,22 +79,42 @@ export function BlogContent({
   // 카테고리 + 검색어 필터링된 포스트 (initialData 계산용)
   const filteredPosts = useMemo(() => {
     let result = effectiveCategory
-      ? posts.filter((post) => post.categorySlug === effectiveCategory)
+      ? posts.filter(post => post.categorySlug === effectiveCategory)
       : posts;
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
-        (post) =>
+        post =>
           post.title.toLowerCase().includes(q) ||
           post.excerpt?.toLowerCase().includes(q) ||
-          post.tags.some((tag) => tag.toLowerCase().includes(q))
+          post.tags.some(tag => tag.toLowerCase().includes(q))
       );
     }
     return result;
   }, [effectiveCategory, posts, searchQuery]);
 
+  const hasClientSideFilter = Boolean(
+    (!isFixedCategoryMode && selectedCategory) || searchQuery.trim()
+  );
+
+  const activeInitialPage = useMemo(() => {
+    if (!hasClientSideFilter && initialPage) {
+      return initialPage;
+    }
+
+    return queryBlogPostsPage(filteredPosts, {
+      page: 1,
+      limit: BLOG_POSTS_PER_PAGE,
+    });
+  }, [filteredPosts, hasClientSideFilter, initialPage]);
+
   // 검색어 적용 시 카테고리 쿼리 키 포함
-  const queryKey = ['posts', effectiveCategory, searchQuery];
+  const queryKey = [
+    'posts',
+    effectiveCategory,
+    searchQuery,
+    activeInitialPage.currentPage,
+  ];
 
   // 무한스크롤을 위한 React Query
   const {
@@ -107,7 +130,7 @@ export function BlogContent({
       const currentPage = typeof pageParam === 'number' ? pageParam : 1;
       const params = new URLSearchParams({
         page: currentPage.toString(),
-        limit: POSTS_PER_PAGE.toString(),
+        limit: BLOG_POSTS_PER_PAGE.toString(),
       });
       if (effectiveCategory) {
         params.set('category', effectiveCategory);
@@ -119,21 +142,13 @@ export function BlogContent({
       if (!response.ok) throw new Error('Failed to fetch posts');
       return (await response.json()) as PostsPageResponse;
     },
-    getNextPageParam: (lastPage) => {
+    getNextPageParam: lastPage => {
       return lastPage.hasMore ? lastPage.currentPage + 1 : undefined;
     },
-    initialPageParam: 1,
+    initialPageParam: activeInitialPage.currentPage,
     initialData: {
-      pages: [
-        {
-          posts: filteredPosts.slice(0, POSTS_PER_PAGE),
-          hasMore: filteredPosts.length > POSTS_PER_PAGE,
-          total: filteredPosts.length,
-          currentPage: 1,
-          totalPages: Math.ceil(filteredPosts.length / POSTS_PER_PAGE),
-        },
-      ],
-      pageParams: [1],
+      pages: [activeInitialPage],
+      pageParams: [activeInitialPage.currentPage],
     },
   });
 
@@ -171,8 +186,10 @@ export function BlogContent({
     return () => observer.disconnect();
   }, []);
 
-  const allLoadedPosts = data?.pages.flatMap((page) => page.posts) ?? [];
-  const totalPosts = data?.pages[0]?.total ?? posts.length;
+  const allLoadedPosts = data?.pages.flatMap(page => page.posts) ?? [];
+  const totalPosts = data?.pages[0]?.total ?? activeInitialPage.total;
+  const shouldShowPaginationNav =
+    !hasClientSideFilter && activeInitialPage.totalPages > 1;
 
   const handleSearchSubmit = () => {
     setSearchQuery(searchInput);
@@ -282,6 +299,14 @@ export function BlogContent({
                 </p>
               ) : null}
             </div>
+
+            {shouldShowPaginationNav ? (
+              <BlogPaginationNav
+                currentPage={activeInitialPage.currentPage}
+                totalPages={activeInitialPage.totalPages}
+                categorySlug={isFixedCategoryMode ? fixedCategorySlug : null}
+              />
+            ) : null}
           </>
         )}
       </main>
