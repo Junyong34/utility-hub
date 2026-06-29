@@ -127,6 +127,8 @@ export const BLOG_CATEGORY_THEME_MAP: Record<string, string> = {
   // 혜택/지원금
   benefits: 'mint',
   support: 'mint',
+  // 육아 생활 정보
+  parenting: 'cream',
   // 실전 가이드
   guide: 'cream',
   tips: 'cream',

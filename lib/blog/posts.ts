@@ -17,6 +17,7 @@ const CATEGORY_NAMES: Record<string, string> = {
   lotto: '로또',
   places: '아이와 갈 곳',
   benefits: '혜택·지원금',
+  parenting: '육아',
   uncategorized: '미분류',
 };
 
