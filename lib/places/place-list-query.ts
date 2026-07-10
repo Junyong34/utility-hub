@@ -70,6 +70,10 @@ function applyPlaceListFilters(
       return false;
     }
 
+    if (filters.theme && !place.themes?.includes(filters.theme)) {
+      return false;
+    }
+
     if (filters.age && filters.age !== 'all') {
       const matchesAge =
         place.ageBands.includes('all') || place.ageBands.includes(filters.age);

@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
       search: searchParams.get('search'),
       age: searchParams.get('age'),
       category: searchParams.get('category'),
+      theme: searchParams.get('theme'),
       season: searchParams.get('season'),
       indoor: searchParams.get('indoor'),
       outdoor: searchParams.get('outdoor'),

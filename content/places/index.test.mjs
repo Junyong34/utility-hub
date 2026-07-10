@@ -2,6 +2,42 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 
+const NEW_ANIMAL_PLACE_IDS = [
+  'gyeonggi-south-seoul-grand-park-zoo',
+  'gyeonggi-south-anseong-farmland',
+  'gyeonggi-south-siheung-bugsrium',
+  'gyeonggi-south-osan-bird-park',
+  'gyeonggi-south-yangpyeong-insect-museum',
+  'gyeonggi-south-bucheon-nature-ecology-park',
+  'gyeonggi-south-pangyo-eco-learning-center',
+  'gyeonggi-south-banseoksan-eco-school',
+  'gyeonggi-south-jonghyeon-fishing-village',
+  'gyeonggi-north-zoozooland-goyang',
+  'gyeonggi-north-guri-insect-ecology-center',
+  'gyeonggi-north-gapyeong-sheep-ranch',
+  'gyeonggi-north-sandulsori-namyangju',
+  'gyeonggi-north-yangju-insect-museum',
+  'incheon-grand-park-childrens-zoo',
+  'incheon-neulsolgil-park-sheep-ranch',
+  'incheon-wolmi-traditional-garden-animal-zone',
+  'incheon-sorae-wetland-ecological-park',
+  'incheon-spoonbill-ecology-learning-center',
+  'incheon-daeijakdo-marine-ecology-center',
+  'incheon-masian-tidal-flat-experience',
+  'incheon-yeongam-fishing-village-experience',
+  'incheon-zoobugs-indoor-zoo',
+  'seoul-sea-life-coex-aquarium',
+  'seoul-lotte-world-aquarium',
+  'seoul-zoolung-zoolung-yeongdeungpo',
+  'seoul-zoorarium-geumcheon',
+  'seoul-ydp-insect-experience-center',
+  'seoul-forest-insect-garden-deer',
+  'seoul-gildong-ecological-park',
+  'seoul-noeul-firefly-ecology-center',
+  'seoul-jungnangcheon-environment-center',
+  'seoul-gangseo-wetland-ecological-park',
+];
+
 test('places index exposes all expected region buckets', async () => {
   const { PLACES_BY_REGION } = await import('./index.ts');
 
@@ -22,11 +58,45 @@ test('places index aggregates current region seeds', async () => {
     SEOUL_PLACES,
   } = await import('./index.ts');
 
-  assert.equal(SEOUL_PLACES.length, 50);
-  assert.equal(GYEONGGI_SOUTH_PLACES.length, 58);
-  assert.equal(GYEONGGI_NORTH_PLACES.length, 35);
-  assert.equal(INCHEON_PLACES.length, 33);
-  assert.equal(ALL_PLACES.length, 176);
+  assert.equal(SEOUL_PLACES.length, 108);
+  assert.equal(GYEONGGI_SOUTH_PLACES.length, 67);
+  assert.equal(GYEONGGI_NORTH_PLACES.length, 40);
+  assert.equal(INCHEON_PLACES.length, 42);
+  assert.equal(ALL_PLACES.length, 257);
+});
+
+test('new animal experience places remain publishable and include a visit reference', async () => {
+  const { ALL_PLACES } = await import('./index.ts');
+  const placesById = new Map(ALL_PLACES.map(place => [place.id, place]));
+
+  for (const id of NEW_ANIMAL_PLACE_IDS) {
+    const place = placesById.get(id);
+
+    assert.ok(place, `${id} should exist in the places dataset`);
+    assert.equal(
+      place.themes?.includes('animal'),
+      true,
+      `${id} should be discoverable with the animal theme filter`
+    );
+    assert.equal(
+      ['official_verified', 'semi_verified'].includes(place.verificationStatus),
+      true,
+      `${id} should be publishable`
+    );
+    assert.match(place.sourceUrl, /^https:\/\//, `${id} should cite a source`);
+    assert.equal(Boolean(place.description), true, `${id} needs a summary`);
+    assert.equal(Boolean(place.address), true, `${id} needs an address`);
+    assert.equal(
+      place.externalBlogLinks?.length,
+      1,
+      `${id} should include one recent visit reference`
+    );
+    assert.match(
+      place.externalBlogLinks[0].href,
+      /^https:\/\//,
+      `${id} visit reference should use a direct https URL`
+    );
+  }
 });
 
 test('places index preserves important ids and verification state', async () => {

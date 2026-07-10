@@ -6,6 +6,9 @@
 
 ## 파일 구성
 
+- [`animal-experiences-seoul-2026-07-10.md`](./animal-experiences-seoul-2026-07-10.md)
+- [`animal-experiences-gyeonggi-2026-07-10.md`](./animal-experiences-gyeonggi-2026-07-10.md)
+- [`animal-experiences-incheon-2026-07-10.md`](./animal-experiences-incheon-2026-07-10.md)
 - [`seoul-outing-facilities.md`](./seoul-outing-facilities.md)
 - [`seoul-family-friendly-cafes.md`](./seoul-family-friendly-cafes.md)
 - [`seoul-private-kids-cafes.md`](./seoul-private-kids-cafes.md)
@@ -78,5 +81,11 @@
 - `권장연령`이나 `강점`은 공식 안내 문구가 없을 경우 과장하지 않고 낮은 확신의 표현으로 적었습니다.
 - `*-baby-cafes.md` 문서는 일반 키즈카페 전체가 아니라 `영아 특화+영아 친화` 필터를 다시 건 별도 목록입니다.
 - `*-outing-facilities.md` 문서는 박물관, 체험관, 시립 키즈카페, 주요 나들이 시설처럼 `지역 대표 시설`을 모아 둔 canonical 문서입니다.
+- `animal-experiences-*-2026-07-10.md` 문서는 `themes: ['animal']` 필터에 넣을 동물 관찰·교감·생태 체험 장소와 외부 방문기 링크의 검증 기록입니다.
+
+## 인천 행정구역 메모
+
+- 2026년 7월 1일 행정체제 개편 이후 신규 장소는 공식 최신 주소의 `제물포구`, `영종구` 등을 사용합니다.
+- 기존 seed의 `중구`, `동구`, `서구` 표기는 별도 마이그레이션 전까지 유지하며, 이번 동물 장소 추가 작업에서 소급 변경하지 않습니다.
 
 간단한 결론: 이제 `docs/research/places`는 지역별 canonical 문서를 중심으로 읽으면 되고, 로컬 준공식 문서는 발행 직전 재검증이 필요한 보조 후보군으로 보면 됩니다.

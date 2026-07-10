@@ -23,6 +23,9 @@ export type PlaceCategory =
   | 'culture' // 문화센터/공연시설
   | 'sports'; // 체육시설/수영장
 
+/** 장소의 보조 탐색 테마 */
+export type PlaceTheme = 'animal'; // 동물 관찰·교감·생태 체험
+
 /** 연령대 구분 */
 export type AgeBand =
   | '0-12m' // 0~12개월
@@ -122,6 +125,8 @@ export interface PlaceVerificationMeta {
  * 장소 카드 권장 부가 필드
  */
 export interface PlaceOptionalFields {
+  /** 카테고리를 보완하는 조건별 탐색 테마 */
+  themes?: PlaceTheme[];
   /** 네이버 지도 링크 (없으면 이름+주소 기반 검색 링크 생성 가능) */
   naverMapUrl?: string;
   /** 시설 설명 (1~2문장) */

@@ -19,7 +19,12 @@ import {
 import { PlacesFilterRail } from './PlacesFilterRail';
 import { Input } from '@/components/ui/input';
 import { MAX_PLACE_SEARCH_LENGTH } from '@/lib/places/place-list-contract';
-import type { AgeBand, PlaceCategory, PlaceSeason } from '@/types/place-source';
+import type {
+  AgeBand,
+  PlaceCategory,
+  PlaceSeason,
+  PlaceTheme,
+} from '@/types/place-source';
 import {
   FILTER_CHIP_STYLES,
   PLACES_MUTED_SURFACE_CLASS,
@@ -58,6 +63,8 @@ const CATEGORIES = [
   'sports',
 ] as const;
 
+const THEMES = ['animal'] as const;
+
 export const CATEGORY_LABELS: Record<PlaceCategory, string> = {
   'baby-kids-cafe': '베이비키즈카페',
   'kids-cafe': '키즈카페',
@@ -70,10 +77,15 @@ export const CATEGORY_LABELS: Record<PlaceCategory, string> = {
   sports: '체육시설',
 };
 
+export const THEME_LABELS: Record<PlaceTheme, string> = {
+  animal: '동물 체험',
+};
+
 export const placesFilterParsers = {
   search: parseAsString,
   age: parseAsStringLiteral([...AGE_BANDS, 'all'] as const),
   category: parseAsStringLiteral([...CATEGORIES] as const),
+  theme: parseAsStringLiteral([...THEMES] as const),
   season: parseAsStringLiteral([...SEASONS] as const),
   indoor: parseAsBoolean,
   outdoor: parseAsBoolean,
@@ -87,6 +99,7 @@ export type PlacesFilter = {
   search: string | null;
   age: AgeBand | 'all' | null;
   category: PlaceCategory | null;
+  theme: PlaceTheme | null;
   season: PlaceSeason | null;
   indoor: boolean | null;
   outdoor: boolean | null;
@@ -158,6 +171,13 @@ export function PlacesFilterBar({
     }));
   }
 
+  function toggleTheme(theme: (typeof THEMES)[number]) {
+    setFilters(prev => ({
+      ...prev,
+      theme: prev.theme === theme ? null : theme,
+    }));
+  }
+
   function toggleSeason(season: (typeof SEASONS)[number]) {
     setFilters(prev => ({
       ...prev,
@@ -182,6 +202,7 @@ export function PlacesFilterBar({
     setFilters({
       age: null,
       category: null,
+      theme: null,
       season: null,
       search: null,
       indoor: null,
@@ -329,6 +350,23 @@ export function PlacesFilterBar({
       </div>
 
       <PlacesFilterRail
+        label="테마"
+        labelClassName={cn('border', TONE_STYLES.mint.badge)}
+        trackTestId="places-filter-track-theme"
+      >
+        {THEMES.map(theme => (
+          <button
+            key={theme}
+            type="button"
+            onClick={() => toggleTheme(theme)}
+            className={filterChipClass(filters.theme === theme, 'theme')}
+          >
+            {THEME_LABELS[theme]}
+          </button>
+        ))}
+      </PlacesFilterRail>
+
+      <PlacesFilterRail
         label="계절"
         labelClassName={cn('border', TONE_STYLES.peach.badge)}
         trackTestId="places-filter-track-season"
@@ -416,6 +454,7 @@ export function PlacesSelectedFiltersPanel() {
     setFilters({
       age: null,
       category: null,
+      theme: null,
       season: null,
       search: null,
       indoor: null,
@@ -527,6 +566,14 @@ function useActiveFilterItems(filters: Partial<PlacesFilter>) {
         key: 'category',
         label: CATEGORY_LABELS[filters.category],
         tone: 'category',
+      });
+    }
+
+    if (filters.theme) {
+      items.push({
+        key: 'theme',
+        label: THEME_LABELS[filters.theme],
+        tone: 'theme',
       });
     }
 

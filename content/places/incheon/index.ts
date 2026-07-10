@@ -188,6 +188,7 @@ export const INCHEON_PLACES = [
     region: 'incheon',
     subRegion: '연수구',
     category: 'kids-cafe',
+    themes: ['animal'],
     ageBands: ['1-3y', '3-6y', '6-10y'],
     indoorOutdoor: 'indoor',
     seasons: ['all-season'],
@@ -218,6 +219,7 @@ export const INCHEON_PLACES = [
     region: 'incheon',
     subRegion: '서구',
     category: 'experience',
+    themes: ['animal'],
     ageBands: ['1-3y', '3-6y', '6-10y'],
     indoorOutdoor: 'indoor',
     seasons: ['all-season'],
@@ -612,6 +614,7 @@ export const INCHEON_PLACES = [
     region: 'incheon',
     subRegion: '강화군',
     category: 'museum',
+    themes: ['animal'],
     ageBands: ['1-3y', '3-6y', '6-10y'],
     indoorOutdoor: 'indoor',
     seasons: ['all-season'],
@@ -671,6 +674,7 @@ export const INCHEON_PLACES = [
     region: 'incheon',
     subRegion: '서구',
     category: 'museum',
+    themes: ['animal'],
     ageBands: ['1-3y', '3-6y', '6-10y'],
     indoorOutdoor: 'indoor',
     seasons: ['all-season'],
@@ -818,6 +822,7 @@ export const INCHEON_PLACES = [
     region: 'incheon',
     subRegion: '중구',
     category: 'museum',
+    themes: ['animal'],
     ageBands: ['1-3y', '3-6y', '6-10y'],
     indoorOutdoor: 'indoor',
     seasons: ['all-season'],
@@ -878,6 +883,7 @@ export const INCHEON_PLACES = [
     region: 'incheon',
     subRegion: '부평구',
     category: 'park',
+    themes: ['animal'],
     ageBands: ['1-3y', '3-6y', '6-10y', 'all'],
     indoorOutdoor: 'both',
     seasons: ['all-season', 'spring', 'fall'],
@@ -997,5 +1003,417 @@ export const INCHEON_PLACES = [
       '민간 시설이라 운영시간·휴관·가격 재확인이 필요하다. 맘맘 발견 후 지자체 문화관광 정보를 보조 출처로 확인했다.',
     linkedPostSlugs: [],
     thumbnailImage: '/images/places/incheon-childrens-museum.webp',
+  },
+  {
+    id: 'incheon-grand-park-childrens-zoo',
+    name: '인천대공원 어린이동물원',
+    region: 'incheon',
+    subRegion: '남동구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'outdoor',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl: 'https://www.incheon.go.kr/park/park010214',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 남동구 무네미로 236 인천대공원 내'
+    )}`,
+    description:
+      '인천대공원 안에서 사막여우·미어캣·원숭이·조류 등을 무료로 관찰하는 야외 어린이동물원. 2026년에는 현장 참여형 동물해설 프로그램도 운영한다.',
+    address: '인천광역시 남동구 무네미로 236 인천대공원 내',
+    operatingHours:
+      '10:00-17:00(16:50 입장 마감) / 월요일·1월 1일·설·추석 당일 휴원',
+    priceInfo: '무료',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 90,
+    operatorType: 'public',
+    editorNote:
+      '공식 페이지가 2026-04-14 재개장과 2026년 5~12월 동물해설 프로그램을 명시한다. 해설은 화~토요일 우천 시 미운영이며 별도 예약 없이 현장 참여한다. 동물 먹이주기는 금지되어 있다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '인천 아이랑 가볼만한곳 인천대공원 동물원 주차장 운영 시간',
+        href: 'https://blog.naver.com/j__trip__/224310964462',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이 동반 관람 동선과 현장 분위기를 방문자 관점에서 가늠할 수 있는 후기입니다.',
+      },
+    ],
+  },
+  {
+    id: 'incheon-neulsolgil-park-sheep-ranch',
+    name: '늘솔길공원 양떼목장',
+    region: 'incheon',
+    subRegion: '남동구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'outdoor',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl:
+      'https://biz.namdong.go.kr/dong/locinfo/park/parkDetail.do?dong=nonhyeongojan&loc_seq=235327&order=view2',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 남동구 앵고개로 771 늘솔길근린공원3호'
+    )}`,
+    description:
+      '늘솔길공원 안에서 면양을 가까이 관찰하고 편백숲·숲속놀이터까지 함께 이용하는 무료 야외 나들이 장소. 무장애 숲길이 있어 유아 동반 산책을 붙이기 좋다.',
+    address: '인천광역시 남동구 앵고개로 771 늘솔길근린공원3호',
+    operatingHours:
+      '4-9월 09:30-17:30 / 10-3월 09:30-17:00 / 우천 시 양떼목장 관람 불가',
+    priceInfo: '무료',
+    feedingRoom: false,
+    strollerFriendly: true,
+    rainFriendly: false,
+    stayMinutes: 120,
+    operatorType: 'public',
+    editorNote:
+      '남동구 공식 시설 페이지와 늘솔길숲 공식 시설 페이지에서 양떼목장 운영을 확인했다. 공식 페이지마다 진입 주소와 시간이 조금 달라 주소 기반 지도 검색과 방문 전 당일 안내 확인이 필요하다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '주말 아이랑 가기좋은 곳 인천 늘솔길공원 양떼목장 장미원 먹이 주차 꿀팁',
+        href: 'https://blog.naver.com/blair_____/224295609803',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 둘러본 양떼목장·장미원·주차 동선을 가볍게 참고할 수 있는 후기입니다.',
+      },
+    ],
+  },
+  {
+    id: 'incheon-wolmi-traditional-garden-animal-zone',
+    name: '월미공원 한국전통정원 동물체험존',
+    region: 'incheon',
+    subRegion: '제물포구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'outdoor',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: false,
+    sourceType: 'semi-official',
+    sourceUrl:
+      'https://itour.incheon.go.kr/thmtour/rcmdtour/detail.do?cotId=ITA21121416220183689',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'semi_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 제물포구 북성동1가 75-1 월미공원 한국전통정원'
+    )}`,
+    description:
+      '월미공원 한국전통정원을 산책하며 사슴과 토끼를 관찰할 수 있는 무료 야외 동물 구역. 물범카·전망대와 함께 월미도 가족 코스로 묶기 좋다.',
+    address: '인천광역시 제물포구 북성동1가 75-1 월미공원 한국전통정원',
+    operatingHours: '하절기 09:00-18:00 / 동절기 09:00-17:00',
+    priceInfo: '무료',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 90,
+    operatorType: 'public',
+    editorNote:
+      '인천관광공사 페이지가 2026-06-12 수정본에서 사슴·토끼 동물체험존과 운영시간을 명시한다. 공원 1차 페이지는 동물 구역을 별도 안내하지 않아 개체·먹이 체험 여부는 방문 전 확인한다. 2026-07-01 출범한 제물포구 기준 주소다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '인천 월미공원 나들이│아이들과 즐기는 물범카·토끼·사슴 체험 후기',
+        href: 'https://blog.naver.com/sweetbandi/224009458384',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 물범카·동물 구역을 함께 이용한 방문 흐름을 참고할 수 있는 후기입니다.',
+      },
+    ],
+  },
+  {
+    id: 'incheon-sorae-wetland-ecological-park',
+    name: '소래습지생태공원',
+    region: 'incheon',
+    subRegion: '남동구',
+    category: 'park',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'both',
+    seasons: ['all-season', 'spring', 'fall'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl: 'https://www.incheon.go.kr/park/park010301',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 남동구 소래로154번길 77'
+    )}`,
+    description:
+      '실내 생태전시관에서 갯벌 생물을 배우고 야외 관찰대에서 철새와 습지 생물을 찾는 공공 생태공원. 유아에게는 짧은 전시관·관찰데크 코스로 압축하기 좋다.',
+    address: '인천광역시 남동구 소래로154번길 77',
+    operatingHours:
+      '생태전시관 10:00-18:00(동절기 17:30까지) / 월요일·법정 공휴일 다음날 등 휴관',
+    priceInfo: '무료 / 주차 유료',
+    feedingRoom: false,
+    strollerFriendly: true,
+    rainFriendly: true,
+    stayMinutes: 120,
+    operatorType: 'public',
+    editorNote:
+      '개인은 현장 관람 가능하고 단체는 사전예약이 필요하다. 야외 철새·갯벌 관찰은 날씨와 계절 영향을 받으며 rainFriendly는 실내 전시관을 기준으로 한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '소래습지생태공원 갯벌체험 인천 아이와 가볼만한곳',
+        href: 'https://blog.naver.com/euna841006/223971182953',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 갯벌·습지 동선을 둘러본 방문 흐름을 참고할 수 있는 후기입니다.',
+      },
+    ],
+  },
+  {
+    id: 'incheon-spoonbill-ecology-learning-center',
+    name: '인천광역시 저어새 생태학습관',
+    region: 'incheon',
+    subRegion: '남동구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y'],
+    indoorOutdoor: 'both',
+    seasons: ['all-season'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: false,
+    sourceType: 'official',
+    sourceUrl: 'https://bfs-ecocenter.kr/sub/sub_0501.php',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 남동구 능허대로 562'
+    )}`,
+    description:
+      '저어새와 이동성 물새를 주제로 전시·환경교육·자유 탐조를 운영하는 생태학습관. 신분증을 지참하면 정해진 시간에 쌍안경을 빌려 승기천과 앞마당의 새를 관찰할 수 있다.',
+    address: '인천광역시 남동구 능허대로 562',
+    operatingHours:
+      '월-토 09:00-18:00(점심시간 12:00-13:00) / 공휴일·대체공휴일 등 휴관',
+    priceInfo: '자유 탐조 무료 / 프로그램별 신청 조건 확인 필요',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 90,
+    operatorType: 'public',
+    editorNote:
+      '자유 탐조는 별도 예약 없이 가능하지만 쌍안경 대여에는 신분증이 필요하다. 가족 프로그램·학교 교육은 별도 신청제다. rainFriendly는 실내 학습관 이용 기준이며 실제 탐조는 날씨 영향을 받는다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '2026 저어새 생일잔치_저어새 캐릭터 공모전 수상',
+        href: 'https://blog.naver.com/ttbcub/224288811261',
+        sourceLabel: 'Naver Blog',
+        description:
+          '가족 행사 참여 맥락과 학습관 현장 분위기를 가볍게 확인할 수 있는 후기입니다.',
+      },
+    ],
+  },
+  {
+    id: 'incheon-daeijakdo-marine-ecology-center',
+    name: '대이작도 해양생태관',
+    region: 'incheon',
+    subRegion: '옹진군',
+    category: 'museum',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y'],
+    indoorOutdoor: 'indoor',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'semi-official',
+    sourceUrl:
+      'https://itour.incheon.go.kr/ssst/ssst/detail.do?cotId=ITD21121616000881406',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'semi_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 옹진군 자월면 대이작로159번길 6'
+    )}`,
+    description:
+      '대이작도 주변의 물고기·갯벌·해양생태와 섬 지형을 전시와 VR로 살펴보는 무료 생태관. 섬 체류 일정에서 날씨가 좋지 않을 때 넣기 좋은 짧은 실내 코스다.',
+    address: '인천광역시 옹진군 자월면 대이작로159번길 6',
+    operatingHours: '10:00-14:00 / 화요일·목요일 휴관',
+    priceInfo: '무료',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 60,
+    operatorType: 'public',
+    editorNote:
+      '인천투어 페이지가 2026-03-03 갱신본에서 시간·휴관일·무료입장·체험 프로그램을 안내한다. 도서 지역이므로 여객선 결항, 계절 운영, 현장 사정에 대비해 출항 전 전화 확인이 필요하다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          "인천 섬여행! '옹진군 대이작도 해양생태관' 대이작도를 그대로 담은 풀스크린 디지털 영상 관람",
+        href: 'https://blog.naver.com/kangkanghee00/224065169363',
+        sourceLabel: 'Naver Blog',
+        description:
+          '해양생태관의 전시·영상 관람 흐름을 방문자 관점에서 확인할 수 있는 후기입니다.',
+      },
+    ],
+  },
+  {
+    id: 'incheon-masian-tidal-flat-experience',
+    name: '마시안 갯벌 체험장',
+    region: 'incheon',
+    subRegion: '영종구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y'],
+    indoorOutdoor: 'outdoor',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'semi-official',
+    sourceUrl:
+      'https://itour.incheon.go.kr/ssst/ssst/detail.do?cotId=ITD22012115265412706',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'semi_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 영종구 마시란로 107-8'
+    )}`,
+    description:
+      '영종도 마시안 갯벌에서 동죽·소라 등 갯벌 생물을 찾아보고 조개를 채집하는 어촌계 체험장. 현장에서 장화·호미 등을 빌릴 수 있지만 물때와 준비물을 먼저 확인해야 한다.',
+    address: '인천광역시 영종구 마시란로 107-8',
+    operatingHours:
+      '물때에 따라 변동(고조 3시간 후부터 다음 고조 3시간 전) / 당일 체험시간 확인 필요',
+    priceInfo: '유료 / 연령·장비 대여별 요금 변동, 공식 일정 확인 필요',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 150,
+    operatorType: 'non-profit',
+    editorNote:
+      '마시안마을 어촌계 운영 시설로 인천투어와 한국어촌어항공단 바다여행에 현재 등재되어 있다. 체험은 현장 접수 안내가 있으나 성수기에는 사전 문의가 안전하다. 2026-07-01 출범한 영종구 기준 주소다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '[인천] 서울에서 가까운 아이랑 갯벌체험 추천, 마시안 해변 갯벌체험',
+        href: 'https://blog.naver.com/onaive/224333388981',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이 동반 갯벌 체험의 준비물과 현장 흐름을 가늠하기 좋은 최근 후기입니다.',
+      },
+    ],
+  },
+  {
+    id: 'incheon-yeongam-fishing-village-experience',
+    name: '영암어촌계 체험장',
+    region: 'incheon',
+    subRegion: '옹진군',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y'],
+    indoorOutdoor: 'outdoor',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'paid',
+    reservationRequired: true,
+    parking: true,
+    sourceType: 'semi-official',
+    sourceUrl:
+      'https://itour.incheon.go.kr/ssst/ssst/detail.do?cotId=APD21120710052328606',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'semi_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 옹진군 영흥면 영흥서로446번길 46'
+    )}`,
+    description:
+      '영흥도 수해해변의 혼합갯벌에서 바지락·굴·박하지·고둥 등을 관찰하고 채집하는 어촌계 체험장. 물때에 따라 조개잡이와 낚시 경험이 달라져 사전 문의가 필수적이다.',
+    address: '인천광역시 옹진군 영흥면 영흥서로446번길 46',
+    operatingHours: '시기·물때별 상이 / 사전 문의 및 접수 필요',
+    priceInfo: '유료 / 체험 종류·시기별 요금 확인 필요',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 150,
+    operatorType: 'non-profit',
+    editorNote:
+      '인천투어가 2026-05-23 수정본에서 주소·주차·계절별 운영을 안내하고 한국어촌어항공단 바다여행 현재 목록에도 영암마을이 노출된다. 외부인은 영암어촌계 체험객으로 접수해야 하므로 예약 필요를 보수적으로 true로 둔다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '[인천 아이랑] 영암어촌계ㅣ 갯벌체험 조개캐기',
+        href: 'https://blog.naver.com/jjj99s2/223916792563',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 조개를 캐는 체험 동선과 현장 분위기를 확인할 수 있는 방문 후기입니다.',
+      },
+    ],
+  },
+  {
+    id: 'incheon-zoobugs-indoor-zoo',
+    name: '실내 동물원 쥬벅스',
+    region: 'incheon',
+    subRegion: '남동구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'indoor',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'semi-official',
+    sourceUrl: 'https://leisure-web.yanolja.com/leisure/10317474',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'semi_verified',
+    naverMapUrl: `https://map.naver.com/p/search/${encodeURIComponent(
+      '인천광역시 남동구 서창남순환로216번길 20 승연프라자 2층 204·205호'
+    )}`,
+    description:
+      '서창동에서 여러 종의 동물을 실내에서 관찰하고 일부 교감 활동을 경험하는 유료 생태 체험 공간. 날씨 영향을 덜 받아 유아·초등 저학년 실내 나들이 후보로 쓰기 좋다.',
+    address:
+      '인천광역시 남동구 서창남순환로216번길 20 승연프라자 2층 204·205호',
+    operatingHours: '매일 10:00-19:00(매표 마감 18:00) / 연중무휴 안내',
+    priceInfo:
+      '2026 NOL 판매 기준 평일 대인 12,000원·소인 15,000원 / 주말·공휴일 대인 13,000원·소인 17,000원 / 18개월 미만 증빙 시 무료',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 120,
+    operatorType: 'commercial',
+    editorNote:
+      'NOL 상품 유효기간과 판매기간이 2026-12-31까지이며 당일 구매·당일 사용, 운영시간, 주소, 주차, 유모차 탑승 관람 불가를 안내한다. 민간 시설이라 가격과 동물 체험 구성은 방문 전 재확인한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '인천 서창 실내동물원 아이와함께 가볼만한 곳 요즘핫플 쥬벅스',
+        href: 'https://blog.naver.com/nimost/224329258899',
+        sourceLabel: 'Naver Blog',
+        description:
+          '아이와 실내 동물 공간을 둘러본 최근 방문 흐름을 참고할 수 있는 후기입니다.',
+      },
+    ],
   },
 ] satisfies PlaceSource[];

@@ -2,6 +2,7 @@ import type {
   AgeBand,
   PlaceCategory,
   PlaceSeason,
+  PlaceTheme,
   RegionSlug,
 } from '../../types/place-source.ts';
 
@@ -30,6 +31,8 @@ const VALID_CATEGORIES = new Set<PlaceCategory>([
   'sports',
 ]);
 
+const VALID_THEMES = new Set<PlaceTheme>(['animal']);
+
 const VALID_SEASONS = new Set<PlaceSeason>([
   'spring',
   'summer',
@@ -49,6 +52,7 @@ export interface PlaceListFilters {
   search: string | null;
   age: AgeBand | 'all' | null;
   category: PlaceCategory | null;
+  theme: PlaceTheme | null;
   season: PlaceSeason | null;
   indoor: boolean;
   outdoor: boolean;
@@ -62,6 +66,7 @@ export interface PlaceListQueryOptions {
   search?: RawValue;
   age?: RawValue;
   category?: RawValue;
+  theme?: RawValue;
   season?: RawValue;
   indoor?: RawValue;
   outdoor?: RawValue;
@@ -93,6 +98,7 @@ export function normalizePlaceListFilters(
     search: normalizeSearch(input.search),
     age: normalizeAgeBand(input.age),
     category: normalizeCategory(input.category),
+    theme: normalizeTheme(input.theme),
     season: normalizeSeason(input.season),
     indoor: normalizeBoolean(input.indoor),
     outdoor: normalizeBoolean(input.outdoor),
@@ -134,6 +140,10 @@ export function buildPlaceListSearchParams(options: {
 
   if (filters.category) {
     params.set('category', filters.category);
+  }
+
+  if (filters.theme) {
+    params.set('theme', filters.theme);
   }
 
   if (filters.season) {
@@ -218,6 +228,15 @@ function normalizeCategory(value: RawValue): PlaceCategory | null {
   return raw as PlaceCategory;
 }
 
+function normalizeTheme(value: RawValue): PlaceTheme | null {
+  const raw = readFirstValue(value);
+  if (!raw || !VALID_THEMES.has(raw as PlaceTheme)) {
+    return null;
+  }
+
+  return raw as PlaceTheme;
+}
+
 function normalizeSeason(value: RawValue): PlaceSeason | null {
   const raw = readFirstValue(value);
   if (!raw || !VALID_SEASONS.has(raw as PlaceSeason)) {
@@ -229,7 +248,10 @@ function normalizeSeason(value: RawValue): PlaceSeason | null {
 
 function setBooleanSearchParam(
   params: URLSearchParams,
-  key: keyof Omit<PlaceListFilters, 'search' | 'age' | 'category' | 'season'>,
+  key: keyof Omit<
+    PlaceListFilters,
+    'search' | 'age' | 'category' | 'theme' | 'season'
+  >,
   enabled: boolean
 ) {
   if (enabled) {

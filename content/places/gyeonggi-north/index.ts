@@ -96,7 +96,8 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MzFfMjg1%2FMDAxNzUzOTE4ODQ3NTQx.5D36XrKPQAGCEgs6SeMsxw6ENA690dD3iYQZR42KBeog.3H6gjcmQ_mqyVFLCL3uzlYlOHTToSPHMmtnKraM7Rasg.PNG%2F%25C8%25F2%25BB%25F6%25B0%25FA_%25B0%25CB%25C1%25A4%25BB%25F6_%25B1%25F2%25B2%25FB%25C7%25D1_%25BB%25E7%25C1%25F8%25B9%25E8%25B0%25E6_SNS_%25BA%25ED%25B7%25CE%25B1%25D7_%25C4%25AB%25B5%25E5%25B4%25BA%25BD%25BA_%25C5%25B8%25C0%25CC%25C6%25B2_%25C6%25F7%25BD%25BA%25C6%25AE_%25BD%25E6%25B3%25D7%25C0%25CF_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25B0%25D4%25BD%25C3%25B9%25B0.png%23900x900&type=ff192_192',
       },
     ],
-    thumbnailImage: '/images/places/gyeonggi-north-uijeongbu-ilovemom-cafe.webp',
+    thumbnailImage:
+      '/images/places/gyeonggi-north-uijeongbu-ilovemom-cafe.webp',
   },
   {
     id: 'gyeonggi-north-toy-library-okjeong',
@@ -261,7 +262,8 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAzMjdfMTgy%2FMDAxNzc0NTc2MTE3Nzgz.jp-t2v3aIj2-A5eoB_TChul05VoOGGXehQZpCh09j5kg.zRS0_V6uTIg-x896a2mIu_SqOKC9PxLpWkCaT_rjaPUg.PNG%2F900%25A3%25DF%25BA%25A3%25C0%25CC%25C1%25F6%25BB%25F6_%25BD%25C9%25C7%25C3%25C7%25D1_%25C0%25B0%25BE%25C6_%25B0%25D4%25BD%25C3%25B9%25B0_%25BB%25E7%25C1%25F8_%25C0%25CE%25BD%25BA%25C5%25B8%25B1%25D7%25B7%25A5_%25C6%25F7%25BD%25BA%25C6%25AE%25A3%25DF20260327%25A3%25DF104823%25A3%25DF0000.png%23900x900&type=ff192_192',
       },
     ],
-    thumbnailImage: '/images/places/gyeonggi-north-hyundai-motorstudio-goyang.webp',
+    thumbnailImage:
+      '/images/places/gyeonggi-north-hyundai-motorstudio-goyang.webp',
   },
   {
     id: 'gyeonggi-north-toykingdom-play-goyang',
@@ -416,7 +418,8 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjA0MDJfMjAw%2FMDAxNzc1MTI5MDk1Nzkz.UGYIgq4T6azOmt6mvEdsRvEObp2tCzvr0E15UIF-kJkg.xSrb1bXFhFYVL1SuG6XZJkTYTm1h3oYwJOzU6txtEaYg.JPEG%2F%25A4%25A1%25A4%25B8%25A4%25A7%25A4%25A1%25A4%25B8%25A4%25A1%25A4%25B8.jpg%23900x900&type=ff192_192',
       },
     ],
-    thumbnailImage: '/images/places/gyeonggi-north-jamjam-kidsroom-hwajeong.webp',
+    thumbnailImage:
+      '/images/places/gyeonggi-north-jamjam-kidsroom-hwajeong.webp',
   },
   {
     id: 'gyeonggi-north-webounce-yangju',
@@ -672,7 +675,8 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNjAyMTlfMTU4%2FMDAxNzcxNDc0MTg4MDM4.0n-SvRaGIzSaR9JVcYagsthHSda75w5_MWV4-vqdP7sg.uJm3sD2BOX8kD4HXTerHPb6kTxfo5jJWI85g5_IUnekg.PNG%2F%25B1%25D7%25B8%25B25.png%231856x2145&type=ff192_192',
       },
     ],
-    thumbnailImage: '/images/places/gyeonggi-north-pororo-park-ilsan-kintex.webp',
+    thumbnailImage:
+      '/images/places/gyeonggi-north-pororo-park-ilsan-kintex.webp',
   },
   {
     id: 'gyeonggi-north-champion-black-belt-homeplus-uijeongbu',
@@ -747,7 +751,8 @@ export const GYEONGGI_NORTH_PLACES = [
           'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTA3MDVfMjU2%2FMDAxNzUxNzIxODQ5ODU3.sTZkiWsQq_utBYwoqGGUnwpVJl7zr_6huiEVdoBbK_Qg.HbwsT1PhMpyrFBg01hKErXgP0XbdQFO6hbGxmvwGchMg.JPEG%2FKakaoTalk_20250705_221435569_12.jpg%231206x1698&type=ff192_192',
       },
     ],
-    thumbnailImage: '/images/places/gyeonggi-north-champion-black-belt-homeplus-uijeongbu.webp',
+    thumbnailImage:
+      '/images/places/gyeonggi-north-champion-black-belt-homeplus-uijeongbu.webp',
   },
   {
     id: 'gyeonggi-north-champion-black-belt-traders-gimpo',
@@ -778,7 +783,8 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '김포는 기존 README 예시에 명시되지 않았지만 경기 서북권 생활권으로 경기북부에 배치했다. 권역 정책이 바뀌면 이동 가능하다.',
-    thumbnailImage: '/images/places/gyeonggi-north-champion-black-belt-traders-gimpo.webp',
+    thumbnailImage:
+      '/images/places/gyeonggi-north-champion-black-belt-traders-gimpo.webp',
   },
   {
     id: 'jeongok-prehistory-museum',
@@ -1004,6 +1010,7 @@ export const GYEONGGI_NORTH_PLACES = [
     region: 'gyeonggi-north',
     subRegion: '고양시 덕양구',
     category: 'kids-cafe',
+    themes: ['animal'],
     ageBands: ['1-3y', '3-6y', '6-10y'],
     indoorOutdoor: 'indoor',
     seasons: ['all-season'],
@@ -1551,7 +1558,8 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '국립수목원은 예약·입장 정책이 있는 시설이라 방문 전 공식 예약 가능 여부 확인이 필요하다.',
     linkedPostSlugs: [],
-    thumbnailImage: '/images/places/korea-national-arboretum-forest-museum.webp',
+    thumbnailImage:
+      '/images/places/korea-national-arboretum-forest-museum.webp',
   },
   {
     id: 'paju-playcloud',
@@ -1611,6 +1619,222 @@ export const GYEONGGI_NORTH_PLACES = [
     editorNote:
       '천문과학관은 실내형이지만 아트밸리 야외 동선 비중이 커 계절 태그를 함께 둔다.',
     linkedPostSlugs: [],
-    thumbnailImage: '/images/places/pocheon-art-valley-astronomy-science-museum.webp',
+    thumbnailImage:
+      '/images/places/pocheon-art-valley-astronomy-science-museum.webp',
+  },
+  {
+    id: 'gyeonggi-north-zoozooland-goyang',
+    name: '쥬쥬랜드',
+    region: 'gyeonggi-north',
+    subRegion: '고양시',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'both',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl: 'https://zoo.muv.kr/38',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EA%B3%A0%EC%96%91%EC%8B%9C%20%EB%8D%95%EC%96%91%EA%B5%AC%20%EC%9B%90%EB%8B%B9%EB%A1%9C458%EB%B2%88%EA%B8%B8%207-42',
+    description:
+      '실내·야외 동물 관람과 먹이 체험, 고양로봇박물관을 한 번에 이용하는 가족형 동물 테마시설이다.',
+    address: '경기도 고양시 덕양구 원당로458번길 7-42',
+    operatingHours: '10:00~18:00; 월요일 휴무, 공휴일인 월요일은 정상 운영',
+    priceInfo: '대인·소인 15,000원; 만 24개월 이하 증빙 시 무료',
+    feedingRoom: false,
+    strollerFriendly: true,
+    rainFriendly: true,
+    stayMinutes: 180,
+    operatorType: 'commercial',
+    editorNote:
+      '유모차 반입은 가능하지만 실내동물원 앞에 보관 후 입장해야 하며 대여 서비스는 없다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '고양 쥬쥬랜드 후기｜아이와 가볼만한 곳, 겨울에도 좋은 실내·야외 동물원',
+        href: 'https://blog.naver.com/tornado-616/224117701228',
+        sourceLabel: 'Naver Blog',
+        description: '겨울철 실내·야외 이용 동선을 참고하는 개인 후기다.',
+      },
+    ],
+  },
+  {
+    id: 'gyeonggi-north-guri-insect-ecology-center',
+    name: '구리시곤충생태관',
+    region: 'gyeonggi-north',
+    subRegion: '구리시',
+    category: 'museum',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'both',
+    seasons: ['all-season'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl: 'https://www.guri.go.kr/eco/contents.do?key=1700',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EA%B5%AC%EB%A6%AC%EC%8B%9C%20%EA%B2%80%EB%B0%B0%EB%A1%9C%20200',
+    description:
+      '연중 살아있는 나비와 곤충, 타란튤라·민물고기 등을 무료로 관람하는 구리시 직영 생태관이다.',
+    address: '경기도 구리시 검배로 200',
+    operatingHours:
+      '3~10월 10:00~18:00(17:00 입장 마감), 11~2월 10:00~17:00(16:30 입장 마감); 월요일 등 휴관',
+    priceInfo: '관람·주차 무료; 단체관람은 예약 필요',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 90,
+    operatorType: 'public',
+    editorNote:
+      '개인 자율관람은 예약 불필요다. 공식 시설현황은 살아있는 나비 일평균 약 100마리와 36여 종의 살아있는 곤충을 안내한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '구리 아이와 함께 가볼만한곳 구리시곤충생태관',
+        href: 'https://blog.naver.com/lsh3172/224154352204',
+        sourceLabel: 'Naver Blog',
+        description: '아이 동반 관람 동선을 참고하는 개인 후기다.',
+      },
+    ],
+  },
+  {
+    id: 'gyeonggi-north-gapyeong-sheep-ranch',
+    name: '가평양떼목장',
+    region: 'gyeonggi-north',
+    subRegion: '가평군',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'outdoor',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: false,
+    sourceType: 'semi-official',
+    sourceUrl: 'https://www.ggtourpass.kr/32',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'semi_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EA%B0%80%ED%8F%89%EA%B5%B0%20%EC%84%A4%EC%95%85%EB%A9%B4%20%EC%9C%A0%EB%AA%85%EB%A1%9C%201209',
+    description:
+      '양을 가까이 관찰하고 목장 산책과 카페를 함께 이용하는 가평의 야외 동물 교감형 목장이다.',
+    address: '경기도 가평군 설악면 유명로 1209',
+    operatingHours:
+      '운영시간과 입장 마감은 공식 예매·SNS에서 방문 전 확인 필요',
+    priceInfo: '입장권·음료 포함 여부와 연령별 요금은 공식 예매 채널 확인 필요',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 150,
+    operatorType: 'commercial',
+    editorNote:
+      '경기투어패스 현재 제휴 목록에서 주소와 입장 혜택을 확인했다. 주차·운영시간을 1차 채널에서 확인하기 전에는 보수적으로 노출한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '가평 아이랑 가볼만한곳 양떼목장 놀거리 두쫀쿠 카페',
+        href: 'https://blog.naver.com/jangrose5932/224184041530',
+        sourceLabel: 'Naver Blog',
+        description: '목장과 카페 이용 동선을 참고하는 개인 후기다.',
+      },
+    ],
+  },
+  {
+    id: 'gyeonggi-north-sandulsori-namyangju',
+    name: '산들소리',
+    region: 'gyeonggi-north',
+    subRegion: '남양주시',
+    category: 'park',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'outdoor',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: false,
+    sourceType: 'official',
+    sourceUrl: 'https://sandulsori.co.kr/default/01/menu03.php',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EB%82%A8%EC%96%91%EC%A3%BC%EC%8B%9C%20%EB%B6%88%EC%95%94%EC%82%B0%EB%A1%9C59%EB%B2%88%EA%B8%B8%2048-31',
+    description:
+      '불암산 자락의 수목원 산책과 작은 동물 먹이 체험을 결합한 남양주의 가족 자연 체험공간이다.',
+    address: '경기도 남양주시 불암산로59번길 48-31',
+    operatingHours:
+      '운영시간과 입장 마감은 공식 홈페이지에서 방문 전 확인 필요',
+    priceInfo: '입장료 별도; 공식 안내상 동물 먹이용 당근은 별도 판매',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 150,
+    operatorType: 'commercial',
+    editorNote:
+      '공식 체험 안내에서 어린이 동물 당근 먹이 체험을 확인했다. 경사·비포장 구간과 주차 정보는 현장 채널에서 재확인한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '남양주 아이와 가기 좋은 수목원, 산들소리',
+        href: 'https://juuwooo.com/13',
+        sourceLabel: 'juuwooo.com',
+        description: '아이 동반 수목원 동선을 참고하는 개인 후기다.',
+      },
+    ],
+  },
+  {
+    id: 'gyeonggi-north-yangju-insect-museum',
+    name: '양주곤충박물관',
+    region: 'gyeonggi-north',
+    subRegion: '양주시',
+    category: 'museum',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y'],
+    indoorOutdoor: 'indoor',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: false,
+    sourceType: 'semi-official',
+    sourceUrl: 'https://pf.kakao.com/_exbxlHG',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'semi_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%EC%96%91%EC%A3%BC%EC%8B%9C%20%EC%9E%A5%ED%9D%A5%EB%A9%B4%20%EA%B6%8C%EC%9C%A8%EB%A1%9C%20124%20A%EB%8F%99%202%EC%B8%B5',
+    description:
+      '살아있는 곤충과 소동물, 표본·공룡 전시를 실내에서 관람하는 장흥관광지 인근 사립 곤충 박물관이다.',
+    address: '경기도 양주시 장흥면 권율로 124 A동 2층',
+    operatingHours:
+      '운영시간과 곤충·동물 해설 회차는 공식 채널에서 방문 전 확인 필요',
+    priceInfo: '연령별 입장료와 체험 추가요금은 공식 예매 채널 확인 필요',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 120,
+    operatorType: 'commercial',
+    editorNote:
+      '공식 카카오 채널의 2026년 게시·후기 노출로 운영을 확인했다. 주차와 상세 운영시간은 1차 예약 페이지를 추가 확인한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '아이와 함께한 실내 나들이 – 양주곤충박물관 후기',
+        href: 'https://endorphink.tistory.com/entry/%F0%9F%90%9B-%EC%95%84%EC%9D%B4%EC%99%80-%ED%95%A8%EA%BB%98%ED%95%9C-%EC%8B%A4%EB%82%B4-%EB%82%98%EB%93%A4%EC%9D%B4-%E2%80%93-%EC%96%91%EC%A3%BC%EA%B3%A4%EC%B6%A9%EB%B0%95%EB%AC%BC%EA%B4%80-%ED%9B%84%EA%B8%B0',
+        sourceLabel: 'Tistory',
+        description: '실내 전시 관람 동선을 참고하는 개인 후기다.',
+      },
+    ],
   },
 ] satisfies PlaceSource[];

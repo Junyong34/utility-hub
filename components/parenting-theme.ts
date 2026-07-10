@@ -131,6 +131,7 @@ export const FILTER_CHIP_STYLES = {
   active: {
     age: PARENTING_TONE_STYLES.butter.badge,
     category: PARENTING_TONE_STYLES.sand.badge,
+    theme: PARENTING_TONE_STYLES.mint.badge,
     indoor: PARENTING_TONE_STYLES.sky.badge,
     outdoor: PARENTING_TONE_STYLES.mint.badge,
     free: PARENTING_TONE_STYLES.mint.badge,

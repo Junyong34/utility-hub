@@ -23,6 +23,13 @@ content/places/
 각 지역 `index.ts`의 place seed 배열은 `PlaceSource[]` 타입을 따릅니다.
 `types/place-source.ts` 참고.
 
+### 테마 분류
+
+- `themes`는 시설 카테고리와 별도로 조건 검색에 사용하는 보조 분류입니다.
+- `animal`은 동물 관찰·교감, 수족관, 곤충·조류·해양 생태, 자연사처럼 동물이 핵심 방문 이유인 장소에만 붙입니다.
+- 일반 공원에서 우연히 동물을 볼 수 있거나 동물 요소가 부수적인 장소에는 붙이지 않습니다.
+- `/places?theme=animal`과 지역별 장소 화면의 `동물 체험` 필터가 이 값을 사용합니다.
+
 ## 발행 기준
 
 - `verificationStatus`가 `official_verified` 또는 `semi_verified`인 항목만 발행됩니다.

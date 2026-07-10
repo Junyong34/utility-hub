@@ -105,6 +105,7 @@ export function hasActivePlaceListFilters(
     normalized.search !== null ||
     normalized.age !== null ||
     normalized.category !== null ||
+    normalized.theme !== null ||
     normalized.season !== null ||
     normalized.indoor ||
     normalized.outdoor ||

@@ -1411,6 +1411,7 @@ export const SEOUL_PLACES = [
     region: 'seoul',
     subRegion: '서대문구',
     category: 'museum',
+    themes: ['animal'],
     ageBands: ['3-6y', '6-10y'],
     indoorOutdoor: 'indoor',
     seasons: ['all-season'],
@@ -1558,6 +1559,7 @@ export const SEOUL_PLACES = [
     region: 'seoul',
     subRegion: '광진구',
     category: 'park',
+    themes: ['animal'],
     ageBands: ['1-3y', '3-6y', '6-10y', 'all'],
     indoorOutdoor: 'both',
     seasons: ['all-season', 'spring', 'fall'],
@@ -6023,5 +6025,456 @@ export const SEOUL_PLACES = [
       '서울시 아이돌봄 공식 시설 상세를 기준으로 반영했으며, 회차·휴관일은 예약 페이지 확인이 필요하다.',
     linkedPostSlugs: [],
     thumbnailImage: '',
+  },
+  {
+    id: 'seoul-sea-life-coex-aquarium',
+    name: '씨라이프 코엑스 아쿠아리움',
+    region: 'seoul',
+    subRegion: '강남구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y', 'all'],
+    indoorOutdoor: 'indoor',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl:
+      'https://www.visitsealife.com/coex-seoul/plan-your-visit/before-you-visit/opening-hours/',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EC%98%81%EB%8F%99%EB%8C%80%EB%A1%9C%20513%20%EC%BD%94%EC%97%91%EC%8A%A4%EB%AA%B0%20%EB%82%B4',
+    description:
+      '상어·바다거북·물범 등 다양한 해양생물을 실내에서 관찰하고 수중 공연과 체험 콘텐츠를 함께 즐길 수 있는 도심형 아쿠아리움이다.',
+    address: '서울특별시 강남구 영동대로 513 코엑스몰 내',
+    operatingHours: '매일 10:00-20:00(마지막 입장 19:00), 연중무휴',
+    priceInfo: '방문일별 일반권·온라인 할인 요금은 공식 예매 페이지 확인',
+    feedingRoom: true,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 120,
+    operatorType: 'commercial',
+    editorNote:
+      '운영시간은 현장·기상 상황에 따라 바뀔 수 있다. 공식 도움말에서 수유실과 기저귀 교환 공간을 확인했다. 유모차 반입 가능 여부는 공식 운영 페이지에서 명확히 확인되지 않아 보수적으로 false로 두었다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '코엑스 아쿠아리움 할인부터 공연시간까지 총정리! 인어공연·물범 먹이주기 꿀팁 (+주차 할인)',
+        href: 'https://blog.naver.com/khimp/224341675975',
+        sourceLabel: 'Naver Blog',
+        description:
+          '2026-07-09 방문 후기. 공연과 관람 동선을 방문자 관점에서 참고하는 링크이며 요금·시간은 공식 페이지에서 재확인한다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-lotte-world-aquarium',
+    name: '롯데월드 아쿠아리움',
+    region: 'seoul',
+    subRegion: '송파구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y', 'all'],
+    indoorOutdoor: 'indoor',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl:
+      'https://aquarium.lotteworld.com/usage-guide/service/operation-information/list',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%86%A1%ED%8C%8C%EA%B5%AC%20%EC%98%AC%EB%A6%BC%ED%94%BD%EB%A1%9C%20300%20%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C%EB%AA%B0%20B1-B2',
+    description:
+      '롯데월드몰 지하에서 펭귄·수달·가오리 등 해양생물을 관찰하고 대형 수조와 해저 터널을 따라 걷는 실내 아쿠아리움이다.',
+    address: '서울특별시 송파구 올림픽로 300 롯데월드몰 B1-B2',
+    operatingHours:
+      '방문일별 운영시간은 공식 일정표 확인(매표·입장 마감은 운영 종료 1시간 전)',
+    priceInfo:
+      '일반권 성인·청소년 35,000원, 어린이·경로 31,000원; 방문 전 공식 요금표 재확인',
+    feedingRoom: true,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 120,
+    operatorType: 'commercial',
+    editorNote:
+      '공식 운영 일정표가 2026년 7월 일정을 제공한다. 베이비 라운지에서 기저귀 교환대·수유 소파·정수기·전자레인지 등을 제공한다. 유모차 반입 여부는 공식 페이지에서 명확히 확인되지 않아 보수적으로 false로 두었다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '🐠 서울 아이랑 가볼만한곳! 롯데월드 아쿠아리움 다녀온 리얼후기 🐟',
+        href: 'https://blog.naver.com/husbandpark119/224184939933',
+        sourceLabel: 'Naver Blog',
+        description:
+          '2026-02-16 아이 동반 방문 후기. 가족 관람 분위기와 동선을 참고하는 주관적 링크다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-zoolung-zoolung-yeongdeungpo',
+    name: '주렁주렁 영등포점',
+    region: 'seoul',
+    subRegion: '영등포구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'indoor',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl:
+      'https://zoolungzoolung.com/%EC%A7%80%EC%A0%90%EC%95%88%EB%82%B4/%EC%98%81%EB%93%B1%ED%8F%AC%EC%A0%90/',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%98%81%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%98%81%EC%A4%91%EB%A1%9C%2015%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%204-5%EC%B8%B5',
+    description:
+      '타임스퀘어 안에서 다양한 동물을 가까이 관찰하고 교감형 프로그램과 미디어아트를 함께 즐기는 실내 애니멀 테마파크다.',
+    address: '서울특별시 영등포구 영중로 15 타임스퀘어 4-5층',
+    operatingHours:
+      '평일 12:00-20:00(입장 마감 18:30) / 주말·공휴일 10:30-20:30(입장 마감 19:00) / 월별 휴무일 공식 확인',
+    priceInfo: '평일 종일 29,000원 / 주말·공휴일 4시간 29,000원',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 180,
+    operatorType: 'commercial',
+    editorNote:
+      '공식 지점 페이지가 2026년 7월 휴무일과 정상 운영을 표시한다. 3시간 무료 주차가 가능하고 유모차는 파크 안에 반입할 수 없다. 할인권·월별 휴무일은 방문일에 재확인한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '[영등포] 아기랑 실내 나들이 주렁주렁 영등포점 할인 주차 유모차 주말 꿀팁 모음',
+        href: 'https://blog.naver.com/shoonya48/224330704844',
+        sourceLabel: 'Naver Blog',
+        description:
+          '2026-07-02 아기 동반 방문 후기. 실내 관람 동선과 현장 분위기를 참고하는 링크다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-zoorarium-geumcheon',
+    name: '쥬라리움 금천점',
+    region: 'seoul',
+    subRegion: '금천구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'indoor',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: false,
+    sourceType: 'official',
+    sourceUrl: 'https://zoorarium.com/geumcheon',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B8%88%EC%B2%9C%EA%B5%AC%20%EB%91%90%EC%82%B0%EB%A1%9C%2071%203%EC%B8%B5',
+    description:
+      '실내 동물원과 키즈 놀이공간을 결합해 동물 관찰·교감과 신체 놀이를 한 장소에서 이어갈 수 있는 체험형 시설이다.',
+    address: '서울특별시 금천구 두산로 71 3층',
+    operatingHours:
+      '10:30-19:00(입장 마감 18:00) / 매월 둘째·넷째 일요일 휴무 / 공휴일 정상 운영',
+    priceInfo:
+      '현장권 평일 소인 16,900원부터·대인 13,900원부터, 주말 소인 19,900원부터·대인 14,900원부터; 온라인 가격 상이',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 180,
+    operatorType: 'commercial',
+    editorNote:
+      '공식 페이지는 건물명을 롯데빅마켓금천점으로 표기하므로 최신 상업시설 명칭과 주차 조건은 방문 전에 지도·매장에 재확인해야 한다. 17개월까지 증빙서류 지참 시 무료이며 양말 착용이 필수다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '17개월 아이랑 갈만한 곳 | 쥬라리움 금천점 | 실내동물원 & 키즈카페 | 경기도 아이와 갈만한 곳',
+        href: 'https://blog.naver.com/minah_ggam/224337402044',
+        sourceLabel: 'Naver Blog',
+        description:
+          '2026-07-06 게시된 17개월 아이 동반 방문 후기. 제목의 경기도 표기와 달리 실제 시설은 서울 금천구에 있다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-ydp-insect-experience-center',
+    name: 'YDP곤충체험학습관',
+    region: 'seoul',
+    subRegion: '영등포구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y'],
+    indoorOutdoor: 'indoor',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    reservationRequired: false,
+    parking: false,
+    sourceType: 'official',
+    sourceUrl:
+      'https://youth.seoul.go.kr/infoData/sprtInfo/view.do?key=2309130006&sprtInfoId=68711',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%98%81%EB%93%B1%ED%8F%AC%EA%B5%AC%20%EC%84%A0%EC%9C%A0%EB%8F%991%EB%A1%9C%2080%20%EC%98%81%EB%93%B1%ED%8F%AC%EA%B5%AC%EC%B2%AD%20%EB%B3%84%EA%B4%80%20E%EB%8F%99',
+    description:
+      '도심에서 살아있는 곤충과 소동물을 관찰하고 곤충 생태 전시와 교감형 체험을 즐길 수 있는 영등포구 공공 체험학습관이다.',
+    address: '서울특별시 영등포구 선유동1로 80 영등포구청 별관 E동',
+    operatingHours:
+      '화-일요일 10:00-17:00(입장 마감 16:00) / 월요일·5월 1일·설·추석 일부 휴관',
+    priceInfo: '관내·관외 요금과 감면 기준은 방문 전 공식 안내 확인',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 60,
+    operatorType: 'public',
+    editorNote:
+      '서울시 공식 안내가 2026-04-01부터 입장료 일부 인하와 현재 운영시간을 명시한다. 요금표가 이미지로 제공되어 seed에는 변동 가능한 숫자를 옮기지 않고 공식 안내 확인 문구를 유지한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '아이랑 가기 좋은 YDP곤충체험학습관 실내 곤충 체험관 후기',
+        href: 'https://blog.naver.com/loxloxl/224341607238',
+        sourceLabel: 'Naver Blog',
+        description:
+          '2026-07-09 아이 동반 방문 후기. 실내 전시 구성과 관람 동선을 참고하는 최신 링크다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-forest-insect-garden-deer',
+    name: '서울숲 곤충식물원·사슴우리',
+    region: 'seoul',
+    subRegion: '성동구',
+    category: 'park',
+    themes: ['animal'],
+    ageBands: ['1-3y', '3-6y', '6-10y', 'all'],
+    indoorOutdoor: 'both',
+    seasons: ['all-season'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl: 'https://parks.seoul.go.kr/template/sub/seoulforest.do',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EB%9A%9D%EC%84%AC%EB%A1%9C%20273%20%EC%84%9C%EC%9A%B8%EC%88%B2',
+    description:
+      '곤충식물원에서 곤충과 열대식물을 관찰하고 생태숲 사슴우리에서 꽃사슴을 볼 수 있어 실내외 동물 관찰을 함께 묶기 좋은 무료 공원 코스다.',
+    address: '서울특별시 성동구 뚝섬로 273 서울숲',
+    operatingHours:
+      '사슴우리 05:30-21:30 / 곤충식물원 3-10월 10:00-17:00, 11-2월 10:00-16:00(월요일 휴관)',
+    priceInfo: '무료',
+    feedingRoom: true,
+    strollerFriendly: true,
+    rainFriendly: false,
+    stayMinutes: 120,
+    operatorType: 'public',
+    editorNote:
+      '사슴 먹이 판매는 2020년부터 중단됐다. 방문자센터에서 수유실과 최대 2시간 무료 유모차 대여를 운영한다. 2026-04-23 곤충식물원 공사는 하루짜리 임시 운영 중지였고 현재 공식 이용시간 안내가 유지된다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '서울숲 곤충식물원/2026/2/26',
+        href: 'https://song550105.tistory.com/18825',
+        sourceLabel: 'Tistory',
+        description:
+          '2026-02-26 곤충식물원 방문 사진 후기. 아이 동반 전용 후기는 아니며 현장 분위기만 참고한다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-gildong-ecological-park',
+    name: '길동생태공원',
+    region: 'seoul',
+    subRegion: '강동구',
+    category: 'park',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y', 'all'],
+    indoorOutdoor: 'both',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'free',
+    reservationRequired: true,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl: 'https://parks.seoul.go.kr/template/sub/gildong.do',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EB%8F%99%EA%B5%AC%20%EC%B2%9C%ED%98%B8%EB%8C%80%EB%A1%9C%201291',
+    description:
+      '반딧불이체험관·조류관찰대·습지 데크를 따라 반딧불이와 새, 개구리 등 도심 생물을 관찰하는 예약형 생태공원이다.',
+    address: '서울특별시 강동구 천호대로 1291',
+    operatingHours:
+      '08:00-18:00(16:00 입장 마감) / 11월 15일-3월 15일 08:00-17:00 / 월요일 휴무',
+    priceInfo: '무료',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 90,
+    operatorType: 'public',
+    editorNote:
+      '서울시 공공서비스예약 사전 예약 또는 당일 현장등록이 필요하며 1일 최대 400명이다. 주차장은 프로그램 등 사전 예약자만 이용할 수 있어 주차가 필요하면 반드시 미리 예약한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '[20260606] 서울둘레길 7코스 일자산 구간과 길동생태공원 이어 걷기 - 4부',
+        href: 'https://macgyver-dct.tistory.com/16166151',
+        sourceLabel: 'Tistory',
+        description:
+          '2026-06-06 반딧불이체험관·조류관찰대·습지 구간을 걸은 방문 기록. 아이 동반 전용 후기는 아니며 야외 동선 참고용이다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-noeul-firefly-ecology-center',
+    name: '월드컵공원 반딧불이생태관',
+    region: 'seoul',
+    subRegion: '마포구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y', 'all'],
+    indoorOutdoor: 'indoor',
+    seasons: ['summer'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl:
+      'https://yeyak.seoul.go.kr/web/reservation/selectReservView.do?rsv_svc_id=S260520140513904308',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%ED%95%98%EB%8A%98%EA%B3%B5%EC%9B%90%EB%A1%9C%20108%20%EB%85%B8%EC%9D%84%EA%B3%B5%EC%9B%90%20%EC%A3%BC%EC%B0%A8%EC%9E%A5%20%EC%9E%85%EA%B5%AC',
+    description:
+      '반딧불이의 생태와 우리나라 종을 배우고 시기에 따라 유충·성충·표본을 관찰하는 월드컵공원 무료 생태관이다.',
+    address: '서울특별시 마포구 하늘공원로 108 노을공원 주차장 입구',
+    operatingHours:
+      '프로그램 외 자유관람 가능 / 일요일·월요일·공휴일 휴관 / 당일 자유관람 시간은 공식 공고 확인',
+    priceInfo: '무료',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: true,
+    stayMinutes: 60,
+    operatorType: 'public',
+    editorNote:
+      '2026년 6월 공식 해설 프로그램에서 유충·성충 관찰과 프로그램 외 자유관람을 확인했다. 해설 프로그램은 인터넷 예약이 필요하지만 일반 자유관람은 예약 필수가 아니다. 생물 상태에 따라 실제 관찰 대상이 달라질 수 있다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '[반딧불이 생태관]초등 과학 곤충 체험 프로그램, 예약방법, 주차_ 서울 마포 상암동 월드컵공원',
+        href: 'https://blog.naver.com/expert4you/224142492265',
+        sourceLabel: 'Naver Blog',
+        description:
+          '2026-01-11 게시된 가족 체험 참고 후기. 예약 프로그램의 주관적 경험을 확인하는 링크다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-jungnangcheon-environment-center',
+    name: '중랑천환경센터',
+    region: 'seoul',
+    subRegion: '노원구',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y'],
+    indoorOutdoor: 'both',
+    seasons: ['spring', 'summer', 'fall'],
+    priceType: 'partial-free',
+    reservationRequired: true,
+    parking: false,
+    sourceType: 'official',
+    sourceUrl: 'https://www.jrecocenter.or.kr/',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EB%85%B8%EC%9B%90%EA%B5%AC%20%EB%8D%95%EB%A6%89%EB%A1%9C%20430',
+    description:
+      '중랑천을 걸으며 새를 탐조하고 어류·수서생물을 조사하는 예약형 생태교육을 운영하는 노원구 환경교육 시설이다.',
+    address: '서울특별시 노원구 덕릉로 430',
+    operatingHours: '화-토요일 10:00-17:00 / 일·월요일·법정공휴일 휴관',
+    priceInfo: '프로그램별 무료 또는 1,000-2,000원 등 상이',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 90,
+    operatorType: 'public',
+    editorNote:
+      '2026년 어린이도시어부·조조탐조·생물다양성 탐사대회 등 동물 관찰형 프로그램이 확인된다. 대상 연령, 보호자 동반, 장화·여벌옷, 참가비는 프로그램마다 달라 신청 상세를 반드시 확인한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title:
+          '아이와 생태체험 2026 중랑천 생물다양성 탐사대회, 무료 조류 탐조 후기 및 환경 이야기 🌾🐦',
+        href: 'https://blog.naver.com/iyoanna/224316283561',
+        sourceLabel: 'Naver Blog',
+        description:
+          '2026-06-15 아이 동반 조류 탐조 후기. 실제 프로그램 흐름과 야외 준비를 참고하는 주관적 링크다.',
+      },
+    ],
+  },
+  {
+    id: 'seoul-gangseo-wetland-ecological-park',
+    name: '강서습지생태공원',
+    region: 'seoul',
+    subRegion: '강서구',
+    category: 'park',
+    themes: ['animal'],
+    ageBands: ['6-10y', 'all'],
+    indoorOutdoor: 'outdoor',
+    seasons: ['spring', 'fall', 'winter'],
+    priceType: 'free',
+    reservationRequired: false,
+    parking: true,
+    sourceType: 'official',
+    sourceUrl: 'https://hangang.seoul.go.kr/www/contents/819.do?mid=581',
+    verifiedAt: '2026-07-10',
+    lastObservedAt: '2026-07-10',
+    verificationStatus: 'official_verified',
+    naverMapUrl:
+      'https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EB%B0%A9%ED%99%94%EB%8F%99%2025%20%EC%9D%BC%EB%8C%80',
+    description:
+      '한강 하류 습지의 탐방로와 조류 관찰 공간에서 철새와 야생조류, 습지 생물을 살펴보는 무료 야외 생태공원이다.',
+    address: '서울특별시 강서구 방화동 25 일대',
+    operatingHours: '연중 현장방문 가능 / 생태 프로그램은 별도 일정·예약 확인',
+    priceInfo: '무료',
+    feedingRoom: false,
+    strollerFriendly: false,
+    rainFriendly: false,
+    stayMinutes: 120,
+    operatorType: 'public',
+    editorNote:
+      '서울시 공식 시설 목록에서 운영 중·무료·연중 현장방문을 확인했다. 생태 프로그램은 별도 예약이 필요하고 계절·현장 상황에 따라 달라진다. 공식 페이지마다 방화동 일대와 안내센터 주소가 달라 현재 공식 시설 주소 기반 검색 링크를 유지한다.',
+    linkedPostSlugs: [],
+    externalBlogLinks: [
+      {
+        title: '강서한강공원 강서습지생태공원, 산책하기 좋은 예쁜 길',
+        href: 'https://invitetour.tistory.com/3272',
+        sourceLabel: 'Tistory',
+        description:
+          '2026-04-13 습지생태공원 직접 방문 후기. 아이 동반 전용 후기는 아니며 탐방로 분위기 참고용이다.',
+      },
+    ],
   },
 ] satisfies PlaceSource[];

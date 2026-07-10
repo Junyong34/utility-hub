@@ -131,6 +131,32 @@ test.describe('/places infinite scroll', () => {
     );
   });
 
+  test('animal theme filter updates the URL and shows the matching first page', async ({
+    page,
+  }) => {
+    const expected = queryPlaceList({ theme: 'animal' });
+    expect(expected.total).toBeGreaterThanOrEqual(20);
+
+    await page.goto('/places', { waitUntil: 'domcontentloaded' });
+    await waitForPlaceCardCount(page, DEFAULT_PLACES_PAGE_SIZE);
+
+    await page
+      .getByTestId('places-filter-track-theme')
+      .getByRole('button', { name: '동물 체험' })
+      .click();
+
+    await expect
+      .poll(() => new URL(page.url()).searchParams.get('theme'))
+      .toBe('animal');
+    await waitForPlaceCardCount(
+      page,
+      Math.min(DEFAULT_PLACES_PAGE_SIZE, expected.total)
+    );
+    await expect(page.getByTestId('place-card').first()).toContainText(
+      expected.places[0].name
+    );
+  });
+
   test('title search updates the URL and resets results to the matching first page', async ({
     page,
   }) => {
