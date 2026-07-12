@@ -46,6 +46,7 @@ export async function generateMetadata({
     title: post.title,
     excerpt: post.excerpt,
     date: post.date,
+    updatedAt: post.updatedAt,
     author: post.author,
     tags: post.tags,
     slug: post.slug,
@@ -92,6 +93,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     categorySlug: post.categorySlug,
     category: post.category,
     date: post.date,
+    updatedAt: post.updatedAt,
     author: post.author,
     tags: post.tags,
     image: resolveBlogPostOgImage({
@@ -112,7 +114,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   });
 
   // 같은 카테고리의 포스트 목록 가져오기 (SelectBox용)
-  const categoryPosts = getPostsByCategory(category).map((p) => ({
+  const categoryPosts = getPostsByCategory(category).map(p => ({
     slug: p.slug,
     title: p.title,
   }));
@@ -142,6 +144,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <PostContent
                   title={post.title}
                   date={post.date}
+                  updatedAt={post.updatedAt}
                   author={post.author}
                   tags={post.tags}
                   content={post.content}

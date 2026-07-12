@@ -789,6 +789,7 @@ export const GYEONGGI_NORTH_PLACES = [
   {
     id: 'jeongok-prehistory-museum',
     name: '전곡선사박물관',
+    linkedPostSlugs: ['jeongok-prehistory-museum-parking'],
     region: 'gyeonggi-north',
     subRegion: '연천군',
     category: 'museum',
@@ -862,6 +863,7 @@ export const GYEONGGI_NORTH_PLACES = [
   {
     id: 'silhak-museum',
     name: '실학박물관',
+    linkedPostSlugs: ['silhak-museum-parking'],
     region: 'gyeonggi-north',
     subRegion: '남양주시',
     category: 'museum',
@@ -1239,6 +1241,7 @@ export const GYEONGGI_NORTH_PLACES = [
   {
     id: 'gyeonggi-northern-childrens-museum',
     name: '경기북부어린이박물관',
+    linkedPostSlugs: ['gyeonggi-northern-childrens-museum-parking'],
     region: 'gyeonggi-north',
     subRegion: '동두천시',
     category: 'museum',
@@ -1315,6 +1318,7 @@ export const GYEONGGI_NORTH_PLACES = [
   {
     id: 'goyang-children-museum',
     name: '고양어린이박물관',
+    linkedPostSlugs: ['goyang-children-museum-parking'],
     region: 'gyeonggi-north',
     subRegion: '고양시',
     category: 'museum',
@@ -1594,6 +1598,7 @@ export const GYEONGGI_NORTH_PLACES = [
   {
     id: 'pocheon-art-valley-astronomy-science-museum',
     name: '포천아트밸리 천문과학관',
+    linkedPostSlugs: ['pocheon-art-valley-astronomy-science-museum-parking'],
     region: 'gyeonggi-north',
     subRegion: '포천시',
     category: 'museum',
@@ -1618,7 +1623,6 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '천문과학관은 실내형이지만 아트밸리 야외 동선 비중이 커 계절 태그를 함께 둔다.',
-    linkedPostSlugs: [],
     thumbnailImage:
       '/images/places/pocheon-art-valley-astronomy-science-museum.webp',
   },
@@ -1668,6 +1672,7 @@ export const GYEONGGI_NORTH_PLACES = [
   {
     id: 'gyeonggi-north-guri-insect-ecology-center',
     name: '구리시곤충생태관',
+    linkedPostSlugs: ['gyeonggi-north-guri-insect-ecology-center-parking'],
     region: 'gyeonggi-north',
     subRegion: '구리시',
     category: 'museum',
@@ -1698,7 +1703,6 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '개인 자율관람은 예약 불필요다. 공식 시설현황은 살아있는 나비 일평균 약 100마리와 36여 종의 살아있는 곤충을 안내한다.',
-    linkedPostSlugs: [],
     externalBlogLinks: [
       {
         title: '구리 아이와 함께 가볼만한곳 구리시곤충생태관',
@@ -1797,6 +1801,7 @@ export const GYEONGGI_NORTH_PLACES = [
   {
     id: 'gyeonggi-north-yangju-insect-museum',
     name: '양주곤충박물관',
+    linkedPostSlugs: ['gyeonggi-north-yangju-insect-museum-parking'],
     region: 'gyeonggi-north',
     subRegion: '양주시',
     category: 'museum',
@@ -1827,7 +1832,6 @@ export const GYEONGGI_NORTH_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '공식 카카오 채널의 2026년 게시·후기 노출로 운영을 확인했다. 주차와 상세 운영시간은 1차 예약 페이지를 추가 확인한다.',
-    linkedPostSlugs: [],
     externalBlogLinks: [
       {
         title: '아이와 함께한 실내 나들이 – 양주곤충박물관 후기',

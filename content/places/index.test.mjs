@@ -187,6 +187,21 @@ test('merged parent museum entries keep child-focused reservation guidance', asy
   assert.match(gwacheonScienceMuseum?.editorNote ?? '', /유아체험관/);
 });
 
+test('every museum links to its dedicated parking guide', async () => {
+  const { ALL_PLACES } = await import('./index.ts');
+  const museums = ALL_PLACES.filter(place => place.category === 'museum');
+
+  assert.equal(museums.length, 40);
+
+  for (const place of museums) {
+    assert.deepEqual(
+      place.linkedPostSlugs,
+      [`${place.id}-parking`],
+      `${place.id} should link its dedicated parking guide`
+    );
+  }
+});
+
 test('thumbnailImage paths point to existing local assets', async () => {
   const { ALL_PLACES } = await import('./index.ts');
 

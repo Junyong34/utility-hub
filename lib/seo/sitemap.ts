@@ -17,7 +17,14 @@ import { pickLatestDate } from './date-utils.ts';
 import type { RegionSlug } from '../../types/place-source.ts';
 
 function getLatestPostDate(): string | undefined {
-  return pickLatestDate(getAllPosts().map(post => post.date));
+  return pickLatestDate(getAllPosts().map(getPostLastModified));
+}
+
+function getPostLastModified(post: {
+  date: string;
+  updatedAt?: string;
+}): string {
+  return post.updatedAt ?? post.date;
 }
 
 function getLatestToolDate(): string | undefined {
@@ -97,7 +104,7 @@ export function collectBlogPostEntries(): SitemapEntry[] {
 
   return posts.map(post => ({
     url: `${SITE_CONFIG.url}/blog/${post.categorySlug}/${post.slug}`,
-    lastModified: post.date,
+    lastModified: getPostLastModified(post),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }));
@@ -116,7 +123,7 @@ export function collectBlogCategoryEntries(): SitemapEntry[] {
       pickLatestDate(
         posts
           .filter(post => post.categorySlug === category.slug)
-          .map(post => post.date)
+          .map(getPostLastModified)
       ) ?? new Date(),
     changeFrequency: 'weekly' as const,
     priority: 0.75,
@@ -140,7 +147,7 @@ export function collectBlogPaginationEntries(): SitemapEntry[] {
       post => post.categorySlug === category.slug
     );
     const latestCategoryDate =
-      pickLatestDate(categoryPosts.map(post => post.date)) ?? latestPostDate;
+      pickLatestDate(categoryPosts.map(getPostLastModified)) ?? latestPostDate;
 
     return buildBlogPaginationEntries({
       categorySlug: category.slug,

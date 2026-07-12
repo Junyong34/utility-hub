@@ -6,6 +6,7 @@ import { processMarkdown } from '@/lib/blog/markdown-processor';
 interface PostContentProps {
   title: string;
   date: string;
+  updatedAt?: string;
   author: string;
   tags: string[];
   content: string;
@@ -17,13 +18,28 @@ interface PostContentProps {
  * 개별 포스트의 전체 내용을 표시합니다
  * unified + rehype-pretty-code를 사용하여 마크다운을 렌더링합니다
  */
-export async function PostContent({ title, date, author, tags, content, ogImage }: PostContentProps) {
+export async function PostContent({
+  title,
+  date,
+  updatedAt,
+  author,
+  tags,
+  content,
+  ogImage,
+}: PostContentProps) {
   // 날짜 포맷팅
   const formattedDate = new Date(date).toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   });
+  const formattedUpdatedAt = updatedAt
+    ? new Date(updatedAt).toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : null;
 
   // 마크다운 처리
   const processedContent = await processMarkdown(content);
@@ -46,14 +62,23 @@ export async function PostContent({ title, date, author, tags, content, ogImage 
 
       {/* 헤더 */}
       <header className="mb-10">
-
-        <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight break-words">{title}</h1>
+        <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight break-words">
+          {title}
+        </h1>
 
         {/* 메타 정보 */}
         <div className="flex items-center gap-3 text-muted-foreground mb-6">
           <time dateTime={date} className="text-sm">
-            {formattedDate}
+            발행 {formattedDate}
           </time>
+          {formattedUpdatedAt && updatedAt !== date ? (
+            <>
+              <span>•</span>
+              <time dateTime={updatedAt} className="text-sm">
+                업데이트 {formattedUpdatedAt}
+              </time>
+            </>
+          ) : null}
           <span>•</span>
           <span className="text-sm">{author}</span>
         </div>
@@ -61,7 +86,7 @@ export async function PostContent({ title, date, author, tags, content, ogImage 
         {/* 태그 */}
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
-            {tags.map((tag) => (
+            {tags.map(tag => (
               <Badge key={tag} variant="secondary" className="text-xs">
                 {tag}
               </Badge>

@@ -488,6 +488,7 @@ export const INCHEON_PLACES = [
   {
     id: 'incheon-children-science-museum',
     name: '인천어린이과학관',
+    linkedPostSlugs: ['incheon-children-science-museum-parking'],
     region: 'incheon',
     subRegion: '계양구',
     category: 'museum',
@@ -520,6 +521,7 @@ export const INCHEON_PLACES = [
   {
     id: 'incheon-student-science-museum',
     name: '인천학생과학관',
+    linkedPostSlugs: ['incheon-student-science-museum-parking'],
     region: 'incheon',
     subRegion: '중구',
     category: 'museum',
@@ -581,6 +583,7 @@ export const INCHEON_PLACES = [
   {
     id: 'ganghwa-history-museum',
     name: '강화역사박물관',
+    linkedPostSlugs: ['ganghwa-history-museum-parking'],
     region: 'incheon',
     subRegion: '강화군',
     category: 'museum',
@@ -611,6 +614,7 @@ export const INCHEON_PLACES = [
   {
     id: 'ganghwa-natural-history-museum',
     name: '강화자연사박물관',
+    linkedPostSlugs: ['ganghwa-natural-history-museum-parking'],
     region: 'incheon',
     subRegion: '강화군',
     category: 'museum',
@@ -641,6 +645,7 @@ export const INCHEON_PLACES = [
   {
     id: 'gyeyang-fortress-museum',
     name: '계양산성박물관',
+    linkedPostSlugs: ['gyeyang-fortress-museum-parking'],
     region: 'incheon',
     subRegion: '계양구',
     category: 'museum',
@@ -671,6 +676,7 @@ export const INCHEON_PLACES = [
   {
     id: 'national-institute-of-biological-resources',
     name: '국립생물자원관',
+    linkedPostSlugs: ['national-institute-of-biological-resources-parking'],
     region: 'incheon',
     subRegion: '서구',
     category: 'museum',
@@ -732,6 +738,7 @@ export const INCHEON_PLACES = [
   {
     id: 'national-museum-of-world-writing',
     name: '국립세계문자박물관',
+    linkedPostSlugs: ['national-museum-of-world-writing-parking'],
     region: 'incheon',
     subRegion: '연수구',
     category: 'museum',
@@ -762,6 +769,7 @@ export const INCHEON_PLACES = [
   {
     id: 'incheon-metropolitan-city-museum',
     name: '인천광역시립박물관',
+    linkedPostSlugs: ['incheon-metropolitan-city-museum-parking'],
     region: 'incheon',
     subRegion: '연수구',
     category: 'museum',
@@ -790,6 +798,7 @@ export const INCHEON_PLACES = [
   {
     id: 'incheon-urban-history-museum',
     name: '인천도시역사관',
+    linkedPostSlugs: ['incheon-urban-history-museum-parking'],
     region: 'incheon',
     subRegion: '연수구',
     category: 'museum',
@@ -819,6 +828,7 @@ export const INCHEON_PLACES = [
   {
     id: 'national-incheon-marine-museum',
     name: '국립인천해양박물관',
+    linkedPostSlugs: ['national-incheon-marine-museum-parking'],
     region: 'incheon',
     subRegion: '중구',
     category: 'museum',
@@ -851,6 +861,7 @@ export const INCHEON_PLACES = [
   {
     id: 'geomdan-prehistory-museum',
     name: '검단선사박물관',
+    linkedPostSlugs: ['geomdan-prehistory-museum-parking'],
     region: 'incheon',
     subRegion: '서구',
     category: 'museum',
@@ -944,6 +955,7 @@ export const INCHEON_PLACES = [
   {
     id: 'sudoguksan-museum-childrens-exhibition',
     name: '수도국산달동네박물관 어린이체험실',
+    linkedPostSlugs: ['sudoguksan-museum-childrens-exhibition-parking'],
     region: 'incheon',
     subRegion: '동구',
     category: 'museum',
@@ -952,12 +964,12 @@ export const INCHEON_PLACES = [
     seasons: ['all-season'],
     priceType: 'free',
     reservationRequired: true,
-    parking: false,
+    parking: true,
     sourceType: 'official',
     sourceUrl: 'https://www.icdonggu.go.kr/open_content/museum/',
     naverMapUrl: 'https://map.naver.com/p/search/수도국산달동네박물관',
-    verifiedAt: '2026-05-07',
-    lastObservedAt: '2026-05-07',
+    verifiedAt: '2026-07-13',
+    lastObservedAt: '2026-07-13',
     verificationStatus: 'official_verified',
     description:
       '인천의 옛 생활사를 아이 눈높이 체험으로 연결할 수 있는 박물관. 짧은 실내 역사 체험 코스로 적합하다.',
@@ -969,13 +981,13 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '어린이 체험실 또는 교육 프로그램은 회차·예약 여부가 바뀔 수 있어 박물관 공지를 확인해야 한다.',
-    linkedPostSlugs: [],
     thumbnailImage:
       '/images/places/sudoguksan-museum-childrens-exhibition.webp',
   },
   {
     id: 'incheon-childrens-museum',
     name: '인천어린이박물관',
+    linkedPostSlugs: ['incheon-childrens-museum-parking'],
     region: 'incheon',
     subRegion: '미추홀구',
     category: 'museum',
@@ -1001,7 +1013,6 @@ export const INCHEON_PLACES = [
     operatorType: 'commercial',
     editorNote:
       '민간 시설이라 운영시간·휴관·가격 재확인이 필요하다. 맘맘 발견 후 지자체 문화관광 정보를 보조 출처로 확인했다.',
-    linkedPostSlugs: [],
     thumbnailImage: '/images/places/incheon-childrens-museum.webp',
   },
   {
@@ -1235,6 +1246,7 @@ export const INCHEON_PLACES = [
   {
     id: 'incheon-daeijakdo-marine-ecology-center',
     name: '대이작도 해양생태관',
+    linkedPostSlugs: ['incheon-daeijakdo-marine-ecology-center-parking'],
     region: 'incheon',
     subRegion: '옹진군',
     category: 'museum',
@@ -1266,7 +1278,6 @@ export const INCHEON_PLACES = [
     operatorType: 'public',
     editorNote:
       '인천투어 페이지가 2026-03-03 갱신본에서 시간·휴관일·무료입장·체험 프로그램을 안내한다. 도서 지역이므로 여객선 결항, 계절 운영, 현장 사정에 대비해 출항 전 전화 확인이 필요하다.',
-    linkedPostSlugs: [],
     externalBlogLinks: [
       {
         title:

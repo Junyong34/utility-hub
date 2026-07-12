@@ -1713,6 +1713,7 @@ export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'gyeonggi-children-museum',
     name: '경기도어린이박물관',
+    linkedPostSlugs: ['gyeonggi-children-museum-parking'],
     region: 'gyeonggi-south',
     subRegion: '용인시',
     category: 'museum',
@@ -2804,6 +2805,7 @@ export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'railroad-museum',
     name: '철도박물관',
+    linkedPostSlugs: ['railroad-museum-parking'],
     region: 'gyeonggi-south',
     subRegion: '의왕시',
     category: 'museum',
@@ -2877,6 +2879,7 @@ export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'bucheon-robopark',
     name: '부천로보파크',
+    linkedPostSlugs: ['bucheon-robopark-parking'],
     region: 'gyeonggi-south',
     subRegion: '부천시',
     category: 'museum',
@@ -2901,7 +2904,6 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '회차 운영과 요금 정책이 바뀔 수 있어 공식 이용안내 확인 후 방문하는 편이 안전하다.',
-    linkedPostSlugs: [],
     thumbnailImage: '/images/places/bucheon-robopark.webp',
     externalBlogLinks: [
       {
@@ -2948,6 +2950,7 @@ export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'korea-comics-museum',
     name: '한국만화박물관',
+    linkedPostSlugs: ['korea-comics-museum-parking'],
     region: 'gyeonggi-south',
     subRegion: '부천시',
     category: 'museum',
@@ -2972,7 +2975,6 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '상설전시 외에 어린이 공연·체험이 열릴 수 있어 방문 전 전시/행사 공지를 확인하면 좋다.',
-    linkedPostSlugs: [],
     thumbnailImage: '/images/places/korea-comics-museum.webp',
     externalBlogLinks: [
       {
@@ -3159,6 +3161,7 @@ export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'uiwang-bird-eco-science-museum',
     name: '의왕조류생태과학관',
+    linkedPostSlugs: ['uiwang-bird-eco-science-museum-parking'],
     region: 'gyeonggi-south',
     subRegion: '의왕시',
     category: 'museum',
@@ -3184,7 +3187,6 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '실내 전시는 4계절 이용 가능하지만 왕송호수 산책 동선은 봄·가을 추천으로 둔다.',
-    linkedPostSlugs: [],
     thumbnailImage: '/images/places/uiwang-bird-eco-science-museum.webp',
     externalBlogLinks: [
       {
@@ -3232,6 +3234,7 @@ export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'siheung-marine-eco-science-museum',
     name: '시흥해양생태과학관',
+    linkedPostSlugs: ['siheung-marine-eco-science-museum-parking'],
     region: 'gyeonggi-south',
     subRegion: '시흥시',
     category: 'museum',
@@ -3242,14 +3245,15 @@ export const GYEONGGI_SOUTH_PLACES = [
     priceType: 'paid',
     reservationRequired: true,
     parking: true,
-    sourceType: 'semi-official',
-    sourceUrl: 'https://www.siheung.go.kr/',
-    verifiedAt: '2026-05-07',
-    lastObservedAt: '2026-05-07',
-    verificationStatus: 'semi_verified',
+    sourceType: 'official',
+    sourceUrl:
+      'https://share.siheung.go.kr/hmpg/shmg/shap/shapDetail.do?shang_resces_mng_no=9B06DA3CCA9511F09EF8FA163E4CDE4B',
+    verifiedAt: '2026-07-13',
+    lastObservedAt: '2026-07-13',
+    verificationStatus: 'official_verified',
     description:
       '거북섬권 해양 생태와 해양 생물을 주제로 한 실내 과학관. 여름 해양 테마 나들이 후보로 묶기 좋다.',
-    address: '경기도 시흥시 거북섬둘레길 36-2',
+    address: '경기도 시흥시 거북섬서로 35',
     operatingHours: '운영시간 확인 필요',
     priceInfo: '요금 확인 필요',
     rainFriendly: true,
@@ -3257,7 +3261,6 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '신규 시설 성격이 강해 상세 운영시간과 예약 방식은 시흥시 공지 또는 시설 안내 재확인이 필요하다.',
-    linkedPostSlugs: [],
     thumbnailImage: '/images/places/siheung-marine-eco-science-museum.webp',
     externalBlogLinks: [
       {
@@ -3391,6 +3394,7 @@ export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'gyeonggi-south-siheung-bugsrium',
     name: '시흥시 곤충전시체험관 벅스리움',
+    linkedPostSlugs: ['gyeonggi-south-siheung-bugsrium-parking'],
     region: 'gyeonggi-south',
     subRegion: '시흥시',
     category: 'museum',
@@ -3422,7 +3426,6 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '일반 자유관람은 예약 불필요다. 12:00~13:30은 생물관리·점심시간이라 입장할 수 없다.',
-    linkedPostSlugs: [],
     externalBlogLinks: [
       {
         title:
@@ -3478,6 +3481,7 @@ export const GYEONGGI_SOUTH_PLACES = [
   {
     id: 'gyeonggi-south-yangpyeong-insect-museum',
     name: '양평곤충박물관',
+    linkedPostSlugs: ['gyeonggi-south-yangpyeong-insect-museum-parking'],
     region: 'gyeonggi-south',
     subRegion: '양평군',
     category: 'museum',
@@ -3509,7 +3513,6 @@ export const GYEONGGI_SOUTH_PLACES = [
     operatorType: 'public',
     editorNote:
       '경기투어패스의 현재 제휴 목록과 주소로 운영 신호를 확인했다. 일반 요금·계절 운영시간은 양평군 1차 페이지 확보 후 갱신한다.',
-    linkedPostSlugs: [],
     externalBlogLinks: [
       {
         title: '경기 양평 아이와 함께 가기 좋은 생태 교육 공간 양평곤충박물관',

@@ -1252,11 +1252,13 @@ export const SEOUL_PLACES = [
     stayMinutes: 90,
     operatorType: 'public',
     editorNote: '사전 예약 필수. 주말은 특히 빠르게 마감됨',
+    linkedPostSlugs: ['national-children-museum-parking'],
     thumbnailImage: '/images/places/national-children-museum.webp',
   },
   {
     id: 'national-folk-museum',
     name: '국립민속박물관',
+    linkedPostSlugs: ['national-folk-museum-parking'],
     region: 'seoul',
     subRegion: '종로구',
     category: 'museum',
@@ -1333,6 +1335,7 @@ export const SEOUL_PLACES = [
   {
     id: 'national-science-museum-gwacheon',
     name: '국립과천과학관',
+    linkedPostSlugs: ['national-science-museum-gwacheon-parking'],
     region: 'seoul',
     subRegion: '관악구',
     category: 'museum',
@@ -1408,6 +1411,7 @@ export const SEOUL_PLACES = [
   {
     id: 'seodaemun-nature-history-museum',
     name: '서대문자연사박물관',
+    linkedPostSlugs: ['seodaemun-nature-history-museum-parking'],
     region: 'seoul',
     subRegion: '서대문구',
     category: 'museum',
@@ -1417,16 +1421,16 @@ export const SEOUL_PLACES = [
     seasons: ['all-season'],
     priceType: 'paid',
     reservationRequired: false,
-    parking: false,
+    parking: true,
     sourceType: 'official',
-    sourceUrl: 'https://namu.sdm.go.kr/',
+    sourceUrl: 'https://namu.sdm.go.kr/web/main/contents/guide_info_parking',
     naverMapUrl: 'https://map.naver.com/p/entry/place/11620547',
-    verifiedAt: '2026-04-01',
-    lastObservedAt: '2026-04-01',
+    verifiedAt: '2026-07-13',
+    lastObservedAt: '2026-07-13',
     verificationStatus: 'official_verified',
     description:
       '공룡 화석과 자연사 표본이 풍부한 구립 박물관. 아이들이 좋아하는 공룡 전시 상설 운영.',
-    address: '서울 서대문구 연세로5나길 45',
+    address: '서울 서대문구 연희로32길 51',
     operatingHours: '09:00-18:00 (월요일 휴관)',
     priceInfo: '어린이 700원, 청소년 1,000원, 성인 3,000원',
     feedingRoom: false,
@@ -1659,6 +1663,7 @@ export const SEOUL_PLACES = [
   {
     id: 'seoul-national-museum-of-korea',
     name: '국립중앙박물관',
+    linkedPostSlugs: ['seoul-national-museum-of-korea-parking'],
     region: 'seoul',
     subRegion: '용산구',
     category: 'museum',
@@ -1733,6 +1738,7 @@ export const SEOUL_PLACES = [
   {
     id: 'seoul-nature-ecology-center',
     name: '서울시립과학관',
+    linkedPostSlugs: ['seoul-nature-ecology-center-parking'],
     region: 'seoul',
     subRegion: '노원구',
     category: 'museum',
@@ -1947,6 +1953,7 @@ export const SEOUL_PLACES = [
   {
     id: 'seoul-sangsangnara',
     name: '서울상상나라',
+    linkedPostSlugs: ['seoul-sangsangnara-parking'],
     region: 'seoul',
     subRegion: '광진구',
     category: 'museum',
@@ -2022,6 +2029,7 @@ export const SEOUL_PLACES = [
   {
     id: 'national-children-science-center',
     name: '국립어린이과학관',
+    linkedPostSlugs: ['national-children-science-center-parking'],
     region: 'seoul',
     subRegion: '종로구',
     category: 'museum',
@@ -2096,6 +2104,7 @@ export const SEOUL_PLACES = [
   {
     id: 'seoul-baekje-childrens-museum',
     name: '서울백제어린이박물관',
+    linkedPostSlugs: ['seoul-baekje-childrens-museum-parking'],
     region: 'seoul',
     subRegion: '송파구',
     category: 'museum',
@@ -2167,6 +2176,7 @@ export const SEOUL_PLACES = [
   {
     id: 'dooly-museum',
     name: '둘리뮤지엄',
+    linkedPostSlugs: ['dooly-museum-parking'],
     region: 'seoul',
     subRegion: '도봉구',
     category: 'museum',
@@ -2795,6 +2805,7 @@ export const SEOUL_PLACES = [
   {
     id: 'national-aviation-museum',
     name: '국립항공박물관',
+    linkedPostSlugs: ['national-aviation-museum-parking'],
     region: 'seoul',
     subRegion: '강서구',
     category: 'museum',
@@ -2819,7 +2830,6 @@ export const SEOUL_PLACES = [
     operatorType: 'public',
     editorNote:
       '상설 관람은 실내형이고 일부 체험 프로그램은 예약·요금 조건이 달라 방문 전 공식 예약/안내 확인이 필요하다.',
-    linkedPostSlugs: [],
     thumbnailImage: '',
     externalBlogLinks: [
       {

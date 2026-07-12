@@ -104,6 +104,9 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
   const hasReviews =
     Boolean(place.blogReviewHighlights?.length) ||
     Boolean(place.externalBlogLinks?.length);
+  const parkingGuideSlug = place.linkedPostSlugs?.find(
+    slug => slug === `${place.id}-parking`
+  );
 
   return (
     <main className="bg-[linear-gradient(180deg,var(--cream-soft)_0%,var(--canvas)_34%,var(--surface)_100%)] md:pt-24">
@@ -344,6 +347,31 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
               </div>
             ) : null}
           </section>
+
+          {parkingGuideSlug ? (
+            <section className="rounded-[28px] border border-primary/20 bg-[linear-gradient(135deg,var(--cream-soft),var(--canvas))] p-5 shadow-card sm:p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-[12px] font-bold tracking-[0.18em] text-primary-deep uppercase">
+                    Parking Guide
+                  </p>
+                  <h2 className="mt-2 text-xl font-bold text-foreground">
+                    주차장 이용방법과 아이 동반 팁
+                  </h2>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    공식 주차 안내와 최근 방문 동선을 나눠서 확인하세요.
+                  </p>
+                </div>
+                <Link
+                  href={`/blog/parking/${parkingGuideSlug}`}
+                  className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-[14px] bg-primary px-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-deep"
+                >
+                  <CarIcon className="h-4 w-4" />
+                  주차 이용방법·꿀팁 자세히 보기
+                </Link>
+              </div>
+            </section>
+          ) : null}
 
           {hasReviews ? (
             <PlaceBlogReviewSection
