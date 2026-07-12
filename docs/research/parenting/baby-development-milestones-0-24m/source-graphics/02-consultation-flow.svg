@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#57483B" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 L12 6 L0 12 Z" fill="#85938D"/>
+    </marker>
+    <style>
+      .sans { font-family: 'Pretendard Variable', 'Apple SD Gothic Neo', 'Noto Sans CJK KR', sans-serif; }
+      .title { font-size: 52px; font-weight: 800; fill: #21362F; letter-spacing: -2px; }
+      .subtitle { font-size: 23px; font-weight: 500; fill: #63736D; letter-spacing: -0.5px; }
+      .step { font-size: 19px; font-weight: 800; fill: #FFFFFF; }
+      .head { font-size: 28px; font-weight: 800; fill: #263D34; letter-spacing: -0.8px; }
+      .copy { font-size: 20px; font-weight: 600; fill: #50615A; letter-spacing: -0.4px; }
+      .branch { font-size: 21px; font-weight: 800; letter-spacing: -0.5px; }
+      .small { font-size: 17px; font-weight: 600; fill: #65716C; letter-spacing: -0.3px; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" rx="44" fill="#FFF9F2"/>
+  <circle cx="1500" cy="70" r="160" fill="#DDEEE7" opacity="0.8"/>
+  <circle cx="80" cy="850" r="150" fill="#F7DDD3" opacity="0.75"/>
+
+  <text x="100" y="105" class="sans title">발달이 걱정될 때, 이렇게 이어가세요</text>
+  <text x="100" y="150" class="sans subtitle">체크리스트 하나로 판단하지 말고 관찰 기록을 의료진과 나누는 것이 첫걸음입니다.</text>
+
+  <g transform="translate(100 220)" filter="url(#shadow)">
+    <rect width="355" height="245" rx="30" fill="#FFFFFF"/>
+    <rect x="26" y="24" width="84" height="38" rx="19" fill="#3B7560"/>
+    <text x="68" y="50" text-anchor="middle" class="sans step">STEP 1</text>
+    <text x="28" y="105" class="sans head">관찰하고 기록하기</text>
+    <text x="28" y="145" class="sans copy">• 언제, 어떤 상황이었는지</text>
+    <text x="28" y="178" class="sans copy">• 새로 한 행동과 잃은 행동</text>
+    <text x="28" y="211" class="sans copy">• 짧은 영상과 보호자 메모</text>
+  </g>
+
+  <line x1="475" y1="343" x2="555" y2="343" stroke="#85938D" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(575 220)" filter="url(#shadow)">
+    <rect width="355" height="245" rx="30" fill="#FFFFFF"/>
+    <rect x="26" y="24" width="84" height="38" rx="19" fill="#547BA5"/>
+    <text x="68" y="50" text-anchor="middle" class="sans step">STEP 2</text>
+    <text x="28" y="105" class="sans head">소아청소년과·검진 상담</text>
+    <text x="28" y="145" class="sans copy">• 월령과 출생력을 함께 설명</text>
+    <text x="28" y="178" class="sans copy">• 청각·시각·움직임 우려 공유</text>
+    <text x="28" y="211" class="sans copy">• 필요하면 발달선별검사 확인</text>
+  </g>
+
+  <line x1="950" y1="343" x2="1030" y2="343" stroke="#85938D" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(1050 220)" filter="url(#shadow)">
+    <rect width="450" height="245" rx="30" fill="#FFFFFF"/>
+    <rect x="26" y="24" width="84" height="38" rx="19" fill="#C96B5D"/>
+    <text x="68" y="50" text-anchor="middle" class="sans step">STEP 3</text>
+    <text x="28" y="105" class="sans head">K-DST 결과에 따라 다음 단계</text>
+    <text x="28" y="145" class="sans copy">9~71개월 · 부모작성형 선별검사</text>
+    <text x="28" y="178" class="sans copy">대근육·소근육·인지·언어·사회성·자조</text>
+    <text x="28" y="211" class="sans copy">결과는 진단이 아니라 상담의 출발점</text>
+  </g>
+
+  <line x1="1275" y1="475" x2="1275" y2="545" stroke="#85938D" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <g transform="translate(520 570)">
+    <rect x="0" y="0" width="260" height="150" rx="26" fill="#E5F2EB" stroke="#90C3A9" stroke-width="2"/>
+    <text x="130" y="48" text-anchor="middle" class="sans branch" fill="#34775A">양호</text>
+    <text x="130" y="84" text-anchor="middle" class="sans small">정기검진을 이어가며</text>
+    <text x="130" y="112" text-anchor="middle" class="sans small">변화를 계속 관찰해요</text>
+
+    <rect x="290" y="0" width="300" height="150" rx="26" fill="#FFF2D5" stroke="#E6BE64" stroke-width="2"/>
+    <text x="440" y="48" text-anchor="middle" class="sans branch" fill="#8B661A">추적검사 요망</text>
+    <text x="440" y="84" text-anchor="middle" class="sans small">주치의와 시기를 정해</text>
+    <text x="440" y="112" text-anchor="middle" class="sans small">K-DST와 진찰을 다시 확인해요</text>
+
+    <rect x="620" y="0" width="360" height="150" rx="26" fill="#FCE7DF" stroke="#E7A391" stroke-width="2"/>
+    <text x="800" y="48" text-anchor="middle" class="sans branch" fill="#A85340">심화평가 권고</text>
+    <text x="800" y="84" text-anchor="middle" class="sans small">의료진과 상의해 전문기관의</text>
+    <text x="800" y="112" text-anchor="middle" class="sans small">정밀 진단평가로 연결해요</text>
+  </g>
+
+  <text x="1010" y="754" text-anchor="middle" class="sans small" fill="#8A5650">이미 진단·치료 중인 아이는 ‘지속관리 필요’로 판정될 수도 있습니다.</text>
+
+  <g transform="translate(100 565)">
+    <rect width="360" height="165" rx="28" fill="#4A3332"/>
+    <text x="28" y="48" class="sans branch" fill="#FFFFFF">기다리지 말아야 할 때</text>
+    <text x="28" y="84" class="sans small" fill="#FBE8E4">하던 능력을 잃었거나 한쪽만 쓰고,</text>
+    <text x="28" y="113" class="sans small" fill="#FBE8E4">지나치게 뻣뻣·축 늘어지거나,</text>
+    <text x="28" y="142" class="sans small" fill="#FBE8E4">소리·시각 자극에 거의 반응하지 않을 때</text>
+  </g>
+
+  <rect x="100" y="782" width="1400" height="70" rx="22" fill="#F2EDE6"/>
+  <text x="800" y="812" text-anchor="middle" class="sans small">K-DST는 발달지연을 확진하는 검사가 아닙니다. 보호자의 관찰과 의료진의 진찰을 함께 봅니다.</text>
+  <text x="800" y="838" text-anchor="middle" class="sans small">자료: 보건복지부·국민건강보험공단 안내를 바탕으로 Zento 편집실 재구성</text>
+</svg>

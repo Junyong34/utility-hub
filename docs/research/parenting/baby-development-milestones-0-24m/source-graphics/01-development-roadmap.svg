@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#755B43" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .sans { font-family: 'Pretendard Variable', 'Apple SD Gothic Neo', 'Noto Sans CJK KR', sans-serif; }
+      .title { font-size: 54px; font-weight: 800; fill: #21362F; letter-spacing: -2px; }
+      .subtitle { font-size: 24px; font-weight: 500; fill: #63736D; letter-spacing: -0.6px; }
+      .month { font-size: 28px; font-weight: 800; fill: #FFFFFF; }
+      .label { font-size: 18px; font-weight: 800; letter-spacing: -0.4px; }
+      .copy { font-size: 20px; font-weight: 600; fill: #33483F; letter-spacing: -0.6px; }
+      .note { font-size: 18px; font-weight: 600; fill: #6D7773; letter-spacing: -0.3px; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1200" rx="44" fill="#FFF9F2"/>
+  <circle cx="1490" cy="88" r="150" fill="#F5E2D3" opacity="0.72"/>
+  <circle cx="98" cy="1130" r="180" fill="#DCEEE6" opacity="0.72"/>
+
+  <text x="100" y="105" class="sans title">0~24개월 아기 발달 로드맵</text>
+  <text x="100" y="150" class="sans subtitle">각 월령까지 대부분의 아이가 보이는 대표적인 모습만 간단히 모았습니다.</text>
+
+  <g transform="translate(100 185)">
+    <rect x="0" y="0" width="170" height="42" rx="21" fill="#FCE7DF"/>
+    <circle cx="23" cy="21" r="8" fill="#E98B73"/>
+    <text x="42" y="28" class="sans label" fill="#A85340">사회·정서</text>
+    <rect x="188" y="0" width="195" height="42" rx="21" fill="#E6EEF9"/>
+    <circle cx="211" cy="21" r="8" fill="#6E9ED6"/>
+    <text x="230" y="28" class="sans label" fill="#3F6EAA">언어·의사소통</text>
+    <rect x="401" y="0" width="145" height="42" rx="21" fill="#FFF0C9"/>
+    <circle cx="424" cy="21" r="8" fill="#DBAB42"/>
+    <text x="443" y="28" class="sans label" fill="#8B661A">인지</text>
+    <rect x="564" y="0" width="180" height="42" rx="21" fill="#DFF0E8"/>
+    <circle cx="587" cy="21" r="8" fill="#5FA683"/>
+    <text x="606" y="28" class="sans label" fill="#34775A">운동·신체</text>
+  </g>
+
+  <g transform="translate(100 270)" filter="url(#shadow)">
+    <rect width="330" height="360" rx="30" fill="#FFFFFF"/>
+    <rect x="24" y="24" width="92" height="48" rx="24" fill="#3B7560"/>
+    <text x="70" y="57" text-anchor="middle" class="sans month">2개월</text>
+    <text x="28" y="112" class="sans label" fill="#A85340">사회</text>
+    <text x="92" y="112" class="sans copy">얼굴을 보고 미소 지어요</text>
+    <text x="28" y="164" class="sans label" fill="#3F6EAA">언어</text>
+    <text x="92" y="164" class="sans copy">울음 외의 소리를 내요</text>
+    <text x="28" y="216" class="sans label" fill="#8B661A">인지</text>
+    <text x="92" y="216" class="sans copy">사람의 움직임을 바라봐요</text>
+    <text x="28" y="268" class="sans label" fill="#34775A">운동</text>
+    <text x="92" y="268" class="sans copy">엎드려 머리를 잠깐 들어요</text>
+    <line x1="28" y1="306" x2="302" y2="306" stroke="#ECE7E0"/>
+    <text x="28" y="334" class="sans note">첫 공식 관찰 체크포인트</text>
+  </g>
+
+  <g transform="translate(457 270)" filter="url(#shadow)">
+    <rect width="330" height="360" rx="30" fill="#FFFFFF"/>
+    <rect x="24" y="24" width="92" height="48" rx="24" fill="#3B7560"/>
+    <text x="70" y="57" text-anchor="middle" class="sans month">4개월</text>
+    <text x="28" y="112" class="sans label" fill="#A85340">사회</text>
+    <text x="92" y="112" class="sans copy">관심을 끌려고 반응해요</text>
+    <text x="28" y="164" class="sans label" fill="#3F6EAA">언어</text>
+    <text x="92" y="164" class="sans copy">쿠잉을 주고받아요</text>
+    <text x="28" y="216" class="sans label" fill="#8B661A">인지</text>
+    <text x="92" y="216" class="sans copy">자기 손을 유심히 봐요</text>
+    <text x="28" y="268" class="sans label" fill="#34775A">운동</text>
+    <text x="92" y="268" class="sans copy">머리를 가누고 팔꿈치로 버텨요</text>
+  </g>
+
+  <g transform="translate(814 270)" filter="url(#shadow)">
+    <rect width="330" height="360" rx="30" fill="#FFFFFF"/>
+    <rect x="24" y="24" width="92" height="48" rx="24" fill="#3B7560"/>
+    <text x="70" y="57" text-anchor="middle" class="sans month">6개월</text>
+    <text x="28" y="112" class="sans label" fill="#A85340">사회</text>
+    <text x="92" y="112" class="sans copy">익숙한 사람을 알아봐요</text>
+    <text x="28" y="164" class="sans label" fill="#3F6EAA">언어</text>
+    <text x="92" y="164" class="sans copy">번갈아 소리를 내요</text>
+    <text x="28" y="216" class="sans label" fill="#8B661A">인지</text>
+    <text x="92" y="216" class="sans copy">입과 손으로 안전하게 탐색해요</text>
+    <text x="28" y="268" class="sans label" fill="#34775A">운동</text>
+    <text x="92" y="268" class="sans copy">뒤집고 손을 짚어 앉아요</text>
+  </g>
+
+  <g transform="translate(1171 270)" filter="url(#shadow)">
+    <rect width="330" height="360" rx="30" fill="#FFFFFF"/>
+    <rect x="24" y="24" width="92" height="48" rx="24" fill="#3B7560"/>
+    <text x="70" y="57" text-anchor="middle" class="sans month">9개월</text>
+    <text x="28" y="112" class="sans label" fill="#A85340">사회</text>
+    <text x="92" y="112" class="sans copy">이름을 부르면 바라봐요</text>
+    <text x="28" y="164" class="sans label" fill="#3F6EAA">언어</text>
+    <text x="92" y="164" class="sans copy">다양하게 옹알이해요</text>
+    <text x="28" y="216" class="sans label" fill="#8B661A">인지</text>
+    <text x="92" y="216" class="sans copy">떨어진 물건을 찾아봐요</text>
+    <text x="28" y="268" class="sans label" fill="#34775A">운동</text>
+    <text x="92" y="268" class="sans copy">도움 없이 앉아요</text>
+  </g>
+
+  <g transform="translate(100 660)" filter="url(#shadow)">
+    <rect width="330" height="360" rx="30" fill="#FFFFFF"/>
+    <rect x="24" y="24" width="108" height="48" rx="24" fill="#C96B5D"/>
+    <text x="78" y="57" text-anchor="middle" class="sans month">12개월</text>
+    <text x="28" y="112" class="sans label" fill="#A85340">사회</text>
+    <text x="92" y="112" class="sans copy">함께 손뼉 놀이를 해요</text>
+    <text x="28" y="164" class="sans label" fill="#3F6EAA">언어</text>
+    <text x="92" y="164" class="sans copy">빠이빠이·엄마·아빠를 써요</text>
+    <text x="28" y="216" class="sans label" fill="#8B661A">인지</text>
+    <text x="92" y="216" class="sans copy">숨긴 물건을 찾아요</text>
+    <text x="28" y="268" class="sans label" fill="#34775A">운동</text>
+    <text x="92" y="268" class="sans copy">붙잡고 서고 가구를 잡고 걸어요</text>
+  </g>
+
+  <g transform="translate(457 660)" filter="url(#shadow)">
+    <rect width="330" height="360" rx="30" fill="#FFFFFF"/>
+    <rect x="24" y="24" width="108" height="48" rx="24" fill="#C96B5D"/>
+    <text x="78" y="57" text-anchor="middle" class="sans month">15개월</text>
+    <text x="28" y="112" class="sans label" fill="#A85340">사회</text>
+    <text x="92" y="112" class="sans copy">좋아하는 물건을 보여줘요</text>
+    <text x="28" y="164" class="sans label" fill="#3F6EAA">언어</text>
+    <text x="92" y="164" class="sans copy">1~2개 단어를 말하려 해요</text>
+    <text x="28" y="216" class="sans label" fill="#8B661A">인지</text>
+    <text x="92" y="216" class="sans copy">컵·책을 용도대로 써봐요</text>
+    <text x="28" y="268" class="sans label" fill="#34775A">운동</text>
+    <text x="92" y="268" class="sans copy">혼자 몇 걸음을 걸어요</text>
+  </g>
+
+  <g transform="translate(814 660)" filter="url(#shadow)">
+    <rect width="330" height="360" rx="30" fill="#FFFFFF"/>
+    <rect x="24" y="24" width="108" height="48" rx="24" fill="#C96B5D"/>
+    <text x="78" y="57" text-anchor="middle" class="sans month">18개월</text>
+    <text x="28" y="112" class="sans label" fill="#A85340">사회</text>
+    <text x="92" y="112" class="sans copy">흥미로운 것을 가리켜 나눠요</text>
+    <text x="28" y="164" class="sans label" fill="#3F6EAA">언어</text>
+    <text x="92" y="164" class="sans copy">3개 이상 단어를 말하려 해요</text>
+    <text x="28" y="216" class="sans label" fill="#8B661A">인지</text>
+    <text x="92" y="216" class="sans copy">간단한 기능놀이를 해요</text>
+    <text x="28" y="268" class="sans label" fill="#34775A">운동</text>
+    <text x="92" y="268" class="sans copy">혼자 걷고 낙서해요</text>
+  </g>
+
+  <g transform="translate(1171 660)" filter="url(#shadow)">
+    <rect width="330" height="360" rx="30" fill="#FFFFFF"/>
+    <rect x="24" y="24" width="108" height="48" rx="24" fill="#C96B5D"/>
+    <text x="78" y="57" text-anchor="middle" class="sans month">24개월</text>
+    <text x="28" y="112" class="sans label" fill="#A85340">사회</text>
+    <text x="92" y="112" class="sans copy">다른 사람의 감정을 살펴요</text>
+    <text x="28" y="164" class="sans label" fill="#3F6EAA">언어</text>
+    <text x="92" y="164" class="sans copy">두 단어를 이어 말해요</text>
+    <text x="28" y="216" class="sans label" fill="#8B661A">인지</text>
+    <text x="92" y="216" class="sans copy">장난감 두 개를 연결해 놀아요</text>
+    <text x="28" y="268" class="sans label" fill="#34775A">운동</text>
+    <text x="92" y="268" class="sans copy">달리고 공을 차요</text>
+  </g>
+
+  <rect x="100" y="1060" width="1400" height="76" rx="24" fill="#F2EDE6"/>
+  <text x="800" y="1092" text-anchor="middle" class="sans note">발달 순서와 속도에는 개인차가 있습니다. 한 항목보다 시간에 따른 변화와 여러 영역을 함께 보세요.</text>
+  <text x="800" y="1122" text-anchor="middle" class="sans note">자료: 질병관리청·CDC 2026 발달 자료를 바탕으로 Zento 편집실 재구성</text>
+</svg>
