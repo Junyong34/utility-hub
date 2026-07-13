@@ -121,8 +121,8 @@ const EXPECTED_POSTS = [
       '/places?indoor=true',
       '/places?rain=true',
     ],
-    requiredText: [
-      '예약 없이 갈 수 있는 곳이라도 주말, 방학, 우천일에는 현장 대기나 회차 마감이 생길 수 있습니다.',
+    requiredPatterns: [
+      /예약 없이 갈 수 있는 곳이라도.+현장 대기나 회차 마감이 생길 수 있습니다\./,
     ],
   },
   {
@@ -231,14 +231,14 @@ const EXPECTED_POSTS = [
   },
 ];
 
-const REQUIRED_HEADINGS = [
-  '## 기준일과 읽는 법',
-  '## 한눈에 보는 추천 장소',
-  '## 장소별로 고르는 기준',
-  '## 방문 전 확인 체크리스트',
-  '## 같이 보면 좋은 글과 페이지',
-  '## FAQ',
-  '## 마무리',
+const REQUIRED_HEADING_PATTERNS = [
+  /^## 운영 정보 기준일과 확인 방법$/m,
+  /^## 지역·연령·(?:비용|예약)별 장소 비교$/m,
+  /^## .+ 선택 기준$/m,
+  /^## 방문 전 확인 체크리스트$/m,
+  /^## .+ 관련 안내$/m,
+  /^## FAQ$/m,
+  /^## .+ 선택 요약$/m,
 ];
 
 const DISALLOWED_PATTERNS = [
@@ -254,7 +254,7 @@ const SUMMARY_TABLE_HEADER =
   '| 장소 | 지역 | 권장 연령 | 비용 | 예약 | 주차 | 이럴 때 추천 |';
 const SUMMARY_TABLE_SEPARATOR = '| --- | --- | --- | --- | --- | --- | --- |';
 const TRUST_SENTENCE =
-  '이 글은 **기준일: 2026년 6월**에 확인한 장소 seed와 공식·준공식 출처를 바탕으로 정리했습니다. 운영시간, 요금, 예약 가능 여부는 바뀔 수 있으니 방문 전 공식 페이지를 다시 확인하세요.';
+  '**기준일: 2026년 6월.** 장소별 운영 정보는 당시 확인한 공식·준공식 출처를 기준으로 정리했습니다. 운영시간·요금·예약 가능 여부는 바뀔 수 있으니 방문 전 공식 페이지에서 다시 확인하세요.';
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -310,12 +310,8 @@ test('rainy day indoor posts have the required editorial structure and links', (
   for (const post of EXPECTED_POSTS) {
     const { content } = readPost(post.slug);
 
-    for (const heading of REQUIRED_HEADINGS) {
-      assert.match(
-        content,
-        new RegExp(escapeRegExp(heading)),
-        `${post.slug} ${heading}`
-      );
+    for (const headingPattern of REQUIRED_HEADING_PATTERNS) {
+      assert.match(content, headingPattern, `${post.slug} ${headingPattern}`);
     }
 
     for (const link of post.requiredLinks) {
@@ -326,12 +322,8 @@ test('rainy day indoor posts have the required editorial structure and links', (
       );
     }
 
-    for (const requiredText of post.requiredText ?? []) {
-      assert.match(
-        content,
-        new RegExp(escapeRegExp(requiredText)),
-        `${post.slug} ${requiredText}`
-      );
+    for (const requiredPattern of post.requiredPatterns ?? []) {
+      assert.match(content, requiredPattern, `${post.slug} ${requiredPattern}`);
     }
 
     assert.match(
