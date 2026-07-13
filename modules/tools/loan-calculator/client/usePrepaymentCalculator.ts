@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useQueryStates } from 'nuqs';
-import { calculatePrepaymentFee } from '@/lib/tools/prepayment-fee-calculator';
+import { calculatePrepaymentFee, PREPAYMENT_QUERY_PARSERS } from '../public.ts';
 import {
   formatNumberWithCommas,
   parseFormattedNumber,
-} from '@/lib/tools/formatting';
-import { PREPAYMENT_QUERY_PARSERS } from './parsers';
+} from '@/shared/domain/money-formatting';
 
 export function usePrepaymentCalculator() {
   // URL 쿼리 상태 (공유 가능한 상태)

@@ -15,7 +15,7 @@ import {
   LOAN_QUERY_PARSERS,
   PREPAYMENT_QUERY_PARSERS,
   TAB_QUERY_PARSER,
-} from '../../components/tools/loan-calculator/hooks/parsers.ts';
+} from '../../modules/tools/loan-calculator/public.ts';
 import {
   DEPOSIT_QUERY_PARSERS,
   INSTALLMENT_QUERY_PARSERS,

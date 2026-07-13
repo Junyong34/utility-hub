@@ -10,15 +10,12 @@ import { AmountInputField } from '@/shared/ui/AmountInputField';
 import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group';
 import { Button } from '@/shared/ui/button';
 import { QuickActionButton } from '@/shared/ui/QuickActionButton';
-import {
-  FormSectionGroup,
-  FormFieldGroup,
-} from '@/shared/ui/FormSectionGroup';
+import { FormSectionGroup, FormFieldGroup } from '@/shared/ui/FormSectionGroup';
 import { Percent, Calendar, ChevronRight } from 'lucide-react';
-import type { RepaymentMethod } from '@/lib/tools/loan-calculator';
-import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
-import { REPAYMENT_METHODS } from '../constants';
-import { getNumberInput } from '../utils';
+import { formatCurrencyToKoreanUnits } from '@/shared/domain/money-formatting';
+import type { RepaymentMethod } from '../public.ts';
+import { getNumberInput } from '../domain/numeric-input.ts';
+import { REPAYMENT_METHODS } from './repayment-method-options.ts';
 
 interface LoanInputFormProps {
   principal: string;
@@ -72,7 +69,11 @@ export function LoanInputForm({
         <FormSectionGroup>
           <FormFieldGroup
             label="대출 원금"
-            icon={<span className="flex w-4 h-4 items-center justify-center text-sm font-bold">₩</span>}
+            icon={
+              <span className="flex w-4 h-4 items-center justify-center text-sm font-bold">
+                ₩
+              </span>
+            }
             description="최대 1조원까지 입력 가능합니다"
           >
             <AmountInputField

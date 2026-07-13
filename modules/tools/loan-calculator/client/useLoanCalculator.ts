@@ -2,13 +2,13 @@ import { useMemo, useState } from 'react';
 import { useQueryStates } from 'nuqs';
 import {
   calculateLoan,
+  LOAN_QUERY_PARSERS,
   type RepaymentMethod,
-} from '@/lib/tools/loan-calculator';
+} from '../public.ts';
 import {
   formatNumberWithCommas,
   parseFormattedNumber,
-} from '@/lib/tools/formatting';
-import { LOAN_QUERY_PARSERS } from './parsers';
+} from '@/shared/domain/money-formatting';
 
 export function useLoanCalculator() {
   // URL 쿼리 상태 (공유 가능한 상태)

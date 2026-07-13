@@ -1,4 +1,4 @@
-import type { RepaymentMethod } from '@/lib/tools/loan-calculator';
+import type { RepaymentMethod } from '../public.ts';
 
 export const REPAYMENT_METHODS: Array<{
   value: RepaymentMethod;
@@ -21,9 +21,3 @@ export const REPAYMENT_METHODS: Array<{
     description: '만기에 원금상환',
   },
 ];
-
-export const currencyFormatter = new Intl.NumberFormat('ko-KR', {
-  style: 'currency',
-  currency: 'KRW',
-  maximumFractionDigits: 0,
-});

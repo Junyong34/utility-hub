@@ -2,9 +2,9 @@
 
 import { TooltipProvider } from '@/shared/ui/tooltip';
 import { BottomSheet } from '@/shared/client/bottom-sheet';
-import { usePrepaymentCalculator } from '../hooks/usePrepaymentCalculator';
-import { PrepaymentInputForm } from '../components/PrepaymentInputForm';
-import { PrepaymentFeeResultCard } from '../components/PrepaymentFeeResultCard';
+import { PrepaymentFeeResultCard, PrepaymentInputForm } from '../ui.ts';
+import { ShareButton } from './ShareButton.tsx';
+import { usePrepaymentCalculator } from './usePrepaymentCalculator.ts';
 
 export function PrepaymentFeeSection() {
   const {
@@ -64,6 +64,9 @@ export function PrepaymentFeeSection() {
             repaymentAmount={repaymentAmount}
             feeRate={feeRate}
             repaymentDate={repaymentDate}
+            action={
+              <ShareButton variant="outline" size="sm" showLabel={false} />
+            }
           />
         )}
 
@@ -80,6 +83,9 @@ export function PrepaymentFeeSection() {
                 repaymentAmount={repaymentAmount}
                 feeRate={feeRate}
                 repaymentDate={repaymentDate}
+                action={
+                  <ShareButton variant="outline" size="sm" showLabel={false} />
+                }
               />
             </div>
           )}

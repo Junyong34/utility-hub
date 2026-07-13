@@ -1,17 +1,11 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/shared/ui/card';
-import type { RepaymentMethod } from '@/lib/tools/loan-calculator';
-import {
-  splitMonths,
-  formatCurrencyToKoreanUnits,
-} from '@/lib/tools/formatting';
-import { currencyFormatter, REPAYMENT_METHODS } from '../constants';
-import { getNumberInput } from '../utils';
-import { ShareButton } from './ShareButton';
+import type { ReactNode } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { splitMonths } from '@/shared/domain/duration';
+import { formatCurrencyToKoreanUnits } from '@/shared/domain/money-formatting';
+import type { RepaymentMethod } from '../public.ts';
+import { getNumberInput } from '../domain/numeric-input.ts';
+import { currencyFormatter } from './display-formatting.ts';
+import { REPAYMENT_METHODS } from './repayment-method-options.ts';
 
 interface LoanResultCardProps {
   result: {
@@ -23,6 +17,7 @@ interface LoanResultCardProps {
   principal: string;
   annualRate: string;
   method: RepaymentMethod;
+  action?: ReactNode;
 }
 
 export function LoanResultCard({
@@ -30,6 +25,7 @@ export function LoanResultCard({
   principal,
   annualRate,
   method,
+  action,
 }: LoanResultCardProps) {
   const { years, months } = splitMonths(result.months);
   const repaymentMethodLabel = REPAYMENT_METHODS.find(
@@ -41,7 +37,7 @@ export function LoanResultCard({
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-semibold">📊 계산 결과</CardTitle>
-          <ShareButton variant="outline" size="sm" showLabel={false} />
+          {action}
         </div>
       </CardHeader>
       <CardContent className="space-y-5">

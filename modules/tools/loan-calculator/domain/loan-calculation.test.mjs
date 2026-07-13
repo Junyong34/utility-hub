@@ -6,7 +6,7 @@ import {
   calculateEqualPrincipal,
   calculateLoan,
   calculateLumpSum,
-} from './loan-calculator.ts';
+} from '../public.ts';
 
 const REPRESENTATIVE_LOAN = {
   principal: 100_000_000,

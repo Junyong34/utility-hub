@@ -1,24 +1,17 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/shared/ui/card';
-import type { PrepaymentFeeResult } from '@/lib/tools/prepayment-fee-calculator';
-import {
-  formatCurrencyToKoreanUnits,
-  formatDateToKorean,
-} from '@/lib/tools/formatting';
-import { currencyFormatter } from '../constants';
-import { getNumberInput } from '../utils';
+import type { ReactNode } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { formatCurrencyToKoreanUnits } from '@/shared/domain/money-formatting';
+import type { PrepaymentFeeResult } from '../public.ts';
+import { getNumberInput } from '../domain/numeric-input.ts';
+import { currencyFormatter, formatDateToKorean } from './display-formatting.ts';
 import { ResultSummaryLabel } from './ResultSummaryLabel';
-import { ShareButton } from './ShareButton';
 
 interface PrepaymentFeeResultCardProps {
   result: PrepaymentFeeResult;
   repaymentAmount: string;
   feeRate: string;
   repaymentDate?: Date;
+  action?: ReactNode;
 }
 
 export function PrepaymentFeeResultCard({
@@ -26,13 +19,14 @@ export function PrepaymentFeeResultCard({
   repaymentAmount,
   feeRate,
   repaymentDate,
+  action,
 }: PrepaymentFeeResultCardProps) {
   return (
     <Card className="border-primary/30 bg-gradient-to-br from-primary/12 via-primary/8 to-transparent shadow-lg shadow-primary/10">
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-semibold">📊 계산 결과</CardTitle>
-          <ShareButton variant="outline" size="sm" showLabel={false} />
+          {action}
         </div>
       </CardHeader>
       <CardContent className="space-y-5">

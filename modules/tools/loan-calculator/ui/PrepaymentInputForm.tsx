@@ -11,13 +11,10 @@ import { Button } from '@/shared/ui/button';
 import { DatePicker } from '@/shared/ui/date-picker';
 import { QuickActionButton } from '@/shared/ui/QuickActionButton';
 import { type CalendarQuickAction } from '@/shared/ui/calendar-date-utils';
-import {
-  FormSectionGroup,
-  FormFieldGroup,
-} from '@/shared/ui/FormSectionGroup';
+import { FormSectionGroup, FormFieldGroup } from '@/shared/ui/FormSectionGroup';
 import { Percent, Calendar, ChevronRight } from 'lucide-react';
-import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
-import { getNumberInput } from '../utils';
+import { formatCurrencyToKoreanUnits } from '@/shared/domain/money-formatting';
+import { getNumberInput } from '../domain/numeric-input.ts';
 
 const PREPAYMENT_DATE_QUICK_ACTIONS: CalendarQuickAction[] = [
   {
@@ -87,16 +84,18 @@ export function PrepaymentInputForm({
     <Card>
       <CardHeader>
         <CardTitle>중도상환 정보 입력</CardTitle>
-        <CardDescription>
-          대출과 상환 관련 정보를 입력하세요.
-        </CardDescription>
+        <CardDescription>대출과 상환 관련 정보를 입력하세요.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* 중도 상환 금액 */}
         <FormSectionGroup>
           <FormFieldGroup
             label="중도 상환 금액"
-            icon={<span className="flex w-4 h-4 items-center justify-center text-sm font-bold">₩</span>}
+            icon={
+              <span className="flex w-4 h-4 items-center justify-center text-sm font-bold">
+                ₩
+              </span>
+            }
             description="최대 1조원까지 입력 가능합니다"
           >
             <AmountInputField
@@ -108,9 +107,7 @@ export function PrepaymentInputForm({
               unitText="원"
               summaryText={
                 repaymentAmount && getNumberInput(repaymentAmount) > 0
-                  ? formatCurrencyToKoreanUnits(
-                      getNumberInput(repaymentAmount)
-                    )
+                  ? formatCurrencyToKoreanUnits(getNumberInput(repaymentAmount))
                   : undefined
               }
               quickActions={[
@@ -195,7 +192,9 @@ export function PrepaymentInputForm({
                     min={0}
                     max={50}
                     value={exemptionYears}
-                    onChange={event => onExemptionYearsChange(event.target.value)}
+                    onChange={event =>
+                      onExemptionYearsChange(event.target.value)
+                    }
                     placeholder="면제기간을 입력하세요"
                     className="text-base h-10 max-w-md"
                   />

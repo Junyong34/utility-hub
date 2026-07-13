@@ -2,10 +2,10 @@
 
 import { TooltipProvider } from '@/shared/ui/tooltip';
 import { BottomSheet } from '@/shared/client/bottom-sheet';
-import { useLoanCalculator } from '../hooks/useLoanCalculator';
-import { LoanInputForm } from '../components/LoanInputForm';
-import { LoanResultCard } from '../components/LoanResultCard';
-import { ResultsView } from '../components/ResultsView';
+import { LoanInputForm, LoanResultCard } from '../ui.ts';
+import { LoanResultsView } from './LoanResultsView.tsx';
+import { ShareButton } from './ShareButton.tsx';
+import { useLoanCalculator } from './useLoanCalculator.ts';
 
 export function LoanCalculatorSection() {
   const {
@@ -61,6 +61,9 @@ export function LoanCalculatorSection() {
             principal={principal}
             annualRate={annualRate}
             method={method}
+            action={
+              <ShareButton variant="outline" size="sm" showLabel={false} />
+            }
           />
         )}
 
@@ -71,7 +74,7 @@ export function LoanCalculatorSection() {
           maxHeight="90vh"
         >
           {hasCalculated && result && (
-            <ResultsView
+            <LoanResultsView
               result={result}
               principal={principal}
               annualRate={annualRate}

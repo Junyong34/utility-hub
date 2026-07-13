@@ -5,14 +5,12 @@ import {
   CollapsibleTrigger,
   CollapsibleContent,
 } from '@/shared/ui/collapsible';
-import type {
-  RepaymentMethod,
-  MonthlyScheduleItem,
-} from '@/lib/tools/loan-calculator';
-import { currencyFormatter } from '../constants';
-import { LoanResultCard } from './LoanResultCard';
+import type { RepaymentMethod, MonthlyScheduleItem } from '../public.ts';
+import { LoanResultCard } from '../ui.ts';
+import { currencyFormatter } from '../ui/display-formatting.ts';
+import { ShareButton } from './ShareButton.tsx';
 
-interface ResultsViewProps {
+interface LoanResultsViewProps {
   result: {
     months: number;
     monthlyPayment: number;
@@ -25,12 +23,12 @@ interface ResultsViewProps {
   method: RepaymentMethod;
 }
 
-export function ResultsView({
+export function LoanResultsView({
   result,
   principal,
   annualRate,
   method,
-}: ResultsViewProps) {
+}: LoanResultsViewProps) {
   const schedule = useMemo(() => result.schedule || [], [result.schedule]);
   const [yearlyOpen, setYearlyOpen] = useState(false);
   const [monthlyOpen, setMonthlyOpen] = useState(false);
@@ -59,6 +57,7 @@ export function ResultsView({
         principal={principal}
         annualRate={annualRate}
         method={method}
+        action={<ShareButton variant="outline" size="sm" showLabel={false} />}
       />
 
       {/* 년도별 상환 현황 */}

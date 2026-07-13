@@ -5,7 +5,7 @@ import {
   LOAN_QUERY_PARSERS,
   PREPAYMENT_QUERY_PARSERS,
   TAB_QUERY_PARSER,
-} from './parsers.ts';
+} from '../public.ts';
 
 function parserDefaults(parsers) {
   return Object.fromEntries(

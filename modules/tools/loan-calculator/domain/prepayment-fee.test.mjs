@@ -1,11 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import {
-  calculatePrepaymentFee,
-  formatDate,
-  parseDate,
-} from './prepayment-fee-calculator.ts';
+import { calculatePrepaymentFee, formatDate, parseDate } from '../public.ts';
 
 const LOAN_DATE = new Date('2024-01-01T00:00:00.000Z');
 const REPAYMENT_DATE = new Date('2024-06-01T00:00:00.000Z');
