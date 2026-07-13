@@ -6,8 +6,9 @@
 한국어 블로그와 생활/금융 중심 웹 도구를 함께 운영하는 Next.js App Router 프로젝트입니다.
 
 ### Current Stack
-- Next.js `16.1.6`
-- React `19.2.3`
+
+- Next.js `16.2.6`
+- React `19.2.6`
 - TypeScript `5`
 - Tailwind CSS `4`
 - shadcn/ui + Radix UI + Base UI
@@ -19,6 +20,7 @@
 ## Current Product Surface
 
 ### Blog
+
 - 마크다운 포스트는 `content/posts/<category>/*.md`에 저장
 - 블로그 라우트:
   - `/blog`
@@ -32,14 +34,17 @@
   - UI: `components/blog/*`
 - 현재 저장소에 존재하는 카테고리 디렉토리:
   - `ai-image-creator`
+  - `benefits`
   - `consumer`
-  - `development`
   - `investment`
   - `lotto`
+  - `parenting`
   - `parking`
+  - `places`
 - 새 카테고리를 추가하면 `lib/blog/posts.ts`의 카테고리 이름 매핑도 같이 갱신해야 합니다.
 
 ### Tools
+
 - 모든 공개 도구의 소스 오브 트루스는 `lib/tools/tool-config.ts`
 - 현재 등록된 주요 도구 ID:
   - `loan-calculator`
@@ -57,6 +62,7 @@
   - API: `/api/og/custom`
 
 ### SEO / Analytics / Metadata
+
 - 공통 SEO 유틸: `lib/seo/*`
 - 도구 전용 구조화 데이터/메타데이터: `lib/tools/tool-structured-data.ts`, `lib/tools/tool-metadata.ts`
 - 동적 사이트맵: `app/(meta)/sitemap.ts`
@@ -72,6 +78,7 @@
 현재 저장소는 생활/금융 중심 구조를 운영 중이지만, **육아형 리브랜딩 Phase A**를 병행 설계하고 있습니다.
 
 ### Rebrand Direction
+
 - 핵심 독자: 수도권 1~7세 자녀 부모
 - 핵심 과업: 아이와 갈 곳 찾기
 - 홈 구조: 검색 + 큐레이션 혼합형
@@ -80,12 +87,14 @@
 - 론칭 범위: 서울 / 경기 북부 / 경기 남부 / 인천
 
 ### Rebrand Guardrails
+
 - 기존 작업물, 기존 도구, 기존 포스트는 **즉시 삭제하지 않습니다**.
 - 리브랜딩은 `교체`보다 `추가/재구성` 우선으로 진행합니다.
 - 기존 상세 블로그 라우트(`/blog/[category]/[slug]`)는 최대한 유지합니다.
 - 새 허브 라우트가 필요하면 `/places`, `/benefits`처럼 독립 추가를 우선 검토합니다.
 
 ### Rebrand Source Docs
+
 - 기준 스펙: `docs/superpowers/specs/2026-04-06-parenting-guide-rebrand-design.md`
 - 공통 설계 문서: `docs/superpowers/specs/parenting-guide-rebrand/*`
 - 메뉴 계획 문서: `docs/superpowers/plans/parenting-guide-rebrand/*`
@@ -102,6 +111,7 @@
 ## Build, Test, and Maintenance Commands
 
 ### Development
+
 ```bash
 pnpm dev
 pnpm build
@@ -109,6 +119,7 @@ pnpm start
 ```
 
 ### Quality
+
 ```bash
 pnpm lint:check
 pnpm lint:fix
@@ -118,18 +129,23 @@ pnpm format:check
 ```
 
 ### Testing
+
 ```bash
+pnpm test:architecture
+pnpm test:contracts
 pnpm test:e2e
 node --test lib/tools/pomodoro/engine.test.mjs
 node --test lib/seo/og.test.mjs
 ```
 
 ### Maintenance
+
 ```bash
 pnpm update-lotto
 ```
 
 ### Notes
+
 - `pnpm lint`는 raw ESLint 엔트리포인트입니다. 보통은 `pnpm lint:check` 또는 `pnpm lint:fix`를 우선 사용합니다.
 - Playwright는 `playwright.config.ts` 기준으로 `127.0.0.1:3000`에 개발 서버를 띄워 테스트합니다.
 - 로또 데이터 갱신 스크립트는 `lib/lotto/lotto_draws.json`을 업데이트합니다.
@@ -153,7 +169,16 @@ utility-hub/
 │   ├── rss.xml/                 # RSS route
 │   ├── layout.tsx               # 전역 메타데이터/스크립트/Provider
 │   └── providers.tsx            # React Query Provider
-├── components/
+├── modules/                     # 신규 도메인 모듈의 기준 위치
+│   └── <domain>/                # public/domain/server/client/ui 경계
+├── shared/                      # 도메인 비의존 공통 코드
+│   ├── ui/                      # 공통 UI primitive/composite
+│   ├── domain/                  # 순수 공통 로직
+│   ├── contracts/               # 공용 타입·스키마 계약
+│   ├── client/                  # 브라우저 전용 공통 adapter
+│   └── server/                  # 서버 전용 공통 adapter
+├── config/                      # 환경 변수·런타임 설정 진입점
+├── components/                  # 마이그레이션 중인 기존 UI 위치
 │   ├── blog/                    # 블로그 UI
 │   ├── layout/                  # 상단/하단 네비게이션
 │   ├── lotto/                   # 로또 전용 UI
@@ -162,7 +187,7 @@ utility-hub/
 │   └── ui/                      # 공통 UI 컴포넌트
 ├── content/posts/               # 블로그 마크다운 원본
 ├── docs/                        # 설계/운영/초안 문서
-├── lib/
+├── lib/                         # 마이그레이션 중인 기존 로직 위치
 │   ├── analytics/               # GA4 서버 로직
 │   ├── blog/                    # 포스트 로드/마크다운 처리
 │   ├── home/                    # 홈 대시보드 콘텐츠
@@ -175,14 +200,28 @@ utility-hub/
 │   ├── images/
 │   └── og-images/
 ├── scripts/                     # 유지보수 스크립트
-├── tests/                       # Playwright E2E
+├── tests/
+│   ├── architecture/            # import·레이어 경계 계약
+│   ├── contracts/               # 공개 URL·카탈로그·SEO 계약
+│   └── *.spec.ts                # Playwright E2E
 ├── types/                       # 공통 타입
 ├── .agents/                     # 프로젝트 전용 에이전트 스킬
 ├── .ai/                         # AI/MCP 설정
 └── rules/changelog.md           # 변경 이력
 ```
 
+`components/**`와 `lib/**`는 점진적으로 `modules/**` 또는 `shared/**`로 옮기는 legacy 경로입니다. 신규 기능은 아래 모듈 경계를 우선 적용하고, 기존 기능은 관련 구현 단위가 수정될 때 호환 facade와 회귀 테스트를 둔 뒤 이동합니다.
+
 ## Source of Truth Files
+
+- `docs/architecture/project-map.md`, `docs/architecture/module-boundaries.md`
+  - 현재 구조 지도와 신규 모듈 import 방향의 기준 문서
+- `docs/architecture/public-contract-matrix.md`, `tests/contracts/public-surface.test.mjs`
+  - 공개 URL·도구·카테고리·SEO 노출 회귀 계약
+- `docs/architecture/migration-ledger.md`
+  - legacy 경로, 신규 경로, compatibility facade와 제거 시점 추적표
+- `tests/architecture/import-boundaries.test.mjs`
+  - `modules/**`, `shared/**`, `config/**`에 즉시 적용되는 실행 가능한 경계 규칙
 
 - `lib/tools/tool-config.ts`
   - 공개 도구 목록, 메타데이터, FAQ, 구조화 데이터 입력값의 기준 파일
@@ -201,7 +240,18 @@ utility-hub/
 
 ## Development Guidelines
 
+### Module Boundaries
+
+- 새 도메인 코드는 `modules/<domain>/` 아래에서 `domain`, `server`, `client`, `ui` 역할로 분리합니다. 필요 없는 레이어는 만들지 않습니다.
+- 외부 소비자는 환경에 맞는 `public.ts`, `ui.ts`, `client.ts`, `server.ts` 진입점만 사용합니다. 다른 모듈의 내부 파일을 직접 import하지 않습니다.
+- `domain`은 React, Next.js, Node.js, 브라우저 API, 환경 변수에 의존하지 않는 순수 규칙을 담습니다.
+- `server`와 `client`는 각각 서버·브라우저 adapter를 담고 서로를 import하지 않습니다. `ui`는 표현 컴포넌트만 담고 `client` orchestration을 import하지 않습니다.
+- `shared/**`와 `config/**`는 `app/**` 또는 `modules/**`를 역으로 import하지 않습니다.
+- 새 런타임 코드에서 `process.env`를 직접 읽지 않고 `config/**`의 검증된 진입점을 사용합니다.
+- 세부 허용 방향과 예외는 `docs/architecture/module-boundaries.md`를 따릅니다.
+
 ### Required Implementation Stack
+
 - 구현 작업은 기본적으로 `React` + `TypeScript` 기준으로 진행합니다.
 - UI 컴포넌트는 기존 `shadcn/ui`와 `components/ui/*` 패턴을 우선 사용합니다.
 - 차트/데이터 시각화는 기본적으로 `recharts`를 사용합니다.
@@ -211,6 +261,7 @@ utility-hub/
 - 기존 패턴으로 해결 가능한데도 새로운 UI/차트/날짜/아이콘/애니메이션 라이브러리를 추가하지 않습니다.
 
 ### Rebrand Work
+
 - 리브랜딩 작업 전에는 반드시 위 `Rebrand Source Docs`를 먼저 확인합니다.
 - 메뉴/허브 작업은 공통 스펙이 아니라 **메뉴별 계획 문서 + execution 문서**를 기준으로 진행합니다.
 - 기존 금융/생활비 자산은 숨기거나 재분류할 수는 있어도, 사용자 요청 없이 삭제하지 않습니다.
@@ -218,6 +269,7 @@ utility-hub/
 - 홈, 블로그, 도구, 소개 페이지를 바꿀 때는 카피와 메타데이터에서 기존 포지셔닝이 남아 있지 않은지 같이 확인합니다.
 
 ### Tool Work
+
 - 새 도구를 추가할 때는 최소한 아래를 함께 맞춥니다:
   - `lib/tools/tool-config.ts`
   - `app/tools/<tool-id>/page.tsx`
@@ -227,6 +279,7 @@ utility-hub/
 - URL 공유가 필요한 계산기는 nuqs를 우선 고려합니다.
 
 ### Blog Work
+
 - 새 포스트는 `content/posts/<category>/` 아래에 추가합니다.
 - 포스트 이미지는 보통 `public/images/blog/<slug-or-topic>/` 아래에 둡니다.
 - 새 카테고리 도입 시 아래를 확인합니다:
@@ -235,6 +288,7 @@ utility-hub/
   - 사이트맵/내부 링크 노출
 
 ### SEO / OG Work
+
 - 공통 SEO는 `lib/seo/*`, 도구 SEO는 `lib/tools/*`에서 관리합니다.
 - OG 관련 변경은 아래 세 군데를 함께 확인합니다:
   - `lib/seo/og.ts`
@@ -243,11 +297,14 @@ utility-hub/
 - `robots.ts`, `sitemap.ts`, RSS는 서로 분리된 진입점이므로 한 곳만 수정하고 끝내지 않습니다.
 
 ### Testing Guidance
+
+- 구조 경계 변경은 `pnpm test:architecture`, 공개 제품 계약 변경은 `pnpm test:contracts`로 먼저 검증합니다.
 - 순수 계산 로직은 가능한 한 파일 근처의 `*.test.mjs`로 검증합니다.
 - UI 흐름 검증은 `tests/*.spec.ts` Playwright 테스트를 사용합니다.
 - 포모도로, 로또 추천, URL state, 도구 입력 폼처럼 상호작용이 많은 기능은 E2E 검증 우선순위가 높습니다.
 
 ### Analytics Guidance
+
 - GA4 통계 로직을 건드릴 때는 다음 환경 변수를 함께 확인합니다:
   - `GA4_PROPERTY_ID`
   - `GA4_CLIENT_EMAIL`
@@ -280,15 +337,16 @@ utility-hub/
 1. `pnpm format:check`
 2. `pnpm type-check`
 3. `pnpm lint:check`
-4. 필요한 경우 관련 `node --test ...` 실행
-5. UI/상호작용 변경 시 `pnpm test:e2e`
-6. 배포 영향이 있는 변경이면 `pnpm build`
+4. `pnpm test:architecture`
+5. `pnpm test:contracts`
+6. 필요한 경우 관련 `node --test ...` 실행
+7. UI/상호작용 변경 시 `pnpm test:e2e`
+8. 배포 영향이 있는 변경이면 `pnpm build`
 
 ## Brief Conclusion
 
 이 저장소는 단순 블로그가 아니라, **블로그 + 다중 계산기/도구 + SEO/OG/분석 인프라**가 함께 있는 App Router 프로젝트입니다.  
 현재는 여기에 **육아형 리브랜딩 문서 체계**가 추가된 상태이므로, 작업할 때는 `lib/tools/tool-config.ts`, `lib/blog/posts.ts`, `app/layout.tsx`와 함께 `docs/superpowers/specs/parenting-guide-rebrand/*`를 같이 기준점으로 보는 것이 가장 안전합니다.
-
 
 # Testing Rules
 
@@ -305,12 +363,14 @@ Drop this file at the project root. Agents read it automatically.
 ## Mocking Rules
 
 **Mock these** — and only these:
+
 - Database / ORM
 - Third-party HTTP APIs
 - Filesystem, clock, randomness, network
 - Anything crossing a process boundary
 
 **Never mock these:**
+
 - Value objects, DTOs, entities you own
 - Pure functions and utilities
 - Internal collaborators (services/modules in the same codebase)
@@ -346,12 +406,12 @@ Template: `<subject>_<expected_behavior>_when_<condition>`
 
 ## Structure Rules
 
-| Layer | Purpose | Budget |
-|---|---|---|
-| Unit | Pure logic, entities, utils | Many, in-memory, milliseconds |
-| Integration | Module + real DB/queue | Moderate, per critical module |
-| E2E | Critical user journeys | Few, one per journey |
-| Regression | One per past incident | As bugs happen |
+| Layer       | Purpose                     | Budget                        |
+| ----------- | --------------------------- | ----------------------------- |
+| Unit        | Pure logic, entities, utils | Many, in-memory, milliseconds |
+| Integration | Module + real DB/queue      | Moderate, per critical module |
+| E2E         | Critical user journeys      | Few, one per journey          |
+| Regression  | One per past incident       | As bugs happen                |
 
 - One E2E per critical journey. A handful of integration tests per domain.
 - Unit tests only where logic is non-trivial. No unit tests for getters, DI wiring, or framework glue.
@@ -361,6 +421,7 @@ Template: `<subject>_<expected_behavior>_when_<condition>`
 ## Domain Entity Rules
 
 Extract a domain entity when **any** of these are true:
+
 - Business logic is scattered across 2+ services on the same data.
 - A service does arithmetic or state transitions on a plain DB row.
 - You need to spin up a DB to test logic that is secretly pure.

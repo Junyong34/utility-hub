@@ -14,6 +14,8 @@
     "lint:fix": "eslint . --fix",
     "lint:staged": "lint-staged",
     "type-check": "tsc --noEmit",
+    "test:architecture": "node --test tests/architecture/*.test.mjs",
+    "test:contracts": "node --experimental-strip-types --test tests/contracts/*.test.mjs",
     "test:e2e": "playwright test",
     "test:places:contracts": "node --experimental-strip-types --test content/places/link-contract.test.mjs",
     "test:places:links": "playwright test -c playwright.places-links.config.ts",
