@@ -20,7 +20,7 @@ import {
   DEPOSIT_QUERY_PARSERS,
   INSTALLMENT_QUERY_PARSERS,
 } from '../../components/tools/savings-calculator/hooks/parsers.ts';
-import * as homeBuyingParsers from '../../components/tools/home-buying-funds-calculator/hooks/parsers.ts';
+import * as homeBuyingParsers from '../../modules/tools/home-buying-funds-calculator/client/hooks/parsers.ts';
 import { queryBlogPostsPage } from '../../lib/blog/pagination.ts';
 import { getAllPosts, getCategoryName } from '../../lib/blog/posts.ts';
 import { buildBlogPostUrl } from '../../lib/blog/url.ts';
@@ -1081,7 +1081,7 @@ test('공유 URL query key와 기본값은 현재 직렬화 계약을 유지한�
   );
 
   assertSourceContains(
-    'components/tools/home-buying-funds-calculator/hooks/useHomeBuyingFundsCalculator.ts',
+    'modules/tools/home-buying-funds-calculator/client/hooks/useHomeBuyingFundsCalculator.ts',
     Object.entries(homeBuyingBindings).map(
       ([queryKey, parserName]) => `${queryKey}: ${parserName}`
     )
