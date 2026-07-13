@@ -1,7 +1,7 @@
 'use client';
 
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
+import { TooltipProvider } from '@/shared/ui/tooltip';
+import { BottomSheet } from '@/shared/client/bottom-sheet';
 import { usePrepaymentCalculator } from '../hooks/usePrepaymentCalculator';
 import { PrepaymentInputForm } from '../components/PrepaymentInputForm';
 import { PrepaymentFeeResultCard } from '../components/PrepaymentFeeResultCard';

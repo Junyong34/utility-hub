@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { ChevronDown, ChevronUp, Minus } from 'lucide-react';
 import { formatFinanceMonthLabel } from '@/lib/finance/formatting';
 import type {

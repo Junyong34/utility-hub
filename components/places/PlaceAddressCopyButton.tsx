@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { copyTextToClipboard } from '@/lib/clipboard';
+import { Button } from '@/shared/ui/button';
+import { copyTextToClipboard } from '@/shared/client/clipboard';
 
 interface PlaceAddressCopyButtonProps {
   address: string;

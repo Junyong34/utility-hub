@@ -1,8 +1,8 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
 import type { MovingBudgetAssetId, MovingBudgetAssets } from '@/lib/tools/moving-budget-checklist';
 import {
   MOVING_BUDGET_ASSET_FIELDS,

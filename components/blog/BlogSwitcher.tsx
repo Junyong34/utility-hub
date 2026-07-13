@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { SharedSelectSwitcher } from '@/components/ui/shared-select-switcher';
+import { SharedSelectSwitcher } from '@/shared/ui/shared-select-switcher';
 import type { BlogPostOption } from '@/lib/blog/types';
 
 interface BlogSwitcherProps {

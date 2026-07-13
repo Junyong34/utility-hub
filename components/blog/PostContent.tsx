@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import { Badge } from '@/shared/ui/badge';
+import { Separator } from '@/shared/ui/separator';
 import { processMarkdown } from '@/lib/blog/markdown-processor';
 
 interface PostContentProps {

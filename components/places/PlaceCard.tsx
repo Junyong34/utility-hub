@@ -7,10 +7,10 @@ import {
   ExternalLinkIcon,
   MapPinIcon,
 } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent } from '@/shared/ui/card';
 import { getPlaceNaverMapUrl } from '@/lib/places/place-map-links';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import type { PlaceSource } from '@/types/place-source';
 import { PlaceAddressCopyButton } from './PlaceAddressCopyButton';
 import {

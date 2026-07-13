@@ -10,13 +10,13 @@ import {
   RotateCcwIcon,
 } from 'lucide-react';
 import { Breadcrumb } from '@/components/seo';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/shared/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
 import type { ToolCategory, ToolListItem } from '@/lib/tools/types';
 import { getToolIcon } from '@/lib/tools';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 type CategoryKey = ToolCategory | 'all';
 

@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Minus, Plus, Equal, ChevronDown, ChevronUp } from 'lucide-react';
 import NumberTicker from '@/components/magicui/number-ticker';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 
 interface LoanBreakdownCardProps {
   salePrice: number;

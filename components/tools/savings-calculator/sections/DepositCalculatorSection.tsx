@@ -1,7 +1,7 @@
 'use client';
 
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
+import { TooltipProvider } from '@/shared/ui/tooltip';
+import { BottomSheet } from '@/shared/client/bottom-sheet';
 import { useDepositCalculator } from '../hooks/useDepositCalculator';
 import { DepositInputForm } from '../components/DepositInputForm';
 import { DepositResultCard } from '../components/DepositResultCard';

@@ -8,9 +8,9 @@ import type {
   MovingBudgetTemplateGroupDefinition,
   MovingBudgetTemplateItemState,
 } from '@/lib/tools/moving-budget-checklist';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Button } from '@/shared/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/ui/collapsible';
 import { MOVING_BUDGET_ARIA_LABELS } from '../accessibility';
 import { TemplateBudgetItemRow } from './TemplateBudgetItemRow';
 import { CustomBudgetItemRow } from './CustomBudgetItemRow';

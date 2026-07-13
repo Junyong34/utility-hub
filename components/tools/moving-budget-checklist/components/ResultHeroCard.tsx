@@ -1,17 +1,17 @@
 'use client';
 
 import NumberTicker from '@/components/magicui/number-ticker';
-import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/shared/ui/badge';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/shared/ui/card';
 import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
 import type { MovingBudgetSummary } from '@/lib/tools/moving-budget-checklist';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 interface ResultHeroCardProps {
   summary: MovingBudgetSummary;

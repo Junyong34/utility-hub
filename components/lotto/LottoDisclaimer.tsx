@@ -1,5 +1,5 @@
 import { AlertTriangle } from 'lucide-react';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/shared/ui/card';
 
 /**
  * 로또 서비스 면책 고지 컴포넌트

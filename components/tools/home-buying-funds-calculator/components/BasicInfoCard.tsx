@@ -1,17 +1,17 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { AmountInputField } from '@/components/ui/AmountInputField';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { AmountInputField } from '@/shared/ui/AmountInputField';
+import { Label } from '@/shared/ui/label';
+import { Input } from '@/shared/ui/input';
+import { Checkbox } from '@/shared/ui/checkbox';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/ui/tooltip';
 import { Info } from 'lucide-react';
 import type { HomeBuyingInput } from '@/lib/tools/home-buying-funds-calculator';
 import { FIELD_LABELS, FIELD_TOOLTIPS, QUICK_ACTIONS } from '../constants';
 import { ARIA_LABELS } from '../accessibility';
 import { DefenseFundInfoDialog } from './DefenseFundInfoDialog';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { RadioGroup, RadioGroupItem } from '@/shared/ui/radio-group';
 import { calculateDefenseFundAmount } from '@/lib/tools/home-buying-funds-calculator/taxes';
 
 interface BasicInfoCardProps {

@@ -20,6 +20,9 @@
       }
     ],
     "paths": {
+      "@/shared/ui/class-names": ["./shared/ui/class-names"],
+      "@/shared/ui/*": ["./shared/ui/*"],
+      "@/shared/client/*": ["./shared/client/*"],
       "@/*": ["./*"]
     }
   },

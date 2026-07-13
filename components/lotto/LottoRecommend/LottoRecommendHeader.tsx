@@ -1,7 +1,7 @@
 'use client';
 
 import { LottoNumberCloud } from '@/components/lotto/LottoRecommend/LottoNumberCloud';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/shared/ui/card';
 import { getToolConfig } from '@/lib/tools';
 
 const lottoTool = getToolConfig('lotto');

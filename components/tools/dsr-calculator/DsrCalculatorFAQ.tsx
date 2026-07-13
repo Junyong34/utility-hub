@@ -6,7 +6,7 @@ import {
   AccordionIndicator,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
+} from '@/shared/ui/accordion'
 import { getToolConfig } from '@/lib/tools/tool-config'
 
 const FAQ_DATA = getToolConfig('dsr-calculator')?.faq ?? []

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card } from '@/shared/ui/card'
+import { Button } from '@/shared/ui/button'
 import { ArrowRightIcon, MailIcon, ShieldAlertIcon } from 'lucide-react'
 import {
   Accordion,
@@ -9,7 +9,7 @@ import {
   AccordionIndicator,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
+} from '@/shared/ui/accordion'
 import {
   SITE_CONFIG,
   generateMetadata as createMetadata,

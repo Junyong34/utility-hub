@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { AlertCircle, CheckCircle } from 'lucide-react';
 import type { HomeBuyingResult } from '@/lib/tools/home-buying-funds-calculator';
 

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import type { FinanceComparisonMode } from '@/lib/finance/types';
 import { buildFinanceHref } from '@/lib/finance/url-state';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 interface FinanceComparisonFilterProps {
   month: string | null;

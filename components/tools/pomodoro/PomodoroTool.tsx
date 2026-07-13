@@ -14,20 +14,20 @@ import {
   Volume2,
   VolumeX,
 } from 'lucide-react';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/shared/ui/checkbox';
+import { Button } from '@/shared/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { cn } from '@/lib/utils';
+} from '@/shared/ui/card';
+import { Input } from '@/shared/ui/input';
+import { Badge } from '@/shared/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
+import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group';
+import { cn } from '@/shared/ui/class-names';
 import { celebrate } from '@/components/magicui/confetti';
 import {
   createSession,

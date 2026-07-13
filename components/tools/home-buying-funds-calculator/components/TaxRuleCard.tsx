@@ -1,9 +1,9 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Label } from '@/shared/ui/label';
+import { Input } from '@/shared/ui/input';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/shared/ui/tooltip';
 import { Info } from 'lucide-react';
 import {
   Select,
@@ -11,8 +11,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Toggle } from '@/components/ui/toggle';
+} from '@/shared/ui/select';
+import { Toggle } from '@/shared/ui/toggle';
 import type { HomeBuyingInput } from '@/lib/tools/home-buying-funds-calculator';
 import { FIELD_LABELS, FIELD_TOOLTIPS, HOUSE_COUNT_OPTIONS } from '../constants';
 import { ARIA_LABELS } from '../accessibility';

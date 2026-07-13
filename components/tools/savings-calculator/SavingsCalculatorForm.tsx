@@ -1,6 +1,6 @@
 'use client';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { CalculatorCategoryLinks } from '@/components/tools/CalculatorCategoryLinks';
 import { DepositCalculatorSection } from './sections/DepositCalculatorSection';
 import { InstallmentCalculatorSection } from './sections/InstallmentCalculatorSection';

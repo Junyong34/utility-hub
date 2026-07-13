@@ -3,7 +3,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/shared/ui/card';
 import type { InstallmentCalculationResult } from '@/lib/tools/savings-calculator';
 import {
   INTEREST_TYPE_LABELS,

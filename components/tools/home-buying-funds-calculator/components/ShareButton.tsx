@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import { Share2, Check } from 'lucide-react';
-import { copyTextToClipboard } from '@/lib/clipboard';
+import { copyTextToClipboard } from '@/shared/client/clipboard';
 import { ARIA_LABELS } from '../accessibility';
 
 export function ShareButton() {

@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   AccordionIndicator,
-} from '@/components/ui/accordion';
+} from '@/shared/ui/accordion';
 
 const FAQ_DATA = [
   {

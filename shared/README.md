@@ -2,7 +2,7 @@
 
 `shared`는 두 개 이상의 module이 **같은 의미와 불변식**으로 사용하는 코드만 소유한다. 이름이 비슷하거나 재사용될 것 같다는 예상만으로 이동하지 않는다.
 
-현재 공통 코드는 주로 `components/ui`, `components/magicui`, `lib/utils.ts`, `lib/clipboard.ts`, root types에 있다. 실제 이관 상태는 [`docs/architecture/migration-ledger.md`](../docs/architecture/migration-ledger.md)를 따른다.
+공통 UI primitive와 className 결합 함수는 `shared/ui`, clipboard와 공통 브라우저 orchestration은 `shared/client`에 있다. 아직 남은 `components/magicui`와 root types의 이관 상태는 [`docs/architecture/migration-ledger.md`](../docs/architecture/migration-ledger.md)를 따른다.
 
 ## 탐색 순서
 
@@ -60,7 +60,7 @@ module이 shared를 사용할 수는 있지만 shared가 module DTO를 import해
 기능 이름을 드러낸다.
 
 ```ts
-import { copyText } from '@/shared/client/clipboard';
+import { copyTextToClipboard } from '@/shared/client/clipboard';
 import type { NavigationItem } from '@/shared/contracts/navigation';
 import { Button } from '@/shared/ui/button';
 ```
@@ -74,7 +74,7 @@ import { Button } from '@/shared/ui/button';
 - 제품 문구, 도메인 상태, tool 전용 variant는 shared UI에 넣지 않고 owner module이 조합한다.
 - `shared/ui`가 module의 타입을 요구한다면 seam이 잘못된 것이다. primitive props 또는 shared contract로 축소한다.
 
-shadcn component를 추가하거나 갱신할 때 generator alias가 `shared/ui`를 가리키는지 먼저 확인한다. legacy `components/ui` facade가 존재하는 기간에도 새 코드는 `@/shared/ui/<name>`만 사용한다.
+shadcn component를 추가하거나 갱신할 때 generator alias가 `shared/ui`를 가리키는지 먼저 확인한다. 새 코드는 `@/shared/ui/<name>`만 사용한다.
 
 ## Contracts와 domain
 

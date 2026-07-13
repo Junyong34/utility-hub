@@ -1,13 +1,13 @@
 'use client';
 
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent } from '@/shared/ui/card';
 import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
 import type {
   MovingBudgetGroupId,
   MovingBudgetSummary,
 } from '@/lib/tools/moving-budget-checklist';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import { MOVING_BUDGET_GROUP_META } from '../constants';
 
 interface GroupSummaryBoardProps {

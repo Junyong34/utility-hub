@@ -1,9 +1,9 @@
 'use client';
 
 import { Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
 import type { MovingBudgetCustomItem } from '@/lib/tools/moving-budget-checklist';
 import { MOVING_BUDGET_ARIA_LABELS } from '../accessibility';
 import { formatAmountInputValue, parseAmountInput } from '../constants';

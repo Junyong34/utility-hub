@@ -3,13 +3,19 @@ import Script from 'next/script';
 import localFont from 'next/font/local';
 import Link from 'next/link';
 import './globals.css';
-import { generateMetadata as createMetadata, SITE_CONFIG } from '@/lib/seo';
+import {
+  SITE_CONFIG,
+  SITE_VERIFICATION_CONFIG,
+  WEB_ANALYTICS_CONFIG,
+} from '@/config/site';
+import { isDevelopmentRuntime } from '@/config/runtime/server';
+import { generateMetadata as createMetadata } from '@/lib/seo';
 import { createWebSiteSchema, createOrganizationSchema } from '@/lib/seo';
 import { AdSenseScript, JsonLdMultiple } from '@/components/seo';
 import { DesktopNav } from '@/components/layout/desktop-nav';
 import { BottomNav } from '@/components/layout/bottom-nav';
 import { SiteFooter } from '@/components/layout/site-footer';
-import { FloatingShareButton } from '@/components/ui/floating-share-button';
+import { FloatingShareButton } from '@/shared/client/floating-share-button';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Providers } from './providers';
 import { NAV_ITEMS } from '@/components/layout/nav-config';
@@ -37,6 +43,8 @@ const pretendard = localFont({
   weight: '45 920',
   display: 'swap',
 });
+
+const isDevelopment = isDevelopmentRuntime();
 
 /**
  * 글로벌 메타데이터 설정
@@ -93,14 +101,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
 
-        {/*{process.env.NODE_ENV === "development" && (*/}
-        {/*  <Script*/}
-        {/*    src="//unpkg.com/react-grab/dist/index.global.js"*/}
-        {/*    crossOrigin="anonymous"*/}
-        {/*    strategy="beforeInteractive"*/}
-        {/*  />*/}
-        {/*)}*/}
-        {process.env.NODE_ENV === 'development' && (
+        {isDevelopment && (
           <Script
             src="//unpkg.com/@react-grab/mcp/dist/client.global.js"
             strategy="lazyOnload"
@@ -151,7 +152,7 @@ export default function RootLayout({
         {/* Naver Site Verification */}
         <meta
           name="naver-site-verification"
-          content="02fee2c3f11fc3e1adf2520de92918a360a75556"
+          content={SITE_VERIFICATION_CONFIG.naver}
         />
 
         {/* 구조화 데이터 (JSON-LD) */}
@@ -159,7 +160,7 @@ export default function RootLayout({
 
         {/* Google Analytics - Optimized with next/script */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-KG82C2B3TH"
+          src={`https://www.googletagmanager.com/gtag/js?id=${WEB_ANALYTICS_CONFIG.googleTagId}`}
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -167,7 +168,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-KG82C2B3TH');
+            gtag('config', '${WEB_ANALYTICS_CONFIG.googleTagId}');
           `}
         </Script>
       </head>

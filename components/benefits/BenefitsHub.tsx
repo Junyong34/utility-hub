@@ -16,7 +16,7 @@ import {
 import { ALL_BENEFITS } from '@/content/benefits';
 import { getFeaturedBenefitsFrom } from '@/lib/benefits/benefit-queries';
 import { BenefitCard } from '@/components/benefits/BenefitCard';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 const CATEGORY_ICONS: Record<string, ElementType> = {
   building: BuildingIcon,

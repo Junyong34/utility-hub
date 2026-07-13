@@ -7,7 +7,7 @@ import { CostBreakdownTable } from '../components/CostBreakdownTable';
 import { SpendingFlowChart } from '../components/SpendingFlowChart';
 import { ShareButton } from '../components/ShareButton';
 import { LoanBreakdownCard } from '../components/LoanBreakdownCard';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { calculateDefenseFundAmount } from '@/lib/tools/home-buying-funds-calculator/taxes';
 
 interface HomeBuyingResultSectionProps {

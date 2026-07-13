@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+} from '@/shared/ui/alert-dialog';
 import { Info } from 'lucide-react';
 import { STANDARD_PRICE_GUIDE_SECTIONS } from '@/lib/tools/home-buying-funds-calculator/standard-price-guide';
 import { FIELD_LABELS } from '../constants';

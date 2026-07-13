@@ -53,7 +53,7 @@ import {
   isLottoRecommendMode,
   isLottoRecommendCount,
 } from '@/lib/lotto/recommendation-spec';
-import { copyTextToClipboard } from '@/lib/clipboard';
+import { copyTextToClipboard } from '@/shared/client/clipboard';
 
 /**
  * 로또 추천 상태 인터페이스

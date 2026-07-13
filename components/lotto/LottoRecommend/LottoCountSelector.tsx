@@ -1,11 +1,11 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import {
   LOTTO_RECOMMEND_COUNT_OPTIONS,
 } from '@/lib/lotto/types';
 import { useLottoRecommend } from './LottoRecommendProvider';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 export function LottoCountSelector() {
   // 추천 개수는 쿼리 상태로 공유되므로, URL 초기값 유지/복원과 동일하게 동작합니다.

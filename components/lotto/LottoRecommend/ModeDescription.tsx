@@ -1,8 +1,8 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
+import { Card } from '@/shared/ui/card';
 import type { LottoRecommendMode } from '@/lib/lotto/types';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 interface ModeDescriptionProps {
   mode: LottoRecommendMode;

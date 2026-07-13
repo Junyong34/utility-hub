@@ -5,8 +5,8 @@ import { BasicInfoCard } from '../components/BasicInfoCard';
 import { TaxRuleCard } from '../components/TaxRuleCard';
 import { PracticalCostCard } from '../components/PracticalCostCard';
 import { AdvancedOptionsCard } from '../components/AdvancedOptionsCard';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Button } from '@/components/ui/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/ui/collapsible';
+import { Button } from '@/shared/ui/button';
 import { ChevronDown, ChevronUp, RotateCcw } from 'lucide-react';
 import { useState } from 'react';
 

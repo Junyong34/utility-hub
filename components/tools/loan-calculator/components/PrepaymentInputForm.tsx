@@ -4,17 +4,17 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { AmountInputField } from '@/components/ui/AmountInputField';
-import { Button } from '@/components/ui/button';
-import { DatePicker } from '@/components/ui/date-picker';
-import { QuickActionButton } from '@/components/ui/QuickActionButton';
-import { type CalendarQuickAction } from '@/components/ui/calendar-date-utils';
+} from '@/shared/ui/card';
+import { Input } from '@/shared/ui/input';
+import { AmountInputField } from '@/shared/ui/AmountInputField';
+import { Button } from '@/shared/ui/button';
+import { DatePicker } from '@/shared/ui/date-picker';
+import { QuickActionButton } from '@/shared/ui/QuickActionButton';
+import { type CalendarQuickAction } from '@/shared/ui/calendar-date-utils';
 import {
   FormSectionGroup,
   FormFieldGroup,
-} from '@/components/ui/FormSectionGroup';
+} from '@/shared/ui/FormSectionGroup';
 import { Percent, Calendar, ChevronRight } from 'lucide-react';
 import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
 import { getNumberInput } from '../utils';

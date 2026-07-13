@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { getAllToolConfigs } from '@/lib/tools/tool-config';
-import { SharedSelectSwitcher } from '@/components/ui/shared-select-switcher';
+import { SharedSelectSwitcher } from '@/shared/ui/shared-select-switcher';
 
 interface ToolSwitcherProps {
   currentToolId: string;

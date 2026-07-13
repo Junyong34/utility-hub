@@ -9,33 +9,33 @@ import {
   Percent,
   Trash2,
 } from 'lucide-react'
-import { AmountInputField } from '@/components/ui/AmountInputField'
-import { Button } from '@/components/ui/button'
+import { AmountInputField } from '@/shared/ui/AmountInputField'
+import { Button } from '@/shared/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/shared/ui/card'
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible'
+} from '@/shared/ui/collapsible'
 import {
   FormFieldGroup,
   FormSectionGroup,
-} from '@/components/ui/FormSectionGroup'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+} from '@/shared/ui/FormSectionGroup'
+import { Input } from '@/shared/ui/input'
+import { Label } from '@/shared/ui/label'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/shared/ui/select'
 import { formatCurrencyToKoreanUnits, formatNumberWithCommas, parseFormattedNumber } from '@/lib/tools/formatting'
 import type { DsrLoanInput, DsrLoanType, DsrRateType, DsrRegionType } from '@/lib/tools/dsr'
 import type { RepaymentMethod } from '@/lib/tools/loan-calculator'

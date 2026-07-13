@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Button } from '@/shared/ui/button';
+import { Card } from '@/shared/ui/card';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import { generateMetadata as createMetadata } from '@/lib/seo';
 import { buildCustomOgImagePath } from '@/lib/seo/og';

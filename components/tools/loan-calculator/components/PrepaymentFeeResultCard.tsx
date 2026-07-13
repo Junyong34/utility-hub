@@ -3,7 +3,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/shared/ui/card';
 import type { PrepaymentFeeResult } from '@/lib/tools/prepayment-fee-calculator';
 import {
   formatCurrencyToKoreanUnits,

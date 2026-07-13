@@ -3,7 +3,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
+} from '@/shared/ui/card';
 import type { RepaymentMethod } from '@/lib/tools/loan-calculator';
 import {
   splitMonths,

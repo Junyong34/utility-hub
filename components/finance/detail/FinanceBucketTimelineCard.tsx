@@ -9,15 +9,15 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import {
   formatSignedPercent,
   formatSignedWon,
   formatWon,
 } from '@/components/finance/dashboard/finance-dashboard-formatting';
 import type { FinanceReportBucketSummary } from '@/lib/finance/types';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 const ACCENT_STYLES: Record<
   'emerald' | 'rose' | 'sky' | 'amber',

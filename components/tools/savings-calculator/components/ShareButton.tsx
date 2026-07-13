@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { Share2, Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { copyTextToClipboard } from '@/lib/clipboard';
+import { Button } from '@/shared/ui/button';
+import { copyTextToClipboard } from '@/shared/client/clipboard';
 
 interface ShareButtonProps {
   variant?: 'default' | 'outline';

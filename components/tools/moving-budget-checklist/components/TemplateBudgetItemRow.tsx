@@ -1,8 +1,8 @@
 'use client';
 
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/shared/ui/checkbox';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
 import type {
   MovingBudgetTemplateItemDefinition,
   MovingBudgetTemplateItemState,

@@ -3,15 +3,15 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Breadcrumb } from '@/components/seo';
 import { CustomOgForm } from '@/components/tools/og-image-studio/CustomOgForm';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+} from '@/shared/ui/card';
+import { Input } from '@/shared/ui/input';
 import { getAllPosts } from '@/lib/blog/posts';
 import { generateMetadata as createMetadata } from '@/lib/seo';
 import {

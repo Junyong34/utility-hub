@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 const TONE_STYLES: Record<
   'neutral' | 'emerald' | 'rose' | 'sky' | 'amber',

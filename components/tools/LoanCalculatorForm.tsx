@@ -7,20 +7,20 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { AmountInputField } from '@/components/ui/AmountInputField';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { Button } from '@/components/ui/button';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
-import { DatePicker } from '@/components/ui/date-picker';
+} from '@/shared/ui/card';
+import { Input } from '@/shared/ui/input';
+import { AmountInputField } from '@/shared/ui/AmountInputField';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
+import { ToggleGroup, ToggleGroupItem } from '@/shared/ui/toggle-group';
+import { Button } from '@/shared/ui/button';
+import { BottomSheet } from '@/shared/client/bottom-sheet';
+import { DatePicker } from '@/shared/ui/date-picker';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
+} from '@/shared/ui/tooltip';
 import {
   calculateLoan,
   type RepaymentMethod,
@@ -49,13 +49,13 @@ import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
-} from '@/components/ui/collapsible';
-import { QuickActionButton } from '@/components/ui/QuickActionButton';
-import { type CalendarQuickAction } from '@/components/ui/calendar-date-utils';
+} from '@/shared/ui/collapsible';
+import { QuickActionButton } from '@/shared/ui/QuickActionButton';
+import { type CalendarQuickAction } from '@/shared/ui/calendar-date-utils';
 import {
   FormSectionGroup,
   FormFieldGroup,
-} from '@/components/ui/FormSectionGroup';
+} from '@/shared/ui/FormSectionGroup';
 
 const currencyFormatter = new Intl.NumberFormat('ko-KR', {
   style: 'currency',

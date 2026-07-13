@@ -1,8 +1,8 @@
 'use client'
 
 import { Calculator, ExternalLink, Info, Plus } from 'lucide-react'
-import { AmountInputField } from '@/components/ui/AmountInputField'
-import { Button } from '@/components/ui/button'
+import { AmountInputField } from '@/shared/ui/AmountInputField'
+import { Button } from '@/shared/ui/button'
 import { CalculatorCategoryLinks } from '@/components/tools/CalculatorCategoryLinks'
 import {
   Card,
@@ -10,19 +10,19 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/shared/ui/card'
 import {
   FormFieldGroup,
   FormSectionGroup,
-} from '@/components/ui/FormSectionGroup'
+} from '@/shared/ui/FormSectionGroup'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { TooltipProvider } from '@/components/ui/tooltip'
+} from '@/shared/ui/select'
+import { TooltipProvider } from '@/shared/ui/tooltip'
 import { formatCurrencyToKoreanUnits, formatNumberWithCommas, parseFormattedNumber } from '@/lib/tools/formatting'
 import { DSR_DEFINITION_REFERENCE, DSR_POLICY_OPTIONS } from './constants'
 import { DsrCalculatorFAQ } from './DsrCalculatorFAQ'

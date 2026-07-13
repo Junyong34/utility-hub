@@ -1,5 +1,5 @@
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { formatFinanceMonthLabel } from '@/lib/finance/formatting';
 import type { FinanceSnapshotSummary } from '@/lib/finance/types';
 import {

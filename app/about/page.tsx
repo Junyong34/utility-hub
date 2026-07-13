@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import type { ComponentType } from 'react'
 import { ArrowRightIcon, BlocksIcon, CpuIcon, FileTextIcon, LightbulbIcon, ShieldCheckIcon } from 'lucide-react'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Card } from '@/shared/ui/card'
+import { Button } from '@/shared/ui/button'
+import { Badge } from '@/shared/ui/badge'
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo'
 import {
   SITE_CONFIG,

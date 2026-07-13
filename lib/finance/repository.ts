@@ -1,6 +1,10 @@
 import path from 'node:path';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import {
+  NETLIFY_FINANCE_SNAPSHOTS_PATH,
+  resolveFinanceSnapshotsPath,
+} from '../../config/runtime/server.ts';
+import {
   cloneFinanceSnapshot,
   createDefaultExpenseRows,
   createDefaultIncomeSnapshot,
@@ -26,25 +30,10 @@ export const DEFAULT_FINANCE_SNAPSHOTS_PATH = path.join(
   process.cwd(),
   'data/private/finance-snapshots.json'
 );
-const NETLIFY_FINANCE_SNAPSHOTS_PATH = '/tmp/finance-snapshots.json';
 const FINANCE_SNAPSHOTS_EXAMPLE_PATH = path.join(
   process.cwd(),
   'data/private/finance-snapshots.example.json'
 );
-
-function isNetlifyRuntime(): boolean {
-  return (
-    process.env.NETLIFY === 'true' ||
-    process.env.NETLIFY === '1' ||
-    Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME)
-  );
-}
-
-function resolveDefaultSnapshotsPath(): string {
-  return isNetlifyRuntime()
-    ? NETLIFY_FINANCE_SNAPSHOTS_PATH
-    : DEFAULT_FINANCE_SNAPSHOTS_PATH;
-}
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
@@ -131,7 +120,10 @@ function normalizeAssetRows(raw: unknown): FinanceAssetRow[] {
   });
 }
 
-function calculateMonthDistance(sourceMonth: string, targetMonth: string): number {
+function calculateMonthDistance(
+  sourceMonth: string,
+  targetMonth: string
+): number {
   const [sourceYearRaw, sourceMonthRaw] = sourceMonth.split('-');
   const [targetYearRaw, targetMonthRaw] = targetMonth.split('-');
   const sourceIndex = Number(sourceYearRaw) * 12 + Number(sourceMonthRaw);
@@ -152,7 +144,7 @@ function applyAssetAutoAccumulation(
 
   return {
     ...target,
-    assets: target.assets.map((row) => {
+    assets: target.assets.map(row => {
       if (!row.autoAccumulate || !row.monthlyContribution) {
         return row;
       }
@@ -248,7 +240,10 @@ function normalizeExpenseRows(raw: unknown): FinanceExpenseRow[] {
   });
 }
 
-function normalizeSnapshot(raw: unknown, index: number): FinanceMonthlySnapshot {
+function normalizeSnapshot(
+  raw: unknown,
+  index: number
+): FinanceMonthlySnapshot {
   if (!isObject(raw) || typeof raw.month !== 'string') {
     throw new Error(`Invalid finance snapshot at index ${index}`);
   }
@@ -272,7 +267,9 @@ function normalizeSnapshot(raw: unknown, index: number): FinanceMonthlySnapshot 
 function sortSnapshots(
   snapshots: FinanceMonthlySnapshot[]
 ): FinanceMonthlySnapshot[] {
-  return [...snapshots].sort((left, right) => left.month.localeCompare(right.month));
+  return [...snapshots].sort((left, right) =>
+    left.month.localeCompare(right.month)
+  );
 }
 
 function normalizeDataset(raw: unknown): FinanceSnapshotsDataset {
@@ -280,11 +277,12 @@ function normalizeDataset(raw: unknown): FinanceSnapshotsDataset {
     throw new Error('Invalid finance snapshots dataset');
   }
 
-  const version =
-    typeof raw.version === 'number' ? raw.version : Number.NaN;
+  const version = typeof raw.version === 'number' ? raw.version : Number.NaN;
 
   if (version !== DATASET_VERSION) {
-    throw new Error(`Unsupported finance snapshots dataset version: ${String(raw.version)}`);
+    throw new Error(
+      `Unsupported finance snapshots dataset version: ${String(raw.version)}`
+    );
   }
 
   if (!Array.isArray(raw.snapshots)) {
@@ -308,7 +306,9 @@ async function ensureParentDirectory(filePath: string): Promise<void> {
   await mkdir(path.dirname(filePath), { recursive: true });
 }
 
-async function readDatasetFromFile(filePath: string): Promise<FinanceSnapshotsDataset> {
+async function readDatasetFromFile(
+  filePath: string
+): Promise<FinanceSnapshotsDataset> {
   try {
     const file = await readFile(filePath, 'utf8');
     const raw = JSON.parse(file) as unknown;
@@ -322,8 +322,13 @@ async function readDatasetFromFile(filePath: string): Promise<FinanceSnapshotsDa
     ) {
       if (filePath === NETLIFY_FINANCE_SNAPSHOTS_PATH) {
         try {
-          const example = await readFile(FINANCE_SNAPSHOTS_EXAMPLE_PATH, 'utf8');
-          const seededDataset = normalizeDataset(JSON.parse(example) as unknown);
+          const example = await readFile(
+            FINANCE_SNAPSHOTS_EXAMPLE_PATH,
+            'utf8'
+          );
+          const seededDataset = normalizeDataset(
+            JSON.parse(example) as unknown
+          );
           await writeDatasetToFile(filePath, seededDataset);
           return seededDataset;
         } catch {
@@ -374,7 +379,7 @@ function upsertSnapshots(
   incomingSnapshots: FinanceMonthlySnapshot[]
 ): FinanceMonthlySnapshot[] {
   const snapshotByMonth = new Map(
-    existingSnapshots.map((snapshot) => [snapshot.month, snapshot])
+    existingSnapshots.map(snapshot => [snapshot.month, snapshot])
   );
 
   for (const snapshot of incomingSnapshots) {
@@ -388,12 +393,14 @@ export interface FinanceRepositoryOptions {
   filePath?: string;
 }
 
-export function createFinanceRepository(options: FinanceRepositoryOptions = {}) {
-  const filePath = options.filePath ?? resolveDefaultSnapshotsPath();
+export function createFinanceRepository(
+  options: FinanceRepositoryOptions = {}
+) {
+  const filePath = options.filePath ?? resolveFinanceSnapshotsPath();
 
   async function listMonths(): Promise<string[]> {
     const dataset = await readDatasetFromFile(filePath);
-    return dataset.snapshots.map((snapshot) => snapshot.month);
+    return dataset.snapshots.map(snapshot => snapshot.month);
   }
 
   async function getSnapshots(): Promise<FinanceMonthlySnapshot[]> {
@@ -406,11 +413,15 @@ export function createFinanceRepository(options: FinanceRepositoryOptions = {}) 
     return months.at(-1) ?? null;
   }
 
-  async function getSnapshot(month: string): Promise<FinanceMonthlySnapshot | null> {
+  async function getSnapshot(
+    month: string
+  ): Promise<FinanceMonthlySnapshot | null> {
     const targetMonth = ensureMonth(month);
     const dataset = await readDatasetFromFile(filePath);
 
-    return dataset.snapshots.find((snapshot) => snapshot.month === targetMonth) ?? null;
+    return (
+      dataset.snapshots.find(snapshot => snapshot.month === targetMonth) ?? null
+    );
   }
 
   async function saveSnapshot(
@@ -456,7 +467,9 @@ export function createFinanceRepository(options: FinanceRepositoryOptions = {}) 
   ): Promise<CreateFinanceSnapshotResult> {
     const targetMonth = ensureMonth(month);
     const dataset = await readDatasetFromFile(filePath);
-    const existing = dataset.snapshots.find((snapshot) => snapshot.month === targetMonth);
+    const existing = dataset.snapshots.find(
+      snapshot => snapshot.month === targetMonth
+    );
 
     if (existing && !options.overwrite) {
       return {
@@ -470,14 +483,19 @@ export function createFinanceRepository(options: FinanceRepositoryOptions = {}) 
       ? ensureMonth(options.sourceMonth)
       : null;
     const explicitSource = explicitSourceMonth
-      ? dataset.snapshots.find((snapshot) => snapshot.month === explicitSourceMonth) ?? null
+      ? (dataset.snapshots.find(
+          snapshot => snapshot.month === explicitSourceMonth
+        ) ?? null)
       : null;
     const previousCandidates = dataset.snapshots.filter(
-      (snapshot) => snapshot.month < targetMonth
+      snapshot => snapshot.month < targetMonth
     );
     const source = explicitSource ?? previousCandidates.at(-1) ?? null;
     const nextSnapshot = source
-      ? applyAssetAutoAccumulation(source, cloneFinanceSnapshot(source, targetMonth))
+      ? applyAssetAutoAccumulation(
+          source,
+          cloneFinanceSnapshot(source, targetMonth)
+        )
       : createEmptyFinanceSnapshot(targetMonth);
     const savedSnapshot = await saveSnapshot(nextSnapshot);
 

@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+} from '@/shared/ui/alert-dialog';
 import { Info } from 'lucide-react';
 
 export function DefenseFundInfoDialog() {

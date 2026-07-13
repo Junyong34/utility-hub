@@ -1,11 +1,11 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import type {
   MovingBudgetGroupId,
   MovingBudgetSummary,
 } from '@/lib/tools/moving-budget-checklist';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import { MOVING_BUDGET_GROUP_META } from '../constants';
 
 interface ChecklistProgressBoardProps {

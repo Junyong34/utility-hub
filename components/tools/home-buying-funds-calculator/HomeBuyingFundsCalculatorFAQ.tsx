@@ -6,8 +6,8 @@ import {
   AccordionIndicator,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion';
-import { Card } from '@/components/ui/card';
+} from '@/shared/ui/accordion';
+import { Card } from '@/shared/ui/card';
 
 export function HomeBuyingFundsCalculatorFAQ() {
   return (

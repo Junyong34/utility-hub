@@ -1,15 +1,15 @@
 'use client'
 
 import { AlertTriangle, CheckCircle2, MinusCircle } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
+import { Badge } from '@/shared/ui/badge'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
+} from '@/shared/ui/card'
+import { Separator } from '@/shared/ui/separator'
 import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting'
 import type { DsrCalculationResult } from '@/lib/tools/dsr'
 import { currencyFormatter } from '../constants'

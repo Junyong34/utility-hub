@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/shared/ui/card';
 import type { HomeBuyingResult } from '@/lib/tools/home-buying-funds-calculator';
 import NumberTicker from '@/components/magicui/number-ticker';
 

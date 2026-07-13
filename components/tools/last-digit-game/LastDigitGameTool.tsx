@@ -9,18 +9,18 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+} from '@/shared/ui/alert-dialog';
+import { Badge } from '@/shared/ui/badge';
+import { Button } from '@/shared/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
+} from '@/shared/ui/card';
+import { Input } from '@/shared/ui/input';
+import { cn } from '@/shared/ui/class-names';
 import { celebrate } from '@/components/magicui/confetti';
 import {
   calculateRankedUsers,

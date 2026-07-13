@@ -9,7 +9,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
+} from '@/shared/ui/alert-dialog';
 import {
   NATIONAL_HOUSING_BOND_GUIDE_ROWS,
   NATIONAL_HOUSING_BOND_GUIDE_TITLE,

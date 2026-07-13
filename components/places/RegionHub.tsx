@@ -16,7 +16,7 @@ import {
 } from './place-theme';
 import type { PlaceListPageResponse } from '@/lib/places';
 import type { RegionConfig } from '@/lib/places/region-config';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 interface RegionHubProps {
   region: RegionConfig;

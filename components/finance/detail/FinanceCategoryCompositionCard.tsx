@@ -7,11 +7,11 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from 'recharts';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { formatWon } from '@/components/finance/dashboard/finance-dashboard-formatting';
 import type { FinanceValueShareDatum } from '@/lib/finance/types';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 const PIE_COLORS = [
   'var(--chart-1)',

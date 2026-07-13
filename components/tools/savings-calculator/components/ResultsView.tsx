@@ -4,7 +4,7 @@ import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
-} from '@/components/ui/collapsible';
+} from '@/shared/ui/collapsible';
 import type {
   MonthlyInterestItem,
   DepositCalculationResult,

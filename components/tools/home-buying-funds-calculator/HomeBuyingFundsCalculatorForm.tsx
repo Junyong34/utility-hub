@@ -1,6 +1,6 @@
 'use client';
 
-import { TooltipProvider } from '@/components/ui/tooltip';
+import { TooltipProvider } from '@/shared/ui/tooltip';
 import { useHomeBuyingFundsCalculator } from './hooks/useHomeBuyingFundsCalculator';
 import { HomeBuyingInputSection } from './sections/HomeBuyingInputSection';
 import { HomeBuyingResultSection } from './sections/HomeBuyingResultSection';

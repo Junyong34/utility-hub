@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { JsonLdMultiple } from '@/components/seo';
 import { BenefitsHub } from '@/components/benefits/BenefitsHub';
-import { PaperPageShell } from '@/components/ui/paper-page-shell';
+import { PaperPageShell } from '@/shared/ui/paper-page-shell';
 import {
   SITE_CONFIG,
   createPageStructuredData,

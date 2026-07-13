@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/shared/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import type { FinanceMonthlySnapshot } from '@/lib/finance/types';
 import { FinanceInputTabs } from './FinanceInputTabs';
 import { FinanceImportDialog } from './FinanceImportDialog';

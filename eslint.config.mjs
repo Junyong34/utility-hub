@@ -210,6 +210,27 @@ const eslintConfig = defineConfig([
   },
   {
     files: [
+      'modules/**/ui/**/*.test.{ts,tsx}',
+      'modules/**/ui/*.test.{ts,tsx}',
+      'shared/ui/**/*.test.{ts,tsx}',
+    ],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: [...serverLayerImportPatterns, ...clientImportPatterns],
+              message:
+                'ui 단위 테스트도 server 또는 client orchestration 진입점을 import할 수 없습니다.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: [
       'modules/**/server/**/*.{ts,tsx}',
       'modules/**/server.{ts,tsx}',
       'shared/server/**/*.{ts,tsx}',

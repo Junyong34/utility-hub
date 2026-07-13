@@ -1,7 +1,7 @@
 'use client';
 
-import { TooltipProvider } from '@/components/ui/tooltip';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
+import { TooltipProvider } from '@/shared/ui/tooltip';
+import { BottomSheet } from '@/shared/client/bottom-sheet';
 import { useInstallmentCalculator } from '../hooks/useInstallmentCalculator';
 import { InstallmentInputForm } from '../components/InstallmentInputForm';
 import { InstallmentResultCard } from '../components/InstallmentResultCard';
