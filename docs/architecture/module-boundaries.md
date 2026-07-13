@@ -54,6 +54,8 @@ import { listFeaturedPlaces } from '@/modules/places/server/place-repository';
 
 교차 호출이 순환을 만들면 한 모듈이 다른 모듈의 내부를 import해서 해결하지 않는다. 조합 책임을 `app` 또는 상위 owner module로 옮기거나, 실제 양쪽이 공유하는 직렬화 계약만 `shared/contracts`로 추출한다.
 
+`modules/tools/catalog`는 각 도구의 `public.ts`에 공개된 manifest만 명시적 순서로 등록한다. 개별 `modules/tools/<tool-id>`는 aggregate catalog를 역으로 import하지 않는다. 양쪽이 공유하는 manifest shape는 `shared/contracts/tool-manifest.ts`가 소유하며, architecture test의 `tool-no-catalog-reverse-import` 규칙이 역참조를 차단한다.
+
 ## 공개 entry 규칙
 
 모든 entry는 필요한 경우에만 만든다. 빈 레이어와 빈 entry를 형식적으로 만들지 않는다.

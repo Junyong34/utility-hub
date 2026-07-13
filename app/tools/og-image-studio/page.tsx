@@ -19,7 +19,7 @@ import {
   buildCustomOgImagePath,
   buildToolOgImagePath,
 } from '@/lib/seo/og';
-import { getAllToolConfigs } from '@/lib/tools';
+import { getAllToolConfigs } from '@/modules/tools/catalog/public';
 
 type StudioMode = 'blog' | 'tool' | 'custom';
 

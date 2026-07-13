@@ -1,4 +1,4 @@
-import { getToolConfig } from '@/lib/tools/tool-config'
+import { getToolConfig } from '@/modules/tools/catalog/public'
 import { createOgImageResponse } from '@/lib/seo/og-renderer'
 import { TOOL_CATEGORY_THEME_MAP, DEFAULT_THEME_PRESET } from '@/lib/seo/og-theme'
 

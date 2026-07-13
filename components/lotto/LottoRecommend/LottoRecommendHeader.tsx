@@ -2,13 +2,10 @@
 
 import { LottoNumberCloud } from '@/components/lotto/LottoRecommend/LottoNumberCloud';
 import { Card } from '@/shared/ui/card';
-import { getToolConfig } from '@/lib/tools';
+import { LOTTO_MANIFEST } from '@/modules/tools/lotto/public';
 
-const lottoTool = getToolConfig('lotto');
-const headerTitle = lottoTool?.name ?? 'AI 로또 번호 추천';
-const headerDescription =
-  lottoTool?.description ??
-  'AI와 확률통계 알고리즘으로 최적의 번호를 추천받아보세요.';
+const headerTitle = LOTTO_MANIFEST.name;
+const headerDescription = LOTTO_MANIFEST.description;
 
 export function LottoRecommendHeader() {
   return (

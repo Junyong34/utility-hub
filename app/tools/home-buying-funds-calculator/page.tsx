@@ -1,16 +1,23 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import { HomeBuyingFundsCalculatorForm } from '@/components/tools/home-buying-funds-calculator';
-import { ToolSwitcher } from '@/components/tools/ToolSwitcher';
+import {
+  ToolCatalogProvider,
+  ToolSwitcher,
+} from '@/modules/tools/catalog/client';
+import {
+  getToolBreadcrumbItems,
+  listToolNavigationItems,
+} from '@/modules/tools/catalog/public';
 import {
   assertToolStructuredData,
   generateToolMetadata,
-  getToolBreadcrumbItems,
   getToolStructuredDataArray,
-} from '@/lib/tools';
+} from '@/modules/tools/catalog/server';
 
 assertToolStructuredData('home-buying-funds-calculator');
+const TOOL_NAVIGATION_ITEMS = listToolNavigationItems();
 
 export const metadata: Metadata = generateToolMetadata(
   'home-buying-funds-calculator'
@@ -24,7 +31,8 @@ export default function HomeBuyingFundsCalculatorPage() {
   return (
     <>
       <JsonLdMultiple data={structuredData} />
-      <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
+      <ToolCatalogProvider items={TOOL_NAVIGATION_ITEMS}>
+        <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         <header className="bg-card border-b">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <Breadcrumb
@@ -52,7 +60,8 @@ export default function HomeBuyingFundsCalculatorPage() {
             <HomeBuyingFundsCalculatorForm />
           </Suspense>
         </main>
-      </div>
+        </div>
+      </ToolCatalogProvider>
     </>
   );
 }

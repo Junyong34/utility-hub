@@ -1,7 +1,35 @@
 import { expect, test } from '@playwright/test';
-import { getAllToolConfigs } from '../../../lib/tools/tool-config.ts';
 
-const tools = getAllToolConfigs();
+const tools = [
+  {
+    id: 'loan-calculator',
+    name: '대출, 중도상환수수료 계산기',
+  },
+  {
+    id: 'dsr-calculator',
+    name: 'DSR 계산기',
+  },
+  {
+    id: 'savings-calculator',
+    name: '예금, 적금 계산기',
+  },
+  {
+    id: 'lotto',
+    name: 'AI 로또 번호 추천',
+  },
+  {
+    id: 'last-digit-game',
+    name: '랜덤 스톱워치 게임',
+  },
+  {
+    id: 'pomodoro',
+    name: '뽀모도로 타이머',
+  },
+  {
+    id: 'home-buying-funds-calculator',
+    name: '주택 구입 비용 계산기',
+  },
+] as const;
 const featuredToolIds = [
   'home-buying-funds-calculator',
   'savings-calculator',

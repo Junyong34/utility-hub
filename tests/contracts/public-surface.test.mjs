@@ -97,17 +97,17 @@ const EXPECTED_PUBLIC_APP_ROUTES = [
 
 const EXPECTED_TOOL_CONFIG_DIGESTS = {
   'loan-calculator':
-    '68f9cf7006e80b6c771af3fe0d6b7d5c39f18bfbe583573cafc5cc0fddf6a5e6',
+    'b68f5aff1cd27bfcf38f2aaea954ab5d04b3db1fcacbeba2260eb0f1a5336a46',
   'dsr-calculator':
-    '89d41094b722889af9be9f94b6989f213104e2cc3fc992be9626c5ed4628ab66',
+    '52fae31aa37dcb5aac1ab23c08fe837611205e6be1759f168535e2152f70b3eb',
   'savings-calculator':
-    '87d80f07b42ca7655565f1585d8777fc080a1370f9fc852f2a589ddc75177b83',
-  lotto: '92e5f4f832a79f633ec610e670053cbf6d2b1dcf353c012da2580733d2facddf',
+    '192c0e8b2d9c11c95b0bff27e8acb1a9ff81cd519110ccb5d58debd26941a587',
+  lotto: '0c7ce7d963a68ba161c1060af4648747e0a095c75ff882cc79068dc5d98e14c5',
   'last-digit-game':
-    'bd6f428030b1447e9186ff20ee9b8d151a3f08021dd7aaf3aec2d488d94d9851',
-  pomodoro: '58086be8e8b66d2fbf0c8700ca6b7f7ccbd43413fc3a128563a2642f38b0260a',
+    '9d2d945dd153070174189494110bc13f775de3b748b88d32ecedc814a952f42f',
+  pomodoro: '13b2526d85708311b7d1392ed9f3866e4b32c388d10dab5ebc85b688dd60cd3d',
   'home-buying-funds-calculator':
-    '26276c5abb7b08d739f79baa2d41a5c65a5c5a0ebcae3784e0a88e1b90c1973f',
+    '426f47ba6da600e71b4dddc2f3bb86068211adb4902ef43a88cb2ca764aaf58a',
 };
 
 function listFiles(directory) {
@@ -164,28 +164,7 @@ function getToolSurface() {
 }
 
 function getSerializableToolConfig(tool) {
-  return {
-    id: tool.id,
-    name: tool.name,
-    shortName: tool.shortName,
-    breadcrumbLabel: tool.breadcrumbLabel,
-    publishedAt: tool.publishedAt,
-    description: tool.description,
-    keywords: tool.keywords,
-    category: tool.category,
-    ogImage: tool.ogImage,
-    badge: tool.badge,
-    homeFeatured: tool.homeFeatured,
-    color: tool.color,
-    features: tool.features,
-    useCases: tool.useCases,
-    faq: tool.faq,
-    howTo: tool.howTo,
-    applicationCategory: tool.applicationCategory,
-    estimatedTime: tool.estimatedTime,
-    tools: tool.tools,
-    relatedTools: tool.relatedTools,
-  };
+  return JSON.parse(JSON.stringify(tool));
 }
 
 function sortSerializableValue(value) {

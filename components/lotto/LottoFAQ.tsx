@@ -8,7 +8,7 @@ import {
   AccordionTrigger,
 } from '@/shared/ui/accordion';
 import { Card } from '@/shared/ui/card';
-import type { ToolFAQItem } from '@/lib/tools/types';
+import type { ToolFAQItem } from '@/shared/contracts/tool-manifest';
 
 /**
  * 로또 FAQ 섹션 컴포넌트

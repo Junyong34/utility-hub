@@ -7,9 +7,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/shared/ui/accordion'
-import { getToolConfig } from '@/lib/tools/tool-config'
+import { DSR_CALCULATOR_MANIFEST } from '@/modules/tools/dsr-calculator/public'
 
-const FAQ_DATA = getToolConfig('dsr-calculator')?.faq ?? []
+const FAQ_DATA = DSR_CALCULATOR_MANIFEST.faq ?? []
 
 export function DsrCalculatorFAQ() {
   return (

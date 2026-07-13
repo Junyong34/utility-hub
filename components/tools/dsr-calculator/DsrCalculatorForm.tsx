@@ -3,7 +3,7 @@
 import { Calculator, ExternalLink, Info, Plus } from 'lucide-react'
 import { AmountInputField } from '@/shared/ui/AmountInputField'
 import { Button } from '@/shared/ui/button'
-import { CalculatorCategoryLinks } from '@/components/tools/CalculatorCategoryLinks'
+import { CalculatorCategoryLinks } from '@/modules/tools/catalog/client'
 import {
   Card,
   CardContent,

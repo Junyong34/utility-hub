@@ -1,24 +1,31 @@
 export const dynamic = 'force-dynamic';
 
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { LottoGenerator } from '@/components/lotto/LottoGenerator';
 import { LottoContentSection } from '@/components/lotto/LottoContentSection';
 import { LottoDisclaimer } from '@/components/lotto/LottoDisclaimer';
 import { LottoFAQ } from '@/components/lotto/LottoFAQ';
 import { LottoInfoPanel } from '@/components/lotto/LottoInfoPanel';
-import { ToolSwitcher } from '@/components/tools/ToolSwitcher';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
+import {
+  ToolCatalogProvider,
+  ToolSwitcher,
+} from '@/modules/tools/catalog/client';
+import {
+  getToolBreadcrumbItems,
+  getToolConfig,
+  listToolNavigationItems,
+} from '@/modules/tools/catalog/public';
 import {
   assertToolStructuredData,
   generateToolMetadata,
   getToolStructuredDataArray,
-  getToolBreadcrumbItems,
-} from '@/lib/tools';
-import { getToolConfig } from '@/lib/tools/tool-config';
+} from '@/modules/tools/catalog/server';
 import { getLatestLottoRoundResult } from '@/lib/lotto/round-data';
 
 assertToolStructuredData('lotto');
+const TOOL_NAVIGATION_ITEMS = listToolNavigationItems();
 
 /**
  * 로또 페이지 메타데이터
@@ -43,7 +50,8 @@ export default function LottoPage() {
   return (
     <>
       <JsonLdMultiple data={structuredData} />
-      <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
+      <ToolCatalogProvider items={TOOL_NAVIGATION_ITEMS}>
+        <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         {/* 헤더 */}
         <header className="bg-card border-b shadow-sm">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -90,7 +98,8 @@ export default function LottoPage() {
             </p>
           </div>
         </footer>
-      </div>
+        </div>
+      </ToolCatalogProvider>
     </>
   );
 }

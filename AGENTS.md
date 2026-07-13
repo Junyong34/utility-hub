@@ -45,7 +45,7 @@
 
 ### Tools
 
-- 모든 공개 도구의 소스 오브 트루스는 `lib/tools/tool-config.ts`
+- 공개 도구의 메타데이터·FAQ·HowTo는 각 `modules/tools/<tool-id>/domain/manifest.ts`가 소유하고, 노출 순서와 등록 여부는 `modules/tools/catalog/domain/catalog.ts`가 소유합니다.
 - 현재 등록된 주요 도구 ID:
   - `loan-calculator`
   - `dsr-calculator`
@@ -55,8 +55,7 @@
   - `pomodoro`
   - `home-buying-funds-calculator`
 - 도구 페이지는 `app/tools/<tool-id>/page.tsx`
-- 도구 UI는 주로 `components/tools/**`에 있고, 로또는 `components/lotto/**`를 사용합니다.
-- 도구 계산/정책 로직은 주로 `lib/tools/**`에 있고, 로또는 `lib/lotto/**`를 사용합니다.
+- 신규 도구 UI·상태·계산 로직은 `modules/tools/<tool-id>/{ui,client,domain}/**`에 둡니다. `components/tools/**`, `components/lotto/**`, `lib/tools/**`, `lib/lotto/**`는 이관 중인 legacy 경로입니다.
 - 내부용 OG 제작 화면도 존재:
   - 페이지: `/tools/og-image-studio`
   - API: `/api/og/custom`
@@ -64,7 +63,7 @@
 ### SEO / Analytics / Metadata
 
 - 공통 SEO 유틸: `lib/seo/*`
-- 도구 전용 구조화 데이터/메타데이터: `lib/tools/tool-structured-data.ts`, `lib/tools/tool-metadata.ts`
+- 도구 전용 구조화 데이터/메타데이터: `modules/tools/catalog/server.ts`
 - 동적 사이트맵: `app/(meta)/sitemap.ts`
 - 동적 robots.txt: `app/robots.ts`
 - RSS 생성: `app/rss.xml/route.ts`
@@ -240,8 +239,10 @@ utility-hub/
 - `tests/architecture/import-boundaries.test.mjs`
   - `modules/**`, `shared/**`, `config/**`에 즉시 적용되는 실행 가능한 경계 규칙
 
-- `lib/tools/tool-config.ts`
-  - 공개 도구 목록, 메타데이터, FAQ, 구조화 데이터 입력값의 기준 파일
+- `modules/tools/<tool-id>/domain/manifest.ts`
+  - 개별 공개 도구의 이름, 설명, FAQ, HowTo, OG 입력값 기준 파일
+- `modules/tools/catalog/domain/catalog.ts`
+  - 공개 도구 등록 여부와 노출 순서의 기준 파일
 - `lib/blog/posts.ts`
   - 블로그 포스트 로딩, 카테고리 추출, 태그/카테고리 집계의 기준 파일
 - `app/layout.tsx`
@@ -288,11 +289,12 @@ utility-hub/
 ### Tool Work
 
 - 새 도구를 추가할 때는 최소한 아래를 함께 맞춥니다:
-  - `lib/tools/tool-config.ts`
+  - `modules/tools/<tool-id>/domain/manifest.ts`
+  - `modules/tools/catalog/domain/catalog.ts`
   - `app/tools/<tool-id>/page.tsx`
-  - 관련 UI 디렉토리 (`components/tools/*` 또는 도메인 전용 디렉토리)
-  - 관련 계산/도메인 로직 디렉토리 (`lib/tools/*` 또는 도메인 전용 디렉토리)
-- 도구 메타데이터와 구조화 데이터는 블로그 SEO 로직이 아니라 `lib/tools/*` 체계 안에서 유지합니다.
+  - 관련 UI·클라이언트 상태 (`modules/tools/<tool-id>/ui/**`, `client/**`)
+  - 관련 계산·정책 (`modules/tools/<tool-id>/domain/**`)
+- 도구 메타데이터와 구조화 데이터는 블로그 SEO 로직이 아니라 도구 manifest와 `modules/tools/catalog/*` 체계 안에서 유지합니다.
 - URL 공유가 필요한 계산기는 nuqs를 우선 고려합니다.
 
 ### Blog Work
@@ -306,7 +308,7 @@ utility-hub/
 
 ### SEO / OG Work
 
-- 공통 SEO는 `lib/seo/*`, 도구 SEO는 `lib/tools/*`에서 관리합니다.
+- 공통 SEO는 `lib/seo/*`, 도구 SEO는 각 도구 manifest와 `modules/tools/catalog/server.ts`에서 관리합니다.
 - OG 관련 변경은 아래 세 군데를 함께 확인합니다:
   - `lib/seo/og.ts`
   - `lib/seo/og-renderer.tsx`
@@ -368,7 +370,7 @@ utility-hub/
 ## Brief Conclusion
 
 이 저장소는 단순 블로그가 아니라, **블로그 + 다중 계산기/도구 + SEO/OG/분석 인프라**가 함께 있는 App Router 프로젝트입니다.  
-현재는 여기에 **육아형 리브랜딩 문서 체계**가 추가된 상태이므로, 작업할 때는 `lib/tools/tool-config.ts`, `lib/blog/posts.ts`, `app/layout.tsx`와 함께 `docs/specs/parenting-guide-rebrand/*`를 같이 기준점으로 보는 것이 가장 안전합니다.
+현재는 여기에 **육아형 리브랜딩 문서 체계**가 추가된 상태이므로, 작업할 때는 도구별 `domain/manifest.ts`, `modules/tools/catalog/domain/catalog.ts`, `lib/blog/posts.ts`, `app/layout.tsx`와 함께 `docs/specs/parenting-guide-rebrand/*`를 같이 기준점으로 보는 것이 가장 안전합니다.
 
 # Testing Rules
 

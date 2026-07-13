@@ -2,7 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
 import { LoanCalculatorFAQ } from '@/components/tools/LoanCalculatorFAQ';
-import { CalculatorCategoryLinks } from '@/components/tools/CalculatorCategoryLinks';
+import { CalculatorCategoryLinks } from '@/modules/tools/catalog/client';
 import { LoanCalculatorSection } from './sections/LoanCalculatorSection';
 import { PrepaymentFeeSection } from './sections/PrepaymentFeeSection';
 

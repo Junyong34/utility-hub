@@ -17,8 +17,11 @@ import {
   createFAQSchema,
 } from '@/lib/seo'
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo'
-import { getAllToolConfigs } from '@/lib/tools'
-import type { ToolConfig, ToolFAQItem } from '@/lib/tools/types'
+import {
+  getAllToolConfigs,
+  type ToolConfig,
+  type ToolFAQItem,
+} from '@/modules/tools/catalog/public'
 import { createFaqMetadataInput } from '@/lib/seo/site-section-seo'
 
 interface FaqItem {

@@ -337,6 +337,21 @@ function inspectFile(root, sourceFile) {
 
     if (
       sourceLeaf !== null &&
+      sourceLeaf.startsWith('modules/tools/') &&
+      sourceLeaf !== 'modules/tools/catalog' &&
+      targetLeaf === 'modules/tools/catalog'
+    ) {
+      addViolation(violations, source, relativeFile, {
+        index: imported.index,
+        rule: 'tool-no-catalog-reverse-import',
+        specifier: imported.specifier,
+        message:
+          'Tool modules cannot import the aggregate catalog; the catalog owns tool registration.',
+      });
+    }
+
+    if (
+      sourceLeaf !== null &&
       targetLeaf !== null &&
       sourceLeaf !== targetLeaf &&
       !isPublicEntryImport(targetPath, targetLeaf)
@@ -677,6 +692,7 @@ test('reports broad exports and cross-module deep imports', () => {
         'no-broad-export',
         'no-cross-module-deep-import',
         'no-cross-module-deep-import',
+        'tool-no-catalog-reverse-import',
       ]);
     }
   );
@@ -723,6 +739,22 @@ test('reports non-public cross-module entries from domain and public code', () =
         'domain-public-only-public-entry',
         'domain-public-only-public-entry',
         'domain-public-only-public-entry',
+        'tool-no-catalog-reverse-import',
+      ]);
+    }
+  );
+});
+
+test('reports reverse imports from a tool module to the catalog module', () => {
+  withFixture(
+    {
+      'modules/tools/catalog/public.ts': 'export const tools = [];',
+      'modules/tools/lotto/public.ts':
+        'import { tools } from "@/modules/tools/catalog/public";\nexport const lottoTools = tools;',
+    },
+    root => {
+      assert.deepEqual(rulesFrom(inspectImportBoundaries(root)), [
+        'tool-no-catalog-reverse-import',
       ]);
     }
   );

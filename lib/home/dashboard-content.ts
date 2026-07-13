@@ -1,7 +1,9 @@
 import type { BlogPostMetadata } from '../blog/types';
 import { getAllPosts } from '../blog/posts';
-import { getAllToolConfigs } from '../tools/tool-config';
-import type { ToolConfig } from '../tools/types';
+import {
+  getAllToolConfigs,
+  type ToolConfig,
+} from '../../modules/tools/catalog/public';
 import type { DashboardContentItem, HomeFeaturedMeta } from '../../types/home';
 
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
-import { CalculatorCategoryLinks } from '@/components/tools/CalculatorCategoryLinks';
+import { CalculatorCategoryLinks } from '@/modules/tools/catalog/client';
 import { DepositCalculatorSection } from './sections/DepositCalculatorSection';
 import { InstallmentCalculatorSection } from './sections/InstallmentCalculatorSection';
 import { SavingsCalculatorFAQ } from './SavingsCalculatorFAQ';

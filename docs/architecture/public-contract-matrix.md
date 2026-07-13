@@ -38,7 +38,7 @@
 
 ### Page 계약 주의사항
 
-- 등록된 공개 tool ID와 노출 순서의 source of truth는 `lib/tools/tool-config.ts`다: `loan-calculator`, `dsr-calculator`, `savings-calculator`, `lotto`, `last-digit-game`, `pomodoro`, `home-buying-funds-calculator`.
+- 등록된 공개 tool ID와 노출 순서의 source of truth는 각 tool의 `domain/manifest.ts`를 명시적으로 조합하는 `modules/tools/catalog/public.ts`다: `loan-calculator`, `dsr-calculator`, `savings-calculator`, `lotto`, `last-digit-game`, `pomodoro`, `home-buying-funds-calculator`.
 - `/tools/home-check`와 `/tools/og-image-studio`는 tool registry에 없으므로 자동 sitemap 대상이 아니다.
 - `/finance/**`는 noindex/nofollow만 확인된다. 현재 page/route 코드에서 인증·인가가 확인되지 않으므로 “private”를 접근 제어 보장으로 해석하지 않는다.
 - canonical/OG가 page에서 미선언된 noindex page의 실제 parent metadata 병합 결과는 현재 코드 확인이 필요하다.
@@ -72,7 +72,7 @@
 | route와 Next 특수 export | `app/**/page.tsx`, `app/**/route.ts`, `app/layout.tsx`, `app/robots.ts`, `app/(meta)/sitemap.ts`                  |
 | place query/default/DTO  | `lib/places/place-list-contract.ts`, `lib/places/place-list-query.ts`                                             |
 | blog page/default/DTO    | `lib/blog/pagination.ts`, `lib/blog/types.ts`, `lib/blog/posts.ts`                                                |
-| tool ID/SEO/schema       | `lib/tools/tool-config.ts`, `lib/tools/tool-metadata.ts`, `lib/tools/tool-structured-data.ts`                     |
+| tool ID/SEO/schema       | `modules/tools/<tool-id>/domain/manifest.ts`, `modules/tools/catalog/{public,server}.ts`                            |
 | tool URL state           | 각 `components/tools/*/hooks/parsers.ts`, lotto `LottoRecommendProvider.tsx`, `lib/lotto/types/recommendation.ts` |
 | storage key              | `lib/tools/pomodoro/storage.ts`, lotto provider, `components/finance/input/localDraft.ts`                         |
 | analytics shape/cache    | `lib/analytics/types.ts`, `lib/analytics/ga4.ts`, analytics route                                                 |

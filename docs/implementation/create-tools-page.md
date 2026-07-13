@@ -7,7 +7,7 @@
 
 - 새 Tool 생성 시 반드시 추가해야 하는 파일과 수정해야 하는 파일이 무엇인지
 - 어떤 파일이 URL, SEO, 구조화 데이터, `/tools` 목록, sitemap을 각각 결정하는지
-- 어디까지는 `TOOL_CONFIGS` 기반 자동 반영이고, 어디부터는 수동 반영인지
+- 어디까지는 tool manifest와 catalog 등록으로 자동 반영되고, 어디부터는 수동 반영인지
 - 메인 Tool 페이지와 Tool 서브페이지 생성 방식이 어떻게 다른지
 
 ## 1. 목적과 범위
@@ -25,13 +25,12 @@
   - `app/tools/<tool-id>/page.tsx`
   - `app/tools/<tool-id>/**/page.tsx`
 - Tool 메타/SEO
-  - `lib/tools/tool-config.ts`
-  - `lib/tools/tool-metadata.ts`
-  - `lib/tools/tool-breadcrumb.ts`
-  - `lib/tools/tool-structured-data.ts`
+  - `modules/tools/<tool-id>/domain/manifest.ts`
+  - `modules/tools/catalog/public.ts`
+  - `modules/tools/catalog/server.ts`
   - `lib/seo/sitemap.ts`
 - 공통 UI
-  - `components/tools/ToolSwitcher.tsx`
+  - `modules/tools/catalog/client.ts`
   - `components/seo/*`
   - `shared/ui/*`
 
@@ -45,43 +44,45 @@
 
 신규 Tool 생성 시 가장 먼저 봐야 하는 중심 파일은 아래다.
 
-| 영역 | 소스 파일 | 역할 |
-| --- | --- | --- |
-| Tool 등록 레지스트리 | `lib/tools/tool-config.ts` | Tool ID, 이름, 설명, 키워드, FAQ, HowTo, 아이콘, 색상 등 중앙 관리 |
-| Tool 메타데이터 | `lib/tools/tool-metadata.ts` | `generateToolMetadata(toolId)`로 canonical, title, description, og 설정 생성 |
-| Tool breadcrumb | `lib/tools/tool-breadcrumb.ts` | UI breadcrumb와 JSON-LD breadcrumb용 라벨/경로 생성 |
-| Tool 구조화 데이터 | `lib/tools/tool-structured-data.ts` | `WebPage`, `WebApplication`, `FAQPage`, `HowTo`, `BreadcrumbList` 생성 |
-| Tool 목록 페이지 | `app/tools/page.tsx` | `getAllToolConfigs()` 기반 `/tools` 카드 목록 생성 |
-| Tool 전환기 | `components/tools/ToolSwitcher.tsx` | `getAllToolConfigs()` 기반 Tool 이동 UI |
-| sitemap | `lib/seo/sitemap.ts` | 메인 Tool 페이지 자동 등록, 일부 서브페이지 수동 등록 |
+| 영역                          | 소스 파일                                    | 역할                                                                                  |
+| ----------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Tool별 공개 계약              | `modules/tools/<tool-id>/domain/manifest.ts` | Tool ID, 이름, 설명, 키워드, FAQ, HowTo, 아이콘, 색상 소유                            |
+| Tool 등록 레지스트리          | `modules/tools/catalog/domain/catalog.ts`    | manifest 등록 여부와 공개 노출 순서 관리                                              |
+| Tool 메타데이터·구조화 데이터 | `modules/tools/catalog/server.ts`            | canonical, OG, `WebPage`, `WebApplication`, `FAQPage`, `HowTo`, `BreadcrumbList` 생성 |
+| Tool breadcrumb               | `modules/tools/catalog/public.ts`            | UI breadcrumb 라벨과 경로 생성                                                        |
+| Tool 목록 페이지              | `app/tools/page.tsx`                         | `getAllToolConfigs()` 기반 `/tools` 카드 목록 생성                                    |
+| Tool 전환기                   | `modules/tools/catalog/client.ts`            | 서버가 전달한 경량 navigation DTO 기반 Tool 이동 UI                                   |
+| sitemap                       | `lib/seo/sitemap.ts`                         | 메인 Tool 페이지 자동 등록, 일부 서브페이지 수동 등록                                 |
 
 핵심 원칙:
 
-- 새 Tool의 1차 소스 오브 트루스는 `app/tools/...`가 아니라 `lib/tools/tool-config.ts`다.
-- `TOOL_CONFIGS`에 등록하지 않으면 `/tools` 목록, `ToolSwitcher`, 메타데이터 헬퍼, sitemap 자동 수집이 모두 끊긴다.
-- 메인 Tool 페이지(`/tools/<tool-id>`)는 `TOOL_CONFIGS` 등록만으로 목록/sitemap에 자동 반영되지만, 서브페이지(`/tools/<tool-id>/stats`)는 자동 반영되지 않는다.
+- 새 Tool의 공개 값은 해당 도구의 `domain/manifest.ts`가 소유한다.
+- manifest를 `modules/tools/catalog/domain/catalog.ts`의 명시적 배열과 맵에 등록하지 않으면 `/tools` 목록, `ToolSwitcher`, 메타데이터 헬퍼, sitemap 자동 수집이 모두 끊긴다.
+- 개별 도구 모듈은 aggregate catalog를 역으로 import하지 않는다. 두 영역의 조합은 `app` 라우트가 담당한다.
+- 메인 Tool 페이지(`/tools/<tool-id>`)는 manifest와 catalog 등록으로 목록/sitemap에 자동 반영되지만, 서브페이지(`/tools/<tool-id>/stats`)는 자동 반영되지 않는다.
 
 ## 3. 메인 Tool 생성 시 반드시 건드려야 하는 파일
 
 ### 3.1 필수 수정 파일
 
-| 파일 | 작업 | 이유 |
-| --- | --- | --- |
-| `lib/tools/tool-config.ts` | `TOOL_CONFIGS['<tool-id>']` 추가 | Tool 전체의 공개 계약과 SEO 원본 데이터 등록 |
-| `app/tools/<tool-id>/page.tsx` | 신규 페이지 생성 | 실제 라우트 생성 |
+| 파일                                         | 작업                                   | 이유                                   |
+| -------------------------------------------- | -------------------------------------- | -------------------------------------- |
+| `modules/tools/<tool-id>/domain/manifest.ts` | 신규 manifest 작성                     | Tool 공개 계약과 SEO 원본 데이터 소유  |
+| `modules/tools/catalog/domain/catalog.ts`    | manifest를 배열과 맵에 명시적으로 등록 | 목록, 전환기, metadata, sitemap에 노출 |
+| `app/tools/<tool-id>/page.tsx`               | 신규 페이지 생성                       | 실제 라우트 생성                       |
 
 ### 3.2 조건부 생성 파일
 
-| 파일/경로 | 생성 조건 | 이유 |
-| --- | --- | --- |
-| `components/tools/<tool-id>/*` | Tool UI가 1개 파일로 끝나지 않을 때 | 폼, 결과, 섹션, 훅 분리 |
-| `lib/tools/<tool-domain>.ts` | 계산/변환/생성 로직이 있을 때 | UI와 도메인 로직 분리 |
-| `hooks/*` 또는 `components/tools/<tool-id>/hooks/*` | URL 상태, 입력 상태, 계산 흐름이 복잡할 때 | 클라이언트 상태 분리 |
-| `public/og-images/...` | Tool별 전용 OG 이미지가 필요할 때 | `tool-config.ts`의 `ogImage`와 연결 |
+| 파일/경로                           | 생성 조건                                    | 이유                                  |
+| ----------------------------------- | -------------------------------------------- | ------------------------------------- |
+| `modules/tools/<tool-id>/ui/**`     | 서버 안전 표시 UI가 있을 때                  | 표현 컴포넌트 분리                    |
+| `modules/tools/<tool-id>/client/**` | URL 상태, 입력 상태, 브라우저 동작이 있을 때 | 클라이언트 orchestration 분리         |
+| `modules/tools/<tool-id>/domain/**` | 계산/변환/정책 로직이 있을 때                | 프레임워크와 분리된 순수 규칙 소유    |
+| `public/og-images/...`              | Tool별 전용 OG 이미지가 필요할 때            | 해당 tool manifest의 `ogImage`와 연결 |
 
 ### 3.3 자동 반영되는 소비처
 
-`tool-config.ts`에 새 Tool이 등록되면 현재 구현 기준으로 아래가 자동 반영된다.
+도구 manifest를 catalog에 등록하면 현재 구현 기준으로 아래가 자동 반영된다.
 
 - `/tools` 목록 카드
 - `ToolSwitcher` 옵션 목록
@@ -89,11 +90,11 @@
 - 메인 Tool 페이지용 구조화 데이터 생성 헬퍼
 - sitemap의 `/tools/<tool-id>` 메인 엔트리
 
-## 4. `TOOL_CONFIGS` 등록 규칙
+## 4. Tool manifest 등록 규칙
 
 ### 4.1 필수 필드
 
-`lib/tools/types.ts`의 `ToolConfig` 기준:
+`shared/contracts/tool-manifest.ts`의 `ToolManifest` 기준:
 
 - `id`
 - `name`
@@ -130,12 +131,7 @@
 
 ## 5. 권장 디렉토리 구조
 
-현재 저장소에는 두 패턴이 공존한다.
-
-- 신규/정리된 패턴: `components/tools/<tool-id>/*`
-- 기존 특화 패턴: `components/lotto/*`
-
-신규 Tool은 특별한 이유가 없으면 아래 패턴을 우선 사용한다.
+`components/tools/**`, `components/lotto/**`, `lib/tools/**`는 이관 중인 legacy 경로다. 신규 Tool은 특별한 이유가 없으면 아래 모듈 구조를 사용한다.
 
 ```text
 app/
@@ -143,25 +139,24 @@ app/
     <tool-id>/
       page.tsx
 
-components/
+modules/
   tools/
     <tool-id>/
-      index.ts
-      <ToolRoot>.tsx
-      hooks/
-      sections/
-      components/
-
-lib/
-  tools/
-    <tool-domain>.ts
+      public.ts
+      client.ts
+      ui.ts
+      domain/
+        manifest.ts
+      client/
+      ui/
 ```
 
 구성 원칙:
 
 - 페이지 셸은 `app/tools/<tool-id>/page.tsx`
-- 복잡한 클라이언트 UI는 `components/tools/<tool-id>/*`
-- 순수 계산/변환 로직은 `lib/tools/*`
+- 복잡한 클라이언트 상태와 브라우저 동작은 `modules/tools/<tool-id>/client/**`
+- 순수 계산/변환 로직은 `modules/tools/<tool-id>/domain/**`
+- 서버에서도 안전한 표시 컴포넌트는 `modules/tools/<tool-id>/ui/**`
 - 여러 Tool에서 재사용되는 UI는 `shared/ui/*`
 
 ## 6. 메인 Tool 페이지 기본 템플릿
@@ -169,49 +164,63 @@ lib/
 현재 `loan-calculator`, `lotto` 페이지 기준으로 메인 Tool 페이지는 아래 패턴을 따르는 것이 안전하다.
 
 ```tsx
-import { Metadata } from 'next'
-import { Suspense } from 'react'
-import { Breadcrumb, JsonLdMultiple } from '@/components/seo'
-import { ToolSwitcher } from '@/components/tools/ToolSwitcher'
-import { MyToolRoot } from '@/components/tools/my-tool'
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
+import {
+  ToolCatalogProvider,
+  ToolSwitcher,
+} from '@/modules/tools/catalog/client';
+import {
+  getToolBreadcrumbItems,
+  listToolNavigationItems,
+} from '@/modules/tools/catalog/public';
 import {
   assertToolStructuredData,
   generateToolMetadata,
-  getToolBreadcrumbItems,
   getToolStructuredDataArray,
-} from '@/lib/tools'
+} from '@/modules/tools/catalog/server';
+import { MyToolRoot } from '@/modules/tools/my-tool/client';
 
-assertToolStructuredData('my-tool')
+assertToolStructuredData('my-tool');
+const TOOL_NAVIGATION_ITEMS = listToolNavigationItems();
 
-export const metadata: Metadata = generateToolMetadata('my-tool')
+export const metadata: Metadata = generateToolMetadata('my-tool');
 
 export default function MyToolPage() {
-  const structuredData = getToolStructuredDataArray('my-tool')
+  const structuredData = getToolStructuredDataArray('my-tool');
 
   return (
     <>
       <JsonLdMultiple data={structuredData} />
-      <div className="min-h-screen bg-background">
-        <header className="bg-card border-b">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <Breadcrumb items={getToolBreadcrumbItems('my-tool')} className="mb-4" />
-            <ToolSwitcher currentToolId="my-tool" />
-          </div>
-        </header>
+      <ToolCatalogProvider items={TOOL_NAVIGATION_ITEMS}>
+        <div className="min-h-screen bg-background">
+          <header className="bg-card border-b">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <Breadcrumb
+                items={getToolBreadcrumbItems('my-tool')}
+                className="mb-4"
+              />
+              <ToolSwitcher currentToolId="my-tool" />
+            </div>
+          </header>
 
-        <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
-          <section>
-            <h1 className="text-3xl font-bold text-foreground">도구 이름</h1>
-            <p className="mt-1 text-muted-foreground">도구 설명</p>
-          </section>
+          <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+            <section>
+              <h1 className="text-3xl font-bold text-foreground">도구 이름</h1>
+              <p className="mt-1 text-muted-foreground">도구 설명</p>
+            </section>
 
-          <Suspense fallback={<div className="text-muted-foreground">로딩 중...</div>}>
-            <MyToolRoot />
-          </Suspense>
-        </main>
-      </div>
+            <Suspense
+              fallback={<div className="text-muted-foreground">로딩 중...</div>}
+            >
+              <MyToolRoot />
+            </Suspense>
+          </main>
+        </div>
+      </ToolCatalogProvider>
     </>
-  )
+  );
 }
 ```
 
@@ -249,8 +258,8 @@ export default function MyToolPage() {
 
 ### 7.3 아이콘과 카드 노출
 
-- `/tools` 카드와 일부 UI는 `tool-config.ts`의 `icon`, `badge`, `color`를 사용한다.
-- `icon`은 `lib/tools/tool-icons.ts`에서 `lucide-react` 문자열 이름으로 해석된다.
+- `/tools` 카드와 일부 UI는 도구 manifest의 `icon`, `badge`, `color`를 사용한다.
+- `icon`은 `modules/tools/catalog/ui.ts`에서 `lucide-react` 문자열 이름으로 해석된다.
 - 존재하지 않는 아이콘 이름은 기본 아이콘(Box)으로 폴백된다.
 
 ## 8. Tool 서브페이지 생성 규칙
@@ -266,24 +275,26 @@ export default function MyToolPage() {
 현재 `app/tools/lotto/stats/page.tsx` 기준으로 아래 패턴이 안전하다.
 
 ```tsx
-import { Metadata } from 'next'
-import { Breadcrumb, JsonLdMultiple } from '@/components/seo'
-import { generateMetadata as createMetadata } from '@/lib/seo'
+import type { Metadata } from 'next';
+import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
+import { generateMetadata as createMetadata } from '@/lib/seo';
 import {
-  assertToolStructuredData,
   getToolBreadcrumbItems,
   getToolStructuredDataBreadcrumbs,
+} from '@/modules/tools/catalog/public';
+import {
+  assertToolStructuredData,
   getToolSubPageStructuredDataArray,
-} from '@/lib/tools'
+} from '@/modules/tools/catalog/server';
 
-assertToolStructuredData('my-tool')
+assertToolStructuredData('my-tool');
 
 export const metadata: Metadata = createMetadata({
   title: '서브페이지 제목',
   description: '서브페이지 설명',
   canonical: 'https://www.zento.kr/tools/my-tool/sub-page',
   keywords: ['키워드'],
-})
+});
 
 export default function MyToolSubPage() {
   const structuredData = getToolSubPageStructuredDataArray({
@@ -296,14 +307,16 @@ export default function MyToolSubPage() {
       'sub-page',
       '서브페이지 제목'
     ),
-  })
+  });
 
   return (
     <>
       <JsonLdMultiple data={structuredData} />
-      <Breadcrumb items={getToolBreadcrumbItems('my-tool', [{ name: '서브페이지 제목' }])} />
+      <Breadcrumb
+        items={getToolBreadcrumbItems('my-tool', [{ name: '서브페이지 제목' }])}
+      />
     </>
-  )
+  );
 }
 ```
 
@@ -327,11 +340,11 @@ export default function MyToolSubPage() {
 신규 Tool 메인 페이지 생성은 아래 순서가 가장 안전하다.
 
 1. `tool-id`를 먼저 확정한다.
-2. `lib/tools/tool-config.ts`에 `TOOL_CONFIGS['<tool-id>']`를 추가한다.
-3. `faq`, `howTo`, `icon`, `ogImage`, `breadcrumbLabel`까지 같이 채운다.
-4. `app/tools/<tool-id>/page.tsx`를 생성한다.
-5. UI가 복잡하면 `components/tools/<tool-id>/*`로 분리한다.
-6. 계산/변환/생성 로직이 있으면 `lib/tools/*`로 이동한다.
+2. `modules/tools/<tool-id>/domain/manifest.ts`에 공개 계약을 작성한다.
+3. manifest를 `modules/tools/catalog/domain/catalog.ts`의 배열과 맵에 등록한다.
+4. `faq`, `howTo`, `icon`, `ogImage`, `breadcrumbLabel`까지 같이 채운다.
+5. `modules/tools/<tool-id>`에 필요한 domain/client/ui entry와 구현을 만든다.
+6. `app/tools/<tool-id>/page.tsx`에서 도구 entry와 catalog entry를 조합한다.
 7. 서브페이지가 있으면 `app/tools/<tool-id>/**/page.tsx`와 `lib/seo/sitemap.ts`까지 같이 본다.
 8. `/tools`, `/tools/<tool-id>`, 필요한 서브페이지를 함께 검증한다.
 
@@ -339,19 +352,19 @@ export default function MyToolSubPage() {
 
 신규 Tool 추가 또는 기존 Tool 변경 시 영향 범위는 아래처럼 본다.
 
-| 변경 지점 | 함께 봐야 하는 곳 |
-| --- | --- |
-| `tool-config.ts`의 `id` 변경 | 라우트 경로, metadata canonical, `/tools` 목록, `ToolSwitcher`, sitemap |
-| `tool-config.ts`의 `name`/`description` 변경 | 페이지 메타데이터, 구조화 데이터, `/tools` 카드 문구 |
-| `faq`/`howTo` 변경 | JSON-LD, `assertToolStructuredData()` 검증 |
-| `icon`/`color`/`badge` 변경 | `/tools` 카드, Tool 전환 UX 일부 |
-| 서브페이지 추가 | breadcrumb, canonical, JSON-LD, sitemap 수동 등록 여부 |
+| 변경 지점                            | 함께 봐야 하는 곳                                                                     |
+| ------------------------------------ | ------------------------------------------------------------------------------------- |
+| manifest의 `id` 변경                 | catalog 등록, 라우트 경로, metadata canonical, `/tools` 목록, `ToolSwitcher`, sitemap |
+| manifest의 `name`/`description` 변경 | 페이지 메타데이터, 구조화 데이터, `/tools` 카드 문구                                  |
+| `faq`/`howTo` 변경                   | JSON-LD, `assertToolStructuredData()` 검증                                            |
+| `icon`/`color`/`badge` 변경          | `/tools` 카드, Tool 전환 UX 일부                                                      |
+| 서브페이지 추가                      | breadcrumb, canonical, JSON-LD, sitemap 수동 등록 여부                                |
 
 ## 11. 검증 체크리스트
 
 ### 필수 확인
 
-- `git branch --show-current`가 `main`인지 확인
+- `git branch --show-current`로 의도한 작업 브랜치인지 확인
 - `/tools/<tool-id>` 라우트 접근 가능
 - `/tools` 목록에 새 Tool 카드 노출
 - `ToolSwitcher`에 새 Tool 옵션 노출
@@ -369,13 +382,12 @@ export default function MyToolSubPage() {
 
 ## 12. 현재 구현 기준 Known issues / 주의점
 
-- `TOOL_CONFIGS`는 단순 참고 데이터가 아니라 Tool 시스템의 중앙 레지스트리다. 빠뜨리면 여러 소비처가 동시에 깨진다.
+- tool manifest 작성과 catalog 등록은 한 작업이다. 둘 중 하나를 빠뜨리면 여러 소비처가 동시에 깨진다.
 - `assertToolStructuredData()` 기본 검증은 생각보다 엄격하다. FAQ/HowTo 없이 기존 패턴을 복사하면 실패할 수 있다.
 - Tool 서브페이지 sitemap은 자동이 아니라 현재 일부만 수동 등록되어 있다.
-- 컴포넌트 디렉토리 구조는 현재 `components/tools/<tool-id>`와 `components/lotto` 패턴이 혼재한다. 신규 Tool은 하나의 패턴으로 정리해서 시작하는 것이 안전하다.
-- `rules/tools-seo-guidelines.md`는 현재 작업 중 직접 확인 가능한 경로로 존재하지 않았다. 이 문서는 실제 코드 기준(`lib/tools/*`, `app/tools/*`, `lib/seo/sitemap.ts`)으로 작성했다.
+- 기존 도구에는 legacy `components/**`, `lib/**` 경로가 남아 있지만 신규 Tool은 `modules/tools/<tool-id>`에서 시작한다.
+- `rules/tools-seo-guidelines.md`는 현재 작업 중 직접 확인 가능한 경로로 존재하지 않았다. 이 문서는 실제 코드 기준(`modules/tools/*`, `app/tools/*`, `lib/seo/sitemap.ts`)으로 작성했다.
 
 ## 13. 결론
 
-새 Tool 페이지 생성의 핵심은 `app/tools/<tool-id>/page.tsx`를 만드는 것보다 먼저 `lib/tools/tool-config.ts`에 공개 계약을 등록하는 것이다.  
-그 다음 메인 페이지는 `generateToolMetadata`, `getToolStructuredDataArray`, `getToolBreadcrumbItems`, `ToolSwitcher` 패턴을 그대로 따르고, 서브페이지가 생기면 `lib/seo/sitemap.ts`까지 함께 점검하는 흐름이 현재 저장소 기준 가장 안전하다.
+새 Tool 페이지 생성의 핵심은 `app/tools/<tool-id>/page.tsx`를 만드는 것보다 먼저 도구별 manifest를 작성하고 중앙 catalog에 명시적으로 등록하는 것이다. 그 다음 메인 페이지는 도구 module entry와 `generateToolMetadata`, `getToolStructuredDataArray`, `getToolBreadcrumbItems`, `ToolSwitcher`를 app에서 조합하고, 서브페이지가 생기면 `lib/seo/sitemap.ts`까지 함께 점검하는 흐름이 현재 저장소 기준 가장 안전하다.

@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Button } from '@/shared/ui/button';
@@ -13,11 +13,13 @@ import {
   getLottoRoundResults,
 } from '@/lib/lotto/round-data';
 import {
-  assertToolStructuredData,
-  getToolSubPageStructuredDataArray,
   getToolBreadcrumbItems,
   getToolStructuredDataBreadcrumbs,
-} from '@/lib/tools';
+} from '@/modules/tools/catalog/public';
+import {
+  assertToolStructuredData,
+  getToolSubPageStructuredDataArray,
+} from '@/modules/tools/catalog/server';
 
 assertToolStructuredData('lotto');
 
