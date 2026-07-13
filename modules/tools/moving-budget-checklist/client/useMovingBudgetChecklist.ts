@@ -9,16 +9,19 @@ import {
   type MovingBudgetCustomItem,
   type MovingBudgetGroupId,
   type MovingBudgetTemplateItemState,
-} from '@/lib/tools/moving-budget-checklist';
+} from '../public';
 import { MOVING_BUDGET_QUERY_PARSERS } from './parsers';
 
 const DEFAULT_STATE = createDefaultMovingBudgetState();
 
 export function useMovingBudgetChecklist() {
-  const [queryState, setQueryState] = useQueryStates(MOVING_BUDGET_QUERY_PARSERS, {
-    history: 'replace',
-    shallow: false,
-  });
+  const [queryState, setQueryState] = useQueryStates(
+    MOVING_BUDGET_QUERY_PARSERS,
+    {
+      history: 'replace',
+      shallow: false,
+    }
+  );
 
   const state = useMemo(
     () => ({
@@ -65,7 +68,7 @@ export function useMovingBudgetChecklist() {
 
       setQueryState({
         mbc: isCompleted
-          ? state.checklistProgress.filter((id) => id !== entryId)
+          ? state.checklistProgress.filter(id => id !== entryId)
           : [...state.checklistProgress, entryId],
       });
     },
@@ -91,7 +94,7 @@ export function useMovingBudgetChecklist() {
   const updateCustomItem = useCallback(
     (itemId: string, updates: Partial<MovingBudgetCustomItem>) => {
       setQueryState({
-        mbx: state.customItems.map((item) =>
+        mbx: state.customItems.map(item =>
           item.id === itemId ? { ...item, ...updates } : item
         ),
       });
@@ -102,7 +105,7 @@ export function useMovingBudgetChecklist() {
   const removeCustomItem = useCallback(
     (itemId: string) => {
       setQueryState({
-        mbx: state.customItems.filter((item) => item.id !== itemId),
+        mbx: state.customItems.filter(item => item.id !== itemId),
       });
     },
     [setQueryState, state.customItems]

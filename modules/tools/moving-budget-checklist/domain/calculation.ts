@@ -29,7 +29,9 @@ function normalizeTemplateItemState(
   };
 }
 
-function normalizeCustomItem(item: MovingBudgetCustomItem): MovingBudgetCustomItem {
+function normalizeCustomItem(
+  item: MovingBudgetCustomItem
+): MovingBudgetCustomItem {
   return {
     ...item,
     amount: normalizeAmount(item.amount),
@@ -62,7 +64,7 @@ function buildComparisonData(
   items: Array<{ id: string; label: string; value: number }>,
   total: number
 ): MovingBudgetComparisonDatum[] {
-  return items.map((item) => ({
+  return items.map(item => ({
     ...item,
     ratio: calculateRatio(item.value, total),
   }));
@@ -80,7 +82,7 @@ export function calculateMovingBudgetSummary(
   };
 
   const normalizedTemplateItems = Object.fromEntries(
-    MOVING_BUDGET_TEMPLATE_ITEMS.map((item) => [
+    MOVING_BUDGET_TEMPLATE_ITEMS.map(item => [
       item.id,
       normalizeTemplateItemState(rawState.templateItems[item.id]),
     ])
@@ -91,24 +93,27 @@ export function calculateMovingBudgetSummary(
     assets.cash + assets.stocks + assets.deposit + assets.savings;
   const totalAvailableFunds = totalAssets + assets.loan;
   const validChecklistIds = new Set(
-    MOVING_BUDGET_TEMPLATE_ITEMS.map((item) => item.id)
+    MOVING_BUDGET_TEMPLATE_ITEMS.map(item => item.id)
   );
-  const normalizedChecklistProgress = rawState.checklistProgress.filter((id) =>
+  const normalizedChecklistProgress = rawState.checklistProgress.filter(id =>
     validChecklistIds.has(id)
   );
   const checklistProgressSet = new Set(normalizedChecklistProgress);
 
-  const groupSummaries = MOVING_BUDGET_TEMPLATE_GROUPS.map((group) => {
+  const groupSummaries = MOVING_BUDGET_TEMPLATE_GROUPS.map(group => {
     const customItemsForGroup = normalizedCustomItems.filter(
-      (item) => item.groupId === group.id
+      item => item.groupId === group.id
     );
     const templateAmount = group.items.reduce(
       (sum, item) => sum + normalizedTemplateItems[item.id].amount,
       0
     );
-    const customAmount = customItemsForGroup.reduce((sum, item) => sum + item.amount, 0);
+    const customAmount = customItemsForGroup.reduce(
+      (sum, item) => sum + item.amount,
+      0
+    );
     const templateItemCount = group.items.length;
-    const completedChecklistCount = group.items.filter((item) =>
+    const completedChecklistCount = group.items.filter(item =>
       checklistProgressSet.has(item.id)
     ).length;
     const totalChecklistCount = templateItemCount;
@@ -140,7 +145,7 @@ export function calculateMovingBudgetSummary(
     normalizedTemplateItems.apartmentPrice.amount - assets.loan,
     0
   );
-  const groupSummariesWithShare = groupSummaries.map((group) => ({
+  const groupSummariesWithShare = groupSummaries.map(group => ({
     ...group,
     sharePercentage: calculateRatio(group.totalAmount, totalEstimatedCost),
   }));
@@ -152,7 +157,7 @@ export function calculateMovingBudgetSummary(
       ? 0
       : Math.floor((completedChecklistCount / totalChecklistCount) * 100);
   const costCompositionData = buildComparisonData(
-    groupSummariesWithShare.map((group) => ({
+    groupSummariesWithShare.map(group => ({
       id: group.id,
       label: group.label,
       value: group.totalAmount,
@@ -160,27 +165,28 @@ export function calculateMovingBudgetSummary(
     totalEstimatedCost
   );
   const sortedGroupsByCost = [...groupSummariesWithShare]
-    .filter((group) => group.totalAmount > 0)
+    .filter(group => group.totalAmount > 0)
     .sort((a, b) => b.totalAmount - a.totalAmount);
   const dominantGroup =
     sortedGroupsByCost.length > 0 &&
     totalEstimatedCost > 0 &&
-    sortedGroupsByCost[0].totalAmount / totalEstimatedCost >= DOMINANT_GROUP_THRESHOLD
+    sortedGroupsByCost[0].totalAmount / totalEstimatedCost >=
+      DOMINANT_GROUP_THRESHOLD
       ? sortedGroupsByCost[0]
       : null;
   const adjustableGroups = (
     dominantGroup
       ? groupSummariesWithShare.filter(
-          (group) => group.id !== dominantGroup.id && group.totalAmount > 0
+          group => group.id !== dominantGroup.id && group.totalAmount > 0
         )
-      : groupSummariesWithShare.filter((group) => group.totalAmount > 0)
+      : groupSummariesWithShare.filter(group => group.totalAmount > 0)
   ).sort((a, b) => b.totalAmount - a.totalAmount);
   const adjustableComparisonTotal = adjustableGroups.reduce(
     (sum, group) => sum + group.totalAmount,
     0
   );
   const adjustableCostComparisonData = buildComparisonData(
-    adjustableGroups.map((group) => ({
+    adjustableGroups.map(group => ({
       id: group.id,
       label: group.label,
       value: group.totalAmount,
@@ -202,7 +208,7 @@ export function calculateMovingBudgetSummary(
     dominantGroupId: dominantGroup?.id ?? null,
     dominantGroupLabel: dominantGroup?.label ?? null,
     groupSummaries: groupSummariesWithShare,
-    costChartData: groupSummariesWithShare.map((group) => ({
+    costChartData: groupSummariesWithShare.map(group => ({
       id: group.id,
       label: group.label,
       value: group.totalAmount,

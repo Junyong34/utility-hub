@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from '@/shared/ui/card';
 import type { HomeBuyingResult } from '@/lib/tools/home-buying-funds-calculator';
-import NumberTicker from '@/components/magicui/number-ticker';
+import { NumberTicker } from '@/shared/client/number-ticker';
 
 interface CostSummaryCardsProps {
   result: HomeBuyingResult;

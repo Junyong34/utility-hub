@@ -1,14 +1,9 @@
-'use client';
-
 import { Badge } from '@/shared/ui/badge';
 import { Card, CardContent } from '@/shared/ui/card';
-import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
-import type {
-  MovingBudgetGroupId,
-  MovingBudgetSummary,
-} from '@/lib/tools/moving-budget-checklist';
+import type { MovingBudgetGroupId, MovingBudgetSummary } from '../public';
+import { formatCurrencyToKoreanUnits } from '../public';
 import { cn } from '@/shared/ui/class-names';
-import { MOVING_BUDGET_GROUP_META } from '../constants';
+import { MOVING_BUDGET_GROUP_META } from './display-metadata';
 
 interface GroupSummaryBoardProps {
   summary: MovingBudgetSummary;
@@ -18,15 +13,18 @@ export function GroupSummaryBoard({ summary }: GroupSummaryBoardProps) {
   return (
     <section className="space-y-3">
       <div className="space-y-1">
-        <h2 className="text-base font-semibold text-foreground">그룹 상태 보드</h2>
+        <h2 className="text-base font-semibold text-foreground">
+          그룹 상태 보드
+        </h2>
         <p className="text-sm text-muted-foreground">
           그룹별 금액, 비중, 체크 진행 상태를 한 번에 봅니다.
         </p>
       </div>
 
       <div className="grid gap-4 xl:grid-cols-3">
-        {summary.groupSummaries.map((group) => {
-          const meta = MOVING_BUDGET_GROUP_META[group.id as MovingBudgetGroupId];
+        {summary.groupSummaries.map(group => {
+          const meta =
+            MOVING_BUDGET_GROUP_META[group.id as MovingBudgetGroupId];
           const isDominant = summary.dominantGroupId === group.id;
 
           return (
@@ -43,7 +41,8 @@ export function GroupSummaryBoard({ summary }: GroupSummaryBoardProps) {
                   <div className="space-y-1">
                     <p className="font-medium text-foreground">{group.label}</p>
                     <p className="text-xs text-muted-foreground">
-                      항목 {group.itemCount}개 · 체크 {group.completedChecklistCount}/
+                      항목 {group.itemCount}개 · 체크{' '}
+                      {group.completedChecklistCount}/
                       {group.totalChecklistCount}
                     </p>
                   </div>
@@ -57,8 +56,8 @@ export function GroupSummaryBoard({ summary }: GroupSummaryBoardProps) {
                     {formatCurrencyToKoreanUnits(group.totalAmount)}
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    템플릿 {formatCurrencyToKoreanUnits(group.templateAmount)} · 추가{' '}
-                    {formatCurrencyToKoreanUnits(group.customAmount)}
+                    템플릿 {formatCurrencyToKoreanUnits(group.templateAmount)} ·
+                    추가 {formatCurrencyToKoreanUnits(group.customAmount)}
                   </p>
                 </div>
 

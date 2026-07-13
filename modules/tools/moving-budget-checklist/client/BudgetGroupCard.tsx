@@ -7,23 +7,35 @@ import type {
   MovingBudgetGroupId,
   MovingBudgetTemplateGroupDefinition,
   MovingBudgetTemplateItemState,
-} from '@/lib/tools/moving-budget-checklist';
+} from '../public';
 import { Button } from '@/shared/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/shared/ui/collapsible';
-import { MOVING_BUDGET_ARIA_LABELS } from '../accessibility';
-import { TemplateBudgetItemRow } from './TemplateBudgetItemRow';
-import { CustomBudgetItemRow } from './CustomBudgetItemRow';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/shared/ui/collapsible';
+import {
+  CustomBudgetItemRow,
+  MOVING_BUDGET_ARIA_LABELS,
+  TemplateBudgetItemRow,
+} from '../ui';
 
 interface BudgetGroupCardProps {
   group: MovingBudgetTemplateGroupDefinition;
   templateItemState: Record<string, MovingBudgetTemplateItemState>;
   checklistProgress: string[];
   customItems: MovingBudgetCustomItem[];
-  onTemplateItemChange: (itemId: string, updates: Partial<MovingBudgetTemplateItemState>) => void;
+  onTemplateItemChange: (
+    itemId: string,
+    updates: Partial<MovingBudgetTemplateItemState>
+  ) => void;
   onChecklistToggle: (entryId: string) => void;
   onAddCustomItem: (groupId: MovingBudgetGroupId) => void;
-  onUpdateCustomItem: (itemId: string, updates: Partial<MovingBudgetCustomItem>) => void;
+  onUpdateCustomItem: (
+    itemId: string,
+    updates: Partial<MovingBudgetCustomItem>
+  ) => void;
   onRemoveCustomItem: (itemId: string) => void;
 }
 
@@ -51,15 +63,26 @@ export function BudgetGroupCard({
                 type="button"
                 size="sm"
                 variant="outline"
-                aria-label={MOVING_BUDGET_ARIA_LABELS.addCustomItem(group.label)}
+                aria-label={MOVING_BUDGET_ARIA_LABELS.addCustomItem(
+                  group.label
+                )}
                 onClick={() => onAddCustomItem(group.id)}
               >
                 <Plus className="mr-1 h-4 w-4" />
                 항목 추가
               </Button>
               <CollapsibleTrigger asChild>
-                <Button type="button" size="icon" variant="ghost" aria-label={`${group.label} 접기`}>
-                  {open ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  aria-label={`${group.label} 접기`}
+                >
+                  {open ? (
+                    <ChevronUp className="h-4 w-4" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4" />
+                  )}
                 </Button>
               </CollapsibleTrigger>
             </div>
@@ -68,7 +91,7 @@ export function BudgetGroupCard({
 
         <CollapsibleContent>
           <CardContent className="space-y-3">
-            {group.items.map((item) => (
+            {group.items.map(item => (
               <TemplateBudgetItemRow
                 key={item.id}
                 item={item}

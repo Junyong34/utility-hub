@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Check, Share2 } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { copyTextToClipboard } from '@/shared/client/clipboard';
-import { MOVING_BUDGET_ARIA_LABELS } from '../accessibility';
+import { MOVING_BUDGET_ARIA_LABELS } from '../ui';
 
 export function ShareButton() {
   const [copied, setCopied] = useState(false);

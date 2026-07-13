@@ -44,7 +44,10 @@ const ITEM_TO_QUERY_KEY = {
 } as const;
 
 const QUERY_KEY_TO_ITEM = Object.fromEntries(
-  Object.entries(ITEM_TO_QUERY_KEY).map(([itemId, queryKey]) => [queryKey, itemId])
+  Object.entries(ITEM_TO_QUERY_KEY).map(([itemId, queryKey]) => [
+    queryKey,
+    itemId,
+  ])
 ) as Record<string, keyof typeof ITEM_TO_QUERY_KEY>;
 
 const GROUP_TO_QUERY_KEY: Record<MovingBudgetGroupId, string> = {
@@ -54,7 +57,10 @@ const GROUP_TO_QUERY_KEY: Record<MovingBudgetGroupId, string> = {
 };
 
 const QUERY_KEY_TO_GROUP = Object.fromEntries(
-  Object.entries(GROUP_TO_QUERY_KEY).map(([groupId, queryKey]) => [queryKey, groupId])
+  Object.entries(GROUP_TO_QUERY_KEY).map(([groupId, queryKey]) => [
+    queryKey,
+    groupId,
+  ])
 ) as Record<string, MovingBudgetGroupId>;
 
 function safeJsonParse<T>(rawValue: string): T | null {
@@ -158,15 +164,16 @@ export function parseTemplateItemsFromQuery(
 }
 
 export function serializeChecklistProgressForQuery(progress: string[]): string {
-  const payload = progress.flatMap((entry) => {
-      const itemQueryKey = ITEM_TO_QUERY_KEY[entry as keyof typeof ITEM_TO_QUERY_KEY];
+  const payload = progress.flatMap(entry => {
+    const itemQueryKey =
+      ITEM_TO_QUERY_KEY[entry as keyof typeof ITEM_TO_QUERY_KEY];
 
-      if (!itemQueryKey) {
-        return [];
-      }
+    if (!itemQueryKey) {
+      return [];
+    }
 
-      return [itemQueryKey];
-    });
+    return [itemQueryKey];
+  });
 
   return JSON.stringify(payload);
 }
@@ -178,7 +185,7 @@ export function parseChecklistProgressFromQuery(rawValue: string): string[] {
     return [];
   }
 
-  return parsed.flatMap((entry) => {
+  return parsed.flatMap(entry => {
     if (typeof entry !== 'string') {
       return [];
     }
@@ -196,7 +203,7 @@ export function parseChecklistProgressFromQuery(rawValue: string): string[] {
 export function serializeCustomItemsForQuery(
   customItems: MovingBudgetCustomItem[]
 ): string {
-  const payload: CompactCustomItemTuple[] = customItems.map((item) => [
+  const payload: CompactCustomItemTuple[] = customItems.map(item => [
     item.id,
     GROUP_TO_QUERY_KEY[item.groupId],
     item.label,
@@ -206,14 +213,16 @@ export function serializeCustomItemsForQuery(
   return JSON.stringify(payload);
 }
 
-export function parseCustomItemsFromQuery(rawValue: string): MovingBudgetCustomItem[] {
+export function parseCustomItemsFromQuery(
+  rawValue: string
+): MovingBudgetCustomItem[] {
   const parsed = safeJsonParse<CompactCustomItemTuple[]>(rawValue);
 
   if (!Array.isArray(parsed)) {
     return [];
   }
 
-  return parsed.flatMap((entry) => {
+  return parsed.flatMap(entry => {
     if (!Array.isArray(entry)) {
       return [];
     }
@@ -221,11 +230,7 @@ export function parseCustomItemsFromQuery(rawValue: string): MovingBudgetCustomI
     const [id, groupQueryKey, label, amount] = entry;
     const groupId = QUERY_KEY_TO_GROUP[groupQueryKey];
 
-    if (
-      typeof id !== 'string' ||
-      typeof label !== 'string' ||
-      !groupId
-    ) {
+    if (typeof id !== 'string' || typeof label !== 'string' || !groupId) {
       return [];
     }
 

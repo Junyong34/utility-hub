@@ -5,7 +5,7 @@ import type {
   MovingBudgetAssets,
   MovingBudgetCustomItem,
   MovingBudgetState,
-} from '@/lib/tools/moving-budget-checklist';
+} from '../public';
 import {
   createDefaultMovingBudgetState,
   parseAssetsFromQuery,
@@ -16,11 +16,14 @@ import {
   serializeChecklistProgressForQuery,
   serializeCustomItemsForQuery,
   serializeTemplateItemsForQuery,
-} from '@/lib/tools/moving-budget-checklist';
+} from '../public';
 
 const DEFAULT_STATE = createDefaultMovingBudgetState();
 
-function areAssetsEqual(left: MovingBudgetAssets, right: MovingBudgetAssets): boolean {
+function areAssetsEqual(
+  left: MovingBudgetAssets,
+  right: MovingBudgetAssets
+): boolean {
   return serializeAssetsForQuery(left) === serializeAssetsForQuery(right);
 }
 
@@ -29,7 +32,8 @@ function areTemplateItemsEqual(
   right: MovingBudgetState['templateItems']
 ): boolean {
   return (
-    serializeTemplateItemsForQuery(left) === serializeTemplateItemsForQuery(right)
+    serializeTemplateItemsForQuery(left) ===
+    serializeTemplateItemsForQuery(right)
   );
 }
 
@@ -44,7 +48,9 @@ function areCustomItemsEqual(
   left: MovingBudgetCustomItem[],
   right: MovingBudgetCustomItem[]
 ): boolean {
-  return serializeCustomItemsForQuery(left) === serializeCustomItemsForQuery(right);
+  return (
+    serializeCustomItemsForQuery(left) === serializeCustomItemsForQuery(right)
+  );
 }
 
 export const assetsParser = createParser({

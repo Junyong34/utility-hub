@@ -33,6 +33,9 @@ test.describe('/tools/home-check', () => {
 
     await page.getByLabel('현금', { exact: true }).fill('50000000');
     await page.getByLabel('주식계좌', { exact: true }).fill('10000000');
+    await page.getByLabel('전세보증금', { exact: true }).fill('200000000');
+    await page.getByLabel('적금', { exact: true }).fill('30000000');
+    await page.getByLabel('대출 예정금', { exact: true }).fill('100000000');
     await page.getByLabel('아파트 가격', { exact: true }).fill('450000000');
     await page.getByLabel('입주청소', { exact: true }).fill('350000');
     await page.getByLabel('줄눈', { exact: true }).fill('700000');
@@ -53,17 +56,22 @@ test.describe('/tools/home-check', () => {
     await expect(
       page.getByText('현재 예산으로는 자금이 부족합니다')
     ).toBeVisible();
-    await expect(page.getByText('총현금자산')).toBeVisible();
-    await expect(page.getByText('2억 9,000만원')).toBeVisible();
-    await expect(page.getByText('총예상비용')).toBeVisible();
-    await expect(page.getByText('4억 5,105만원')).toBeVisible();
-    await expect(page.getByText('아파트 실지급액')).toBeVisible();
-    await expect(page.getByText('3억 5,000만원')).toBeVisible();
+    await expect(
+      page.getByText('총예상비용', { exact: true }).locator('..')
+    ).toContainText('4억 5,105만원');
+    await expect(
+      page.getByText('아파트 실지급액', { exact: true }).locator('..')
+    ).toContainText('3억 5,000만원');
     await expect(page.getByText('대출+현금 표')).toBeVisible();
-    await expect(page.getByText('대출 예정금')).toBeVisible();
-    await expect(page.getByText('1억원')).toBeVisible();
-    await expect(page.getByText('대출 포함 가용자금')).toBeVisible();
-    await expect(page.getByText('3억 9,000만원')).toBeVisible();
+    await expect(
+      page.getByRole('row', { name: '총현금자산 2억 9,000만원' })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('row', { name: '대출 예정금 1억원' })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('row', { name: '대출 포함 가용자금 3억 9,000만원' })
+    ).toBeVisible();
     await expect(page.getByText('비용 구조 해석')).toBeVisible();
     await expect(page.getByText('조정 가능 비교')).toBeVisible();
     await expect(page.getByText('그룹 상태 보드')).toBeVisible();
@@ -90,6 +98,13 @@ test.describe('/tools/home-check', () => {
     await page.getByLabel('추가 항목 이름 1').fill('줄눈 시공');
     await page.getByLabel('추가 항목 금액 1').fill('900000');
     await page.getByRole('checkbox', { name: '입주청소 완료' }).click();
+
+    await expect(
+      page.getByRole('checkbox', { name: '입주청소 완료' })
+    ).toBeChecked();
+    await expect(page).toHaveURL(url => {
+      return url.searchParams.has('mbc') && url.searchParams.has('mbx');
+    });
 
     await page.reload({ waitUntil: 'networkidle' });
 

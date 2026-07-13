@@ -1,20 +1,21 @@
-'use client';
-
 import { Checkbox } from '@/shared/ui/checkbox';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
 import type {
   MovingBudgetTemplateItemDefinition,
   MovingBudgetTemplateItemState,
-} from '@/lib/tools/moving-budget-checklist';
-import { MOVING_BUDGET_ARIA_LABELS } from '../accessibility';
-import { formatAmountInputValue, parseAmountInput } from '../constants';
+} from '../public';
+import { formatAmountInputValue, parseAmountInput } from '../public';
+import { MOVING_BUDGET_ARIA_LABELS } from './accessibility';
 
 interface TemplateBudgetItemRowProps {
   item: MovingBudgetTemplateItemDefinition;
   state: MovingBudgetTemplateItemState;
   checklistProgress: string[];
-  onChange: (itemId: string, updates: Partial<MovingBudgetTemplateItemState>) => void;
+  onChange: (
+    itemId: string,
+    updates: Partial<MovingBudgetTemplateItemState>
+  ) => void;
   onChecklistToggle: (entryId: string) => void;
 }
 
@@ -38,8 +39,10 @@ export function TemplateBudgetItemRow({
             aria-label={item.label}
             inputMode="numeric"
             value={formatAmountInputValue(state.amount)}
-            onChange={(event) =>
-              onChange(item.id, { amount: parseAmountInput(event.target.value) })
+            onChange={event =>
+              onChange(item.id, {
+                amount: parseAmountInput(event.target.value),
+              })
             }
             placeholder="0"
           />

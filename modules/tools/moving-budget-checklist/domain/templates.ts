@@ -96,9 +96,8 @@ export const MOVING_BUDGET_TEMPLATE_GROUPS: MovingBudgetTemplateGroupDefinition[
     },
   ];
 
-export const MOVING_BUDGET_TEMPLATE_ITEMS = MOVING_BUDGET_TEMPLATE_GROUPS.flatMap(
-  (group) => group.items
-);
+export const MOVING_BUDGET_TEMPLATE_ITEMS =
+  MOVING_BUDGET_TEMPLATE_GROUPS.flatMap(group => group.items);
 
 function createEmptyTemplateItemState(): MovingBudgetTemplateItemState {
   return {
@@ -108,7 +107,7 @@ function createEmptyTemplateItemState(): MovingBudgetTemplateItemState {
 
 export function createDefaultMovingBudgetState(): MovingBudgetState {
   const templateItems = Object.fromEntries(
-    MOVING_BUDGET_TEMPLATE_ITEMS.map((item) => [
+    MOVING_BUDGET_TEMPLATE_ITEMS.map(item => [
       item.id,
       createEmptyTemplateItemState(),
     ])

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import { Minus, Plus, Equal, ChevronDown, ChevronUp } from 'lucide-react';
-import NumberTicker from '@/components/magicui/number-ticker';
+import { NumberTicker } from '@/shared/client/number-ticker';
 import { Button } from '@/shared/ui/button';
 
 interface LoanBreakdownCardProps {

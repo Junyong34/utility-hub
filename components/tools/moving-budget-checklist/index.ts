@@ -1,2 +1,2 @@
-export { MovingBudgetChecklistPageClient } from './MovingBudgetChecklistPageClient';
-export { useMovingBudgetChecklist } from './hooks/useMovingBudgetChecklist';
+export { MovingBudgetChecklistPageClient } from '@/modules/tools/moving-budget-checklist/client';
+export { useMovingBudgetChecklist } from '@/modules/tools/moving-budget-checklist/client';

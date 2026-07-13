@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/shared/ui/card';
 import { Badge } from '@/shared/ui/badge';
 import { CheckCircle, AlertCircle, TrendingUp, TrendingDown } from 'lucide-react';
 import type { HomeBuyingResult } from '@/lib/tools/home-buying-funds-calculator';
-import NumberTicker from '@/components/magicui/number-ticker';
+import { NumberTicker } from '@/shared/client/number-ticker';
 
 interface FinalCashHeroCardProps {
   result: HomeBuyingResult;

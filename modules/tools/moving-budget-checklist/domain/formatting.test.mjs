@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
+  formatCurrencyToKoreanUnits,
   formatAmountInputValue,
   parseAmountInput,
 } from './formatting.ts';
@@ -16,4 +17,11 @@ test('금액 입력 파서는 콤마가 섞여 있어도 숫자만 추출한다'
   assert.equal(parseAmountInput('350,000'), 350000);
   assert.equal(parseAmountInput('50,000,000'), 50000000);
   assert.equal(parseAmountInput('abc'), 0);
+});
+
+test('예산 결과는 억·만·원 단위를 유지해 표시한다', () => {
+  assert.equal(formatCurrencyToKoreanUnits(0), '0원');
+  assert.equal(formatCurrencyToKoreanUnits(290_000_000), '2억 9,000만원');
+  assert.equal(formatCurrencyToKoreanUnits(451_050_000), '4억 5,105만원');
+  assert.equal(formatCurrencyToKoreanUnits(-350_000), '-35만원');
 });

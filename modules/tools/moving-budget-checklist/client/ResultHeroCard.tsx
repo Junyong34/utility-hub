@@ -1,6 +1,6 @@
 'use client';
 
-import NumberTicker from '@/components/magicui/number-ticker';
+import { NumberTicker } from '@/shared/client/number-ticker';
 import { Badge } from '@/shared/ui/badge';
 import {
   Card,
@@ -9,8 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/ui/card';
-import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
-import type { MovingBudgetSummary } from '@/lib/tools/moving-budget-checklist';
+import type { MovingBudgetSummary } from '../public';
+import { formatCurrencyToKoreanUnits } from '../public';
 import { cn } from '@/shared/ui/class-names';
 
 interface ResultHeroCardProps {
@@ -22,7 +22,7 @@ export function ResultHeroCard({ summary }: ResultHeroCardProps) {
     summary.totalAvailableFunds === 0 && summary.totalEstimatedCost === 0;
   const balanceAmount = Math.abs(summary.balanceAmount);
   const dominantGroup = summary.groupSummaries.find(
-    (group) => group.id === summary.dominantGroupId
+    group => group.id === summary.dominantGroupId
   );
 
   const tone = isEmpty
@@ -76,14 +76,26 @@ export function ResultHeroCard({ summary }: ResultHeroCardProps) {
       <CardContent className="space-y-5">
         <div className="space-y-2">
           <p className="text-xs font-medium tracking-wide text-muted-foreground">
-            {isEmpty ? '예산 차이' : summary.isShortage ? '부족 금액' : '여유 금액'}
+            {isEmpty
+              ? '예산 차이'
+              : summary.isShortage
+                ? '부족 금액'
+                : '여유 금액'}
           </p>
           <div className="flex flex-wrap items-end gap-2">
-            <span className={cn('text-4xl font-bold tracking-tight', tone.valueClass)}>
+            <span
+              className={cn(
+                'text-4xl font-bold tracking-tight',
+                tone.valueClass
+              )}
+            >
               {isEmpty ? '' : summary.isShortage ? '-' : '+'}
               <NumberTicker
                 value={balanceAmount}
-                className={cn('text-4xl font-bold tracking-tight', tone.valueClass)}
+                className={cn(
+                  'text-4xl font-bold tracking-tight',
+                  tone.valueClass
+                )}
               />
               <span className="ml-1 text-xl font-semibold">원</span>
             </span>
@@ -126,7 +138,8 @@ export function ResultHeroCard({ summary }: ResultHeroCardProps) {
             <div className="flex items-center justify-between gap-3">
               <p className="text-xs text-muted-foreground">전체 진행률</p>
               <p className="text-xs font-medium text-foreground">
-                {summary.completedChecklistCount}/{summary.totalChecklistCount} 항목
+                {summary.completedChecklistCount}/{summary.totalChecklistCount}{' '}
+                항목
               </p>
             </div>
             <p className="mt-1 text-base font-semibold text-foreground">

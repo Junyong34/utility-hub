@@ -1,18 +1,15 @@
-'use client';
-
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
-import type {
-  MovingBudgetGroupId,
-  MovingBudgetSummary,
-} from '@/lib/tools/moving-budget-checklist';
+import type { MovingBudgetGroupId, MovingBudgetSummary } from '../public';
 import { cn } from '@/shared/ui/class-names';
-import { MOVING_BUDGET_GROUP_META } from '../constants';
+import { MOVING_BUDGET_GROUP_META } from './display-metadata';
 
 interface ChecklistProgressBoardProps {
   summary: MovingBudgetSummary;
 }
 
-export function ChecklistProgressBoard({ summary }: ChecklistProgressBoardProps) {
+export function ChecklistProgressBoard({
+  summary,
+}: ChecklistProgressBoardProps) {
   return (
     <Card>
       <CardHeader className="space-y-1">
@@ -28,7 +25,8 @@ export function ChecklistProgressBoard({ summary }: ChecklistProgressBoardProps)
             <div>
               <p className="text-sm font-medium text-foreground">전체 진행</p>
               <p className="text-sm text-muted-foreground">
-                {summary.completedChecklistCount}/{summary.totalChecklistCount} 항목 완료
+                {summary.completedChecklistCount}/{summary.totalChecklistCount}{' '}
+                항목 완료
               </p>
             </div>
             <p className="text-2xl font-bold text-foreground">
@@ -44,8 +42,9 @@ export function ChecklistProgressBoard({ summary }: ChecklistProgressBoardProps)
         </section>
 
         <section className="space-y-3">
-          {summary.groupSummaries.map((group) => {
-            const meta = MOVING_BUDGET_GROUP_META[group.id as MovingBudgetGroupId];
+          {summary.groupSummaries.map(group => {
+            const meta =
+              MOVING_BUDGET_GROUP_META[group.id as MovingBudgetGroupId];
 
             return (
               <div key={group.id} className="space-y-2">
@@ -55,7 +54,8 @@ export function ChecklistProgressBoard({ summary }: ChecklistProgressBoardProps)
                       {group.label}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {group.completedChecklistCount}/{group.totalChecklistCount} 항목 완료
+                      {group.completedChecklistCount}/
+                      {group.totalChecklistCount} 항목 완료
                     </p>
                   </div>
                   <span className="shrink-0 text-sm font-medium text-foreground">
@@ -63,7 +63,9 @@ export function ChecklistProgressBoard({ summary }: ChecklistProgressBoardProps)
                   </span>
                 </div>
 
-                <div className={cn('h-2 overflow-hidden rounded-full bg-muted')}>
+                <div
+                  className={cn('h-2 overflow-hidden rounded-full bg-muted')}
+                >
                   <div
                     className={cn('h-full rounded-full', meta.barClass)}
                     style={{ width: `${group.progressPercentage}%` }}

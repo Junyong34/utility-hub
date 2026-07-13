@@ -1,14 +1,12 @@
-'use client';
-
 import { Badge } from '@/shared/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
-import { formatCurrencyToKoreanUnits } from '@/lib/tools/formatting';
 import type {
   MovingBudgetComparisonDatum,
   MovingBudgetSummary,
   MovingBudgetGroupId,
-} from '@/lib/tools/moving-budget-checklist';
-import { MOVING_BUDGET_GROUP_META } from '../constants';
+} from '../public';
+import { formatCurrencyToKoreanUnits } from '../public';
+import { MOVING_BUDGET_GROUP_META } from './display-metadata';
 
 interface CostStructurePanelProps {
   summary: MovingBudgetSummary;
@@ -54,7 +52,9 @@ export function CostStructurePanel({ summary }: CostStructurePanelProps) {
           <>
             <section className="space-y-3">
               <div className="space-y-1">
-                <h3 className="text-sm font-medium text-foreground">전체 예산 비중</h3>
+                <h3 className="text-sm font-medium text-foreground">
+                  전체 예산 비중
+                </h3>
                 <p className="text-sm text-muted-foreground">
                   전체 총예상비용 안에서 각 그룹이 차지하는 비중입니다.
                 </p>
@@ -62,8 +62,9 @@ export function CostStructurePanel({ summary }: CostStructurePanelProps) {
 
               <div className="overflow-hidden rounded-full bg-muted">
                 <div className="flex h-3 w-full">
-                  {summary.costCompositionData.map((item) => {
-                    const meta = MOVING_BUDGET_GROUP_META[item.id as MovingBudgetGroupId];
+                  {summary.costCompositionData.map(item => {
+                    const meta =
+                      MOVING_BUDGET_GROUP_META[item.id as MovingBudgetGroupId];
 
                     return (
                       <div
@@ -77,7 +78,7 @@ export function CostStructurePanel({ summary }: CostStructurePanelProps) {
               </div>
 
               <div className="space-y-2">
-                {summary.costCompositionData.map((item) => (
+                {summary.costCompositionData.map(item => (
                   <GroupLegendRow key={item.id} item={item} />
                 ))}
               </div>
@@ -116,7 +117,9 @@ export function CostStructurePanel({ summary }: CostStructurePanelProps) {
                             <span className="font-medium text-foreground">
                               {formatCurrencyToKoreanUnits(item.value)}
                             </span>
-                            <span className="text-muted-foreground">{item.ratio}%</span>
+                            <span className="text-muted-foreground">
+                              {item.ratio}%
+                            </span>
                           </div>
                         </div>
                         <div className="h-2 overflow-hidden rounded-full bg-muted">
@@ -131,16 +134,16 @@ export function CostStructurePanel({ summary }: CostStructurePanelProps) {
                 </div>
               ) : (
                 <div className="rounded-lg border border-dashed border-border px-4 py-5 text-sm text-muted-foreground">
-                  아직 비교할 다른 비용 그룹이 없습니다. 다른 그룹에도 금액을 입력하면
-                  상대 비교가 보입니다.
+                  아직 비교할 다른 비용 그룹이 없습니다. 다른 그룹에도 금액을
+                  입력하면 상대 비교가 보입니다.
                 </div>
               )}
             </section>
           </>
         ) : (
           <div className="rounded-lg border border-dashed border-border px-4 py-6 text-sm text-muted-foreground">
-            아직 비용 구조를 해석할 데이터가 없습니다. 아파트 가격이나 입주 비용을
-            하나만 입력해도 전체 비중과 비교 보드가 바로 열립니다.
+            아직 비용 구조를 해석할 데이터가 없습니다. 아파트 가격이나 입주
+            비용을 하나만 입력해도 전체 비중과 비교 보드가 바로 열립니다.
           </div>
         )}
       </CardContent>

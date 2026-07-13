@@ -13,7 +13,7 @@ interface NumberTickerProps {
   decimalPlaces?: number;
 }
 
-export default function NumberTicker({
+export function NumberTicker({
   value,
   direction = 'up',
   delay = 0,

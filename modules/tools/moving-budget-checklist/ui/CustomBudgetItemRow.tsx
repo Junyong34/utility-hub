@@ -1,12 +1,10 @@
-'use client';
-
 import { Trash2 } from 'lucide-react';
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { Label } from '@/shared/ui/label';
-import type { MovingBudgetCustomItem } from '@/lib/tools/moving-budget-checklist';
-import { MOVING_BUDGET_ARIA_LABELS } from '../accessibility';
-import { formatAmountInputValue, parseAmountInput } from '../constants';
+import type { MovingBudgetCustomItem } from '../public';
+import { formatAmountInputValue, parseAmountInput } from '../public';
+import { MOVING_BUDGET_ARIA_LABELS } from './accessibility';
 
 interface CustomBudgetItemRowProps {
   item: MovingBudgetCustomItem;
@@ -32,7 +30,7 @@ export function CustomBudgetItemRow({
             id={`${item.id}-label`}
             aria-label={MOVING_BUDGET_ARIA_LABELS.customItemName(index)}
             value={item.label}
-            onChange={(event) => onChange(item.id, { label: event.target.value })}
+            onChange={event => onChange(item.id, { label: event.target.value })}
             placeholder="추가 항목 이름"
           />
         </div>
@@ -45,8 +43,10 @@ export function CustomBudgetItemRow({
             aria-label={MOVING_BUDGET_ARIA_LABELS.customItemAmount(index)}
             inputMode="numeric"
             value={formatAmountInputValue(item.amount)}
-            onChange={(event) =>
-              onChange(item.id, { amount: parseAmountInput(event.target.value) })
+            onChange={event =>
+              onChange(item.id, {
+                amount: parseAmountInput(event.target.value),
+              })
             }
             placeholder="0"
           />
