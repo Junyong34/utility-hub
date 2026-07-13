@@ -95,10 +95,13 @@
 
 ### Rebrand Source Docs
 
-- 기준 스펙: `docs/superpowers/specs/2026-04-06-parenting-guide-rebrand-design.md`
-- 공통 설계 문서: `docs/superpowers/specs/parenting-guide-rebrand/*`
-- 메뉴 계획 문서: `docs/superpowers/plans/parenting-guide-rebrand/*`
-- 실행 계획 문서: `docs/superpowers/plans/parenting-guide-rebrand/execution/*`
+- 기준 스펙: `docs/specs/2026-04-06-parenting-guide-rebrand-design.md`
+- 공통 설계 문서: `docs/specs/parenting-guide-rebrand/*`
+- 관련 추적 실행 계획:
+  - `docs/plans/2026-05-26-parenting-benefits-content-expansion.md`
+  - `docs/plans/2026-06-12-rainy-day-indoor-content-cluster.md`
+  - `docs/plans/2026-06-30-baby-fruit-intake-research.md`
+- 신규 메뉴·실행 계획의 canonical 위치: `docs/plans/*`
 
 ## General Instructions
 
@@ -133,6 +136,7 @@ pnpm format:check
 ```bash
 pnpm test:architecture
 pnpm test:contracts
+pnpm test:integration
 pnpm test:e2e
 node --test lib/tools/pomodoro/engine.test.mjs
 node --test lib/seo/og.test.mjs
@@ -186,7 +190,16 @@ utility-hub/
 │   ├── tools/                   # 도구 UI
 │   └── ui/                      # 공통 UI 컴포넌트
 ├── content/posts/               # 블로그 마크다운 원본
-├── docs/                        # 설계/운영/초안 문서
+├── docs/                        # 목적별 canonical 문서 트리
+│   ├── architecture/            # 프로젝트 지도·경계·ADR
+│   ├── specs/                   # 제품 요구사항·설계 기준
+│   ├── plans/                   # 날짜 기반 실행 계획
+│   ├── implementation/          # 페이지·모듈 구현 가이드
+│   ├── testing/                 # 테스트 전략·수동 계획
+│   ├── operations/              # 배포·분석·유지보수 runbook
+│   ├── research/                # 근거 조사
+│   ├── reference/               # 장기 참조 자료
+│   └── archive/                 # 대체된 이력 문서
 ├── lib/                         # 마이그레이션 중인 기존 로직 위치
 │   ├── analytics/               # GA4 서버 로직
 │   ├── blog/                    # 포스트 로드/마크다운 처리
@@ -203,7 +216,11 @@ utility-hub/
 ├── tests/
 │   ├── architecture/            # import·레이어 경계 계약
 │   ├── contracts/               # 공개 URL·카탈로그·SEO 계약
-│   └── *.spec.ts                # Playwright E2E
+│   ├── integration/             # 파일시스템·외부 경계 통합 검증
+│   ├── e2e/                     # 핵심 사용자 여정
+│   ├── live/                    # 명시적으로만 실행하는 실제 네트워크 검증
+│   ├── fixtures/                # 공통 테스트 데이터
+│   └── support/                 # 테스트 실행 지원 코드
 ├── types/                       # 공통 타입
 ├── .agents/                     # 프로젝트 전용 에이전트 스킬
 ├── .ai/                         # AI/MCP 설정
@@ -253,7 +270,7 @@ utility-hub/
 ### Required Implementation Stack
 
 - 구현 작업은 기본적으로 `React` + `TypeScript` 기준으로 진행합니다.
-- UI 컴포넌트는 기존 `shadcn/ui`와 `components/ui/*` 패턴을 우선 사용합니다.
+- UI 컴포넌트는 기존 `shadcn/ui`와 `shared/ui/*` 패턴을 우선 사용합니다.
 - 차트/데이터 시각화는 기본적으로 `recharts`를 사용합니다.
 - 날짜 계산과 날짜 상태 처리는 기본적으로 `date-fns`를 사용합니다.
 - 아이콘은 기본적으로 `lucide-react`를 사용합니다.
@@ -263,7 +280,7 @@ utility-hub/
 ### Rebrand Work
 
 - 리브랜딩 작업 전에는 반드시 위 `Rebrand Source Docs`를 먼저 확인합니다.
-- 메뉴/허브 작업은 공통 스펙이 아니라 **메뉴별 계획 문서 + execution 문서**를 기준으로 진행합니다.
+- 메뉴/허브 작업은 공통 스펙과 해당 작업의 `docs/plans/**` 실행 계획을 함께 기준으로 진행합니다.
 - 기존 금융/생활비 자산은 숨기거나 재분류할 수는 있어도, 사용자 요청 없이 삭제하지 않습니다.
 - 리브랜딩 중 새 카테고리나 허브를 추가할 때는 기존 정보 구조와 충돌 여부를 먼저 확인합니다.
 - 홈, 블로그, 도구, 소개 페이지를 바꿀 때는 카피와 메타데이터에서 기존 포지셔닝이 남아 있지 않은지 같이 확인합니다.
@@ -300,7 +317,9 @@ utility-hub/
 
 - 구조 경계 변경은 `pnpm test:architecture`, 공개 제품 계약 변경은 `pnpm test:contracts`로 먼저 검증합니다.
 - 순수 계산 로직은 가능한 한 파일 근처의 `*.test.mjs`로 검증합니다.
-- UI 흐름 검증은 `tests/*.spec.ts` Playwright 테스트를 사용합니다.
+- 파일시스템과 모듈 경계를 함께 검증하는 테스트는 `pnpm test:integration`으로 실행합니다.
+- UI 흐름 검증은 `tests/e2e/<domain>/*.spec.ts` Playwright 테스트를 사용합니다.
+- 실제 외부 네트워크 검증은 `tests/live/<domain>`에 두고 명시적 환경 플래그와 별도 명령으로만 실행합니다.
 - 포모도로, 로또 추천, URL state, 도구 입력 폼처럼 상호작용이 많은 기능은 E2E 검증 우선순위가 높습니다.
 
 ### Analytics Guidance
@@ -316,16 +335,18 @@ utility-hub/
 ## Useful Docs In This Repo
 
 - `package.json`
-- `components/ui/*`
+- `shared/ui/*`
 - `components/blog/*`
 - `components/tools/*`
 - `components/layout/*`
-- `docs/superpowers/specs/2026-04-06-parenting-guide-rebrand-design.md`
-- `docs/superpowers/specs/parenting-guide-rebrand/README.md`
-- `docs/superpowers/plans/parenting-guide-rebrand/README.md`
-- `docs/superpowers/plans/parenting-guide-rebrand/execution/README.md`
-- `docs/app-page/create-tools-page.md`
-- `docs/app-page/blog-page-structure.md`
+- `docs/README.md`
+- `docs/specs/2026-04-06-parenting-guide-rebrand-design.md`
+- `docs/specs/parenting-guide-rebrand/README.md`
+- `docs/plans/2026-05-26-parenting-benefits-content-expansion.md`
+- `docs/plans/2026-06-12-rainy-day-indoor-content-cluster.md`
+- `docs/implementation/create-tools-page.md`
+- `docs/implementation/blog-page-structure.md`
+- `docs/testing/tools/pomodoro.md`
 - `docs/breadcrumb-and-content-maintenance-guide.md`
 - `docs/tools/lotto/algorithms/data-analysis-spec.md`
 - `docs/tools/lotto/algorithms/ai-statistical-algorithm.md`
@@ -339,14 +360,15 @@ utility-hub/
 3. `pnpm lint:check`
 4. `pnpm test:architecture`
 5. `pnpm test:contracts`
-6. 필요한 경우 관련 `node --test ...` 실행
-7. UI/상호작용 변경 시 `pnpm test:e2e`
-8. 배포 영향이 있는 변경이면 `pnpm build`
+6. `pnpm test:integration`
+7. 필요한 경우 관련 `node --test ...` 실행
+8. UI/상호작용 변경 시 `pnpm test:e2e`
+9. 배포 영향이 있는 변경이면 `pnpm build`
 
 ## Brief Conclusion
 
 이 저장소는 단순 블로그가 아니라, **블로그 + 다중 계산기/도구 + SEO/OG/분석 인프라**가 함께 있는 App Router 프로젝트입니다.  
-현재는 여기에 **육아형 리브랜딩 문서 체계**가 추가된 상태이므로, 작업할 때는 `lib/tools/tool-config.ts`, `lib/blog/posts.ts`, `app/layout.tsx`와 함께 `docs/superpowers/specs/parenting-guide-rebrand/*`를 같이 기준점으로 보는 것이 가장 안전합니다.
+현재는 여기에 **육아형 리브랜딩 문서 체계**가 추가된 상태이므로, 작업할 때는 `lib/tools/tool-config.ts`, `lib/blog/posts.ts`, `app/layout.tsx`와 함께 `docs/specs/parenting-guide-rebrand/*`를 같이 기준점으로 보는 것이 가장 안전합니다.
 
 # Testing Rules
 

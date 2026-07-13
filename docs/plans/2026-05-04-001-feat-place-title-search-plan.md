@@ -36,7 +36,7 @@ date: 2026-05-04
 
 ### Deferred to Separate Tasks
 
-- Places 검색 행동 분석 이벤트: `docs/superpowers/specs/parenting-guide-rebrand/10-ga-event-tracking-strategy.md` 기준으로 `search`/`view_search_results`를 별도 계획에서 정의한다.
+- Places 검색 행동 분석 이벤트: `docs/specs/parenting-guide-rebrand/10-ga-event-tracking-strategy.md` 기준으로 `search`/`view_search_results`를 별도 계획에서 정의한다.
 - 검색어 하이라이트 또는 자동완성: 실제 검색 사용 패턴을 본 뒤 별도 UX 작업으로 다룬다.
 
 ## Context & Research
@@ -62,13 +62,13 @@ date: 2026-05-04
   - `SearchIcon` + `Input`을 조합한 검색 입력 UI 패턴이 있다.
 - `lib/places/place-list-query.test.mjs`
   - Places 필터/페이지네이션 계약을 pure node test로 고정하는 기존 테스트 파일이다.
-- `tests/places-infinite-scroll.spec.ts`
+- `tests/e2e/places/infinite-scroll.spec.ts`
   - 필터 변경 시 목록이 1페이지로 reset되는 E2E 검증 패턴이 있다.
-- `tests/places-mobile-layout.spec.ts`
+- `tests/e2e/places/mobile-layout.spec.ts`
   - 모바일 필터 레일, 공유 링크, hydration 안전성 관련 기존 Places E2E 기반선이 있다.
 - `docs/plans/2026-04-14-002-feat-places-infinite-scroll-plan.md`
   - 현재 Places 목록 구조가 `React Query + paginated API + first-page SSR`로 정리된 배경 계획이다.
-- `docs/superpowers/specs/2026-04-06-parenting-guide-rebrand-design.md`
+- `docs/specs/2026-04-06-parenting-guide-rebrand-design.md`
   - 리브랜딩 방향에서 `아이와 갈 곳, 조건별로 빠르게 찾으세요`, 검색 입력, 빠른 필터가 핵심 흐름으로 정의되어 있다.
 
 ### Institutional Learnings
@@ -189,7 +189,7 @@ flowchart TB
 
 - Modify: `app/api/places/route.ts`
 - Modify: `components/places/PlacesFilteredGrid.tsx`
-- Test: `tests/places-infinite-scroll.spec.ts`
+- Test: `tests/e2e/places/infinite-scroll.spec.ts`
 
 **Approach:**
 
@@ -203,7 +203,7 @@ flowchart TB
 
 - `components/places/PlacesFilteredGrid.tsx`의 기존 `regionSlug + filters` query key 구성
 - `buildPlaceListSearchParams`를 통해 API query string을 조립하는 현재 방식
-- `tests/places-infinite-scroll.spec.ts`의 필터 변경 후 카드 수 reset 검증
+- `tests/e2e/places/infinite-scroll.spec.ts`의 필터 변경 후 카드 수 reset 검증
 
 **Test scenarios:**
 
@@ -229,8 +229,8 @@ flowchart TB
 **Files:**
 
 - Modify: `components/places/PlacesFilterBar.tsx`
-- Test: `tests/places-mobile-layout.spec.ts`
-- Test: `tests/places-infinite-scroll.spec.ts`
+- Test: `tests/e2e/places/mobile-layout.spec.ts`
+- Test: `tests/e2e/places/infinite-scroll.spec.ts`
 
 **Approach:**
 
@@ -280,7 +280,7 @@ flowchart TB
 | 타이핑마다 URL history와 API 요청이 늘어남                           | 입력 draft와 적용 검색어를 분리하고 제출 시에만 URL 상태를 갱신한다.                                     |
 | 검색이 제목 외 필드까지 넓어져 결과가 예상보다 많아짐                | `place.name`만 검색한다는 요구를 pure helper 테스트로 고정한다.                                          |
 | 공개 query 입력이 과도하게 길어 URL과 필터 비교 비용이 커짐          | 계약 레이어에서 검색어를 trim하고 80자로 제한한다.                                                       |
-| 모바일 필터 카드가 검색 입력 추가로 과밀해짐                         | `tests/places-mobile-layout.spec.ts`에 작은 폭 배치 검증을 추가하고, 필요하면 입력/버튼을 세로 배치한다. |
+| 모바일 필터 카드가 검색 입력 추가로 과밀해짐                         | `tests/e2e/places/mobile-layout.spec.ts`에 작은 폭 배치 검증을 추가하고, 필요하면 입력/버튼을 세로 배치한다. |
 | 기존 필터 초기화가 검색어를 남겨 혼란을 줌                           | `clearAll` 범위에 검색어와 draft reset을 포함한다.                                                       |
 
 ## Documentation / Operational Notes
@@ -297,8 +297,8 @@ flowchart TB
 - Related code: `lib/places/place-list-query.ts`
 - Related code: `app/api/places/route.ts`
 - Related tests: `lib/places/place-list-query.test.mjs`
-- Related tests: `tests/places-infinite-scroll.spec.ts`
-- Related tests: `tests/places-mobile-layout.spec.ts`
+- Related tests: `tests/e2e/places/infinite-scroll.spec.ts`
+- Related tests: `tests/e2e/places/mobile-layout.spec.ts`
 - Prior plan: `docs/plans/2026-04-14-002-feat-places-infinite-scroll-plan.md`
-- Rebrand spec: `docs/superpowers/specs/2026-04-06-parenting-guide-rebrand-design.md`
-- Analytics note: `docs/superpowers/specs/parenting-guide-rebrand/10-ga-event-tracking-strategy.md`
+- Rebrand spec: `docs/specs/2026-04-06-parenting-guide-rebrand-design.md`
+- Analytics note: `docs/specs/parenting-guide-rebrand/10-ga-event-tracking-strategy.md`

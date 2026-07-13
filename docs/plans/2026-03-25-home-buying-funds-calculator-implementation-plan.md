@@ -13,10 +13,10 @@
 ## 참고 문서
 
 - 기준 PRD: `docs/plans/2026-03-25-home-buying-funds-calculator-prd.md`
-- 신규 Tool 생성 규칙: `docs/app-page/create-tools-page.md`
+- 신규 Tool 생성 규칙: `docs/implementation/create-tools-page.md`
 - 기존 구조 참고:
-  - `docs/app-page/tools-page-loan-structure.md`
-  - `docs/app-page/tools-page-saving-structure.md`
+  - `docs/implementation/tools-page-loan-structure.md`
+  - `docs/implementation/tools-page-saving-structure.md`
 
 ## 구현 원칙
 
@@ -253,29 +253,29 @@ lib/
 
 ### 3. 파일별 책임
 
-| 파일 | 책임 |
-| --- | --- |
-| `app/tools/home-buying-funds-calculator/page.tsx` | metadata, JSON-LD, breadcrumb, ToolSwitcher, 루트 폼 조립 |
-| `HomeBuyingFundsCalculatorForm.tsx` | 페이지 내부 전체 조립, FAQ/관련 도구 연결 |
-| `hooks/parsers.ts` | URL query key, 자동/수동 모드, 수동 금액 필드 정의 |
-| `hooks/useHomeBuyingFundsCalculator.ts` | 입력 상태, 계산 실행, 결과 모델 생성, 공유 상태 관리 |
-| `sections/HomeBuyingInputSection.tsx` | 입력 카드 4개 조립 |
-| `sections/HomeBuyingResultSection.tsx` | 요약 카드, 플로우 차트, 비용 표 조립 |
-| `components/BasicInfoCard.tsx` | 매매가, 대출금, 보유 현금, 계약금 등 기본 입력 |
-| `components/TaxRuleCard.tsx` | 조정대상지역, 생애최초, 주택 수, 시가표준액 등 |
-| `components/PracticalCostCard.tsx` | 중개보수, 법무사, 청소, 이사, 인테리어 프리셋 |
-| `components/AdvancedOptionsCard.tsx` | 방공제, MCG, 예비비, 직접 입력 전환 |
-| `components/CostSummaryCards.tsx` | 핵심 합계 카드 |
-| `components/CashGapCard.tsx` | 부족액/여유자금 카드 |
-| `components/CostBreakdownTable.tsx` | 항목별 정리 표 |
-| `components/SpendingFlowChart.tsx` | 단계별 지출 시각화 |
-| `components/FieldInfoDialog.tsx` | 법정/정책 항목 설명 모달 |
-| `components/AutoManualToggle.tsx` | 자동 계산과 직접 입력 전환 공통 UI |
-| `lib/tools/home-buying-funds-calculator/types.ts` | 입력, 결과, breakdown item, flow node 타입 |
-| `lib/tools/home-buying-funds-calculator/taxes.ts` | 취득세, 지방교육세, 농특세, 등록면허세, 인지세 계산 |
-| `lib/tools/home-buying-funds-calculator/practical-costs.ts` | 청소/이사/인테리어 등 프리셋 계산 |
-| `lib/tools/home-buying-funds-calculator/calculation.ts` | 전체 합산, 결과 표/플로우 차트용 정규화 모델 생성 |
-| `lib/tools/home-buying-funds-calculator/presets.ts` | 지역/프리셋/기본 비율 상수 |
+| 파일                                                        | 책임                                                      |
+| ----------------------------------------------------------- | --------------------------------------------------------- |
+| `app/tools/home-buying-funds-calculator/page.tsx`           | metadata, JSON-LD, breadcrumb, ToolSwitcher, 루트 폼 조립 |
+| `HomeBuyingFundsCalculatorForm.tsx`                         | 페이지 내부 전체 조립, FAQ/관련 도구 연결                 |
+| `hooks/parsers.ts`                                          | URL query key, 자동/수동 모드, 수동 금액 필드 정의        |
+| `hooks/useHomeBuyingFundsCalculator.ts`                     | 입력 상태, 계산 실행, 결과 모델 생성, 공유 상태 관리      |
+| `sections/HomeBuyingInputSection.tsx`                       | 입력 카드 4개 조립                                        |
+| `sections/HomeBuyingResultSection.tsx`                      | 요약 카드, 플로우 차트, 비용 표 조립                      |
+| `components/BasicInfoCard.tsx`                              | 매매가, 대출금, 보유 현금, 계약금 등 기본 입력            |
+| `components/TaxRuleCard.tsx`                                | 조정대상지역, 생애최초, 주택 수, 시가표준액 등            |
+| `components/PracticalCostCard.tsx`                          | 중개보수, 법무사, 청소, 이사, 인테리어 프리셋             |
+| `components/AdvancedOptionsCard.tsx`                        | 방공제, MCG, 예비비, 직접 입력 전환                       |
+| `components/CostSummaryCards.tsx`                           | 핵심 합계 카드                                            |
+| `components/CashGapCard.tsx`                                | 부족액/여유자금 카드                                      |
+| `components/CostBreakdownTable.tsx`                         | 항목별 정리 표                                            |
+| `components/SpendingFlowChart.tsx`                          | 단계별 지출 시각화                                        |
+| `components/FieldInfoDialog.tsx`                            | 법정/정책 항목 설명 모달                                  |
+| `components/AutoManualToggle.tsx`                           | 자동 계산과 직접 입력 전환 공통 UI                        |
+| `lib/tools/home-buying-funds-calculator/types.ts`           | 입력, 결과, breakdown item, flow node 타입                |
+| `lib/tools/home-buying-funds-calculator/taxes.ts`           | 취득세, 지방교육세, 농특세, 등록면허세, 인지세 계산       |
+| `lib/tools/home-buying-funds-calculator/practical-costs.ts` | 청소/이사/인테리어 등 프리셋 계산                         |
+| `lib/tools/home-buying-funds-calculator/calculation.ts`     | 전체 합산, 결과 표/플로우 차트용 정규화 모델 생성         |
+| `lib/tools/home-buying-funds-calculator/presets.ts`         | 지역/프리셋/기본 비율 상수                                |
 
 ### 4. 상태 모델 설계
 
@@ -304,15 +304,15 @@ lib/
 
 ```ts
 interface CostBreakdownItem {
-  id: string
-  stage: 'contract' | 'loan' | 'balance' | 'registration' | 'move'
-  category: 'public' | 'loan-registration' | 'practical' | 'other'
-  label: string
-  amount: number
-  calculationMode: 'auto' | 'auto-adjusted' | 'manual'
-  confidence: 'high' | 'medium' | 'low'
-  note?: string
-  formula?: string
+  id: string;
+  stage: 'contract' | 'loan' | 'balance' | 'registration' | 'move';
+  category: 'public' | 'loan-registration' | 'practical' | 'other';
+  label: string;
+  amount: number;
+  calculationMode: 'auto' | 'auto-adjusted' | 'manual';
+  confidence: 'high' | 'medium' | 'low';
+  note?: string;
+  formula?: string;
 }
 ```
 
