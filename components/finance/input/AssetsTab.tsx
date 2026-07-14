@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import { FINANCE_ASSET_CATEGORIES } from '@/lib/finance/categories';
 import type {
   FinanceAssetCategory,

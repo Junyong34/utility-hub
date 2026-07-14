@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { JsonLdMultiple } from '@/components/seo';
 import { PlacesHub } from '@/components/places/PlacesHub';
-import { PaperPageShell } from '@/components/ui/paper-page-shell';
+import { PaperPageShell } from '@/shared/ui/paper-page-shell';
 import { getPlaceCountByRegion, queryPlaceList } from '@/lib/places';
 import { getPhaseARegions } from '@/lib/places/region-config';
 import {

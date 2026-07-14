@@ -8,7 +8,7 @@ import {
   LOTTO_STATS_STRATEGIES,
   type LottoStatsStrategy,
 } from '@/lib/lotto/types';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import { useLottoRecommend } from '../LottoRecommendProvider';
 
 const STRATEGY_LABELS: Record<LottoStatsStrategy, string> = {

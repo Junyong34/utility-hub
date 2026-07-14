@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from './nav-config';
-import { FloatingShareButton } from '@/components/ui/floating-share-button';
+import { FloatingShareButton } from '@/shared/client/floating-share-button';
 
 export function BottomNav() {
   const pathname = usePathname();

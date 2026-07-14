@@ -1,5 +1,6 @@
 import type { NextConfig } from 'next';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { isBundleAnalysisEnabled } from './config/runtime/server.ts';
 
 const nextConfig: NextConfig = {
   turbopack: {},
@@ -78,7 +79,7 @@ const nextConfig: NextConfig = {
   // 파워풀한 빌드 분석 (프로덕션 빌드 시 번들 크기 분석)
   // ANALYZE=true pnpm build -- --webpack 로 실행 시 활성화
   webpack: (config, { isServer }) => {
-    if (process.env.ANALYZE === 'true') {
+    if (isBundleAnalysisEnabled()) {
       config.plugins.push(
         new BundleAnalyzerPlugin({
           analyzerMode: 'static',

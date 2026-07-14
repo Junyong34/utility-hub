@@ -1,8 +1,8 @@
 'use client';
 
 import { memo, useEffect, useRef, useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/shared/ui/card';
+import { Button } from '@/shared/ui/button';
 import { formatLottoNumbers } from '@/lib/lotto/generator';
 import { LottoNumberAnimation } from './LottoNumberAnimation';
 

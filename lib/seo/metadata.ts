@@ -1,25 +1,10 @@
 import type { Metadata } from 'next';
+import { SITE_CONFIG } from '../../config/site.ts';
 import type { SEOMetadata, OpenGraphImage } from '../../types/seo.ts';
 import { buildCustomOgImagePath } from './og.ts';
 import { resolveBlogPostOgImage } from './og-policy.ts';
 
-/**
- * 사이트 기본 설정
- */
-export const SITE_CONFIG = {
-  name: 'Zento',
-  title: 'Zento - 아이와 갈 곳, 조건별로 빠르게 찾으세요',
-  description:
-    '서울·경기 중심으로 아이와 가볼 곳을 지역, 연령, 날씨, 예산 기준으로 빠르게 정리합니다. 나들이 예산 계산, 육아 혜택·지원금 정보까지 한 번에.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.zento.kr',
-  ogImage: '/og-images/home-og-image.webp',
-  locale: 'ko_KR',
-  author: 'Zento',
-  social: {
-    // github: 'https://github.com/yourusername', // 실제 URL로 교체 후 주석 해제
-    // twitter: 'https://twitter.com/yourusername',
-  },
-} as const;
+export { SITE_CONFIG } from '../../config/site.ts';
 
 /**
  * Next.js Metadata 생성 헬퍼

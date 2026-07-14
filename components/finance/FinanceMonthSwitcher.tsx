@@ -7,7 +7,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import type { FinanceComparisonMode } from '@/lib/finance/types';
 import { buildFinanceHref } from '@/lib/finance/url-state';
 import { formatFinanceMonthLabel } from '@/lib/finance/formatting';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import {
   getLocalDraftMonths,
   getLocalDraftSnapshot,

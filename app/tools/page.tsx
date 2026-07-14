@@ -1,12 +1,11 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { JsonLdMultiple } from '@/components/seo';
+import { ToolsPageClient } from '@/modules/tools/catalog/client';
+import { listToolItems } from '@/modules/tools/catalog/public';
 import {
   generateToolsMainMetadata,
   getToolsMainStructuredDataArray,
-  getAllToolConfigs,
-} from '@/lib/tools';
-import type { ToolListItem } from '@/lib/tools';
-import { ToolsPageClient } from '@/components/tools/ToolsPageClient';
+} from '@/modules/tools/catalog/server';
 
 /**
  * Tools 메인 페이지 메타데이터
@@ -17,17 +16,7 @@ export const metadata: Metadata = generateToolsMainMetadata();
  * TOOL_CONFIGS → ToolListItem 변환 (서버 사이드)
  * icon 컴포넌트(함수)는 Client 경계를 넘길 수 없으므로 iconName(문자열)만 전달
  */
-const toolConfigs = getAllToolConfigs();
-const TOOLS: ToolListItem[] = toolConfigs.map(config => ({
-  id: config.id,
-  name: config.name,
-  description: config.description,
-  iconName: config.icon ?? '',
-  href: `/tools/${config.id}`,
-  badge: config.badge,
-  color: config.color ?? 'from-primary to-sunshine-900',
-  category: config.category,
-}));
+const TOOLS = listToolItems();
 
 /**
  * Tools 메인 페이지

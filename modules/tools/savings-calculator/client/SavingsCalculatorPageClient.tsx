@@ -1,0 +1,24 @@
+'use client';
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shared/ui/tabs';
+import { DepositCalculatorSection } from './DepositCalculatorSection.tsx';
+import { InstallmentCalculatorSection } from './InstallmentCalculatorSection.tsx';
+
+export function SavingsCalculatorPageClient() {
+  return (
+    <Tabs defaultValue="deposit" className="w-full">
+      <TabsList className="grid w-full grid-cols-2">
+        <TabsTrigger value="deposit">예금 계산기</TabsTrigger>
+        <TabsTrigger value="installment">적금 계산기</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="deposit" className="space-y-6">
+        <DepositCalculatorSection />
+      </TabsContent>
+
+      <TabsContent value="installment" className="space-y-6">
+        <InstallmentCalculatorSection />
+      </TabsContent>
+    </Tabs>
+  );
+}

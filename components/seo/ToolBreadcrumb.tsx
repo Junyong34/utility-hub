@@ -4,8 +4,10 @@
  */
 
 import { Breadcrumb } from './Breadcrumb';
-import { getToolBreadcrumbItems } from '@/lib/tools/tool-breadcrumb';
-import type { BreadcrumbLink } from '@/types/navigation';
+import {
+  getToolBreadcrumbItems,
+  type BreadcrumbLink,
+} from '@/modules/tools/catalog/public';
 
 interface ToolBreadcrumbProps {
   toolId: string;

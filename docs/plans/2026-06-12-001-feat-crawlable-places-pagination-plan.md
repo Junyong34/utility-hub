@@ -75,7 +75,7 @@ Without crawlable page links, many detail pages only become visible after JavaSc
   - Currently includes region entries and all publishable detail entries through `collectPlaceEntries()`.
 - `docs/seo/google-indexing-action-list-2026-05-08.md`
   - Existing SEO operations note says `/places?*` filter URLs should canonicalize to representative place URLs.
-- `tests/places-infinite-scroll.spec.ts`
+- `tests/e2e/places/infinite-scroll.spec.ts`
   - Existing Playwright coverage for API filtering, region scope, infinite scroll append, and filter reset behavior.
 - `lib/places/place-list-query.test.mjs`
   - Existing pure tests for filtering, paging, invalid query handling, and region scope.
@@ -202,7 +202,7 @@ flowchart TB
 
 - Create: `components/places/PlacesPaginationNav.tsx`
 - Modify: `components/places/PlacesFilteredGrid.tsx`
-- Test: `tests/places-crawlable-pagination.spec.ts`
+- Test: `tests/e2e/places/crawlable-pagination.spec.ts`
 
 **Approach:**
 
@@ -248,7 +248,7 @@ flowchart TB
 - Modify: `app/places/[region]/page.tsx`
 - Modify: `lib/seo/site-section-seo.ts`
 - Test: `lib/seo/site-section-seo.test.ts`
-- Test: `tests/places-crawlable-pagination.spec.ts`
+- Test: `tests/e2e/places/crawlable-pagination.spec.ts`
 
 **Approach:**
 
@@ -336,8 +336,8 @@ flowchart TB
 
 **Files:**
 
-- Create: `tests/places-crawlable-pagination.spec.ts`
-- Modify: `tests/places-infinite-scroll.spec.ts`
+- Create: `tests/e2e/places/crawlable-pagination.spec.ts`
+- Modify: `tests/e2e/places/infinite-scroll.spec.ts`
 - Modify: `docs/seo/google-indexing-action-list-2026-05-08.md`
 
 **Approach:**
@@ -353,8 +353,8 @@ flowchart TB
 
 **Patterns to follow:**
 
-- `tests/places-infinite-scroll.spec.ts`
-- `tests/places-links.spec.ts`
+- `tests/e2e/places/infinite-scroll.spec.ts`
+- `tests/live/places/links.spec.ts`
 - Existing indexing policy style in `docs/seo/google-indexing-action-list-2026-05-08.md`
 
 **Test scenarios:**
@@ -428,7 +428,7 @@ flowchart TB
 - Related code: `components/places/PlacesFilteredGrid.tsx`
 - Related code: `lib/places/place-list-query.ts`
 - Related code: `lib/seo/sitemap.ts`
-- Related tests: `tests/places-infinite-scroll.spec.ts`
+- Related tests: `tests/e2e/places/infinite-scroll.spec.ts`
 - Related docs: `docs/seo/google-indexing-action-list-2026-05-08.md`
 - Google Search Central: [Crawlable links](https://developers.google.com/search/docs/crawling-indexing/links-crawlable)
 - Google Search Central: [Fix lazy-loaded content](https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading)

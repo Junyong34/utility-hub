@@ -17,7 +17,7 @@
 import { useLottoRecommend } from './LottoRecommendProvider';
 import { LottoResults } from '../LottoResults';
 import { CheckCircle2, Sparkles } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 /**
  * 로또 추천 결과 표시

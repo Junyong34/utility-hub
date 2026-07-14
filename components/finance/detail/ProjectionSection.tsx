@@ -1,23 +1,23 @@
 'use client';
 
 import { useState } from 'react';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupText,
-} from '@/components/ui/input-group';
+} from '@/shared/ui/input-group';
 import {
   buildFinanceProjectionSummary,
   FINANCE_PROJECTION_YEAR_LIMIT,
 } from '@/lib/finance/projection';
 import { formatFinanceMonthLabel, formatFinanceYearLabel } from '@/lib/finance/formatting';
 import type { FinanceSnapshotSummary } from '@/lib/finance/types';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import {
   formatSignedPercent,
   formatSignedWon,

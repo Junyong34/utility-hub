@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowRightIcon } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 interface ParentingSectionGridProps {
   eyebrow: string;

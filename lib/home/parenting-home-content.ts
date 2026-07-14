@@ -6,8 +6,10 @@ import {
   getPublishablePlaces,
 } from '@/lib/places/place-content';
 import { REGION_CONFIGS } from '@/lib/places/region-config';
-import { getAllToolConfigs } from '@/lib/tools';
-import type { ToolConfig } from '@/lib/tools';
+import {
+  getAllToolConfigs,
+  type ToolConfig,
+} from '@/modules/tools/catalog/public';
 import type {
   AgeBand,
   PlaceCategory,

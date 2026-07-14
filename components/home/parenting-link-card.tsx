@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowRightIcon } from 'lucide-react';
 import type { HomeLinkCardItem } from '@/types/home';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import {
   HOME_TONE_BY_ACCENT,
   PARENTING_TONE_STYLES,

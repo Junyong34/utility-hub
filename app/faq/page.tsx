@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Card } from '@/shared/ui/card'
+import { Button } from '@/shared/ui/button'
 import { ArrowRightIcon, MailIcon, ShieldAlertIcon } from 'lucide-react'
 import {
   Accordion,
@@ -9,7 +9,7 @@ import {
   AccordionIndicator,
   AccordionItem,
   AccordionTrigger,
-} from '@/components/ui/accordion'
+} from '@/shared/ui/accordion'
 import {
   SITE_CONFIG,
   generateMetadata as createMetadata,
@@ -17,8 +17,11 @@ import {
   createFAQSchema,
 } from '@/lib/seo'
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo'
-import { getAllToolConfigs } from '@/lib/tools'
-import type { ToolConfig, ToolFAQItem } from '@/lib/tools/types'
+import {
+  getAllToolConfigs,
+  type ToolConfig,
+  type ToolFAQItem,
+} from '@/modules/tools/catalog/public'
 import { createFaqMetadataInput } from '@/lib/seo/site-section-seo'
 
 interface FaqItem {

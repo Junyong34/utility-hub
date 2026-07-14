@@ -8,7 +8,7 @@ import {
   CircleHelpIcon,
   ArrowRightIcon,
 } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/shared/ui/card';
 import { useVisitorStats } from '@/hooks/useVisitorStats';
 
 const serviceCards = [

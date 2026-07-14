@@ -11,7 +11,7 @@ export {
   getToolsByCategory,
   isValidToolId,
   getToolCount,
-} from './tool-config';
+} from './tool-config.ts';
 
 // Tool 메타데이터
 export {
@@ -20,7 +20,7 @@ export {
   getToolTitle,
   getToolUrl,
   getToolShareText,
-} from './tool-metadata';
+} from './tool-metadata.ts';
 
 // Tool 구조화 데이터
 export {
@@ -33,7 +33,7 @@ export {
   getToolStructuredDataArray,
   getToolSubPageStructuredDataArray,
   getToolsMainStructuredDataArray,
-} from './tool-structured-data';
+} from './tool-structured-data.ts';
 
 // Tool Breadcrumb
 export {
@@ -42,7 +42,7 @@ export {
   getToolStructuredDataBreadcrumbs,
   TOOLS_MAIN_LABEL,
   TOOLS_MAIN_URL,
-} from './tool-breadcrumb';
+} from './tool-breadcrumb.ts';
 
 // Tool 아이콘
 export {
@@ -51,7 +51,7 @@ export {
   isValidIcon,
   clearIconCache,
   getAvailableIcons,
-} from './tool-icons';
+} from './tool-icons.ts';
 
 // 타입 re-export
 export type {
@@ -60,4 +60,4 @@ export type {
   ToolFAQItem,
   ToolHowToStep,
   ToolListItem,
-} from './types';
+} from './types.ts';

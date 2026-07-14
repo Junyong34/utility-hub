@@ -1,8 +1,8 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { Button } from '@/shared/ui/button';
+import { Card } from '@/shared/ui/card';
 import { LottoRoundYearFilter } from '@/components/lotto/LottoRoundYearFilter';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import { generateMetadata as createMetadata } from '@/lib/seo';
@@ -13,11 +13,13 @@ import {
   getLottoRoundResults,
 } from '@/lib/lotto/round-data';
 import {
-  assertToolStructuredData,
-  getToolSubPageStructuredDataArray,
   getToolBreadcrumbItems,
   getToolStructuredDataBreadcrumbs,
-} from '@/lib/tools';
+} from '@/modules/tools/catalog/public';
+import {
+  assertToolStructuredData,
+  getToolSubPageStructuredDataArray,
+} from '@/modules/tools/catalog/server';
 
 assertToolStructuredData('lotto');
 

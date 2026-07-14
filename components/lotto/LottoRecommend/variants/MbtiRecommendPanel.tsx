@@ -4,7 +4,7 @@ import {
   LOTTO_MBTI_OPTIONS,
   type LottoMbtiType,
 } from '@/lib/lotto/types';
-import { Label } from '@/components/ui/label';
+import { Label } from '@/shared/ui/label';
 import { MBTI_LOTTO_PROFILES } from '@/lib/lotto/mbti-profile';
 import { useLottoRecommend } from '../LottoRecommendProvider';
 

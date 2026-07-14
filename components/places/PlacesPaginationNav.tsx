@@ -12,7 +12,7 @@ import {
   buildPlacePaginationPages,
   hasActivePlaceListFilters,
 } from '@/lib/places/place-pagination';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import type { PlaceListFilters } from '@/lib/places/place-list-contract';
 import type { RegionSlug } from '@/types/place-source';
 

@@ -17,7 +17,7 @@ import {
   useQueryStates,
 } from 'nuqs';
 import { PlacesFilterRail } from './PlacesFilterRail';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/shared/ui/input';
 import { MAX_PLACE_SEARCH_LENGTH } from '@/lib/places/place-list-contract';
 import type {
   AgeBand,
@@ -30,7 +30,7 @@ import {
   PLACES_MUTED_SURFACE_CLASS,
   TONE_STYLES,
 } from './place-theme';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 const AGE_BANDS = ['0-12m', '1-3y', '3-6y', '6-10y'] as const;
 

@@ -1,16 +1,23 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
-import { ToolSwitcher } from '@/components/tools/ToolSwitcher';
 import { PomodoroTool } from '@/components/tools/pomodoro';
+import {
+  ToolCatalogProvider,
+  ToolSwitcher,
+} from '@/modules/tools/catalog/client';
+import {
+  getToolBreadcrumbItems,
+  listToolNavigationItems,
+} from '@/modules/tools/catalog/public';
 import {
   assertToolStructuredData,
   generateToolMetadata,
-  getToolBreadcrumbItems,
   getToolStructuredDataArray,
-} from '@/lib/tools';
+} from '@/modules/tools/catalog/server';
 
 assertToolStructuredData('pomodoro');
+const TOOL_NAVIGATION_ITEMS = listToolNavigationItems();
 
 export const metadata: Metadata = generateToolMetadata('pomodoro');
 
@@ -20,7 +27,8 @@ export default function PomodoroPage() {
   return (
     <>
       <JsonLdMultiple data={structuredData} />
-      <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
+      <ToolCatalogProvider items={TOOL_NAVIGATION_ITEMS}>
+        <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
         <header className="border-b bg-card">
           <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
             <Breadcrumb
@@ -49,7 +57,8 @@ export default function PomodoroPage() {
             <PomodoroTool />
           </Suspense>
         </main>
-      </div>
+        </div>
+      </ToolCatalogProvider>
     </>
   );
 }

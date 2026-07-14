@@ -1,7 +1,7 @@
 'use client';
 
 import { Download, Trash2 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import { formatFinanceMonthLabel } from '@/lib/finance/formatting';
 import type { FinanceMonthlySnapshot } from '@/lib/finance/types';
 import { FinanceImportDialog } from './FinanceImportDialog';

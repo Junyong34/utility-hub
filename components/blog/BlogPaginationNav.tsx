@@ -11,7 +11,7 @@ import {
   buildBlogPaginationHref,
   buildBlogPaginationPages,
 } from '@/lib/blog/pagination';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 interface BlogPaginationNavProps {
   currentPage: number;

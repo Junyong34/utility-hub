@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import { BlogBreadcrumb } from '@/components/seo';
 import { BlogSwitcher } from '@/components/blog/BlogSwitcher';
 import type { BlogPostOption } from '@/lib/blog/types';

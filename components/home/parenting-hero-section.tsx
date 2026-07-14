@@ -8,7 +8,7 @@ import {
   SearchIcon,
 } from 'lucide-react';
 import type { HomeFilterChip, HomeLinkCardItem } from '@/types/home';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import {
   CONDITION_BADGE_STYLES,
   FILTER_CHIP_STYLES,

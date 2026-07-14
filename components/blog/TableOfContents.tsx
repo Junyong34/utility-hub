@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import type { BlogTocItem } from '@/lib/blog/types';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import { List } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
+import { Button } from '@/shared/ui/button';
+import { BottomSheet } from '@/shared/client/bottom-sheet';
 
 interface TableOfContentsProps {
   items: BlogTocItem[];

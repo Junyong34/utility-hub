@@ -2,6 +2,13 @@
  * 금액 포맷팅 유틸리티
  */
 
+export { splitMonths } from '../../shared/domain/duration.ts';
+export {
+  formatCurrencyToKoreanUnits,
+  formatNumberWithCommas,
+  parseFormattedNumber,
+} from '../../shared/domain/money-formatting.ts';
+
 /**
  * 숫자를 한글 단위로 표시
  * 예: 1000 → "1천원", 10000 → "1만원", 100000000 → "1억원"
@@ -73,20 +80,6 @@ export function convertTermUnit(
 }
 
 /**
- * 개월 수를 년/월로 분리
- * 240 → { years: 20, months: 0 }
- * 241 → { years: 20, months: 1 }
- */
-export function splitMonths(
-  totalMonths: number
-): { years: number; months: number } {
-  return {
-    years: Math.floor(totalMonths / 12),
-    months: totalMonths % 12,
-  };
-}
-
-/**
  * 년/월을 총 개월로 합치기
  */
 export function combineTerms(years: number, months: number): number {
@@ -141,58 +134,6 @@ export function formatNumberToKorean(num: number): string {
   }
 
   return result.trim();
-}
-
-/**
- * 숫자를 한글 금액 표기로 변환 (아라비아 숫자 + 한글 단위)
- * 예: 123456789 → "1억 2,345만 6,789원"
- */
-export function formatCurrencyToKoreanUnits(num: number): string {
-  if (num === 0) return '0원';
-  if (num < 0) return '-' + formatCurrencyToKoreanUnits(-num);
-
-  const eok = Math.floor(num / 100000000);
-  const man = Math.floor((num % 100000000) / 10000);
-  const rest = num % 10000;
-
-  const parts: string[] = [];
-
-  if (eok > 0) {
-    parts.push(`${eok.toLocaleString('ko-KR')}억`);
-  }
-  if (man > 0) {
-    parts.push(`${man.toLocaleString('ko-KR')}만`);
-  }
-  if (rest > 0 || parts.length === 0) {
-    parts.push(rest.toLocaleString('ko-KR'));
-  }
-
-  return parts.join(' ') + '원';
-}
-
-/**
- * 숫자에 콤마 추가
- * 예: 1000000 → "1,000,000"
- */
-export function formatNumberWithCommas(value: string | number): string {
-  const numStr = typeof value === 'number' ? value.toString() : value;
-  const cleaned = numStr.replace(/[^0-9.-]/g, '');
-  if (!cleaned) return '';
-
-  const num = parseFloat(cleaned);
-  if (isNaN(num)) return '';
-
-  return num.toLocaleString('ko-KR');
-}
-
-/**
- * 콤마가 포함된 문자열에서 숫자만 추출
- * 예: "1,000,000" → 1000000
- */
-export function parseFormattedNumber(value: string): number {
-  const cleaned = value.replace(/[^0-9.-]/g, '');
-  const num = parseFloat(cleaned);
-  return isNaN(num) ? 0 : num;
 }
 
 /**

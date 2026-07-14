@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllCategories, getPostsByCategory } from '@/lib/blog/posts';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/shared/ui/button';
 import { SITE_CONFIG, generateMetadata as createMetadata } from '@/lib/seo';
 import { createPageStructuredData } from '@/lib/seo';
 import { Breadcrumb } from '@/components/seo';

@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { CheckIcon, Link2Icon, Share2Icon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { copyTextToClipboard } from '@/lib/clipboard';
+import { Button } from '@/shared/ui/button';
+import { copyTextToClipboard } from '@/shared/client/clipboard';
 
 function subscribeNativeShareSupport(): () => void {
   return () => {};

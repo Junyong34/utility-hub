@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowRightIcon, MapPinIcon } from 'lucide-react';
 import type { RegionConfig } from '@/lib/places/region-config';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import { REGION_TONE_BY_SLUG, TONE_STYLES } from './place-theme';
 
 interface RegionCardProps {

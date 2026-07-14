@@ -14,7 +14,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import type { FinanceComparisonMode } from '@/lib/finance';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import { buildFinanceHref } from '@/lib/finance';
 import {
   getLocalDraftMonths,

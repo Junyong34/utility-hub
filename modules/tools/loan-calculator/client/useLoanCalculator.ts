@@ -1,0 +1,168 @@
+import { useMemo, useState } from 'react';
+import { useQueryStates } from 'nuqs';
+import {
+  calculateLoan,
+  LOAN_QUERY_PARSERS,
+  type RepaymentMethod,
+} from '../public.ts';
+import {
+  formatNumberWithCommas,
+  parseFormattedNumber,
+} from '@/shared/domain/money-formatting';
+
+export function useLoanCalculator() {
+  // URL 쿼리 상태 (공유 가능한 상태)
+  const [queryState, setQueryState] = useQueryStates(LOAN_QUERY_PARSERS, {
+    shallow: true,
+    history: 'push',
+  });
+
+  // URL 상태에서 파생된 값
+  const principal = (queryState.principal ?? 0).toString();
+  const principalDisplay = useMemo(
+    () => formatNumberWithCommas(queryState.principal ?? 0),
+    [queryState.principal]
+  );
+  const annualRate = (queryState.rate ?? 0).toString();
+  const termMode = queryState.termMode;
+  const termValue = (queryState.term ?? 0).toString();
+  const method = queryState.method;
+
+  const principalValue = queryState.principal ?? 0;
+  const rateValue = queryState.rate ?? 0;
+  const termNumValue = queryState.term ?? 0;
+
+  const canCalculate = useMemo(() => {
+    if (!termMode) {
+      return false;
+    }
+
+    if (
+      !Number.isFinite(principalValue) ||
+      !Number.isFinite(rateValue) ||
+      !Number.isFinite(termNumValue)
+    ) {
+      return false;
+    }
+
+    return principalValue > 0 && rateValue >= 0 && termNumValue > 0;
+  }, [principalValue, rateValue, termNumValue, termMode]);
+
+  const result = useMemo(() => {
+    if (!canCalculate || !termMode) {
+      return null;
+    }
+
+    const months =
+      termMode === 'year'
+        ? Math.round(termNumValue * 12)
+        : Math.round(termNumValue);
+
+    return calculateLoan(principalValue, rateValue, months, method, true);
+  }, [canCalculate, principalValue, rateValue, termNumValue, termMode, method]);
+
+  // 로컬 UI 상태 (URL에 저장하지 않음)
+  const [showResults, setShowResults] = useState(false);
+  const [hasCalculated, setHasCalculated] = useState(() => Boolean(result));
+
+  const handleTermModeChange = (newMode: 'year' | 'month') => {
+    if (newMode === termMode) return;
+
+    const currentValue = termNumValue;
+
+    if (termMode && Number.isFinite(currentValue) && currentValue > 0) {
+      if (newMode === 'month') {
+        setQueryState({
+          termMode: newMode,
+          term: Math.round(currentValue * 12),
+        });
+      } else {
+        setQueryState({
+          termMode: newMode,
+          term: Math.floor(currentValue / 12),
+        });
+      }
+    } else {
+      setQueryState({ termMode: newMode });
+    }
+  };
+
+  const handleReset = () => {
+    setQueryState({
+      principal: 0,
+      rate: 0,
+      term: 0,
+      termMode: undefined,
+      method: 'equal-payment',
+    });
+    setShowResults(false);
+    setHasCalculated(false);
+  };
+
+  const handlePrincipalChange = (value: string) => {
+    const numValue = parseFormattedNumber(value);
+    setQueryState({ principal: numValue });
+  };
+
+  const handleCalculate = () => {
+    if (canCalculate && result) {
+      setHasCalculated(true);
+      setShowResults(true);
+    }
+  };
+
+  const addToPrincipal = (amount: number) => {
+    const current = principalValue || 0;
+    const newValue = Math.min(current + amount, 1000000000000);
+    setQueryState({ principal: newValue });
+  };
+
+  const addToRate = (amount: number) => {
+    const current = rateValue || 0;
+    const newValue = Math.min(Math.max(current + amount, 0), 100);
+    setQueryState({ rate: Number(newValue.toFixed(2)) });
+  };
+
+  const addToTerm = (amount: number) => {
+    if (!termMode) return;
+
+    const current = termNumValue || 0;
+    if (termMode === 'year') {
+      const newValue = Math.min(Math.max(current + amount, 0), 50);
+      setQueryState({ term: newValue });
+    } else {
+      const newValue = Math.min(Math.max(current + amount, 0), 600);
+      setQueryState({ term: newValue });
+    }
+  };
+
+  return {
+    // State
+    principal,
+    principalDisplay,
+    annualRate,
+    termMode,
+    termValue,
+    method,
+    showResults,
+    hasCalculated,
+    canCalculate,
+    result,
+    // State setters
+    setAnnualRate: (value: string) =>
+      setQueryState({ rate: Number(value) || 0 }),
+    setTermValue: (value: string) =>
+      setQueryState({ term: Number(value) || 0 }),
+    setMethod: (value: RepaymentMethod) => setQueryState({ method: value }),
+    setShowResults,
+    // Handlers
+    handleTermModeChange,
+    handleReset,
+    handlePrincipalChange,
+    handleCalculate,
+    // Quick actions
+    addToPrincipal,
+    addToRate,
+    addToTerm,
+  };
+}

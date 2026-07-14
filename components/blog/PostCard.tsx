@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card } from '@/shared/ui/card';
+import { Badge } from '@/shared/ui/badge';
 import { resolveBlogPostOgImage } from '@/lib/seo/og-policy';
 
 interface PostCardProps {

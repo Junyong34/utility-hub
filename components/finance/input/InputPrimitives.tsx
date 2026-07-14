@@ -1,10 +1,10 @@
 'use client';
 
 import type { ChangeEvent, ReactNode } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
+import { Label } from '@/shared/ui/label';
+import { cn } from '@/shared/ui/class-names';
 import type { FinanceOwner } from '@/lib/finance/types';
 
 export const OWNER_OPTIONS: Array<{ value: FinanceOwner; label: string }> = [

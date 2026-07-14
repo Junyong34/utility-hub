@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { FlameIcon, ArrowRightIcon, CalendarIcon } from 'lucide-react';
 
 import type { DashboardContentItem } from '@/types/home';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent } from '@/shared/ui/card';
 
 const FEATURED_BADGE_STYLES: Record<string, string> = {
   NEW: 'bg-blue-500/10 text-blue-500 border-blue-500/20',

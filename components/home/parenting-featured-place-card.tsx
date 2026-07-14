@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRightIcon, ExternalLinkIcon } from 'lucide-react';
 import type { HomeFeaturedPlaceCardItem } from '@/types/home';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import {
   CONDITION_BADGE_STYLES,
   HOME_TONE_BY_ACCENT,

@@ -2,7 +2,7 @@ import type { VerificationStatus, SourceType } from '@/types/place-source';
 
 /**
  * 소스 신뢰도 정책
- * @see docs/superpowers/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md
+ * @see docs/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md
  */
 
 /** 발행 가능 검증 상태 집합 */

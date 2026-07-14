@@ -15,7 +15,7 @@ import {
   buildPlaceListSearchParams,
   normalizePlaceListFilters,
 } from '@/lib/places/place-list-contract';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 import type {
   PlaceListFilters,
   PlaceListPageResponse,

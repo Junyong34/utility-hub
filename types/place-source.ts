@@ -1,7 +1,7 @@
 /**
  * 장소/시설 데이터 소스 타입 정의
  * Phase A 수도권 중심 육아형 리브랜딩 기준
- * @see docs/superpowers/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md
+ * @see docs/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md
  */
 
 /** 수도권 지역 슬러그 */

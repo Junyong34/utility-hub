@@ -11,7 +11,7 @@ import {
 import { queryPlaceList } from '../places/place-list-query.ts';
 import { buildPlacePaginationHref } from '../places/place-pagination.ts';
 import { SITE_CONFIG } from './metadata.ts';
-import { getAllToolConfigs } from '../tools/tool-config.ts';
+import { getAllToolConfigs } from '../../modules/tools/catalog/public.ts';
 import { PHASE_A_REGION_SLUGS } from '../places/region-config.ts';
 import { pickLatestDate } from './date-utils.ts';
 import type { RegionSlug } from '../../types/place-source.ts';

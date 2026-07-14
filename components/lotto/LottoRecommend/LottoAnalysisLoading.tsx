@@ -1,7 +1,7 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+import { Card } from '@/shared/ui/card';
+import { cn } from '@/shared/ui/class-names';
 
 interface LottoAnalysisLoadingProps {
   stages: readonly string[];

@@ -9,7 +9,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import type { FinanceTrendPoint } from '@/lib/finance/types';
 import { formatWon } from './finance-dashboard-formatting';
 

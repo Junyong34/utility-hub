@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { BottomSheet } from '@/components/ui/bottom-sheet';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { BottomSheet } from '@/shared/client/bottom-sheet';
+import { Button } from '@/shared/ui/button';
+import { cn } from '@/shared/ui/class-names';
 import { celebrate } from '@/components/magicui/confetti';
 import { LottoAnalysisLoading } from './LottoAnalysisLoading';
 import { LottoRecommendActions } from './LottoRecommendActions';

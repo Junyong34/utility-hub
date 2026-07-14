@@ -1,8 +1,14 @@
 import { defineConfig } from '@playwright/test';
 
+if (process.env.RUN_LIVE_TESTS !== '1') {
+  throw new Error(
+    'External place-link tests are disabled by default. Set RUN_LIVE_TESTS=1 to run them.'
+  );
+}
+
 export default defineConfig({
-  testDir: './tests',
-  testMatch: 'places-links.spec.ts',
+  testDir: './tests/live/places',
+  testMatch: 'links.spec.ts',
   timeout: 45_000,
   fullyParallel: false,
   workers: 1,

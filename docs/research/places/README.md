@@ -14,7 +14,6 @@
 - [`seoul-private-kids-cafes.md`](./seoul-private-kids-cafes.md)
 - [`seoul-local-kids-cafes-semi-verified.md`](./seoul-local-kids-cafes-semi-verified.md)
 - [`seoul-baby-cafes.md`](./seoul-baby-cafes.md)
-- [`large-kids-cafes-seoul-incheon-gyeonggi.md`](./large-kids-cafes-seoul-incheon-gyeonggi.md)
 - [`mart-kids-cafes-seoul-gyeonggi-incheon.md`](./mart-kids-cafes-seoul-gyeonggi-incheon.md)
 - [`gyeonggi-north-outing-facilities.md`](./gyeonggi-north-outing-facilities.md)
 - [`gyeonggi-north-family-friendly-cafes.md`](./gyeonggi-north-family-friendly-cafes.md)
@@ -31,9 +30,8 @@
 
 ## 기준 문서
 
-- [`07-data-sourcing-and-trust-model.md`](../../superpowers/specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md)
-- [`03-content-model-and-taxonomy.md`](../../superpowers/specs/parenting-guide-rebrand/03-content-model-and-taxonomy.md)
-- [`20-source-ingestion-and-verification-plan.md`](../../superpowers/plans/parenting-guide-rebrand/execution/20-source-ingestion-and-verification-plan.md)
+- [`07-data-sourcing-and-trust-model.md`](../../specs/parenting-guide-rebrand/07-data-sourcing-and-trust-model.md)
+- [`03-content-model-and-taxonomy.md`](../../specs/parenting-guide-rebrand/03-content-model-and-taxonomy.md)
 
 ## 공통 규칙
 

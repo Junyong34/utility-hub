@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { JsonLdMultiple } from '@/components/seo';
 import { RegionHub } from '@/components/places/RegionHub';
-import { PaperPageShell } from '@/components/ui/paper-page-shell';
+import { PaperPageShell } from '@/shared/ui/paper-page-shell';
 import {
   getPhaseARegions,
   getRegionBySlug,

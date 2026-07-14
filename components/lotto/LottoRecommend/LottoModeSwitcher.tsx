@@ -1,8 +1,8 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
+import { Button } from '@/shared/ui/button';
+import { Card } from '@/shared/ui/card';
+import { cn } from '@/shared/ui/class-names';
 import {
   LOTTO_RECOMMEND_MODES,
   type LottoRecommendMode,

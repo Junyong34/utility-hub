@@ -10,14 +10,14 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/shared/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/card';
 import {
   formatPercent,
   formatWon,
 } from '@/components/finance/dashboard/finance-dashboard-formatting';
 import type { FinanceSnapshotSummary } from '@/lib/finance/types';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/ui/class-names';
 
 const BAR_COLORS = ['var(--chart-4)', 'var(--chart-3)'];
 
