@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
-import { LastDigitGameTool } from '@/components/tools/last-digit-game';
 import {
   ToolCatalogProvider,
   ToolSwitcher,
@@ -15,6 +14,7 @@ import {
   generateToolMetadata,
   getToolStructuredDataArray,
 } from '@/modules/tools/catalog/server';
+import { LastDigitGameTool } from '@/modules/tools/last-digit-game/client/LastDigitGameTool.tsx';
 
 assertToolStructuredData('last-digit-game');
 const TOOL_NAVIGATION_ITEMS = listToolNavigationItems();
