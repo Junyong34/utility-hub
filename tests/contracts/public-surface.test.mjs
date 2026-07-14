@@ -19,7 +19,7 @@ import {
 import {
   DEPOSIT_QUERY_PARSERS,
   INSTALLMENT_QUERY_PARSERS,
-} from '../../components/tools/savings-calculator/hooks/parsers.ts';
+} from '../../modules/tools/savings-calculator/public.ts';
 import * as homeBuyingParsers from '../../modules/tools/home-buying-funds-calculator/client/hooks/parsers.ts';
 import { queryBlogPostsPage } from '../../lib/blog/pagination.ts';
 import { getAllPosts, getCategoryName } from '../../lib/blog/posts.ts';

@@ -1,10 +1,12 @@
-export { DSR_POLICY_PRESETS, getDsrPolicyPreset, getDsrPolicyVersions } from './policies';
 export {
   calculateAnnualDebtService,
   calculateDsrSummary,
+  DSR_POLICY_PRESETS,
   estimateMaxNewLoanAmount,
+  getDsrPolicyPreset,
+  getDsrPolicyVersions,
   resolveDsrPolicy,
-} from './dsr-calculator';
+} from '../../../modules/tools/dsr-calculator/public.ts';
 export type {
   AnnualDebtService,
   DsrCalculationInput,
@@ -19,4 +21,4 @@ export type {
   DsrRegionType,
   MaxLoanEstimate,
   ResolvedDsrPolicy,
-} from './types';
+} from '../../../modules/tools/dsr-calculator/public.ts';

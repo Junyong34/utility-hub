@@ -1,55 +1,67 @@
-import type { Metadata } from 'next'
-import { Suspense } from 'react'
-import { Breadcrumb, JsonLdMultiple } from '@/components/seo'
-import { DsrCalculatorForm } from '@/components/tools/dsr-calculator'
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import {
+  CalculatorCategoryLinks,
   ToolCatalogProvider,
   ToolSwitcher,
-} from '@/modules/tools/catalog/client'
+} from '@/modules/tools/catalog/client';
 import {
   getToolBreadcrumbItems,
   listToolNavigationItems,
-} from '@/modules/tools/catalog/public'
+} from '@/modules/tools/catalog/public';
 import {
   assertToolStructuredData,
   generateToolMetadata,
   getToolStructuredDataArray,
-} from '@/modules/tools/catalog/server'
+} from '@/modules/tools/catalog/server';
+import { DsrCalculatorForm } from '@/modules/tools/dsr-calculator/client';
+import { DsrCalculatorFAQ } from '@/modules/tools/dsr-calculator/ui';
 
-assertToolStructuredData('dsr-calculator')
-const TOOL_NAVIGATION_ITEMS = listToolNavigationItems()
+assertToolStructuredData('dsr-calculator');
+const TOOL_NAVIGATION_ITEMS = listToolNavigationItems();
 
-export const metadata: Metadata = generateToolMetadata('dsr-calculator')
+export const metadata: Metadata = generateToolMetadata('dsr-calculator');
 
 export default function DsrCalculatorPage() {
-  const structuredData = getToolStructuredDataArray('dsr-calculator')
+  const structuredData = getToolStructuredDataArray('dsr-calculator');
 
   return (
     <>
       <JsonLdMultiple data={structuredData} />
       <ToolCatalogProvider items={TOOL_NAVIGATION_ITEMS}>
         <div className="min-h-screen bg-background pt-10 md:pt-24 xl:pt-32">
-        <header className="border-b bg-card">
-          <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
-            <Breadcrumb items={getToolBreadcrumbItems('dsr-calculator')} className="mb-4" />
-            <ToolSwitcher currentToolId="dsr-calculator" />
-          </div>
-        </header>
+          <header className="border-b bg-card">
+            <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+              <Breadcrumb
+                items={getToolBreadcrumbItems('dsr-calculator')}
+                className="mb-4"
+              />
+              <ToolSwitcher currentToolId="dsr-calculator" />
+            </div>
+          </header>
 
-        <main className="mx-auto max-w-5xl space-y-10 px-4 py-12 sm:px-6 lg:px-8">
-          <section>
-            <h1 className="text-3xl font-bold text-foreground">DSR 계산기</h1>
-            <p className="mt-1 text-muted-foreground">
-              연소득, 보유 대출, 신규 대출 조건을 입력해 현재 DSR과 스트레스 DSR, 가능한 신규 대출 한도를 확인하세요.
-            </p>
-          </section>
+          <main className="mx-auto max-w-5xl space-y-10 px-4 py-12 sm:px-6 lg:px-8">
+            <section>
+              <h1 className="text-3xl font-bold text-foreground">DSR 계산기</h1>
+              <p className="mt-1 text-muted-foreground">
+                연소득, 보유 대출, 신규 대출 조건을 입력해 현재 DSR과 스트레스
+                DSR, 가능한 신규 대출 한도를 확인하세요.
+              </p>
+            </section>
 
-          <Suspense fallback={<div className="text-muted-foreground">로딩 중...</div>}>
-            <DsrCalculatorForm />
-          </Suspense>
-        </main>
+            <Suspense
+              fallback={<div className="text-muted-foreground">로딩 중...</div>}
+            >
+              <div className="space-y-8">
+                <DsrCalculatorForm />
+                <CalculatorCategoryLinks currentToolId="dsr-calculator" />
+                <DsrCalculatorFAQ />
+              </div>
+            </Suspense>
+          </main>
         </div>
       </ToolCatalogProvider>
     </>
-  )
+  );
 }
