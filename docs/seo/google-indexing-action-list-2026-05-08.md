@@ -3,7 +3,7 @@
 ## 기준
 
 - 주요 공개 URL은 `200 OK`, `index, follow`, 자기 canonical이어야 한다.
-- `/blog?tag=*`, `/places?*` 같은 필터 URL은 대표 URL(`/blog`, `/places`)로 canonical 처리한다.
+- `/blog?tag=*` 필터 URL은 대표 URL(`/blog`)로 canonical 처리한다. `/places` 필터 URL은 대표 scope URL로 canonical 처리하고 `noindex,follow`를 함께 선언한다.
 - `/places?page=*`, `/places/{region}?page=*` 같은 비필터 페이지네이션 URL은 장소 상세 URL 발견을 위한 색인 가능 경로로 유지한다.
 - `favicon.ico?...`, `/finance/**`, `/tools/home-check`는 페이지 색인 목표에서 제외한다.
 
@@ -44,9 +44,11 @@
 - 사이트맵에는 필터 없는 페이지네이션 URL만 포함한다.
   - 예: `https://www.zento.kr/places?page=2`
   - 예: `https://www.zento.kr/places/seoul?page=2`
-- 필터 URL은 공유/탐색용으로만 두고 대표 URL로 canonical 처리한다.
+- 필터 URL은 공유/탐색용으로만 두고 대표 URL로 canonical 처리하며 `noindex,follow`를 선언한다.
   - 예: `https://www.zento.kr/places?free=true&page=2` -> `https://www.zento.kr/places`
   - 예: `https://www.zento.kr/places/seoul?free=true&page=2` -> `https://www.zento.kr/places/seoul`
+- `page=1`, invalid/out-of-range page, 모든 `limit` 변형은 정규 page URL로 308 redirect한다.
+- valid `?region=seoul`은 `/places/seoul` path URL로 308 redirect한다. invalid region과 unknown query는 sitemap에 넣지 않고 noindex 처리한다.
 
 ## 배포 후 확인
 
@@ -54,4 +56,5 @@
 2. `https://www.zento.kr/robots.txt`에 `Sitemap: https://www.zento.kr/sitemap.xml`이 있는지 확인한다.
 3. 위 우선순위 URL에서 canonical이 자기 자신인지 확인한다.
 4. Search Console에서 sitemap을 다시 제출한다.
-5. 3-7일 뒤 `페이지 색인 생성` 보고서에서 제외 사유가 줄었는지 확인한다.
+5. 배포 2주와 4주에 전체/지역 page 2, 필터 URL, `limit`, `?region=` 표본을 다시 검사한다.
+6. 4주에도 filter variation이 색인되면 robots/canonical/sitemap exclusion을 우선 점검한다. 비필터 page 2+가 두 주 연속 `Crawled - currently not indexed`이면 sitemap을 자동 제거하지 말고 콘텐츠 품질 진단 작업을 만든다.

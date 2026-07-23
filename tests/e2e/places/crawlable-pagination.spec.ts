@@ -76,4 +76,71 @@ test.describe('crawlable places pagination', () => {
       '/places?page=2&free=true'
     );
   });
+
+  test('indexable pagination and filtered variations render distinct metadata', async ({
+    page,
+  }) => {
+    await page.goto('/places?page=2', { waitUntil: 'domcontentloaded' });
+
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://www.zento.kr/places?page=2'
+    );
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      'content',
+      /(^|,)\s*index/
+    );
+    await expect(page.locator('meta[name="robots"]')).not.toHaveAttribute(
+      'content',
+      /noindex/
+    );
+    await expect(
+      page.locator('script[type="application/ld+json"]').first()
+    ).toHaveText(/"url":"https:\/\/www\.zento\.kr\/places\?page=2"/);
+
+    await page.goto('/places?free=true&page=2', {
+      waitUntil: 'domcontentloaded',
+    });
+
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://www.zento.kr/places'
+    );
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      'content',
+      /noindex/
+    );
+
+    await page.goto('/places?utm_source=newsletter', {
+      waitUntil: 'domcontentloaded',
+    });
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      'https://www.zento.kr/places'
+    );
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      'content',
+      /noindex/
+    );
+  });
+
+  test('redirects transport and legacy region query variations to canonical routes', async ({
+    page,
+  }) => {
+    const limitResponse = await page.goto('/places?limit=10&page=2', {
+      waitUntil: 'domcontentloaded',
+    });
+    await expect(page).toHaveURL(/\/places\?page=2$/);
+    expect(
+      limitResponse?.request().redirectedFrom()?.response()?.status()
+    ).toBe(308);
+
+    const regionResponse = await page.goto('/places?region=seoul', {
+      waitUntil: 'domcontentloaded',
+    });
+    await expect(page).toHaveURL(/\/places\/seoul$/);
+    expect(
+      regionResponse?.request().redirectedFrom()?.response()?.status()
+    ).toBe(308);
+  });
 });

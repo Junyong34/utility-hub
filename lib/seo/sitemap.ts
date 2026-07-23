@@ -9,7 +9,7 @@ import {
   getPublishablePlacesByRegion,
 } from '../places/place-content.ts';
 import { queryPlaceList } from '../places/place-list-query.ts';
-import { buildPlacePaginationHref } from '../places/place-pagination.ts';
+import { resolvePlaceListIndexingPolicy } from '../places/place-pagination.ts';
 import { SITE_CONFIG } from './metadata.ts';
 import { getAllToolConfigs } from '../../modules/tools/catalog/public.ts';
 import { PHASE_A_REGION_SLUGS } from '../places/region-config.ts';
@@ -310,14 +310,26 @@ function buildPlacePaginationEntries({
 
   return Array.from({ length: totalPages - 1 }, (_, index) => {
     const page = index + 2;
+    const pageResult = queryPlaceList({ region, page });
+    const policy = resolvePlaceListIndexingPolicy({
+      page: pageResult,
+      rawSearchParams: { page: String(page) },
+      region,
+    });
 
-    return {
-      url: `${SITE_CONFIG.url}${buildPlacePaginationHref({ region, page, totalPages })}`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority,
-    };
-  });
+    if (!policy.includeInSitemap) {
+      return [];
+    }
+
+    return [
+      {
+        url: `${SITE_CONFIG.url}${policy.canonicalPath}`,
+        lastModified,
+        changeFrequency: 'weekly' as const,
+        priority,
+      },
+    ];
+  }).flat();
 }
 
 /**

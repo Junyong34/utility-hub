@@ -22,6 +22,7 @@ export function generateMetadata(seo: SEOMetadata): Metadata {
     authors,
     section,
     tags,
+    robots: robotsOverride,
   } = seo;
 
   // Canonical URL 처리
@@ -32,6 +33,10 @@ export function generateMetadata(seo: SEOMetadata): Metadata {
   const fullOgImageUrl = ogImageUrl.startsWith('http')
     ? ogImageUrl
     : `${SITE_CONFIG.url}${ogImageUrl}`;
+  const robots = {
+    index: robotsOverride?.index ?? true,
+    follow: robotsOverride?.follow ?? true,
+  };
 
   // 기본 메타데이터
   const metadata: Metadata = {
@@ -86,11 +91,11 @@ export function generateMetadata(seo: SEOMetadata): Metadata {
 
     // 추가 메타 태그
     robots: {
-      index: true,
-      follow: true,
+      index: robots.index,
+      follow: robots.follow,
       googleBot: {
-        index: true,
-        follow: true,
+        index: robots.index,
+        follow: robots.follow,
         'max-video-preview': -1,
         'max-image-preview': 'large',
         'max-snippet': -1,

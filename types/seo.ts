@@ -141,6 +141,10 @@ export interface SEOMetadata {
   authors?: string[];
   section?: string; // 카테고리/섹션
   tags?: string[];
+  robots?: {
+    index: boolean;
+    follow: boolean;
+  };
 }
 
 /**

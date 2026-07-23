@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { JsonLdMultiple } from '@/components/seo';
 import { RegionHub } from '@/components/places/RegionHub';
 import { PaperPageShell } from '@/shared/ui/paper-page-shell';
@@ -8,7 +8,12 @@ import {
   getRegionBySlug,
   PHASE_A_REGION_SLUGS,
 } from '@/lib/places/region-config';
-import { getPlaceCountByRegion, queryPlaceList } from '@/lib/places';
+import {
+  buildPlaceListRouteQueryOptions,
+  getPlaceCountByRegion,
+  queryPlaceList,
+  resolvePlaceListIndexingPolicy,
+} from '@/lib/places';
 import type { RegionSlug } from '@/types/place-source';
 import {
   SITE_CONFIG,
@@ -35,16 +40,19 @@ export async function generateMetadata({
   const region = getRegionBySlug(regionSlug);
   if (!region) return {};
 
-  const page = queryPlaceList({
-    ...resolvedSearchParams,
-    region: regionSlug as RegionSlug,
-  });
+  const page = queryPlaceList(
+    buildPlaceListRouteQueryOptions({
+      rawSearchParams: resolvedSearchParams,
+      region: regionSlug as RegionSlug,
+    })
+  );
 
   return createMetadata(
     createPlaceRegionMetadataInput(SITE_CONFIG.url, region, {
-      ...resolvedSearchParams,
+      rawSearchParams: resolvedSearchParams,
       page: page.currentPage,
       totalPages: page.totalPages,
+      placeIds: page.places.map(place => place.id),
     })
   );
 }
@@ -58,15 +66,26 @@ export default async function RegionPage({ params, searchParams }: PageProps) {
     notFound();
   }
 
-  const initialPage = queryPlaceList({
-    ...resolvedSearchParams,
+  const initialPage = queryPlaceList(
+    buildPlaceListRouteQueryOptions({
+      rawSearchParams: resolvedSearchParams,
+      region: regionSlug as RegionSlug,
+    })
+  );
+  const indexingPolicy = resolvePlaceListIndexingPolicy({
+    page: initialPage,
+    rawSearchParams: resolvedSearchParams,
     region: regionSlug as RegionSlug,
   });
+
+  if (indexingPolicy.redirectPath) {
+    permanentRedirect(indexingPolicy.redirectPath);
+  }
   const regions = getPhaseARegions();
   const placeCountByRegion = getPlaceCountByRegion();
   const { webPage, breadcrumb } = createPageStructuredData({
     name: `${region.name} 아이와 가볼 곳`,
-    path: `/places/${region.slug}`,
+    path: indexingPolicy.canonicalPath,
     description: region.description,
     breadcrumbs: [
       { name: '홈', url: '/' },

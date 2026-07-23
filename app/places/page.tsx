@@ -1,8 +1,14 @@
 import type { Metadata } from 'next';
+import { permanentRedirect } from 'next/navigation';
 import { JsonLdMultiple } from '@/components/seo';
 import { PlacesHub } from '@/components/places/PlacesHub';
 import { PaperPageShell } from '@/shared/ui/paper-page-shell';
-import { getPlaceCountByRegion, queryPlaceList } from '@/lib/places';
+import {
+  buildPlaceListRouteQueryOptions,
+  getPlaceCountByRegion,
+  queryPlaceList,
+  resolvePlaceListIndexingPolicy,
+} from '@/lib/places';
 import { getPhaseARegions } from '@/lib/places/region-config';
 import {
   SITE_CONFIG,
@@ -19,13 +25,18 @@ export async function generateMetadata({
   searchParams,
 }: PageProps): Promise<Metadata> {
   const resolvedSearchParams = await searchParams;
-  const page = queryPlaceList(resolvedSearchParams);
+  const page = queryPlaceList(
+    buildPlaceListRouteQueryOptions({
+      rawSearchParams: resolvedSearchParams,
+    })
+  );
 
   return createMetadata(
     createPlacesMetadataInput(SITE_CONFIG.url, {
-      ...resolvedSearchParams,
+      rawSearchParams: resolvedSearchParams,
       page: page.currentPage,
       totalPages: page.totalPages,
+      placeIds: page.places.map(place => place.id),
     })
   );
 }
@@ -34,10 +45,22 @@ export default async function PlacesPage({ searchParams }: PageProps) {
   const resolvedSearchParams = await searchParams;
   const regions = getPhaseARegions();
   const placeCountByRegion = getPlaceCountByRegion();
-  const initialPage = queryPlaceList(resolvedSearchParams);
+  const initialPage = queryPlaceList(
+    buildPlaceListRouteQueryOptions({
+      rawSearchParams: resolvedSearchParams,
+    })
+  );
+  const indexingPolicy = resolvePlaceListIndexingPolicy({
+    page: initialPage,
+    rawSearchParams: resolvedSearchParams,
+  });
+
+  if (indexingPolicy.redirectPath) {
+    permanentRedirect(indexingPolicy.redirectPath);
+  }
   const { webPage, breadcrumb } = createPageStructuredData({
     name: '아이와 가볼 곳',
-    path: '/places',
+    path: indexingPolicy.canonicalPath,
     description:
       '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 입니다.',
     breadcrumbs: [{ name: '홈', url: '/' }, { name: '아이와 가볼 곳' }],

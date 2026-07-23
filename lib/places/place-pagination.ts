@@ -3,11 +3,17 @@ import {
   buildPlaceListSearchParams,
   normalizePlaceListFilters,
   normalizePositiveInteger,
+  normalizeRegion,
   type PlaceListQueryOptions,
 } from './place-list-contract.ts';
 import type { RegionSlug } from '../../types/place-source.ts';
 
 type PageValue = string | number | null | undefined | string[];
+
+export type PlaceListRawSearchParams = Record<
+  string,
+  string | string[] | undefined
+>;
 
 interface PlacePaginationHrefOptions {
   region?: RegionSlug | null;
@@ -22,8 +28,75 @@ interface PlacePaginationWindowOptions {
   totalPages: number;
 }
 
+interface PlaceListIndexingPolicyOptions {
+  page: {
+    currentPage: number;
+    totalPages: number;
+    places: Array<{ id: string }>;
+  };
+  rawSearchParams?: PlaceListRawSearchParams;
+  region?: RegionSlug | null;
+}
+
+export interface PlaceListIndexingPolicy {
+  canonicalPath: string;
+  index: boolean;
+  follow: true;
+  includeInSitemap: boolean;
+  redirectPath?: string;
+}
+
+const PLACE_LIST_QUERY_KEYS = new Set([
+  'search',
+  'age',
+  'category',
+  'theme',
+  'season',
+  'indoor',
+  'outdoor',
+  'free',
+  'feeding',
+  'stroller',
+  'rain',
+  'region',
+  'page',
+  'limit',
+]);
+
+const PLACE_LIST_FILTER_QUERY_KEYS = new Set([
+  'search',
+  'age',
+  'category',
+  'theme',
+  'season',
+  'indoor',
+  'outdoor',
+  'free',
+  'feeding',
+  'stroller',
+  'rain',
+]);
+
 export function buildPlaceListPath(region?: RegionSlug | null): string {
   return region ? `/places/${region}` : '/places';
+}
+
+export function buildPlaceListRouteQueryOptions({
+  rawSearchParams,
+  region,
+}: {
+  rawSearchParams: PlaceListRawSearchParams;
+  region?: RegionSlug | null;
+}): PlaceListQueryOptions {
+  const queryRegion = normalizeRegion(
+    getFirstSearchParam(rawSearchParams, 'region')
+  );
+
+  return {
+    ...rawSearchParams,
+    limit: undefined,
+    region: region ?? queryRegion ?? undefined,
+  };
 }
 
 export function buildPlacePaginationHref({
@@ -54,6 +127,73 @@ export function buildPlaceCanonicalPath({
   }
 
   return buildPlacePaginationHref({ region, page, totalPages });
+}
+
+export function resolvePlaceListIndexingPolicy({
+  page,
+  rawSearchParams = {},
+  region = null,
+}: PlaceListIndexingPolicyOptions): PlaceListIndexingPolicy {
+  const rawPage = getFirstSearchParam(rawSearchParams, 'page');
+  const rawLimit = getFirstSearchParam(rawSearchParams, 'limit');
+  const rawRegion = getFirstSearchParam(rawSearchParams, 'region');
+  const queryRegion = normalizeRegion(rawRegion);
+  const targetRegion = region ?? queryRegion;
+  const functionalPath = buildPlacePaginationHref({
+    region: targetRegion,
+    page: page.currentPage,
+    totalPages: page.totalPages,
+    filters: rawSearchParams,
+    preserveFilters: true,
+  });
+
+  if (hasPageNormalizationRedirect(rawPage, page.currentPage)) {
+    return redirectTo(functionalPath);
+  }
+
+  if (rawLimit !== undefined) {
+    return redirectTo(functionalPath);
+  }
+
+  if (rawRegion !== undefined && queryRegion !== null) {
+    return redirectTo(functionalPath);
+  }
+
+  const hasFilterVariation = Object.keys(rawSearchParams).some(key =>
+    PLACE_LIST_FILTER_QUERY_KEYS.has(key)
+  );
+  const hasParameterVariation =
+    hasUnknownSearchParams(rawSearchParams) ||
+    hasDuplicateSearchParams(rawSearchParams) ||
+    rawLimit !== undefined ||
+    rawRegion !== undefined;
+
+  if (hasFilterVariation) {
+    return {
+      canonicalPath: buildPlaceListPath(targetRegion),
+      index: false,
+      follow: true,
+      includeInSitemap: false,
+    };
+  }
+
+  const canonicalPath = buildPlacePaginationHref({
+    region: targetRegion,
+    page: page.currentPage,
+    totalPages: page.totalPages,
+  });
+  const hasUniquePlaceCards =
+    page.places.length > 0 &&
+    new Set(page.places.map(place => place.id)).size === page.places.length;
+  const isIndexablePage = page.currentPage === 1 || hasUniquePlaceCards;
+
+  return {
+    canonicalPath,
+    index: !hasParameterVariation && isIndexablePage,
+    follow: true,
+    includeInSitemap:
+      !hasParameterVariation && page.currentPage > 1 && hasUniquePlaceCards,
+  };
 }
 
 export function buildAbsolutePlaceCanonicalUrl(
@@ -125,6 +265,58 @@ function normalizePaginationPage(page: PageValue, totalPages?: number): number {
 
   const normalizedTotalPages = normalizePositiveInteger(totalPages, 1);
   return Math.min(normalizedPage, normalizedTotalPages);
+}
+
+function redirectTo(redirectPath: string): PlaceListIndexingPolicy {
+  return {
+    canonicalPath: redirectPath,
+    index: true,
+    follow: true,
+    includeInSitemap: false,
+    redirectPath,
+  };
+}
+
+function hasPageNormalizationRedirect(
+  rawPage: string | undefined,
+  currentPage: number
+): boolean {
+  if (rawPage === undefined) {
+    return false;
+  }
+
+  return (
+    !/^[1-9]\d*$/.test(rawPage) ||
+    Number(rawPage) !== currentPage ||
+    currentPage === 1
+  );
+}
+
+function getFirstSearchParam(
+  searchParams: PlaceListRawSearchParams,
+  key: string
+): string | undefined {
+  const value = searchParams[key];
+
+  if (Array.isArray(value)) {
+    return value[0];
+  }
+
+  return value;
+}
+
+function hasUnknownSearchParams(
+  searchParams: PlaceListRawSearchParams
+): boolean {
+  return Object.keys(searchParams).some(key => !PLACE_LIST_QUERY_KEYS.has(key));
+}
+
+function hasDuplicateSearchParams(
+  searchParams: PlaceListRawSearchParams
+): boolean {
+  return Object.values(searchParams).some(
+    value => Array.isArray(value) && value.length > 1
+  );
 }
 
 function normalizeBaseUrl(baseUrl: string): string {

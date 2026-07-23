@@ -1,6 +1,6 @@
 import {
-  buildAbsolutePlaceCanonicalUrl,
-  hasActivePlaceListFilters,
+  resolvePlaceListIndexingPolicy,
+  type PlaceListRawSearchParams,
 } from '../places/place-pagination.ts';
 import { buildBlogPaginationHref } from '../blog/pagination.ts';
 import {
@@ -15,6 +15,10 @@ export interface MetadataInput {
   canonical: string;
   keywords?: string[];
   ogImage?: string;
+  robots?: {
+    index: boolean;
+    follow: boolean;
+  };
 }
 
 interface RegionMetadataSource {
@@ -25,6 +29,8 @@ interface RegionMetadataSource {
 
 type PlaceListMetadataOptions = Partial<PlaceListQueryOptions> & {
   totalPages?: number;
+  placeIds?: string[];
+  rawSearchParams?: PlaceListRawSearchParams;
 };
 
 type PaginationMetadataOptions = {
@@ -71,19 +77,15 @@ export function createPlacesMetadataInput(
   options: PlaceListMetadataOptions = {}
 ): MetadataInput {
   const siteUrl = normalizeBaseUrl(baseUrl);
-  const page = normalizeMetadataPage(options);
-  const hasFilters = hasActivePlaceListFilters(options);
-  const pageSuffix = !hasFilters && page > 1 ? ` - 페이지 ${page}` : '';
+  const { page, policy } = resolvePlaceListMetadata(options);
+  const pageSuffix = policy.index && page > 1 ? ` - 페이지 ${page}` : '';
 
   return {
     title: `아이와 가볼 곳${pageSuffix}`,
     description:
       '서울·경기·인천에서 아이와 가볼 곳을 지역과 조건별로 빠르게 찾을 수 있는 장소 입니다. 출처와 확인 시점을 함께 안내합니다.',
-    canonical: buildAbsolutePlaceCanonicalUrl(siteUrl, {
-      page,
-      totalPages: options.totalPages,
-      filters: options,
-    }),
+    canonical: `${siteUrl}${policy.canonicalPath}`,
+    robots: { index: policy.index, follow: policy.follow },
     keywords: [
       '아이와 가볼 곳',
       '서울 아이와 가볼 곳',
@@ -122,19 +124,14 @@ export function createPlaceRegionMetadataInput(
   options: PlaceListMetadataOptions = {}
 ): MetadataInput {
   const siteUrl = normalizeBaseUrl(baseUrl);
-  const page = normalizeMetadataPage(options);
-  const hasFilters = hasActivePlaceListFilters(options);
-  const pageSuffix = !hasFilters && page > 1 ? ` - 페이지 ${page}` : '';
+  const { page, policy } = resolvePlaceListMetadata(options, region.slug);
+  const pageSuffix = policy.index && page > 1 ? ` - 페이지 ${page}` : '';
 
   return {
     title: `${region.name} 아이와 가볼 곳${pageSuffix}`,
     description: region.description,
-    canonical: buildAbsolutePlaceCanonicalUrl(siteUrl, {
-      region: region.slug as RegionSlug,
-      page,
-      totalPages: options.totalPages,
-      filters: options,
-    }),
+    canonical: `${siteUrl}${policy.canonicalPath}`,
+    robots: { index: policy.index, follow: policy.follow },
     keywords: [
       `${region.name} 아이와 가볼 곳`,
       `${region.name} 키즈카페`,
@@ -152,6 +149,45 @@ function normalizeMetadataPage(options: PaginationMetadataOptions): number {
   }
 
   return Math.min(page, normalizePositiveInteger(options.totalPages, 1));
+}
+
+function resolvePlaceListMetadata(
+  options: PlaceListMetadataOptions,
+  region?: string
+) {
+  const page = normalizeMetadataPage(options);
+  const rawSearchParams = getPlaceListRawSearchParams(options);
+  const placeIds = options.placeIds ?? ['metadata-placeholder'];
+  const policy = resolvePlaceListIndexingPolicy({
+    page: {
+      currentPage: page,
+      totalPages: Math.max(
+        page,
+        normalizePositiveInteger(options.totalPages, page)
+      ),
+      places: placeIds.map(id => ({ id })),
+    },
+    rawSearchParams,
+    region: region as RegionSlug | undefined,
+  });
+
+  return { page, policy };
+}
+
+function getPlaceListRawSearchParams(
+  options: PlaceListMetadataOptions
+): PlaceListRawSearchParams {
+  if (options.rawSearchParams) {
+    return options.rawSearchParams;
+  }
+
+  const {
+    totalPages: _,
+    placeIds: __,
+    rawSearchParams: ___,
+    ...query
+  } = options;
+  return query as PlaceListRawSearchParams;
 }
 
 export function createBlogIndexMetadataInput(

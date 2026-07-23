@@ -24,6 +24,7 @@ test('createPlacesMetadataInput은 unfiltered 페이지네이션 canonical을 �
 
   assert.equal(result.title, '아이와 가볼 곳 - 페이지 2');
   assert.equal(result.canonical, 'https://www.zento.kr/places?page=2');
+  assert.deepEqual(result.robots, { index: true, follow: true });
 });
 
 test('createPlacesMetadataInput은 과한 페이지 canonical을 마지막 페이지로 보정한다', () => {
@@ -44,6 +45,7 @@ test('createPlacesMetadataInput은 필터 URL을 places 대표 URL로 canonical 
 
   assert.equal(result.title, '아이와 가볼 곳');
   assert.equal(result.canonical, 'https://www.zento.kr/places');
+  assert.deepEqual(result.robots, { index: false, follow: true });
 });
 
 test('createBenefitsMetadataInput은 benefits  canonical과 제목을 반환한다', () => {
@@ -107,6 +109,7 @@ test('createPlaceRegionMetadataInput은 지역 필터 URL을 지역 대표 URL�
 
   assert.equal(result.title, '서울 아이와 가볼 곳');
   assert.equal(result.canonical, 'https://www.zento.kr/places/seoul');
+  assert.deepEqual(result.robots, { index: false, follow: true });
 });
 
 test('주요 네비게이션 페이지는 서로 다른 정적 OG 이미지를 반환한다', () => {
