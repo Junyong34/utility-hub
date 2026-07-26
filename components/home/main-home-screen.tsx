@@ -210,14 +210,16 @@ export function MainHomeScreen({ featuredPlaces }: MainHomeScreenProps) {
 function HeroSection() {
   return (
     <section className="relative min-h-[39rem] overflow-hidden border-b border-beige-deep/60 bg-cream-soft sm:min-h-[38rem] lg:min-h-[35rem] xl:min-h-[36rem]">
-      <Image
-        src="/images/home/main-hero-family.webp"
-        alt="실내 식물원에서 전시를 바라보는 엄마와 아이"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[74%_center] sm:object-[63%_center]"
-      />
+      <div className="absolute inset-y-0 right-0 w-full max-w-[1920px]">
+        <Image
+          src="/images/home/main-hero-family.webp"
+          alt="실내 식물원에서 전시를 바라보는 엄마와 아이"
+          fill
+          priority
+          sizes="(min-width: 1920px) 1920px, 100vw"
+          className="object-cover object-[74%_50%] sm:object-[63%_38%] lg:object-[63%_30%] 2xl:object-[63%_22%]"
+        />
+      </div>
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,253,248,0.98)_0%,rgba(255,253,248,0.92)_48%,rgba(255,248,231,0.42)_100%)] sm:bg-[linear-gradient(90deg,rgba(255,253,248,0.96)_0%,rgba(255,253,248,0.9)_24%,rgba(255,248,231,0.52)_48%,rgba(255,248,231,0.12)_72%,rgba(255,248,231,0)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_30%,rgba(255,178,56,0.32),transparent_28%)]" />
 
