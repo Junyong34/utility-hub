@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { unified } from 'unified';
+import remarkGfm from 'remark-gfm';
+import remarkParse from 'remark-parse';
 
 const POST_SLUG = 'siheung-thebay54-aquarium-guide';
 const PLACE_ID = 'gyeonggi-south-siheung-thebay54-aquarium';
@@ -37,4 +40,17 @@ test('더베이54 가이드는 장소와 연결된 이미지 없는 방문 정�
   assert.equal((faqContent.match(/^### /gm) ?? []).length, 6);
   assert.deepEqual(place.linkedPostSlugs, [POST_SLUG]);
   assert.equal(place.thumbnailImage, undefined);
+
+  const markdownTree = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .parse(post.content);
+  const deleteNodes = [];
+  const collectDeleteNodes = node => {
+    if (node.type === 'delete') deleteNodes.push(node);
+    for (const child of node.children ?? []) collectDeleteNodes(child);
+  };
+  collectDeleteNodes(markdownTree);
+
+  assert.deepEqual(deleteNodes, []);
 });
