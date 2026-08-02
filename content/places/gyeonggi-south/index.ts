@@ -3694,4 +3694,41 @@ export const GYEONGGI_SOUTH_PLACES = [
       },
     ],
   },
+  {
+    id: 'gyeonggi-south-siheung-thebay54-aquarium',
+    name: '더베이54 관상어 테마파크',
+    linkedPostSlugs: ['siheung-thebay54-aquarium-guide'],
+    region: 'gyeonggi-south',
+    subRegion: '시흥시',
+    category: 'experience',
+    themes: ['animal'],
+    ageBands: ['3-6y', '6-10y'],
+    indoorOutdoor: 'indoor',
+    seasons: ['all-season'],
+    priceType: 'paid',
+    parking: true,
+    sourceType: 'semi-official',
+    sourceUrl: 'https://mom-mom.net/shop/products/6a6c3096aa68b041fc82c880',
+    verifiedAt: '2026-08-02',
+    lastObservedAt: '2026-08-02',
+    verificationStatus: 'semi_verified',
+    description:
+      '시흥 거북섬 아쿠아펫랜드 D동에 있는 관상어 중심의 실내 테마파크. 아이와 함께 위치·요금·주차 정보를 확인하고 방문하기 좋은 장소다.',
+    address: '경기도 시흥시 거북섬북로 54 아쿠아펫랜드 D동',
+    operatingHours: '판매처 표기 10:00~19:00; 방문 전 재확인',
+    priceInfo: '판매처 표시 정상가 17,000원; 기간 한정 프로모션은 방문 전 확인',
+    rainFriendly: true,
+    operatorType: 'commercial',
+    editorNote:
+      '판매처 표기 기준으로 주소·운영시간·가격·무료 주차를 정리했다. D동 내 정확한 입구 층과 현장 동선은 방문 당일 표지를 우선한다.',
+    externalBlogLinks: [
+      {
+        title: '사용자 제공 네이버 방문기｜더베이54 방문 관찰',
+        href: 'https://m.blog.naver.com/joyoontime/224364770012',
+        sourceLabel: 'Naver Blog · 방문 관찰',
+        description:
+          '주차장 동선, 전시 구성, 아이 동반 편의와 체류 사례를 참고할 수 있는 방문기다.',
+      },
+    ],
+  },
 ] satisfies PlaceSource[];

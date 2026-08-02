@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {
   ArrowLeftIcon,
   BabyIcon,
+  BookOpenIcon,
   Building2Icon,
   CalendarCheckIcon,
   CarIcon,
@@ -114,6 +115,17 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
   const parkingGuideSlug = place.linkedPostSlugs?.find(
     slug => slug === `${place.id}-parking`
   );
+  const relatedGuideSlugs = Array.from(
+    new Set(
+      (place.linkedPostSlugs ?? []).filter(
+        slug => slug.trim() && slug !== parkingGuideSlug
+      )
+    )
+  );
+  const verificationNotice =
+    place.reservationRequired === undefined
+      ? '요금과 휴무 정보는 방문 직전에'
+      : '요금, 휴무, 예약 가능 여부는 방문 직전에';
 
   return (
     <main className="bg-[linear-gradient(180deg,var(--cream-soft)_0%,var(--canvas)_34%,var(--surface)_100%)] md:pt-24">
@@ -249,13 +261,15 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
                 label="요금"
                 value={place.priceInfo ?? PRICE_TYPE_LABELS[place.priceType]}
               />
-              <DetailFact
-                icon={CalendarCheckIcon}
-                label="예약"
-                value={
-                  place.reservationRequired ? '예약 권장/필수' : '예약 없음'
-                }
-              />
+              {place.reservationRequired !== undefined ? (
+                <DetailFact
+                  icon={CalendarCheckIcon}
+                  label="예약"
+                  value={
+                    place.reservationRequired ? '예약 권장/필수' : '예약 없음'
+                  }
+                />
+              ) : null}
               <DetailFact
                 icon={CarIcon}
                 label="주차"
@@ -274,8 +288,8 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
                   {verificationLabel}
                 </p>
                 <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                  요금, 휴무, 예약 가능 여부는 방문 직전에{' '}
-                  {verificationTargetLabel}에서 한 번 더 확인하세요.
+                  {verificationNotice} {verificationTargetLabel}에서 한 번 더
+                  확인하세요.
                 </p>
               </div>
             </div>
@@ -376,6 +390,37 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
                   <CarIcon className="h-4 w-4" />
                   주차 이용방법·꿀팁 자세히 보기
                 </Link>
+              </div>
+            </section>
+          ) : null}
+
+          {relatedGuideSlugs.length > 0 ? (
+            <section className="rounded-[28px] border border-primary/20 bg-[linear-gradient(135deg,var(--cream-soft),var(--canvas))] p-5 shadow-card sm:p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-[12px] font-bold tracking-[0.18em] text-primary-deep uppercase">
+                    관련 정보 가이드
+                  </p>
+                  <h2 className="mt-2 text-xl font-bold text-foreground">
+                    방문 전에 읽어볼 글
+                  </h2>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    위치·요금·주차처럼 방문 전에 확인할 내용을 한 번에
+                    정리했습니다.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  {relatedGuideSlugs.map(slug => (
+                    <Link
+                      key={slug}
+                      href={`/blog/places/${slug}`}
+                      className="inline-flex h-11 items-center justify-center gap-2 rounded-[14px] bg-primary px-4 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary-deep"
+                    >
+                      <BookOpenIcon className="h-4 w-4" />
+                      장소 가이드 읽기
+                    </Link>
+                  ))}
+                </div>
               </div>
             </section>
           ) : null}

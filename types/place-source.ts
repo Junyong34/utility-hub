@@ -99,8 +99,8 @@ export interface PlaceCardFields {
   seasons: PlaceSeason[];
   /** 가격 유형 */
   priceType: PriceType;
-  /** 사전 예약 필요 여부 */
-  reservationRequired: boolean;
+  /** 사전 예약 필요 여부. 이번 확인 범위에서 제외한 장소는 생략할 수 있다. */
+  reservationRequired?: boolean;
   /** 주차 가능 여부 */
   parking: boolean;
 }

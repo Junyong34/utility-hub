@@ -6,6 +6,7 @@ const NEW_ANIMAL_PLACE_IDS = [
   'gyeonggi-south-seoul-grand-park-zoo',
   'gyeonggi-south-anseong-farmland',
   'gyeonggi-south-siheung-bugsrium',
+  'gyeonggi-south-siheung-thebay54-aquarium',
   'gyeonggi-south-osan-bird-park',
   'gyeonggi-south-yangpyeong-insect-museum',
   'gyeonggi-south-bucheon-nature-ecology-park',
@@ -59,10 +60,22 @@ test('places index aggregates current region seeds', async () => {
   } = await import('./index.ts');
 
   assert.equal(SEOUL_PLACES.length, 108);
-  assert.equal(GYEONGGI_SOUTH_PLACES.length, 67);
+  assert.equal(GYEONGGI_SOUTH_PLACES.length, 68);
   assert.equal(GYEONGGI_NORTH_PLACES.length, 40);
   assert.equal(INCHEON_PLACES.length, 42);
-  assert.equal(ALL_PLACES.length, 257);
+  assert.equal(ALL_PLACES.length, 258);
+});
+
+test('thebay54 publishes without reservation or thumbnail fields when those are out of scope', async () => {
+  const { ALL_PLACES } = await import('./index.ts');
+  const place = ALL_PLACES.find(
+    candidate => candidate.id === 'gyeonggi-south-siheung-thebay54-aquarium'
+  );
+
+  assert.ok(place);
+  assert.equal(place.reservationRequired, undefined);
+  assert.equal(place.thumbnailImage, undefined);
+  assert.deepEqual(place.linkedPostSlugs, ['siheung-thebay54-aquarium-guide']);
 });
 
 test('new animal experience places remain publishable and include a visit reference', async () => {
