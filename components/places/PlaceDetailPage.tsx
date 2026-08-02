@@ -19,6 +19,11 @@ import {
 } from 'lucide-react';
 import { PlaceAddressCopyButton } from './PlaceAddressCopyButton';
 import { PlaceBlogReviewSection } from './PlaceBlogReviewSection';
+import {
+  getPlaceSourceLinkLabel,
+  getPlaceVerificationLabel,
+  getPlaceVerificationTargetLabel,
+} from './place-trust-labels';
 import { getPlaceNaverMapUrl } from '@/lib/places/place-map-links';
 import type { RegionConfig } from '@/lib/places/region-config';
 import type {
@@ -99,7 +104,9 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
   const heroImage = getHeroImage(place);
   const ageSummary = getAgeSummary(place);
   const seasonSummary = getSeasonSummary(place);
-  const verifiedDate = formatShortDate(place.verifiedAt);
+  const sourceLinkLabel = getPlaceSourceLinkLabel(place);
+  const verificationLabel = getPlaceVerificationLabel(place);
+  const verificationTargetLabel = getPlaceVerificationTargetLabel(place);
   const placeAddress = place.address ?? place.subRegion;
   const hasReviews =
     Boolean(place.blogReviewHighlights?.length) ||
@@ -210,7 +217,7 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
                     className="inline-flex h-14 items-center justify-center gap-3 rounded-[14px] border border-white/78 bg-white/6 px-7 text-base font-bold text-on-dark shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 sm:min-w-[16rem]"
                   >
                     <ShieldCheckIcon className="h-6 w-6" />
-                    공식 정보 확인
+                    {sourceLinkLabel}
                   </Link>
                 ) : null}
               </div>
@@ -219,7 +226,7 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
 
           <div className="absolute right-7 bottom-8 z-10 hidden items-center gap-2 text-base font-semibold text-on-dark/82 md:flex">
             <ShieldCheckIcon className="h-5 w-5" />
-            <span>공식 확인 {verifiedDate}</span>
+            <span>{verificationLabel}</span>
           </div>
         </div>
       </section>
@@ -235,7 +242,7 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
               <DetailFact
                 icon={ClockIcon}
                 label="운영 시간"
-                value={place.operatingHours ?? '공식 정보 확인 필요'}
+                value={place.operatingHours ?? '운영 시간 확인 필요'}
               />
               <DetailFact
                 icon={TicketIcon}
@@ -264,11 +271,11 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
               </div>
               <div>
                 <p className="text-sm font-bold text-foreground">
-                  공식 확인 {verifiedDate}
+                  {verificationLabel}
                 </p>
                 <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                  요금, 휴무, 예약 가능 여부는 방문 직전에 공식 페이지에서 한 번
-                  더 확인하세요.
+                  요금, 휴무, 예약 가능 여부는 방문 직전에{' '}
+                  {verificationTargetLabel}에서 한 번 더 확인하세요.
                 </p>
               </div>
             </div>
@@ -388,7 +395,7 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
                   방문 전 최종 확인
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                  공식 페이지와 지도를 함께 열어 운영 정보와 이동 동선을
+                  확인한 출처와 지도를 함께 열어 운영 정보와 이동 동선을
                   확인하세요.
                 </p>
               </div>
@@ -412,7 +419,7 @@ export function PlaceDetailPage({ place, region }: PlaceDetailPageProps) {
                     className="inline-flex h-11 items-center justify-center gap-2 rounded-[14px] border border-hairline-strong bg-canvas px-4 text-sm font-bold text-foreground transition-colors hover:border-primary/35"
                   >
                     <ExternalLinkIcon className="h-4 w-4" />
-                    공식 정보
+                    {sourceLinkLabel}
                   </Link>
                 ) : null}
               </div>
@@ -521,9 +528,7 @@ function getConvenienceSummary(place: PlaceSource): string {
     place.parking ? '주차' : null,
   ].filter(Boolean);
 
-  return conveniences.length > 0 ? conveniences.join(' · ') : '공식 정보 확인';
-}
-
-function formatShortDate(date: string): string {
-  return date.replaceAll('-', '.');
+  return conveniences.length > 0
+    ? conveniences.join(' · ')
+    : '편의 정보 확인 필요';
 }

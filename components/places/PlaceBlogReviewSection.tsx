@@ -27,7 +27,7 @@ export function PlaceBlogReviewSection({
 
   return (
     <section
-      aria-label="블로그 후기"
+      aria-label="관련 글과 후기"
       className={cn(
         'relative overflow-hidden rounded-[18px] border border-primary/20 bg-[linear-gradient(145deg,color-mix(in_srgb,var(--primary)_5%,var(--canvas)),color-mix(in_srgb,var(--sunshine-300)_14%,var(--canvas)))] p-3.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.78),0_10px_26px_rgba(78,49,24,0.07)] transition-all duration-300 ease-out group-hover:border-primary/30 sm:p-4',
         className
@@ -38,7 +38,7 @@ export function PlaceBlogReviewSection({
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[11px] font-bold tracking-[0.08em] text-primary-deep/80 uppercase">
-            블로그 후기
+            관련 글·후기
           </p>
           <h4
             className="mt-1 text-[1rem] font-semibold leading-tight text-foreground"
@@ -46,7 +46,7 @@ export function PlaceBlogReviewSection({
               fontFamily: 'var(--font-editorial)',
             }}
           >
-            방문 전 읽어볼 후기
+            방문 전 읽어볼 글
           </h4>
         </div>
 
@@ -83,7 +83,7 @@ export function PlaceBlogReviewSection({
       {visibleExternalLinks.length > 0 ? (
         <div className="mt-3 border-t border-primary/15 pt-3">
           <p className="text-[12px] font-semibold text-primary-deep/85">
-            외부 블로그 링크
+            외부 방문 후기 링크
           </p>
           <div className="mt-2 grid gap-2">
             {visibleExternalLinks.map(link => (
