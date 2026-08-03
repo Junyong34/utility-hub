@@ -4,7 +4,6 @@ import { TooltipProvider } from '@/shared/ui/tooltip';
 import { useHomeBuyingFundsCalculator } from './hooks/useHomeBuyingFundsCalculator';
 import { HomeBuyingInputSection } from './sections/HomeBuyingInputSection';
 import { HomeBuyingResultSection } from './sections/HomeBuyingResultSection';
-import { HomeBuyingFundsCalculatorFAQ } from './HomeBuyingFundsCalculatorFAQ';
 
 export function HomeBuyingFundsCalculatorForm() {
   const { input, result, setState, reset } = useHomeBuyingFundsCalculator();
@@ -36,9 +35,6 @@ export function HomeBuyingFundsCalculatorForm() {
             />
           </div>
         </div>
-
-        {/* FAQ */}
-        <HomeBuyingFundsCalculatorFAQ />
       </div>
     </TooltipProvider>
   );

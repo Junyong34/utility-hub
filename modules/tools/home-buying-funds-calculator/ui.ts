@@ -15,6 +15,7 @@ export {
   STAGE_LABELS,
 } from './ui/constants.ts';
 export { CashGapCard } from './ui/components/CashGapCard.tsx';
+export { HomeBuyingFundsGuideSection } from './ui/components/HomeBuyingFundsGuideSection.tsx';
 export { SpendingFlowChart } from './ui/components/SpendingFlowChart.tsx';
 export {
   NATIONAL_HOUSING_BOND_GUIDE_ROWS,

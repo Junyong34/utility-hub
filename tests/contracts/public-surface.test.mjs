@@ -107,7 +107,7 @@ const EXPECTED_TOOL_CONFIG_DIGESTS = {
     '9d2d945dd153070174189494110bc13f775de3b748b88d32ecedc814a952f42f',
   pomodoro: '13b2526d85708311b7d1392ed9f3866e4b32c388d10dab5ebc85b688dd60cd3d',
   'home-buying-funds-calculator':
-    '426f47ba6da600e71b4dddc2f3bb86068211adb4902ef43a88cb2ca764aaf58a',
+    '3c13631863b3c05b521cfb58c24af0d61304f3fd89867ec713e051efdf82d5ff',
 };
 
 function listFiles(directory) {
@@ -397,7 +397,7 @@ test('도구 catalog는 ID 순서와 metadata·FAQ·HowTo·OG 입력 shape를 �
       category: 'calculator',
       ogImage: '/og-images/post/home-buying-funds.webp',
       badge: '인기',
-      faqCount: 6,
+      faqCount: 8,
       howToCount: 5,
       applicationCategory: 'FinanceApplication',
       estimatedTime: 'PT3M',

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import { Breadcrumb, JsonLdMultiple } from '@/components/seo';
 import { HomeBuyingFundsCalculatorForm } from '@/modules/tools/home-buying-funds-calculator/client';
+import { HomeBuyingFundsGuideSection } from '@/modules/tools/home-buying-funds-calculator/ui';
 import {
   ToolCatalogProvider,
   ToolSwitcher,
@@ -59,6 +60,8 @@ export default function HomeBuyingFundsCalculatorPage() {
             >
               <HomeBuyingFundsCalculatorForm />
             </Suspense>
+
+            <HomeBuyingFundsGuideSection />
           </main>
         </div>
       </ToolCatalogProvider>
