@@ -3,6 +3,7 @@ import type { ToolManifest } from '../../../../shared/contracts/tool-manifest.ts
 export const HOME_BUYING_FUNDS_CALCULATOR_MANIFEST = {
   id: 'home-buying-funds-calculator',
   name: '주택 구입 비용 계산기',
+  seoTitle: '주택 구입 비용 계산기 – 아파트 매매 취득세·부대비용 계산',
   shortName: '주택 구입 비용 계산기',
   breadcrumbLabel: '주택 구입 비용 계산기',
   publishedAt: '2026-03-25',

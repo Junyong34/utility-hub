@@ -30,6 +30,8 @@ export interface ToolHomeFeaturedMeta {
 export interface ToolManifest {
   id: string;
   name: string;
+  /** 검색 결과 <title> 전용 문구. 미지정 시 name 사용. h1/카드에는 영향 없음 */
+  seoTitle?: string;
   shortName?: string;
   breadcrumbLabel?: string;
   description: string;

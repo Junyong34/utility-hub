@@ -24,4 +24,13 @@ test.describe('주택 구입 비용 계산기 SSR SEO', () => {
     expect(html).toContain('세법·요율 기준');
     expect(html).toContain('"dateModified"');
   });
+
+  test('title_includes_apartment_and_acquisition_tax_keywords', async ({
+    request,
+  }) => {
+    const html = await (await request.get(PAGE_PATH)).text();
+    expect(html).toMatch(
+      /<title>주택 구입 비용 계산기 – 아파트 매매 취득세·부대비용 계산 \| Zento<\/title>/
+    );
+  });
 });
