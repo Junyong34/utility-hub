@@ -11,6 +11,7 @@ import type {
 import {
   calculateAcquisitionTax,
   calculateLocalEducationTax,
+  calculateLocalEducationTaxBase,
   calculateRuralSpecialTax,
   calculateRegistrationTax,
   calculateStampTax,
@@ -65,9 +66,12 @@ export function calculateHomeBuyingFunds(
       : '주택 수, 지역, 면적 기준 자동 계산',
   });
 
-  // 지방교육세
+  // 지방교육세 (과세표준은 감면 전 표준세율 기준 산출세액 — calculateLocalEducationTaxBase 참고)
   const localEducationTax =
-    input.manualLocalEducationTax ?? calculateLocalEducationTax(acquisitionTax);
+    input.manualLocalEducationTax ??
+    calculateLocalEducationTax(
+      calculateLocalEducationTaxBase(input, acquisitionTax)
+    );
   breakdown.push({
     id: 'local-education-tax',
     stage: 'balance',

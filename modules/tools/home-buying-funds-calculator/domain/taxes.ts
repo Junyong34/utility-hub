@@ -17,21 +17,41 @@ const STANDARD_RATE_UPPER_THRESHOLD = 900_000_000; // 9억원
 /**
  * 무주택자·1주택자의 유상거래 주택 취득 표준세율 기준 산출세액
  * 「지방세법」 제11조제1항제8호 가목~다목
+ *
+ * 나목 구간은 BigInt 정수 연산으로 계산한다. `(salePrice / 300_000_000) * 2 - 3`처럼
+ * 부동소수점 나눗셈을 거치면 이진수로 정확히 표현되지 않는 값(예: 0.01005)이 생겨
+ * 정확히 .5에서 반올림해야 하는 지점(예: 600,750,000원 → 1.005% → 1.01%)에서
+ * `Math.round`가 100.5 대신 99.99999999999999… 같은 값을 보고 한 자리 낮게
+ * 반올림하는 사례가 실측으로 확인됐다(200개 tie 중 61개). 아래는 그 오차를 원천 차단한다.
  */
-function calculateStandardHomeAcquisitionTax(salePrice: number): number {
+export function calculateStandardHomeAcquisitionTax(salePrice: number): number {
+  // 리포지토리 tsconfig의 target(ES2017)이 BigInt 리터럴(`1n`) 문법을 emit할 수 없어
+  // `BigInt(...)` 함수 호출 형태만 사용한다(값 자체는 리터럴과 동일하게 동작한다).
+  const price = BigInt(salePrice);
+
   if (salePrice <= STANDARD_RATE_LOWER_THRESHOLD) {
-    return Math.floor(salePrice * 0.01); // 가목: 1%
+    // 가목: 1천분의 10 = 1%. BigInt 정수 나눗셈(양수이므로 절사=버림)으로 계산해
+    // 부동소수점 표현 오차 가능성을 배제한다.
+    return Number((price * BigInt(1)) / BigInt(100));
   }
 
   if (salePrice <= STANDARD_RATE_UPPER_THRESHOLD) {
-    // 나목: (취득당시가액 × 2 / 3억원 − 3) × 1/100, 소수점 넷째자리까지 반올림
-    const rawRate = (salePrice / 300_000_000) * 2 - 3;
-    const percentRate = rawRate / 100;
-    const roundedRate = Math.round(percentRate * 10_000) / 10_000;
-    return Math.floor(salePrice * roundedRate);
+    // 나목: 세율 = (취득당시가액 × 2 / 3억원 − 3) × 1/100, 소수점 다섯째자리에서
+    // 반올림하여 넷째자리까지 계산한다.
+    //
+    // 세율 × 10000 = (2 × salePrice − 9억) / 300만 을 정수(BigInt) 연산으로 구한다.
+    // 이 구간(6억 초과 9억 이하)에서는 분자가 항상 양수이므로,
+    // round-half-up(a / b) = floor((a + b/2) / b) (b가 짝수일 때 항상 성립) 공식을
+    // 그대로 정수 나눗셈에 적용하면 부동소수점을 전혀 거치지 않고 정확한 반올림을 얻는다.
+    const numerator = BigInt(2) * price - BigInt(900_000_000);
+    const divisor = BigInt(3_000_000); // 항상 짝수
+    const roundedRatePer10000 = (numerator + divisor / BigInt(2)) / divisor;
+    // 산출세액 = salePrice × (roundedRatePer10000 / 10000), 원 단위 절사(버림)
+    return Number((price * roundedRatePer10000) / BigInt(10_000));
   }
 
-  return Math.floor(salePrice * 0.03); // 다목: 3%
+  // 다목: 1천분의 30 = 3%
+  return Number((price * BigInt(3)) / BigInt(100));
 }
 
 /**
@@ -96,8 +116,46 @@ export function calculateAcquisitionTax(input: HomeBuyingInput): number {
 }
 
 /**
+ * 지방교육세 과세표준(취득세분) 계산.
+ *
+ * 「지방세법」 제151조제1항제1호 본문 + 제11조제1항제8호 특칙(law.go.kr, MST=282559,
+ * JO=015100, 조문시행일자 2026-01-01) 원문:
+ *   "취득물건에 대하여 … 과세표준에 제11조제1항제1호부터 제7호까지와 제12조의 세율에서
+ *   1천분의 20을 뺀 세율을 적용하여 산출한 금액(제11조제1항제8호의 경우에는 해당 세율에
+ *   100분의 50을 곱한 세율을 적용하여 산출한 금액)의 100분의 20."
+ * 즉 주택 유상취득(제8호)의 지방교육세는 "과세표준 × (제8호 표준세율 × 50%) × 20%"이며,
+ * 이는 표준세율 기준 산출세액 × 10%와 같다 — 실제로 감면을 받았는지와 무관하게 표준세율
+ * 기준으로 계산한다는 뜻이다.
+ *
+ * 다만 같은 항 제1호다목은 "지방세감면법령에서 취득세의 감면율을 정하는 경우"에 한해
+ * 지방교육세도 같은 감면율만큼 줄여준다고 정하는데, 「지방세특례제한법」 제36조의3의 생애최초
+ * 감면은 비율(%)이 아니라 정액(200만원) 공제 방식이라 이 다목의 "감면율"에 해당하지 않는다.
+ * 따라서 생애최초 감면이 적용돼도 지방교육세 과세표준은 줄어들지 않고, 감면 전 표준세율
+ * 기준 산출세액을 그대로 사용해야 한다.
+ *
+ * 이 보정은 무주택자·1주택자(제11조제1항제8호가 실제로 적용되는 구간)에 자동 계산으로
+ * 생애최초 감면이 적용된 경우에만 유효하다. 사용자가 취득세를 직접 입력했다면(manualAcquisitionTax)
+ * 그 값을 그대로 지방교육세 기준으로 쓴다. 다주택 중과(제13조의2, 제151조제1항제1호나목 적용
+ * 대상)는 이번 검증 범위 밖이라 손대지 않고 기존처럼 실제 취득세를 그대로 사용한다.
+ */
+export function calculateLocalEducationTaxBase(
+  input: HomeBuyingInput,
+  acquisitionTax: number
+): number {
+  const isAutoCalculatedFirstTimeRelief =
+    input.manualAcquisitionTax === undefined &&
+    input.isFirstTime &&
+    input.houseCount === 0 &&
+    input.salePrice <= 1_200_000_000;
+
+  return isAutoCalculatedFirstTimeRelief
+    ? calculateStandardHomeAcquisitionTax(input.salePrice)
+    : acquisitionTax;
+}
+
+/**
  * 지방교육세 계산
- * 취득세의 10%
+ * 과세표준(취득세분 산출세액, `calculateLocalEducationTaxBase` 참고)의 10%
  */
 export function calculateLocalEducationTax(acquisitionTax: number): number {
   return Math.floor(acquisitionTax * 0.1);
@@ -106,6 +164,22 @@ export function calculateLocalEducationTax(acquisitionTax: number): number {
 /**
  * 농어촌특별세 계산
  * 조건에 따라 취득세의 10% 또는 면제
+ *
+ * ⚠ 미해결 사항(2026-08-03 fix round 1 조사): 「농어촌특별세법」 제5조제1항(law.go.kr,
+ * MST=285905, JO=000500)에는 이 세액 계산에 관련될 수 있는 항목이 최소 두 개 있다.
+ *   - 제1호: "「지방세법」 및 「지방세특례제한법」에 따라 감면을 받는 … 취득세 … 의 감면세액"의
+ *     100분의 20 — 즉 "감면받은 금액" 자체에 20%를 물리는 항목.
+ *   - 제6호: "「지방세법」 제11조 및 제12조의 표준세율을 100분의 2로 적용하여 … 산출한
+ *     취득세액"의 100분의 10 — 즉 실제 적용 세율과 무관하게 "2%로 의제한 가상의 취득세액"에
+ *     10%를 물리는 항목.
+ * 아래 구현은 이 둘 중 어느 것도 아닌 "실제 취득세액 × 10%"라는 기존 근사식을 그대로 쓰고
+ * 있다. 제1호와 제6호가 이 사안(생애최초 감면을 받은 유상취득 주택)에 동시에 적용되는지,
+ * 배타적으로 적용되는지, 「지방세특례제한법」 제36조의3처럼 정액 공제형 감면의 "감면세액"을
+ * 제1호가 어떻게 산정하는지를 조문 원문만으로는 확정하지 못했다(농어촌특별세법 제4조 비과세
+ * 목록도 확인했으나 제36조의3은 열거되어 있지 않다 — 즉 제1호 과세대상에서 제외되지 않는다는
+ * 것만 확인됨). 잘못 추측해 고치는 대신, 이번 fix round에서는 기존 동작(감면 후 취득세 ×
+ * 10%, 85㎡ 이하 국민주택 규모는 비과세)을 그대로 유지한다. 별도 태스크로 제1호·제6호의
+ * 적용 관계를 확정한 뒤 다시 검토해야 한다.
  */
 export function calculateRuralSpecialTax(
   input: HomeBuyingInput,
@@ -122,7 +196,7 @@ export function calculateRuralSpecialTax(
     return 0;
   }
 
-  // 그 외 취득세의 10%
+  // 그 외 취득세의 10% (위 미해결 사항 참고)
   return Math.floor(acquisitionTax * 0.1);
 }
 
