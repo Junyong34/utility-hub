@@ -82,10 +82,12 @@ export function HomeBuyingFundsGuideSection() {
       </section>
 
       <p className="text-xs text-muted-foreground">
-        세법·요율 기준: 취득세·중개보수·국민주택채권 계산은{' '}
+        세법·요율 기준: 취득세·지방교육세 계산은{' '}
         {HOME_BUYING_FUNDS_CALCULATOR_MANIFEST.updatedAt} 확인 기준의 법정
-        세율·상한 요율을 따릅니다. 정책 변경 시 실제 금액과 다를 수 있으며, 최종
-        계약 전 세무사·법무사 확인이 필요합니다.
+        세율을 따릅니다. 중개보수·국민주택채권·인지세·등록면허세는 근사치로
+        계산되어 실제 법정 기준과 다를 수 있으니, 위 가이드에서 차이를 확인하고
+        필요하면 직접 입력으로 바꿔 쓰세요. 최종 계약 전 세무사·법무사 확인도
+        함께 받으시길 권합니다.
       </p>
     </div>
   );
