@@ -6,6 +6,7 @@ export const HOME_BUYING_FUNDS_CALCULATOR_MANIFEST = {
   shortName: '주택 구입 비용 계산기',
   breadcrumbLabel: '주택 구입 비용 계산기',
   publishedAt: '2026-03-25',
+  updatedAt: '2026-08-03',
   ogImage: '/og-images/post/home-buying-funds.webp',
   description:
     '집 살 때 필요한 돈과 아파트 매매 부대비용을 한 번에 계산하는 주택 구입 비용 계산기입니다. 취득세, 중개보수, 등기비용, 국민주택채권, 법무사 비용은 물론 대출 제외 자기자본과 실제 필요자금까지 바로 확인할 수 있습니다.',

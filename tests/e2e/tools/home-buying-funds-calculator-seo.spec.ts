@@ -16,4 +16,12 @@ test.describe('주택 구입 비용 계산기 SSR SEO', () => {
     expect(html).toContain('사용 방법');
     expect(html).toContain('시가표준액은 무엇인가요?');
   });
+
+  test('shows_tax_basis_date_and_date_modified_in_initial_html', async ({
+    request,
+  }) => {
+    const html = await (await request.get(PAGE_PATH)).text();
+    expect(html).toContain('세법·요율 기준');
+    expect(html).toContain('"dateModified"');
+  });
 });

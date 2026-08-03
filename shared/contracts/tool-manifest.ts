@@ -34,6 +34,8 @@ export interface ToolManifest {
   breadcrumbLabel?: string;
   description: string;
   publishedAt: string;
+  /** 세법·요율 등 기준 데이터의 최종 확인일 (ISO YYYY-MM-DD) */
+  updatedAt?: string;
   keywords: string[];
   category: ToolCategory;
   ogImage?: string;

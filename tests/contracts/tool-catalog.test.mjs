@@ -47,7 +47,7 @@ const EXPECTED_MANIFEST_DIGESTS = {
     '9d2d945dd153070174189494110bc13f775de3b748b88d32ecedc814a952f42f',
   pomodoro: '13b2526d85708311b7d1392ed9f3866e4b32c388d10dab5ebc85b688dd60cd3d',
   'home-buying-funds-calculator':
-    '3c13631863b3c05b521cfb58c24af0d61304f3fd89867ec713e051efdf82d5ff',
+    'bb8b63f3e69c6da92e4797e37ad0d3827c13c7be89f4b2df68729e7ffd52f0c6',
 };
 
 const EXPECTED_LEGACY_RUNTIME_EXPORTS = [

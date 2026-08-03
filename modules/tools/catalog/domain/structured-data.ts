@@ -9,6 +9,8 @@ interface WebPageSchema {
   url: string;
   description?: string;
   inLanguage: 'ko-KR';
+  datePublished?: string;
+  dateModified?: string;
   isPartOf: {
     '@type': 'WebSite';
     name: string;
@@ -100,7 +102,13 @@ export type ToolStructuredDataItem =
 
 function buildWebPageSchema(
   site: CatalogSiteContext,
-  page: { name: string; path: string; description?: string }
+  page: {
+    name: string;
+    path: string;
+    description?: string;
+    datePublished?: string;
+    dateModified?: string;
+  }
 ): WebPageSchema {
   return {
     '@context': 'https://schema.org',
@@ -109,6 +117,8 @@ function buildWebPageSchema(
     url: `${site.url}${page.path}`,
     description: page.description,
     inLanguage: 'ko-KR',
+    datePublished: page.datePublished,
+    dateModified: page.dateModified,
     isPartOf: {
       '@type': 'WebSite',
       name: site.name,
@@ -212,6 +222,8 @@ export function buildToolStructuredData(
       name: tool.name,
       path: `/tools/${tool.id}`,
       description: tool.description,
+      datePublished: tool.publishedAt,
+      dateModified: tool.updatedAt ?? tool.publishedAt,
     }),
     breadcrumb: buildBreadcrumbSchema(site, [
       { name: '홈', url: '/' },
