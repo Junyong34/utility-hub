@@ -80,7 +80,12 @@ export function calculateHomeBuyingFunds(
     amount: localEducationTax,
     calculationMode: input.manualLocalEducationTax ? 'manual' : 'auto',
     confidence: 'high',
-    formula: input.manualLocalEducationTax ? undefined : '취득세 × 10%',
+    // 「지방세법」 제151조제1항제1호 기준 산출세액(감면 전 표준세율 취득세)의 10%.
+    // 생애최초 감면이 적용된 경우 이 값은 화면에 보이는 취득세(감면 후)와 다르다 —
+    // calculateLocalEducationTaxBase 참고. 감면이 없으면 산출세액 = 취득세라 값이 같다.
+    formula: input.manualLocalEducationTax
+      ? undefined
+      : '산출세액(감면 전) × 10%',
   });
 
   // 농어촌특별세

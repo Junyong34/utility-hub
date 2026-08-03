@@ -39,6 +39,10 @@ function findAmount(breakdown, id) {
   return breakdown.find(item => item.id === id)?.amount;
 }
 
+function findFormula(breakdown, id) {
+  return breakdown.find(item => item.id === id)?.formula;
+}
+
 test('생애최초 감면을 받아도 지방교육세는 감면 전 표준세율 기준 산출세액으로 계산된다', () => {
   // 8억, 무주택, 생애최초, 85㎡ 초과 (농어촌특별세 면제 조건 밖으로 만들어 두 세목을 함께 관찰)
   //
@@ -64,6 +68,47 @@ test('생애최초 감면을 받아도 지방교육세는 감면 전 표준세�
 
   assert.equal(findAmount(result.breakdown, 'acquisition-tax'), 16_640_000);
   assert.equal(findAmount(result.breakdown, 'local-education-tax'), 1_864_000);
+  assert.equal(
+    findFormula(result.breakdown, 'local-education-tax'),
+    '산출세액(감면 전) × 10%'
+  );
+});
+
+test('지방교육세 formula 라벨은 화면에 보이는 취득세가 아니라 감면 전 산출세액을 가리켜야 정확하다', () => {
+  // fix round 2 회귀 방지: formula 문구가 '취득세 × 10%'였을 때는 8억 생애최초 사례에서
+  // 화면에 보이는 취득세(16,640,000원)의 10%가 1,664,000원인데 실제 지방교육세는
+  // 1,864,000원이라 라벨이 옆에 적힌 숫자를 재현하지 못했다. 지금 라벨('산출세액(감면 전)
+  // × 10%')이 가리키는 감면 전 산출세액(18,640,000원, standard-acquisition-tax-rate.test.mjs
+  // '8억 주택' 케이스와 동일하게 손으로 유도)의 10%만이 실제 지방교육세와 일치해야 한다.
+  const result = calculateHomeBuyingFunds(
+    createInput({
+      salePrice: 800_000_000,
+      houseCount: 0,
+      isFirstTime: true,
+      isOver85m2: true,
+    })
+  );
+
+  const displayedAcquisitionTax = findAmount(
+    result.breakdown,
+    'acquisition-tax'
+  );
+  const displayedLocalEducationTax = findAmount(
+    result.breakdown,
+    'local-education-tax'
+  );
+  const preReliefStandardTax = 18_640_000; // 손으로 유도한 감면 전 표준세율 산출세액
+
+  assert.notEqual(
+    Math.floor(displayedAcquisitionTax * 0.1),
+    displayedLocalEducationTax,
+    '취득세(감면 후) × 10%는 지방교육세와 다르다 — 그래서 옛 라벨이 틀렸다'
+  );
+  assert.equal(
+    Math.floor(preReliefStandardTax * 0.1),
+    displayedLocalEducationTax,
+    '감면 전 산출세액 × 10%는 실제 지방교육세와 일치해야 한다 — 그래서 새 라벨이 맞다'
+  );
 });
 
 test('감면이 없는 일반 매수자는 지방교육세가 실제 취득세의 10%와 같다(과세표준 보정이 필요 없는 경우)', () => {
@@ -80,6 +125,12 @@ test('감면이 없는 일반 매수자는 지방교육세가 실제 취득세�
 
   assert.equal(findAmount(result.breakdown, 'acquisition-tax'), 18_640_000);
   assert.equal(findAmount(result.breakdown, 'local-education-tax'), 1_864_000);
+  // 감면이 없으면 산출세액과 취득세가 같은 값(18,640,000원)이므로, formula 라벨이
+  // '산출세액(감면 전)'을 가리켜도 '취득세'를 가리켰을 때와 계산 결과는 동일하게 맞는다.
+  assert.equal(
+    findFormula(result.breakdown, 'local-education-tax'),
+    '산출세액(감면 전) × 10%'
+  );
 });
 
 test('취득세를 직접 입력하면 지방교육세는 표준세율 보정 없이 입력값 기준으로 계산된다', () => {
