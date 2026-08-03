@@ -208,7 +208,7 @@ export function collectToolEntries(): SitemapEntry[] {
   const tools = getAllToolConfigs();
   const toolPages = tools.map(tool => ({
     url: `${SITE_CONFIG.url}/tools/${tool.id}`,
-    lastModified: tool.publishedAt ?? new Date(),
+    lastModified: tool.updatedAt ?? tool.publishedAt ?? new Date(),
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }));

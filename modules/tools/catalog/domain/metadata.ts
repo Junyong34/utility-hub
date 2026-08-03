@@ -129,7 +129,7 @@ export function buildToolMetadata(
   tool: ToolManifest
 ): CatalogMetadata {
   return buildMetadata(site, {
-    title: tool.name,
+    title: tool.seoTitle ?? tool.name,
     description: tool.description,
     canonical: `${normalizeBaseUrl(site.url)}/tools/${tool.id}`,
     keywords: tool.keywords,

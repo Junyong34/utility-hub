@@ -17,10 +17,12 @@ export {
   calculateAcquisitionTax,
   calculateDefenseFundAmount,
   calculateLocalEducationTax,
+  calculateLocalEducationTaxBase,
   calculateNationalHousingBond,
   calculateRegistrationTax,
   calculateRuralSpecialTax,
   calculateStampTax,
+  calculateStandardHomeAcquisitionTax,
 } from './domain/taxes.ts';
 export {
   calculateBrokerageFee,

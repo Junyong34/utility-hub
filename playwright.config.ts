@@ -6,13 +6,16 @@ import { createFinanceE2eEnvironment } from './tests/support/finance/playwright-
 const financeEnvironment = createFinanceE2eEnvironment();
 const financeSupportPath = path.resolve(process.cwd(), 'tests/support/finance');
 
+const e2ePort = process.env.E2E_PORT ?? '3000';
+const e2eBaseUrl = `http://127.0.0.1:${e2ePort}`;
+
 export default defineConfig({
   testDir: './tests/e2e',
   timeout: 30_000,
   globalSetup: path.join(financeSupportPath, 'global-setup.ts'),
   globalTeardown: path.join(financeSupportPath, 'global-teardown.ts'),
   use: {
-    baseURL: 'http://127.0.0.1:3000',
+    baseURL: e2eBaseUrl,
     trace: 'on-first-retry',
     video: 'retain-on-failure',
   },
@@ -36,10 +39,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command:
-      "/bin/zsh -lc 'source ~/.nvm/nvm.sh && nvm use 22 >/dev/null && pnpm dev --hostname 127.0.0.1 --port 3000'",
+    command: `/bin/zsh -lc 'source ~/.nvm/nvm.sh && nvm use 22 >/dev/null && pnpm dev --hostname 127.0.0.1 --port ${e2ePort}'`,
     env: financeEnvironment.env,
-    url: 'http://127.0.0.1:3000',
+    url: e2eBaseUrl,
     reuseExistingServer: false,
     timeout: 120_000,
   },

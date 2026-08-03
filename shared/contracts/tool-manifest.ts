@@ -30,10 +30,14 @@ export interface ToolHomeFeaturedMeta {
 export interface ToolManifest {
   id: string;
   name: string;
+  /** 검색 결과 <title> 전용 문구. 미지정 시 name 사용. h1/카드에는 영향 없음 */
+  seoTitle?: string;
   shortName?: string;
   breadcrumbLabel?: string;
   description: string;
   publishedAt: string;
+  /** 세법·요율 등 기준 데이터의 최종 확인일 (ISO YYYY-MM-DD) */
+  updatedAt?: string;
   keywords: string[];
   category: ToolCategory;
   ogImage?: string;

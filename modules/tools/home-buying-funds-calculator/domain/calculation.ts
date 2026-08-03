@@ -11,6 +11,7 @@ import type {
 import {
   calculateAcquisitionTax,
   calculateLocalEducationTax,
+  calculateLocalEducationTaxBase,
   calculateRuralSpecialTax,
   calculateRegistrationTax,
   calculateStampTax,
@@ -65,9 +66,12 @@ export function calculateHomeBuyingFunds(
       : '주택 수, 지역, 면적 기준 자동 계산',
   });
 
-  // 지방교육세
+  // 지방교육세 (과세표준은 감면 전 표준세율 기준 산출세액 — calculateLocalEducationTaxBase 참고)
   const localEducationTax =
-    input.manualLocalEducationTax ?? calculateLocalEducationTax(acquisitionTax);
+    input.manualLocalEducationTax ??
+    calculateLocalEducationTax(
+      calculateLocalEducationTaxBase(input, acquisitionTax)
+    );
   breakdown.push({
     id: 'local-education-tax',
     stage: 'balance',
@@ -76,7 +80,12 @@ export function calculateHomeBuyingFunds(
     amount: localEducationTax,
     calculationMode: input.manualLocalEducationTax ? 'manual' : 'auto',
     confidence: 'high',
-    formula: input.manualLocalEducationTax ? undefined : '취득세 × 10%',
+    // 「지방세법」 제151조제1항제1호 기준 산출세액(감면 전 표준세율 취득세)의 10%.
+    // 생애최초 감면이 적용된 경우 이 값은 화면에 보이는 취득세(감면 후)와 다르다 —
+    // calculateLocalEducationTaxBase 참고. 감면이 없으면 산출세액 = 취득세라 값이 같다.
+    formula: input.manualLocalEducationTax
+      ? undefined
+      : '산출세액(감면 전) × 10%',
   });
 
   // 농어촌특별세
