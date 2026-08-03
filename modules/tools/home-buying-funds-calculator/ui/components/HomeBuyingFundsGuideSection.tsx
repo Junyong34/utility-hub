@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Card } from '@/shared/ui/card';
 import { HOME_BUYING_FUNDS_CALCULATOR_MANIFEST } from '../../domain/manifest';
 
@@ -46,6 +47,38 @@ export function HomeBuyingFundsGuideSection() {
             ))}
           </div>
         </Card>
+      </section>
+
+      <section aria-labelledby="home-buying-guides-title" className="space-y-4">
+        <h2 id="home-buying-guides-title" className="text-2xl font-bold">
+          함께 보면 좋은 가이드
+        </h2>
+        <ul className="list-disc list-inside space-y-2 text-sm md:text-base">
+          <li>
+            <Link
+              href="/blog/investment/first-time-buyer-acquisition-tax-guide"
+              className="underline underline-offset-4 hover:text-foreground"
+            >
+              생애최초 취득세 감면, 조건·한도·신청까지 한 번에 정리
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/blog/investment/apartment-purchase-extra-costs-checklist"
+              className="underline underline-offset-4 hover:text-foreground"
+            >
+              아파트 매매 부대비용 총정리: 취득세부터 복비·법무사 비용까지
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/blog/investment/national-housing-bond-cost-guide"
+              className="underline underline-offset-4 hover:text-foreground"
+            >
+              국민주택채권 실부담액, 왜 매입액보다 훨씬 적을까?
+            </Link>
+          </li>
+        </ul>
       </section>
 
       <p className="text-xs text-muted-foreground">
