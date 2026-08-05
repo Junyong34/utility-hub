@@ -1,9 +1,32 @@
-import * as LucideIcons from 'lucide-react';
+import {
+  AlarmClock,
+  Box,
+  Calculator,
+  DicesIcon,
+  Home,
+  PiggyBank,
+  Timer,
+} from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
-const lucideIconMap = LucideIcons as Record<string, unknown>;
+const toolIconMap = {
+  AlarmClock,
+  Box,
+  Calculator,
+  DicesIcon,
+  Home,
+  PiggyBank,
+  Timer,
+} satisfies Record<string, LucideIcon>;
+
 const iconCache = new Map<string, LucideIcon>();
-const DEFAULT_ICON: LucideIcon = LucideIcons.Box;
+const DEFAULT_ICON = Box;
+
+function isRegisteredToolIcon(
+  iconName: string
+): iconName is keyof typeof toolIconMap {
+  return Object.prototype.hasOwnProperty.call(toolIconMap, iconName);
+}
 
 export function getToolIcon(iconName?: string): LucideIcon {
   if (!iconName) {
@@ -15,16 +38,14 @@ export function getToolIcon(iconName?: string): LucideIcon {
     return cachedIcon;
   }
 
-  const icon = lucideIconMap[iconName];
-
-  if (icon && (typeof icon === 'function' || typeof icon === 'object')) {
-    const resolvedIcon = icon as LucideIcon;
-    iconCache.set(iconName, resolvedIcon);
-    return resolvedIcon;
+  if (isRegisteredToolIcon(iconName)) {
+    const icon = toolIconMap[iconName];
+    iconCache.set(iconName, icon);
+    return icon;
   }
 
   console.warn(
-    `Icon "${iconName}" not found in lucide-react. Using default icon.`
+    `Icon "${iconName}" is not registered for tools. Using default icon.`
   );
   iconCache.set(iconName, DEFAULT_ICON);
   return DEFAULT_ICON;
@@ -35,10 +56,7 @@ export function getToolIcons(iconNames: string[]): LucideIcon[] {
 }
 
 export function isValidIcon(iconName: string): boolean {
-  return (
-    iconName in LucideIcons &&
-    ['function', 'object'].includes(typeof lucideIconMap[iconName])
-  );
+  return isRegisteredToolIcon(iconName);
 }
 
 export function clearIconCache(): void {
@@ -46,7 +64,5 @@ export function clearIconCache(): void {
 }
 
 export function getAvailableIcons(): string[] {
-  return Object.keys(LucideIcons).filter(key =>
-    ['function', 'object'].includes(typeof lucideIconMap[key])
-  );
+  return Object.keys(toolIconMap);
 }
